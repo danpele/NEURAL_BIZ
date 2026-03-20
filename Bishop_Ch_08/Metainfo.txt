@@ -1,0 +1,20 @@
+Name of Quantlet: NB_bishop_ch08
+
+Published in: Neural Networks and Deep Learning with Business Applications
+
+Description: 'Jupyter notebooks for Bishop & Bishop (2024) Chapter 8: Backpropagation. 
+Feature attribution via gradients, sensitivity analysis. All figures are reproducible via Google Colab.'
+
+Keywords: deep learning, neural networks, business applications, backpropagation, finance, Python, PyTorch
+
+Author: Daniel Traian PELE
+
+Submitted: 2026-03-20
+
+Datafile: S&P 500 daily returns (via yfinance), synthetic data
+
+Input: Financial time series data, synthetic examples from Bishop textbook
+
+Output: Charts (PDF/PNG), model evaluation metrics, business interpretation
+
+Example: Run NB_bishop_ch08_figures.ipynb to reproduce all lecture figures
