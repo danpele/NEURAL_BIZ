@@ -19,8 +19,10 @@ GOLD    = '#d4a017'   # alternative
 
 # ── Plot styling ──
 plt.rc('text', usetex=False)
-plt.rcParams['figure.facecolor'] = '#EBEBEB'
-plt.rcParams['axes.facecolor']   = '#EBEBEB'
+plt.rcParams['figure.facecolor'] = 'none'
+plt.rcParams['axes.facecolor']   = 'none'
+plt.rcParams['savefig.transparent'] = True
+plt.rcParams['legend.framealpha'] = 0.0
 plt.rcParams['font.size'] = 11
 
 np.random.seed(42)
@@ -96,7 +98,7 @@ ax.set_xlabel('False Positive Rate')
 ax.set_ylabel('True Positive Rate')
 ax.set_xlim(-0.02, 1.02)
 ax.set_ylim(-0.02, 1.05)
-ax.legend(loc='lower right', fontsize=8, framealpha=0.8)
+ax.legend(bbox_to_anchor=(0.5, -0.15), loc='upper center', fontsize=8, framealpha=0.0, ncol=3)
 ax.set_aspect('equal')
 
 fig.tight_layout()
@@ -105,18 +107,18 @@ fig.tight_layout()
 out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'charts')
 os.makedirs(out_dir, exist_ok=True)
 fig.savefig(os.path.join(out_dir, 'fig5_11_roc_comparison.pdf'),
-            bbox_inches='tight', facecolor='#EBEBEB')
+            bbox_inches='tight', transparent=True)
 fig.savefig(os.path.join(out_dir, 'fig5_11_roc_comparison.png'),
-            bbox_inches='tight', facecolor='#EBEBEB', dpi=300)
+            bbox_inches='tight', transparent=True, dpi=300)
 
 # Also save to the main charts directory used by slides
 main_charts = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            '..', '..', 'charts')
 if os.path.exists(main_charts):
     fig.savefig(os.path.join(main_charts, 'fig5_11_roc_comparison.pdf'),
-                bbox_inches='tight', facecolor='#EBEBEB')
+                bbox_inches='tight', transparent=True)
     fig.savefig(os.path.join(main_charts, 'fig5_11_roc_comparison.png'),
-                bbox_inches='tight', facecolor='#EBEBEB', dpi=300)
+                bbox_inches='tight', transparent=True, dpi=300)
 
 print(f'Saved fig5_11_roc_comparison (LR AUC={auc_lr:.3f}, NB AUC={auc_nb:.3f})')
 plt.close()
