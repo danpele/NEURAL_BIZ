@@ -1,0 +1,103 @@
+/* NN: additions to the shared SFM / TSA / BA stylesheet (site.css) */
+
+/* course title in the header links back to the top of the home page */
+.header-title h1 a { color: inherit; text-decoration: none; }
+.header-title h1 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.section-intro { max-width: 60rem; margin-bottom: 1rem; }
+.tbd { color: var(--mid-gray); font-style: italic; }
+
+/* lecture cards: case-study links under the topics */
+.lecture-cases { margin: 0.2rem 0 0.8rem; font-size: 0.9rem; }
+.lecture-cases a { text-decoration: none; border-bottom: 1px dotted var(--main-blue); }
+.quantinar-box h4 { line-height: 1.35; }
+
+/* episodes in the data (short examples) */
+.case-card { scroll-margin-top: 80px; border-left: 4px solid var(--amber); }
+#episodes .info-card { padding: 1.1rem 1.2rem; }
+
+/* research case studies C1-C8: cards linking to web/cases/CK.html */
+.study-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 1.2rem; margin-top: 1rem; }
+.study-card { min-width: 0; display: flex; flex-direction: column; gap: 0.55rem; background: var(--white); border: 1px solid var(--border);
+    border-top: 4px solid var(--main-blue); border-radius: 8px; padding: 1.1rem 1.25rem 1rem; scroll-margin-top: 80px; box-shadow: 0 1px 3px rgba(26, 58, 110, 0.06); }
+.study-head { display: flex; align-items: center; gap: 0.6rem; }
+.study-num { font-weight: 800; color: white; background: var(--main-blue); border-radius: 5px; padding: 0.1rem 0.5rem; font-size: 0.9rem; }
+.study-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ida-red); }
+.study-card h3 { font-size: 1.08rem; line-height: 1.35; margin: 0; }
+.study-card h3 a { color: var(--main-blue); text-decoration: none; }
+.study-card h3 a:hover { text-decoration: underline; }
+.study-sum { font-size: 0.93rem; line-height: 1.55; margin: 0; overflow-wrap: break-word; }
+.study-paper { font-size: 0.82rem; line-height: 1.45; color: #4A5060; margin: 0; overflow-wrap: anywhere; background: #F5F7FB; border-radius: 6px; padding: 0.45rem 0.6rem; }
+.study-k { font-weight: 700; color: var(--main-blue); }
+.study-links { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.3rem; }
+.study-links .btn { padding: 0.4rem 0.75rem; font-size: 0.85rem; }
+.study-card .case-lecture { margin-top: 0; }
+.lecture-study { margin: 0.2rem 0 0.4rem; font-size: 0.9rem; }
+.lecture-study a { font-weight: 600; text-decoration: none; border-bottom: 1px dotted var(--main-blue); }
+
+/* data table (same look as the BA session table) */
+.table-wrap { overflow-x: auto; }
+table.sessions { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--white); }
+table.sessions th { background: var(--main-blue); color: white; text-align: left; padding: 0.55rem 0.7rem; }
+table.sessions td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+table.sessions td.c { white-space: nowrap; color: var(--main-blue); }
+table.sessions tr:nth-child(even) td { background: var(--light-gray); }
+table.sessions code { font-size: 0.78rem; color: var(--mid-gray); overflow-wrap: anywhere; }
+.muted-note { font-size: 0.8rem; color: var(--mid-gray); }
+.data-licence { font-size: 0.85rem; color: var(--mid-gray); margin-top: 0.8rem; max-width: 60rem; }
+
+/* phones: each data row becomes a small card, no sideways scrolling */
+@media (max-width: 700px) {
+    table.data-table thead { display: none; }
+    table.data-table, table.data-table tbody, table.data-table tr, table.data-table td { display: block; width: 100%; }
+    table.data-table tr { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.7rem; overflow: hidden; }
+    table.data-table td { border-bottom: 0; padding: 0.3rem 0.7rem; }
+    table.data-table td:first-child { font-weight: 600; padding-top: 0.6rem; }
+    table.data-table td.c { white-space: normal; }
+    table.sessions tr:nth-child(even) td { background: transparent; }
+}
+
+/* abbreviations */
+.abbr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0.3rem 2rem; margin: 0.5rem 0 0; }
+.abbr-row { display: flex; gap: 0.7rem; padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.abbr-row dt { flex: 0 0 9.5rem; font-weight: 700; color: var(--main-blue); }
+.abbr-row dd { margin: 0; }
+@media (max-width: 480px) { .abbr-list { grid-template-columns: 1fr; } .abbr-row dt { flex-basis: 7.5rem; } }
+
+/* lecture cards: chart carousel (MFM chart + caption, with arrows over the lecture's Quantlet charts) */
+.chapter-showcase { border-bottom: 1px solid #eef1f5; background: white; }
+.chapter-showcase .chapter-chart { border-bottom: 0; }
+.sc-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.8rem 0.55rem; }
+.sc-cap {
+    flex: 1; min-width: 0; font-size: 0.82rem; line-height: 1.35; color: var(--main-blue);
+    text-decoration: none; border: 1px solid #dbe3f0; border-radius: 6px; padding: 0.3rem 0.55rem; background: #f7f9fc;
+}
+.sc-cap:hover { background: #edf2fa; text-decoration: underline; }
+.sc-cap::after { content: " \2197"; font-size: 0.75rem; opacity: 0.7; }
+.sc-nav { display: flex; align-items: center; gap: 0.25rem; flex: 0 0 auto; }
+.sc-arrow {
+    width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 1px solid #cfd8e6; background: white;
+    color: var(--main-blue); font-size: 1.2rem; line-height: 1; cursor: pointer; padding: 0;
+}
+.sc-arrow:hover, .sc-arrow:focus-visible { background: var(--main-blue); color: white; border-color: var(--main-blue); }
+.sc-count { font-size: 0.75rem; color: var(--mid-gray); min-width: 3.2rem; text-align: center; font-variant-numeric: tabular-nums; }
+.lightbox figcaption a { margin-left: 0.4rem; font-weight: 600; white-space: nowrap; }
+
+/* Quantlets buttons */
+.btn-ql { height: 1em; width: auto; vertical-align: -0.12em; margin-right: 0.35rem; }
+
+/* case studies: Quantlet link and the lectures that use the case */
+.case-link { margin-top: 0.6rem; }
+.case-link .btn { padding: 0.35rem 0.7rem; font-size: 0.85rem; }
+.case-lecture { margin-top: 0.5rem; font-size: 0.85rem; color: var(--mid-gray); }
+.case-lecture a { text-decoration: none; border-bottom: 1px dotted var(--main-blue); }
+
+/* team project cards: space between items */
+.project-card p + p { margin-top: 0.45rem; }
+
+/* Data page: list of downloadable files */
+.data-files { columns: 2 22rem; padding-left: 1.1rem; margin: 0.4rem 0 0.6rem; }
+.data-files li { break-inside: avoid; margin: 0.15rem 0; }
+.data-table a code, .data-files a code { color: inherit; }
+
+.biblio-group { margin: 1.1rem 0 0.3rem; font-size: 1rem; }

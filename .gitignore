@@ -1,0 +1,26 @@
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+lectures/*/cache/*
+*.pkl
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*_contact_sheet*.png
+# NN course: raw downloads (large, re-created by data/download_all.py), instructor-only seminar solutions,
+# local tools state
+data/raw/
+notebooks/*_solutions*.ipynb
+tools/.chrome-profile/
+lectures/*/cache/
+*.pt
+*.ckpt

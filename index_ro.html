@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rețele neuronale și deep learning - Site-ul cursului</title>
+    <meta name="description" content="Rețele neuronale și deep learning - curs de master, Academia de Studii Economice din București și Academia Română, Institutul de Prognoză Economică">
+    <link rel="icon" href="assets/logos/ase_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/site.css?v=20261108a">
+    <link rel="stylesheet" href="assets/nn.css?v=20261108a">
+
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Page language: 'ro' here, 'en' in index.html. Everything else is shared. -->
+    <script>window.NN_LANG = 'ro';</script>
+    <script src="assets/config.js?v=20261108a"></script>
+    <script src="assets/course-data.js?v=20261108a"></script>
+    <script src="assets/data-table.js?v=20261108a"></script>
+    <script src="assets/showcase.js?v=20261108a"></script>
+    <!-- quiz banks (one per lecture, assets/quizzes/lK.js; must load after course-data.js): none published yet -->
+    <script src="assets/site.js?v=20261108a"></script>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="assets/logos/ase_logo.png" alt="ASE"></a>
+            <div class="header-title">
+                <h1><a href="index_ro.html" data-t="courseTitle">Rețele neuronale și deep learning</a></h1>
+                <p data-t="subtitle"></p>
+            </div>
+            <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home" data-t="nav.home">Acasă</a></li>
+            <li><a href="#chapters" data-t="nav.lectures">Cursuri</a></li>
+            <li><a href="#cases" data-t="nav.cases">Studii de caz</a></li>
+            <li><a href="#data" data-t="nav.data">Date</a></li>
+            <li><a href="#project" data-t="nav.project">Proiect și AI</a></li>
+            <li><a href="#quizzes" data-t="nav.quizzes">Quiz-uri</a></li>
+            <li><a href="#resources" data-t="nav.resources">Resurse</a></li>
+            <li><a href="#contact" data-t="nav.contact">Contact</a></li>
+            <li class="lang-switcher">
+                <a href="index.html" class="lang-btn">EN</a>
+                <a href="index_ro.html" class="lang-btn active">RO</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero" aria-label="Cursul pe scurt">
+        <div class="hero-inner">
+            <p class="hero-tag" data-t="heroTag"></p>
+            <div class="hero-cta">
+                <a class="btn btn-primary btn-lg" href="#chapters" data-t="heroCta1"></a>
+                <a class="btn btn-ghost btn-lg" href="#data" data-t="heroCta2"></a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="home">
+            <h2 data-t="overview"></h2>
+            <div class="course-info" id="overview-cards"></div>
+            <h3 class="sub" data-t="objectives"></h3>
+            <ul class="objectives" id="objectives-list"></ul>
+        </section>
+
+        <section id="chapters">
+            <h2 data-t="chapters"></h2>
+            <div class="chapters-grid" id="chapters-grid"></div>
+        </section>
+
+        <section id="cases">
+            <h2 data-t="casesTitle"></h2>
+            <p class="section-intro" data-t="casesIntro"></p>
+            <div class="study-grid" id="cases-grid"></div>
+        </section>
+
+
+        <section id="data">
+            <h2 data-t="dataTitle"></h2>
+            <p class="section-intro" id="data-intro"></p>
+            <div class="table-wrap" id="data-table"></div>
+            <div id="data-files"></div>
+            <p class="data-licence" id="data-licence"></p>
+        </section>
+
+        <section id="project">
+            <h2 data-t="projectTitle"></h2>
+            <p class="section-intro" data-t="projectIntro"></p>
+            <div class="course-info" id="project-cards"></div>
+            <h3 class="sub" data-t="aiTitle"></h3>
+            <ul class="objectives" id="ai-policy"></ul>
+        </section>
+
+        <section id="quizzes">
+            <h2 data-t="quizzes"></h2>
+            <div id="quiz-login" class="quiz-login" style="display: none;"></div>
+            <div class="quiz-tabs" id="quiz-tabs"></div>
+            <div class="quiz-container" id="quiz-container"></div>
+        </section>
+
+        <section id="resources">
+            <h2 data-t="resources"></h2>
+            <div class="resources-list" id="resources-list"></div>
+            <h3 class="sub" data-t="bibliography"></h3>
+            <div id="bibliography"></div>
+            <h3 class="sub" data-t="abbreviations"></h3>
+            <dl class="abbr-list" id="abbreviations"></dl>
+        </section>
+
+        <section id="contact">
+            <h2 data-t="contact"></h2>
+            <div class="course-info" id="contact-cards"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logos" id="footer-logos"></div>
+        <p id="footer-text"></p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" hidden>
+        <figure>
+            <img id="lightbox-img" alt="">
+            <figcaption id="lightbox-cap"></figcaption>
+        </figure>
+        <button class="lightbox-close" id="lightbox-close" type="button">&times;</button>
+    </div>
+
+    <noscript><p style="text-align:center;padding:1rem">This page needs JavaScript. / Această pagină necesită JavaScript.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,605 @@
+{
+ "fraud": {
+  "name": {
+   "en": "Credit-card fraud (ULB Machine Learning Group, European cardholders)",
+   "ro": "Fraude cu carduri bancare (ULB Machine Learning Group, deținători de carduri din Europa)"
+  },
+  "source": "OpenML dataset 1597 (Worldline and ULB Machine Learning Group)",
+  "url": "https://www.openml.org/d/1597",
+  "licence": "Database Contents License (DbCL) v1.0 (Kaggle release); OpenML: public",
+  "cite": "Dal Pozzolo, A., Caelen, O., Johnson, R. A. & Bontempi, G. (2015). Calibrating probability with undersampling for unbalanced classification. IEEE SSCI, 159-166. doi:10.1109/SSCI.2015.33",
+  "lectures": [
+   "l1",
+   "l2",
+   "l3",
+   "l8",
+   "l11"
+  ],
+  "note": "Full data: 284,807 transactions, 492 frauds (0.173 %), 143.8 MB raw (kept in data/raw/, not committed). The committed file keeps all frauds and a 10 % random sample of the legitimate transactions (seed 20261108); column weight = inverse sampling rate, so weighted statistics reproduce the full data. V1-V28 are PCA (principal component analysis) components released by the data owner; Time = seconds since the first transaction; Amount in EUR; row_id = row in the full file.",
+  "freq": {
+   "en": "transaction",
+   "ro": "tranzacție"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "creditcard_fraud_sample.csv",
+    "rows": 28924,
+    "columns": [
+     "row_id",
+     "Time",
+     "V1",
+     "V2",
+     "V3",
+     "V4",
+     "V5",
+     "V6",
+     "V7",
+     "V8",
+     "V9",
+     "V10",
+     "V11",
+     "V12",
+     "V13",
+     "V14",
+     "V15",
+     "V16",
+     "V17",
+     "V18",
+     "V19",
+     "V20",
+     "V21",
+     "V22",
+     "V23",
+     "V24",
+     "V25",
+     "V26",
+     "V27",
+     "V28",
+     "Amount",
+     "Class",
+     "weight"
+    ],
+    "size": 8772855,
+    "coverage": "September 2013 (2 days); all frauds + 10 % random sample of legitimate transactions"
+   }
+  ]
+ },
+ "german": {
+  "name": {
+   "en": "German credit (Statlog): credit scoring of 1,000 loan applicants",
+   "ro": "German credit (Statlog): scoringul de credit pentru 1.000 de solicitanți de împrumut"
+  },
+  "source": "UCI Machine Learning Repository, dataset 144 (H. Hofmann, University of Hamburg)",
+  "url": "https://archive.ics.uci.edu/dataset/144/statlog+german+credit+data",
+  "licence": "CC BY 4.0 (Creative Commons Attribution 4.0)",
+  "cite": "Hofmann, H. (1994). Statlog (German Credit Data). UCI Machine Learning Repository. doi:10.24432/C5NC77",
+  "lectures": [
+   "l1",
+   "l3",
+   "l11"
+  ],
+  "note": "Categorical attributes keep the UCI codes (A11, A12, ...; code book in the UCI page); default = 1 for a bad credit risk (300 of 1,000). The UCI cost matrix weights a missed bad risk 5 times a rejected good one.",
+  "freq": {
+   "en": "applicant",
+   "ro": "solicitant"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "german_credit.csv",
+    "rows": 1000,
+    "columns": [
+     "checking_status",
+     "duration_months",
+     "credit_history",
+     "purpose",
+     "credit_amount_dm",
+     "savings_status",
+     "employment_since",
+     "installment_rate_pct",
+     "personal_status_sex",
+     "other_debtors",
+     "residence_since",
+     "property",
+     "age_years",
+     "other_installment_plans",
+     "housing",
+     "existing_credits",
+     "job",
+     "num_dependents",
+     "telephone",
+     "foreign_worker",
+     "default"
+    ],
+    "size": 80088,
+    "coverage": "1,000 loan applicants of a German bank"
+   }
+  ]
+ },
+ "hmeq": {
+  "name": {
+   "en": "HMEQ: home-equity loan defaults",
+   "ro": "HMEQ: neplata creditelor ipotecare de tip home equity"
+  },
+  "source": "Baesens, Roesch & Scheule (2016), Credit Risk Analytics (companion data)",
+  "url": "http://www.creditriskanalytics.net/datasets-private2.html",
+  "licence": "Distributed by the book authors for teaching and research",
+  "cite": "Baesens, B., Roesch, D. & Scheule, H. (2016). Credit Risk Analytics: Measurement Techniques, Applications, and Examples in SAS. Wiley.",
+  "lectures": [
+   "l1",
+   "l3",
+   "l11"
+  ],
+  "note": "BAD = 1 if the applicant defaulted or was seriously delinquent; missing values kept as missing (they are part of the exercise).",
+  "freq": {
+   "en": "loan",
+   "ro": "credit"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "hmeq.csv",
+    "rows": 5960,
+    "columns": [
+     "BAD",
+     "LOAN",
+     "MORTDUE",
+     "VALUE",
+     "REASON",
+     "JOB",
+     "YOJ",
+     "DEROG",
+     "DELINQ",
+     "CLAGE",
+     "NINQ",
+     "CLNO",
+     "DEBTINC"
+    ],
+    "size": 473944,
+    "coverage": "5,960 home-equity loans (United States)"
+   }
+  ]
+ },
+ "california": {
+  "name": {
+   "en": "California housing (1990 census block groups)",
+   "ro": "Locuințe din California (grupuri de blocuri, recensămîntul din 1990)"
+  },
+  "source": "StatLib repository (Pace & Barry, 1997), via scikit-learn",
+  "url": "https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html",
+  "licence": "Public research dataset (StatLib); redistributed by scikit-learn (BSD-3-Clause)",
+  "cite": "Pace, R. K. & Barry, R. (1997). Sparse spatial autoregressions. Statistics & Probability Letters, 33(3), 291-297. doi:10.1016/S0167-7152(96)00140-X",
+  "lectures": [
+   "l2",
+   "l3",
+   "l11"
+  ],
+  "note": "Target MedHouseVal_100k_usd = median house value in units of 100,000 USD, capped at 5.00001 by the data source (keep the cap in mind).",
+  "freq": {
+   "en": "block group",
+   "ro": "grup de blocuri"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "california_housing.csv",
+    "rows": 20640,
+    "columns": [
+     "MedInc",
+     "HouseAge",
+     "AveRooms",
+     "AveBedrms",
+     "Population",
+     "AveOccup",
+     "Latitude",
+     "Longitude",
+     "MedHouseVal_100k_usd"
+    ],
+    "size": 1895163,
+    "coverage": "20,640 census block groups, California, 1990 census"
+   }
+  ]
+ },
+ "markets": {
+  "name": {
+   "en": "Stock indices, stocks, volatility, FX and Bitcoin: S&P 500, EURO STOXX 50, DAX, VIX, EUR/USD, BTC/USD, Apple, Microsoft, JPMorgan, ExxonMobil, NVIDIA",
+   "ro": "Indici bursieri, acțiuni, volatilitate, curs valutar și Bitcoin: S&P 500, EURO STOXX 50, DAX, VIX, EUR/USD, BTC/USD, Apple, Microsoft, JPMorgan, ExxonMobil, NVIDIA"
+  },
+  "source": "Yahoo Finance (via yfinance)",
+  "url": "https://finance.yahoo.com/quote/%5EGSPC",
+  "licence": "Yahoo Finance terms: personal and educational use",
+  "cite": "Yahoo Finance, daily quotes downloaded with yfinance",
+  "lectures": [
+   "l5",
+   "l10",
+   "l13"
+  ],
+  "note": "Long format (date, ticker); adjclose = close adjusted for splits and dividends. Exchange trading days; no gap filling.",
+  "freq": {
+   "en": "daily (trading days)",
+   "ro": "zilnic (zile de tranzacționare)"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "markets_daily.csv",
+    "rows": 59049,
+    "columns": [
+     "date",
+     "ticker",
+     "open",
+     "high",
+     "low",
+     "close",
+     "adjclose",
+     "volume"
+    ],
+    "size": 4616161,
+    "coverage": "2005-01-03 to 2026-11-08 (BTCUSD from 2014-09-17)"
+   }
+  ]
+ },
+ "bvb": {
+  "name": {
+   "en": "Bucharest Stock Exchange (BVB): 13 most traded shares (TLV, BRD, SNP, SNG, SNN, H2O, TGN, EL, TEL, DIGI, FP, M, ONE)",
+   "ro": "Bursa de Valori București (BVB): 13 dintre cele mai tranzacționate acțiuni (TLV, BRD, SNP, SNG, SNN, H2O, TGN, EL, TEL, DIGI, FP, M, ONE)"
+  },
+  "source": "EODHD (End of Day Historical Data) API",
+  "url": "https://eodhd.com/",
+  "licence": "EODHD terms: personal and educational use",
+  "cite": "EODHD, end-of-day prices of the Bucharest Stock Exchange",
+  "lectures": [
+   "l5",
+   "l9",
+   "l10",
+   "l13"
+  ],
+  "note": "Prices in RON; adjclose adjusted for splits and dividends. First date per ticker: BRD 2005-01-03; DIGI 2017-05-17; EL 2014-07-07; FP 2010-09-30; H2O 2023-07-12; M 2016-12-21; ONE 2021-07-12; SNG 2013-11-12; SNN 2013-11-04; SNP 2005-01-03; TEL 2006-08-29; TGN 2008-01-25; TLV 2005-01-03.",
+  "freq": {
+   "en": "daily (trading days)",
+   "ro": "zilnic (zile de tranzacționare)"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "bvb_equities_daily.csv",
+    "rows": 47798,
+    "columns": [
+     "date",
+     "ticker",
+     "open",
+     "high",
+     "low",
+     "close",
+     "adjclose",
+     "volume"
+    ],
+    "size": 2536665,
+    "coverage": "2005-01-03 to 2026-11-06; listing dates differ by stock"
+   }
+  ]
+ },
+ "power": {
+  "name": {
+   "en": "Day-ahead electricity prices (Romania, Bulgaria, Hungary, Germany-Luxembourg) and Romanian load and generation by source",
+   "ro": "Prețurile energiei electrice pentru ziua următoare (România, Bulgaria, Ungaria, Germania-Luxemburg), consumul și producția României pe surse"
+  },
+  "source": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data; same files as the course Energy Markets Quantitative Analysis",
+  "url": "https://api.energy-charts.info/",
+  "licence": "Prices: private and internal (teaching) use; generation and load: CC BY 4.0",
+  "cite": "Fraunhofer ISE, Energy-Charts (energy-charts.info)",
+  "lectures": [
+   "l5",
+   "l10",
+   "l13"
+  ],
+  "note": "Timestamps in UTC (interval start). Prices in EUR/MWh: hourly to 30 Sep 2025, then the hourly mean of the 15-minute prices (mtu_minutes gives the native resolution). Load and generation in mean MW per hour; cross_border_electricity_trading > 0 = net import. Missing hours stay missing.",
+  "freq": {
+   "en": "hourly (UTC) and daily (CET)",
+   "ro": "orar (UTC) și zilnic (CET)"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "power_da_prices_hourly_utc.csv",
+    "rows": 103847,
+    "columns": [
+     "timestamp_utc",
+     "RO",
+     "BG",
+     "HU",
+     "DE_LU",
+     "mtu_minutes"
+    ],
+    "size": 6326566,
+    "coverage": "2015-01-01 to 2026-11-05 (BG from 2016-10-31)"
+   },
+   {
+    "file": "power_da_prices_daily_cet.csv",
+    "rows": 4327,
+    "columns": [
+     "date_cet",
+     "RO",
+     "BG",
+     "HU",
+     "DE_LU",
+     "RO_n_obs",
+     "RO_n_negative",
+     "BG_n_obs",
+     "BG_n_negative",
+     "HU_n_obs",
+     "HU_n_negative",
+     "DE_LU_n_obs",
+     "DE_LU_n_negative"
+    ],
+    "size": 272358,
+    "coverage": "same period, CET/CEST calendar days"
+   },
+   {
+    "file": "ro_load_generation_hourly_utc.csv",
+    "rows": 103818,
+    "columns": [
+     "timestamp_utc",
+     "load",
+     "nuclear",
+     "hydro_run_of_river",
+     "hydro_water_reservoir",
+     "brown_coal_lignite",
+     "hard_coal",
+     "gas",
+     "wind_onshore",
+     "solar",
+     "cross_border_electricity_trading"
+    ],
+    "size": 9185684,
+    "coverage": "2015-01-01 to 2026-11-04"
+   }
+  ]
+ },
+ "yield": {
+  "name": {
+   "en": "Euro area AAA government bond yield curve (spot rates, 11 maturities from 3 months to 30 years)",
+   "ro": "Curba randamentelor obligațiunilor guvernamentale AAA din zona euro (rate spot, 11 scadențe, de la 3 luni la 30 de ani)"
+  },
+  "source": "European Central Bank (ECB) Data Portal, dataset YC (Svensson model, AAA-rated issuers)",
+  "url": "https://data.ecb.europa.eu/data/datasets/YC",
+  "licence": "ECB statistics: reuse free of charge with the source acknowledged",
+  "cite": "European Central Bank, Euro area yield curves, ECB Data Portal (YC)",
+  "lectures": [
+   "l8",
+   "l13"
+  ],
+  "note": "Percent per year; TARGET business days. Curves are fitted by the ECB with the Svensson (1994) model on AAA-rated euro area central government bonds.",
+  "freq": {
+   "en": "daily (TARGET days)",
+   "ro": "zilnic (zile TARGET)"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "ecb_yield_curve_daily.csv",
+    "rows": 5668,
+    "columns": [
+     "date",
+     "y_3M",
+     "y_6M",
+     "y_1Y",
+     "y_2Y",
+     "y_3Y",
+     "y_5Y",
+     "y_7Y",
+     "y_10Y",
+     "y_15Y",
+     "y_20Y",
+     "y_30Y"
+    ],
+    "size": 1183145,
+    "coverage": "2004-09-06 to 2026-11-05"
+   }
+  ]
+ },
+ "phrasebank": {
+  "name": {
+   "en": "Financial PhraseBank: sentiment of sentences from financial news",
+   "ro": "Financial PhraseBank: sentimentul frazelor din știri financiare"
+  },
+  "source": "Malo et al. (2014), Aalto University; copy on Hugging Face (takala/financial_phrasebank)",
+  "url": "https://huggingface.co/datasets/takala/financial_phrasebank",
+  "licence": "CC BY-NC-SA 3.0 (Creative Commons Attribution-NonCommercial-ShareAlike)",
+  "cite": "Malo, P., Sinha, A., Korhonen, P., Wallenius, J. & Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. JASIST, 65(4), 782-796. doi:10.1002/asi.23062",
+  "lectures": [
+   "l6",
+   "l7",
+   "l12"
+  ],
+  "note": "label in {positive, neutral, negative}, annotated by 5-8 finance and business students; min_agreement_pct = highest share of annotators that agree (50, 66, 75 or 100).",
+  "freq": {
+   "en": "sentence",
+   "ro": "frază"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "financial_phrasebank.csv",
+    "rows": 4838,
+    "columns": [
+     "sentence",
+     "label",
+     "min_agreement_pct"
+    ],
+    "size": 687517,
+    "coverage": "4,838 sentences from English financial news about companies listed in Finland"
+   }
+  ]
+ },
+ "tweets": {
+  "name": {
+   "en": "Twitter financial news: sentiment (bearish, bullish, neutral) and topic (20 classes)",
+   "ro": "Știri financiare de pe Twitter: sentiment (pesimist, optimist, neutru) și temă (20 de clase)"
+  },
+  "source": "Hugging Face datasets zeroshot/twitter-financial-news-sentiment and -topic",
+  "url": "https://huggingface.co/datasets/zeroshot/twitter-financial-news-sentiment",
+  "licence": "MIT",
+  "cite": "Zeroshot (2022). Twitter financial news sentiment and topic datasets, Hugging Face",
+  "lectures": [
+   "l6",
+   "l7",
+   "l12"
+  ],
+  "note": "Text as published (tweets contain links and tickers); labels assigned by the dataset authors.",
+  "freq": {
+   "en": "tweet",
+   "ro": "tweet"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "twitter_fin_sentiment.csv",
+    "rows": 12424,
+    "columns": [
+     "text",
+     "label",
+     "split",
+     "label_name"
+    ],
+    "size": 1243063,
+    "coverage": "11,932 finance tweets, English; split train/valid as published"
+   },
+   {
+    "file": "twitter_fin_topic.csv",
+    "rows": 21107,
+    "columns": [
+     "text",
+     "label",
+     "split",
+     "label_name"
+    ],
+    "size": 3432809,
+    "coverage": "21,107 finance tweets, 20 topics; split train/valid as published"
+   }
+  ]
+ },
+ "speeches": {
+  "name": {
+   "en": "Speeches of the European Central Bank (ECB) Executive Board and Supervisory Board, full text",
+   "ro": "Discursurile membrilor Comitetului executiv și ai Consiliului de supraveghere ai Băncii Centrale Europene (BCE), text integral"
+  },
+  "source": "European Central Bank, speeches dataset",
+  "url": "https://www.ecb.europa.eu/press/key/html/downloads.en.html",
+  "licence": "ECB website: reproduction permitted with the source acknowledged",
+  "cite": "European Central Bank, Speeches dataset (all_ECB_speeches.csv)",
+  "lectures": [
+   "l12",
+   "l7"
+  ],
+  "note": "The full file has 2,915 speeches from 1997-02-07 (55.9 MB, kept in data/raw/); the committed file keeps the speeches from 1 January 2022 (whitespace normalised, n_words added).",
+  "freq": {
+   "en": "speech",
+   "ro": "discurs"
+  },
+  "downloaded": "2026-11-08",
+  "files": [
+   {
+    "file": "ecb_speeches_2022plus.csv",
+    "rows": 400,
+    "columns": [
+     "date",
+     "speakers",
+     "title",
+     "subtitle",
+     "contents",
+     "n_words"
+    ],
+    "size": 8300619,
+    "coverage": "2022-01-08 to 2026-10-30"
+   }
+  ]
+ },
+ "elliptic": {
+  "name": {
+   "en": "Elliptic Bitcoin transaction graph (illicit vs licit transactions)",
+   "ro": "Graful tranzacțiilor Bitcoin Elliptic (tranzacții ilicite și licite)"
+  },
+  "source": "Elliptic, released with Weber et al. (2019); files served by PyTorch Geometric (EllipticBitcoinDataset)",
+  "url": "https://www.kaggle.com/datasets/ellipticco/elliptic-data-set",
+  "licence": "Released by Elliptic for research and teaching (see the Kaggle page); not redistributed here",
+  "cite": "Weber, M., Domeniconi, G., Chen, J., Weidele, D. K. I., Bellei, C., Robinson, T. & Leiserson, C. E. (2019). Anti-money laundering in Bitcoin: Experimenting with graph convolutional networks for financial forensics. KDD Workshop on Anomaly Detection in Finance. arXiv:1908.02591",
+  "lectures": [
+   "l9"
+  ],
+  "note": "Download on demand: 203,769 transactions (nodes), 234,355 payment flows (edges), 49 time steps, 166 features; labels: illicit 4,545, licit 42,019, unknown 157,205. About 146.1 MB zipped: not committed. python3 data/download_all.py elliptic puts the files in data/raw/elliptic/; torch_geometric.datasets.EllipticBitcoinDataset downloads the same files.",
+  "freq": {
+   "en": "transaction (node)",
+   "ro": "tranzacție (nod)"
+  },
+  "downloaded": "2026-11-08",
+  "files": [],
+  "on_demand": true
+ },
+ "fashion_mnist": {
+  "downloaded": "2026-11-08",
+  "files": [],
+  "on_demand": true,
+  "freq": {
+   "en": "image",
+   "ro": "imagine"
+  },
+  "name": {
+   "en": "Fashion-MNIST: Zalando product images (10 clothing categories)",
+   "ro": "Fashion-MNIST: imagini de produse Zalando (10 categorii de îmbrăcăminte)"
+  },
+  "source": "Zalando Research",
+  "url": "https://github.com/zalandoresearch/fashion-mnist",
+  "licence": "MIT",
+  "cite": "Xiao, H., Rasul, K. & Vollgraf, R. (2017). Fashion-MNIST: A novel image dataset for benchmarking machine learning algorithms. arXiv:1708.07747",
+  "lectures": [
+   "l4",
+   "l8"
+  ],
+  "note": "Download on demand (torchvision.datasets.FashionMNIST): 60,000 training and 10,000 test images, 28 x 28 grey levels, from the Zalando online catalogue."
+ },
+ "cifar10": {
+  "downloaded": "2026-11-08",
+  "files": [],
+  "on_demand": true,
+  "freq": {
+   "en": "image",
+   "ro": "imagine"
+  },
+  "name": {
+   "en": "CIFAR-10: 60,000 colour photographs in 10 classes",
+   "ro": "CIFAR-10: 60.000 de fotografii color în 10 clase"
+  },
+  "source": "Canadian Institute for Advanced Research; University of Toronto",
+  "url": "https://www.cs.toronto.edu/~kriz/cifar.html",
+  "licence": "Free for research and teaching (as stated by the authors)",
+  "cite": "Krizhevsky, A. (2009). Learning multiple layers of features from tiny images. Technical report, University of Toronto",
+  "lectures": [
+   "l4"
+  ],
+  "note": "Download on demand (torchvision.datasets.CIFAR10): 50,000 training and 10,000 test images, 32 x 32 RGB (red, green, blue)."
+ },
+ "eurosat": {
+  "downloaded": "2026-11-08",
+  "files": [],
+  "on_demand": true,
+  "freq": {
+   "en": "image",
+   "ro": "imagine"
+  },
+  "name": {
+   "en": "EuroSAT: Sentinel-2 satellite images of land use in Europe (10 classes)",
+   "ro": "EuroSAT: imagini satelitare Sentinel-2 ale utilizării terenurilor din Europa (10 clase)"
+  },
+  "source": "Helber et al. (2019), from Copernicus Sentinel-2 data",
+  "url": "https://github.com/phelber/EuroSAT",
+  "licence": "MIT",
+  "cite": "Helber, P., Bischke, B., Dengel, A. & Borth, D. (2019). EuroSAT: A novel dataset and deep learning benchmark for land use and land cover classification. IEEE JSTARS, 12(7), 2217-2226. doi:10.1109/JSTARS.2019.2918242",
+  "lectures": [
+   "l4",
+   "l14"
+  ],
+  "note": "Download on demand (torchvision.datasets.EuroSAT): 27,000 images of 64 x 64 pixels (RGB bands), classes such as annual crop, industrial, residential, river; used for transfer learning and zero-shot vision-language classification."
+ }
+}

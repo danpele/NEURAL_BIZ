@@ -1,0 +1,71 @@
+/* Web pages of the NN research case studies (web/cases/CK.html, CK_ro.html), on top of assets/site.css and web/web.css.
+   Built by cases/common/build_web_case.py. */
+.tp-subt { font-size: 1rem; color: var(--main-blue); margin: 0 0 0.6rem; max-width: 52rem; }
+.toc-all { margin: 0.8rem 0 0; padding-top: 0.6rem; border-top: 1px solid var(--border); font-size: 0.85rem; }
+.toc-all a { text-decoration: none; }
+
+/* paper and materials */
+.cpaper, .cmat { max-width: 52rem; margin: 0.4rem 0 0.9rem; padding: 0.75rem 0.95rem; border: 1px solid var(--border); border-radius: 8px; background: #F7F9FC; }
+.cpaper { border-left: 4px solid var(--main-blue); }
+.cpaper-h { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--main-blue); margin: 0 0 0.3rem; }
+.cpaper-c { margin: 0; line-height: 1.55; overflow-wrap: anywhere; }
+.cmat { display: flex; flex-direction: column; gap: 0.6rem; background: #fff; }
+.cmat .cpaper-h { margin-bottom: 0; }
+
+/* boxes of the brief */
+.cbox { border-radius: 6px; padding: 0.7rem 0.95rem 0.15rem; margin: 0.5rem 0 1rem; max-width: 52rem; line-height: 1.6; }
+.cbox p { margin: 0 0 0.6rem; }
+.cbox-t { font-weight: 700; margin-bottom: 0.35rem !important; }
+.cbox-scenario { background: #ECEEF2; border: 1px solid var(--main-blue); }
+.cbox-scenario .cbox-t { color: var(--main-blue); font-size: 1.05rem; }
+.cbox-intuition { background: #EEF6EE; border-left: 4px solid var(--forest); }
+.cbox-intuition .cbox-t { color: var(--forest); }
+.cbox-decision { background: #FDF0F0; border-left: 4px solid #B00000; }
+.cbox-decision .cbox-t { color: #B00000; }
+.wintro .cbox-scenario { margin-top: 1rem; }
+.cnote { font-size: 0.85rem; color: #4A5060; line-height: 1.5; margin: 0.4rem 0 0.8rem; }
+.cnote p { margin: 0 0 0.5rem; }
+
+/* figures and tables */
+.cfig-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.2rem; margin: 0.6rem 0 1.1rem; max-width: 1020px; }
+.cfig-row.one { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.cfig { margin: 0; min-width: 0; }
+.cfig img { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; background: #fff; }
+.cfig a { display: block; }
+.cfig figcaption, .ctab { margin-top: 0.35rem; }
+.cfig .fcap, .ctab .fcap { font-size: 0.9rem; line-height: 1.5; margin: 0 0 0.2rem; color: var(--dark-gray); }
+.ctab .fcap { margin-bottom: 0.35rem; max-width: 52rem; }
+.fnum { font-weight: 700; color: var(--main-blue); }
+.cfig .fsrc, .ctab .fsrc { font-size: 0.78rem; line-height: 1.4; margin: 0 0 0.25rem; color: var(--mid-gray); }
+.ctab { margin: 0.8rem 0 1.2rem; max-width: 1020px; }
+.ctab .tbl { margin: 0 0 0.3rem; }
+.ctab .tbl tbody + tbody { border-top: 1px solid var(--main-blue); }
+.ctext .ctab, .ctext .cfig-row { max-width: 1020px; }
+.ctext { max-width: none; }
+.ctext > p, .ctext > ul, .ctext > ol, .ctext > .dm, .ctext > .cbox, .ctext > .cnote { max-width: 52rem; }
+
+/* key numbers and the "at a glance" flow */
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; margin: 0.8rem 0 1rem; max-width: 52rem; }
+.kpi { border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 0.8rem; text-align: center; background: #fff; }
+.kpi-v { display: block; font-size: 1.9rem; font-weight: 700; color: var(--main-blue); line-height: 1.2; }
+.kpi-red .kpi-v { color: #B00000; }
+.kpi-l { display: block; font-size: 0.85rem; color: #4A5060; margin-top: 0.25rem; line-height: 1.4; }
+ol.glance { list-style: none; padding: 0 !important; margin: 0.6rem 0 1rem; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.6rem; max-width: 1020px; }
+ol.glance li.gl { margin: 0; padding: 0.6rem 0.7rem; background: #ECEEF2; border: 1px solid var(--main-blue); border-radius: 6px; font-size: 0.88rem; line-height: 1.45; position: relative; }
+ol.glance li.gl-dec { background: #FDF0F0; border-color: #B00000; }
+.gl-h { display: block; font-weight: 700; color: var(--main-blue); margin-bottom: 0.25rem; }
+.gl-dec .gl-h { color: #B00000; }
+.gl-t { display: block; }
+
+table.abbr th { white-space: nowrap; color: var(--main-blue); }
+
+@media (max-width: 1000px) {
+  ol.glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  ol.glance li.gl-dec { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .cfig-row { grid-template-columns: minmax(0, 1fr); }
+  .kpis { grid-template-columns: minmax(0, 1fr); }
+  ol.glance { grid-template-columns: minmax(0, 1fr); }
+  .kpi-v { font-size: 1.6rem; }
+}

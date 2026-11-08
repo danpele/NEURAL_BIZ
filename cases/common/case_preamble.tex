@@ -1,0 +1,123 @@
+% =============================================================================
+% case_preamble.tex -- shared preamble of the NN research case briefs (article style).
+% Adapted from assignments/common/assign_preamble.tex (same look).
+% One source, two languages: the body uses \T{English}{Romanian}; the wrapper file sets
+% \ROtrue (Romanian) or \ROfalse (English) before \input{assign_preamble}.
+% Decimal separator: \ds (point in English, comma in Romanian), e.g. 0\ds 95.
+% =============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english,romanian]{babel}
+\usepackage[a4paper, margin=2.0cm, top=2.2cm, bottom=2.2cm]{geometry}
+\usepackage{amsmath, amssymb, mathtools, bm}
+\usepackage{booktabs, tabularx, longtable, array, multirow}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=MainBlue, urlcolor=MainBlue, citecolor=MainBlue}
+\graphicspath{{../../lectures/common/logos/}{fig/\lang/}{./}}
+\usepackage{caption}
+\captionsetup{font=small, labelfont={bf,color=MainBlue}, skip=3pt}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, shapes.misc}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+% include a generated table, shrunk to the line width if needed: \tabin{name}
+\newcommand{\tabin}[1]{\begin{adjustbox}{max width=\linewidth}\input{tab_#1_\lang}\end{adjustbox}}
+
+\definecolor{MainBlue}{RGB}{26, 58, 110}
+\definecolor{IDAred}{RGB}{205, 0, 0}
+\definecolor{DarkGray}{RGB}{51, 51, 51}
+\definecolor{FooterGray}{RGB}{100, 100, 100}
+\definecolor{BlockGray}{RGB}{236, 238, 242}
+\definecolor{Crimson}{RGB}{190, 40, 50}
+\definecolor{Forest}{RGB}{30, 110, 50}
+
+\newcommand{\T}[2]{\ifRO#2\else#1\fi}
+\newcommand{\lang}{\ifRO ro\else en\fi}
+\newcommand{\ds}{\ifRO{,}\else.\fi}
+\ifRO\AtBeginDocument{\selectlanguage{romanian}}\else\AtBeginDocument{\selectlanguage{english}}\fi
+
+\AtBeginDocument{\sloppy}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist{itemsep=1pt, topsep=2pt, leftmargin=*}
+\setlist[itemize,1]{label={\color{MainBlue}$\boxdot$}}
+\setlist[itemize,2]{label={\color{MainBlue}$\blacktriangleright$}}
+\titleformat{\section}{\large\bfseries\color{MainBlue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{MainBlue}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{8pt}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\color{FooterGray}\footnotesize \T{Neural Networks and Deep Learning (NN)}{Rețele neuronale și deep learning (NN)} \textbullet\ \emqacase}
+\fancyfoot[R]{\color{FooterGray}\footnotesize D.T.~Pele \textbullet\ \thepage}
+
+% boxes
+\newtcolorbox{scenario}{colback=BlockGray, colframe=MainBlue, boxrule=0.6pt, arc=1mm,
+  left=2mm, right=2mm, top=1mm, bottom=1mm, title={\T{The business question}{Problema decizională}}, fonttitle=\bfseries}
+\newtcolorbox{outbox}{colback=Forest!6, colframe=Forest, boxrule=0.5pt, arc=1mm,
+  left=2mm, right=2mm, top=0.5mm, bottom=0.5mm}
+\newtcolorbox{warnbox}{colback=Crimson!6, colframe=Crimson, boxrule=0.5pt, arc=1mm,
+  left=2mm, right=2mm, top=0.5mm, bottom=0.5mm}
+\newtcolorbox{todobox}{colback=yellow!12, colframe=orange!80!black, boxrule=0.5pt, arc=1mm,
+  left=2mm, right=2mm, top=0.5mm, bottom=0.5mm}
+% task header: \task{number}{title}{points}
+\newcommand{\task}[3]{\subsection*{\T{Task}{Cerința} #1 — #2 \hfill {\normalfont\color{Forest}[#3 \T{points}{puncte}]}}}
+\newcommand{\out}[1]{\begin{outbox}\textbf{\T{Show}{De prezentat}:} #1\end{outbox}}
+\newcommand{\where}{\T{where}{unde}}
+\newcommand{\asinh}{\operatorname{asinh}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\1}{\mathbf{1}}
+
+% title block: \emqatitle{Assignment n: title}{subtitle}
+\newcommand{\emqacase}{}
+\newcommand{\emqatitle}[2]{%
+  \thispagestyle{fancy}
+  \noindent\begin{minipage}[c]{0.24\textwidth}
+    \href{https://www.ase.ro}{\includegraphics[height=1.0cm]{ase_logo.png}}\hspace{0.2cm}%
+    \href{https://ipe.ro/new}{\includegraphics[height=1.0cm]{acad_logo.png}}%
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.74\textwidth}\raggedleft
+    {\small\color{FooterGray}Master \textbullet\ \T{Neural Networks and Deep Learning (NN)}{Rețele neuronale și deep learning (NN)}}\\
+    {\small\color{FooterGray}Prof.\ dr.\ Daniel Traian PELE}\\
+    {\footnotesize\color{FooterGray}\T{Bucharest University of Economic Studies \textbullet\ Romanian Academy, Institute for Economic Forecasting}%
+      {Academia de Studii Economice din București \textbullet\ Academia Română, Institutul de Prognoză Economică}}
+  \end{minipage}\par\vspace{0.35cm}
+  {\color{IDAred}\LARGE\bfseries #1\par}\vspace{0.1cm}
+  {\color{MainBlue}\large #2\par}\vspace{0.15cm}
+  {\color{MainBlue}\rule{\linewidth}{0.6pt}}\par}
+
+% ---------------------------------------------------------------- case-specific boxes
+\newtcolorbox{paperbox}{colback=white, colframe=MainBlue!60, boxrule=0.5pt, arc=1mm,
+  left=2mm, right=2mm, top=1mm, bottom=1mm, title={\T{What the paper did}{Lucrarea de referință}}, fonttitle=\bfseries\small}
+\newtcolorbox{intuition}{colback=Forest!6, colframe=Forest, boxrule=0.5pt, arc=1mm,
+  left=2mm, right=2mm, top=0.5mm, bottom=0.5mm, title={\T{Intuition first}{Intuiția metodei}}, fonttitle=\bfseries\small}
+\newtcolorbox{decision}{colback=IDAred!5, colframe=IDAred!80!black, boxrule=0.5pt, arc=1mm,
+  left=2mm, right=2mm, top=0.5mm, bottom=0.5mm, title={\T{In practice}{În practică}}, fonttitle=\bfseries\small}
+% one stage of the at-a-glance flow: \glancebox{title}{text}
+\tikzset{glance/.style={draw=MainBlue, fill=BlockGray, rounded corners=2pt, text width=0.158\linewidth,
+  minimum height=3.6cm, align=flush left, font=\scriptsize, inner sep=3pt}}
+\newcommand{\glance}[5]{%
+\begin{center}
+\begin{tikzpicture}[node distance=0.22cm, >={Stealth[length=2mm]}]
+\node[glance] (q) {\textbf{\color{MainBlue}\T{Question}{Întrebare}}\\[2pt] #1};
+\node[glance, right=of q] (d) {\textbf{\color{MainBlue}\T{Data}{Date}}\\[2pt] #2};
+\node[glance, right=of d] (m) {\textbf{\color{MainBlue}\T{Method}{Metodă}}\\[2pt] #3};
+\node[glance, right=of m] (r) {\textbf{\color{MainBlue}\T{Result}{Rezultat}}\\[2pt] #4};
+\node[glance, right=of r, fill=IDAred!8, draw=IDAred] (x) {\textbf{\color{IDAred}\T{Decision}{Decizie}}\\[2pt] #5};
+\draw[->, MainBlue, thick] (q) -- (d); \draw[->, MainBlue, thick] (d) -- (m);
+\draw[->, MainBlue, thick] (m) -- (r); \draw[->, MainBlue, thick] (r) -- (x);
+\end{tikzpicture}
+\end{center}}
+% source line under a figure
+\newcommand{\src}[1]{\par\vspace{-1pt}{\scriptsize\color{FooterGray}\T{Source}{Sursa}: #1}}

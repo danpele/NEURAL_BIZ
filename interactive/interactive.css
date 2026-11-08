@@ -1,0 +1,50 @@
+/* Interactive lecture pages (NN): layout on top of assets/site.css; same design as the MFM interactive chapters */
+.header-title h1 a { color: inherit; text-decoration: none; }
+.header-title h1 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.imain { max-width: 1440px; margin: 0 auto; padding: 1.2rem 16px 3rem; }
+.lead { max-width: 900px; margin: 0.4rem 0 0.6rem; }
+.toc { font-size: 0.92rem; margin-bottom: 1rem; }
+.toc a { text-decoration: none; font-weight: 600; }
+h2.sec { font-size: 1.35rem; color: var(--main-blue); margin: 2rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--ida-red); }
+.blk { border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; margin: 0 0 1.4rem; background: var(--white); }
+.blk h3 { font-size: 1.1rem; color: var(--main-blue); margin: 0 0 0.7rem; }
+.pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.2rem; align-items: start; }
+.pair.solo { grid-template-columns: minmax(0, 1fr); }
+.slide { margin: 0; position: sticky; top: 70px; }
+.slide img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; }
+.slide figcaption { font-size: 0.8rem; margin-top: 0.25rem; }
+.live { min-width: 0; }
+.ctls { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; align-items: flex-end; margin-bottom: 0.4rem; }
+.ctl { display: flex; flex-direction: column; flex: 1 1 200px; min-width: 180px; font-size: 0.9rem; }
+.ctl input[type=range] { width: 100%; accent-color: var(--main-blue); }
+.ctl select { padding: 0.3rem 0.4rem; border: 1px solid var(--border); border-radius: 6px; font: inherit; background: var(--white); }
+.ctl-tg .lbl { margin-bottom: 0.15rem; }
+.tgs { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; }
+.tg { display: inline-flex; align-items: center; gap: 0.3rem; cursor: pointer; white-space: nowrap; }
+.tg input { accent-color: var(--main-blue); }
+.btn { display: inline-block; padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid var(--main-blue); background: var(--white); color: var(--main-blue); font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-decoration: none; }
+.btn:hover { background: var(--main-blue); color: var(--white); }
+.btn.play { background: var(--main-blue); color: var(--white); min-width: 7rem; }
+.btn.play:hover { background: var(--accent-blue); }
+.btn:focus-visible { outline: 2px solid var(--main-blue); outline-offset: 2px; }
+.charts { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+.charts:has(.chart + .chart) { grid-template-columns: 1fr 1fr; }
+.charts.one, .charts.one:has(.chart + .chart) { grid-template-columns: 1fr; }
+.chart { width: 100%; height: 360px; min-width: 0; }
+.out { margin: 0.4rem 0 0 1.2rem; font-size: 0.95rem; }
+.qlk { font-size: 0.82rem; margin: 0.35rem 0 0; color: var(--mid-gray); }
+.ask { background: #EEF3FA; border-left: 4px solid var(--main-blue); padding: 0.55rem 0.8rem; border-radius: 4px; margin-top: 0.8rem; }
+.ask-tag { font-weight: 700; color: var(--main-blue); margin-right: 0.3rem; }
+details { margin: 0.4rem 0 0; }
+details summary { cursor: pointer; font-weight: 600; color: var(--main-blue); }
+details p { margin: 0.35rem 0 0; }
+.src { font-size: 0.82rem; margin-top: 0.5rem; }
+@media (max-width: 1100px) {
+  .pair { grid-template-columns: 1fr; }
+  .slide { position: static; max-width: 720px; }
+}
+@media (max-width: 720px) {
+  .charts:has(.chart + .chart) { grid-template-columns: 1fr; }
+  .chart { height: 320px; }
+  .ctl { min-width: 0; flex-basis: 100%; }
+}

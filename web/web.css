@@ -1,0 +1,114 @@
+/* Web version of an NN lecture (web/LK.html, web/LK_ro.html): layout on top of assets/site.css.
+   Built by lectures/common/build_web_lecture.py; same layout as the MFM web lectures. */
+body.web { background: var(--white); }
+html, body { overflow-x: clip; }
+header h1 a { color: inherit; text-decoration: none; }
+header h1 { font-size: 2.1rem; }
+header { padding: 1.4rem 0; }
+nav ul { gap: 0.8rem; flex-wrap: wrap; }
+nav a { padding: 0.4rem 0.75rem; font-size: 0.95rem; }
+
+.wlay { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 2rem; max-width: 1340px; margin: 0 auto; padding: 1.2rem 16px 3rem; }
+.wtoc { min-width: 0; position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 96px); overflow-y: auto; }
+.wtoc details { font-size: 0.9rem; }
+.wtoc summary { font-weight: 700; color: var(--main-blue); cursor: pointer; margin-bottom: 0.4rem; }
+.wtoc ol { list-style: none; margin: 0; padding: 0; }
+.wtoc li { margin: 0; }
+.wtoc a { display: block; padding: 0.28rem 0.5rem; border-left: 3px solid transparent; text-decoration: none; line-height: 1.35; color: var(--main-blue); }
+.wtoc a:hover { background: #EEF3FA; }
+.wtoc a.on { border-left-color: var(--ida-red); font-weight: 600; background: #EEF3FA; }
+.wmain { min-width: 0; max-width: 1020px; width: 100%; margin: 0; padding: 0; }
+.wmain section { margin-bottom: 0; }
+.wmain h2.sec { font-size: 1.55rem; color: var(--main-blue); margin: 2.4rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--main-blue); scroll-margin-top: 70px; }
+
+/* title block and opener */
+.wintro { margin: 0.2rem 0 0.4rem; padding: 0.2rem 0 1.4rem; border-bottom: 1px solid var(--border); scroll-margin-top: 80px; }
+.tp { padding: 0.4rem 0 1rem; }
+.tp-k { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-gray); margin: 0; }
+.tp-sub { font-size: 1.75rem; font-weight: 700; color: #CD0000; margin: 0.1rem 0 0.4rem; line-height: 1.25; }
+.tp-au { font-weight: 600; margin: 0; }
+.tp-in { font-size: 0.88rem; color: var(--mid-gray); margin: 0.2rem 0 0; }
+.wintro h3.ih { font-size: 1.05rem; color: var(--main-blue); margin: 1.2rem 0 0.4rem; }
+ol.plan { margin: 0; padding-left: 1.6rem; max-width: 52rem; line-height: 1.5; }
+ol.plan li { margin: 0.3rem 0; }
+ol.plan li::marker { color: var(--main-blue); font-weight: 600; }
+ol.plan a { font-weight: 600; text-decoration: none; }
+ol.plan a:hover { text-decoration: underline; }
+ol.plan .plan-d { display: block; font-size: 0.9rem; color: #4A5060; }
+
+/* blocks */
+.frame { padding: 1rem 0 1.3rem; border-bottom: 1px solid var(--border); min-width: 0; scroll-margin-top: 70px; }
+.fhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2rem 1rem; margin-bottom: 0.55rem; }
+.fhead h3 { font-size: 1.15rem; color: #CD0000; margin: 0; flex: 1 1 320px; min-width: 0; overflow-wrap: anywhere; }
+.pdfp { font-size: 0.78rem; color: var(--mid-gray); text-decoration: none; white-space: nowrap; border: 1px solid var(--border); border-radius: 4px; padding: 0.05rem 0.4rem; }
+.pdfp:hover { color: var(--main-blue); border-color: var(--main-blue); }
+
+/* course text */
+.ctext { line-height: 1.65; overflow-wrap: break-word; min-width: 0; max-width: 52rem; }
+.ctext p { margin: 0 0 0.75rem; }
+.ctext p.lead { margin-bottom: 0.35rem; }
+.ctext ol, .ctext ul { margin: 0 0 0.85rem; padding-left: 1.7rem; }
+.ctext ul { list-style: square; }
+.ctext ul ul { list-style: disc; margin: 0.2rem 0 0.2rem; }
+.ctext li { margin: 0 0 0.35rem; padding-left: 0.2rem; }
+.ctext li::marker { color: var(--main-blue); }
+.ctext ol > li::marker { font-weight: 600; }
+.ctext strong { color: var(--main-blue); }
+.ctext mjx-container.wide { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+.sintro { margin: 0.3rem 0 0.4rem; padding-bottom: 0.4rem; }
+.dm { margin: 0.2rem 0 0.8rem; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+.dm.eq { display: flex; align-items: center; gap: 0.6rem; overflow: visible; scroll-margin-top: 90px; }
+.dm.eq .eqb { flex: 1 1 auto; min-width: 0; overflow-x: auto; overflow-y: hidden; }
+.dm.eq .eqn { flex: 0 0 auto; font-family: 'Times New Roman', Times, serif; font-size: 1.05em; white-space: nowrap; }
+.dm.eq:target { background: #FFF6D6; border-radius: 4px; }
+a.eqref { text-decoration: none; }
+a.eqref:hover { text-decoration: underline; }
+
+/* "in practice" box (the slide's manager line) and section summary */
+.mgr { background: #EEF6EE; border-left: 4px solid var(--forest); border-radius: 4px; padding: 0.5rem 0.85rem; margin: 0.3rem 0 0.9rem; line-height: 1.55; }
+.mgr-t { font-weight: 700; color: var(--forest); }
+.send { margin: 1rem 0 0.4rem; padding: 0.7rem 0.95rem 0.1rem; background: #F5F7FB; border-radius: 6px; max-width: 52rem; line-height: 1.6; }
+.send .send-t { font-weight: 600; color: var(--main-blue); margin-bottom: 0.35rem; }
+.send p { margin: 0 0 0.6rem; }
+
+/* figures */
+.wfig { margin: 0.6rem 0 1.1rem; max-width: 860px; }
+.wfig img { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; background: #fff; }
+.wfig figcaption { margin-top: 0.35rem; }
+.wfig .fcap { font-size: 0.9rem; line-height: 1.5; margin: 0 0 0.2rem; color: var(--dark-gray); }
+.wfig .fsrc { font-size: 0.78rem; line-height: 1.4; margin: 0 0 0.25rem; color: var(--mid-gray); }
+.flinks { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.ql { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; padding: 0.08rem 0.5rem; border: 1px solid var(--border); border-radius: 5px; text-decoration: none; overflow-wrap: anywhere; }
+.ql img { height: 1.05em; width: auto; }
+.ql:hover { border-color: var(--main-blue); }
+
+/* tables */
+.tbl { max-width: 100%; overflow-x: auto; margin: 0.45rem 0 0.9rem; }
+.tbl table { border-collapse: collapse; font-size: 0.9rem; border-top: 2px solid var(--main-blue); border-bottom: 2px solid var(--main-blue); }
+.tbl th, .tbl td { padding: 0.28rem 0.6rem; text-align: left; vertical-align: top; }
+.tbl thead th { border-bottom: 1px solid var(--main-blue); }
+.tbl tbody tr:nth-child(even) { background: #F5F7FB; }
+.tbl .r { text-align: right; white-space: nowrap; }
+
+/* references */
+.wbib { margin-top: 2.4rem; }
+ul.bib { list-style: none; margin: 0.6rem 0 1rem; padding: 0; max-width: 52rem; }
+ul.bib li { padding-left: 1.6rem; text-indent: -1.6rem; margin: 0 0 0.55rem; line-height: 1.5; overflow-wrap: anywhere; font-size: 0.93rem; }
+.src.foot { margin-top: 1.5rem; font-size: 0.82rem; color: var(--mid-gray); }
+
+@media (max-width: 1000px) {
+  .wlay { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; padding-top: 0.8rem; }
+  .wtoc { position: static; max-height: none; overflow: visible; }
+  .wtoc details { border: 1px solid var(--border); border-radius: 8px; padding: 0.4rem 0.6rem; }
+}
+@media (max-width: 760px) {
+  .fhead h3 { font-size: 1.05rem; flex-basis: 100%; }
+  .header-logo { height: 40px; }
+  header h1 { font-size: 1.4rem; }
+  .header-inner { padding: 0 16px; }
+  nav ul { gap: 0.3rem 0.5rem; padding: 0 8px; }
+  nav a { padding: 0.3rem 0.5rem; font-size: 0.88rem; }
+  .lang-switcher { margin-left: 0; padding-left: 0; }
+  .tp-sub { font-size: 1.4rem; }
+}
+.ctext .qa { font-weight: 600; color: var(--forest); }

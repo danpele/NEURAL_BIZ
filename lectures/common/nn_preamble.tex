@@ -1,0 +1,225 @@
+% =============================================================================
+% nn_preamble.tex -- shared Beamer preamble of Neural Networks and Deep Learning (NN)
+% Used by every lecture: lectures/Lk/lecturek.tex does
+%   \documentclass[10pt,aspectratio=169,t]{beamer}
+%   \input{../common/nn_preamble}
+%   \nnlecture{k}{Lecture title}
+% Logos live in lectures/common/logos/, charts in lectures/Lk/charts/.
+% Do NOT add \hfuzz / \vfuzz / \hbadness here: overfull boxes must be fixed, not hidden.
+% =============================================================================
+
+\usetheme{default}
+\setbeamersize{text margin left=7mm, text margin right=7mm}
+
+% ---------------------------------------------------------------- packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, shapes.misc}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{multicol}
+\hypersetup{colorlinks=true, linkcolor=MainBlue, urlcolor=MainBlue, citecolor=MainBlue}
+\graphicspath{{../common/logos/}}   % charts are included with their language folder: charts/en/, charts/ro/
+
+% ---------------------------------------------------------------- colours
+\definecolor{MainBlue}{RGB}{26, 58, 110}
+\definecolor{IDAred}{RGB}{205, 0, 0}
+\definecolor{DarkGray}{RGB}{51, 51, 51}
+\definecolor{FooterGray}{RGB}{100, 100, 100}
+\definecolor{BlockGray}{RGB}{236, 238, 242}
+\definecolor{KeynoteGray}{RGB}{218, 218, 218}
+\definecolor{Crimson}{RGB}{190, 40, 50}
+\definecolor{Forest}{RGB}{30, 110, 50}
+\definecolor{Bitter}{RGB}{214, 150, 20}
+% chart palette (same hex values and order as lectures/common/nn_plot.py SERIES)
+\definecolor{Ser1}{HTML}{2A78D6}
+\definecolor{Ser2}{HTML}{EB6834}
+\definecolor{Ser3}{HTML}{1BAF7A}
+\definecolor{Ser4}{HTML}{EDA100}
+\definecolor{Ser5}{HTML}{E87BA4}
+\definecolor{Ser6}{HTML}{008300}
+\definecolor{Ser7}{HTML}{6250D6}
+\definecolor{Ser8}{HTML}{E34948}
+
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \shade[shading=axis, shading angle=315, top color=white, bottom color=KeynoteGray]
+      (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}}
+\setbeamercolor{background canvas}{bg=}
+\setbeamercolor{structure}{fg=MainBlue}
+\setbeamercolor{normal text}{fg=DarkGray}
+\setbeamercolor{title}{fg=IDAred}
+\setbeamercolor{frametitle}{fg=IDAred, bg=}
+\setbeamercolor{block title}{bg=MainBlue, fg=white}
+\setbeamercolor{block body}{bg=BlockGray, fg=DarkGray}
+\setbeamercolor{block title alerted}{bg=Crimson, fg=white}
+\setbeamercolor{block body alerted}{bg=Crimson!7, fg=DarkGray}
+\setbeamercolor{block title example}{bg=Forest, fg=white}
+\setbeamercolor{block body example}{bg=Forest!7, fg=DarkGray}
+\setbeamercolor{item}{fg=MainBlue}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{block title}{size=\small, series=\bfseries}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{itemize item}{\color{MainBlue}$\boxdot$}
+\setbeamertemplate{itemize subitem}{\color{MainBlue}\scriptsize$\blacktriangleright$}
+% compact two-level lists: level 1 = main point, level 2 = details (no text outside bullets)
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setlength{\leftmargini}{1.1em}
+\setlength{\leftmarginii}{1.1em}
+\setbeamertemplate{itemize/enumerate body begin}{\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\parskip}{0pt}}
+\setbeamertemplate{itemize/enumerate subbody begin}{\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\itemsep}{0pt}\vspace{-0.4ex}}
+
+\setbeamertemplate{enumerate item}{\color{MainBlue}\insertenumlabel.}
+\setlength{\leftmargini}{1.3em}
+\setlength{\leftmarginii}{1.2em}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{section in toc}{\color{MainBlue}$\blacktriangleright$~\inserttocsection}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+% frame subtitle = precise citation line under the claim title (Weron style)
+\setbeamerfont{framesubtitle}{size=\footnotesize}
+\setbeamercolor{framesubtitle}{fg=FooterGray}
+% outline that reappears at every section with the current section highlighted
+\setbeamertemplate{section in toc shaded}[default][35]
+\setbeamertemplate{subsection in toc shaded}[default][35]
+\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=2.2em\color{DarkGray}\small\inserttocsubsection\par}
+\AtBeginSection[]{{\begin{frame}{\txtoutline}\vspace{2mm}\small
+  \tableofcontents[currentsection,hideothersubsections]\end{frame}}}
+
+% ---------------------------------------------------------------- head and foot
+\setbeamertemplate{headline}{%
+  \vskip10pt%
+  \hbox to \paperwidth{\hskip0.5cm%
+    {\small\color{FooterGray}\renewcommand{\hyperlink}[2]{##2}\insertsectionhead}%
+    \hfill\textcolor{FooterGray}{\small\insertframenumber}\hskip0.5cm}%
+  \vskip4pt{\color{FooterGray}\hrule height 0.4pt}}
+% footer as in the other courses (MFM, SFM): course name on the left, small sparkline on the right
+\setbeamertemplate{footline}{%
+  {\color{FooterGray}\hrule height 0.4pt}\vskip4pt%
+  \hbox to \paperwidth{\hskip0.5cm%
+    \textcolor{FooterGray}{\small\txtcourse}%
+    \hfill\raisebox{-0.1em}{\begin{tikzpicture}[x=0.08em, y=0.08em, line width=0.4pt]
+      \draw[FooterGray] (0,3) -- (1,4) -- (2,3.5) -- (3,5) -- (4,4) -- (5,6) -- (6,5.5) -- (7,4) -- (8,5) -- (9,7) -- (10,6) -- (11,5) -- (12,6.5) -- (13,8) -- (14,7) -- (15,6) -- (16,7.5) -- (17,9) -- (18,8) -- (19,7) -- (20,8.5) -- (21,10) -- (22,9) -- (23,8) -- (24,9.5);
+    \end{tikzpicture}}\hskip0.5cm}%
+  \vskip6pt}
+
+% ---------------------------------------------------------------- title page
+\defbeamertemplate*{title page}{nn}[1][]{%
+  \vspace{0.15cm}
+  \begin{center}
+    \href{https://www.ase.ro}{\includegraphics[height=0.9cm]{ase_logo.png}}\hspace{0.3cm}%
+    \href{https://ipe.ro/new}{\includegraphics[height=0.9cm]{acad_logo.png}}\hspace{0.3cm}%
+    \href{https://theida.net}{\includegraphics[height=0.9cm]{ida_logo.png}}\hspace{0.3cm}%
+    \href{https://blockchain-research-center.com}{\includegraphics[height=0.9cm]{brc_logo.png}}\hspace{0.3cm}%
+    \href{https://www.ai4efin.ase.ro}{\includegraphics[height=0.9cm]{ai4efin_logo.png}}\hspace{0.3cm}%
+    \href{https://www.digital-finance-msca.com}{\includegraphics[height=0.9cm]{msca_logo.png}}%
+  \end{center}
+  \vspace{0.45cm}
+  \begin{center}
+    \begin{minipage}{0.1\textwidth}\centering
+      \href{https://quantlet.com}{\includegraphics[height=0.9cm]{ql_logo.png}}\end{minipage}%
+    \begin{minipage}{0.78\textwidth}\centering
+      {\Large\bfseries\usebeamercolor[fg]{title}\inserttitle}\par\vspace{0.25cm}
+      {\large\usebeamercolor[fg]{title}\insertsubtitle}\end{minipage}%
+    \begin{minipage}{0.1\textwidth}\centering
+      \href{https://quantinar.com}{\includegraphics[height=0.9cm]{qr_logo.png}}\end{minipage}
+  \end{center}
+  \vfill
+  \hspace{0.4cm}{\bfseries\insertauthor}\par\vspace{0.12cm}
+  \hspace{0.4cm}\begin{minipage}[t]{0.92\textwidth}\raggedright\footnotesize\insertinstitute\end{minipage}
+  \par\vspace{0.4cm}}
+
+% ---------------------------------------------------------------- lecture metadata
+\newcommand{\nnshort}{}
+\newcommand{\nnnb}{notebooks}
+\newcommand{\nnrepo}{https://github.com/danpele/NEURAL_BIZ/tree/main}
+% language-dependent labels (English default; \nnromanian switches to Romanian, call it before \nnlecture)
+\newcommand{\txtcourse}{Neural Networks and Deep Learning}
+\newcommand{\txtlecture}{Lecture}
+\newcommand{\txtoutline}{Outline}
+\newcommand{\txtintuition}{In one sentence:}
+\newcommand{\txtjob}{In practice:}
+\newcommand{\txttry}{Experiment yourself:}
+\newcommand{\txtwhere}{where}
+\newcommand{\txtsim}{SIMULATED DATA (teaching illustration)}
+\newcommand{\txtnbsuffix}{}
+\newcommand{\txtinstitute}{Bucharest University of Economic Studies (ASE), Department of Statistics and Econometrics\\
+    Romanian Academy, Institute for Economic Forecasting (IPE)\\
+    IDA Institute Digital Assets \textbullet\ AI4EFin \textbullet\ MSCA Digital Finance}
+\newcommand{\nnromanian}{%
+  \renewcommand{\txtcourse}{Rețele neuronale și deep learning}%
+  \renewcommand{\txtlecture}{Cursul}%
+  \renewcommand{\txtoutline}{Cuprins}%
+  \renewcommand{\txtintuition}{Pe scurt:}%
+  \renewcommand{\txtjob}{În practică:}%
+  \renewcommand{\txttry}{Exercițiu practic:}%
+  \renewcommand{\txtwhere}{unde}%
+  \renewcommand{\txtsim}{DATE SIMULATE (doar pentru ilustrare)}%
+  \renewcommand{\txtnbsuffix}{\string_ro}%
+  \renewcommand{\txtinstitute}{Academia de Studii Economice din București (ASE), Departamentul de Statistică și Econometrie\\
+    Academia Română, Institutul de Prognoză Economică (IPE)\\
+    IDA Institute Digital Assets \textbullet\ AI4EFin \textbullet\ MSCA Digital Finance}}
+\newcommand{\nnlecture}[2]{%
+  \renewcommand{\nnshort}{\txtlecture\ #1}%
+  \renewcommand{\nnnb}{notebooks/L#1\string_notebook\txtnbsuffix.ipynb}%
+  \title[NN]{\txtcourse}%
+  \subtitle{\txtlecture\ #1: #2}%
+  \author{Prof.\ dr.\ Daniel Traian PELE}%
+  \institute{\txtinstitute}%
+  \date{}}
+
+% ---------------------------------------------------------------- teaching blocks (one message per frame)
+% \intuition{one plain sentence}  ->  formula with every symbol defined  ->  real-data example  ->  \manager{one line}
+\newcommand{\intuition}[1]{\begin{itemize}\item {\color{MainBlue}\textbf{\txtintuition}}~#1\end{itemize}\vspace{0.6mm}}
+\newcommand{\manager}[1]{\colorbox{Forest!10}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\footnotesize
+  \begin{itemize}\setlength{\itemsep}{0pt}\item \textbf{\color{Forest}\txtjob}~#1\end{itemize}}}}
+% Experiment yourself: pointer to the matching notebook section
+\newcommand{\tryit}[1]{{\scriptsize\href{\nnrepo/\nnnb}{%
+  \raisebox{-0.15em}{\includegraphics[height=0.85em]{ql_logo.png}}\,\textbf{\txttry}~\color{MainBlue}#1}}}
+% bottom row: manager line (left) + experiment pointer (right), pinned to the bottom of the frame
+\newcommand{\bottomrow}[2]{\par\vfill\noindent\begin{minipage}[b]{0.72\linewidth}#1\end{minipage}\hfill
+  \begin{minipage}[b]{0.26\linewidth}\raggedleft #2\end{minipage}\par\vspace{0.5mm}}
+\newcommand{\where}[1]{{\footnotesize\textbf{\txtwhere}~#1\par}}
+
+% ---------------------------------------------------------------- helpers
+% chart source line under a figure: \chartsource{Source ...; period ...}
+\newcommand{\chartsource}[1]{\par\vspace{1pt}{\scriptsize\color{FooterGray}#1\par}}
+% link to code: \quantlet{label}{path inside the repo}
+\newcommand{\quantlet}[2]{\par\vspace{1pt}\hfill\href{\nnrepo/#2}{%
+  \raisebox{-0.15em}{\includegraphics[height=0.75em]{ql_logo.png}}\textcolor{MainBlue}{\scriptsize\ #1}}}
+% inline Quantlet link for the bottom-right corner of a frame: \qlink{label}{path inside the repo}
+\newcommand{\qlink}[2]{{\scriptsize\href{\nnrepo/#2}{\raisebox{-0.15em}{\includegraphics[height=0.85em]{ql_logo.png}}\,\textcolor{MainBlue}{#1}}}}
+\newcommand{\simlabel}{\colorbox{Crimson!12}{\scriptsize\bfseries\color{Crimson}\txtsim}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\asinh}{\operatorname{asinh}}
+\newcommand{\iid}{\overset{\text{i.i.d.}}{\sim}}
+\newcommand{\EUR}{EUR}
+% deep-learning notation (Bishop & Bishop, 2024): vectors bold lower case, matrices bold upper case
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\mW}{\mathbf{W}}
+\newcommand{\mX}{\mathbf{X}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\loss}{\mathcal{L}}
+\newcommand{\dataset}{\mathcal{D}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\ReLU}{ReLU}
+\DeclareMathOperator{\sigm}{\sigma}
