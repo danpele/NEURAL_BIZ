@@ -301,7 +301,7 @@ print({k: round(v, 3) for k, v in boot.items()})
 names = {"xgb": ("XGBoost (paper), 5-seed ensemble", "XGBoost (lucrarea), ansamblu de 5 rulări"),
          "lstm": ("LSTM, 5-seed ensemble", "LSTM, ansamblu de 5 rulări"), "gru": ("GRU, 5-seed ensemble", "GRU, ansamblu de 5 rulări"),
          "ind": ("Indicator warning score (paper)", "Scorul de avertizare cu indicatori (lucrarea)"),
-         "naive": ("Naive: spike on day d-1, same hour", "Naiv: vîrf în ziua d-1, la aceeași oră")}
+         "naive": ("Naive: spike on day d-1, same hour", "Persistență: vîrf la aceeași oră în ziua precedentă")}
 t = res[["Precision", "Recall", "F1", "sdF1", "PR-AUC", "sdPR", "AUC"]].copy(); t.index = [names[i] for i in t.index]
 cu.write_table(t, "warning", header=[("Early-warning rule (test period)", "Regula de avertizare (perioada de test)"), ("Precision", "Precizia"),
                ("Recall", "Sensibilitatea"), ("F1", "F1"), ("s.d.", "a.s."), ("PR-AUC", "PR-AUC"), ("s.d.", "a.s."), ("AUC", "AUC")], digits=3,
@@ -390,7 +390,7 @@ def fig_decision(lang):
     ax.plot(cuts, vals["lstm"], color=cu.PAL["DE_LU"], lw=1.5, label=cu.T(lang, "LSTM ensemble", "Ansamblul LSTM"))
     ax.plot(cuts, vals["xgb"], color=cu.PAL["HU"], lw=1.5, label=cu.T(lang, "XGBoost ensemble", "Ansamblul XGBoost"))
     ax.axvline(pc, color=cu.PAL["c8"], ls="--", lw=1, label=cu.T(lang, "Cost-loss threshold C/L", "Pragul cost-pierdere C/L"))
-    ax.axhline(val_naive, color=cu.INK, ls=":", lw=1, label=cu.T(lang, "Naive rule (spike on day d-1)", "Regula naivă (vîrf în ziua d-1)"))
+    ax.axhline(val_naive, color=cu.INK, ls=":", lw=1, label=cu.T(lang, "Naive rule (spike on day d-1)", "Regula persistenței (vîrf în ziua precedentă)"))
     ax.set_xlabel(cu.T(lang, "Act when the spike probability exceeds", "Reacționăm cînd probabilitatea vîrfului depășește"))
     ax.set_ylabel(cu.T(lang, "Thousand EUR per MW, test", "Mii EUR pe MW, perioada de test"))
     cu.comma_axis(ax, lang, "x"); cu.comma_axis(ax, lang, "y")

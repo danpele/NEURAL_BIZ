@@ -121,7 +121,7 @@ In this new regime, persistence is hard to beat: the naive rule ``spike on day $
 Numai cu informația de la închiderea porții, modelul XGBoost din lucrare ordonează cel mai bine orele (AUC \NxAUC, PR-AUC \NxPR); primele variabile după SHAP sînt \Ntop, \Nsecond\ și \Nthird{} --- domină prețurile anterioare, ca în lucrare, unde prețul din ora anterioară este pe primul loc.
 Rețelele recurente, care primesc numai istoricul orar brut, obțin PR-AUC \NlPR\ (LSTM; rulări individuale: \NlPRmin--\NlPRmax) și \NgPR\ (GRU; \NgPRmin--\NgPRmax).
 Bootstrap-ul pe blocuri de zile de test dă o diferență de PR-AUC LSTM $-$ XGBoost de \NdPR\ (interval de 95\,\%: \NdPRlo\ pînă la \NdPRhi) și o diferență de F1 de \NdFone\ (\NdFlo\ pînă la \NdFhi): pe doi ani de date de antrenare, variabilele construite în lucrare depășesc rețeaua.
-În acest regim nou, persistența este greu de depășit: regula naivă „vîrf în ziua $d-1$, la aceeași oră” are cel mai mare scor F1 (\NnFone) și cea mai mare sensibilitate (\NnRec), motiv pentru care lucrarea consideră sensibilitatea și semnalele simple, verificabile, esențiale pentru un sistem de avertizare timpurie.}
+În acest regim nou, persistența este greu de depășit: regula naivă a persistenței (se semnalează un vîrf la o anumită oră dacă a existat un vîrf la aceeași oră în ziua precedentă) are cel mai mare scor F1 (\NnFone) și cea mai mare sensibilitate (\NnRec), motiv pentru care lucrarea consideră sensibilitatea și semnalele simple, verificabile, esențiale pentru un sistem de avertizare timpurie.}
 
 \begin{figure}[H]
 \begin{minipage}[t]{0.49\linewidth}\centering

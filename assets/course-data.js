@@ -235,14 +235,14 @@
         // ---------------------------------------------------------------
         overview: {
             en: [
-                { h: 'Course', p: ['Neural Networks and Deep Learning (NN)', 'Master\'s programme Business Analytics, year 1, Faculty of Business Administration in Foreign Languages (FABIZ), Bucharest University of Economic Studies (ASE)', 'TODO: semester and number of credits (ECTS, European Credit Transfer and Accumulation System)'] },
+                { h: 'Course', p: ['Neural Networks and Deep Learning (NN)', 'Master\'s programme Business Analytics, year 1, Faculty of Business Administration in Foreign Languages (FABIZ), Bucharest University of Economic Studies (ASE)', 'Semester 2 (February–June 2027)', 'TODO: number of credits (ECTS, European Credit Transfer and Accumulation System)'] },
                 { h: 'Goal', p: ['Deep learning for decisions in business and finance: credit scoring, fraud detection, forecasting, text and document analysis, and the use of large language models.', 'Every method is derived with its full formulas and estimated by the students on real public data.'] },
                 { h: 'Schedule', p: ['Fourteen lectures, each with a seminar', 'TODO: dates, times and rooms of the lectures and seminars'] },
                 { h: 'Assessment', p: ['TODO: components and weights of the final grade', 'Team project and AI policy: <a href="#project">see the Project section</a>'] },
                 { h: 'Tools', p: ['Python, PyTorch, scikit-learn, Hugging Face Transformers, PyTorch Geometric', 'Jupyter / Google Colab; GitHub: slides, notebooks, code and data'] }
             ],
             ro: [
-                { h: 'Curs', p: ['Rețele neuronale și deep learning (NN, Neural Networks and Deep Learning)', 'Programul de master Business Analytics, anul 1, Facultatea de Administrarea Afacerilor, cu predare în limbi străine (FABIZ), Academia de Studii Economice din București (ASE)', 'TODO: semestrul și numărul de credite (ECTS, European Credit Transfer and Accumulation System)'] },
+                { h: 'Curs', p: ['Rețele neuronale și deep learning (NN, Neural Networks and Deep Learning)', 'Programul de master Business Analytics, anul 1, Facultatea de Administrarea Afacerilor, cu predare în limbi străine (FABIZ), Academia de Studii Economice din București (ASE)', 'Semestrul 2 (februarie–iunie 2027)', 'TODO: numărul de credite (ECTS, European Credit Transfer and Accumulation System)'] },
                 { h: 'Scop', p: ['Deep learning pentru decizii în afaceri și finanțe: scoringul de credit, detectarea fraudei, prognoza, analiza textelor și a documentelor și utilizarea modelelor lingvistice mari.', 'Fiecare metodă este prezentată cu formulele complete și estimată de studenți pe date publice reale.'] },
                 { h: 'Program', p: ['Paisprezece cursuri, fiecare cu un seminar', 'TODO: datele, orele și sălile cursurilor și seminarelor'] },
                 { h: 'Evaluare', p: ['TODO: componentele și ponderile notei finale', 'Proiectul de echipă și regulile privind AI: <a href="#project">secțiunea Proiect</a>'] },
