@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 3 · Regularisation and generalisation</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 3 · Regularisation and generalisation">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L3.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L3_data.js?v=20261108s", "L3_text_en.js?v=20261108s", "common.js?v=20261108s"], "L3.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 3 · Regularisation and generalisation</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L3/lecture3.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L3.html" class="lang-btn active">EN</a><a href="L3_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the course data when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. The curves are the real training runs of the lecture, saved epoch by epoch; the controls choose which run you see and where you stop it.</p>
+<p class="toc"><a href="#s-gen">Overfitting and generalisation</a> · <a href="#s-reg">Early stopping</a> · <a href="#s-eval">Validation and the cost of errors</a></p>
+<h2 class="sec" id="s-gen">Overfitting and generalisation</h2>
+<section class="blk" id="overfitting">
+  <h3>Without regularisation, a large MLP memorises 600 applicants in a few epochs</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=6" target="_blank" rel="noopener"><img src="slides/L3_overfit_german_en.jpg" alt="Slide 6: Without regularisation, a large MLP memorises 600 applicants in a few epochs" loading="lazy"></a>
+      <figcaption>Slide 6</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ov-p">Dropout (share of units switched off): <b id="ov-p-v"></b></label><input type="range" id="ov-p" min="0" max="2" step="1" value="0"></div><div class="ctl"><label for="ov-w">Weight decay: <b id="ov-w-v"></b></label><input type="range" id="ov-w" min="0" max="2" step="1" value="0"></div><div class="ctl"><label for="ov-e">Stop training after epoch: <b id="ov-e-v"></b></label><input type="range" id="ov-e" min="1" max="150" step="1" value="150"></div><button class="btn play" id="ov-play" type="button"></button></div><div class="charts "><div class="chart" id="ov-loss"></div><div class="chart" id="ov-auc"></div></div><ul class="out" id="ov-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_overfit_german" target="_blank" rel="noopener">NN_L3_overfit_german</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_overfit_german/NN_L3_overfit_german.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> An MLP with 78,593 parameters is trained on 600 applicants for 150 epochs. The validation loss explodes; does the model also get worse at ranking applicants?</div>
+  <details><summary>Answer</summary><p>Not much. Without regularisation the validation cross-entropy is lowest at epoch 3 (0.536, below the logistic regression at 0.570) and rises to 2.187 by epoch 150, while the training loss falls to 0.0001: the network memorises the training applicants and becomes over-confident. The validation AUC, which only looks at the ranking, moves from 0.730 at epoch 3 to 0.780 at epoch 150 (logistic regression: 0.760). Weight decay 1 keeps the final validation loss at 1.08; dropout alone helps little. Probabilities (for pricing, provisions) are hurt far more by overfitting than rankings are, which is why the lecture reports both.</p></details>
+</section>
+<section class="blk" id="double-descent">
+  <h3>Past the interpolation threshold, more hidden units lower the test error again</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=8" target="_blank" rel="noopener"><img src="slides/L3_double_descent_en.jpg" alt="Slide 8: Past the interpolation threshold, more hidden units lower the test error again" loading="lazy"></a>
+      <figcaption>Slide 8</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="dd-p">Hidden units p (random ReLU features): <b id="dd-p-v"></b></label><input type="range" id="dd-p" min="0" max="17" step="1" value="2"></div><div class="ctl ctl-tg" id="dd-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="dd-s" value="draws" checked> The 10 draws at the chosen p</label></div></div><button class="btn play" id="dd-play" type="button"></button></div><div class="charts one"><div class="chart" id="dd-chart"></div></div><ul class="out" id="dd-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_double_descent" target="_blank" rel="noopener">NN_L3_double_descent</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_double_descent/NN_L3_double_descent.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Random ReLU features on 400 California block groups: what happens to the test MSE when the number of features reaches the number of observations, p = n = 400?</div>
+  <details><summary>Answer</summary><p>It explodes: the median test MSE is about 1,019,219 at p = 400, because the least-squares fit must interpolate every training point with an ill-conditioned system. Below the threshold the best is p = 50 (0.781); above it the minimum-norm solution becomes smoother again and the test MSE comes back down to 0.932 at p = 8,000, the "second descent". The training MSE is zero from p = 400 on. Classical U-shaped bias–variance and the modern over-parameterised regime are two halves of the same curve.</p></details>
+</section><h2 class="sec" id="s-reg">Early stopping</h2>
+<section class="blk" id="early-stopping">
+  <h3>On card fraud, validation loss bottoms out early while training loss keeps falling</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L3_early_stopping_en.jpg" alt="Slide 17: On card fraud, validation loss bottoms out early while training loss keeps falling" loading="lazy"></a>
+      <figcaption>Slide 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="es-p">Patience (epochs without improvement before stopping): <b id="es-p-v"></b></label><input type="range" id="es-p" min="1" max="60" step="1" value="20"></div><button class="btn play" id="es-play" type="button"></button></div><div class="charts "><div class="chart" id="es-loss"></div><div class="chart" id="es-ap"></div></div><ul class="out" id="es-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_early_stopping" target="_blank" rel="noopener">NN_L3_early_stopping</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_early_stopping/NN_L3_early_stopping.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> With a patience of 20 epochs, at which epoch does training stop on the fraud data, and which weights are kept?</div>
+  <details><summary>Answer</summary><p>The validation loss is lowest at epoch 4 (0.0159); with patience 20 training stops at epoch 24 and restores the weights of epoch 4. Their validation PR-AUC is 0.763, against 0.697 if we kept training to epoch 120. Patience 1 stops too early (epoch 3, keeping epoch 2, PR-AUC 0.741); any patience from 2 to 60 keeps epoch 4 here. Patience trades computing time against the risk of stopping on a noisy dip.</p></details>
+</section><h2 class="sec" id="s-eval">Validation and the cost of errors</h2>
+<section class="blk" id="holdout-noise">
+  <h3>One random hold-out split can move the AUC by several points</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L3_holdout_noise_en.jpg" alt="Slide 23: One random hold-out split can move the AUC by several points" loading="lazy"></a>
+      <figcaption>Slide 23</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ho-s">Share of the test set: <b id="ho-s-v"></b></label><input type="range" id="ho-s" min="0" max="3" step="1" value="2"></div><button class="btn play" id="ho-play" type="button"></button></div><div class="charts one"><div class="chart" id="ho-chart"></div></div><ul class="out" id="ho-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_holdout_noise" target="_blank" rel="noopener">NN_L3_holdout_noise</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_holdout_noise/NN_L3_holdout_noise.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Two analysts evaluate the same logistic regression on German credit with different random 70/30 splits. How far apart can their test AUCs be?</div>
+  <details><summary>Answer</summary><p>Far: over 200 random splits the AUC ranges from 0.702 to 0.842 (mean 0.780, standard deviation 0.024). With a 10% test set (100 applicants, about 30 defaults) the standard deviation doubles to 0.047; with 50% it falls to 0.019, but the model is then trained on fewer applicants (mean AUC 0.767). A difference of 0.01–0.02 AUC between two models on one small hold-out is noise; repeated cross-validation or a paired test is needed.</p></details>
+</section>
+<section class="blk" id="fraud-cost">
+  <h3>The right number of alerts saves most of the fraud losses</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L3_fraud_cost_en.jpg" alt="Slide 32: The right number of alerts saves most of the fraud losses" loading="lazy"></a>
+      <figcaption>Slide 32</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fc-r">Cost of reviewing one alert (EUR): <b id="fc-r-v"></b></label><input type="range" id="fc-r" min="1" max="50" step="1" value="5"></div><div class="ctl"><label for="fc-a">Alerts sent to review (weighted, log scale): <b id="fc-a-v"></b></label><input type="range" id="fc-a" min="1" max="3.6" step="0.02" value="1.8"></div><div class="ctl ctl-tg" id="fc-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="fc-m" value="logit" checked> Logistic regression</label><label class="tg"><input type="checkbox" name="fc-m" value="mlp" checked> Regularised MLP</label><label class="tg"><input type="checkbox" name="fc-m" value="xgb" checked> XGBoost</label></div></div><button class="btn play" id="fc-play" type="button"></button></div><div class="charts one"><div class="chart" id="fc-chart"></div></div><ul class="out" id="fc-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_fraud_cost" target="_blank" rel="noopener">NN_L3_fraud_cost</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_fraud_cost/NN_L3_fraud_cost.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A missed fraud costs its amount; each alert costs a manual review. With a review cost of 5 EUR, how many alerts should the bank send, and which model is cheapest?</div>
+  <details><summary>Answer</summary><p>Without a model all test frauds are lost: 7,729 EUR. With a review cost of 5 EUR the regularised MLP reaches its minimum, 2,694 EUR, with about 59 weighted alerts; XGBoost is practically equal (2,695 EUR) and logistic regression costs 3,093 EUR at about 142 alerts. Raise the review cost: every model sends fewer alerts and lets more small frauds through, and the gap between the models widens. The cut-off is a business parameter, set by the cost of each error, not by the model.</p></details>
+</section>
+<p class="src foot">Data: UCI Statlog German credit (1,000 applicants; 600 training, 200 validation, 200 test), ULB and Worldline credit-card transactions (OpenML 1597; all 492 frauds and a 10% sample of the legitimate transactions, weighted back to the 284,807 transactions of the two days; time-ordered split 60/20/20), California housing (StatLib, 1990 census). Models, splits and seeds (20261108 + s) as in the lecture (analysis_L3.py): multilayer perceptrons (MLP) with AdamW (Adam with decoupled weight decay); PR-AUC = area under the precision-recall curve.</p>
+</main>
+</body>
+</html>

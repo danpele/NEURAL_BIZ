@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 11 · Explainable AI: SHAP, LIME, gradient methods and the stability of explanations</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 11 · Explainable AI: SHAP, LIME, gradient methods and the stability of explanations">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L11.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_en.js?v=20261108s", "common.js?v=20261108s"], "L11.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 11 · Explainable AI: SHAP, LIME, gradient methods and the stability of explanations</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L11/lecture11.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L11.html" class="lang-btn active">EN</a><a href="L11_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the models of the lecture when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. The explanations come from SHAP (SHapley Additive exPlanations), LIME (local interpretable model-agnostic explanations), partial dependence and ICE (individual conditional expectation) curves and IG (integrated gradients), computed for a multilayer perceptron (MLP), an XGBoost (extreme gradient boosting) ensemble and a logistic regression.</p>
+<p class="toc"><a href="#s-shap">Shapley values and SHAP</a> · <a href="#s-lime">LIME, counterfactuals and global effects</a> · <a href="#s-grad">Gradient methods for neural networks</a> · <a href="#s-stab">Do explanations agree, are they faithful, are they stable?</a></p>
+<h2 class="sec" id="s-shap">Shapley values and SHAP</h2>
+<section class="blk" id="waterfall">
+  <h3>Why was this applicant rejected? A SHAP waterfall</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L11_shap_waterfall_en.jpg" alt="Slide 15: Why was this applicant rejected? A SHAP waterfall" loading="lazy"></a>
+      <figcaption>Slide 15</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="wf-r">Applicant, ranked by the probability of default (PD) of the network (1 = lowest): <b id="wf-r-v"></b></label><input type="range" id="wf-r" min="1" max="400" step="1" value="346"></div><div class="ctl"><label for="wf-m">Model and SHAP method</label><select id="wf-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option><option value="lr">Logistic regression (linear SHAP)</option></select></div><div class="ctl"><label for="wf-k">Features shown separately: <b id="wf-k-v"></b></label><input type="range" id="wf-k" min="3" max="12" step="1" value="8"></div><button class="btn play" id="wf-play" type="button"></button></div><div class="charts one"><div class="chart" id="wf-chart"></div></div><ul class="out" id="wf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_shap_waterfall" target="_blank" rel="noopener">NN_L11_shap_waterfall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_shap_waterfall/NN_L11_shap_waterfall.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Applicant row 2411 has a predicted PD of 65.6% and did default. Which feature pushes the network most towards rejection, and does the logistic regression blame the same feature?</div>
+  <details><summary>Answer</summary><p>For the MLP the missing debt-to-income ratio (DEBTINC missing, +3.13 log-odds) dominates, followed by JOB = Other (+1.74); DELINQ = 0 (no delinquent credit lines) lowers the risk (−0.71). The bars add up exactly: −3.613 (the average applicant, PD 2.6%) + 4.261 = 0.648 log-odds, i.e. a PD of 65.6%. Switch the model: the three models agree that a missing DEBTINC is the strongest signal (in the data, 62.0% of the applicants without DEBTINC default against 8.6% of the others), but they split the rest of the score differently. Move the applicant slider to the safest applicants: there, most bars are blue.</p></details>
+</section><h2 class="sec" id="s-lime">LIME, counterfactuals and global effects</h2>
+<section class="blk" id="lime">
+  <h3>LIME depends on its own settings</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=20" target="_blank" rel="noopener"><img src="slides/L11_lime_instability_en.jpg" alt="Slide 20: LIME depends on its own settings" loading="lazy"></a>
+      <figcaption>Slide 20</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="lm-n"><span class="lbl">Samples drawn by LIME around the applicant</span><div class="tgs"><label class="tg"><input type="radio" name="lm-n" value="500" checked> 500</label><label class="tg"><input type="radio" name="lm-n" value="5000"> 5,000</label></div></div><div class="ctl"><label for="lm-r">Random run (seed of LIME): <b id="lm-r-v"></b></label><input type="range" id="lm-r" min="1" max="30" step="1" value="1"></div><div class="ctl"><label for="lm-w">Kernel width σ (right panel, 5,000 samples): <b id="lm-w-v"></b></label><input type="range" id="lm-w" min="0" max="6" step="1" value="4"></div><button class="btn play" id="lm-play" type="button"></button></div><div class="charts "><div class="chart" id="lm-runs"></div><div class="chart" id="lm-kw"></div></div><ul class="out" id="lm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_lime_instability" target="_blank" rel="noopener">NN_L11_lime_instability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_lime_instability/NN_L11_lime_instability.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> LIME fits a small linear model on random samples around the applicant. Run it 30 times with 500 samples: is the top feature always the same?</div>
+  <details><summary>Answer</summary><p>No: with 500 samples the top feature is the same as in the reference run in 73% of the 30 runs (Jaccard overlap of the top-5 sets 0.72); with 5,000 samples in 100% (overlap 1.00), and the coefficient of variation of the top-5 slopes falls from 10% to 2%. The kernel width σ matters as well: the slope of DELINQ, the top LIME feature, goes from −2.04 to almost 0 as σ moves over the seven widths tried (default 0.75·√18 = 3.18). Report the seed, the sample size and the kernel width with every LIME explanation.</p></details>
+</section>
+<section class="blk" id="pdp-ice">
+  <h3>Global effects: partial dependence and ICE</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L11_pdp_ice_en.jpg" alt="Slide 22: Global effects: partial dependence and ICE" loading="lazy"></a>
+      <figcaption>Slide 22</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="pd-f">Feature moved</label><select id="pd-f"><option value="MedInc" selected>Median income of the block group</option><option value="HouseAge">Median age of the houses</option><option value="AveRooms">Average rooms per household</option><option value="AveOccup">Average occupants per household</option><option value="Latitude">Latitude (north)</option></select></div><div class="ctl"><label for="pd-n">ICE curves shown (block groups): <b id="pd-n-v"></b></label><input type="range" id="pd-n" min="0" max="60" step="5" value="30"></div><div class="ctl ctl-tg" id="pd-c"><span class="lbl">Display</span><div class="tgs"><label class="tg"><input type="checkbox" name="pd-c" value="c"> Curves centred at the left end (c-ICE)</label></div></div><button class="btn play" id="pd-play" type="button"></button></div><div class="charts one"><div class="chart" id="pd-chart"></div></div><ul class="out" id="pd-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_pdp_ice" target="_blank" rel="noopener">NN_L11_pdp_ice</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_pdp_ice/NN_L11_pdp_ice.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> The partial dependence curve of income rises from 1.40 to 3.60 (100,000 USD). Does every block group follow it?</div>
+  <details><summary>Answer</summary><p>No. The PDP (partial dependence plot) is an average; the ICE curves show one block group each, with all its other features fixed. At the top of the income grid the curves spread by 0.95 (standard deviation, 100,000 USD): the network has learned interactions, e.g. with location. Centre the curves (c-ICE) to compare only their shapes. With latitude the curves fall from south to north for most block groups, but not by the same amount.</p></details>
+</section><h2 class="sec" id="s-grad">Gradient methods for neural networks</h2>
+<section class="blk" id="ig-steps">
+  <h3>Completeness holds once the integral is computed accurately</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L11_ig_completeness_en.jpg" alt="Slide 26: Completeness holds once the integral is computed accurately" loading="lazy"></a>
+      <figcaption>Slide 26</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ig-c">Fraud of day 2</label><select id="ig-c"><option value="0" selected>Fraud 1 (median score, slides)</option><option value="1">Fraud 2</option><option value="2">Fraud 3</option><option value="3">Fraud 4</option><option value="4">Fraud 5</option><option value="5">Fraud 6</option><option value="6">Fraud 7</option><option value="7">Fraud 8</option></select></div><div class="ctl"><label for="ig-m">Steps m of the integral (Riemann sum): <b id="ig-m-v"></b></label><input type="range" id="ig-m" min="0" max="8" step="1" value="2"></div><button class="btn play" id="ig-play" type="button"></button></div><div class="charts "><div class="chart" id="ig-bar"></div><div class="chart" id="ig-err"></div></div><ul class="out" id="ig-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_ig_completeness" target="_blank" rel="noopener">NN_L11_ig_completeness</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_ig_completeness/NN_L11_ig_completeness.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Integrated gradients promise that the attributions add up to f(x) − f(x′). Why does the sum miss with 2 steps and not with 64?</div>
+  <details><summary>Answer</summary><p>IG is an integral of the gradient along the straight path from the baseline x′ (the mean legitimate transaction of day 1) to the fraud x, computed with a midpoint Riemann sum of m steps. With few steps the sum is a poor approximation: over the 211 frauds of day 2 the median relative error is 7.5% with 2 steps, 3.7% with 4 and 0.18% with 64; it falls roughly as 1/m², as for the midpoint rule. The ranking of the features is stable much earlier than the sum.</p></details>
+</section><h2 class="sec" id="s-stab">Do explanations agree, are they faithful, are they stable?</h2>
+<section class="blk" id="deletion">
+  <h3>Faithfulness: remove what the explanation says matters</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L11_deletion_curve_en.jpg" alt="Slide 31: Faithfulness: remove what the explanation says matters" loading="lazy"></a>
+      <figcaption>Slide 31</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="dl-m"><span class="lbl">Order of deletion</span><div class="tgs"><label class="tg"><input type="checkbox" name="dl-m" value="ig" checked> Integrated gradients</label><label class="tg"><input type="checkbox" name="dl-m" value="shap" checked> Kernel SHAP</label><label class="tg"><input type="checkbox" name="dl-m" value="lime"> LIME</label><label class="tg"><input type="checkbox" name="dl-m" value="saliency" checked> Saliency</label><label class="tg"><input type="checkbox" name="dl-m" value="random" checked> Random order</label></div></div><div class="ctl"><label for="dl-f">Fraud (0 = mean of the 211 frauds; 1 = highest score): <b id="dl-f-v"></b></label><input type="range" id="dl-f" min="0" max="211" step="1" value="0"></div><div class="ctl"><label for="dl-k">Features reset to the baseline, k: <b id="dl-k-v"></b></label><input type="range" id="dl-k" min="0" max="12" step="1" value="3"></div><button class="btn play" id="dl-play" type="button"></button></div><div class="charts one"><div class="chart" id="dl-chart"></div></div><ul class="out" id="dl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_deletion_curve" target="_blank" rel="noopener">NN_L11_deletion_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_deletion_curve/NN_L11_deletion_curve.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> If an explanation is faithful, resetting the features it calls important should make the fraud score fall fast. Which method passes this test, and which one does not?</div>
+  <details><summary>Answer</summary><p>Integrated gradients, Kernel SHAP and LIME take the mean fraud score from 85.4% to about 61% after three features (IG 61.3%, SHAP 61.1%, LIME 61.2%); saliency (the absolute gradient) only to 71.9%, and a random order to 83.9%. The AOPC (area over the perturbation curve, mean drop over k = 1–12) is 56.2, 58.4 and 56.1 points for IG, SHAP and LIME, 48.0 for saliency and 3.9 for the random order. Move the fraud slider: for single frauds the curves can cross.</p></details>
+</section>
+<section class="blk" id="seeds">
+  <h3>The Rashomon effect: same accuracy, different explanations</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L11_seed_stability_en.jpg" alt="Slide 33: The Rashomon effect: same accuracy, different explanations" loading="lazy"></a>
+      <figcaption>Slide 33</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ss-m">Model</label><select id="ss-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option></select></div><div class="ctl"><label for="ss-s">Training seeds compared: <b id="ss-s-v"></b></label><input type="range" id="ss-s" min="2" max="10" step="1" value="10"></div><div class="ctl"><label for="ss-a">Applicant (right panel): <b id="ss-a-v"></b></label><input type="range" id="ss-a" min="1" max="200" step="1" value="1"></div><button class="btn play" id="ss-play" type="button"></button></div><div class="charts "><div class="chart" id="ss-rank"></div><div class="chart" id="ss-loc"></div></div><ul class="out" id="ss-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_seed_stability" target="_blank" rel="noopener">NN_L11_seed_stability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_seed_stability/NN_L11_seed_stability.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Ten networks differ only in the random seed of training and have almost the same accuracy (AUC between 0.929 and 0.941). Do they give the same explanation?</div>
+  <details><summary>Answer</summary><p>Not quite: the ranking of the global importances agrees with a mean pairwise Kendall τ of 0.83 for the networks and 0.97 for XGBoost, and the top feature of a single applicant is the same in 78% (MLP) and 83% (XGBoost) of the seed pairs. This is the Rashomon effect: several equally good models explain the data in different ways. An explanation sent to a customer should be checked across seeds, or produced by a model whose explanation is stable.</p></details>
+</section>
+<p class="src foot">Credit: HMEQ (home equity loans) data of Baesens, Roesch and Scheule (2016), 5,960 loans, 400 test applicants explained, 100 training applicants as background. Fraud: ULB (Université Libre de Bruxelles) Machine Learning Group and Worldline, credit-card transactions (OpenML 1597); network trained on day 1, 211 frauds of day 2 explained. House values: StatLib, California housing, 1990 census (Pace and Barry, 1997). Models, SHAP, LIME and attributions: analysis_L11.py, seed 20261108.</p>
+</main>
+</body>
+</html>

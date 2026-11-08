@@ -86,12 +86,13 @@ for k in range(1, 15):
     vid = re.search(r"^                videos: .*$", obj, re.M).group(0)
     qn = re.search(r"^                quantinar: .*$", obj, re.M).group(0)
     c = cards[k]
+    inter = ' interactive: true,' if os.path.exists(os.path.join(ROOT, 'interactive', f'L{k}.html')) else ''
     fur = []
     for f in c['further']:
         en = f.get('en') or f.get('label') or f.get('title')
         ro = f.get('ro') or en
         fur.append(f"{{ en: {J(amp(en))}, ro: {J(amp(ro))}, url: {J(f['url'])} }}")
-    new = (f"            {{\n                id: 'l{k}', num: {k}, status: 'ready', files: files({k}),\n{vid}\n{qn}\n"
+    new = (f"            {{\n                id: 'l{k}', num: {k}, status: 'ready', files: files({k}),{inter}\n{vid}\n{qn}\n"
            f"                title: TITLES[{k}],\n                topics: {{\n"
            f"                    en: {J([amp(t) for t in c['topics']['en']])},\n"
            f"                    ro: {J([amp(t) for t in c['topics']['ro']])}\n                }},\n"

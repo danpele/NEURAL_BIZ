@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 13 · Deep learning for energy and financial time series; time-series foundation models</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 13 · Deep learning for energy and financial time series; time-series foundation models">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L13.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261108s", "L13_text_en.js?v=20261108s", "common.js?v=20261108s"], "L13.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 13 · Deep learning for energy and financial time series; time-series foundation models</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L13/lecture13.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L13.html" class="lang-btn active">EN</a><a href="L13_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the forecasts of the lecture when you move a control. The forecasts are those of the test year, 1 November 2025 to 31 October 2026 (360 days with all 24 hours and every model available): naive rule, LEAR (Lasso-estimated autoregressive model), DNN (deep neural network with 24 outputs), N-BEATS (neural basis expansion analysis) and the foundation models Chronos-2, Chronos-Bolt and TimesFM (Time-series Foundation Model), used zero-shot, i.e. without any training on our data. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart.</p>
+<p class="toc"><a href="#s-epf">Day-ahead price forecasts for Romania</a> · <a href="#s-eval">Is one forecast really better?</a> · <a href="#s-fm">Foundation models: context and quantiles</a> · <a href="#s-risk">Value-at-Risk with a foundation model</a></p>
+<h2 class="sec" id="s-epf">Day-ahead price forecasts for Romania</h2>
+<section class="blk" id="forecast-week">
+  <h3>One week of forecasts: level right, spikes smoothed</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L13_forecast_week_en.jpg" alt="Slide 27: One week of forecasts: level right, spikes smoothed" loading="lazy"></a>
+      <figcaption>Slide 27</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fw-w">Week (starting on Monday): <b id="fw-w-v"></b></label><input type="range" id="fw-w" min="0" max="51" step="1" value="50"></div><div class="ctl ctl-tg" id="fw-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="fw-m" value="naive"> Naive (weekly/daily)</label><label class="tg"><input type="checkbox" name="fw-m" value="lear" checked> LEAR</label><label class="tg"><input type="checkbox" name="fw-m" value="dnn" checked> DNN</label><label class="tg"><input type="checkbox" name="fw-m" value="nbeats"> N-BEATS</label><label class="tg"><input type="checkbox" name="fw-m" value="chronos2" checked> Chronos-2</label><label class="tg"><input type="checkbox" name="fw-m" value="chronos2_cov"> Chronos-2 + covariates</label><label class="tg"><input type="checkbox" name="fw-m" value="bolt"> Chronos-Bolt</label><label class="tg"><input type="checkbox" name="fw-m" value="timesfm"> TimesFM 2.5</label><label class="tg"><input type="checkbox" name="fw-m" value="ens"> Ensemble LEAR+DNN+Chronos-2</label></div></div><button class="btn play" id="fw-play" type="button"></button></div><div class="charts one"><div class="chart" id="fw-chart"></div></div><ul class="out" id="fw-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_forecast_week" target="_blank" rel="noopener">NN_L13_forecast_week</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_forecast_week/NN_L13_forecast_week.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> In the lecture week of 19–25 October 2026, which forecast was closest to the actual prices: LEAR, the DNN or Chronos-2, a foundation model that never saw Romanian prices during training?</div>
+  <details><summary>Answer</summary><p>Chronos-2, with a mean absolute error (MAE) of 25.41 EUR/MWh, against 32.33 EUR/MWh for the DNN and 43.34 EUR/MWh for LEAR (lecture numbers). Over the whole test year the ranking is the same at the top: Chronos-2 with covariates 20.41, Chronos-2 20.72, LEAR 22.79, DNN 23.06 EUR/MWh. Move the week: every model gets the level right and smooths the evening spikes; the weeks with the largest errors are those with price jumps that no model saw coming.</p></details>
+</section>
+<section class="blk" id="mae-by-hour">
+  <h3>Errors are largest in the evening and around solar hours</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L13_mae_by_hour_en.jpg" alt="Slide 26: Errors are largest in the evening and around solar hours" loading="lazy"></a>
+      <figcaption>Slide 26</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="mh-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="mh-m" value="naive" checked> Naive (weekly/daily)</label><label class="tg"><input type="checkbox" name="mh-m" value="lear" checked> LEAR</label><label class="tg"><input type="checkbox" name="mh-m" value="dnn" checked> DNN</label><label class="tg"><input type="checkbox" name="mh-m" value="nbeats"> N-BEATS</label><label class="tg"><input type="checkbox" name="mh-m" value="chronos2" checked> Chronos-2</label><label class="tg"><input type="checkbox" name="mh-m" value="chronos2_cov"> Chronos-2 + covariates</label><label class="tg"><input type="checkbox" name="mh-m" value="bolt"> Chronos-Bolt</label><label class="tg"><input type="checkbox" name="mh-m" value="timesfm"> TimesFM 2.5</label><label class="tg"><input type="checkbox" name="mh-m" value="ens"> Ensemble LEAR+DNN+Chronos-2</label></div></div><div class="ctl"><label for="mh-s">Period</label><select id="mh-s"><option value="all" selected>Whole test year</option><option value="win">Winter (Dec–Feb)</option><option value="spr">Spring (Mar–May)</option><option value="sum">Summer (Jun–Aug)</option><option value="aut">Autumn (Sep–Oct)</option></select></div></div><div class="charts "><div class="chart" id="mh-chart"></div><div class="chart" id="mh-bar"></div></div><ul class="out" id="mh-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_mae_by_hour" target="_blank" rel="noopener">NN_L13_mae_by_hour</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_mae_by_hour/NN_L13_mae_by_hour.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> At which hours of the day are the forecasts worst, and why?</div>
+  <details><summary>Answer</summary><p>In the evening: for LEAR the worst hour is 19:00 (35.78 EUR/MWh) and the best 01:00 (10.75 EUR/MWh); Chronos-2 has the same worst hour (34.05) and best hour (8.57 EUR/MWh). The evening peak is when solar output has gone and prices jump; the night is calm and predictable. Choose spring or summer to see the second bump of errors around midday, when solar output pushes prices down and sometimes below zero.</p></details>
+</section><h2 class="sec" id="s-eval">Is one forecast really better?</h2>
+<section class="blk" id="dm-test">
+  <h3>Which forecast is significantly better? The full chessboard</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L13_dm_pvalues_en.jpg" alt="Slide 31: Which forecast is significantly better? The full chessboard" loading="lazy"></a>
+      <figcaption>Slide 31</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="dm-a">Model A (reference)</label><select id="dm-a"><option value="naive">Naive (weekly/daily)</option><option value="lear" selected>LEAR</option><option value="dnn">DNN</option><option value="nbeats">N-BEATS</option><option value="chronos2">Chronos-2</option><option value="chronos2_cov">Chronos-2 + covariates</option><option value="bolt">Chronos-Bolt</option><option value="timesfm">TimesFM 2.5</option><option value="ens">Ensemble LEAR+DNN+Chronos-2</option></select></div><div class="ctl"><label for="dm-b">Model B (is it better?)</label><select id="dm-b"><option value="naive">Naive (weekly/daily)</option><option value="lear">LEAR</option><option value="dnn">DNN</option><option value="nbeats">N-BEATS</option><option value="chronos2" selected>Chronos-2</option><option value="chronos2_cov">Chronos-2 + covariates</option><option value="bolt">Chronos-Bolt</option><option value="timesfm">TimesFM 2.5</option><option value="ens">Ensemble LEAR+DNN+Chronos-2</option></select></div><div class="ctl ctl-tg" id="dm-l"><span class="lbl">Loss</span><div class="tgs"><label class="tg"><input type="radio" name="dm-l" value="abs" checked> absolute error</label><label class="tg"><input type="radio" name="dm-l" value="sq"> squared error</label></div></div></div><div class="charts "><div class="chart" id="dm-d"></div><div class="chart" id="dm-c"></div></div><ul class="out" id="dm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_dm_pvalues" target="_blank" rel="noopener">NN_L13_dm_pvalues</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_dm_pvalues/NN_L13_dm_pvalues.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Chronos-2 has a lower test-year MAE than LEAR (20.72 against 22.79 EUR/MWh). Is the difference statistically significant?</div>
+  <details><summary>Answer</summary><p>Yes. The Diebold–Mariano (DM) test compares the daily sums of absolute errors of the two models over the 360 days; the lecture reports a p-value below 0.0001 for "Chronos-2 is more accurate than LEAR". For DNN against LEAR the p-value is 0.76 (no evidence that the DNN is better), for N-BEATS against the DNN 0.36. A lower MAE on one test year is not enough: the curve on the right must rise steadily, not because of a few days.</p></details>
+</section><h2 class="sec" id="s-fm">Foundation models: context and quantiles</h2>
+<section class="blk" id="context-length">
+  <h3>Longer context helps the foundation model, up to a point</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L13_context_length_en.jpg" alt="Slide 28: Longer context helps the foundation model, up to a point" loading="lazy"></a>
+      <figcaption>Slide 28</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Context length of Chronos-2: <b id="cl-c-v"></b></label><input type="range" id="cl-c" min="0" max="3" step="1" value="2"></div><div class="ctl"><label for="cl-w">Moving average of the daily MAE (days): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="1" max="60" step="1" value="30"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-bar"></div><div class="chart" id="cl-roll"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_context_length" target="_blank" rel="noopener">NN_L13_context_length</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_context_length/NN_L13_context_length.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Chronos-2 forecasts the next day from the last hours of prices it is given. Does a longer history always help?</div>
+  <details><summary>Answer</summary><p>Up to a point. With 168 hours (one week) the MAE is 24.45 EUR/MWh, with 512 hours 21.34, with 2,048 hours (about 85 days) 20.72 and with 8,192 hours (about 341 days) 20.95 EUR/MWh (lecture numbers). One week is too short to see the weekly pattern repeat often enough; a full year of context brings back the old price regime and does not improve on about three months.</p></details>
+</section>
+<section class="blk" id="quantile-fan">
+  <h3>A week of Chronos-2 quantiles: the band widens where prices jump</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L13_chronos_fan_en.jpg" alt="Slide 34: A week of Chronos-2 quantiles: the band widens where prices jump" loading="lazy"></a>
+      <figcaption>Slide 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="qf-w">Week (starting on Monday): <b id="qf-w-v"></b></label><input type="range" id="qf-w" min="0" max="51" step="1" value="50"></div><div class="ctl ctl-tg" id="qf-l"><span class="lbl">Prediction interval</span><div class="tgs"><label class="tg"><input type="radio" name="qf-l" value="50"> 50%</label><label class="tg"><input type="radio" name="qf-l" value="80" checked> 80%</label><label class="tg"><input type="radio" name="qf-l" value="90"> 90%</label></div></div><div class="ctl ctl-tg" id="qf-c"><span class="lbl">Correction</span><div class="tgs"><label class="tg"><input type="checkbox" name="qf-c" value="conf"> split-conformal</label></div></div><div class="ctl"><label for="qf-n">Calibration window (days): <b id="qf-n-v"></b></label><input type="range" id="qf-n" min="10" max="60" step="5" value="60"></div><button class="btn play" id="qf-play" type="button"></button></div><div class="charts "><div class="chart" id="qf-fan"></div><div class="chart" id="qf-cov"></div></div><ul class="out" id="qf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_chronos_fan" target="_blank" rel="noopener">NN_L13_chronos_fan</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_chronos_fan/NN_L13_chronos_fan.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Chronos-2 also gives quantiles. Does its 80% interval contain the actual price 80% of the time?</div>
+  <details><summary>Answer</summary><p>Not quite: the raw 80% interval of Chronos-2 covers 76.5% of the hours of the test year (mean width 60.03 EUR/MWh). The split-conformal correction widens or narrows the interval by the quantile of the errors of the last 60 days and brings coverage to 79.3% (width 63.89 EUR/MWh); for 90%: 88.3% raw, 89.4% conformal. A shorter calibration window reacts faster but is noisier.</p></details>
+</section><h2 class="sec" id="s-risk">Value-at-Risk with a foundation model</h2>
+<section class="blk" id="var-backtest">
+  <h3>S&P 500: the calibrated foundation-model VaR follows volatility regimes</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=41" target="_blank" rel="noopener"><img src="slides/L13_var_sp500_en.jpg" alt="Slide 41: S&P 500: the calibrated foundation-model VaR follows volatility regimes" loading="lazy"></a>
+      <figcaption>Slide 41</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="va-a">Asset</label><select id="va-a"><option value="SP500" selected>S&P 500</option><option value="BTCUSD">Bitcoin (BTC/USD)</option></select></div><div class="ctl ctl-tg" id="va-q"><span class="lbl">VaR level</span><div class="tgs"><label class="tg"><input type="radio" name="va-q" value="01" checked> 1% (99%)</label><label class="tg"><input type="radio" name="va-q" value="05"> 5% (95%)</label></div></div><div class="ctl"><label for="va-m">Benchmark model</label><select id="va-m"><option value="hs" selected>Historical simulation, 250 days</option><option value="garch">GARCH(1,1) with Student-t errors</option><option value="ch">Chronos-2, raw quantile</option></select></div><div class="ctl"><label for="va-n">Conformal calibration window (trading days): <b id="va-n-v"></b></label><input type="range" id="va-n" min="50" max="250" step="10" value="250"></div><button class="btn play" id="va-play" type="button"></button></div><div class="charts "><div class="chart" id="va-chart"></div><div class="chart" id="va-bar"></div></div><ul class="out" id="va-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_var_sp500" target="_blank" rel="noopener">NN_L13_var_sp500</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_var_sp500/NN_L13_var_sp500.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A 1% Value-at-Risk (VaR) should be breached on about 1% of days. Over January 2020 – October 2026 (1,717 trading days of the S&P 500, 17.2 violations expected), how many breaches does the raw Chronos-2 quantile have, and how many after the conformal shift?</div>
+  <details><summary>Answer</summary><p>22 for the raw quantile (1.28%, Kupiec p = 0.262) and 16 with the conformal shift calibrated on 250 trading days (0.93%, Kupiec p = 0.774); historical simulation has 31 (p = 0.003) and GARCH(1,1) 32 (p = 0.001). At 5% the raw Chronos-2 quantile is too tight (122 violations against 85.9 expected, p < 0.001) and the conformal shift brings it to 93 (p = 0.434). The Kupiec test asks only whether the share of violations equals the nominal level.</p></details>
+</section>
+<p class="src foot">Romanian day-ahead prices (hourly, EUR/MWh) and load: energy-charts.info (Fraunhofer Institute for Solar Energy Systems, ISE), from exchange and ENTSO-E (European Network of Transmission System Operators for Electricity) data. S&P 500 and Bitcoin (BTC/USD) daily closing prices: course market data (data/clean). All forecasts, quantiles and Value-at-Risk series were computed by lectures/L13/analysis_L13.py; the page only recombines them (errors, tests, conformal shifts, violation counts).</p>
+</main>
+</body>
+</html>

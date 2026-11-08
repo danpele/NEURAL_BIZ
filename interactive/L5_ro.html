@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 5 · Rețele recurente: RNN, LSTM și GRU pentru secvențe și serii de timp financiare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 5 · Rețele recurente: RNN, LSTM și GRU pentru secvențe și serii de timp financiare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L5.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L5.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 5 · Rețele recurente: RNN, LSTM și GRU pentru secvențe și serii de timp financiare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L5/lecture5_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L5.html" class="lang-btn">EN</a><a href="L5_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului și din prognozele salvate în curs cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Alegeți o perioadă, o piață sau o zi și comparați rețelele recurente cu modelele de referință, pe aceleași zile.</p>
+<p class="toc"><a href="#s-fin">Serii de timp financiare: ce se poate prognoza</a> · <a href="#s-load">Consumul de energie electrică din România, pentru ziua următoare</a></p>
+<h2 class="sec" id="s-fin">Serii de timp financiare: ce se poate prognoza</h2>
+<section class="blk" id="acf">
+  <h3>Memoria este în volatilitate, nu în randamente</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L5_acf_abs_ro.jpg" alt="Slide-ul 7: Memoria este în volatilitate, nu în randamente" loading="lazy"></a>
+      <figcaption>Slide-ul 7</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ac-m">Piața</label><select id="ac-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl ctl-tg" id="ac-t"><span class="lbl">Seria</span><div class="tgs"><label class="tg"><input type="radio" name="ac-t" value="r"> randamente rₜ</label><label class="tg"><input type="radio" name="ac-t" value="a" checked> randamente absolute |rₜ|</label><label class="tg"><input type="radio" name="ac-t" value="s"> randamente la pătrat rₜ²</label></div></div><div class="ctl"><label for="ac-l">Laguri afișate (zile de tranzacționare): <b id="ac-l-v"></b></label><input type="range" id="ac-l" min="10" max="250" step="10" value="50"></div></div><div class="charts one"><div class="chart" id="ac-chart"></div></div><ul class="out" id="ac-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_acf_abs" target="_blank" rel="noopener">NN_L5_acf_abs</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_acf_abs/NN_L5_acf_abs.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Randamentele zilnice ale S&P 500 sînt aproape necorelate, totuși folosim o rețea recurentă pentru a prognoza volatilitatea. Ce arată autocorelația randamentelor absolute?</div>
+  <details><summary>Răspuns</summary><p>Randamentele însele au o autocorelație de ordinul 1 de −0,119 și doar 15 din primele 50 de laguri ies din banda de ±0,026 (1,96/√T pentru zgomot alb). Randamentele absolute au ρ(1) = 0,315, iar toate cele 50 de laguri sînt semnificative, încă 0,126 la lagul 50: perioadele calme și cele agitate se grupează (gruparea volatilității). Mărimea mișcării de mîine este previzibilă, chiar dacă semnul ei nu este; de aceea sarcina A din curs prognozează volatilitatea. Pentru Banca Transilvania tiparul este același, dar mai slab (|r|: ρ(1) = 0,227).</p></details>
+</section>
+<section class="blk" id="volatility">
+  <h3>În criza din 2020, LSTM s-a adaptat mai repede decît HAR</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L5_vol_forecast_ro.jpg" alt="Slide-ul 25: În criza din 2020, LSTM s-a adaptat mai repede decît HAR" loading="lazy"></a>
+      <figcaption>Slide-ul 25</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vf-s">Începutul ferestrei: <b id="vf-s-v"></b></label><input type="range" id="vf-s" min="0" max="81" step="1" value="0"></div><div class="ctl"><label for="vf-n">Lungimea ferestrei (luni): <b id="vf-n-v"></b></label><input type="range" id="vf-n" min="1" max="82" step="1" value="12"></div><div class="ctl ctl-tg" id="vf-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="vf-m" value="naive"> Naiv (ziua de ieri)</label><label class="tg"><input type="checkbox" name="vf-m" value="har" checked> HAR</label><label class="tg"><input type="checkbox" name="vf-m" value="garch"> GARCH(1,1)</label><label class="tg"><input type="checkbox" name="vf-m" value="rnn"> RNN</label><label class="tg"><input type="checkbox" name="vf-m" value="lstm" checked> LSTM</label><label class="tg"><input type="checkbox" name="vf-m" value="gru"> GRU</label></div></div><button class="btn play" id="vf-play" type="button"></button></div><div class="charts one"><div class="chart" id="vf-chart"></div></div><ul class="out" id="vf-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_vol_forecast" target="_blank" rel="noopener">NN_L5_vol_forecast</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_vol_forecast/NN_L5_vol_forecast.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Pe perioada de test 2020–2026, LSTM reduce MSE a log-varianței cu 11,6% față de HAR. Cîștigă în fiecare subperioadă?</div>
+  <details><summary>Răspuns</summary><p>Pe tot setul de test, MSE este 0,966 pentru prognoza naivă, 0,786 pentru GARCH, 0,706 pentru HAR și 0,625 pentru LSTM (media a 5 semințe; GRU 0,624, RNN 0,643). Cîștigul este cel mai mare în criza din 2020 (20 februarie - 30 aprilie: LSTM 0,521, HAR 1,014, GARCH 1,032): rețeaua reacționează mai repede la saltul volatilității. În 2022, ordinea este aceeași, dar diferențele sînt mai mici (0,585 față de 0,623). Mutați fereastra: ferestrele scurte dau clasamente zgomotoase; de aceea cursul folosește testul Diebold–Mariano pe toată perioada de test (LSTM contra HAR: statistica −5,52).</p></details>
+</section>
+<section class="blk" id="returns">
+  <h3>În afara eșantionului, prognozele randamentelor nu explică aproape nimic</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L5_returns_r2_ro.jpg" alt="Slide-ul 29: În afara eșantionului, prognozele randamentelor nu explică aproape nimic" loading="lazy"></a>
+      <figcaption>Slide-ul 29</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="rt-m">Piața</label><select id="rt-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl"><label for="rt-s">LSTM</label><select id="rt-s"><option value="ens" selected>media celor 5 semințe</option><option value="0">sămînța 1</option><option value="1">sămînța 2</option><option value="2">sămînța 3</option><option value="3">sămînța 4</option><option value="4">sămînța 5</option></select></div><div class="ctl ctl-tg" id="rt-k"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="rt-k" value="mean" checked> Media de antrenare</label><label class="tg"><input type="checkbox" name="rt-k" value="ar" checked> AR(1)</label><label class="tg"><input type="checkbox" name="rt-k" value="lstm" checked> LSTM</label></div></div></div><div class="charts one"><div class="chart" id="rt-chart"></div></div><ul class="out" id="rt-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_returns_r2" target="_blank" rel="noopener">NN_L5_returns_r2</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_returns_r2/NN_L5_returns_r2.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Modelul AR(1) are un R² în afara eșantionului de 2,4% pe randamentele S&P 500, mai mult decît LSTM (0,8%). De unde vine acest R²?</div>
+  <details><summary>Răspuns</summary><p>Aproape în întregime din criza din februarie–aprilie 2020: panta AR(1) este −0,10 (reveniri), iar în acele zile violente ea aduce cîștig. Curba cumulată sare în martie 2020, apoi merge lateral sau în jos; în afara intervalului 20 februarie - 30 aprilie 2020, R² al AR(1) este −0,2%. Ansamblul LSTM obține aproximativ două treimi din cîștigul său în aceleași săptămîni. Semnul este corect în 52,1% din zile (media celor 5 semințe; 53,1% pentru prognoza lor medie), sub proporția zilelor de creștere (54,0%). Pe TLV, R² al tuturor modelelor este între 0,1% și 0,4%. Randamentele zilnice sînt aproape imprevizibile; un R² mic și pozitiv nu este o strategie de tranzacționare.</p></details>
+</section><h2 class="sec" id="s-load">Consumul de energie electrică din România, pentru ziua următoare</h2>
+<section class="blk" id="load-days">
+  <h3>Două săptămîni de test din iarnă: prognozele față de consumul observat</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L5_load_fortnight_ro.jpg" alt="Slide-ul 34: Două săptămîni de test din iarnă: prognozele față de consumul observat" loading="lazy"></a>
+      <figcaption>Slide-ul 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ld-d">Prima zi afișată: <b id="ld-d-v"></b></label><input type="range" id="ld-d" min="0" max="1034" step="1" value="385"></div><div class="ctl"><label for="ld-w">Fereastra</label><select id="ld-w"><option value="1">o zi</option><option value="7">o săptămînă</option><option value="14" selected>două săptămîni</option></select></div><div class="ctl ctl-tg" id="ld-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="ld-m" value="snaive" checked> Naiv sezonier</label><label class="tg"><input type="checkbox" name="ld-m" value="ridge"> Ridge ARX</label><label class="tg"><input type="checkbox" name="ld-m" value="lstm" checked> LSTM</label><label class="tg"><input type="checkbox" name="ld-m" value="gru"> GRU</label></div></div><button class="btn play" id="ld-play" type="button"></button></div><div class="charts one"><div class="chart" id="ld-chart"></div></div><ul class="out" id="ld-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_load_fortnight" target="_blank" rel="noopener">NN_L5_load_fortnight</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_load_fortnight/NN_L5_load_fortnight.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> În cele două săptămîni de la 20 ianuarie 2025, care prognoză urmărește cel mai bine consumul și unde greșește prognoza naivă sezonieră?</div>
+  <details><summary>Răspuns</summary><p>În aceste 14 zile, MAPE este 6,0% pentru prognoza naivă sezonieră (aceeași zi din săptămîna anterioară), 3,2% pentru LSTM, 2,9% pentru GRU și 2,6% pentru ridge ARX. Prognoza naivă greșește cînd nivelul se schimbă de la o săptămînă la alta (valuri de frig, sărbători): repetă nivelul de săptămîna trecută. Pe toată perioada de test (1.035 de zile), MAPE este 6,79% (naiv), 4,86% (ridge ARX), 5,81% (LSTM) și 5,17% (GRU). Parcurgeți zilele din jurul Crăciunului sau al Paștelui: toate modelele ratează sărbătorile pentru care nu au o variabilă de intrare.</p></details>
+</section>
+<section class="blk" id="load-errors">
+  <h3>Pe consum, modelul liniar ARX depășește rețelele recurente</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=35" target="_blank" rel="noopener"><img src="slides/L5_load_errors_ro.jpg" alt="Slide-ul 35: Pe consum, modelul liniar ARX depășește rețelele recurente" loading="lazy"></a>
+      <figcaption>Slide-ul 35</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="le-f"><span class="lbl">Zilele</span><div class="tgs"><label class="tg"><input type="radio" name="le-f" value="all" checked> toate</label><label class="tg"><input type="radio" name="le-f" value="wd"> lucrătoare (luni–vineri)</label><label class="tg"><input type="radio" name="le-f" value="we"> weekend</label></div></div><div class="ctl"><label for="le-s">Sezonul</label><select id="le-s"><option value="all" selected>tot anul</option><option value="win">iarna (dec–feb)</option><option value="spr">primăvara (mar–mai)</option><option value="sum">vara (iun–aug)</option><option value="aut">toamna (sep–nov)</option></select></div><div class="ctl ctl-tg" id="le-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="le-m" value="snaive" checked> Naiv sezonier</label><label class="tg"><input type="checkbox" name="le-m" value="ridge" checked> Ridge ARX</label><label class="tg"><input type="checkbox" name="le-m" value="lstm" checked> LSTM</label><label class="tg"><input type="checkbox" name="le-m" value="gru" checked> GRU</label></div></div></div><div class="charts one"><div class="chart" id="le-chart"></div></div><ul class="out" id="le-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_load_errors" target="_blank" rel="noopener">NN_L5_load_errors</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_load_errors/NN_L5_load_errors.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> La ce ore din zi sînt cele mai mari erorile prognozelor pentru ziua următoare și sînt weekendurile mai dificile decît zilele lucrătoare?</div>
+  <details><summary>Răspuns</summary><p>Erorile au un vîrf la sfîrșitul dimineții (în jurul orelor 10:00–11:00 UTC), cînd creșterea cererii și producția panourilor solare de pe acoperișuri fac consumul net cel mai greu de prognozat: 681 MW pentru prognoza naivă, 537 MW pentru ridge ARX, 581 MW pentru LSTM. Weekendurile nu sînt mai dificile: MAE pentru LSTM este 342 MW în zilele lucrătoare și 303 MW în weekend. Pe toate zilele de test, ridge ARX are cea mai mică MAE (269 MW, față de 293 MW pentru GRU, 331 MW pentru LSTM și 396 MW pentru prognoza naivă): un model liniar cu lagurile potrivite este un reper greu de depășit pentru o rețea recurentă.</p></details>
+</section>
+<p class="src foot">Date: S&P 500, prețurile zilnice de deschidere, maxim, minim și închidere (Yahoo Finance, ianuarie 2005 - octombrie 2026), Banca Transilvania (TLV), prețuri de închidere ajustate (EODHD, Bursa de Valori București, din 2008), consumul orar de energie electrică din România (energy-charts.info, din datele ENTSO-E, 2016 - octombrie 2026, ore în UTC = timpul universal coordonat). Perioadele de test: 2020 - octombrie 2026 (piețe), 2024 - octombrie 2026 (consum). Prognozele rețelelor neuronale recurente (RNN), ale rețelelor cu memorie lungă pe termen scurt (LSTM) și ale celor cu unități recurente cu porți (GRU) sînt rulările salvate din curs (analysis_L5.py, semințele 20261108 + s); HAR = model autoregresiv heterogen, GARCH = model autoregresiv generalizat cu heteroscedasticitate condiționată, ARX = model autoregresiv cu variabile exogene, MSE = eroarea pătratică medie, MAE = eroarea absolută medie, MAPE = eroarea procentuală absolută medie.</p>
+</main>
+</body>
+</html>

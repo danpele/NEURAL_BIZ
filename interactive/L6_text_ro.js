@@ -1,0 +1,25 @@
+// Readouts of the Lecture 6 interactive page, written by lectures/L6/build_interactive_L6.py.
+window.LK_TEXT = {
+ rank: 'Rangul cuvîntului', freq: 'Frecvența (apariții)', inVoc: 'în vocabular', outVoc: 'sub frecvența minimă', fit: s => `legea putere estimată, panta ${s}`,
+ vocSize: 'Dimensiunea vocabularului (cuvinte)', cover: 'Ponderea textului acoperit (%)', zfTitle: 'Rang–frecvență pentru cuvintele din discursurile BCE', covTitle: 'Cît din text acoperă un vocabular',
+ zf: (m, v, n, c, oov) => `Frecvența minimă ${m}: ${window.NNI.cnt(v, 'cuvînt', 'cuvinte')} în vocabular din ${n}; ele acoperă ${c} din unitățile lexicale, deci ${oov} din text rămîne în afara vocabularului (OOV).`,
+ zf2: (t, s) => `Cele mai frecvente zece cuvinte: ${t}; împreună, ${s} din toate unitățile lexicale.`,
+ cls: ['negativă', 'neutră', 'pozitivă'], contrib: 'β pozitiv − β negativ (log-șanse la o apariție)', prob: 'Probabilitatea (%)', probTitle: 'Probabilitățile prezise ale claselor',
+ scTitle: 'Ponderea fiecărui cuvînt din frază', notVoc: 'nu este în vocabular', empty: 'Scrieți o frază.',
+ sc: (c, p, lab) => `Predicția regresiei logistice pe sacul de cuvinte (BoW): ${c} (${p})` + (lab ? `; eticheta adnotatorilor: ${lab}.` : '.'),
+ sc2: (n, k, oov) => `${window.NNI.cnt(n, 'unitate lexicală', 'unități lexicale')}, dintre care ${k} în vocabularul modelului (3.561 de cuvinte văzute de cel puțin două ori la antrenare)` + (oov ? `; în afara vocabularului: ${oov}.` : '.'),
+ sc3: r => `Eliminate drept cuvinte de legătură: ${r}.`,
+ cos: 'Asemănarea cosinus', shared: 'și în lista celuilalt model', own: 'numai în acest model',
+ nb: (w, f, k, s, list) => `„${w}” apare de ${window.NNI.cnt(f, 'dată', 'ori')} în discursurile BCE. Dintre cei ${k} vecini cei mai apropiați, ${s} sînt comuni pentru word2vec și GloVe: ${list}.`,
+ nbNone: 'niciunul',
+ pc1: 'Prima componentă principală', pc2: 'A doua componentă principală',
+ pc: (n, v, m) => `${window.NNI.cnt(n, 'cuvînt', 'cuvinte')}, ${m}: cele două componente păstrează ${v} din varianța vectorilor.`,
+ pcFew: 'Alegeți cel puțin un grup.',
+ trueC: 'Eticheta adnotatorilor', predC: 'Clasa prezisă', acc: 'Acuratețea pe test (%)', lvl: { all: 'toate', 50: '50%', 66: '66%', 75: '75%', 100: '100%' },
+ agTitle: 'Matricea de confuzie, cele 5 seturi de test cumulate', accTitle: 'Acuratețea după acordul adnotatorilor', majority: 'clasa majoritară', agX: 'Acordul adnotatorilor',
+ ag: (m, a, n, acc, maj) => `${m}, ${a === 'all' ? 'toate frazele de test' : 'frazele cu acord de ' + a + '%'} (${n} în cele 5 seturi de test): acuratețea ${acc}; clasa majoritară ${maj}.`,
+ ag2: (r0, r1, r2) => `Recall (sensibilitatea): negativă ${r0}, neutră ${r1}, pozitivă ${r2}.`,
+ share: 'Ponderea din tweet-urile temei (%)', rowTitle: t => `Unde ajung tweet-urile de test din „${t}”`, f1: 'F1 pe tweet-urile de test (%)', f1Title: 'F1 pe teme',
+ tp: (t, n, p, r, f) => `${t}: ${window.NNI.cnt(n, 'tweet de test', 'tweet-uri de test')}; precizia ${p}, recall ${r}, F1 ${f}.`,
+ tp2: (f, a) => `Toate cele 20 de teme: macro-F1 ${f}, acuratețea ${a}.`
+};

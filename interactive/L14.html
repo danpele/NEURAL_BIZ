@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 14 · Multimodal and vision-language models</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 14 · Multimodal and vision-language models">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L14.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261108s", "L14_text_en.js?v=20261108s", "common.js?v=20261108s"], "L14.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 14 · Multimodal and vision-language models</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L14/lecture14.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L14.html" class="lang-btn active">EN</a><a href="L14_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the results of the lecture when you move a control. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. Models: CLIP (contrastive language–image pre-training) ViT-B/32 and ViT-B/16, where ViT is a vision transformer; Qwen2-VL-2B, a vision-language model (VLM); a convolutional neural network (CNN) trained from scratch.</p>
+<p class="toc"><a href="#s-vit">Vision transformers</a> · <a href="#s-clip">CLIP: images and text in one space</a> · <a href="#s-vlm">Vision-language models: reading charts</a></p>
+<h2 class="sec" id="s-vit">Vision transformers</h2>
+<section class="blk" id="vit-patches">
+  <h3>Patches and attention on real EuroSAT images</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=10" target="_blank" rel="noopener"><img src="slides/L14_vit_patches_attention_en.jpg" alt="Slide 10: Patches and attention on real EuroSAT images" loading="lazy"></a>
+      <figcaption>Slide 10</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vp-i">Test image</label><select id="vp-i"><option value="0">Annual crop</option><option value="1">Forest</option><option value="2">Herbaceous vegetation</option><option value="3" selected>Highway</option><option value="4">Industrial</option><option value="5">Pasture</option><option value="6">Permanent crop</option><option value="7">Residential</option><option value="8">River</option><option value="9">Sea or lake</option></select></div><div class="ctl"><label for="vp-p">Patch size (pixels of the 224 × 224 image): <b id="vp-p-v"></b></label><input type="range" id="vp-p" min="0" max="5" step="1" value="2"></div><div class="ctl ctl-tg" id="vp-v"><span class="lbl">What the model sees</span><div class="tgs"><label class="tg"><input type="radio" name="vp-v" value="grid" checked> Image with the patch grid</label><label class="tg"><input type="radio" name="vp-v" value="mean"> Mean colour of each patch</label></div></div><div class="ctl"><label for="vp-a">Opacity of the attention map (%): <b id="vp-a-v"></b></label><input type="range" id="vp-a" min="0" max="100" step="5" value="45"></div></div><div class="charts "><div class="chart" id="vp-img"></div><div class="chart" id="vp-att"></div></div><ul class="out" id="vp-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_vit_patches_attention" target="_blank" rel="noopener">NN_L14_vit_patches_attention</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_vit_patches_attention/NN_L14_vit_patches_attention.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> CLIP ViT-B/16 cuts the 224 × 224 image into patches of 16 × 16 pixels. How many tokens does the transformer read, and what happens to the cost of attention if the patches are halved to 8 × 8?</div>
+  <details><summary>Answer</summary><p>14 × 14 = 196 patch tokens plus one class token, 197 in all (lecture numbers: 12 layers, 12 heads, width 768). With 8 × 8 patches the grid is 28 × 28 = 784 tokens, four times more, and self-attention compares every token with every other one, so its cost grows about 16 times. Switch to "mean colour of each patch": with large patches a road or a river disappears inside one token, which is why small details need small patches. The attention map shows where the class token looks after all 12 layers (attention rollout).</p></details>
+</section><h2 class="sec" id="s-clip">CLIP: images and text in one space</h2>
+<section class="blk" id="zero-shot">
+  <h3>Zero-shot predictions on eight random test images</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_examples_en.jpg" alt="Slide 15: Zero-shot predictions on eight random test images" loading="lazy"></a>
+      <figcaption>Slide 15</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="zs-i">Test image</label><select id="zs-i"><option value="0" selected>Annual crop · 1</option><option value="1">Annual crop · 2</option><option value="2">Annual crop · 3</option><option value="3">Forest · 1</option><option value="4">Forest · 2</option><option value="5">Forest · 3</option><option value="6">Herbaceous vegetation · 1</option><option value="7">Herbaceous vegetation · 2</option><option value="8">Herbaceous vegetation · 3</option><option value="9">Highway · 1</option><option value="10">Highway · 2</option><option value="11">Highway · 3</option><option value="12">Industrial · 1</option><option value="13">Industrial · 2</option><option value="14">Industrial · 3</option><option value="15">Pasture · 1</option><option value="16">Pasture · 2</option><option value="17">Pasture · 3</option><option value="18">Permanent crop · 1</option><option value="19">Permanent crop · 2</option><option value="20">Permanent crop · 3</option><option value="21">Residential · 1</option><option value="22">Residential · 2</option><option value="23">Residential · 3</option><option value="24">River · 1</option><option value="25">River · 2</option><option value="26">River · 3</option><option value="27">Sea or lake · 1</option><option value="28">Sea or lake · 2</option><option value="29">Sea or lake · 3</option></select></div><div class="ctl"><label for="zs-m">Model</label><select id="zs-m"><option value="B32">CLIP ViT-B/32</option><option value="B16" selected>CLIP ViT-B/16</option></select></div><div class="ctl"><label for="zs-t">Prompt (text template)</label><select id="zs-t"><option value="name">Folder name ("AnnualCrop")</option><option value="photo">"a photo of {class}."</option><option value="sat">"a satellite photo of {class}."</option><option value="ens" selected>Average of 5 satellite templates</option></select></div><div class="ctl"><label for="zs-s">Logit scale (inverse temperature): <b id="zs-s-v"></b></label><input type="range" id="zs-s" min="1" max="200" step="1" value="100"></div></div><div class="charts "><div class="chart" id="zs-img"></div><div class="chart" id="zs-bar"></div></div><ul class="out" id="zs-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_examples" target="_blank" rel="noopener">NN_L14_zeroshot_examples</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_zeroshot_examples/NN_L14_zeroshot_examples.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> CLIP was never trained on EuroSAT. How can it classify these images, and what does the logit scale change?</div>
+  <details><summary>Answer</summary><p>Each class becomes a sentence ("a centered satellite photo of forest."); the image is assigned to the class whose sentence embedding has the largest cosine similarity with the image embedding. The cosines are close to each other (between about 0.2 and 0.3), so the softmax multiplies them by a scale, 100 in CLIP. The scale does not change the predicted class, only how confident the probabilities look: at scale 1 every class gets about 10%, at 200 the top class takes almost everything. On all 5,400 test images the best set-up, ViT-B/16 with 5 templates, is right 56.4% of the time; 5 of the 8 images on the slide are correct.</p></details>
+</section>
+<section class="blk" id="confusion">
+  <h3>Where zero-shot fails: similar-looking land uses</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_confusion_en.jpg" alt="Slide 16: Where zero-shot fails: similar-looking land uses" loading="lazy"></a>
+      <figcaption>Slide 16</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Model</label><select id="cm-m"><option value="B32">CLIP ViT-B/32</option><option value="B16" selected>CLIP ViT-B/16</option></select></div><div class="ctl"><label for="cm-t">Prompt (text template)</label><select id="cm-t"><option value="name">Folder name ("AnnualCrop")</option><option value="photo">"a photo of {class}."</option><option value="sat">"a satellite photo of {class}."</option><option value="ens" selected>Average of 5 satellite templates</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Cells show</span><div class="tgs"><label class="tg"><input type="radio" name="cm-n" value="row" checked> Row percentages</label><label class="tg"><input type="radio" name="cm-n" value="n"> Number of images</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_confusion" target="_blank" rel="noopener">NN_L14_zeroshot_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_zeroshot_confusion/NN_L14_zeroshot_confusion.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Which land uses does zero-shot CLIP confuse, and does a better prompt help?</div>
+  <details><summary>Answer</summary><p>With ViT-B/16 and 5 templates, 399 of the 600 sea or lake images are called highway, and permanent crops are recognised in only 18.6% of cases, while industrial areas (93.6%) and residential areas (92.3%) are almost always right. The prompt matters a lot: the bare folder name gives 34.1% (ViT-B/32) and 42.4% (ViT-B/16), the average of 5 satellite templates 49.1% and 56.4%. Words that describe the image as a satellite photo move the text embedding closer to this kind of picture.</p></details>
+</section>
+<section class="blk" id="text-search">
+  <h3>Searching images with words: the same embeddings, used the other way</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L14_text_search_en.jpg" alt="Slide 17: Searching images with words: the same embeddings, used the other way" loading="lazy"></a>
+      <figcaption>Slide 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ts-c">Query (class in the prompt)</label><select id="ts-c"><option value="0" selected>Annual crop</option><option value="1">Forest</option><option value="2">Herbaceous vegetation</option><option value="3">Highway</option><option value="4">Industrial</option><option value="5">Pasture</option><option value="6">Permanent crop</option><option value="7">Residential</option><option value="8">River</option><option value="9">Sea or lake</option></select></div><div class="ctl"><label for="ts-k">Number of images returned, k: <b id="ts-k-v"></b></label><input type="range" id="ts-k" min="10" max="1000" step="10" value="100"></div><div class="ctl ctl-tg" id="ts-a"><span class="lbl">Comparison</span><div class="tgs"><label class="tg"><input type="checkbox" name="ts-a" value="avg" checked> Mean of the 10 queries</label></div></div></div><div class="charts one"><div class="chart" id="ts-chart"></div></div><div class="thumbs" id="ts-thumbs" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"></div><ul class="out" id="ts-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_text_search" target="_blank" rel="noopener">NN_L14_text_search</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_text_search/NN_L14_text_search.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> The same embeddings can be used the other way round: type a description, retrieve images. Is a search for "annual crop land" as reliable as one for "industrial buildings"?</div>
+  <details><summary>Answer</summary><p>No. Among the 100 images most similar to the prompt, 99% are industrial for the industrial query, but only 20% are annual crops for the annual crop query, and 21% for sea or lake; the mean over the 10 queries is 58.9%. Move k: precision usually falls as more images are returned, and it cannot stay at 100% once k exceeds the number of test images of the class (400 to 600, given in the readout). A search engine on a bank's satellite archive would need checking class by class.</p></details>
+</section>
+<section class="blk" id="few-shot">
+  <h3>Pre-trained features win with few labels; a trained CNN wins with many</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L14_fewshot_eurosat_en.jpg" alt="Slide 19: Pre-trained features win with few labels; a trained CNN wins with many" loading="lazy"></a>
+      <figcaption>Slide 19</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fs-k">Labelled images per class: <b id="fs-k-v"></b></label><input type="range" id="fs-k" min="0" max="7" step="1" value="4"></div><div class="ctl ctl-tg" id="fs-s"><span class="lbl">Series</span><div class="tgs"><label class="tg"><input type="checkbox" name="fs-s" value="probe" checked> CLIP + logistic regression</label><label class="tg"><input type="checkbox" name="fs-s" value="cnn" checked> CNN trained from scratch</label><label class="tg"><input type="checkbox" name="fs-s" value="zs" checked> CLIP zero-shot (no labels)</label></div></div></div><div class="charts one"><div class="chart" id="fs-chart"></div></div><ul class="out" id="fs-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_fewshot_eurosat" target="_blank" rel="noopener">NN_L14_fewshot_eurosat</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_fewshot_eurosat/NN_L14_fewshot_eurosat.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> How many labelled images per class do you need before a network trained from scratch beats a logistic regression on CLIP embeddings?</div>
+  <details><summary>Answer</summary><p>With few labels the pre-trained features win: one image per class gives 59.0% with the CLIP probe, already above zero-shot (56.4%); with 4 per class the probe reaches 73.8% and the CNN 50.3%, with 16 per class 84.7% against 78.5%. At 64 per class the CNN catches up (90.9% against 90.1%) and at 128 it is ahead (94.1% against 91.6%); on all 21,600 training images the CNN reaches 97.4%, the probe 95.5%. Labels are expensive: pre-trained embeddings are the cheap start, a dedicated model pays off once the labels exist.</p></details>
+</section><h2 class="sec" id="s-vlm">Vision-language models: reading charts</h2>
+<section class="blk" id="chart-regime">
+  <h3>From the picture or from the numbers? Detecting market stress</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L14_chart_regime_en.jpg" alt="Slide 24: From the picture or from the numbers? Detecting market stress" loading="lazy"></a>
+      <figcaption>Slide 24</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cr-m">Model</label><select id="cr-m"><option value="numeric" selected>Numbers + logistic regression</option><option value="clip_probe">CLIP image + logistic regression</option><option value="clip_zs">CLIP zero-shot</option><option value="vlm_stress">Qwen2-VL zero-shot</option></select></div><div class="ctl"><label for="cr-a">Windows flagged as stress (% of the test set): <b id="cr-a-v"></b></label><input type="range" id="cr-a" min="2" max="40" step="1" value="10"></div></div><div class="charts "><div class="chart" id="cr-roc"></div><div class="chart" id="cr-time"></div></div><ul class="out" id="cr-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_chart_regime" target="_blank" rel="noopener">NN_L14_chart_regime</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_chart_regime/NN_L14_chart_regime.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A model can look at the picture of the last 120 days of the S&P 500 or at four numbers computed from it (returns, volatility, drawdown). Which detects stress better?</div>
+  <details><summary>Answer</summary><p>The numbers: area under the ROC (receiver operating characteristic) curve (AUC) 0.933 for the logistic regression on the numbers, 0.907 for CLIP zero-shot, 0.880 for the CLIP image probe and 0.758 for Qwen2-VL zero-shot, on 394 test windows of which 8.4% are stress. Move the share of windows flagged: with 10% of the windows flagged (39 alarms), the numbers catch 21 of the 33 stress windows, CLIP zero-shot 20, the CLIP probe 14 and Qwen2-VL 11; to catch 25 of them the numbers need 59 alarms, Qwen2-VL 191. When the numbers behind a chart exist, give the model the numbers; the image route is for documents where only the picture exists.</p></details>
+</section>
+<p class="src foot">Images: EuroSAT, Sentinel-2 RGB images of land use in Europe, 64 × 64 pixels, 10 classes (Helber et al., 2019); 21,600 training and 5,400 test images, split fixed in advance. Market charts: S&P 500 daily closes (Yahoo Finance), windows of 120 trading days every 5 days, test windows from 2019 to October 2026. Open models from Hugging Face; all scores were computed in the lecture (lectures/L14/analysis_L14.py), except the CLIP text embeddings of the 30 example images and the attention rollout of the 10 images of the first block, recomputed with the same models for this page.</p>
+</main>
+</body>
+</html>

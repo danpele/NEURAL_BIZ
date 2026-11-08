@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 12 · Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 12 · Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L12.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261108s", "L12_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L12.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 12 · Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L12/lecture12_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L12.html" class="lang-btn">EN</a><a href="L12_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din ieșirile modelelor deschise rulate pentru curs (Qwen2.5 cu 0,5, 1,5 și 3 miliarde de parametri) cînd modificați un control. Nimic nu este inventat: fiecare probabilitate, etichetă și estimare a valorii expuse la risc (VaR) de mai jos a fost produsă de modele pe date reale. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="toc"><a href="#s-lm">Cum scrie un model de limbaj: următorul token</a> · <a href="#s-prompt">Formularea instrucțiunilor (prompt engineering), măsurată</a> · <a href="#s-rag">Generarea augmentată prin regăsire (RAG)</a> · <a href="#s-var">Un model de limbaj ca estimator al riscului (LLM-VaR)</a></p>
+<h2 class="sec" id="s-lm">Cum scrie un model de limbaj: următorul token</h2>
+<section class="blk" id="next-token">
+  <h3>Probabilitățile următorului token: un model real, o frază reală</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=10" target="_blank" rel="noopener"><img src="slides/L12_next_token_ro.jpg" alt="Slide-ul 10: Probabilitățile următorului token: un model real, o frază reală" loading="lazy"></a>
+      <figcaption>Slide-ul 10</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="nt-T">Temperatura T: <b id="nt-T-v"></b></label><input type="range" id="nt-T" min="0.1" max="2.0" step="0.05" value="1.0"></div><div class="ctl"><label for="nt-k">Top-k: cîți tokeni candidați păstrăm: <b id="nt-k-v"></b></label><input type="range" id="nt-k" min="1" max="8" step="1" value="8"></div><button class="btn play" id="nt-play" type="button"></button></div><div class="charts one"><div class="chart" id="nt-chart"></div></div><ul class="out" id="nt-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_next_token" target="_blank" rel="noopener">NN_L12_next_token</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_next_token/NN_L12_next_token.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Fraza unui discurs al BCE (Banca Centrală Europeană) din 30 octombrie 2026 începe cu „The inflation impact is limited:”. La temperatura 1, modelul dă 10,1% cuvîntului „the”. Ce se întîmplă cu această probabilitate la temperatura 0,5 și la temperatura 2?</div>
+  <details><summary>Răspuns</summary><p>Împărțirea logiților la T ascute distribuția cînd T < 1 și o aplatizează cînd T > 1. Pe întregul vocabular de 151.665 de tokeni, cursul măsoară 49,9% pentru „the” la T = 0,5 și doar 0,4% la T = 2; entropia crește de la 1,74 la 6,20 și 10,29 nats. Figura renormalizează pe cei mai probabili k tokeni, ca eșantionarea top-k: cu k = 1 modelul scrie mereu „the” (decodare lacomă). Cuvîntul rostit efectiv, „prices”, nu este printre cei opt tokeni cei mai probabili. Pentru clasificare și extragere folosiți T = 0; temperaturile mari sînt pentru generarea de idei.</p></details>
+</section><h2 class="sec" id="s-prompt">Formularea instrucțiunilor (prompt engineering), măsurată</h2>
+<section class="blk" id="few-shot">
+  <h3>Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L12_fewshot_curve_ro.jpg" alt="Slide-ul 24: Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută" loading="lazy"></a>
+      <figcaption>Slide-ul 24</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fs-m">Modelul</label><select id="fs-m"><option value="1.5B">Qwen2.5-1.5B</option><option value="3B" selected>Qwen2.5-3B</option></select></div><div class="ctl"><label for="fs-k">Numărul de exemple în prompt, k: <b id="fs-k-v"></b></label><input type="range" id="fs-k" min="0" max="4" step="1" value="2"></div><div class="ctl ctl-tg" id="fs-s"><span class="lbl">Setul de exemple (extragerea aleatoare)</span><div class="tgs"><label class="tg"><input type="radio" name="fs-s" value="0" checked> 1</label><label class="tg"><input type="radio" name="fs-s" value="1"> 2</label><label class="tg"><input type="radio" name="fs-s" value="2"> 3</label></div></div><button class="btn play" id="fs-play" type="button"></button></div><div class="charts "><div class="chart" id="fs-curve"></div><div class="chart" id="fs-conf"></div></div><ul class="out" id="fs-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_fewshot_curve" target="_blank" rel="noopener">NN_L12_fewshot_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_fewshot_curve/NN_L12_fewshot_curve.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Adăugarea unor exemple etichetate în prompt (few-shot) ar trebui să ajute. Clasifică modelul cu 3 miliarde de parametri mai bine propozițiile din Financial PhraseBank cu 4 exemple decît fără niciunul?</div>
+  <details><summary>Răspuns</summary><p>Nu. Fără exemple (zero-shot), Qwen2.5-3B atinge un macro-F1 de 92,2%; cu k = 1, 2, 4 și 8 exemple, media pe trei extrageri aleatoare ale exemplelor este 89,5%, 90,4%, 92,1% și 91,3%, iar cu k = 1 extragerile variază între 87,5% și 91,1%. Modelul mai mic, de 1,5 miliarde, cîștigă puțin la k = 1 (85,1% → 87,3%) și pierde la k = 8 (84,1%). Contează ce exemple extrageți aproape cît contează cîte. Macro-F1 mediază scorul F1 (media armonică a preciziei și a sensibilității) celor trei clase, deci clasa negativă, rară, contează cît cea neutră.</p></details>
+</section>
+<section class="blk" id="prompt-sensitivity">
+  <h3>Reformularea instrucțiunii schimbă scorul: sensibilitatea la prompt</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L12_prompt_sensitivity_ro.jpg" alt="Slide-ul 25: Reformularea instrucțiunii schimbă scorul: sensibilitatea la prompt" loading="lazy"></a>
+      <figcaption>Slide-ul 25</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ps-d">Setul de date</label><select id="ps-d"><option value="pb" selected>Financial PhraseBank (știri despre companii)</option><option value="tw">Tweet-uri financiare</option></select></div><div class="ctl"><label for="ps-m">Modelul (zero-shot)</label><select id="ps-m"><option value="1.5B" selected>Qwen2.5-1.5B</option><option value="3B">Qwen2.5-3B</option></select></div><div class="ctl ctl-tg" id="ps-i"><span class="lbl">Formularea instrucțiunii</span><div class="tgs"><label class="tg"><input type="radio" name="ps-i" value="0" checked> 1</label><label class="tg"><input type="radio" name="ps-i" value="1"> 2</label><label class="tg"><input type="radio" name="ps-i" value="2"> 3</label><label class="tg"><input type="radio" name="ps-i" value="3"> 4</label><label class="tg"><input type="radio" name="ps-i" value="4"> 5</label></div></div><button class="btn play" id="ps-play" type="button"></button></div><div class="charts "><div class="chart" id="ps-bars"></div><div class="chart" id="ps-conf"></div></div><ul class="out" id="ps-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_prompt_sensitivity" target="_blank" rel="noopener">NN_L12_prompt_sensitivity</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_prompt_sensitivity/NN_L12_prompt_sensitivity.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Cinci reformulări ale aceleiași instrucțiuni, același model, aceleași propoziții. Cît poate muta formularea singură scorul macro-F1?</div>
+  <details><summary>Răspuns</summary><p>Mult pentru modelul mic: pe Financial PhraseBank, Qwen2.5-1.5B variază între 72,8% și 87,0% (14,2 puncte) de la o formulare la alta, Qwen2.5-3B doar între 88,5% și 92,2% (3,6 puncte). Pe tweet-urile financiare ambele sînt fragile: 34,3–47,6% pentru 1,5B și 65,5–78,4% pentru 3B. Matricea de confuzie arată unde merg erorile; un scor raportat pentru un LLM este scorul unui singur prompt, deci testați mai multe formulări și raportați intervalul.</p></details>
+</section>
+<section class="blk" id="calibration">
+  <h3>Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L12_calibration_ro.jpg" alt="Slide-ul 28: Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale" loading="lazy"></a>
+      <figcaption>Slide-ul 28</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cb-d">Setul de date</label><select id="cb-d"><option value="pb" selected>Financial PhraseBank (știri despre companii)</option><option value="tw">Tweet-uri financiare</option></select></div><div class="ctl"><label for="cb-m">Modelul</label><select id="cb-m"><option value="tfidf">TF-IDF + regresie logistică</option><option value="zs_0.5B">Zero-shot, Qwen2.5-0.5B</option><option value="zs_1.5B">Zero-shot, Qwen2.5-1.5B</option><option value="zs_3B" selected>Zero-shot, Qwen2.5-3B</option><option value="fs_1.5B">Few-shot (k = 4), Qwen2.5-1.5B</option><option value="fs_3B">Few-shot (k = 4), Qwen2.5-3B</option><option value="cot_3B">Raționament pas cu pas (chain-of-thought), Qwen2.5-3B</option><option value="probe">Embedding Qwen2.5-1.5B + regresie logistică</option></select></div><div class="ctl"><label for="cb-t">Răspundem doar dacă probabilitatea etichetei alese este cel puțin: <b id="cb-t-v"></b></label><input type="range" id="cb-t" min="0.33" max="0.99" step="0.01" value="0.33"></div><button class="btn play" id="cb-play" type="button"></button></div><div class="charts "><div class="chart" id="cb-rel"></div><div class="chart" id="cb-cov"></div></div><ul class="out" id="cb-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_calibration" target="_blank" rel="noopener">NN_L12_calibration</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_calibration/NN_L12_calibration.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Un clasificator care se abține cînd nu este sigur poate trimite cazurile dificile unui analist. Dacă modelul zero-shot 3B răspunde doar cînd probabilitatea este mare, crește acuratețea pe propozițiile la care răspunde?</div>
+  <details><summary>Răspuns</summary><p>Da: mutați pragul și urmăriți cum scade acoperirea, în timp ce acuratețea pe propozițiile cu răspuns crește. Aceasta funcționează numai dacă probabilitățile sînt calibrate, adică dacă „90% sigur” are dreptate în circa 90% din cazuri. Cursul măsoară eroarea de calibrare așteptată (ECE) pe Financial PhraseBank: 4,7% pentru zero-shot 3B, 3,6% pentru few-shot 3B și 5,4% pentru TF-IDF (frecvența termenului – frecvența inversă în documente) cu regresie logistică. Comparați modelul 0,5B: curba sa de fiabilitate este departe de diagonală, iar un prag aduce mult mai puțin.</p></details>
+</section><h2 class="sec" id="s-rag">Generarea augmentată prin regăsire (RAG)</h2>
+<section class="blk" id="rag-recall">
+  <h3>Găsirea discursului corect după titlu</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=36" target="_blank" rel="noopener"><img src="slides/L12_rag_recall_ro.jpg" alt="Slide-ul 36: Găsirea discursului corect după titlu" loading="lazy"></a>
+      <figcaption>Slide-ul 36</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="rg-r"><span class="lbl">Metoda de regăsire</span><div class="tgs"><label class="tg"><input type="checkbox" name="rg-r" value="tfidf" checked> TF-IDF</label><label class="tg"><input type="checkbox" name="rg-r" value="bm25" checked> BM25</label><label class="tg"><input type="checkbox" name="rg-r" value="dense" checked> Embedding dense (bge-small)</label><label class="tg"><input type="checkbox" name="rg-r" value="hybrid" checked> Hibrid (BM25 + dense)</label></div></div><div class="ctl"><label for="rg-k">k: cîte discursuri returnează regăsirea: <b id="rg-k-v"></b></label><input type="range" id="rg-k" min="1" max="20" step="1" value="5"></div><div class="ctl"><label for="rg-y">Anul discursurilor</label><select id="rg-y"><option value="all" selected>Toți anii (2022–2026)</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option></select></div><button class="btn play" id="rg-play" type="button"></button></div><div class="charts one"><div class="chart" id="rg-chart"></div></div><ul class="out" id="rg-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_rag_recall" target="_blank" rel="noopener">NN_L12_rag_recall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_rag_recall/NN_L12_rag_recall.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Interogarea este titlul unui discurs al BCE; regăsirea trebuie să găsească acel discurs printre 400 (8.400 de fragmente de 200 de cuvinte). Ce metodă pune cel mai des discursul corect pe primul loc?</div>
+  <details><summary>Răspuns</summary><p>Cea hibridă. Recall@1 este 35,2% pentru TF-IDF, 37,0% pentru BM25 (Best Matching 25, un scor pe cuvinte-cheie), 44,0% pentru embedding-urile dense și 50,7% pentru metoda hibridă, care combină rangurile BM25 și dense; la k = 10 cele patru ajung la 75,0%, 78,0%, 80,0% și 83,2%. Cuvintele-cheie și sensul greșesc la interogări diferite, de aceea combinarea lor ajută. Cu regăsire, modelul 3B răspunde corect la „cine a ținut acest discurs?” pentru 81,2% din 160 de discursuri recente, față de 13,8% din propria memorie.</p></details>
+</section><h2 class="sec" id="s-var">Un model de limbaj ca estimator al riscului (LLM-VaR)</h2>
+<section class="blk" id="llm-var">
+  <h3>LLM-VaR cu un model deschis de 3B pe S&P 500</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=41" target="_blank" rel="noopener"><img src="slides/L12_llm_var_ro.jpg" alt="Slide-ul 41: LLM-VaR cu un model deschis de 3B pe S&P 500" loading="lazy"></a>
+      <figcaption>Slide-ul 41</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="lv-a"><span class="lbl">Nivelul VaR (probabilitatea cozii)</span><div class="tgs"><label class="tg"><input type="radio" name="lv-a" value="05" checked> 5%</label><label class="tg"><input type="radio" name="lv-a" value="01"> 1%</label></div></div><div class="ctl ctl-tg" id="lv-m"><span class="lbl">Metode</span><div class="tgs"><label class="tg"><input type="checkbox" name="lv-m" value="llm" checked> LLM-VaR (Qwen2.5-3B)</label><label class="tg"><input type="checkbox" name="lv-m" value="hs"> Simulare istorică</label><label class="tg"><input type="checkbox" name="lv-m" value="garch" checked> GARCH(1,1), t</label></div></div><div class="ctl"><label for="lv-s">Începutul perioadei de testare: <b id="lv-s-v"></b></label><input type="range" id="lv-s" min="0" max="20" step="1" value="0"></div><button class="btn play" id="lv-play" type="button"></button></div><div class="charts one"><div class="chart" id="lv-chart"></div></div><ul class="out" id="lv-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_llm_var" target="_blank" rel="noopener">NN_L12_llm_var</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_llm_var/NN_L12_llm_var.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Un model de limbaj citește ca text ultimele 250 de randamente zilnice ale S&P 500 și scrie un număr: valoarea expusă la risc (VaR) de 5% pentru ziua următoare. Pe 459 de zile de tranzacționare ne așteptăm la circa 23 de depășiri. Cum se compară cu GARCH și cu simularea istorică?</div>
+  <details><summary>Răspuns</summary><p>La 5%, LLM-VaR are 28 de depășiri (6,1%, p Kupiec = 0,295), simularea istorică 23 (5,01%, p = 0,991), iar GARCH(1,1) cu erori Student-t 35 (7,63%, p = 0,016, respins la 5%). La 1%, numerele sînt 4, 6 și 9, pentru 4,6 așteptate. Testul Kupiec verifică dacă ponderea depășirilor este egală cu nivelul VaR; o valoare p sub 0,05 respinge modelul. LLM-ul trece testul numărului de depășiri, dar VaR-ul său aproape nu reacționează la volatilitate (corelația cu GARCH este 0,05): mutați începutul perioadei și vedeți unde se grupează depășirile.</p></details>
+</section>
+<p class="src foot">Următorul token și RAG: discursurile Băncii Centrale Europene (BCE), 2022–2026. Sentimentul: Financial PhraseBank (Malo et al., 2014; propozițiile cu acord de 100% între adnotatori, setul de test de 678) și Twitter financial news (Zeroshot, eșantion de test de 900 de tweet-uri). Modelele: Qwen2.5-Instruct (Alibaba), rulate local; probabilitatea unei etichete = masa de probabilitate a primului său token. LLM-VaR: randamentele logaritmice zilnice ale indicelui S&P 500, 2 ianuarie 2025 – 30 octombrie 2026, fereastră de 250 de zile, după Pele et al. (2026).</p>
+</main>
+</body>
+</html>

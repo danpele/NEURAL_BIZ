@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 1 · Deep learning for business: from linear models to the multilayer perceptron</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 1 · Deep learning for business: from linear models to the multilayer perceptron">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L1.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L1_data.js?v=20261108s", "L1_text_en.js?v=20261108s", "common.js?v=20261108s"], "L1.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 1 · Deep learning for business: from linear models to the multilayer perceptron</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L1/lecture1.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L1.html" class="lang-btn active">EN</a><a href="L1_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the course data when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. No formula is needed to play: move the weights, the number of hidden units or the cut-off and watch what changes.</p>
+<p class="toc"><a href="#s-neuron">From one neuron to a multilayer perceptron</a> · <a href="#s-eval">From scores to credit decisions</a></p>
+<h2 class="sec" id="s-neuron">From one neuron to a multilayer perceptron</h2>
+<section class="blk" id="one-neuron">
+  <h3>An MLP bends the decision boundary, but two inputs carry little extra signal</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L1_boundary_hmeq_en.jpg" alt="Slide 31: An MLP bends the decision boundary, but two inputs carry little extra signal" loading="lazy"></a>
+      <figcaption>Slide 31</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="nb-m">Model</label><select id="nb-m"><option value="n" selected>One neuron, your weights</option><option value="mlp">Trained MLP 64-64</option></select></div><div class="ctl"><label for="nb-w1">Weight on debt-to-income, w₁: <b id="nb-w1-v"></b></label><input type="range" id="nb-w1" min="-3" max="3" step="0.05" value="0.6"></div><div class="ctl"><label for="nb-w2">Weight on age of the oldest credit line, w₂: <b id="nb-w2-v"></b></label><input type="range" id="nb-w2" min="-3" max="3" step="0.05" value="-0.5"></div><div class="ctl"><label for="nb-b">Bias, b: <b id="nb-b-v"></b></label><input type="range" id="nb-b" min="-5" max="1" step="0.05" value="-2.45"></div><div class="ctl"><label for="nb-t">Cut-off: flag the loan if probability ≥: <b id="nb-t-v"></b></label><input type="range" id="nb-t" min="0.05" max="0.6" step="0.01" value="0.2"></div><div class="ctl"><button class="btn" id="nb-fit" type="button">Fitted weights (logistic regression)</button></div></div><div class="charts one"><div class="chart" id="nb-chart"></div></div><ul class="out" id="nb-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_boundary_hmeq" target="_blank" rel="noopener">NN_L1_boundary_hmeq</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_boundary_hmeq/NN_L1_boundary_hmeq.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A single neuron with two inputs, debt-to-income and the age of the oldest credit line, draws a straight boundary. Which sign should each weight have, and what happens to the AUC (area under the ROC curve) if you flip both signs?</div>
+  <details><summary>Answer</summary><p>Debt-to-income raises the risk (w₁ > 0) and an older credit history lowers it (w₂ < 0): the fitted logistic regression gives w₁ = 0.62 and w₂ = −0.48 per standard deviation, with a test AUC of 0.744 on the 871 test loans that report both variables. Flip both signs and the ranking is reversed: the AUC drops to 0.256 = 1 − 0.744. Changing the bias moves the line without rotating it, so it changes how many loans are flagged but not the AUC. The trained MLP 64-64 bends the boundary and reaches 0.736 on the same test loans: with two inputs there is little non-linear structure to find.</p></details>
+</section>
+<section class="blk" id="universal-approximation">
+  <h3>More hidden units trace the price geography of California</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L1_uat_california_en.jpg" alt="Slide 29: More hidden units trace the price geography of California" loading="lazy"></a>
+      <figcaption>Slide 29</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ua-h">Sigmoid hidden units, H: <b id="ua-h-v"></b></label><input type="range" id="ua-h" min="0" max="6" step="1" value="2"></div><div class="ctl ctl-tg" id="ua-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="ua-s" value="lin" checked> Linear regression line</label><label class="tg"><input type="checkbox" name="ua-s" value="units" checked> Contribution of each unit</label></div></div><button class="btn play" id="ua-play" type="button"></button></div><div class="charts "><div class="chart" id="ua-fit"></div><div class="chart" id="ua-units"></div></div><ul class="out" id="ua-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_uat_california" target="_blank" rel="noopener">NN_L1_uat_california</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_uat_california/NN_L1_uat_california.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> With one hidden layer of sigmoid units the network adds up "steps". How many units does it take to follow the north–south pattern of house values in California?</div>
+  <details><summary>Answer</summary><p>One unit gives a single smooth step (test MSE 0.855, against 0.896 for the straight line); three units already capture the two coastal peaks around Los Angeles and San Francisco (0.757); fifty units bring only a little more (0.731) on the 4,912 test block groups. The right panel shows each unit's contribution: the fitted curve is their sum plus a constant. This is the universal approximation theorem at work, and also its limit: a single variable explains only part of the variance (mean squared error, MSE, in squared 100,000 USD).</p></details>
+</section>
+<section class="blk" id="width">
+  <h3>On HMEQ, a wider hidden layer raises the test AUC above the logistic score</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L1_width_auc_en.jpg" alt="Slide 34: On HMEQ, a wider hidden layer raises the test AUC above the logistic score" loading="lazy"></a>
+      <figcaption>Slide 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="wd-h">Hidden units, H (one hidden layer): <b id="wd-h-v"></b></label><input type="range" id="wd-h" min="0" max="8" step="1" value="0"></div><div class="ctl ctl-tg" id="wd-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="wd-s" value="seeds" checked> Each of the 5 seeds</label><label class="tg"><input type="checkbox" name="wd-s" value="bench" checked> Logistic regression and XGBoost</label></div></div><button class="btn play" id="wd-play" type="button"></button></div><div class="charts one"><div class="chart" id="wd-chart"></div></div><ul class="out" id="wd-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_width_auc" target="_blank" rel="noopener">NN_L1_width_auc</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_width_auc/NN_L1_width_auc.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> On HMEQ, how many hidden units does a one-layer MLP need before it beats logistic regression on test AUC?</div>
+  <details><summary>Answer</summary><p>One hidden unit (AUC 0.901) is a logistic regression with an extra squashing step and does worse than the logistic model (0.920); from 4 to 8 units the MLP passes it (0.923, 0.931) and the gain flattens above 32 units (0.946 to 0.953 at 256). Gradient boosting (XGBoost, 0.961) stays ahead on this small tabular dataset, with far fewer tuning choices. The readout gives the number of parameters: 7,681 at H = 256, against 29 for the logistic regression.</p></details>
+</section><h2 class="sec" id="s-eval">From scores to credit decisions</h2>
+<section class="blk" id="roc-threshold">
+  <h3>At a 10 % false-alarm rate, the MLP catches more defaults than the logistic score</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=35" target="_blank" rel="noopener"><img src="slides/L1_roc_hmeq_en.jpg" alt="Slide 35: At a 10 % false-alarm rate, the MLP catches more defaults than the logistic score" loading="lazy"></a>
+      <figcaption>Slide 35</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="rc-m">Model</label><select id="rc-m"><option value="logit">Logistic regression</option><option value="mlp" selected>MLP 64-64</option><option value="xgb">XGBoost</option></select></div><div class="ctl"><label for="rc-t">Cut-off: flag the loan if PD ≥: <b id="rc-t-v"></b></label><input type="range" id="rc-t" min="0.01" max="0.95" step="0.01" value="0.5"></div><button class="btn play" id="rc-play" type="button"></button></div><div class="charts "><div class="chart" id="rc-roc"></div><div class="chart" id="rc-hist"></div></div><ul class="out" id="rc-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_roc_hmeq" target="_blank" rel="noopener">NN_L1_roc_hmeq</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_roc_hmeq/NN_L1_roc_hmeq.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A bank flags a loan for manual review when its predicted probability of default (PD) is at least the cut-off. What does moving the cut-off from 0.5 to 0.2 do for the MLP?</div>
+  <details><summary>Answer</summary><p>At 0.5 the MLP flags 220 of the 1,192 test loans and catches 76.5% of the 238 defaults, with 4.0% of the good loans flagged by mistake; at 0.2 it flags 290 loans, catches 84.9% of the defaults and flags 9.2% of the good loans. The cut-off moves the point along the ROC curve; the curve itself, and the AUC, do not change. Which point is best depends on the cost of each error, the subject of the next block.</p></details>
+</section>
+<section class="blk" id="cost-threshold">
+  <h3>A missed default costs five times a rejected good applicant: cut at 1/6, not 1/2</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=40" target="_blank" rel="noopener"><img src="slides/L1_cost_threshold_en.jpg" alt="Slide 40: A missed default costs five times a rejected good applicant: cut at 1/6, not 1/2" loading="lazy"></a>
+      <figcaption>Slide 40</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ct-c">Cost of accepting a bad applicant (cost of rejecting a good one = 1): <b id="ct-c-v"></b></label><input type="range" id="ct-c" min="1" max="10" step="0.5" value="5"></div><div class="ctl"><label for="ct-t">Cut-off: reject if PD ≥: <b id="ct-t-v"></b></label><input type="range" id="ct-t" min="0.02" max="0.9" step="0.01" value="0.5"></div><div class="ctl ctl-tg" id="ct-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="ct-m" value="logit" checked> Logistic regression</label><label class="tg"><input type="checkbox" name="ct-m" value="mlp" checked> MLP 64-64</label><label class="tg"><input type="checkbox" name="ct-m" value="xgb" checked> XGBoost</label></div></div><button class="btn play" id="ct-play" type="button"></button></div><div class="charts one"><div class="chart" id="ct-chart"></div></div><ul class="out" id="ct-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_cost_threshold" target="_blank" rel="noopener">NN_L1_cost_threshold</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_cost_threshold/NN_L1_cost_threshold.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> The UCI cost matrix of German credit says that accepting a bad applicant costs 5 times as much as rejecting a good one. Is 0.5 a sensible cut-off?</div>
+  <details><summary>Answer</summary><p>No. With costs 5 and 1 the cut-off that minimises the expected cost is 1/(1 + 5) = 1/6 ≈ 0.17 (Bayes decision rule). At 0.5 the cost per applicant is 0.87 for the logistic regression, 1.13 for the MLP and 0.98 for XGBoost, worse than rejecting everyone (0.70); at 1/6 it falls to 0.55, 0.57 and 0.59. Move the cost slider: the best cut-off follows 1/(1 + c), and at c = 1 it is back at 0.5. The differences between the three models are much smaller than the cost of a badly chosen cut-off.</p></details>
+</section>
+<p class="src foot">Data: HMEQ home-equity loans (Baesens, Roesch and Scheule, 2016; 5,960 loans), UCI Statlog German credit (1,000 applicants), California housing (StatLib, 1990 census). Splits, models and seeds (20261108 + s) as in the lecture (analysis_L1.py): HMEQ 60/20/20 stratified split; German credit out-of-fold scores of a 5-fold cross-validation; MLP = multilayer perceptron, XGBoost = gradient boosting, AUC = area under the ROC (receiver operating characteristic) curve.</p>
+</main>
+</body>
+</html>

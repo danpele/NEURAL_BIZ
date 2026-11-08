@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L10.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261108s", "L10_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L10.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L10/lecture10_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L10.html" class="lang-btn">EN</a><a href="L10_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">Învățarea prin întărire (RL, reinforcement learning) pe trei probleme reale: o baterie de 2 MWh (megawatt-oră) care tranzacționează pe piața pentru ziua următoare, o poziție în indicele S&P 500 care este fie în afara pieței, fie investită, și acoperirea zilnică a unei opțiuni call pe o lună. În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului (data/clean) și din deciziile agenților antrenați cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="toc"><a href="#s-bat">Bateria ca proces decizional Markov (MDP): programarea dinamică (DP)</a> · <a href="#s-val">Învățarea bazată pe valoare: Q-learning și rețeaua Q profundă (DQN)</a> · <a href="#s-pol">Gradienți de politică: optimizarea proximală a politicii (PPO) în tranzacționare</a> · <a href="#s-hed">Acoperirea neuronală a unei opțiuni call vîndute</a></p>
+<h2 class="sec" id="s-bat">Bateria ca proces decizional Markov (MDP): programarea dinamică (DP)</h2>
+<section class="blk" id="dp-day">
+  <h3>O zi reală: cumpără la minim, vinde la vîrfuri</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L10_dp_day_ro.jpg" alt="Slide-ul 16: O zi reală: cumpără la minim, vinde la vîrfuri" loading="lazy"></a>
+      <figcaption>Slide-ul 16</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="dd-z">Zona de licitație</label><select id="dd-z"><option value="RO" selected>România</option><option value="HU">Ungaria</option><option value="DE_LU">Germania–Luxemburg</option><option value="BG">Bulgaria</option></select></div><div class="ctl"><label for="dd-d">Ziua de livrare: <b id="dd-d-v"></b></label><input type="range" id="dd-d" min="0" max="1" step="1" value="0"></div><div class="ctl"><label for="dd-e">Randamentul ciclului complet (încărcare și descărcare): <b id="dd-e-v"></b></label><input type="range" id="dd-e" min="50" max="100" step="5" value="85"></div><div class="ctl"><label for="dd-c">Capacitatea bateriei (se mută 1 MWh pe oră): <b id="dd-c-v"></b></label><input type="range" id="dd-c" min="1" max="6" step="1" value="2"></div><button class="btn play" id="dd-play" type="button"></button></div><div class="charts one"><div class="chart" id="dd-chart"></div></div><ul class="out" id="dd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_dp_day" target="_blank" rel="noopener">NN_L10_dp_day</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_dp_day/NN_L10_dp_day.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Pe 30 iunie 2026, prețul românesc pentru ziua următoare a variat între 100,65 EUR/MWh la ora 13:00 și 954,59 EUR/MWh la ora 20:00, iar o baterie de 2 MWh a cîștigat 1.541 EUR cu previziune perfectă. Cîștigă o baterie de 4 MWh de două ori mai mult?</div>
+  <details><summary>Răspuns</summary><p>Aproape, dar nu chiar: 2.885 EUR, cu 87% mai mult. Bateria mută 1 MWh pe oră, deci al treilea și al patrulea MWh sînt cumpărate în ore mai puțin ieftine și vîndute în ore mai puțin scumpe; cu 6 MWh venitul este de 3.282 EUR, doar cu 14% peste cel de la 4 MWh, pentru că vîrful de seară durează puține ore. O baterie fără pierderi (randament 100%) ar cîștiga 1.745 EUR la 2 MWh. În aceeași zi, Ungaria dă 1.466 EUR, Germania–Luxemburg 708 EUR și Bulgaria 744 EUR: venitul urmează diferența zilnică dintre prețuri, nu nivelul lor. Toate aceste cifre sînt limite superioare, deoarece programarea dinamică (DP) cunoaște cele 24 de prețuri ale zilei înainte ca ele să fie publicate.</p></details>
+</section>
+<section class="blk" id="dp-value">
+  <h3>Funcția de valoare evaluează energia stocată oră de oră</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L10_dp_value_ro.jpg" alt="Slide-ul 17: Funcția de valoare evaluează energia stocată oră de oră" loading="lazy"></a>
+      <figcaption>Slide-ul 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="dv-k">Pașii inducției înapoi (ore rezolvate, de la miezul nopții spre 0:00): <b id="dv-k-v"></b></label><input type="range" id="dv-k" min="0" max="24" step="1" value="24"></div><div class="ctl"><label for="dv-v">Ce se afișează</label><select id="dv-v"><option value="v" selected>valoarea V_h(s)</option><option value="mwh">valoarea unui MWh stocat în plus, V_h(s+1) − V_h(s)</option></select></div><button class="btn play" id="dv-play" type="button"></button></div><div class="charts "><div class="chart" id="dv-chart"></div><div class="chart" id="dv-pol"></div></div><ul class="out" id="dv-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_dp_value" target="_blank" rel="noopener">NN_L10_dp_value</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_dp_value/NN_L10_dp_value.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Mergeți înapoi oră cu oră cu ▶. Pe 30 iunie 2026, cît valorează un MWh stocat la ora 12:00, la ora 18:00 și la ora 23:00?</div>
+  <details><summary>Răspuns</summary><p>La ora 12:00, V<sub>12</sub>(0) = 1.541 EUR și V<sub>12</sub>(2) = 1.760 EUR, deci fiecare MWh stocat valorează 109,38 EUR: prețul-umbră al energiei din baterie, aproximativ cît costă cumpărarea ei la amiază. La ora 18:00, fiecare MWh valorează circa 880 EUR, pentru că cele mai scumpe două ore (19:00 și 20:00) urmează. La ora 23:00 (alegeți valoarea unui MWh stocat în plus), primul MWh valorează 211 EUR (mai poate fi vîndut în ultima oră), iar al doilea nimic, deoarece se poate muta doar 1 MWh pe oră. Ecuația Bellman construiește aceste valori înapoi, pornind de la V<sub>24</sub>(s) = 0, iar acțiunea optimă în fiecare (h, s) este cea care atinge maximul.</p></details>
+</section><h2 class="sec" id="s-val">Învățarea bazată pe valoare: Q-learning și rețeaua Q profundă (DQN)</h2>
+<section class="blk" id="q-policy">
+  <h3>Ce a învățat Q-learning tabelar</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L10_q_policy_ro.jpg" alt="Slide-ul 22: Ce a învățat Q-learning tabelar" loading="lazy"></a>
+      <figcaption>Slide-ul 22</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="qp-s"><span class="lbl">Energia stocată</span><div class="tgs"><label class="tg"><input type="radio" name="qp-s" value="0"> 0 MWh</label><label class="tg"><input type="radio" name="qp-s" value="1" checked> 1 MWh</label><label class="tg"><input type="radio" name="qp-s" value="2"> 2 MWh</label></div></div><div class="ctl"><label for="qp-h">Ora (CET): <b id="qp-h-v"></b></label><input type="range" id="qp-h" min="0" max="23" step="1" value="13"></div><div class="ctl"><label for="qp-b">Rangul orei în prețurile de ieri</label><select id="qp-b"><option value="0" selected>cele mai ieftine 6 ore ieri</option><option value="1">quartila a 2-a</option><option value="2">quartila a 3-a</option><option value="3">cele mai scumpe 6 ore ieri</option></select></div><button class="btn play" id="qp-play" type="button"></button></div><div class="charts one"><div class="chart" id="qp-map"></div><div class="chart" id="qp-bar"></div></div><ul class="out" id="qp-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_q_policy" target="_blank" rel="noopener">NN_L10_q_policy</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_q_policy/NN_L10_q_policy.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Agentul tabelar nu vede prețurile de azi, ci doar rangul fiecărei ore în prețurile de ieri. La ora 13:00, cu 1 MWh stocat, într-o oră care ieri a fost printre cele mai ieftine șase, ce acțiune alege și cît de sigur este?</div>
+  <details><summary>Răspuns</summary><p>Încarcă: Q(încărcare) = 175,0 EUR, Q(inactiv) = 167,2 EUR, Q(descărcare) = 139,6 EUR, valorile restului zilei după fiecare acțiune, învățate din 1.746 de zile de antrenare (2019–2023). Avantajul față de așteptare este mic, circa 8 EUR. Cu 1 MWh stocat, rîndul orelor celor mai ieftine de ieri încarcă în 7 ore și descarcă în 8, mai ales de la ora 18:00 încolo: ora zilei domină, ca în curs. Cu 0 MWh agentul poate doar să încarce sau să aștepte, cu 2 MWh doar să descarce sau să aștepte (mascarea acțiunilor). Tabelul are 24 × 4 × 3 = 288 de stări și poate fi tipărit și auditat.</p></details>
+</section>
+<section class="blk" id="battery-test">
+  <h3>Anii de test: cît din venitul cu previziune perfectă se obține</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L10_battery_test_cum_ro.jpg" alt="Slide-ul 25: Anii de test: cît din venitul cu previziune perfectă se obține" loading="lazy"></a>
+      <figcaption>Slide-ul 25</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bt-k"><span class="lbl">Strategii</span><div class="tgs"><label class="tg"><input type="checkbox" name="bt-k" value="pf" checked> previziune perfectă</label><label class="tg"><input type="checkbox" name="bt-k" value="dqn" checked> DQN dublu</label><label class="tg"><input type="checkbox" name="bt-k" value="q" checked> Q-learning tabelar</label><label class="tg"><input type="checkbox" name="bt-k" value="nv" checked> planul optim de ieri</label></div></div><div class="ctl"><label for="bt-seed">Agenții care învață</label><select id="bt-seed"><option value="avg" selected>Media celor 5 valori inițiale</option><option value="0">Valoarea inițială 1 (20261108)</option><option value="1">Valoarea inițială 2 (20261109)</option><option value="2">Valoarea inițială 3 (20261110)</option><option value="3">Valoarea inițială 4 (20261111)</option><option value="4">Valoarea inițială 5 (20261112)</option></select></div><div class="ctl"><label for="bt-v">Scala</label><select id="bt-v"><option value="cum" selected>venit cumulat (mii EUR)</option><option value="cap">% din venitul cu previziune perfectă</option></select></div><div class="ctl"><label for="bt-m">Începutul ferestrei: <b id="bt-m-v"></b></label><input type="range" id="bt-m" min="0" max="21" step="1" value="0"></div><button class="btn play" id="bt-play" type="button"></button></div><div class="charts one"><div class="chart" id="bt-chart"></div></div><ul class="out" id="bt-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_battery_test_cum" target="_blank" rel="noopener">NN_L10_battery_test_cum</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_battery_test_cum/NN_L10_battery_test_cum.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> În cele 638 de zile de test, 1 ianuarie 2025 – 24 octombrie 2026, cine obține o parte mai mare din venitul cu previziune perfectă: rețeaua Q profundă (DQN) dublă, Q-learning tabelar sau simpla repetare a planului optim de ieri?</div>
+  <details><summary>Răspuns</summary><p>Planul de ieri: 163,1 mii EUR, adică 80,7% din limita superioară de 202,1 mii EUR. Q-learning tabelar obține 115,2 mii EUR (57,0%), iar DQN dublu 101,3 mii EUR (50,1%, media a 5 valori inițiale; alegeți valorile inițiale pe rînd pentru a vedea cît diferă). DQN depășește planul naiv doar în 9% din zile. Agenții care învață văd un rezumat grosier al zilei de ieri (quartilele prețurilor și cîteva variabile), planul naiv vede întregul profil orar de ieri, iar prețurile sînt puternic autocorelate de la o zi la alta: un reper simplu este greu de depășit.</p></details>
+</section><h2 class="sec" id="s-pol">Gradienți de politică: optimizarea proximală a politicii (PPO) în tranzacționare</h2>
+<section class="blk" id="trading">
+  <h3>Perioada de test: agentul PPO față de două reguli simple</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L10_trading_equity_ro.jpg" alt="Slide-ul 33: Perioada de test: agentul PPO față de două reguli simple" loading="lazy"></a>
+      <figcaption>Slide-ul 33</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="tq-k"><span class="lbl">Strategii</span><div class="tgs"><label class="tg"><input type="checkbox" name="tq-k" value="bh" checked> cumpără și păstrează</label><label class="tg"><input type="checkbox" name="tq-k" value="ma" checked> media mobilă de 200 de zile</label><label class="tg"><input type="checkbox" name="tq-k" value="ppo" checked> agentul PPO</label></div></div><div class="ctl"><label for="tq-seed">Agentul PPO</label><select id="tq-seed"><option value="avg" selected>Media celor 5 valori inițiale</option><option value="0">Valoarea inițială 1 (20261108)</option><option value="1">Valoarea inițială 2 (20261109)</option><option value="2">Valoarea inițială 3 (20261110)</option><option value="3">Valoarea inițială 4 (20261111)</option><option value="4">Valoarea inițială 5 (20261112)</option></select></div><div class="ctl"><label for="tq-c">Costul unei tranzacții (puncte de bază, pb): <b id="tq-c-v"></b></label><input type="range" id="tq-c" min="0" max="30" step="1" value="5"></div><div class="ctl"><label for="tq-y">Începutul ferestrei de test (1 ianuarie): <b id="tq-y-v"></b></label><input type="range" id="tq-y" min="2020" max="2026" step="1" value="2020"></div><button class="btn play" id="tq-play" type="button"></button></div><div class="charts one"><div class="chart" id="tq-eq"></div><div class="chart" id="tq-ex"></div></div><ul class="out" id="tq-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_trading_equity" target="_blank" rel="noopener">NN_L10_trading_equity</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_trading_equity/NN_L10_trading_equity.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Cu un cost de 5 puncte de bază (pb) pe tranzacție, agentul de optimizare proximală a politicii (PPO) are un raport Sharpe mai mare decît strategia cumpără și păstrează în 2020–2026 (0,83 față de 0,61, media celor cinci valori inițiale). Rezistă avantajul la costuri mai mari sau la un început mai tîrziu?</div>
+  <details><summary>Răspuns</summary><p>Doar parțial. La 20 pb, media rapoartelor Sharpe ale valorilor inițiale scade la 0,63, la nivelul strategiei cumpără și păstrează (0,61); la 30 pb este 0,50, iar două valori inițiale care tranzacționează des coboară la 0,02 și 0,07. Cu începere din 2023, cumpără și păstrează are raportul Sharpe 1,23, față de 1,04 pentru PPO la 5 pb: avantajul vine din 2020 și 2022, cînd agentul a stat parțial în afara pieței (graficul expunerii). Valorile inițiale diferă (de la 0,72 la 0,95 la 5 pb), iar intervalul bootstrap pe blocuri al diferenței de raport Sharpe din curs, de la −0,08 la 0,56, conține zero. Un singur test retrospectiv al unui agent RL nu dovedește abilitate.</p></details>
+</section><h2 class="sec" id="s-hed">Acoperirea neuronală a unei opțiuni call vîndute</h2>
+<section class="blk" id="hedging">
+  <h3>Rezultatul acoperirii pe traiectoriile de test</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=40" target="_blank" rel="noopener"><img src="slides/L10_hedge_pnl_ro.jpg" alt="Slide-ul 40: Rezultatul acoperirii pe traiectoriile de test" loading="lazy"></a>
+      <figcaption>Slide-ul 40</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="hg-k"><span class="lbl">Strategii</span><div class="tgs"><label class="tg"><input type="checkbox" name="hg-k" value="nh" checked> fără acoperire</label><label class="tg"><input type="checkbox" name="hg-k" value="bs" checked> delta Black-Scholes</label><label class="tg"><input type="checkbox" name="hg-k" value="dh" checked> acoperire neuronală</label></div></div><div class="ctl"><label for="hg-seed">Acoperirea neuronală</label><select id="hg-seed"><option value="avg" selected>Media celor 5 valori inițiale</option><option value="0">Valoarea inițială 1 (20261108)</option><option value="1">Valoarea inițială 2 (20261109)</option><option value="2">Valoarea inițială 3 (20261110)</option><option value="3">Valoarea inițială 4 (20261111)</option><option value="4">Valoarea inițială 5 (20261112)</option></select></div><div class="ctl"><label for="hg-r">Volatilitatea la începutul lunii (VIX)</label><select id="hg-r"><option value="all" selected>toate zilele de început</option><option value="lo">VIX sub 20</option><option value="hi">VIX de cel puțin 20</option></select></div><div class="ctl"><label for="hg-a">Nivelul pierderii așteptate în coadă (ES): <b id="hg-a-v"></b></label><input type="range" id="hg-a" min="90" max="99" step="1" value="95"></div><button class="btn play" id="hg-play" type="button"></button></div><div class="charts "><div class="chart" id="hg-hist"></div><div class="chart" id="hg-es"></div></div><ul class="out" id="hg-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_hedge_pnl" target="_blank" rel="noopener">NN_L10_hedge_pnl</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_hedge_pnl/NN_L10_hedge_pnl.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Un dealer vinde o opțiune call la bani pe o lună pe S&P 500 și o acoperă zilnic, cu costuri de 10 pb. Cu cît reduce acoperirea neuronală pierderea așteptată în coadă (ES, expected shortfall) față de delta Black-Scholes și este cîștigul același pe piețe calme și pe piețe agitate?</div>
+  <details><summary>Răspuns</summary><p>Pe cele 1.696 de traiectorii de test (zile de început 2020–2026), ES de 95% al pierderii este 6,82% din nivelul indicelui fără acoperire, 1,94% cu delta Black-Scholes și 1,15% cu acoperirea neuronală (media a 5 valori inițiale). Abaterile standard sînt apropiate (0,74% și 0,69%): rețeaua a fost antrenată să micșoreze coada, nu varianța. Cîștigul este mai mare în perioadele agitate: cu VIX sub 20 la început (986 de traiectorii), ES scade de la 1,41% la 1,01%, cu VIX de cel puțin 20 (710 traiectorii) de la 2,60% la 1,31%. La 99%, ES este 4,09% față de 2,43%.</p></details>
+</section>
+<p class="src foot">Prețuri orare pentru ziua următoare: OPCOM (România), HUPX (Ungaria), EPEX (Germania–Luxemburg), IBEX (Bulgaria), prin energy-charts.info (Fraunhofer ISE); orele de livrare în ora Europei Centrale (CET/CEST), zile cu 24 de ore complete; din octombrie 2025, fiecare oră este media a patru prețuri pe 15 minute. S&P 500 și indicele de volatilitate Cboe (VIX): Yahoo Finance, prețuri zilnice de închidere. Agenții au fost antrenați o singură dată de lectures/L10/analysis_L10.py (cinci valori inițiale, 20261108–20261112); pagina reia deciziile lor din perioada de test și recalculează programarea dinamică, costurile și măsurile de risc. Date pînă la data-limită a cursului, 31 octombrie 2026.</p>
+</main>
+</body>
+</html>

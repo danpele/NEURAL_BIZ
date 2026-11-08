@@ -1,0 +1,25 @@
+// Readouts of the Lecture 4 interactive page, written by lectures/L4/build_interactive_L4.py.
+window.LK_TEXT = {
+ es: ['Annual crop', 'Forest', 'Herbaceous vegetation', 'Highway', 'Industrial', 'Pasture', 'Permanent crop', 'Residential', 'River', 'Sea/lake'], fm: ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot'],
+ input: c => `Input: ${c} (64 × 64, grey levels)`, output: (k, n) => `Output of the filter: ${n} × ${n}`,
+ kname: { sx: 'vertical edges', sy: 'horizontal edges', lap: 'outlines', blur: 'mean 3 × 3', sharp: 'sharpen', id: 'identity' },
+ cv: (n, p, s, o) => `Output size ⌊(${n} + 2·${p} − 3) / ${s}⌋ + 1 = <b>${o}</b> pixels per side; the filter has 9 weights + 1 bias, used at all ${o * o} positions.`,
+ cvK: k => `Kernel: ${k}`,
+ layers: 'Convolutional layers', rfY: 'Receptive field (pixels)', plain: '3 × 3 convolutions, stride 1', this: 'chosen design',
+ rfTile: 'Receptive field on a 64 × 64 tile (10 m per pixel)',
+ rf: (l, r, m, w) => `After ${l} layers one neuron sees <b>${r} × ${r} pixels</b> (${m} m × ${m} m on the ground); weights per channel pair in each layer: ${w}.`,
+ rfFull: 'The receptive field covers the whole tile.',
+ img: c => `Test image: ${c}`, map: (b, c, n) => `Block ${b === 'b1' ? 1 : 3}, channel ranked ${c} (${n} × ${n})`,
+ fmOut: (c, p, t) => `Prediction of the CNN: <b>${c}</b> (${p}); next: ${t}.`, fmMap: (ch, mx) => `Channel no. ${ch} of the layer; its largest activation on this image is ${mx}.`,
+ pred: 'Predicted class', truth: 'True class', cmTitle: (m, a) => `${m}: confusion matrix, 10,000 test images (accuracy ${a})`,
+ models: { softmax: 'Softmax regression', mlp: 'MLP', cnn: 'CNN' },
+ cm: (c, r, n, t, tn) => `${c}: recall <b>${r}</b> (${n} of 1,000 test images); most frequent error: ${t} (${tn} images).`,
+ cm2: (p) => `Parameters of the model: ${p}.`,
+ cfNames: { cnn: 'Small CNN, no augmentation', cnn_aug: 'Small CNN, augmentation', plain32: 'Plain, 32 layers', res32: 'ResNet, 32 layers' },
+ cfY: { train_loss: 'Training loss', train_acc: 'Training accuracy (%)', valid_acc: 'Validation accuracy (%)' }, epoch: 'Epoch',
+ cf: (m, t, p, tr, va, l) => `${m}: test accuracy <b>${t}</b>, ${p} parameters; after 12 epochs training accuracy ${tr}, validation ${va}, training loss ${l}.`,
+ tlNames: { scratch: 'CNN from scratch', probe: 'Frozen ResNet-18 + logistic', finetune: 'Fine-tuned ResNet-18' },
+ tlHist: 'Full training set: validation accuracy (%)', tlBudget: 'Test accuracy (%) by label budget', epochs: 'Epochs', perClass: 'Labelled tiles per class (log scale)',
+ acc: 'Accuracy (%)', seeds: 'one seed',
+ tl: (m, n, a, lo, hi) => `${m}: <b>${a}</b> with ${n} tiles per class (2 seeds: ${lo} and ${hi}).`, tl0: (n, t) => `${n} labelled tiles per class = ${t} tiles in all (full training set: 16,200).`
+};

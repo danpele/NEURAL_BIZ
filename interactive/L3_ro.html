@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 3 · Regularizare și generalizare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 3 · Regularizare și generalizare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L3.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L3_data.js?v=20261108s", "L3_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L3.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 3 · Regularizare și generalizare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L3/lecture3_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L3.html" class="lang-btn">EN</a><a href="L3_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Curbele sînt antrenările reale din curs, salvate epocă cu epocă; controalele aleg antrenarea afișată și momentul în care o opriți.</p>
+<p class="toc"><a href="#s-gen">Supraajustare și generalizare</a> · <a href="#s-reg">Oprirea timpurie</a> · <a href="#s-eval">Validarea și costul erorilor</a></p>
+<h2 class="sec" id="s-gen">Supraajustare și generalizare</h2>
+<section class="blk" id="overfitting">
+  <h3>Fără regularizare, un MLP mare memorează 600 de solicitanți în cîteva epoci</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=6" target="_blank" rel="noopener"><img src="slides/L3_overfit_german_ro.jpg" alt="Slide-ul 6: Fără regularizare, un MLP mare memorează 600 de solicitanți în cîteva epoci" loading="lazy"></a>
+      <figcaption>Slide-ul 6</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ov-p">Dropout (proporția de neuroni opriți): <b id="ov-p-v"></b></label><input type="range" id="ov-p" min="0" max="2" step="1" value="0"></div><div class="ctl"><label for="ov-w">Penalizarea ponderilor (weight decay): <b id="ov-w-v"></b></label><input type="range" id="ov-w" min="0" max="2" step="1" value="0"></div><div class="ctl"><label for="ov-e">Oprim antrenarea după epoca: <b id="ov-e-v"></b></label><input type="range" id="ov-e" min="1" max="150" step="1" value="150"></div><button class="btn play" id="ov-play" type="button"></button></div><div class="charts "><div class="chart" id="ov-loss"></div><div class="chart" id="ov-auc"></div></div><ul class="out" id="ov-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_overfit_german" target="_blank" rel="noopener">NN_L3_overfit_german</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_overfit_german/NN_L3_overfit_german.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Un MLP cu 78.593 de parametri este antrenat pe 600 de solicitanți timp de 150 de epoci. Pierderea pe validare explodează; devine modelul și mai slab la ordonarea solicitanților?</div>
+  <details><summary>Răspuns</summary><p>Nu prea. Fără regularizare, entropia încrucișată pe validare este minimă la epoca 3 (0,536, sub regresia logistică, 0,570) și crește la 2,187 pînă la epoca 150, în timp ce pierderea de antrenare scade la 0,0001: rețeaua memorează solicitanții de antrenare și devine prea sigură pe ea. AUC pe validare, care privește doar ordonarea, trece de la 0,730 la epoca 3 la 0,780 la epoca 150 (regresia logistică: 0,760). O penalizare a ponderilor de 1 ține pierderea finală pe validare la 1,08; dropout-ul singur ajută puțin. Probabilitățile (pentru stabilirea dobînzii, a provizioanelor) sînt afectate de supraajustare mult mai mult decît ordonarea; de aceea cursul le raportează pe amîndouă.</p></details>
+</section>
+<section class="blk" id="double-descent">
+  <h3>După pragul de interpolare, mai mulți neuroni ascunși reduc din nou eroarea</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=8" target="_blank" rel="noopener"><img src="slides/L3_double_descent_ro.jpg" alt="Slide-ul 8: După pragul de interpolare, mai mulți neuroni ascunși reduc din nou eroarea" loading="lazy"></a>
+      <figcaption>Slide-ul 8</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="dd-p">Neuroni ascunși p (caracteristici ReLU aleatoare): <b id="dd-p-v"></b></label><input type="range" id="dd-p" min="0" max="17" step="1" value="2"></div><div class="ctl ctl-tg" id="dd-s"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="dd-s" value="draws" checked> Cele 10 extrageri pentru p ales</label></div></div><button class="btn play" id="dd-play" type="button"></button></div><div class="charts one"><div class="chart" id="dd-chart"></div></div><ul class="out" id="dd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_double_descent" target="_blank" rel="noopener">NN_L3_double_descent</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_double_descent/NN_L3_double_descent.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Caracteristici ReLU aleatoare pe 400 de grupuri de locuințe din California: ce se întîmplă cu MSE pe test cînd numărul de caracteristici ajunge la numărul de observații, p = n = 400?</div>
+  <details><summary>Răspuns</summary><p>Explodează: MSE mediană pe test este de aproximativ 1.019.219 la p = 400, pentru că ajustarea prin cele mai mici pătrate trebuie să interpoleze fiecare punct de antrenare cu un sistem prost condiționat. Sub prag, cel mai bun este p = 50 (0,781); peste prag, soluția de normă minimă devine din nou mai netedă, iar MSE pe test coboară la 0,932 la p = 8.000: „a doua coborîre”. MSE de antrenare este zero de la p = 400 încolo. Curba clasică în U deplasare–varianță și regimul modern supraparametrizat sînt două jumătăți ale aceleiași curbe.</p></details>
+</section><h2 class="sec" id="s-reg">Oprirea timpurie</h2>
+<section class="blk" id="early-stopping">
+  <h3>La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L3_early_stopping_ro.jpg" alt="Slide-ul 17: La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade" loading="lazy"></a>
+      <figcaption>Slide-ul 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="es-p">Răbdarea (epoci fără îmbunătățire înainte de oprire): <b id="es-p-v"></b></label><input type="range" id="es-p" min="1" max="60" step="1" value="20"></div><button class="btn play" id="es-play" type="button"></button></div><div class="charts "><div class="chart" id="es-loss"></div><div class="chart" id="es-ap"></div></div><ul class="out" id="es-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_early_stopping" target="_blank" rel="noopener">NN_L3_early_stopping</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_early_stopping/NN_L3_early_stopping.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Cu o răbdare de 20 de epoci, la ce epocă se oprește antrenarea pe datele de fraudă și ce ponderi se păstrează?</div>
+  <details><summary>Răspuns</summary><p>Pierderea pe validare este minimă la epoca 4 (0,0159); cu răbdarea 20, antrenarea se oprește la epoca 24 și restabilește ponderile epocii 4. PR-AUC pe validare al acestora este 0,763, față de 0,697 dacă am continua pînă la epoca 120. Răbdarea 1 oprește prea devreme (epoca 3, păstrînd epoca 2, PR-AUC 0,741); orice răbdare între 2 și 60 păstrează aici epoca 4. Răbdarea schimbă timp de calcul contra riscului de a ne opri pe o scădere zgomotoasă.</p></details>
+</section><h2 class="sec" id="s-eval">Validarea și costul erorilor</h2>
+<section class="blk" id="holdout-noise">
+  <h3>O singură împărțire aleatoare poate muta AUC cu cîteva puncte</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L3_holdout_noise_ro.jpg" alt="Slide-ul 23: O singură împărțire aleatoare poate muta AUC cu cîteva puncte" loading="lazy"></a>
+      <figcaption>Slide-ul 23</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ho-s">Proporția setului de test: <b id="ho-s-v"></b></label><input type="range" id="ho-s" min="0" max="3" step="1" value="2"></div><button class="btn play" id="ho-play" type="button"></button></div><div class="charts one"><div class="chart" id="ho-chart"></div></div><ul class="out" id="ho-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_holdout_noise" target="_blank" rel="noopener">NN_L3_holdout_noise</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_holdout_noise/NN_L3_holdout_noise.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Doi analiști evaluează aceeași regresie logistică pe German credit, cu împărțiri aleatoare 70/30 diferite. Cît de diferite pot fi AUC-urile lor pe test?</div>
+  <details><summary>Răspuns</summary><p>Foarte diferite: pe 200 de împărțiri aleatoare, AUC variază între 0,702 și 0,842 (media 0,780, abaterea standard 0,024). Cu un set de test de 10% (100 de solicitanți, circa 30 de neplăți), abaterea standard se dublează la 0,047; cu 50% scade la 0,019, dar modelul este antrenat pe mai puțini solicitanți (AUC mediu 0,767). O diferență de 0,01–0,02 AUC între două modele, pe un singur set mic de test, este zgomot; avem nevoie de validare încrucișată repetată sau de un test pe perechi.</p></details>
+</section>
+<section class="blk" id="fraud-cost">
+  <h3>Numărul potrivit de alerte salvează cea mai mare parte din pierderi</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L3_fraud_cost_ro.jpg" alt="Slide-ul 32: Numărul potrivit de alerte salvează cea mai mare parte din pierderi" loading="lazy"></a>
+      <figcaption>Slide-ul 32</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fc-r">Costul verificării unei alerte (EUR): <b id="fc-r-v"></b></label><input type="range" id="fc-r" min="1" max="50" step="1" value="5"></div><div class="ctl"><label for="fc-a">Alerte trimise la verificare (ponderat, scară logaritmică): <b id="fc-a-v"></b></label><input type="range" id="fc-a" min="1" max="3.6" step="0.02" value="1.8"></div><div class="ctl ctl-tg" id="fc-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="fc-m" value="logit" checked> Regresia logistică</label><label class="tg"><input type="checkbox" name="fc-m" value="mlp" checked> MLP regularizat</label><label class="tg"><input type="checkbox" name="fc-m" value="xgb" checked> XGBoost</label></div></div><button class="btn play" id="fc-play" type="button"></button></div><div class="charts one"><div class="chart" id="fc-chart"></div></div><ul class="out" id="fc-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_fraud_cost" target="_blank" rel="noopener">NN_L3_fraud_cost</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_fraud_cost/NN_L3_fraud_cost.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> O fraudă ratată costă valoarea ei; fiecare alertă costă o verificare manuală. Cu un cost de verificare de 5 EUR, cîte alerte ar trebui să trimită banca și care model este cel mai ieftin?</div>
+  <details><summary>Răspuns</summary><p>Fără model, toate fraudele din setul de test sînt pierdute: 7.729 EUR. Cu un cost de verificare de 5 EUR, MLP regularizat ajunge la minimul de 2.694 EUR, cu aproximativ 59 de alerte ponderate; XGBoost este practic egal (2.695 EUR), iar regresia logistică costă 3.093 EUR, la circa 142 de alerte. Creșteți costul verificării: fiecare model trimite mai puține alerte și lasă să treacă mai multe fraude mici, iar diferența dintre modele crește. Pragul este un parametru de afaceri, stabilit de costul fiecărei erori, nu de model.</p></details>
+</section>
+<p class="src foot">Date: UCI Statlog German credit (1.000 de solicitanți; 600 de antrenare, 200 de validare, 200 de test), tranzacțiile cu carduri ULB și Worldline (OpenML 1597; toate cele 492 de fraude și un eșantion de 10% din tranzacțiile legitime, ponderate înapoi la cele 284.807 tranzacții din cele două zile; împărțire cronologică 60/20/20), locuințele din California (StatLib, recensămîntul din 1990). Modelele, împărțirile și semințele (20261108 + s) sînt cele din curs (analysis_L3.py): perceptroni multistrat (MLP) antrenați cu AdamW (Adam cu penalizarea ponderilor decuplată); PR-AUC = aria de sub curba precizie-sensibilitate.</p>
+</main>
+</body>
+</html>

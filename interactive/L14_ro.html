@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 14 · Modele multimodale și vizual-lingvistice</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 14 · Modele multimodale și vizual-lingvistice">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L14.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261108s", "L14_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L14.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 14 · Modele multimodale și vizual-lingvistice</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L14/lecture14_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L14.html" class="lang-btn">EN</a><a href="L14_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din rezultatele cursului cînd modificați un control. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Modele: CLIP (preantrenare contrastivă limbaj–imagine) ViT-B/32 și ViT-B/16, unde ViT este un transformer pentru imagini; Qwen2-VL-2B, un model vizual-lingvistic (VLM); o rețea neuronală convoluțională (CNN) antrenată de la zero.</p>
+<p class="toc"><a href="#s-vit">Transformere pentru imagini</a> · <a href="#s-clip">CLIP: imagini și text în același spațiu</a> · <a href="#s-vlm">Modele vizual-lingvistice: citirea graficelor</a></p>
+<h2 class="sec" id="s-vit">Transformere pentru imagini</h2>
+<section class="blk" id="vit-patches">
+  <h3>Petice și atenție pe imagini EuroSAT reale</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=10" target="_blank" rel="noopener"><img src="slides/L14_vit_patches_attention_ro.jpg" alt="Slide-ul 10: Petice și atenție pe imagini EuroSAT reale" loading="lazy"></a>
+      <figcaption>Slide-ul 10</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vp-i">Imaginea de test</label><select id="vp-i"><option value="0">Culturi anuale</option><option value="1">Pădure</option><option value="2">Vegetație ierboasă</option><option value="3" selected>Autostradă</option><option value="4">Zonă industrială</option><option value="5">Pășune</option><option value="6">Culturi permanente</option><option value="7">Zonă rezidențială</option><option value="8">Rîu</option><option value="9">Mare sau lac</option></select></div><div class="ctl"><label for="vp-p">Mărimea peticului (pixeli din imaginea de 224 × 224): <b id="vp-p-v"></b></label><input type="range" id="vp-p" min="0" max="5" step="1" value="2"></div><div class="ctl ctl-tg" id="vp-v"><span class="lbl">Ce vede modelul</span><div class="tgs"><label class="tg"><input type="radio" name="vp-v" value="grid" checked> Imaginea cu grila de petice</label><label class="tg"><input type="radio" name="vp-v" value="mean"> Media de culoare a fiecărui petic</label></div></div><div class="ctl"><label for="vp-a">Opacitatea hărții de atenție (%): <b id="vp-a-v"></b></label><input type="range" id="vp-a" min="0" max="100" step="5" value="45"></div></div><div class="charts "><div class="chart" id="vp-img"></div><div class="chart" id="vp-att"></div></div><ul class="out" id="vp-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_vit_patches_attention" target="_blank" rel="noopener">NN_L14_vit_patches_attention</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_vit_patches_attention/NN_L14_vit_patches_attention.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> CLIP ViT-B/16 împarte imaginea de 224 × 224 de pixeli în petice de 16 × 16. Cîți tokeni citește transformerul și ce se întîmplă cu costul atenției dacă peticele se înjumătățesc la 8 × 8?</div>
+  <details><summary>Răspuns</summary><p>14 × 14 = 196 de tokeni-petic plus un token de clasă, în total 197 (cifrele din curs: 12 straturi, 12 capete de atenție, lățimea 768). Cu petice de 8 × 8, grila are 28 × 28 = 784 de tokeni, de patru ori mai mulți, iar autoatenția compară fiecare token cu toți ceilalți, deci costul ei crește de circa 16 ori. Alegeți „media de culoare a fiecărui petic”: cu petice mari, un drum sau un rîu dispare într-un singur token; de aceea detaliile mici cer petice mici. Harta de atenție arată unde se uită tokenul de clasă după toate cele 12 straturi (propagarea atenției, attention rollout).</p></details>
+</section><h2 class="sec" id="s-clip">CLIP: imagini și text în același spațiu</h2>
+<section class="blk" id="zero-shot">
+  <h3>Predicțiile zero-shot pe opt imagini de test alese aleator</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_examples_ro.jpg" alt="Slide-ul 15: Predicțiile zero-shot pe opt imagini de test alese aleator" loading="lazy"></a>
+      <figcaption>Slide-ul 15</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="zs-i">Imaginea de test</label><select id="zs-i"><option value="0" selected>Culturi anuale · 1</option><option value="1">Culturi anuale · 2</option><option value="2">Culturi anuale · 3</option><option value="3">Pădure · 1</option><option value="4">Pădure · 2</option><option value="5">Pădure · 3</option><option value="6">Vegetație ierboasă · 1</option><option value="7">Vegetație ierboasă · 2</option><option value="8">Vegetație ierboasă · 3</option><option value="9">Autostradă · 1</option><option value="10">Autostradă · 2</option><option value="11">Autostradă · 3</option><option value="12">Zonă industrială · 1</option><option value="13">Zonă industrială · 2</option><option value="14">Zonă industrială · 3</option><option value="15">Pășune · 1</option><option value="16">Pășune · 2</option><option value="17">Pășune · 3</option><option value="18">Culturi permanente · 1</option><option value="19">Culturi permanente · 2</option><option value="20">Culturi permanente · 3</option><option value="21">Zonă rezidențială · 1</option><option value="22">Zonă rezidențială · 2</option><option value="23">Zonă rezidențială · 3</option><option value="24">Rîu · 1</option><option value="25">Rîu · 2</option><option value="26">Rîu · 3</option><option value="27">Mare sau lac · 1</option><option value="28">Mare sau lac · 2</option><option value="29">Mare sau lac · 3</option></select></div><div class="ctl"><label for="zs-m">Modelul</label><select id="zs-m"><option value="B32">CLIP ViT-B/32</option><option value="B16" selected>CLIP ViT-B/16</option></select></div><div class="ctl"><label for="zs-t">Promptul (șablonul textului)</label><select id="zs-t"><option value="name">Numele dosarului („AnnualCrop”)</option><option value="photo">„a photo of {class}.”</option><option value="sat">„a satellite photo of {class}.”</option><option value="ens" selected>Media a 5 șabloane satelitare</option></select></div><div class="ctl"><label for="zs-s">Scala logiților (inversul temperaturii): <b id="zs-s-v"></b></label><input type="range" id="zs-s" min="1" max="200" step="1" value="100"></div></div><div class="charts "><div class="chart" id="zs-img"></div><div class="chart" id="zs-bar"></div></div><ul class="out" id="zs-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_examples" target="_blank" rel="noopener">NN_L14_zeroshot_examples</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_zeroshot_examples/NN_L14_zeroshot_examples.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> CLIP nu a fost antrenat niciodată pe EuroSAT. Cum poate clasifica aceste imagini și ce schimbă scala logiților?</div>
+  <details><summary>Răspuns</summary><p>Fiecare clasă devine o propoziție („a centered satellite photo of forest.”); imaginea este atribuită clasei a cărei propoziție are embedding-ul cu cea mai mare similaritate cosinus față de embedding-ul imaginii. Cosinusurile sînt apropiate între ele (între circa 0,2 și 0,3), de aceea funcția softmax le înmulțește cu o scală, 100 în CLIP. Scala nu schimbă clasa prezisă, ci doar cît de sigure par probabilitățile: la scala 1, fiecare clasă primește circa 10%, la 200 clasa de pe primul loc ia aproape tot. Pe toate cele 5.400 de imagini de test, cea mai bună variantă, ViT-B/16 cu 5 șabloane, are dreptate în 56,4% din cazuri; 5 din cele 8 imagini de pe slide sînt corecte.</p></details>
+</section>
+<section class="blk" id="confusion">
+  <h3>Unde greșește zero-shot: utilizări ale terenului care arată la fel</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_confusion_ro.jpg" alt="Slide-ul 16: Unde greșește zero-shot: utilizări ale terenului care arată la fel" loading="lazy"></a>
+      <figcaption>Slide-ul 16</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Modelul</label><select id="cm-m"><option value="B32">CLIP ViT-B/32</option><option value="B16" selected>CLIP ViT-B/16</option></select></div><div class="ctl"><label for="cm-t">Promptul (șablonul textului)</label><select id="cm-t"><option value="name">Numele dosarului („AnnualCrop”)</option><option value="photo">„a photo of {class}.”</option><option value="sat">„a satellite photo of {class}.”</option><option value="ens" selected>Media a 5 șabloane satelitare</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Celulele arată</span><div class="tgs"><label class="tg"><input type="radio" name="cm-n" value="row" checked> Procente pe rînd</label><label class="tg"><input type="radio" name="cm-n" value="n"> Numărul de imagini</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_confusion" target="_blank" rel="noopener">NN_L14_zeroshot_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_zeroshot_confusion/NN_L14_zeroshot_confusion.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Ce utilizări ale terenului confundă CLIP în regim zero-shot și ajută un prompt mai bun?</div>
+  <details><summary>Răspuns</summary><p>Cu ViT-B/16 și 5 șabloane, 399 din cele 600 de imagini cu mare sau lac sînt numite autostradă, iar culturile permanente sînt recunoscute doar în 18,6% din cazuri, în timp ce zonele industriale (93,6%) și cele rezidențiale (92,3%) sînt aproape mereu corecte. Promptul contează mult: simplul nume al dosarului dă 34,1% (ViT-B/32) și 42,4% (ViT-B/16), media a 5 șabloane satelitare 49,1% și 56,4%. Cuvintele care descriu imaginea ca fotografie din satelit apropie embedding-ul textului de acest tip de imagine.</p></details>
+</section>
+<section class="blk" id="text-search">
+  <h3>Căutarea imaginilor cu ajutorul cuvintelor: aceleași embedding-uri, folosite invers</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L14_text_search_ro.jpg" alt="Slide-ul 17: Căutarea imaginilor cu ajutorul cuvintelor: aceleași embedding-uri, folosite invers" loading="lazy"></a>
+      <figcaption>Slide-ul 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ts-c">Căutarea (clasa din prompt)</label><select id="ts-c"><option value="0" selected>Culturi anuale</option><option value="1">Pădure</option><option value="2">Vegetație ierboasă</option><option value="3">Autostradă</option><option value="4">Zonă industrială</option><option value="5">Pășune</option><option value="6">Culturi permanente</option><option value="7">Zonă rezidențială</option><option value="8">Rîu</option><option value="9">Mare sau lac</option></select></div><div class="ctl"><label for="ts-k">Numărul de imagini returnate, k: <b id="ts-k-v"></b></label><input type="range" id="ts-k" min="10" max="1000" step="10" value="100"></div><div class="ctl ctl-tg" id="ts-a"><span class="lbl">Comparație</span><div class="tgs"><label class="tg"><input type="checkbox" name="ts-a" value="avg" checked> Media celor 10 căutări</label></div></div></div><div class="charts one"><div class="chart" id="ts-chart"></div></div><div class="thumbs" id="ts-thumbs" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"></div><ul class="out" id="ts-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_text_search" target="_blank" rel="noopener">NN_L14_text_search</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_text_search/NN_L14_text_search.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Aceleași embedding-uri pot fi folosite invers: scrieți o descriere și regăsiți imagini. Este căutarea „annual crop land” la fel de sigură ca „industrial buildings”?</div>
+  <details><summary>Răspuns</summary><p>Nu. Dintre cele 100 de imagini cele mai apropiate de prompt, 99% sînt industriale pentru căutarea zonelor industriale, dar doar 20% sînt culturi anuale pentru căutarea culturilor anuale și 21% pentru mare sau lac; media celor 10 căutări este 58,9%. Modificați k: precizia scade de regulă pe măsură ce sînt returnate mai multe imagini și nu poate rămîne 100% cînd k depășește numărul imaginilor de test din clasă (între 400 și 600, dat în sinteză). Un motor de căutare pe arhiva de imagini satelitare a unei bănci ar trebui verificat clasă cu clasă.</p></details>
+</section>
+<section class="blk" id="few-shot">
+  <h3>Trăsăturile preantrenate cîștigă cu puține etichete; o CNN antrenată cîștigă cu multe</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L14_fewshot_eurosat_ro.jpg" alt="Slide-ul 19: Trăsăturile preantrenate cîștigă cu puține etichete; o CNN antrenată cîștigă cu multe" loading="lazy"></a>
+      <figcaption>Slide-ul 19</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fs-k">Imagini etichetate pe clasă: <b id="fs-k-v"></b></label><input type="range" id="fs-k" min="0" max="7" step="1" value="4"></div><div class="ctl ctl-tg" id="fs-s"><span class="lbl">Serii</span><div class="tgs"><label class="tg"><input type="checkbox" name="fs-s" value="probe" checked> CLIP + regresie logistică</label><label class="tg"><input type="checkbox" name="fs-s" value="cnn" checked> CNN antrenată de la zero</label><label class="tg"><input type="checkbox" name="fs-s" value="zs" checked> CLIP zero-shot (fără etichete)</label></div></div></div><div class="charts one"><div class="chart" id="fs-chart"></div></div><ul class="out" id="fs-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_fewshot_eurosat" target="_blank" rel="noopener">NN_L14_fewshot_eurosat</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_fewshot_eurosat/NN_L14_fewshot_eurosat.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> De cîte imagini etichetate pe clasă este nevoie pentru ca o rețea antrenată de la zero să întreacă o regresie logistică pe embedding-urile CLIP?</div>
+  <details><summary>Răspuns</summary><p>Cu puține etichete cîștigă reprezentările preantrenate: o imagine pe clasă dă 59,0% cu regresia pe CLIP, deja peste zero-shot (56,4%); cu 4 imagini pe clasă, regresia ajunge la 73,8% și CNN la 50,3%, cu 16 pe clasă la 84,7% față de 78,5%. La 64 pe clasă, CNN o ajunge din urmă (90,9% față de 90,1%), iar la 128 o depășește (94,1% față de 91,6%); pe toate cele 21.600 de imagini de antrenare, CNN atinge 97,4%, regresia 95,5%. Etichetele sînt scumpe: embedding-urile preantrenate sînt începutul ieftin, un model dedicat se justifică atunci cînd etichetele există.</p></details>
+</section><h2 class="sec" id="s-vlm">Modele vizual-lingvistice: citirea graficelor</h2>
+<section class="blk" id="chart-regime">
+  <h3>Din imagine sau din cifre? Detectarea crizelor de piață</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L14_chart_regime_ro.jpg" alt="Slide-ul 24: Din imagine sau din cifre? Detectarea crizelor de piață" loading="lazy"></a>
+      <figcaption>Slide-ul 24</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cr-m">Modelul</label><select id="cr-m"><option value="numeric" selected>Cifre + regresie logistică</option><option value="clip_probe">Imagine CLIP + regresie logistică</option><option value="clip_zs">CLIP zero-shot</option><option value="vlm_stress">Qwen2-VL zero-shot</option></select></div><div class="ctl"><label for="cr-a">Ferestre semnalate ca stres (% din test): <b id="cr-a-v"></b></label><input type="range" id="cr-a" min="2" max="40" step="1" value="10"></div></div><div class="charts "><div class="chart" id="cr-roc"></div><div class="chart" id="cr-time"></div></div><ul class="out" id="cr-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_chart_regime" target="_blank" rel="noopener">NN_L14_chart_regime</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_chart_regime/NN_L14_chart_regime.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Un model poate privi imaginea ultimelor 120 de zile ale indicelui S&P 500 sau patru cifre calculate din ea (randamente, volatilitate, scăderea față de maxim). Care detectează mai bine stresul?</div>
+  <details><summary>Răspuns</summary><p>Cifrele: aria de sub curba ROC (caracteristica de operare a receptorului), AUC, este 0,933 pentru regresia logistică pe cifre, 0,907 pentru CLIP zero-shot, 0,880 pentru regresia pe imaginea CLIP și 0,758 pentru Qwen2-VL zero-shot, pe 394 de ferestre de test, dintre care 8,4% de stres. Modificați ponderea ferestrelor semnalate: cu 10% din ferestre semnalate (39 de alarme), cifrele prind 21 din cele 33 de ferestre de stres, CLIP zero-shot 20, regresia pe imaginea CLIP 14, iar Qwen2-VL 11; pentru a prinde 25 dintre ele, modelul pe cifre are nevoie de 59 de alarme, Qwen2-VL de 191. Cînd cifrele din spatele unui grafic există, dați modelului cifrele; calea imaginii este pentru documentele în care există doar imaginea.</p></details>
+</section>
+<p class="src foot">Imagini: EuroSAT, imagini RGB Sentinel-2 ale utilizării terenului în Europa, 64 × 64 de pixeli, 10 clase (Helber et al., 2019); 21.600 de imagini de antrenare și 5.400 de test, împărțire fixată dinainte. Grafice de piață: prețurile zilnice de închidere ale indicelui S&P 500 (Yahoo Finance), ferestre de 120 de zile de tranzacționare la fiecare 5 zile, ferestrele de test din 2019 pînă în octombrie 2026. Modele deschise de pe Hugging Face; toate scorurile au fost calculate în curs (lectures/L14/analysis_L14.py), cu excepția embedding-urilor de text CLIP pentru cele 30 de imagini-exemplu și a propagării atenției pentru cele 10 imagini din primul bloc, recalculate cu aceleași modele pentru această pagină.</p>
+</main>
+</body>
+</html>

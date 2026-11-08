@@ -127,3 +127,6 @@ function safe(name, f) { try { f(); } catch (e) { console.error('NN block ' + na
 window.NNI = { LANG, C, SERIES, ZONE, DASH, MONTHS, sum, mean, sdev, quantile, median, finite, npdf, ncdf, nqnt, nf, pct, cnt, $, esc, AX, layout, ttl,
   CFG, plot, out, vline, hline, bindSlider, bindSelect, bindToggles, bindRadios, Player, range, safe };
 })();
+
+// left-hand menu on every page (assets/sidemenu.js)
+;(function () { var c = document.currentScript; if (!c || !c.src) return; var e = document.createElement('script'); e.src = new URL('../assets/sidemenu.js?v=20261108a', c.src).href; document.head.appendChild(e); })();

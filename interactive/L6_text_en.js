@@ -1,0 +1,25 @@
+// Readouts of the Lecture 6 interactive page, written by lectures/L6/build_interactive_L6.py.
+window.LK_TEXT = {
+ rank: 'Rank of the word', freq: 'Frequency (occurrences)', inVoc: 'in the vocabulary', outVoc: 'below the minimum count', fit: s => `fitted power law, slope ${s}`,
+ vocSize: 'Vocabulary size (words)', cover: 'Share of the text covered (%)', zfTitle: 'Rank–frequency of the words of the ECB speeches', covTitle: 'How much of the text a vocabulary covers',
+ zf: (m, v, n, c, oov) => `Minimum count ${m}: ${window.NNI.cnt(v, 'word', 'words')} in the vocabulary out of ${n}; they cover ${c} of the tokens, so ${oov} of the running text is out of vocabulary (OOV).`,
+ zf2: (t, s) => `Ten most frequent words: ${t}; together ${s} of all tokens.`,
+ cls: ['negative', 'neutral', 'positive'], contrib: 'β positive − β negative (log-odds per occurrence)', prob: 'Probability (%)', probTitle: 'Predicted class probabilities',
+ scTitle: 'Weight of each word of the sentence', notVoc: 'not in the vocabulary', empty: 'Type a sentence.',
+ sc: (c, p, lab) => `Prediction of the bag-of-words (BoW) logistic regression: ${c} (${p})` + (lab ? `; label of the annotators: ${lab}.` : '.'),
+ sc2: (n, k, oov) => `${window.NNI.cnt(n, 'token', 'tokens')}, ${k} of them in the vocabulary of the model (3,561 words seen at least twice in training)` + (oov ? `; not in the vocabulary: ${oov}.` : '.'),
+ sc3: r => `Removed as stop words: ${r}.`,
+ cos: 'Cosine similarity', shared: 'also in the other model’s list', own: 'only in this model',
+ nb: (w, f, k, s, list) => `“${w}” occurs ${window.NNI.cnt(f, 'time', 'times')} in the ECB speeches. Of the ${k} nearest neighbours, ${s} are shared by word2vec and GloVe: ${list}.`,
+ nbNone: 'none',
+ pc1: 'First principal component', pc2: 'Second principal component',
+ pc: (n, v, m) => `${window.NNI.cnt(n, 'word', 'words')}, ${m}: the two components keep ${v} of the variance of the vectors.`,
+ pcFew: 'Choose at least one group.',
+ trueC: 'Label of the annotators', predC: 'Predicted class', acc: 'Test accuracy (%)', lvl: { all: 'all', 50: '50%', 66: '66%', 75: '75%', 100: '100%' },
+ agTitle: 'Confusion matrix, 5 test sets pooled', accTitle: 'Accuracy by agreement of the annotators', majority: 'majority class', agX: 'Agreement of the annotators',
+ ag: (m, a, n, acc, maj) => `${m}, ${a === 'all' ? 'all test sentences' : 'sentences with ' + a + '% agreement'} (${n} over the 5 test sets): accuracy ${acc}; majority class ${maj}.`,
+ ag2: (r0, r1, r2) => `Recall: negative ${r0}, neutral ${r1}, positive ${r2}.`,
+ share: 'Share of the topic’s test tweets (%)', rowTitle: t => `Where the test tweets of “${t}” go`, f1: 'F1 on the test tweets (%)', f1Title: 'F1 by topic',
+ tp: (t, n, p, r, f) => `${t}: ${window.NNI.cnt(n, 'test tweet', 'test tweets')}; precision ${p}, recall ${r}, F1 ${f}.`,
+ tp2: (f, a) => `All 20 topics: macro-F1 ${f}, accuracy ${a}.`
+};

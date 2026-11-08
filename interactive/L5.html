@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 5 · Recurrent networks: RNN, LSTM and GRU for sequences and financial time series</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 5 · Recurrent networks: RNN, LSTM and GRU for sequences and financial time series">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L5.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_en.js?v=20261108s", "common.js?v=20261108s"], "L5.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 5 · Recurrent networks: RNN, LSTM and GRU for sequences and financial time series</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L5/lecture5.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L5.html" class="lang-btn active">EN</a><a href="L5_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the course data and the saved forecasts of the lecture when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. Choose a period, a market or a day and compare the recurrent networks with their benchmarks on the same days.</p>
+<p class="toc"><a href="#s-fin">Financial time series: what is predictable</a> · <a href="#s-load">Day-ahead electricity load in Romania</a></p>
+<h2 class="sec" id="s-fin">Financial time series: what is predictable</h2>
+<section class="blk" id="acf">
+  <h3>The memory is in the volatility, not in the returns</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L5_acf_abs_en.jpg" alt="Slide 7: The memory is in the volatility, not in the returns" loading="lazy"></a>
+      <figcaption>Slide 7</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ac-m">Market</label><select id="ac-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl ctl-tg" id="ac-t"><span class="lbl">Series</span><div class="tgs"><label class="tg"><input type="radio" name="ac-t" value="r"> returns rₜ</label><label class="tg"><input type="radio" name="ac-t" value="a" checked> absolute returns |rₜ|</label><label class="tg"><input type="radio" name="ac-t" value="s"> squared returns rₜ²</label></div></div><div class="ctl"><label for="ac-l">Lags shown (trading days): <b id="ac-l-v"></b></label><input type="range" id="ac-l" min="10" max="250" step="10" value="50"></div></div><div class="charts one"><div class="chart" id="ac-chart"></div></div><ul class="out" id="ac-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_acf_abs" target="_blank" rel="noopener">NN_L5_acf_abs</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_acf_abs/NN_L5_acf_abs.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> S&P 500 daily returns are almost uncorrelated, yet a recurrent network is used to forecast volatility. What does the autocorrelation of absolute returns show?</div>
+  <details><summary>Answer</summary><p>Returns themselves have a first-order autocorrelation of −0.119 and only 15 of the first 50 lags outside the ±0.026 band (1.96/√T for white noise). Absolute returns have ρ(1) = 0.315 and all 50 lags are significant, still 0.126 at lag 50: calm and turbulent periods cluster (volatility clustering). The size of tomorrow's move is predictable even if its sign is not, which is why task A of the lecture forecasts volatility. For Banca Transilvania the pattern is the same but weaker (|r|: ρ(1) = 0.227).</p></details>
+</section>
+<section class="blk" id="volatility">
+  <h3>In the 2020 crash the LSTM adapted faster than HAR</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L5_vol_forecast_en.jpg" alt="Slide 25: In the 2020 crash the LSTM adapted faster than HAR" loading="lazy"></a>
+      <figcaption>Slide 25</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vf-s">Start of the window: <b id="vf-s-v"></b></label><input type="range" id="vf-s" min="0" max="81" step="1" value="0"></div><div class="ctl"><label for="vf-n">Length of the window (months): <b id="vf-n-v"></b></label><input type="range" id="vf-n" min="1" max="82" step="1" value="12"></div><div class="ctl ctl-tg" id="vf-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="vf-m" value="naive"> Naive (yesterday)</label><label class="tg"><input type="checkbox" name="vf-m" value="har" checked> HAR</label><label class="tg"><input type="checkbox" name="vf-m" value="garch"> GARCH(1,1)</label><label class="tg"><input type="checkbox" name="vf-m" value="rnn"> RNN</label><label class="tg"><input type="checkbox" name="vf-m" value="lstm" checked> LSTM</label><label class="tg"><input type="checkbox" name="vf-m" value="gru"> GRU</label></div></div><button class="btn play" id="vf-play" type="button"></button></div><div class="charts one"><div class="chart" id="vf-chart"></div></div><ul class="out" id="vf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_vol_forecast" target="_blank" rel="noopener">NN_L5_vol_forecast</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_vol_forecast/NN_L5_vol_forecast.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Over the test period 2020–2026, the LSTM reduces the MSE of the log variance by 11.6% against HAR. Does it win in every sub-period?</div>
+  <details><summary>Answer</summary><p>Over the whole test the MSE is 0.966 for the naive forecast, 0.786 for GARCH, 0.706 for HAR and 0.625 for the LSTM (mean of 5 seeds; GRU 0.624, RNN 0.643). The gain is largest in the 2020 crash (20 February to 30 April: LSTM 0.521, HAR 1.014, GARCH 1.032): the network reacts faster to the jump in range volatility. In 2022 the ranking is the same but the gaps are smaller (0.585 against 0.623). Move the window: short windows give noisy rankings, which is why the lecture uses the Diebold–Mariano test on the whole test period (LSTM vs HAR: statistic −5.52).</p></details>
+</section>
+<section class="blk" id="returns">
+  <h3>Out of sample, return forecasts explain almost nothing</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L5_returns_r2_en.jpg" alt="Slide 29: Out of sample, return forecasts explain almost nothing" loading="lazy"></a>
+      <figcaption>Slide 29</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="rt-m">Market</label><select id="rt-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl"><label for="rt-s">LSTM</label><select id="rt-s"><option value="ens" selected>mean of the 5 seeds</option><option value="0">seed 1</option><option value="1">seed 2</option><option value="2">seed 3</option><option value="3">seed 4</option><option value="4">seed 5</option></select></div><div class="ctl ctl-tg" id="rt-k"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="rt-k" value="mean" checked> Training mean</label><label class="tg"><input type="checkbox" name="rt-k" value="ar" checked> AR(1)</label><label class="tg"><input type="checkbox" name="rt-k" value="lstm" checked> LSTM</label></div></div></div><div class="charts one"><div class="chart" id="rt-chart"></div></div><ul class="out" id="rt-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_returns_r2" target="_blank" rel="noopener">NN_L5_returns_r2</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_returns_r2/NN_L5_returns_r2.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> The AR(1) model has an out-of-sample R² of 2.4% on S&P 500 returns, more than the LSTM (0.8%). Where does this R² come from?</div>
+  <details><summary>Answer</summary><p>Almost entirely from the crash of February–April 2020: the AR(1) slope is −0.10 (reversals), and on those violent days it pays off. The cumulative curve jumps in March 2020 and then drifts sideways or down; outside 20 February – 30 April 2020 the AR(1) R² is −0.2%. The LSTM ensemble earns about two thirds of its gain in the same weeks. Its sign is right on 52.1% of the days (mean of the 5 seeds; 53.1% for their average forecast), below the share of up days (54.0%). On TLV the R² of all models is between 0.1% and 0.4%. Daily returns are close to unpredictable; a small positive R² is not a trading strategy.</p></details>
+</section><h2 class="sec" id="s-load">Day-ahead electricity load in Romania</h2>
+<section class="blk" id="load-days">
+  <h3>Two winter test weeks: forecasts against the observed load</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L5_load_fortnight_en.jpg" alt="Slide 34: Two winter test weeks: forecasts against the observed load" loading="lazy"></a>
+      <figcaption>Slide 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ld-d">First day shown: <b id="ld-d-v"></b></label><input type="range" id="ld-d" min="0" max="1034" step="1" value="385"></div><div class="ctl"><label for="ld-w">Window</label><select id="ld-w"><option value="1">one day</option><option value="7">one week</option><option value="14" selected>two weeks</option></select></div><div class="ctl ctl-tg" id="ld-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="ld-m" value="snaive" checked> Seasonal naive</label><label class="tg"><input type="checkbox" name="ld-m" value="ridge"> Ridge ARX</label><label class="tg"><input type="checkbox" name="ld-m" value="lstm" checked> LSTM</label><label class="tg"><input type="checkbox" name="ld-m" value="gru"> GRU</label></div></div><button class="btn play" id="ld-play" type="button"></button></div><div class="charts one"><div class="chart" id="ld-chart"></div></div><ul class="out" id="ld-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_load_fortnight" target="_blank" rel="noopener">NN_L5_load_fortnight</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_load_fortnight/NN_L5_load_fortnight.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> In the fortnight from 20 January 2025, which forecast follows the load best, and where does the seasonal naive fail?</div>
+  <details><summary>Answer</summary><p>Over these 14 days the MAPE is 6.0% for the seasonal naive forecast (same day of the previous week), 3.2% for the LSTM, 2.9% for the GRU and 2.6% for the ridge ARX. The naive forecast fails when the level changes from one week to the next (cold spells, holidays): it repeats last week's level. Over the whole test period (1,035 days) the MAPE is 6.79% (naive), 4.86% (ridge ARX), 5.81% (LSTM) and 5.17% (GRU). Scroll through the days around Christmas or Easter: every model misses holidays it has no input for.</p></details>
+</section>
+<section class="blk" id="load-errors">
+  <h3>On load, the linear ARX beats the recurrent networks</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=35" target="_blank" rel="noopener"><img src="slides/L5_load_errors_en.jpg" alt="Slide 35: On load, the linear ARX beats the recurrent networks" loading="lazy"></a>
+      <figcaption>Slide 35</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="le-f"><span class="lbl">Days</span><div class="tgs"><label class="tg"><input type="radio" name="le-f" value="all" checked> all</label><label class="tg"><input type="radio" name="le-f" value="wd"> weekdays (Mon–Fri)</label><label class="tg"><input type="radio" name="le-f" value="we"> weekend</label></div></div><div class="ctl"><label for="le-s">Season</label><select id="le-s"><option value="all" selected>whole year</option><option value="win">winter (Dec–Feb)</option><option value="spr">spring (Mar–May)</option><option value="sum">summer (Jun–Aug)</option><option value="aut">autumn (Sep–Nov)</option></select></div><div class="ctl ctl-tg" id="le-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="le-m" value="snaive" checked> Seasonal naive</label><label class="tg"><input type="checkbox" name="le-m" value="ridge" checked> Ridge ARX</label><label class="tg"><input type="checkbox" name="le-m" value="lstm" checked> LSTM</label><label class="tg"><input type="checkbox" name="le-m" value="gru" checked> GRU</label></div></div></div><div class="charts one"><div class="chart" id="le-chart"></div></div><ul class="out" id="le-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_load_errors" target="_blank" rel="noopener">NN_L5_load_errors</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_load_errors/NN_L5_load_errors.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> At which hours of the day are the day-ahead forecasts worst, and are weekends harder than weekdays?</div>
+  <details><summary>Answer</summary><p>The errors peak in the late morning (around 10:00–11:00 UTC), when the ramp-up of demand and the output of rooftop solar make the net load hardest to predict: 681 MW for the naive forecast, 537 MW for the ridge ARX, 581 MW for the LSTM. Weekends are not harder: the MAE of the LSTM is 342 MW on weekdays and 303 MW on weekends. Over all test days the ridge ARX has the lowest MAE (269 MW, against 293 MW for the GRU, 331 MW for the LSTM and 396 MW for the naive forecast): a linear model with the right lags is a hard benchmark for a recurrent network.</p></details>
+</section>
+<p class="src foot">Data: S&P 500 daily open, high, low and close (Yahoo Finance, January 2005 to October 2026), Banca Transilvania (TLV) adjusted closes (EODHD, Bucharest Stock Exchange, from 2008), Romanian hourly electricity load (energy-charts.info, from ENTSO-E data, 2016 to October 2026, hours in UTC = coordinated universal time). Test periods: 2020 to October 2026 (markets), 2024 to October 2026 (load). Forecasts of the recurrent neural networks (RNN), long short-term memory (LSTM) and gated recurrent unit (GRU) networks are the saved runs of the lecture (analysis_L5.py, seeds 20261108 + s); HAR = heterogeneous autoregressive model, GARCH = generalised autoregressive conditional heteroskedasticity, ARX = autoregressive model with exogenous inputs, MSE = mean squared error, MAE = mean absolute error, MAPE = mean absolute percentage error.</p>
+</main>
+</body>
+</html>

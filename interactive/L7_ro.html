@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 7 · Atenția și transformerele</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 7 · Atenția și transformerele">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L7.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261108s", "L7_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L7.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 7 · Atenția și transformerele</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L7/lecture7_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L7.html" class="lang-btn">EN</a><a href="L7_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser cînd modificați un control. Hărțile de atenție sînt cele ale modelului preantrenat FinBERT (BERT, Bidirectional Encoder Representations from Transformers, antrenat suplimentar pe texte financiare) pe tweet-uri reale de test; rezultatele modelelor sînt cele din studiul de caz al cursului (2.388 de tweet-uri de test, trei clase: pesimist, optimist, neutru). Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="toc"><a href="#s-why">De ce atenția</a> · <a href="#s-mech">Mecanismul atenției</a> · <a href="#s-arch">Arhitectura transformer</a> · <a href="#s-case">Studiu de caz: sentimentul tweet-urilor financiare</a></p>
+<h2 class="sec" id="s-why">De ce atenția</h2>
+<section class="blk" id="context-lengths">
+  <h3>Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L7_context_lengths_ro.jpg" alt="Slide-ul 7: Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni" loading="lazy"></a>
+      <figcaption>Slide-ul 7</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Corpusul</label><select id="cl-c"><option value="tweets">Tweet-uri financiare</option><option value="phrasebank">Financial PhraseBank</option><option value="speeches" selected>Discursuri BCE</option></select></div><div class="ctl"><label for="cl-w">Fereastra de context (tokeni, 2^k): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="5" max="15" step="1" value="9"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-hist"></div><div class="chart" id="cl-cdf"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_context_lengths" target="_blank" rel="noopener">NN_L7_context_lengths</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_context_lengths/NN_L7_context_lengths.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> BERT citește cel mult 512 tokeni. Care dintre cele trei corpusuri încape și ce înseamnă costul pătratic al atenției pentru un discurs BCE?</div>
+  <details><summary>Răspuns</summary><p>Tweet-urile (mediana 25 de tokeni, maximum 82) și frazele din Financial PhraseBank (mediana 28) încap ușor; 98,8% dintre cele 400 de discursuri BCE au mai mult de 512 tokeni (mediana 3.338). Atenția compară fiecare token cu toți ceilalți, deci costul crește cu n²: un discurs median costă aproximativ (3.338/25)² ≈ 17.800 de tweet-uri mediane. Documentele lungi sînt de aceea tăiate în ferestre sau citite cu modele construite pentru contexte lungi.</p></details>
+</section><h2 class="sec" id="s-mech">Mecanismul atenției</h2>
+<section class="blk" id="attention-map">
+  <h3>La ce este atent FinBERT într-un tweet negativ real</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L7_attention_example_ro.jpg" alt="Slide-ul 13: La ce este atent FinBERT într-un tweet negativ real" loading="lazy"></a>
+      <figcaption>Slide-ul 13</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="am-t">Tweet-ul (setul de test)</label><select id="am-t"><option value="0" selected>BTIG points to breakfast pressure for Dunkin' Brands (observat: pesimist)</option><option value="1">Netflix downgraded to underperform at Wells Fargo (observat: pesimist)</option><option value="2">Lowe's to shut 34 Canadian stores as it reports revenue miss (observat: pesimist)</option><option value="3">Morgan Stanley sees GM doubling in bull case scenario (observat: optimist)</option><option value="4">JMP Securities upgrades snap to outperform with $20 pt (observat: optimist)</option><option value="5">Fed's Mester says central bank can watch and wait on interest rates (observat: neutru)</option><option value="6">Little impact on Netflix from Disney Plus launch - Credit Suisse (observat: neutru)</option></select></div><div class="ctl"><label for="am-l">Stratul FinBERT: <b id="am-l-v"></b></label><input type="range" id="am-l" min="1" max="12" step="1" value="12"></div><div class="ctl"><label for="am-q">Tokenul care întreabă (query): <b id="am-q-v"></b></label><input type="range" id="am-q" min="0" max="12" step="1" value="0"></div><button class="btn play" id="am-play" type="button"></button></div><div class="charts "><div class="chart" id="am-map"></div><div class="chart" id="am-row"></div></div><ul class="out" id="am-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_attention_example" target="_blank" rel="noopener">NN_L7_attention_example</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_attention_example/NN_L7_attention_example.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> În ultimul strat, la ce cuvînt se uită tokenul [CLS] (tokenul-rezumat folosit la clasificare) în „BTIG points to breakfast pressure for Dunkin' Brands”? Este aceasta explicația predicției?</div>
+  <details><summary>Răspuns</summary><p>În stratul 12, [CLS] își împarte atenția între „points”, „to”, „pressure” și „breakfast” (circa 14–17% fiecare); în stratul 6 pune 66% pe [SEP]. Multe capete își „parchează” atenția pe [SEP] cînd nu au nimic util de făcut. FinBERT clasifică tweet-ul ca neutru (75%), deși eticheta lui este pesimist: ponderile atenției arată pe unde circulă informația, nu de ce decide modelul, deci nu sînt o explicație.</p></details>
+</section>
+<section class="blk" id="softmax-temperature">
+  <h3>De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=14" target="_blank" rel="noopener"><img src="slides/L7_attention_entropy_ro.jpg" alt="Slide-ul 14: De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori" loading="lazy"></a>
+      <figcaption>Slide-ul 14</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="st-c">Împărțitorul scorurilor: c · √d_k, c =: <b id="st-c-v"></b></label><input type="range" id="st-c" min="-3" max="3" step="0.25" value="0"></div><div class="ctl"><label for="st-l">Stratul: <b id="st-l-v"></b></label><input type="range" id="st-l" min="1" max="12" step="1" value="6"></div><div class="ctl"><label for="st-h">Capul de atenție</label><select id="st-h"><option value="0" selected>capul 1</option><option value="1">capul 2</option><option value="2">capul 3</option><option value="3">capul 4</option><option value="4">capul 5</option><option value="5">capul 6</option><option value="6">capul 7</option><option value="7">capul 8</option><option value="8">capul 9</option><option value="9">capul 10</option><option value="10">capul 11</option><option value="11">capul 12</option></select></div><div class="ctl"><label for="st-q">Tokenul care întreabă (query): <b id="st-q-v"></b></label><input type="range" id="st-q" min="0" max="12" step="1" value="0"></div><button class="btn play" id="st-play" type="button"></button></div><div class="charts "><div class="chart" id="st-row"></div><div class="chart" id="st-ent"></div></div><ul class="out" id="st-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_attention_entropy" target="_blank" rel="noopener">NN_L7_attention_entropy</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_attention_entropy/NN_L7_attention_entropy.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> De ce împărțim scorurile query-key la √d_k = 8 înainte de softmax? Mutați c sub 1 și peste 1.</div>
+  <details><summary>Răspuns</summary><p>Produsul scalar a doi vectori cu 64 de dimensiuni are o împrăștiere care crește cu √d_k; fără împărțire, softmax se saturează: un singur token primește aproape toată ponderea, iar gradienții celorlalți dispar. Cu c = 1/8 (2^−3), cele mai multe rînduri pun aproape toată ponderea pe un token; cu c = 8 devin aproape uniforme (entropie / log n aproape de 1). Pe cele 500 de tweet-uri de test din curs, entropia normalizată scade de la 0,76 în stratul 1 la 0,36 în stratul 8.</p></details>
+</section><h2 class="sec" id="s-arch">Arhitectura transformer</h2>
+<section class="blk" id="positional-encoding">
+  <h3>Atenția ignoră ordinea; codificarea poziției o readuce</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L7_positional_encoding_ro.jpg" alt="Slide-ul 17: Atenția ignoră ordinea; codificarea poziției o readuce" loading="lazy"></a>
+      <figcaption>Slide-ul 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="pe-t">Poziția tokenului t: <b id="pe-t-v"></b></label><input type="range" id="pe-t" min="0" max="63" step="1" value="10"></div><div class="ctl"><label for="pe-i">Perechea de dimensiuni i (dimensiunile 2i și 2i+1): <b id="pe-i-v"></b></label><input type="range" id="pe-i" min="0" max="31" step="1" value="2"></div><button class="btn play" id="pe-play" type="button"></button></div><div class="charts "><div class="chart" id="pe-map"></div><div class="chart" id="pe-sim"></div></div><ul class="out" id="pe-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_positional_encoding" target="_blank" rel="noopener">NN_L7_positional_encoding</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_positional_encoding/NN_L7_positional_encoding.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Atenția singură nu vede ordinea cuvintelor. Cum deosebește codificarea sinusoidală poziția 10 de poziția 11?</div>
+  <details><summary>Răspuns</summary><p>Fiecare poziție primește un vector de 64 de sinusuri și cosinusuri, cu lungimi de undă de la 2π pînă la circa 2π·10.000^(62/64): primele perechi se schimbă repede, ultimele încet, ca acele unui ceas. Produsul scalar a doi vectori de poziție este maxim cînd pozițiile coincid și scade cu distanța, deci pozițiile apropiate seamănă. În studiul de caz, adăugarea pozițiilor în transformerul mic crește macro-F1 cu 0,9 puncte (intervalul de 95%: 0,1 – 1,7).</p></details>
+</section><h2 class="sec" id="s-case">Studiu de caz: sentimentul tweet-urilor financiare</h2>
+<section class="blk" id="model-comparison">
+  <h3>Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L7_model_comparison_ro.jpg" alt="Slide-ul 26: Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF" loading="lazy"></a>
+      <figcaption>Slide-ul 26</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="mc-a">Modelul A</label><select id="mc-a"><option value="tfidf">TF-IDF + regresie logistică</option><option value="embbag">Medie de embedding-uri</option><option value="tiny_nopos">Transformer mic, fără poziții</option><option value="tiny">Transformer mic</option><option value="finbert_zs">FinBERT fără antrenare</option><option value="finbert_probe">FinBERT înghețat + logistic</option><option value="finbert_ft" selected>FinBERT ajustat</option></select></div><div class="ctl"><label for="mc-b">Modelul B</label><select id="mc-b"><option value="tfidf" selected>TF-IDF + regresie logistică</option><option value="embbag">Medie de embedding-uri</option><option value="tiny_nopos">Transformer mic, fără poziții</option><option value="tiny">Transformer mic</option><option value="finbert_zs">FinBERT fără antrenare</option><option value="finbert_probe">FinBERT înghețat + logistic</option><option value="finbert_ft">FinBERT ajustat</option></select></div><div class="ctl"><label for="mc-r">Replicări bootstrap: <b id="mc-r-v"></b></label><input type="range" id="mc-r" min="200" max="2000" step="200" value="1000"></div><button class="btn play" id="mc-play" type="button"></button></div><div class="charts "><div class="chart" id="mc-bar"></div><div class="chart" id="mc-boot"></div></div><ul class="out" id="mc-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_model_comparison" target="_blank" rel="noopener">NN_L7_model_comparison</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_model_comparison/NN_L7_model_comparison.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> FinBERT ajustat depășește TF-IDF + regresie logistică cu aproximativ 9 puncte de macro-F1. Este mai mult decît zgomotul unui set de test de 2.388 de tweet-uri?</div>
+  <details><summary>Răspuns</summary><p>Da. Reeșantionarea tweet-urilor de test (bootstrap pereche pe predicțiile cu sămînța 1) dă o diferență de circa 9 puncte, cu un interval de 95% de aproximativ 7 – 11 puncte, care nu conține zero (în curs, media pe trei semințe: 9,3, intervalul 7,3 – 11,3). FinBERT înghețat + logistic față de TF-IDF dă un interval în jurul lui zero (în curs: −0,2, de la −2,5 la 2,0): un model mare preantrenat, folosit fără ajustare, nu este automat mai bun.</p></details>
+</section>
+<section class="blk" id="data-scaling">
+  <h3>Cu puține date etichetate, reprezentările preantrenate contează cel mai mult</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L7_data_scaling_ro.jpg" alt="Slide-ul 29: Cu puține date etichetate, reprezentările preantrenate contează cel mai mult" loading="lazy"></a>
+      <figcaption>Slide-ul 29</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ds-n">Tweet-uri de antrenare (pasul din curs): <b id="ds-n-v"></b></label><input type="range" id="ds-n" min="0" max="4" step="1" value="0"></div><div class="ctl ctl-tg" id="ds-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="ds-m" value="tfidf" checked> TF-IDF + regresie logistică</label><label class="tg"><input type="checkbox" name="ds-m" value="tiny" checked> Transformer mic</label><label class="tg"><input type="checkbox" name="ds-m" value="probe" checked> FinBERT înghețat + logistic</label></div></div><button class="btn play" id="ds-play" type="button"></button></div><div class="charts "><div class="chart" id="ds-line"></div><div class="chart" id="ds-bar"></div></div><ul class="out" id="ds-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_data_scaling" target="_blank" rel="noopener">NN_L7_data_scaling</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_data_scaling/NN_L7_data_scaling.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Cu numai 429 de tweet-uri etichetate, ce model ați folosi?</div>
+  <details><summary>Răspuns</summary><p>FinBERT înghețat cu o regresie logistică deasupra: 70,4% macro-F1 cu 429 de tweet-uri, față de 52,1% pentru TF-IDF și 43,3% pentru transformerul mic antrenat de la zero. Preantrenarea aduce cunoașterea limbii pe care datele puține nu o pot oferi. Cu toate cele 8.588 de tweet-uri, TF-IDF ajunge din urmă (75,5% față de 75,3%), iar transformerul mic rămîne în urmă (69,7%).</p></details>
+</section>
+<p class="src foot">Tweet-uri: Twitter financial news sentiment (Hugging Face, zeroshot), setul de validare publicat folosit ca set de test. Financial PhraseBank: Malo et al. (2014). Discursuri: Banca Centrală Europeană (BCE), 8 ianuarie 2022 – 30 octombrie 2026. Tokeni: tokenizatorul WordPiece al modelului ProsusAI/finbert. Atenția: ProsusAI/finbert, 12 straturi × 12 capete, d_k = 64. Rezultatele modelelor, predicțiile de test (sămînța 1) și învățarea cu mai puține date: estimări proprii din curs (lectures/L7/results). Codificarea poziției: formula din Vaswani et al. (2017).</p>
+</main>
+</body>
+</html>

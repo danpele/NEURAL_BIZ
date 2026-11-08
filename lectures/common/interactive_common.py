@@ -35,7 +35,7 @@ OUT = os.path.join(ROOT, 'interactive')
 DATA = os.path.join(ROOT, 'data', 'clean')
 QLROOT = os.path.join(ROOT, 'Quantlets')
 PLOTLY = 'https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js'
-V = '20261108a'
+V = '20261108s'
 GH = 'https://github.com/danpele/NEURAL_BIZ'
 COLAB = 'https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main'
 
@@ -152,7 +152,7 @@ def latex_text(t):
     for _ in range(3):
         t = re.sub(r'\\(?:textbf|textit|emph|mathrm|mathbf|text|textsc|textsf|texttt|boldsymbol|mbox|alert|textcolor\{[^{}]*\})'
                    r'\{((?:[^{}]|\{[^{}]*\})*)\}', r'\1', t)
-    t = t.replace('\\ ', ' ').replace('---', '—').replace('--', '–').replace(r'\%', '%').replace(r'\&', '&').replace(r'\_', '_')
+    t = t.replace('\\,', '\u2009').replace('\\ ', ' ').replace('---', '—').replace('--', '–').replace(r'\%', '%').replace(r'\&', '&').replace(r'\_', '_')
     t = t.replace(r'\#', '#').replace('~', ' ').replace('``', '“').replace("''", '”').replace(r'\ldots', '…').replace('$', '')
     t = re.sub(r'\\[a-zA-Z]+\s*', '', t).replace('{', '').replace('}', '').replace('^', '').replace('_', '')
     return re.sub(r'\s+', ' ', t).strip()
@@ -356,7 +356,7 @@ def build(sp, argv=None):
 
 if __name__ == '__main__':
     import subprocess
-    for kk in range(1, 8):
+    for kk in range(1, 15):
         f = os.path.join(ROOT, 'lectures', f'L{kk}', f'build_interactive_L{kk}.py')
         if os.path.exists(f):
             subprocess.run([sys.executable, f] + sys.argv[1:], check=True)

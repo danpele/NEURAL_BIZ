@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 9 · Rețele neuronale pe grafuri</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 9 · Rețele neuronale pe grafuri">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L9.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261108s", "L9_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L9.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 9 · Rețele neuronale pe grafuri</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L9/lecture9_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L9.html" class="lang-btn">EN</a><a href="L9_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">Rețelele neuronale pe grafuri (GNN, graph neural networks) învață din vecinii fiecărui nod. În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din graful Bitcoin Elliptic și din scorurile modelelor din curs cînd modificați un control: rețeaua convoluțională pe graf (GCN, graph convolutional network), eșantionarea și agregarea pe graf (GraphSAGE, graph sample and aggregate), rețeaua cu atenție pe graf (GAT, graph attention network), perceptronul multistrat (MLP, multilayer perceptron), regresia logistică și pădurea aleatoare, testate pentru combaterea spălării banilor (AML, anti-money laundering). Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="toc"><a href="#s-why">De ce grafuri pentru criminalitatea financiară</a> · <a href="#s-mp">Transmiterea mesajelor</a> · <a href="#s-case">Studiu de caz: tranzacții Bitcoin ilicite</a></p>
+<h2 class="sec" id="s-why">De ce grafuri pentru criminalitatea financiară</h2>
+<section class="blk" id="homophily">
+  <h3>Tranzacțiile ilicite stau lîngă alte tranzacții ilicite</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=9" target="_blank" rel="noopener"><img src="slides/L9_homophily_ro.jpg" alt="Slide-ul 9: Tranzacțiile ilicite stau lîngă alte tranzacții ilicite" loading="lazy"></a>
+      <figcaption>Slide-ul 9</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="hm-s">Pasul de timp: <b id="hm-s-v"></b></label><input type="range" id="hm-s" min="1" max="49" step="1" value="29"></div><div class="ctl"><label for="hm-m">Măsura</label><select id="hm-m"><option value="node" selected>Ponderea vecinilor ilicite, pe clase</option><option value="edge">Muchii care leagă aceeași clasă</option></select></div><button class="btn play" id="hm-play" type="button"></button></div><div class="charts "><div class="chart" id="hm-bar"></div><div class="chart" id="hm-line"></div></div><ul class="out" id="hm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_homophily" target="_blank" rel="noopener">NN_L9_homophily</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_homophily/NN_L9_homophily.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Pe întregul graf, 51,0% dintre vecinii etichetați ai unei tranzacții ilicite sînt ilicite, față de 1,8% pentru o tranzacție licită. Este acest tipar la fel de puternic în fiecare pas de timp?</div>
+  <details><summary>Răspuns</summary><p>Nu. Modificați pasul de timp: în pasul 29, vîrful perioadei de antrenare, ponderea este 86,2% (276 de tranzacții ilicite cu vecini etichetați), în pasul 9 este 25,4%, iar în cîțiva pași este 0. Homofilia muchiilor pe întregul graf este 95,4%, față de 82,4% dacă etichetele ar fi atribuite aleator. Homofilia este semnalul pe care îl exploatează o rețea GNN, iar intensitatea ei variază în timp: încă un motiv pentru a testa în ordine cronologică.</p></details>
+</section><h2 class="sec" id="s-mp">Transmiterea mesajelor</h2>
+<section class="blk" id="message-passing">
+  <h3>Fiecare strat lărgește vecinătatea care ajunge la un nod</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L9_receptive_field_ro.jpg" alt="Slide-ul 18: Fiecare strat lărgește vecinătatea care ajunge la un nod" loading="lazy"></a>
+      <figcaption>Slide-ul 18</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="mp-g">Vecinătatea reală (2 pași în jurul tranzacției)</label><select id="mp-g"><option value="0" selected>Tranzacția 96957326 (ilicită, pasul 40)</option><option value="1">Tranzacția 98079154 (ilicită, pasul 40)</option><option value="2">Tranzacția 97732178 (licită, pasul 40)</option></select></div><div class="ctl"><label for="mp-x">Semnalul transmis</label><select id="mp-x"><option value="lab" selected>Etichetele cunoscute (1 = ilicit, 0 = licit)</option><option value="f53">Variabila f53, standardizată (cea mai importantă pentru pădure)</option></select></div><div class="ctl"><label for="mp-k">Runde de transmitere a mesajelor, k: <b id="mp-k-v"></b></label><input type="range" id="mp-k" min="0" max="6" step="1" value="0"></div><button class="btn play" id="mp-play" type="button"></button></div><div class="charts "><div class="chart" id="mp-graph"></div><div class="chart" id="mp-hops"></div></div><ul class="out" id="mp-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_receptive_field" target="_blank" rel="noopener">NN_L9_receptive_field</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_receptive_field/NN_L9_receptive_field.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> În jurul tranzacției 96957326 există doar 3 vecini direcți. Cîte tranzacții pot influența reprezentarea ei după 4 runde de transmitere a mesajelor?</div>
+  <details><summary>Răspuns</summary><p>1.259 de tranzacții (numărare exactă în graful complet): 3 după o rundă, 27 după două, 283 după trei și 3.081 după șase. Eșantionul din curs, de 2.000 de tranzacții de test, are o mediană de 2, 11, 87 și 325 de noduri după 1–4 runde. Cu etichetele cunoscute ca semnal, ponderea etichetelor ilicite în centru, ponderată după grad, scade de la 1,00 (k = 0) la 0,68 (k = 4) și 0,56 (k = 6): cu cît mesajele ajung mai departe, cu atît centrul seamănă mai mult cu media unei vecinătăți mari.</p></details>
+</section>
+<section class="blk" id="over-smoothing">
+  <h3>Prea multe straturi fac toate nodurile să semene: suprasmoothing-ul (over-smoothing)</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L9_oversmoothing_ro.jpg" alt="Slide-ul 19: Prea multe straturi fac toate nodurile să semene: suprasmoothing-ul (over-smoothing)" loading="lazy"></a>
+      <figcaption>Slide-ul 19</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="os-L">Numărul de straturi GCN: <b id="os-L-v"></b></label><input type="range" id="os-L" min="1" max="6" step="1" value="1"></div><div class="ctl ctl-tg" id="os-s"><span class="lbl">Rularea</span><div class="tgs"><label class="tg"><input type="radio" name="os-s" value="mean" checked> Media celor 2 semințe</label><label class="tg"><input type="radio" name="os-s" value="1"> Sămînța 1</label><label class="tg"><input type="radio" name="os-s" value="2"> Sămînța 2</label></div></div><button class="btn play" id="os-play" type="button"></button></div><div class="charts "><div class="chart" id="os-perf"></div><div class="chart" id="os-cos"></div></div><ul class="out" id="os-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_oversmoothing" target="_blank" rel="noopener">NN_L9_oversmoothing</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_oversmoothing/NN_L9_oversmoothing.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Dacă două straturi GCN văd mai mult din graf decît unul, de ce aria de sub curba precizie-recall (PR-AUC) de test scade cu mai multe straturi?</div>
+  <details><summary>Răspuns</summary><p>Fiecare strat face media unui nod cu vecinii săi, așa că reprezentările ajung să semene. În medie pe 2 semințe, rețeaua GCN antrenată are PR-AUC 0,504 cu un strat, 0,458 cu două și 0,371 cu șase, iar similaritatea cosinus medie a reprezentărilor crește de la 0,57 la 0,96. Panoul din dreapta repetă doar medierea, fără ponderi antrenate: similaritatea cosinus a celor 165 de variabile propagate crește de la 0,29 (variabilele brute) la 0,56 după 3 runde și 0,69 după 10. Sămînța 1 și sămînța 2 diferă, de aceea cursul raportează medii.</p></details>
+</section><h2 class="sec" id="s-case">Studiu de caz: tranzacții Bitcoin ilicite</h2>
+<section class="blk" id="pr-curves">
+  <h3>Curbele precizie-recall: ordonarea din spatele lui F1</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L9_pr_curves_ro.jpg" alt="Slide-ul 29: Curbele precizie-recall: ordonarea din spatele lui F1" loading="lazy"></a>
+      <figcaption>Slide-ul 29</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="pr-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="pr-m" value="lr_local"> Regresie logistică, variabile locale</label><label class="tg"><input type="checkbox" name="pr-m" value="lr_all" checked> Regresie logistică, toate variabilele</label><label class="tg"><input type="checkbox" name="pr-m" value="rf" checked> Pădure aleatoare</label><label class="tg"><input type="checkbox" name="pr-m" value="mlp"> MLP (fără graf)</label><label class="tg"><input type="checkbox" name="pr-m" value="gcn" checked> GCN</label><label class="tg"><input type="checkbox" name="pr-m" value="sage" checked> GraphSAGE</label><label class="tg"><input type="checkbox" name="pr-m" value="gat"> GAT</label><label class="tg"><input type="checkbox" name="pr-m" value="rf_emb"> Pădure aleatoare + reprezentări GCN</label></div></div><div class="ctl"><label for="pr-t">Pragul de alertă pe scor: <b id="pr-t-v"></b></label><input type="range" id="pr-t" min="0.01" max="0.99" step="0.01" value="0.5"></div><button class="btn play" id="pr-play" type="button"></button></div><div class="charts one"><div class="chart" id="pr-chart"></div></div><ul class="out" id="pr-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_pr_curves" target="_blank" rel="noopener">NN_L9_pr_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_pr_curves/NN_L9_pr_curves.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> La pragul 0,5, pădurea aleatoare semnalează mult mai puține tranzacții decît regresia logistică. Care dintre ele este un sistem de alertă mai bun?</div>
+  <details><summary>Răspuns</summary><p>La pragul 0,5, regresia logistică pe toate variabilele găsește 77,1% dintre tranzacțiile ilicite de test (recall), dar numai 22,0% dintre alertele ei sînt ilicite (precizie); pădurea aleatoare găsește 72,5%, cu o precizie de 92,7%. Curba arată întregul compromis: cu scorurile mediate pe semințe, aria de sub ea este 0,785 pentru pădure, 0,499 pentru GCN, 0,596 pentru GraphSAGE și 0,311 pentru regresia logistică, față de o rată de bază de 6,5%. Modificați pragul: pădurea rămîne deasupra celorlalte modele la aproape orice recall.</p></details>
+</section>
+<section class="blk" id="drift">
+  <h3>Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L9_f1_by_timestep_ro.jpg" alt="Slide-ul 32: Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului" loading="lazy"></a>
+      <figcaption>Slide-ul 32</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="fd-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="fd-m" value="lr_local"> Regresie logistică, variabile locale</label><label class="tg"><input type="checkbox" name="fd-m" value="lr_all" checked> Regresie logistică, toate variabilele</label><label class="tg"><input type="checkbox" name="fd-m" value="rf" checked> Pădure aleatoare</label><label class="tg"><input type="checkbox" name="fd-m" value="mlp"> MLP (fără graf)</label><label class="tg"><input type="checkbox" name="fd-m" value="gcn" checked> GCN</label><label class="tg"><input type="checkbox" name="fd-m" value="sage"> GraphSAGE</label><label class="tg"><input type="checkbox" name="fd-m" value="gat"> GAT</label><label class="tg"><input type="checkbox" name="fd-m" value="rf_emb" checked> Pădure aleatoare + reprezentări GCN</label></div></div><div class="ctl"><label for="fd-t">Pragul de alertă pe scor: <b id="fd-t-v"></b></label><input type="range" id="fd-t" min="0.05" max="0.95" step="0.05" value="0.5"></div><button class="btn play" id="fd-play" type="button"></button></div><div class="charts one"><div class="chart" id="fd-chart"></div></div><ul class="out" id="fd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_f1_by_timestep" target="_blank" rel="noopener">NN_L9_f1_by_timestep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_f1_by_timestep/NN_L9_f1_by_timestep.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Înainte de pasul 43, pădurea aleatoare are un F1 mediu (media armonică a preciziei și a recall-ului) de 0,898 pe clasa ilicită. Ar salva-o un prag de alertă mai mic după închiderea pieței ilegale?</div>
+  <details><summary>Răspuns</summary><p>Nu. Din pasul 43, F1 mediu al pădurii este 0,048 la pragul 0,5 și 0,015 la pragul 0,2; rețeaua GCN scade de la 0,473 la 0,000 la pragul 0,5. Un prag mai mic adaugă alarme false, dar nu găsește noul tip de fluxuri ilicite, pe care niciun model antrenat pe pașii 1–34 nu le văzuse. Doar regresia logistică păstrează puțin recall (F1 mediu 0,151 după pasul 43 la pragul 0,2), cu prețul multor alerte false. Schimbarea conceptului se corectează prin reantrenare pe etichete recente, nu prin mutarea pragului.</p></details>
+</section>
+<section class="blk" id="alert-budget">
+  <h3>Ce obține o echipă de investigații din 1.000 de alerte</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L9_alert_budget_ro.jpg" alt="Slide-ul 33: Ce obține o echipă de investigații din 1.000 de alerte" loading="lazy"></a>
+      <figcaption>Slide-ul 33</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ab-k">Alerte verificate (scorurile cele mai mari): <b id="ab-k-v"></b></label><input type="range" id="ab-k" min="25" max="3000" step="25" value="1000"></div><div class="ctl"><label for="ab-m">Modelul pentru alertele pe pași</label><select id="ab-m"><option value="lr_local">Regresie logistică, variabile locale</option><option value="lr_all">Regresie logistică, toate variabilele</option><option value="rf" selected>Pădure aleatoare</option><option value="mlp">MLP (fără graf)</option><option value="gcn">GCN</option><option value="sage">GraphSAGE</option><option value="gat">GAT</option><option value="rf_emb">Pădure aleatoare + reprezentări GCN</option></select></div><button class="btn play" id="ab-play" type="button"></button></div><div class="charts "><div class="chart" id="ab-curve"></div><div class="chart" id="ab-step"></div></div><ul class="out" id="ab-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_alert_budget" target="_blank" rel="noopener">NN_L9_alert_budget</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_alert_budget/NN_L9_alert_budget.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> O echipă de investigații poate verifica 1.000 de alerte în perioada de test. Cîte dintre cele 1.083 de tranzacții ilicite găsește și unde se află ele?</div>
+  <details><summary>Răspuns</summary><p>Cu pădurea aleatoare găsește 72,9% dintre ele (789 dintre cele 1.000 de alerte sînt ilicite, o rată de succes de 78,9%); cu GCN, 44,8% (rată de succes 48,5%); cu regresia logistică pe toate variabilele, 36,6%. Alegeți pădurea și priviți panoul din dreapta: aproape toate tranzacțiile găsite sînt în pașii 35–42, înainte de închiderea pieței; tranzacțiile ilicite din pașii 43–49 sînt rareori găsite, oricare ar fi bugetul. Bugetul de alerte, nu F1, dimensionează o echipă de conformitate.</p></details>
+</section>
+<p class="src foot">Date: graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019): 203.769 de tranzacții, 234.355 de fluxuri de plăți, 165 de variabile, 49 de pași de timp de circa două săptămîni. Modele antrenate pe pașii 1–34 și testate pe pașii 35–49 (16.670 de tranzacții de test etichetate, dintre care 1.083 ilicite); scorurile sînt mediate pe semințele fiecărui model (estimări proprii, lectures/L9/analysis_L9.py).</p>
+</main>
+</body>
+</html>

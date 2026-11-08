@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 4 · Convolutional neural networks (CNN) and transfer learning</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 4 · Convolutional neural networks (CNN) and transfer learning">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L4.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261108s", "L4_text_en.js?v=20261108s", "common.js?v=20261108s"], "L4.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 4 · Convolutional neural networks (CNN) and transfer learning</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L4/lecture4.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L4.html" class="lang-btn active">EN</a><a href="L4_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. The first block runs a convolution live on a real satellite image; the feature maps come from the CNN trained in the lecture; the curves are its saved training runs.</p>
+<p class="toc"><a href="#s-conv">The convolutional layer</a> · <a href="#s-fm">Product photos: what a CNN learns</a> · <a href="#s-arch">Deeper networks and transfer learning</a></p>
+<h2 class="sec" id="s-conv">The convolutional layer</h2>
+<section class="blk" id="convolution">
+  <h3>Hand-made filters already find roads and field edges</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=10" target="_blank" rel="noopener"><img src="slides/L4_conv_edges_en.jpg" alt="Slide 10: Hand-made filters already find roads and field edges" loading="lazy"></a>
+      <figcaption>Slide 10</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cv-i">EuroSAT tile</label><select id="cv-i"><option value="0">Annual crop</option><option value="1">Forest</option><option value="2">Herbaceous vegetation</option><option value="3" selected>Highway</option><option value="4">Industrial</option><option value="5">Pasture</option><option value="6">Permanent crop</option><option value="7">Residential</option><option value="8">River</option><option value="9">Sea/lake</option></select></div><div class="ctl"><label for="cv-k">Filter (3 × 3 kernel)</label><select id="cv-k"><option value="sx" selected>Vertical edges (Sobel)</option><option value="sy">Horizontal edges (Sobel)</option><option value="lap">Outlines (Laplacian)</option><option value="blur">Mean 3 × 3 (blur)</option><option value="sharp">Sharpen</option><option value="id">Identity</option></select></div><div class="ctl"><label for="cv-s">Stride: <b id="cv-s-v"></b></label><input type="range" id="cv-s" min="1" max="3" step="1" value="1"></div><div class="ctl ctl-tg" id="cv-o"><span class="lbl">Options</span><div class="tgs"><label class="tg"><input type="checkbox" name="cv-o" value="pad" checked> Zero padding ("same")</label><label class="tg"><input type="checkbox" name="cv-o" value="relu"> ReLU after the convolution</label></div></div></div><div class="charts "><div class="chart" id="cv-in"></div><div class="chart" id="cv-res"></div></div><ul class="out" id="cv-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_conv_edges" target="_blank" rel="noopener">NN_L4_conv_edges</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_conv_edges/NN_L4_conv_edges.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A 3 × 3 filter slides over a 64 × 64 Sentinel-2 tile. How many weights does it have, how large is the output, and why does the Sobel filter light up the highway?</div>
+  <details><summary>Answer</summary><p>Nine weights and one bias, whatever the size of the image (a dense layer from 4,096 pixels to 4,096 outputs would need about 16.8 million weights). With zero padding the output keeps 64 × 64 pixels; without it, (64 − 3)/1 + 1 = 62; with stride 2, (64 + 2 − 3)/2 + 1 = 32 (integer part). The vertical Sobel filter computes a left-minus-right difference: large positive or negative values where brightness changes from left to right, as on the edges of the highway, and zero on uniform fields. Switch to the river or the residential tile: the same filter finds other edges.</p></details>
+</section>
+<section class="blk" id="receptive-field">
+  <h3>Depth and pooling widen what a unit can see</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L4_receptive_field_en.jpg" alt="Slide 13: Depth and pooling widen what a unit can see" loading="lazy"></a>
+      <figcaption>Slide 13</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="rf-l">Number of convolutional layers: <b id="rf-l-v"></b></label><input type="range" id="rf-l" min="1" max="12" step="1" value="6"></div><div class="ctl"><label for="rf-k">Kernel size</label><select id="rf-k"><option value="3" selected>3 × 3</option><option value="5">5 × 5</option><option value="7">7 × 7</option></select></div><div class="ctl ctl-tg" id="rf-p"><span class="lbl">Pooling</span><div class="tgs"><label class="tg"><input type="checkbox" name="rf-p" value="pool"> 2 × 2 pooling every two layers</label></div></div><button class="btn play" id="rf-play" type="button"></button></div><div class="charts "><div class="chart" id="rf-chart"></div><div class="chart" id="rf-tile"></div></div><ul class="out" id="rf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_receptive_field" target="_blank" rel="noopener">NN_L4_receptive_field</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_receptive_field/NN_L4_receptive_field.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> How many 3 × 3 convolutions must be stacked before one neuron "sees" a whole 64 × 64 EuroSAT tile (640 m × 640 m)?</div>
+  <details><summary>Answer</summary><p>Without pooling the receptive field grows by 2 pixels per layer: 13 pixels after 6 layers, 25 after 12, so about 32 layers would be needed. With 2 × 2 pooling after every two convolutions it grows geometrically: 68 pixels after 8 convolutions, more than the whole tile. Larger kernels (5 × 5, 7 × 7) grow it faster but cost 25 or 49 weights per channel pair instead of 9; stacking small kernels with pooling is the cheaper way to see far.</p></details>
+</section><h2 class="sec" id="s-fm">Product photos: what a CNN learns</h2>
+<section class="blk" id="feature-maps">
+  <h3>Feature maps: from edges to a coarse map of parts</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L4_fmnist_featuremaps_en.jpg" alt="Slide 23: Feature maps: from edges to a coarse map of parts" loading="lazy"></a>
+      <figcaption>Slide 23</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fm-i">Test image</label><select id="fm-i"><option value="0">T-shirt/top</option><option value="1">Trouser</option><option value="2">Pullover</option><option value="3">Dress</option><option value="4">Coat</option><option value="5">Sandal</option><option value="6">Shirt</option><option value="7">Sneaker</option><option value="8">Bag</option><option value="9" selected>Ankle boot</option></select></div><div class="ctl ctl-tg" id="fm-b"><span class="lbl">Block</span><div class="tgs"><label class="tg"><input type="radio" name="fm-b" value="b1" checked> block 1 (32 channels, 14 × 14)</label><label class="tg"><input type="radio" name="fm-b" value="b3"> block 3 (128 channels, 7 × 7)</label></div></div><div class="ctl"><label for="fm-c">Channel (1 = most active): <b id="fm-c-v"></b></label><input type="range" id="fm-c" min="0" max="31" step="1" value="0"></div><button class="btn play" id="fm-play" type="button"></button></div><div class="charts "><div class="chart" id="fm-img"></div><div class="chart" id="fm-map"></div></div><ul class="out" id="fm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_featuremaps" target="_blank" rel="noopener">NN_L4_fmnist_featuremaps</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_fmnist_featuremaps/NN_L4_fmnist_featuremaps.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Feed the trained CNN the shirt of the test set. Which class does it predict, and what do the block 1 and block 3 channels respond to?</div>
+  <details><summary>Answer</summary><p>The CNN gives "T-shirt/top" 69.7% for this shirt: the most frequent error of the network, 102 of the 1,000 test shirts go to T-shirt/top and the recall of the class is 75.1%. Block 1 channels (14 × 14) still look like the image: edges, collars, the background. Block 3 channels (7 × 7) are coarse and respond to parts of the object; their average over the map is what the classifier reads. For the other nine test images the CNN is almost certain (99.8% or more).</p></details>
+</section>
+<section class="blk" id="confusion">
+  <h3>The errors are the products that people also confuse</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=21" target="_blank" rel="noopener"><img src="slides/L4_fmnist_confusion_en.jpg" alt="Slide 21: The errors are the products that people also confuse" loading="lazy"></a>
+      <figcaption>Slide 21</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Model</label><select id="cm-m"><option value="softmax">Softmax regression</option><option value="mlp">MLP</option><option value="cnn" selected>CNN</option></select></div><div class="ctl"><label for="cm-c">True class highlighted</label><select id="cm-c"><option value="0">T-shirt/top</option><option value="1">Trouser</option><option value="2">Pullover</option><option value="3">Dress</option><option value="4">Coat</option><option value="5">Sandal</option><option value="6" selected>Shirt</option><option value="7">Sneaker</option><option value="8">Bag</option><option value="9">Ankle boot</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="cm-n" value="pct" checked> Row percentages</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_confusion" target="_blank" rel="noopener">NN_L4_fmnist_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_fmnist_confusion/NN_L4_fmnist_confusion.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Which product class is hardest, and does the CNN fix the errors of the softmax regression or only reduce them?</div>
+  <details><summary>Answer</summary><p>Shirt is the hardest class for all three models: recall 56.9% for the softmax regression, 68.2% for the MLP (multilayer perceptron) and 75.1% for the CNN; the largest confusion is always shirt → T-shirt/top (138, 124 and 102 images). Accuracy rises from 84.6% (7,850 parameters) to 89.0% (235,146) and 92.9% (140,778): the CNN has fewer parameters than the MLP and makes 37% fewer errors, because it shares weights across positions. The remaining errors are between visually similar classes (shirt, T-shirt, pullover, coat).</p></details>
+</section><h2 class="sec" id="s-arch">Deeper networks and transfer learning</h2>
+<section class="blk" id="residual">
+  <h3>Augmentation narrows the gap; residuals make depth trainable</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L4_cifar_curves_en.jpg" alt="Slide 27: Augmentation narrows the gap; residuals make depth trainable" loading="lazy"></a>
+      <figcaption>Slide 27</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="cf-m"><span class="lbl">Networks</span><div class="tgs"><label class="tg"><input type="checkbox" name="cf-m" value="cnn"> Small CNN, no augmentation</label><label class="tg"><input type="checkbox" name="cf-m" value="cnn_aug"> Small CNN, augmentation</label><label class="tg"><input type="checkbox" name="cf-m" value="plain32" checked> Plain network, 32 layers</label><label class="tg"><input type="checkbox" name="cf-m" value="res32" checked> ResNet, 32 layers</label></div></div><div class="ctl ctl-tg" id="cf-y"><span class="lbl">Measure</span><div class="tgs"><label class="tg"><input type="radio" name="cf-y" value="train_loss" checked> Training loss</label><label class="tg"><input type="radio" name="cf-y" value="train_acc"> Training accuracy</label><label class="tg"><input type="radio" name="cf-y" value="valid_acc"> Validation accuracy</label></div></div></div><div class="charts one"><div class="chart" id="cf-chart"></div></div><ul class="out" id="cf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_cifar_curves" target="_blank" rel="noopener">NN_L4_cifar_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_cifar_curves/NN_L4_cifar_curves.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> A plain network of 32 layers and a ResNet of 32 layers have the same 466,906 parameters. Why does the plain one train worse?</div>
+  <details><summary>Answer</summary><p>This is the degradation problem: after 12 epochs the plain network still has a training loss of 0.557 and 80.0% test accuracy, while the residual one reaches 0.291 and 87.8%. The deeper plain network is not overfitting (its training accuracy is low too); it is hard to optimise. Skip connections let each block learn a correction to the identity and let the gradient flow back unchanged. The small CNN shows the other problem: without augmentation the training accuracy reaches 96.1% against 87.2% on validation; with augmentation the gap falls to 0.9 points.</p></details>
+</section>
+<section class="blk" id="transfer">
+  <h3>Fine-tuning wins, and transfer matters most when labels are few</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L4_transfer_curves_en.jpg" alt="Slide 33: Fine-tuning wins, and transfer matters most when labels are few" loading="lazy"></a>
+      <figcaption>Slide 33</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="tl-n">Labelled tiles per class: <b id="tl-n-v"></b></label><input type="range" id="tl-n" min="0" max="5" step="1" value="0"></div><div class="ctl ctl-tg" id="tl-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="tl-m" value="scratch" checked> CNN from scratch</label><label class="tg"><input type="checkbox" name="tl-m" value="probe" checked> Frozen ResNet-18 + logistic regression</label><label class="tg"><input type="checkbox" name="tl-m" value="finetune" checked> Fine-tuned ResNet-18</label></div></div><button class="btn play" id="tl-play" type="button"></button></div><div class="charts "><div class="chart" id="tl-hist"></div><div class="chart" id="tl-budget"></div></div><ul class="out" id="tl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_transfer_curves" target="_blank" rel="noopener">NN_L4_transfer_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_transfer_curves/NN_L4_transfer_curves.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> With only 10 labelled satellite tiles per class (100 in all), how far can each approach go?</div>
+  <details><summary>Answer</summary><p>A CNN trained from scratch reaches 69.9% test accuracy (mean of 2 seeds), a frozen ResNet-18 with a logistic regression on its features 78.6%, and a fine-tuned ResNet-18 87.8%. The gap closes as labels grow: with 1,000 tiles per class the three reach 94.7%, 93.0% and 98.1%, and with the full 16,200 training tiles 97.8%, 93.5% and 98.8%. Features learned on ImageNet photographs carry over to satellite images; they matter most when labels are scarce. The dip of the scratch CNN at 250 tiles (86.6% after 89.5% at 100) shows the noise of two seeds.</p></details>
+</section>
+<p class="src foot">Data: EuroSAT (Sentinel-2 satellite tiles of 64 × 64 pixels, 10 m per pixel, 10 land-use classes; Helber et al., 2019), Fashion-MNIST (Zalando, 28 × 28 grey product photos; 10,000 test images), CIFAR-10 (32 × 32 colour photographs). Networks and seeds (20261108) as in the lecture (analysis_L4.py); ResNet-18 = residual network with 18 layers, pre-trained on ImageNet; MLP = multilayer perceptron; ReLU = rectified linear unit.</p>
+</main>
+</body>
+</html>

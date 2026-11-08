@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 2 · Training: backpropagation and optimisation</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 2 · Training: backpropagation and optimisation">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'en';</script>
+<link rel="preload" as="script" href="L2.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_en.js?v=20261108s", "common.js?v=20261108s"], "L2.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 2 · Training: backpropagation and optimisation</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L2/lecture2.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L2.html" class="lang-btn active">EN</a><a href="L2_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the course data when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. The first block runs gradient descent live in your browser on a real regression; the others replay the training runs of the lecture.</p>
+<p class="toc"><a href="#s-gd">Gradient descent and the learning rate</a> · <a href="#s-opt">Optimisers and mini-batches</a> · <a href="#s-deep">Deep networks: vanishing gradients</a></p>
+<h2 class="sec" id="s-gd">Gradient descent and the learning rate</h2>
+<section class="blk" id="gd-paths">
+  <h3>Badly scaled inputs turn the loss into a narrow valley</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L2_gd_paths_en.jpg" alt="Slide 7: Badly scaled inputs turn the loss into a narrow valley" loading="lazy"></a>
+      <figcaption>Slide 7</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="gd-x"><span class="lbl">Median income</span><div class="tgs"><label class="tg"><input type="radio" name="gd-x" value="raw" checked> raw, in 10,000 USD</label><label class="tg"><input type="radio" name="gd-x" value="std"> standardised</label></div></div><div class="ctl"><label for="gd-e">Step η, as a multiple of the safe step 1/λmax: <b id="gd-e-v"></b></label><input type="range" id="gd-e" min="0.1" max="2.2" step="0.05" value="1"></div><div class="ctl"><label for="gd-m">Momentum β (0 = plain gradient descent): <b id="gd-m-v"></b></label><input type="range" id="gd-m" min="0" max="0.95" step="0.05" value="0"></div><div class="ctl"><label for="gd-k">Number of steps: <b id="gd-k-v"></b></label><input type="range" id="gd-k" min="1" max="200" step="1" value="60"></div><button class="btn play" id="gd-play" type="button"></button></div><div class="charts "><div class="chart" id="gd-path"></div><div class="chart" id="gd-loss"></div></div><ul class="out" id="gd-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_gd_paths" target="_blank" rel="noopener">NN_L2_gd_paths</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_gd_paths/NN_L2_gd_paths.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> On the raw income scale the loss surface is a long narrow valley. Why does gradient descent crawl along it, and what does standardising the income change?</div>
+  <details><summary>Answer</summary><p>The two directions of the valley have curvatures λmax = 38.8 and λmin = 0.37 (condition number 104): a step must stay below 2/λmax to avoid divergence (try 2.05 × 1/λmax), and at that step the flat direction is covered 104 times more slowly. After 60 steps the MSE is still 1.486, against a minimum of 0.701. Momentum (β = 0.9 with half the step) accumulates the consistent part of the gradient and reaches 0.704. Standardising makes the valley round (condition number 1.0): one step of 1/λmax lands on the minimum.</p></details>
+</section>
+<section class="blk" id="lr-sweep">
+  <h3>The learning rate decides everything: too small crawls, too large diverges</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L2_lr_sweep_en.jpg" alt="Slide 17: The learning rate decides everything: too small crawls, too large diverges" loading="lazy"></a>
+      <figcaption>Slide 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="lr-i">Learning rate η (SGD): <b id="lr-i-v"></b></label><input type="range" id="lr-i" min="0" max="8" step="1" value="6"></div><div class="ctl ctl-tg" id="lr-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="lr-s" value="all" checked> Curves of the other rates (grey)</label></div></div><button class="btn play" id="lr-play" type="button"></button></div><div class="charts "><div class="chart" id="lr-curve"></div><div class="chart" id="lr-all"></div></div><ul class="out" id="lr-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_lr_sweep" target="_blank" rel="noopener">NN_L2_lr_sweep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_lr_sweep/NN_L2_lr_sweep.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Plain SGD (stochastic gradient descent) for 30 epochs: which learning rate gives the lowest validation MSE, and what happens just above it?</div>
+  <details><summary>Answer</summary><p>η = 0.1 gives the lowest validation MSE, 0.281 (the linear regression reaches 0.500). One step higher, η = 0.3, two of the three seeds diverge, and at η = 1 all three do. Too small a rate is slow rather than wrong: at η = 0.0001 the MSE is still 1.005 to 1.142 after 30 epochs. The best rate sits just below the edge of divergence, which is why learning-rate range tests sweep η on a log scale.</p></details>
+</section><h2 class="sec" id="s-opt">Optimisers and mini-batches</h2>
+<section class="blk" id="optimizers">
+  <h3>On California housing, all tuned optimisers end close; adaptive ones get there more reliably</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L2_optimizers_en.jpg" alt="Slide 22: On California housing, all tuned optimisers end close; adaptive ones get there more reliably" loading="lazy"></a>
+      <figcaption>Slide 22</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="op-o">Optimiser</label><select id="op-o"><option value="sgd">SGD</option><option value="momentum">SGD + momentum</option><option value="rmsprop">RMSProp</option><option value="adam" selected>Adam</option><option value="adamw">AdamW</option></select></div><div class="ctl"><label for="op-l">Learning rate (tuning grid of the lecture): <b id="op-l-v"></b></label><input type="range" id="op-l" min="0" max="2" step="1" value="2"></div><div class="ctl ctl-tg" id="op-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="op-s" value="seeds" checked> Each seed</label><label class="tg"><input type="checkbox" name="op-s" value="best"> Other optimisers at their best rate</label></div></div><button class="btn play" id="op-play" type="button"></button></div><div class="charts one"><div class="chart" id="op-chart"></div></div><ul class="out" id="op-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_optimizers" target="_blank" rel="noopener">NN_L2_optimizers</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_optimizers/NN_L2_optimizers.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Each optimiser was tuned on a grid of three learning rates (3 seeds, 60 epochs). Does the choice of optimiser matter as much as the choice of its learning rate?</div>
+  <details><summary>Answer</summary><p>Within one optimiser, the learning rate matters more: Adam ends at 0.288 with η = 0.0003 and 0.259 with η = 0.003; SGD ends at 0.307 with η = 0.01 and 0.274 with η = 0.1. At their best rates the five optimisers end close to each other (validation MSE 0.259 to 0.274) and all beat the linear regression (0.500); Adam and AdamW get there faster (0.299 after 10 epochs, against 0.350 for SGD) and with less spread across seeds. On the test set, Adam is not significantly better than SGD (paired t = 1.01, p = 0.37, 5 seeds).</p></details>
+</section>
+<section class="blk" id="batch-size">
+  <h3>Small batches learn more per epoch, large batches more per second</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L2_batch_size_en.jpg" alt="Slide 18: Small batches learn more per epoch, large batches more per second" loading="lazy"></a>
+      <figcaption>Slide 18</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bs-x"><span class="lbl">Horizontal axis</span><div class="tgs"><label class="tg"><input type="radio" name="bs-x" value="ep" checked> Epochs (passes over the data)</label><label class="tg"><input type="radio" name="bs-x" value="st"> Gradient steps</label><label class="tg"><input type="radio" name="bs-x" value="sec"> Seconds of computing</label></div></div><div class="ctl ctl-tg" id="bs-b"><span class="lbl">Batch size</span><div class="tgs"><label class="tg"><input type="checkbox" name="bs-b" value="16" checked> 16</label><label class="tg"><input type="checkbox" name="bs-b" value="128" checked> 128</label><label class="tg"><input type="checkbox" name="bs-b" value="1024" checked> 1024</label></div></div></div><div class="charts one"><div class="chart" id="bs-chart"></div></div><ul class="out" id="bs-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_batch_size" target="_blank" rel="noopener">NN_L2_batch_size</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_batch_size/NN_L2_batch_size.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Batch 16, 128 or 1,024 with the same learning rate (Adam, 0.001): which one learns fastest per epoch, per gradient step and per second?</div>
+  <details><summary>Answer</summary><p>Per epoch, batch 16 wins (validation MSE 0.294 after 5 epochs, against 0.367 for 128 and 0.870 for 1,024), because it takes 774 steps per epoch instead of 97 or 13. Per gradient step the large batch is at least as good: each of its steps averages more examples. Per second the picture changes again: the 40 epochs took 25.8 s with batch 16, 3.7 s with 128 and 1.0 s with 1,024 on this laptop. With the same learning rate, the large batch has not converged after 40 epochs (0.335); larger batches usually need a larger learning rate.</p></details>
+</section><h2 class="sec" id="s-deep">Deep networks: vanishing gradients</h2>
+<section class="blk" id="vanishing">
+  <h3>In a deep sigmoid network the gradient dies before it reaches the first layers</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L2_vanishing_en.jpg" alt="Slide 13: In a deep sigmoid network the gradient dies before it reaches the first layers" loading="lazy"></a>
+      <figcaption>Slide 13</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vg-a">Activation function</label><select id="vg-a"><option value="sig" selected>sigmoid</option><option value="tanh">tanh</option><option value="relu">ReLU</option></select></div><div class="ctl"><label for="vg-i">Weight initialisation</label><select id="vg-i"><option value="xavier" selected>Xavier (Glorot)</option><option value="he">He (Kaiming)</option><option value="small">N(0, 0.01²)</option><option value="large">N(0, 1)</option></select></div><div class="ctl"><label for="vg-d">Number of hidden layers: <b id="vg-d-v"></b></label><input type="range" id="vg-d" min="0" max="7" step="1" value="4"></div><button class="btn play" id="vg-play" type="button"></button></div><div class="charts one"><div class="chart" id="vg-chart"></div></div><ul class="out" id="vg-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_vanishing" target="_blank" rel="noopener">NN_L2_vanishing</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_vanishing/NN_L2_vanishing.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Question for the room</span> Ten hidden layers of 64 sigmoid units with Xavier initialisation: how much smaller is the gradient of the first layer than that of the last one?</div>
+  <details><summary>Answer</summary><p>About 10⁷ times smaller (8.5 × 10⁻⁷ against 7.5; mean of 5 seeds on one batch of 512 block groups): each sigmoid layer multiplies the backward signal by at most 0.25, so the first layers barely learn. With tanh and Xavier the ratio stays near 0.6, and with ReLU and He initialisation the gradient stays of the same order in every layer. Small weights N(0, 0.01²) shrink the signal in both directions (gradients of 10⁻¹² at depth 10), large weights N(0, 1) make it explode (above 10¹⁶ at depth 10, overflow beyond). Move the depth: the problem grows geometrically with the number of layers.</p></details>
+</section>
+<p class="src foot">Data: California housing (StatLib, 1990 census; 20,640 block groups), split 60/20/20 with seed 20261108 as in the lecture (analysis_L2.py): 12,384 training, 4,128 validation and 4,128 test block groups. Networks: multilayer perceptron (MLP) with two hidden layers of 64 ReLU (rectified linear unit) units, mean squared error (MSE) on the median house value in 100,000 USD; SGD = stochastic gradient descent, RMSProp = root mean square propagation, Adam = adaptive moment estimation.</p>
+</main>
+</body>
+</html>

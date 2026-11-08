@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 11 · Inteligența artificială explicabilă: SHAP, LIME, metode bazate pe gradient și stabilitatea explicațiilor</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 11 · Inteligența artificială explicabilă: SHAP, LIME, metode bazate pe gradient și stabilitatea explicațiilor">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L11.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L11.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 11 · Inteligența artificială explicabilă: SHAP, LIME, metode bazate pe gradient și stabilitatea explicațiilor</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L11/lecture11_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L11.html" class="lang-btn">EN</a><a href="L11_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din modelele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Explicațiile provin din SHAP (explicații aditive Shapley), LIME (explicații locale interpretabile, independente de model), din curbele de dependență parțială și ICE (așteptarea condiționată individuală) și din IG (gradienți integrați), calculate pentru un perceptron multistrat (MLP), un ansamblu XGBoost (extreme gradient boosting, arbori amplificați prin gradient) și o regresie logistică.</p>
+<p class="toc"><a href="#s-shap">Valorile Shapley și SHAP</a> · <a href="#s-lime">LIME, explicații contrafactuale și efecte globale</a> · <a href="#s-grad">Metode bazate pe gradient pentru rețele neuronale</a> · <a href="#s-stab">Concordă explicațiile, sînt fidele, sînt stabile?</a></p>
+<h2 class="sec" id="s-shap">Valorile Shapley și SHAP</h2>
+<section class="blk" id="waterfall">
+  <h3>De ce a fost respins acest solicitant? Diagrama cascadă SHAP</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L11_shap_waterfall_ro.jpg" alt="Slide-ul 15: De ce a fost respins acest solicitant? Diagrama cascadă SHAP" loading="lazy"></a>
+      <figcaption>Slide-ul 15</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="wf-r">Solicitantul, ordonat după probabilitatea de nerambursare (PD) a rețelei (1 = cea mai mică): <b id="wf-r-v"></b></label><input type="range" id="wf-r" min="1" max="400" step="1" value="346"></div><div class="ctl"><label for="wf-m">Modelul și metoda SHAP</label><select id="wf-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option><option value="lr">Regresie logistică (SHAP liniar)</option></select></div><div class="ctl"><label for="wf-k">Variabile afișate separat: <b id="wf-k-v"></b></label><input type="range" id="wf-k" min="3" max="12" step="1" value="8"></div><button class="btn play" id="wf-play" type="button"></button></div><div class="charts one"><div class="chart" id="wf-chart"></div></div><ul class="out" id="wf-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_shap_waterfall" target="_blank" rel="noopener">NN_L11_shap_waterfall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_shap_waterfall/NN_L11_shap_waterfall.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Solicitantul din rîndul 2411 are o PD prognozată de 65,6% și nu a rambursat creditul. Ce variabilă împinge cel mai mult rețeaua spre respingere și dă vina regresia logistică pe aceeași variabilă?</div>
+  <details><summary>Răspuns</summary><p>Pentru MLP domină lipsa raportului datorie/venit (DEBTINC lipsă, +3,13 log-șanse), urmată de JOB = Other (+1,74); DELINQ = 0 (nicio linie de credit cu restanțe) reduce riscul (−0,71). Barele se adună exact: −3,613 (solicitantul mediu, PD 2,6%) + 4,261 = 0,648 log-șanse, adică o PD de 65,6%. Schimbați modelul: cele trei modele sînt de acord că lipsa DEBTINC este cel mai puternic semnal (în date, 62,0% dintre solicitanții fără DEBTINC nu rambursează, față de 8,6% dintre ceilalți), dar împart diferit restul scorului. Mutați cursorul spre solicitanții cei mai siguri: acolo, majoritatea barelor sînt albastre.</p></details>
+</section><h2 class="sec" id="s-lime">LIME, explicații contrafactuale și efecte globale</h2>
+<section class="blk" id="lime">
+  <h3>LIME depinde de propriile setări</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=20" target="_blank" rel="noopener"><img src="slides/L11_lime_instability_ro.jpg" alt="Slide-ul 20: LIME depinde de propriile setări" loading="lazy"></a>
+      <figcaption>Slide-ul 20</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="lm-n"><span class="lbl">Eșantioane generate de LIME în jurul solicitantului</span><div class="tgs"><label class="tg"><input type="radio" name="lm-n" value="500" checked> 500</label><label class="tg"><input type="radio" name="lm-n" value="5000"> 5.000</label></div></div><div class="ctl"><label for="lm-r">Rularea aleatoare (valoarea inițială a LIME): <b id="lm-r-v"></b></label><input type="range" id="lm-r" min="1" max="30" step="1" value="1"></div><div class="ctl"><label for="lm-w">Lățimea nucleului σ (panoul din dreapta, 5.000 de eșantioane): <b id="lm-w-v"></b></label><input type="range" id="lm-w" min="0" max="6" step="1" value="4"></div><button class="btn play" id="lm-play" type="button"></button></div><div class="charts "><div class="chart" id="lm-runs"></div><div class="chart" id="lm-kw"></div></div><ul class="out" id="lm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_lime_instability" target="_blank" rel="noopener">NN_L11_lime_instability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_lime_instability/NN_L11_lime_instability.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> LIME ajustează un model liniar mic pe eșantioane aleatoare din jurul solicitantului. Rulat de 30 de ori cu 500 de eșantioane, dă mereu aceeași variabilă pe primul loc?</div>
+  <details><summary>Răspuns</summary><p>Nu: cu 500 de eșantioane, variabila de pe primul loc coincide cu cea din rularea de referință în 73% dintre cele 30 de rulări (suprapunerea Jaccard a primelor cinci variabile 0,72); cu 5.000 de eșantioane în 100% (suprapunere 1,00), iar coeficientul de variație al pantelor primelor cinci variabile scade de la 10% la 2%. Contează și lățimea nucleului σ: panta DELINQ, variabila de top pentru LIME, trece de la −2,04 la aproape 0 pe cele șapte lățimi încercate (implicit 0,75·√18 = 3,18). Raportați valoarea inițială, mărimea eșantionului și lățimea nucleului pentru fiecare explicație LIME.</p></details>
+</section>
+<section class="blk" id="pdp-ice">
+  <h3>Efecte globale: dependența parțială și ICE</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L11_pdp_ice_ro.jpg" alt="Slide-ul 22: Efecte globale: dependența parțială și ICE" loading="lazy"></a>
+      <figcaption>Slide-ul 22</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="pd-f">Variabila modificată</label><select id="pd-f"><option value="MedInc" selected>Venitul median al grupului de locuințe</option><option value="HouseAge">Vîrsta mediană a locuințelor</option><option value="AveRooms">Numărul mediu de camere pe gospodărie</option><option value="AveOccup">Numărul mediu de ocupanți pe gospodărie</option><option value="Latitude">Latitudinea (nord)</option></select></div><div class="ctl"><label for="pd-n">Curbe ICE afișate (grupuri de locuințe): <b id="pd-n-v"></b></label><input type="range" id="pd-n" min="0" max="60" step="5" value="30"></div><div class="ctl ctl-tg" id="pd-c"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="pd-c" value="c"> Curbe centrate la capătul din stînga (c-ICE)</label></div></div><button class="btn play" id="pd-play" type="button"></button></div><div class="charts one"><div class="chart" id="pd-chart"></div></div><ul class="out" id="pd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_pdp_ice" target="_blank" rel="noopener">NN_L11_pdp_ice</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_pdp_ice/NN_L11_pdp_ice.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Curba de dependență parțială a venitului crește de la 1,40 la 3,60 (100.000 USD). O urmează fiecare grup de locuințe?</div>
+  <details><summary>Răspuns</summary><p>Nu. PDP (graficul dependenței parțiale) este o medie; curbele ICE arată cîte un grup de locuințe, cu toate celelalte variabile fixate. La capătul de sus al grilei de venit, curbele se împrăștie cu 0,95 (abaterea standard, 100.000 USD): rețeaua a învățat interacțiuni, de exemplu cu localizarea. Centrați curbele (c-ICE) pentru a compara numai formele lor. Pentru latitudine, curbele scad de la sud spre nord la majoritatea grupurilor, dar nu cu aceeași valoare.</p></details>
+</section><h2 class="sec" id="s-grad">Metode bazate pe gradient pentru rețele neuronale</h2>
+<section class="blk" id="ig-steps">
+  <h3>Completitudinea se verifică atunci cînd integrala este calculată precis</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L11_ig_completeness_ro.jpg" alt="Slide-ul 26: Completitudinea se verifică atunci cînd integrala este calculată precis" loading="lazy"></a>
+      <figcaption>Slide-ul 26</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ig-c">Frauda din ziua 2</label><select id="ig-c"><option value="0" selected>Frauda 1 (scorul median, slide-uri)</option><option value="1">Frauda 2</option><option value="2">Frauda 3</option><option value="3">Frauda 4</option><option value="4">Frauda 5</option><option value="5">Frauda 6</option><option value="6">Frauda 7</option><option value="7">Frauda 8</option></select></div><div class="ctl"><label for="ig-m">Pașii m ai integralei (suma Riemann): <b id="ig-m-v"></b></label><input type="range" id="ig-m" min="0" max="8" step="1" value="2"></div><button class="btn play" id="ig-play" type="button"></button></div><div class="charts "><div class="chart" id="ig-bar"></div><div class="chart" id="ig-err"></div></div><ul class="out" id="ig-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_ig_completeness" target="_blank" rel="noopener">NN_L11_ig_completeness</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_ig_completeness/NN_L11_ig_completeness.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Gradienții integrați promit că atribuirile se adună la f(x) − f(x′). De ce suma nu se potrivește cu 2 pași și se potrivește cu 64?</div>
+  <details><summary>Răspuns</summary><p>IG este o integrală a gradientului pe drumul drept de la referința x′ (tranzacția legitimă medie din ziua 1) la frauda x, calculată cu o sumă Riemann cu punctul de mijloc, cu m pași. Cu puțini pași, suma aproximează slab integrala: pe cele 211 fraude din ziua 2, eroarea relativă mediană este 7,5% cu 2 pași, 3,7% cu 4 și 0,18% cu 64; scade aproximativ ca 1/m², ca pentru regula punctului de mijloc. Ordinea variabilelor se stabilizează mult înaintea sumei.</p></details>
+</section><h2 class="sec" id="s-stab">Concordă explicațiile, sînt fidele, sînt stabile?</h2>
+<section class="blk" id="deletion">
+  <h3>Fidelitatea: eliminați ce spune explicația că este important</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L11_deletion_curve_ro.jpg" alt="Slide-ul 31: Fidelitatea: eliminați ce spune explicația că este important" loading="lazy"></a>
+      <figcaption>Slide-ul 31</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="dl-m"><span class="lbl">Ordinea eliminării</span><div class="tgs"><label class="tg"><input type="checkbox" name="dl-m" value="ig" checked> Gradienți integrați</label><label class="tg"><input type="checkbox" name="dl-m" value="shap" checked> Kernel SHAP</label><label class="tg"><input type="checkbox" name="dl-m" value="lime"> LIME</label><label class="tg"><input type="checkbox" name="dl-m" value="saliency" checked> Saliență</label><label class="tg"><input type="checkbox" name="dl-m" value="random" checked> Ordine aleatoare</label></div></div><div class="ctl"><label for="dl-f">Frauda (0 = media celor 211 fraude; 1 = scorul cel mai mare): <b id="dl-f-v"></b></label><input type="range" id="dl-f" min="0" max="211" step="1" value="0"></div><div class="ctl"><label for="dl-k">Variabile readuse la referință, k: <b id="dl-k-v"></b></label><input type="range" id="dl-k" min="0" max="12" step="1" value="3"></div><button class="btn play" id="dl-play" type="button"></button></div><div class="charts one"><div class="chart" id="dl-chart"></div></div><ul class="out" id="dl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_deletion_curve" target="_blank" rel="noopener">NN_L11_deletion_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_deletion_curve/NN_L11_deletion_curve.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Dacă o explicație este fidelă, readucerea la referință a variabilelor pe care le declară importante ar trebui să scadă repede scorul de fraudă. Ce metodă trece acest test și care nu?</div>
+  <details><summary>Răspuns</summary><p>Gradienții integrați, Kernel SHAP și LIME duc scorul mediu de fraudă de la 85,4% la aproximativ 61% după trei variabile (IG 61,3%, SHAP 61,1%, LIME 61,2%); saliența (valoarea absolută a gradientului) doar la 71,9%, iar o ordine aleatoare la 83,9%. AOPC (aria de deasupra curbei de perturbare, scăderea medie pentru k = 1–12) este 56,2, 58,4 și 56,1 puncte pentru IG, SHAP și LIME, 48,0 pentru saliență și 3,9 pentru ordinea aleatoare. Mutați cursorul fraudei: pentru fraude individuale, curbele se pot intersecta.</p></details>
+</section>
+<section class="blk" id="seeds">
+  <h3>Efectul Rashomon: aceeași acuratețe, explicații diferite</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L11_seed_stability_ro.jpg" alt="Slide-ul 33: Efectul Rashomon: aceeași acuratețe, explicații diferite" loading="lazy"></a>
+      <figcaption>Slide-ul 33</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ss-m">Modelul</label><select id="ss-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option></select></div><div class="ctl"><label for="ss-s">Valori inițiale de antrenare comparate: <b id="ss-s-v"></b></label><input type="range" id="ss-s" min="2" max="10" step="1" value="10"></div><div class="ctl"><label for="ss-a">Solicitantul (panoul din dreapta): <b id="ss-a-v"></b></label><input type="range" id="ss-a" min="1" max="200" step="1" value="1"></div><button class="btn play" id="ss-play" type="button"></button></div><div class="charts "><div class="chart" id="ss-rank"></div><div class="chart" id="ss-loc"></div></div><ul class="out" id="ss-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_seed_stability" target="_blank" rel="noopener">NN_L11_seed_stability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_seed_stability/NN_L11_seed_stability.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Zece rețele diferă numai prin valoarea inițială a antrenării și au aproape aceeași acuratețe (AUC, aria de sub curba ROC, între 0,929 și 0,941). Dau aceeași explicație?</div>
+  <details><summary>Răspuns</summary><p>Nu întru totul: ordinea importanțelor globale concordă cu un tau Kendall mediu pe perechi de 0,83 pentru rețele și 0,97 pentru XGBoost, iar variabila de top a unui solicitant este aceeași în 78% (MLP) și 83% (XGBoost) dintre perechile de valori inițiale. Acesta este efectul Rashomon: mai multe modele la fel de bune explică datele în moduri diferite. O explicație trimisă unui client trebuie verificată pe mai multe valori inițiale sau produsă de un model cu explicații stabile.</p></details>
+</section>
+<p class="src foot">Credit: datele HMEQ (credite garantate cu locuința) ale lui Baesens, Roesch și Scheule (2016), 5.960 de credite, 400 de solicitanți din test explicați, 100 de solicitanți din antrenare ca referință. Fraudă: ULB (Université Libre de Bruxelles) Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597); rețea antrenată pe ziua 1, 211 fraude din ziua 2 explicate. Valoarea locuințelor: StatLib, California housing, recensămîntul din 1990 (Pace și Barry, 1997). Modele, SHAP, LIME și atribuiri: analysis_L11.py, valoarea inițială 20261108.</p>
+</main>
+</body>
+</html>

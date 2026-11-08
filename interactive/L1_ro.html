@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 1 · Deep learning pentru afaceri: de la modelele liniare la perceptronul multistrat</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 1 · Deep learning pentru afaceri: de la modelele liniare la perceptronul multistrat">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L1.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L1_data.js?v=20261108s", "L1_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L1.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 1 · Deep learning pentru afaceri: de la modelele liniare la perceptronul multistrat</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L1/lecture1_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L1.html" class="lang-btn">EN</a><a href="L1_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Nu este nevoie de formule: modificați ponderile, numărul de neuroni ascunși sau pragul și urmăriți ce se schimbă.</p>
+<p class="toc"><a href="#s-neuron">De la un neuron la perceptronul multistrat</a> · <a href="#s-eval">De la scoruri la decizii de creditare</a></p>
+<h2 class="sec" id="s-neuron">De la un neuron la perceptronul multistrat</h2>
+<section class="blk" id="one-neuron">
+  <h3>Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L1_boundary_hmeq_ro.jpg" alt="Slide-ul 31: Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus" loading="lazy"></a>
+      <figcaption>Slide-ul 31</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="nb-m">Modelul</label><select id="nb-m"><option value="n" selected>Un neuron, ponderile dvs.</option><option value="mlp">MLP 64-64 antrenat</option></select></div><div class="ctl"><label for="nb-w1">Ponderea pentru datorii/venit, w₁: <b id="nb-w1-v"></b></label><input type="range" id="nb-w1" min="-3" max="3" step="0.05" value="0.6"></div><div class="ctl"><label for="nb-w2">Ponderea pentru vechimea celei mai vechi linii de credit, w₂: <b id="nb-w2-v"></b></label><input type="range" id="nb-w2" min="-3" max="3" step="0.05" value="-0.5"></div><div class="ctl"><label for="nb-b">Termenul liber (bias), b: <b id="nb-b-v"></b></label><input type="range" id="nb-b" min="-5" max="1" step="0.05" value="-2.45"></div><div class="ctl"><label for="nb-t">Pragul: semnalăm creditul dacă probabilitatea ≥: <b id="nb-t-v"></b></label><input type="range" id="nb-t" min="0.05" max="0.6" step="0.01" value="0.2"></div><div class="ctl"><button class="btn" id="nb-fit" type="button">Ponderile estimate (regresia logistică)</button></div></div><div class="charts one"><div class="chart" id="nb-chart"></div></div><ul class="out" id="nb-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_boundary_hmeq" target="_blank" rel="noopener">NN_L1_boundary_hmeq</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_boundary_hmeq/NN_L1_boundary_hmeq.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Un singur neuron cu două intrări, raportul datorii/venit și vechimea celei mai vechi linii de credit, trasează o frontieră dreaptă. Ce semn ar trebui să aibă fiecare pondere și ce se întîmplă cu AUC (aria de sub curba ROC) dacă schimbați ambele semne?</div>
+  <details><summary>Răspuns</summary><p>Raportul datorii/venit crește riscul (w₁ > 0), iar un istoric de credit mai vechi îl reduce (w₂ < 0): regresia logistică estimată dă w₁ = 0,62 și w₂ = −0,48 la o abatere standard, cu un AUC pe test de 0,744 pe cele 871 de credite de test care au ambele variabile. Dacă schimbați ambele semne, ordonarea se inversează: AUC scade la 0,256 = 1 − 0,744. Termenul liber mută dreapta fără să o rotească, deci schimbă numărul de credite semnalate, dar nu și AUC. MLP 64-64 antrenat curbează frontiera și obține 0,736 pe aceleași credite: cu două intrări există puțină structură neliniară de găsit.</p></details>
+</section>
+<section class="blk" id="universal-approximation">
+  <h3>Mai mulți neuroni ascunși urmăresc geografia prețurilor din California</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L1_uat_california_ro.jpg" alt="Slide-ul 29: Mai mulți neuroni ascunși urmăresc geografia prețurilor din California" loading="lazy"></a>
+      <figcaption>Slide-ul 29</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ua-h">Neuroni ascunși sigmoizi, H: <b id="ua-h-v"></b></label><input type="range" id="ua-h" min="0" max="6" step="1" value="2"></div><div class="ctl ctl-tg" id="ua-s"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="ua-s" value="lin" checked> Dreapta de regresie</label><label class="tg"><input type="checkbox" name="ua-s" value="units" checked> Contribuția fiecărui neuron</label></div></div><button class="btn play" id="ua-play" type="button"></button></div><div class="charts "><div class="chart" id="ua-fit"></div><div class="chart" id="ua-units"></div></div><ul class="out" id="ua-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_uat_california" target="_blank" rel="noopener">NN_L1_uat_california</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_uat_california/NN_L1_uat_california.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Cu un strat ascuns de neuroni sigmoizi, rețeaua adună „trepte”. Cîți neuroni sînt necesari pentru a urmări profilul nord–sud al valorii locuințelor din California?</div>
+  <details><summary>Răspuns</summary><p>Un neuron dă o singură treaptă netedă (MSE pe test 0,855, față de 0,896 pentru dreapta de regresie); trei neuroni surprind deja cele două vîrfuri de pe coastă, în jurul orașelor Los Angeles și San Francisco (0,757); cincizeci de neuroni aduc doar puțin în plus (0,731) pe cele 4.912 grupuri de locuințe de test. Panoul din dreapta arată contribuția fiecărui neuron: curba estimată este suma lor plus o constantă. Este teorema de aproximare universală la lucru, dar și limita ei: o singură variabilă explică doar o parte din varianță (eroarea pătratică medie, MSE, în pătrate de 100.000 USD).</p></details>
+</section>
+<section class="blk" id="width">
+  <h3>Pe HMEQ, un strat ascuns mai lat crește AUC pe test peste scorul logistic</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L1_width_auc_ro.jpg" alt="Slide-ul 34: Pe HMEQ, un strat ascuns mai lat crește AUC pe test peste scorul logistic" loading="lazy"></a>
+      <figcaption>Slide-ul 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="wd-h">Neuroni ascunși, H (un strat ascuns): <b id="wd-h-v"></b></label><input type="range" id="wd-h" min="0" max="8" step="1" value="0"></div><div class="ctl ctl-tg" id="wd-s"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="wd-s" value="seeds" checked> Fiecare dintre cele 5 inițializări</label><label class="tg"><input type="checkbox" name="wd-s" value="bench" checked> Regresia logistică și XGBoost</label></div></div><button class="btn play" id="wd-play" type="button"></button></div><div class="charts one"><div class="chart" id="wd-chart"></div></div><ul class="out" id="wd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_width_auc" target="_blank" rel="noopener">NN_L1_width_auc</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_width_auc/NN_L1_width_auc.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Pe HMEQ, de cîți neuroni ascunși are nevoie un MLP cu un strat ascuns ca să depășească regresia logistică la AUC pe test?</div>
+  <details><summary>Răspuns</summary><p>Un singur neuron ascuns (AUC 0,901) este o regresie logistică cu o comprimare în plus și este mai slab decît modelul logistic (0,920); între 4 și 8 neuroni, MLP îl depășește (0,923, 0,931), iar cîștigul se aplatizează peste 32 de neuroni (de la 0,946 la 0,953 pentru 256). Gradient boosting (XGBoost, 0,961) rămîne înainte pe acest set tabular mic, cu mult mai puține alegeri de reglaj. Sinteza dă numărul de parametri: 7.681 pentru H = 256, față de 29 pentru regresia logistică.</p></details>
+</section><h2 class="sec" id="s-eval">De la scoruri la decizii de creditare</h2>
+<section class="blk" id="roc-threshold">
+  <h3>La 10 % alarme false, MLP detectează mai multe neplăți decît scorul logistic</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=35" target="_blank" rel="noopener"><img src="slides/L1_roc_hmeq_ro.jpg" alt="Slide-ul 35: La 10 % alarme false, MLP detectează mai multe neplăți decît scorul logistic" loading="lazy"></a>
+      <figcaption>Slide-ul 35</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="rc-m">Modelul</label><select id="rc-m"><option value="logit">Regresia logistică</option><option value="mlp" selected>MLP 64-64</option><option value="xgb">XGBoost</option></select></div><div class="ctl"><label for="rc-t">Pragul: semnalăm creditul dacă PD ≥: <b id="rc-t-v"></b></label><input type="range" id="rc-t" min="0.01" max="0.95" step="0.01" value="0.5"></div><button class="btn play" id="rc-play" type="button"></button></div><div class="charts "><div class="chart" id="rc-roc"></div><div class="chart" id="rc-hist"></div></div><ul class="out" id="rc-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_roc_hmeq" target="_blank" rel="noopener">NN_L1_roc_hmeq</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_roc_hmeq/NN_L1_roc_hmeq.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> O bancă trimite un credit la analiză manuală cînd probabilitatea estimată de neplată (PD) este cel puțin egală cu pragul. Ce se întîmplă pentru MLP dacă pragul scade de la 0,5 la 0,2?</div>
+  <details><summary>Răspuns</summary><p>La 0,5, MLP semnalează 220 din cele 1.192 de credite de test și detectează 76,5% din cele 238 de neplăți, cu 4,0% dintre creditele bune semnalate din greșeală; la 0,2 semnalează 290 de credite, detectează 84,9% din neplăți și semnalează 9,2% dintre creditele bune. Pragul mută punctul de-a lungul curbei ROC; curba însăși și AUC nu se schimbă. Care punct este cel mai bun depinde de costul fiecărei erori, subiectul blocului următor.</p></details>
+</section>
+<section class="blk" id="cost-threshold">
+  <h3>O neplată ratată costă de cinci ori cît un client bun respins: pragul este 1/6, nu 1/2</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=40" target="_blank" rel="noopener"><img src="slides/L1_cost_threshold_ro.jpg" alt="Slide-ul 40: O neplată ratată costă de cinci ori cît un client bun respins: pragul este 1/6, nu 1/2" loading="lazy"></a>
+      <figcaption>Slide-ul 40</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ct-c">Costul unui rău-platnic acceptat (costul unui bun-platnic respins = 1): <b id="ct-c-v"></b></label><input type="range" id="ct-c" min="1" max="10" step="0.5" value="5"></div><div class="ctl"><label for="ct-t">Pragul: respingem dacă PD ≥: <b id="ct-t-v"></b></label><input type="range" id="ct-t" min="0.02" max="0.9" step="0.01" value="0.5"></div><div class="ctl ctl-tg" id="ct-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="ct-m" value="logit" checked> Regresia logistică</label><label class="tg"><input type="checkbox" name="ct-m" value="mlp" checked> MLP 64-64</label><label class="tg"><input type="checkbox" name="ct-m" value="xgb" checked> XGBoost</label></div></div><button class="btn play" id="ct-play" type="button"></button></div><div class="charts one"><div class="chart" id="ct-chart"></div></div><ul class="out" id="ct-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_cost_threshold" target="_blank" rel="noopener">NN_L1_cost_threshold</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_cost_threshold/NN_L1_cost_threshold.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Matricea de costuri UCI pentru German credit spune că acceptarea unui rău-platnic costă de 5 ori mai mult decît respingerea unui bun-platnic. Este 0,5 un prag rezonabil?</div>
+  <details><summary>Răspuns</summary><p>Nu. Cu costurile 5 și 1, pragul care minimizează costul așteptat este 1/(1 + 5) = 1/6 ≈ 0,17 (regula de decizie Bayes). La 0,5, costul pe solicitant este 0,87 pentru regresia logistică, 1,13 pentru MLP și 0,98 pentru XGBoost, mai mare decît dacă am respinge pe toată lumea (0,70); la 1/6 scade la 0,55, 0,57 și 0,59. Modificați costul: pragul optim urmează 1/(1 + c), iar la c = 1 revine la 0,5. Diferențele dintre cele trei modele sînt mult mai mici decît costul unui prag ales prost.</p></details>
+</section>
+<p class="src foot">Date: creditele ipotecare HMEQ (Baesens, Roesch și Scheule, 2016; 5.960 de credite), UCI Statlog German credit (1.000 de solicitanți), locuințele din California (StatLib, recensămîntul din 1990). Împărțirile, modelele și semințele (20261108 + s) sînt cele din curs (analysis_L1.py): HMEQ împărțit stratificat 60/20/20; pentru German credit, scoruri în afara pliului dintr-o validare încrucișată cu 5 pliuri; MLP = perceptron multistrat, XGBoost = gradient boosting, AUC = aria de sub curba ROC (receiver operating characteristic).</p>
+</main>
+</body>
+</html>

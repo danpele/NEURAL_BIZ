@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 8 · Modele generative: autoencodere, VAE, GAN, difuzie</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 8 · Modele generative: autoencodere, VAE, GAN, difuzie">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L8.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L8_data.js?v=20261108s", "L8_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L8.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 8 · Modele generative: autoencodere, VAE, GAN, difuzie</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L8/lecture8_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L8.html" class="lang-btn">EN</a><a href="L8_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">Patru familii de modele generative, fiecare pe date reale: autoencoderul (AE), autoencoderul variațional (VAE), rețeaua generativă adversarială (GAN) și modelul probabilistic de difuzie cu eliminarea zgomotului (DDPM). În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din rezultatele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="toc"><a href="#s-ae">Autoencodere: detectarea anomaliilor la fraudele cu carduri</a> · <a href="#s-vae">Autoencodere variaționale</a> · <a href="#s-gan">Rețele generative adversariale</a> · <a href="#s-diff">Modele de difuzie</a></p>
+<h2 class="sec" id="s-ae">Autoencodere: detectarea anomaliilor la fraudele cu carduri</h2>
+<section class="blk" id="fraud-alerts">
+  <h3>Fraudele sînt greu de reconstruit: eroarea lor de reconstrucție este mult mai mare</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L8/lecture8_ro.pdf#page=11" target="_blank" rel="noopener"><img src="slides/L8_ae_error_dist_ro.jpg" alt="Slide-ul 11: Fraudele sînt greu de reconstruit: eroarea lor de reconstrucție este mult mai mare" loading="lazy"></a>
+      <figcaption>Slide-ul 11</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fa-s">Scorul de anomalie</label><select id="fa-s"><option value="ae" selected>Autoencoder (fără etichete)</option><option value="pca">Analiza componentelor principale, PCA (fără etichete)</option><option value="logit">Regresie logistică (cu etichete)</option></select></div><div class="ctl"><label for="fa-b">Bugetul de alerte: ponderea tranzacțiilor verificate: <b id="fa-b-v"></b></label><input type="range" id="fa-b" min="0" max="8" step="1" value="2"></div><button class="btn play" id="fa-play" type="button"></button></div><div class="charts "><div class="chart" id="fa-hist"></div><div class="chart" id="fa-pr"></div></div><ul class="out" id="fa-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_ae_error_dist" target="_blank" rel="noopener">NN_L8_ae_error_dist</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_ae_error_dist/NN_L8_ae_error_dist.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Echipa antifraudă poate verifica doar primele 0,1% scoruri din perioada de test, 57 de alerte. Cîte dintre cele 75 de fraude de test găsește fiecare scor și ce se întîmplă dacă bugetul crește la 1%?</div>
+  <details><summary>Răspuns</summary><p>La 0,1%, autoencoderul găsește 8 fraude (recall 10,7%), analiza componentelor principale (PCA) nu găsește niciuna, iar regresia logistică, care a văzut fraude etichetate, găsește 48 (64,0%). La 1% (572 de alerte), cele trei găsesc 56, 50 și 65 de fraude: cu un buget mai larg, diferența dintre scoruri se reduce, dar precizia scade (9,7% pentru autoencoder), pentru că tranzacțiile legitime sînt de cîteva sute de ori mai numeroase decît fraudele. Autoencoderul nu are nevoie de etichete, deci este un detector al necunoscutului, care completează modelul supervizat, nu îl înlocuiește.</p></details>
+</section><h2 class="sec" id="s-vae">Autoencodere variaționale</h2>
+<section class="blk" id="vae-latent">
+  <h3>Un spațiu latent cu două dimensiuni sortează deja produsele</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L8/lecture8_ro.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L8_vae_latent_ro.jpg" alt="Slide-ul 18: Un spațiu latent cu două dimensiuni sortează deja produsele" loading="lazy"></a>
+      <figcaption>Slide-ul 18</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vl-a">Coordonata latentă z₁: <b id="vl-a-v"></b></label><input type="range" id="vl-a" min="-2.1" max="2.4" step="0.3" value="0"></div><div class="ctl"><label for="vl-b">Coordonata latentă z₂: <b id="vl-b-v"></b></label><input type="range" id="vl-b" min="-3.0" max="2.7" step="0.3" value="0"></div><button class="btn play" id="vl-play" type="button"></button><div class="ctl ctl-tg" id="vl-c"><span class="lbl">Clasele afișate pe hartă</span><div class="tgs"><label class="tg"><input type="checkbox" name="vl-c" value="0" checked> Tricou</label><label class="tg"><input type="checkbox" name="vl-c" value="1" checked> Pantaloni</label><label class="tg"><input type="checkbox" name="vl-c" value="2" checked> Pulover</label><label class="tg"><input type="checkbox" name="vl-c" value="3" checked> Rochie</label><label class="tg"><input type="checkbox" name="vl-c" value="4" checked> Palton</label><label class="tg"><input type="checkbox" name="vl-c" value="5" checked> Sandală</label><label class="tg"><input type="checkbox" name="vl-c" value="6" checked> Cămașă</label><label class="tg"><input type="checkbox" name="vl-c" value="7" checked> Pantof sport</label><label class="tg"><input type="checkbox" name="vl-c" value="8" checked> Geantă</label><label class="tg"><input type="checkbox" name="vl-c" value="9" checked> Gheată</label></div></div></div><div class="charts "><div class="chart" id="vl-map"></div><div class="chart" id="vl-img"></div></div><ul class="out" id="vl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_vae_latent" target="_blank" rel="noopener">NN_L8_vae_latent</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_vae_latent/NN_L8_vae_latent.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Fiecare punct de pe hartă este codul unei imagini de test; imaginea din dreapta este ceea ce desenează decodorul din punctul ales. Unde se află încălțămintea și se schimbă desenul brusc sau treptat cînd treceți de la o clasă la alta?</div>
+  <details><summary>Răspuns</summary><p>Încălțămintea ocupă partea dreaptă a hărții: în jurul punctului (1,5; 1,5), 94% dintre cele mai apropiate 50 de imagini de test sînt pantofi sport, în jurul punctului (1,5; −1,5) 98% sînt ghete; în jurul punctului (0; 2,1) sînt pantaloni, iar în jurul punctului (0,9; −2,1) genți. Mutați z₂ de la 1,5 la −1,5 cu z₁ = 1,5: desenul trece treptat de la pantof sport la gheată. Termenul Kullback–Leibler (KL) din marginea inferioară a evidenței (ELBO) ține codurile aproape de o normală standard, deci punctele apropiate se decodează în imagini asemănătoare și orice punct se decodează în ceva plauzibil. În jurul punctului (0; 0) cămășile și tricourile se suprapun, de aceea desenul de acolo este neclar.</p></details>
+</section><h2 class="sec" id="s-gan">Rețele generative adversariale</h2>
+<section class="blk" id="gan-tails">
+  <h3>GAN-ul învață cozile groase pe care distribuția normală nu le vede</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L8/lecture8_ro.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L8_gan_density_ro.jpg" alt="Slide-ul 26: GAN-ul învață cozile groase pe care distribuția normală nu le vede" loading="lazy"></a>
+      <figcaption>Slide-ul 26</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="gt-q">Probabilitatea din coadă a VaR (%): <b id="gt-q-v"></b></label><input type="range" id="gt-q" min="0.5" max="5" step="0.5" value="1"></div><div class="ctl"><label for="gt-v">Vederea</label><select id="gt-v"><option value="all" selected>Toată distribuția</option><option value="tail">Coada stîngă (pierderi mari)</option></select></div><div class="ctl ctl-tg" id="gt-s"><span class="lbl">Distribuțiile</span><div class="tgs"><label class="tg"><input type="checkbox" name="gt-s" value="tr" checked> Reale 2005–2019</label><label class="tg"><input type="checkbox" name="gt-s" value="g" checked> GAN</label><label class="tg"><input type="checkbox" name="gt-s" value="n" checked> Normală</label></div></div><button class="btn play" id="gt-play" type="button"></button></div><div class="charts "><div class="chart" id="gt-hist"></div><div class="chart" id="gt-bt"></div></div><ul class="out" id="gt-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_gan_density" target="_blank" rel="noopener">NN_L8_gan_density</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_gan_density/NN_L8_gan_density.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Valoarea la risc (VaR) de 1% este pierderea zilnică depășită în 1% din zile. Estimată pe 2005–2019, cîte depășiri dau cele trei estimări în cele 1.717 zile de tranzacționare din ianuarie 2020 – octombrie 2026, cînd ne așteptăm la circa 17?</div>
+  <details><summary>Răspuns</summary><p>La 1%, cuantila istorică este −3,48%, GAN-ul (sămînța 1) dă −3,52%, iar normala doar −2,67%. În 2020–2026, primele două sînt depășite în cîte 19 zile (1,11%), normala în 41 de zile (2,39%): subestimează coada, pentru că randamentele zilnice au cozi groase (exces de kurtosis 11,86 în 2005–2019). La 5%, cele trei cuantile se apropie (−1,78%, −1,69%, −1,88%): diferențele sînt în coada îndepărtată. Sînt cuantile necondiționate: niciuna nu reacționează la nivelul volatilității.</p></details>
+</section>
+<section class="blk" id="gan-acf">
+  <h3>Un GAN pe zile izolate nu poate învăța gruparea volatilității</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L8/lecture8_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L8_gan_acf_ro.jpg" alt="Slide-ul 28: Un GAN pe zile izolate nu poate învăța gruparea volatilității" loading="lazy"></a>
+      <figcaption>Slide-ul 28</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="ga-f">Transformarea randamentului</label><select id="ga-f"><option value="abs" selected>|r| (mărimea mișcării)</option><option value="sq">r²</option><option value="raw">r (cu semn)</option></select></div><div class="ctl"><label for="ga-L">Decalaje afișate (zile): <b id="ga-L-v"></b></label><input type="range" id="ga-L" min="5" max="60" step="5" value="20"></div><div class="ctl ctl-tg" id="ga-s"><span class="lbl">Seriile</span><div class="tgs"><label class="tg"><input type="checkbox" name="ga-s" value="tr" checked> Reale 2005–2019</label><label class="tg"><input type="checkbox" name="ga-s" value="g" checked> GAN</label><label class="tg"><input type="checkbox" name="ga-s" value="te"> Reale 2020–2026</label></div></div></div><div class="charts one"><div class="chart" id="ga-chart"></div></div><ul class="out" id="ga-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_gan_acf" target="_blank" rel="noopener">NN_L8_gan_acf</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_gan_acf/NN_L8_gan_acf.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Mișcările mari ale S&P 500 vin în grupuri. Reproduce acest lucru GAN-ul antrenat pe zile izolate?</div>
+  <details><summary>Răspuns</summary><p>Nu. Autocorelația lui |r| este 0,28 la decalajul 1 în 2005–2019 și rămîne în jur de 0,3 timp de 20 de zile (media pe decalajele 1–20: 0,31); pentru eșantioanele GAN este −0,01 la decalajul 1 și aproape zero la orice decalaj. Generatorul extrage fiecare zi independent, deci poate învăța distribuția unei zile, cu cozile ei groase, dar nu dependența dintre zile. Randamentele cu semn r nu au aproape deloc autocorelație în niciuna dintre serii: volatilitatea, nu direcția, este previzibilă. Pentru gruparea volatilității este nevoie de un model de secvențe (un GAN recurent sau convoluțional pe ferestre de zile).</p></details>
+</section><h2 class="sec" id="s-diff">Modele de difuzie</h2>
+<section class="blk" id="diffusion-forward">
+  <h3>Procesul înainte pe o curbă reală a randamentelor</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L8/lecture8_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L8_diffusion_forward_ro.jpg" alt="Slide-ul 32: Procesul înainte pe o curbă reală a randamentelor" loading="lazy"></a>
+      <figcaption>Slide-ul 32</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="df-c">Curba reală (zona euro, AAA)</label><select id="df-c"><option value="last" selected>30.10.2026, ultima curbă din eșantion</option><option value="max10">16.06.2008, randamentul maxim la 10 ani</option><option value="min10">09.03.2020, randamentul minim la 10 ani</option><option value="inv">28.12.2023, cea mai inversată curbă</option></select></div><div class="ctl"><label for="df-e">Extragerea zgomotului ε</label><select id="df-e"><option value="7" selected>ε din slide (sămînța 7)</option><option value="1">altă extragere (sămînța 1)</option><option value="2">altă extragere (sămînța 2)</option></select></div><div class="ctl"><label for="df-t">Pasul de difuzie t: <b id="df-t-v"></b></label><input type="range" id="df-t" min="0" max="199" step="1" value="60"></div><button class="btn play" id="df-play" type="button"></button></div><div class="charts "><div class="chart" id="df-curve"></div><div class="chart" id="df-w"></div></div><ul class="out" id="df-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_diffusion_forward" target="_blank" rel="noopener">NN_L8_diffusion_forward</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_diffusion_forward/NN_L8_diffusion_forward.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Procesul înainte amestecă curba cu zgomot: x_t = √ᾱ_t · x₀ + √(1 − ᾱ_t) · ε. De la ce pas cîntărește zgomotul mai mult decît curba?</div>
+  <details><summary>Răspuns</summary><p>De la t = 117, unde ᾱ_t scade sub 0,5 (√ᾱ_t = √(1 − ᾱ_t) ≈ 0,71). La t = 20 curba este aproape intactă (ᾱ = 0,977), la t = 60 ᾱ = 0,827, iar la ultimul pas, t = 199, ᾱ = 0,132: cu programul liniar din curs (β de la 0,0001 la 0,02 în 200 de pași) supraviețuiesc circa 36% din amplitudinea semnalului. Rețeaua de eliminare a zgomotului învață să refacă acești pași, prezicînd zgomotul ε adăugat; generarea pornește de la zgomot pur și îi parcurge invers.</p></details>
+</section>
+<section class="blk" id="yc-scenarios">
+  <h3>Difuzia reproduce cele două regimuri ale dobînzilor euro; distribuția normală nu poate</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L8/lecture8_ro.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L8_yc_density_ro.jpg" alt="Slide-ul 34: Difuzia reproduce cele două regimuri ale dobînzilor euro; distribuția normală nu poate" loading="lazy"></a>
+      <figcaption>Slide-ul 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="yc-v">Variabila</label><select id="yc-v"><option value="sl" selected>Panta 10 ani − 3 luni (puncte procentuale)</option><option value="y10">Randamentul la 10 ani (%)</option></select></div><div class="ctl"><label for="yc-x">Pragul (%, respectiv puncte procentuale): <b id="yc-x-v"></b></label><input type="range" id="yc-x" min="-1.5" max="5" step="0.1" value="0"></div><div class="ctl ctl-tg" id="yc-m"><span class="lbl">Seriile</span><div class="tgs"><label class="tg"><input type="checkbox" name="yc-m" value="real" checked> Curbe reale</label><label class="tg"><input type="checkbox" name="yc-m" value="ddpm" checked> Difuzie (DDPM)</label><label class="tg"><input type="checkbox" name="yc-m" value="gauss" checked> Normală multivariată</label><label class="tg"><input type="checkbox" name="yc-m" value="vae"> VAE</label></div></div></div><div class="charts "><div class="chart" id="yc-hist"></div><div class="chart" id="yc-sc"></div></div><ul class="out" id="yc-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_yc_density" target="_blank" rel="noopener">NN_L8_yc_density</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_yc_density/NN_L8_yc_density.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> În datele reale, 8,7% dintre zile au o curbă inversată (randamentul la 10 ani sub cel la 3 luni). Care generator reproduce această pondere și care o ratează?</div>
+  <details><summary>Răspuns</summary><p>Cu pragul la 0 pentru pantă: DDPM (sămînța 1) dă 10,5% curbe inversate, normala multivariată 14,2%, iar VAE-ul cu doi factori doar 0,3%. Normala pune scenarii și acolo unde curbele reale nu au fost niciodată (vedeți diagrama de dispersie: umple spațiul dintre regimul dobînzilor mari de dinainte de 2012 și regimul dobînzilor negative din 2015–2021). Treceți la randamentul la 10 ani, cu pragul 0: 13,8% dintre zilele reale au randament negativ, față de 9,9% pentru DDPM, 9,3% pentru normală și 11,2% pentru VAE. Difuzia păstrează ambele regimuri și relația curbă dintre nivel și pantă; normala le netezește într-unul singur.</p></details>
+</section>
+<p class="src foot">Fraude cu carduri: ULB Machine Learning Group și Worldline (OpenML 1597), două zile din septembrie 2013, test = ultimele 20% din interval, tranzacțiile legitime ponderate la totalul datelor. Imagini: Fashion-MNIST, Zalando Research (Xiao et al., 2017), 10.000 de imagini de test. Randamente: prețurile zilnice de închidere ale S&P 500, Yahoo Finance, antrenare 4 ianuarie 2005 – 31 decembrie 2019, test 2 ianuarie 2020 – 30 octombrie 2026. Curbele randamentelor: Banca Centrală Europeană (BCE), obligațiuni guvernamentale AAA din zona euro, 6 septembrie 2004 – 30 octombrie 2026, zile lucrătoare. Rezultatele modelelor: estimări proprii din curs (analysis_L8.py).</p>
+</main>
+</body>
+</html>

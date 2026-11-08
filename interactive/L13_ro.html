@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 13 · Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 13 · Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L13.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261108s", "L13_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L13.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 13 · Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L13/lecture13_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L13.html" class="lang-btn">EN</a><a href="L13_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din prognozele cursului cînd modificați un control. Prognozele sînt cele din anul de test, 1 noiembrie 2025 – 31 octombrie 2026 (360 de zile cu toate cele 24 de ore și toate modelele disponibile): regula naivă, LEAR (model autoregresiv estimat prin Lasso), DNN (rețea neuronală profundă cu 24 de ieșiri), N-BEATS (analiza prin expansiune în baze neuronale) și modelele fundație Chronos-2, Chronos-Bolt și TimesFM (model fundație pentru serii de timp), folosite zero-shot, adică fără nicio antrenare pe datele noastre. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="toc"><a href="#s-epf">Prognoza prețurilor pentru ziua următoare în România</a> · <a href="#s-eval">Este o prognoză cu adevărat mai bună?</a> · <a href="#s-fm">Modele fundație: contextul și cuantilele</a> · <a href="#s-risk">Valoarea expusă la risc cu un model fundație</a></p>
+<h2 class="sec" id="s-epf">Prognoza prețurilor pentru ziua următoare în România</h2>
+<section class="blk" id="forecast-week">
+  <h3>O săptămînă de prognoze: nivelul este corect, vîrfurile sînt netezite</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L13_forecast_week_ro.jpg" alt="Slide-ul 27: O săptămînă de prognoze: nivelul este corect, vîrfurile sînt netezite" loading="lazy"></a>
+      <figcaption>Slide-ul 27</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="fw-w">Săptămîna (începe lunea): <b id="fw-w-v"></b></label><input type="range" id="fw-w" min="0" max="51" step="1" value="50"></div><div class="ctl ctl-tg" id="fw-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="fw-m" value="naive"> Naiv (săptămînal/zilnic)</label><label class="tg"><input type="checkbox" name="fw-m" value="lear" checked> LEAR</label><label class="tg"><input type="checkbox" name="fw-m" value="dnn" checked> DNN</label><label class="tg"><input type="checkbox" name="fw-m" value="nbeats"> N-BEATS</label><label class="tg"><input type="checkbox" name="fw-m" value="chronos2" checked> Chronos-2</label><label class="tg"><input type="checkbox" name="fw-m" value="chronos2_cov"> Chronos-2 + covariabile</label><label class="tg"><input type="checkbox" name="fw-m" value="bolt"> Chronos-Bolt</label><label class="tg"><input type="checkbox" name="fw-m" value="timesfm"> TimesFM 2.5</label><label class="tg"><input type="checkbox" name="fw-m" value="ens"> Ansamblu LEAR+DNN+Chronos-2</label></div></div><button class="btn play" id="fw-play" type="button"></button></div><div class="charts one"><div class="chart" id="fw-chart"></div></div><ul class="out" id="fw-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_forecast_week" target="_blank" rel="noopener">NN_L13_forecast_week</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_forecast_week/NN_L13_forecast_week.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> În săptămîna din curs, 19–25 octombrie 2026, care prognoză a fost cea mai apropiată de prețurile realizate: LEAR, DNN sau Chronos-2, un model fundație care nu a văzut prețuri românești la antrenare?</div>
+  <details><summary>Răspuns</summary><p>Chronos-2, cu o eroare absolută medie (MAE) de 25,41 EUR/MWh, față de 32,33 EUR/MWh pentru DNN și 43,34 EUR/MWh pentru LEAR (cifrele din curs). Pe întregul an de test, ordinea este aceeași în vîrf: Chronos-2 cu covariabile 20,41, Chronos-2 20,72, LEAR 22,79, DNN 23,06 EUR/MWh. Mutați săptămîna: toate modelele prind nivelul și netezesc vîrfurile de seară; săptămînile cu cele mai mari erori sînt cele cu salturi de preț pe care niciun model nu le-a anticipat.</p></details>
+</section>
+<section class="blk" id="mae-by-hour">
+  <h3>Erorile sînt cele mai mari seara și în orele cu producție solară</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L13_mae_by_hour_ro.jpg" alt="Slide-ul 26: Erorile sînt cele mai mari seara și în orele cu producție solară" loading="lazy"></a>
+      <figcaption>Slide-ul 26</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="mh-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="mh-m" value="naive" checked> Naiv (săptămînal/zilnic)</label><label class="tg"><input type="checkbox" name="mh-m" value="lear" checked> LEAR</label><label class="tg"><input type="checkbox" name="mh-m" value="dnn" checked> DNN</label><label class="tg"><input type="checkbox" name="mh-m" value="nbeats"> N-BEATS</label><label class="tg"><input type="checkbox" name="mh-m" value="chronos2" checked> Chronos-2</label><label class="tg"><input type="checkbox" name="mh-m" value="chronos2_cov"> Chronos-2 + covariabile</label><label class="tg"><input type="checkbox" name="mh-m" value="bolt"> Chronos-Bolt</label><label class="tg"><input type="checkbox" name="mh-m" value="timesfm"> TimesFM 2.5</label><label class="tg"><input type="checkbox" name="mh-m" value="ens"> Ansamblu LEAR+DNN+Chronos-2</label></div></div><div class="ctl"><label for="mh-s">Perioada</label><select id="mh-s"><option value="all" selected>Tot anul de test</option><option value="win">Iarna (dec–feb)</option><option value="spr">Primăvara (mar–mai)</option><option value="sum">Vara (iun–aug)</option><option value="aut">Toamna (sep–oct)</option></select></div></div><div class="charts "><div class="chart" id="mh-chart"></div><div class="chart" id="mh-bar"></div></div><ul class="out" id="mh-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_mae_by_hour" target="_blank" rel="noopener">NN_L13_mae_by_hour</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_mae_by_hour/NN_L13_mae_by_hour.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> La ce ore ale zilei sînt prognozele cele mai slabe și de ce?</div>
+  <details><summary>Răspuns</summary><p>Seara: pentru LEAR, ora cea mai slabă este 19:00 (35,78 EUR/MWh), iar cea mai bună 01:00 (10,75 EUR/MWh); Chronos-2 are aceeași oră cea mai slabă (34,05) și cea mai bună (8,57 EUR/MWh). Vîrful de seară vine cînd producția solară a dispărut și prețurile sar; noaptea este liniștită și previzibilă. Alegeți primăvara sau vara pentru a vedea a doua cocoașă a erorilor, la amiază, cînd producția solară împinge prețurile în jos, uneori sub zero.</p></details>
+</section><h2 class="sec" id="s-eval">Este o prognoză cu adevărat mai bună?</h2>
+<section class="blk" id="dm-test">
+  <h3>Care prognoză este semnificativ mai bună? Tabla de șah completă</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L13_dm_pvalues_ro.jpg" alt="Slide-ul 31: Care prognoză este semnificativ mai bună? Tabla de șah completă" loading="lazy"></a>
+      <figcaption>Slide-ul 31</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="dm-a">Modelul A (referința)</label><select id="dm-a"><option value="naive">Naiv (săptămînal/zilnic)</option><option value="lear" selected>LEAR</option><option value="dnn">DNN</option><option value="nbeats">N-BEATS</option><option value="chronos2">Chronos-2</option><option value="chronos2_cov">Chronos-2 + covariabile</option><option value="bolt">Chronos-Bolt</option><option value="timesfm">TimesFM 2.5</option><option value="ens">Ansamblu LEAR+DNN+Chronos-2</option></select></div><div class="ctl"><label for="dm-b">Modelul B (este mai bun?)</label><select id="dm-b"><option value="naive">Naiv (săptămînal/zilnic)</option><option value="lear">LEAR</option><option value="dnn">DNN</option><option value="nbeats">N-BEATS</option><option value="chronos2" selected>Chronos-2</option><option value="chronos2_cov">Chronos-2 + covariabile</option><option value="bolt">Chronos-Bolt</option><option value="timesfm">TimesFM 2.5</option><option value="ens">Ansamblu LEAR+DNN+Chronos-2</option></select></div><div class="ctl ctl-tg" id="dm-l"><span class="lbl">Pierderea</span><div class="tgs"><label class="tg"><input type="radio" name="dm-l" value="abs" checked> eroarea absolută</label><label class="tg"><input type="radio" name="dm-l" value="sq"> eroarea pătratică</label></div></div></div><div class="charts "><div class="chart" id="dm-d"></div><div class="chart" id="dm-c"></div></div><ul class="out" id="dm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_dm_pvalues" target="_blank" rel="noopener">NN_L13_dm_pvalues</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_dm_pvalues/NN_L13_dm_pvalues.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Chronos-2 are o MAE mai mică decît LEAR pe anul de test (20,72 față de 22,79 EUR/MWh). Este diferența semnificativă statistic?</div>
+  <details><summary>Răspuns</summary><p>Da. Testul Diebold–Mariano (DM) compară sumele zilnice ale erorilor absolute ale celor două modele pe cele 360 de zile; cursul raportează o valoare p sub 0,0001 pentru „Chronos-2 este mai precis decît LEAR”. Pentru DNN față de LEAR, valoarea p este 0,76 (nicio dovadă că DNN este mai bun), pentru N-BEATS față de DNN 0,36. O MAE mai mică pe un an de test nu ajunge: curba din dreapta trebuie să crească constant, nu din cauza cîtorva zile.</p></details>
+</section><h2 class="sec" id="s-fm">Modele fundație: contextul și cuantilele</h2>
+<section class="blk" id="context-length">
+  <h3>Un context mai lung ajută modelul fundație, pînă la un punct</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L13_context_length_ro.jpg" alt="Slide-ul 28: Un context mai lung ajută modelul fundație, pînă la un punct" loading="lazy"></a>
+      <figcaption>Slide-ul 28</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Lungimea contextului Chronos-2: <b id="cl-c-v"></b></label><input type="range" id="cl-c" min="0" max="3" step="1" value="2"></div><div class="ctl"><label for="cl-w">Media mobilă a MAE zilnice (zile): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="1" max="60" step="1" value="30"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-bar"></div><div class="chart" id="cl-roll"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_context_length" target="_blank" rel="noopener">NN_L13_context_length</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_context_length/NN_L13_context_length.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Chronos-2 prognozează ziua următoare din ultimele ore de prețuri pe care le primește. Ajută întotdeauna un istoric mai lung?</div>
+  <details><summary>Răspuns</summary><p>Pînă la un punct. Cu 168 de ore (o săptămînă), MAE este 24,45 EUR/MWh, cu 512 ore 21,34, cu 2.048 de ore (circa 85 de zile) 20,72, iar cu 8.192 de ore (circa 341 de zile) 20,95 EUR/MWh (cifrele din curs). O săptămînă este prea scurtă pentru ca tiparul săptămînal să se repete suficient; un an întreg de context readuce vechiul regim al prețurilor și nu aduce nimic peste circa trei luni.</p></details>
+</section>
+<section class="blk" id="quantile-fan">
+  <h3>O săptămînă de cuantile Chronos-2: banda se lărgește acolo unde prețurile sar</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L13_chronos_fan_ro.jpg" alt="Slide-ul 34: O săptămînă de cuantile Chronos-2: banda se lărgește acolo unde prețurile sar" loading="lazy"></a>
+      <figcaption>Slide-ul 34</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="qf-w">Săptămîna (începe lunea): <b id="qf-w-v"></b></label><input type="range" id="qf-w" min="0" max="51" step="1" value="50"></div><div class="ctl ctl-tg" id="qf-l"><span class="lbl">Intervalul de prognoză</span><div class="tgs"><label class="tg"><input type="radio" name="qf-l" value="50"> 50%</label><label class="tg"><input type="radio" name="qf-l" value="80" checked> 80%</label><label class="tg"><input type="radio" name="qf-l" value="90"> 90%</label></div></div><div class="ctl ctl-tg" id="qf-c"><span class="lbl">Corecția</span><div class="tgs"><label class="tg"><input type="checkbox" name="qf-c" value="conf"> conformală (split-conformal)</label></div></div><div class="ctl"><label for="qf-n">Fereastra de calibrare (zile): <b id="qf-n-v"></b></label><input type="range" id="qf-n" min="10" max="60" step="5" value="60"></div><button class="btn play" id="qf-play" type="button"></button></div><div class="charts "><div class="chart" id="qf-fan"></div><div class="chart" id="qf-cov"></div></div><ul class="out" id="qf-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_chronos_fan" target="_blank" rel="noopener">NN_L13_chronos_fan</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_chronos_fan/NN_L13_chronos_fan.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Chronos-2 dă și cuantile. Conține intervalul său de 80% prețul realizat în 80% din cazuri?</div>
+  <details><summary>Răspuns</summary><p>Nu întocmai: intervalul brut de 80% al Chronos-2 acoperă 76,5% din orele anului de test (lățimea medie 60,03 EUR/MWh). Corecția conformală (split-conformal) lărgește sau îngustează intervalul cu cuantila erorilor din ultimele 60 de zile și aduce acoperirea la 79,3% (lățimea 63,89 EUR/MWh); pentru 90%: 88,3% brut, 89,4% conformal. O fereastră de calibrare mai scurtă reacționează mai repede, dar este mai zgomotoasă.</p></details>
+</section><h2 class="sec" id="s-risk">Valoarea expusă la risc cu un model fundație</h2>
+<section class="blk" id="var-backtest">
+  <h3>S&P 500: VaR calibrată a modelului fundație urmărește regimurile de volatilitate</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=41" target="_blank" rel="noopener"><img src="slides/L13_var_sp500_ro.jpg" alt="Slide-ul 41: S&P 500: VaR calibrată a modelului fundație urmărește regimurile de volatilitate" loading="lazy"></a>
+      <figcaption>Slide-ul 41</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="va-a">Activul</label><select id="va-a"><option value="SP500" selected>S&P 500</option><option value="BTCUSD">Bitcoin (BTC/USD)</option></select></div><div class="ctl ctl-tg" id="va-q"><span class="lbl">Nivelul VaR</span><div class="tgs"><label class="tg"><input type="radio" name="va-q" value="01" checked> 1% (99%)</label><label class="tg"><input type="radio" name="va-q" value="05"> 5% (95%)</label></div></div><div class="ctl"><label for="va-m">Modelul de comparație</label><select id="va-m"><option value="hs" selected>Simulare istorică, 250 de zile</option><option value="garch">GARCH(1,1) cu erori Student-t</option><option value="ch">Chronos-2, cuantila brută</option></select></div><div class="ctl"><label for="va-n">Fereastra de calibrare conformală (zile de tranzacționare): <b id="va-n-v"></b></label><input type="range" id="va-n" min="50" max="250" step="10" value="250"></div><button class="btn play" id="va-play" type="button"></button></div><div class="charts "><div class="chart" id="va-chart"></div><div class="chart" id="va-bar"></div></div><ul class="out" id="va-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_var_sp500" target="_blank" rel="noopener">NN_L13_var_sp500</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_var_sp500/NN_L13_var_sp500.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> O valoare expusă la risc (VaR) de 1% ar trebui depășită în circa 1% din zile. În ianuarie 2020 – octombrie 2026 (1.717 zile de tranzacționare pentru S&P 500, 17,2 depășiri așteptate), cîte depășiri are cuantila brută a Chronos-2 și cîte după deplasarea conformală?</div>
+  <details><summary>Răspuns</summary><p>22 pentru cuantila brută (1,28%, testul Kupiec p = 0,262) și 16 cu deplasarea conformală calibrată pe 250 de zile de tranzacționare (0,93%, p = 0,774); simularea istorică are 31 (p = 0,003), iar GARCH(1,1) 32 (p = 0,001). La 5%, cuantila brută a Chronos-2 este prea strînsă (122 de depășiri față de 85,9 așteptate, p < 0,001), iar deplasarea conformală o aduce la 93 (p = 0,434). Testul Kupiec întreabă doar dacă proporția depășirilor este egală cu nivelul nominal.</p></details>
+</section>
+<p class="src foot">Prețurile pentru ziua următoare din România (orare, EUR/MWh) și consumul: energy-charts.info (Institutul Fraunhofer pentru Sisteme de Energie Solară, ISE), din datele burselor și ale ENTSO-E (Rețeaua europeană a operatorilor de transport și sistem pentru energie electrică). Prețurile zilnice de închidere ale S&P 500 și Bitcoin (BTC/USD): datele de piață ale cursului (data/clean). Toate prognozele, cuantilele și seriile de valoare expusă la risc au fost calculate de lectures/L13/analysis_L13.py; pagina doar le recombină (erori, teste, deplasări conformale, numărul depășirilor).</p>
+</main>
+</body>
+</html>

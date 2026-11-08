@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursul 2 · Antrenarea rețelelor: propagarea înapoi a erorii și optimizarea</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 2 · Antrenarea rețelelor: propagarea înapoi a erorii și optimizarea">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261108s">
+<link rel="stylesheet" href="interactive.css?v=20261108s">
+<script>window.NN_LANG = 'ro';</script>
+<link rel="preload" as="script" href="L2.js?v=20261108s">
+<script>
+(function (early, page) {
+  'use strict';
+  let left = early.length, ok = true, parsed = document.readyState !== 'loading', started = false;
+  function add(src, k, done, ordered) {
+    const s = document.createElement('script');
+    s.src = k ? src + (src.indexOf('?') < 0 ? '?' : '&') + 'retry=' + k : src;
+    s.async = !ordered;
+    s.onload = () => done(true);
+    s.onerror = () => { s.remove(); if (k < 3) setTimeout(() => add(src, k + 1, done, ordered), 300 * (k + 1)); else done(false); };
+    document.head.appendChild(s);
+  }
+  function go() {
+    if (started || left || !parsed) return;
+    started = true;
+    if (!ok || !window.NNI) { console.error('NN: a script of the interactive charts did not load; the live charts are off.'); return; }
+    add(page, 0, () => {}, true);
+  }
+  early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
+  if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
+  go();
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L2.js?v=20261108s");
+</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 2 · Antrenarea rețelelor: propagarea înapoi a erorii și optimizarea</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L2/lecture2_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2" target="_blank" rel="noopener">Quantlets</a></li>
+  <li class="lang-switcher"><a href="L2.html" class="lang-btn">EN</a><a href="L2_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain">
+<p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Primul bloc rulează coborîrea pe gradient chiar în browser, pe o regresie reală; celelalte reiau antrenările din curs.</p>
+<p class="toc"><a href="#s-gd">Coborîrea pe gradient și rata de învățare</a> · <a href="#s-opt">Optimizatori și mini-loturi</a> · <a href="#s-deep">Rețele adînci: gradienți care se sting</a></p>
+<h2 class="sec" id="s-gd">Coborîrea pe gradient și rata de învățare</h2>
+<section class="blk" id="gd-paths">
+  <h3>Intrările nescalate transformă pierderea într-o vale îngustă</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L2_gd_paths_ro.jpg" alt="Slide-ul 7: Intrările nescalate transformă pierderea într-o vale îngustă" loading="lazy"></a>
+      <figcaption>Slide-ul 7</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="gd-x"><span class="lbl">Venitul median</span><div class="tgs"><label class="tg"><input type="radio" name="gd-x" value="raw" checked> brut, în 10.000 USD</label><label class="tg"><input type="radio" name="gd-x" value="std"> standardizat</label></div></div><div class="ctl"><label for="gd-e">Pasul η, ca multiplu al pasului sigur 1/λmax: <b id="gd-e-v"></b></label><input type="range" id="gd-e" min="0.1" max="2.2" step="0.05" value="1"></div><div class="ctl"><label for="gd-m">Momentul β (0 = coborîre simplă): <b id="gd-m-v"></b></label><input type="range" id="gd-m" min="0" max="0.95" step="0.05" value="0"></div><div class="ctl"><label for="gd-k">Numărul de pași: <b id="gd-k-v"></b></label><input type="range" id="gd-k" min="1" max="200" step="1" value="60"></div><button class="btn play" id="gd-play" type="button"></button></div><div class="charts "><div class="chart" id="gd-path"></div><div class="chart" id="gd-loss"></div></div><ul class="out" id="gd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_gd_paths" target="_blank" rel="noopener">NN_L2_gd_paths</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_gd_paths/NN_L2_gd_paths.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Pe scara brută a venitului, suprafața pierderii este o vale lungă și îngustă. De ce avansează coborîrea pe gradient atît de încet de-a lungul ei și ce schimbă standardizarea venitului?</div>
+  <details><summary>Răspuns</summary><p>Cele două direcții ale văii au curburile λmax = 38,8 și λmin = 0,37 (numărul de condiționare 104): pasul trebuie să rămînă sub 2/λmax ca să nu diveargă (încercați 2,05 × 1/λmax), iar la acest pas direcția plată este parcursă de 104 ori mai încet. După 60 de pași, MSE este încă 1,486, față de un minim de 0,701. Momentul (β = 0,9 cu jumătate din pas) acumulează partea constantă a gradientului și ajunge la 0,704. Standardizarea face valea rotundă (numărul de condiționare 1,0): un singur pas de 1/λmax ajunge în minim.</p></details>
+</section>
+<section class="blk" id="lr-sweep">
+  <h3>Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L2_lr_sweep_ro.jpg" alt="Slide-ul 17: Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge" loading="lazy"></a>
+      <figcaption>Slide-ul 17</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="lr-i">Rata de învățare η (SGD): <b id="lr-i-v"></b></label><input type="range" id="lr-i" min="0" max="8" step="1" value="6"></div><div class="ctl ctl-tg" id="lr-s"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="lr-s" value="all" checked> Curbele celorlalte rate (gri)</label></div></div><button class="btn play" id="lr-play" type="button"></button></div><div class="charts "><div class="chart" id="lr-curve"></div><div class="chart" id="lr-all"></div></div><ul class="out" id="lr-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_lr_sweep" target="_blank" rel="noopener">NN_L2_lr_sweep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_lr_sweep/NN_L2_lr_sweep.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> SGD simplu (coborîre stocastică pe gradient), 30 de epoci: ce rată de învățare dă cea mai mică MSE pe validare și ce se întîmplă imediat peste ea?</div>
+  <details><summary>Răspuns</summary><p>η = 0,1 dă cea mai mică MSE pe validare, 0,281 (regresia liniară ajunge la 0,500). Un pas mai sus, la η = 0,3, două din cele trei inițializări diverg, iar la η = 1 diverg toate trei. O rată prea mică este lentă, nu greșită: la η = 0,0001, MSE este încă între 1,005 și 1,142 după 30 de epoci. Rata cea mai bună stă chiar sub limita de divergență; de aceea testele de rată parcurg η pe o scară logaritmică.</p></details>
+</section><h2 class="sec" id="s-opt">Optimizatori și mini-loturi</h2>
+<section class="blk" id="optimizers">
+  <h3>Pe datele California, toți optimizatorii ajustați ajung aproape; cei adaptivi ajung mai sigur</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L2_optimizers_ro.jpg" alt="Slide-ul 22: Pe datele California, toți optimizatorii ajustați ajung aproape; cei adaptivi ajung mai sigur" loading="lazy"></a>
+      <figcaption>Slide-ul 22</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="op-o">Optimizatorul</label><select id="op-o"><option value="sgd">SGD</option><option value="momentum">SGD + moment</option><option value="rmsprop">RMSProp</option><option value="adam" selected>Adam</option><option value="adamw">AdamW</option></select></div><div class="ctl"><label for="op-l">Rata de învățare (grila de reglaj a cursului): <b id="op-l-v"></b></label><input type="range" id="op-l" min="0" max="2" step="1" value="2"></div><div class="ctl ctl-tg" id="op-s"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="op-s" value="seeds" checked> Fiecare inițializare</label><label class="tg"><input type="checkbox" name="op-s" value="best"> Ceilalți optimizatori la rata lor cea mai bună</label></div></div><button class="btn play" id="op-play" type="button"></button></div><div class="charts one"><div class="chart" id="op-chart"></div></div><ul class="out" id="op-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_optimizers" target="_blank" rel="noopener">NN_L2_optimizers</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_optimizers/NN_L2_optimizers.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Fiecare optimizator a fost reglat pe o grilă de trei rate de învățare (3 inițializări, 60 de epoci). Contează alegerea optimizatorului la fel de mult ca alegerea ratei sale de învățare?</div>
+  <details><summary>Răspuns</summary><p>În cadrul aceluiași optimizator, rata contează mai mult: Adam termină la 0,288 cu η = 0,0003 și la 0,259 cu η = 0,003; SGD termină la 0,307 cu η = 0,01 și la 0,274 cu η = 0,1. La ratele lor cele mai bune, cei cinci optimizatori termină aproape unul de altul (MSE pe validare între 0,259 și 0,274) și toți depășesc regresia liniară (0,500); Adam și AdamW ajung acolo mai repede (0,299 după 10 epoci, față de 0,350 pentru SGD) și cu o dispersie mai mică între inițializări. Pe setul de test, Adam nu este semnificativ mai bun decît SGD (t pereche = 1,01, p = 0,37, 5 inițializări).</p></details>
+</section>
+<section class="blk" id="batch-size">
+  <h3>Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L2_batch_size_ro.jpg" alt="Slide-ul 18: Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă" loading="lazy"></a>
+      <figcaption>Slide-ul 18</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bs-x"><span class="lbl">Axa orizontală</span><div class="tgs"><label class="tg"><input type="radio" name="bs-x" value="ep" checked> Epoci (treceri prin date)</label><label class="tg"><input type="radio" name="bs-x" value="st"> Pași de gradient</label><label class="tg"><input type="radio" name="bs-x" value="sec"> Secunde de calcul</label></div></div><div class="ctl ctl-tg" id="bs-b"><span class="lbl">Mărimea lotului</span><div class="tgs"><label class="tg"><input type="checkbox" name="bs-b" value="16" checked> 16</label><label class="tg"><input type="checkbox" name="bs-b" value="128" checked> 128</label><label class="tg"><input type="checkbox" name="bs-b" value="1024" checked> 1024</label></div></div></div><div class="charts one"><div class="chart" id="bs-chart"></div></div><ul class="out" id="bs-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_batch_size" target="_blank" rel="noopener">NN_L2_batch_size</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_batch_size/NN_L2_batch_size.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Loturi de 16, 128 sau 1.024 de exemple, cu aceeași rată de învățare (Adam, 0,001): care învață cel mai repede pe epocă, pe pas de gradient și pe secundă?</div>
+  <details><summary>Răspuns</summary><p>Pe epocă cîștigă lotul de 16 (MSE pe validare 0,294 după 5 epoci, față de 0,367 pentru 128 și 0,870 pentru 1.024), pentru că face 774 de pași pe epocă în loc de 97 sau 13. Pe pas de gradient, lotul mare este cel puțin la fel de bun: fiecare pas al său mediază mai multe exemple. Pe secundă, imaginea se schimbă din nou: cele 40 de epoci au durat 25,8 s cu lotul de 16, 3,7 s cu 128 și 1,0 s cu 1.024 pe acest laptop. Cu aceeași rată de învățare, lotul mare nu a convers după 40 de epoci (0,335); loturile mari cer de obicei o rată de învățare mai mare.</p></details>
+</section><h2 class="sec" id="s-deep">Rețele adînci: gradienți care se sting</h2>
+<section class="blk" id="vanishing">
+  <h3>Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi</h3>
+  <div class="pair">
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L2_vanishing_ro.jpg" alt="Slide-ul 13: Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi" loading="lazy"></a>
+      <figcaption>Slide-ul 13</figcaption></figure>
+    <div class="live"><div class="ctls"><div class="ctl"><label for="vg-a">Funcția de activare</label><select id="vg-a"><option value="sig" selected>sigmoidă</option><option value="tanh">tanh</option><option value="relu">ReLU</option></select></div><div class="ctl"><label for="vg-i">Inițializarea ponderilor</label><select id="vg-i"><option value="xavier" selected>Xavier (Glorot)</option><option value="he">He (Kaiming)</option><option value="small">N(0; 0,01²)</option><option value="large">N(0; 1)</option></select></div><div class="ctl"><label for="vg-d">Numărul de straturi ascunse: <b id="vg-d-v"></b></label><input type="range" id="vg-d" min="0" max="7" step="1" value="4"></div><button class="btn play" id="vg-play" type="button"></button></div><div class="charts one"><div class="chart" id="vg-chart"></div></div><ul class="out" id="vg-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_vanishing" target="_blank" rel="noopener">NN_L2_vanishing</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_vanishing/NN_L2_vanishing.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
+  </div>
+  <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Zece straturi ascunse de cîte 64 de neuroni sigmoizi, cu inițializare Xavier: de cîte ori este mai mic gradientul primului strat decît al ultimului?</div>
+  <details><summary>Răspuns</summary><p>De aproximativ 10⁷ ori (8,5 × 10⁻⁷ față de 7,5; media a 5 inițializări pe un lot de 512 grupuri de locuințe): fiecare strat sigmoid înmulțește semnalul propagat înapoi cu cel mult 0,25, deci primele straturi abia învață. Cu tanh și Xavier, raportul rămîne în jur de 0,6, iar cu ReLU și inițializarea He gradientul rămîne de același ordin în toate straturile. Ponderile mici N(0; 0,01²) micșorează semnalul în ambele sensuri (gradienți de 10⁻¹² la adîncimea 10), ponderile mari N(0; 1) îl fac să explodeze (peste 10¹⁶ la adîncimea 10, depășire numerică dincolo de ea). Modificați adîncimea: problema crește geometric cu numărul de straturi.</p></details>
+</section>
+<p class="src foot">Date: locuințele din California (StatLib, recensămîntul din 1990; 20.640 de grupuri de locuințe), împărțite 60/20/20 cu sămînța 20261108, ca în curs (analysis_L2.py): 12.384 de grupuri de antrenare, 4.128 de validare și 4.128 de test. Rețele: perceptron multistrat (MLP) cu două straturi ascunse de cîte 64 de neuroni ReLU (unitate liniară rectificată), eroarea pătratică medie (MSE) pentru valoarea mediană a locuințelor în 100.000 USD; SGD = coborîre stocastică pe gradient, RMSProp = propagarea rădăcinii mediei pătratice, Adam = estimarea adaptivă a momentelor.</p>
+</main>
+</body>
+</html>
