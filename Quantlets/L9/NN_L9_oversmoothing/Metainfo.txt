@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_oversmoothing'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Test PR-AUC of a GCN and mean cosine similarity of its node representations as a function of the number of layers (1-6, mean of 2 seeds): over-smoothing.'
+
+Keywords: 'over-smoothing, GCN depth, cosine similarity, message passing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/depth.csv'
+
+Output: 'oversmoothing.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_schedules'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Learning-rate schedules (constant, step decay, cosine annealing, one-cycle) for SGD with momentum and the resulting validation MSE of an MLP 64-64 on California housing (mean of 3 seeds).'
+
+Keywords: 'learning-rate schedule, cosine annealing, step decay, one-cycle, warm-up, SGD with momentum, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'schedules.png'

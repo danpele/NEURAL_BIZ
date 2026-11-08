@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_load_series'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Daily mean Romanian electricity load and its 365-day mean, from hourly ENTSO-E data.'
+
+Keywords: 'electricity load, Romania, seasonality, ENTSO-E, energy-charts'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ro_load_generation_hourly_utc.csv (energy-charts.info, ENTSO-E)'
+
+Output: 'load_series.png'

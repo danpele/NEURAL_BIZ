@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_uat_california'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Universal approximation on real data: one-hidden-layer sigmoid MLPs with 1, 3 and 50 units fitted to California house values as a function of latitude, against a straight line; held-out MSE.'
+
+Keywords: 'universal approximation theorem, hidden units, nonlinear regression, California housing, multilayer perceptron'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'uat_california.png'

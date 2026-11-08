@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_load_window'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test MAPE of the day-ahead LSTM for Romanian load as a function of the input window (24, 72, 168, 336 hours), 2 seeds each, against ridge ARX.'
+
+Keywords: 'window length, LSTM, memory, load forecasting, Romania'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'saved test MAPE of analysis_L5.py (load_window_results.json)'
+
+Output: 'load_window.png'

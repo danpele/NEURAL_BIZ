@@ -1,0 +1,607 @@
+{
+ "charts": {
+  "tokens_per_sentence": {
+   "source_en": "Financial PhraseBank (Malo et al., 2014)",
+   "source_ro": "Financial PhraseBank (Malo et al., 2014)",
+   "period_en": "4,838 sentences",
+   "period_ro": "4.838 de propoziții"
+  },
+  "next_token": {
+   "source_en": "European Central Bank, speeches dataset",
+   "source_ro": "Banca Centrală Europeană, setul de discursuri",
+   "period_en": "prompt from the ECB speech of 30 Oct 2026; model Qwen2.5-1.5B-Instruct",
+   "period_ro": "începutul unei fraze din discursul BCE din 30 octombrie 2026; modelul Qwen2.5-1.5B-Instruct"
+  },
+  "perplexity_size": {
+   "source_en": "European Central Bank, speeches dataset",
+   "source_ro": "Banca Centrală Europeană, setul de discursuri",
+   "period_en": "40 + 40 speeches, first 1,024 tokens of each",
+   "period_ro": "40 + 40 de discursuri, primii 1.024 de tokeni din fiecare"
+  },
+  "prompt_results": {
+   "source_en": "Financial PhraseBank (Malo et al., 2014) and Twitter financial news (zeroshot)",
+   "source_ro": "Financial PhraseBank (Malo et al., 2014) și Twitter financial news (zeroshot)",
+   "period_en": "test sets: 678 sentences (100\\,\\% agreement) and 900 tweets; 95\\,\\% bootstrap intervals",
+   "period_ro": "seturi de test: 678 de propoziții (acord 100\\,\\%) și 900 de tweet-uri; intervale bootstrap de 95\\,\\%"
+  },
+  "fewshot_curve": {
+   "source_en": "Financial PhraseBank (Malo et al., 2014)",
+   "source_ro": "Financial PhraseBank (Malo et al., 2014)",
+   "period_en": "test set of 678 sentences; bars = range over 3 seeds",
+   "period_ro": "setul de test de 678 de propoziții; barele = intervalul pe 3 valori ale generatorului aleator"
+  },
+  "prompt_sensitivity": {
+   "source_en": "Financial PhraseBank and Twitter financial news",
+   "source_ro": "Financial PhraseBank și Twitter financial news",
+   "period_en": "test sets as above; five paraphrases of the instruction",
+   "period_ro": "seturile de test de mai sus; cinci reformulări ale instrucțiunii"
+  },
+  "calibration": {
+   "source_en": "Financial PhraseBank (Malo et al., 2014)",
+   "source_ro": "Financial PhraseBank (Malo et al., 2014)",
+   "period_en": "test set of 678 sentences, 10 bins",
+   "period_ro": "setul de test de 678 de propoziții, 10 intervale"
+  },
+  "agreement": {
+   "source_en": "Financial PhraseBank (Malo et al., 2014)",
+   "source_ro": "Financial PhraseBank (Malo et al., 2014)",
+   "period_en": "sentences never used for training or for examples",
+   "period_ro": "propoziții nefolosite nici la antrenare, nici ca exemple"
+  },
+  "cost_accuracy": {
+   "source_en": "Financial PhraseBank (Malo et al., 2014)",
+   "source_ro": "Financial PhraseBank (Malo et al., 2014)",
+   "period_en": "test set of 678 sentences; time measured on a laptop graphics processor",
+   "period_ro": "setul de test de 678 de propoziții; timp măsurat pe procesorul grafic al unui laptop"
+  },
+  "rag_recall": {
+   "source_en": "European Central Bank, speeches dataset",
+   "source_ro": "Banca Centrală Europeană, setul de discursuri",
+   "period_en": "400 speeches, 8400 chunks; query = speech title",
+   "period_ro": "400 de discursuri, 8400 de fragmente; interogarea = titlul discursului"
+  },
+  "rag_qa": {
+   "source_en": "European Central Bank, speeches dataset",
+   "source_ro": "Banca Centrală Europeană, setul de discursuri",
+   "period_en": "160 single-speaker speeches from 15 Jan 2025 to 30 Oct 2026; model Qwen2.5-3B-Instruct",
+   "period_ro": "160 de discursuri cu un singur vorbitor, 15 ianuarie 2025 - 30 octombrie 2026; modelul Qwen2.5-3B-Instruct"
+  },
+  "llm_var": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cotații zilnice",
+   "period_en": "2 Jan 2025 to 30 Oct 2026, S\\&P 500, trading days",
+   "period_ro": "2 ianuarie 2025 - 30 octombrie 2026, S\\&P 500, zile de tranzacționare"
+  }
+ },
+ "seed": 20261108,
+ "models": {
+  "05B": {
+   "params_b": 0.49
+  },
+  "15B": {
+   "params_b": 1.54
+  },
+  "3B": {
+   "params_b": 3.09
+  }
+ },
+ "data": {
+  "pb_n": 4838,
+  "pb100_n": 2259,
+  "pb_tr": 1581,
+  "pb_te": 678,
+  "pb_share_neutral": 61.4,
+  "pb_share_pos": 25.2,
+  "pb_share_neg": 13.4,
+  "tw_tr": 9543,
+  "tw_va": 2388,
+  "tw_te": 900,
+  "tw_share_neutral": 65.6,
+  "pb_lev50": 627,
+  "pb_lev66": 763,
+  "pb_lev75": 1189,
+  "pb_lev100": 2259
+ },
+ "tok": {
+  "vocab_qwen": 151665,
+  "vocab_bert": 30522,
+  "words_mean": 23.1,
+  "qwen_mean": 31.1,
+  "bert_mean": 28.6,
+  "qwen_per_word": 1.35,
+  "bert_per_word": 1.24,
+  "ecb_tokens_mean": 4143,
+  "ecb_tokens_max": 22897,
+  "ecb_per_word": 1.31,
+  "ecb_total_m": 1.66,
+  "example": "- Cash flow from operating activities before investments was EUR 0.8 -1.2 million .",
+  "example_qwen": "- |  Cash |  flow |  from |  operating |  activities |  before |  investments |  was |  EUR |   | 0 | . | 8 |  - | 1 | . | 2 |  million |  .",
+  "example_n_qwen": 20,
+  "example_n_bert": 20
+ },
+ "next": {
+  "prompt": "The inflation impact is limited:",
+  "speech_date": "2026-10-30",
+  "speaker": "Philip R. Lane",
+  "true_next": "prices",
+  "entropy": {
+   "t05": 1.74,
+   "t10": 6.2,
+   "t20": 10.29
+  },
+  "top1": "the",
+  "top1_p": 10.1,
+  "top1_p05": 49.9,
+  "top1_p2": 0.4
+ },
+ "ppl_data": {
+  "old_first": "2022-02-10",
+  "old_last": "2023-11-30",
+  "new_first": "2025-08-20",
+  "new_last": "2026-10-02",
+  "n_each": 40,
+  "n_tokens": 1024
+ },
+ "ppl": {
+  "05B": {
+   "old": 13.88,
+   "new": 14.71,
+   "nll_new": 2.688
+  },
+  "15B": {
+   "old": 9.99,
+   "new": 10.63,
+   "nll_new": 2.364
+  },
+  "3B": {
+   "old": 8.9,
+   "new": 9.43,
+   "nll_new": 2.244
+  }
+ },
+ "ppl_slope": -0.1,
+ "tfidf": {
+  "pb": {
+   "C": 10.0,
+   "n_features": 5203
+  },
+  "tw": {
+   "C": 1.0,
+   "n_features": 18902
+  }
+ },
+ "cot": {
+  "pb": {
+   "parsed_pct": 100.0,
+   "example_text": "CapMan said the deal 's effect on its cash flow for 2009 totals EUR3 .4 m , but the transaction would not affect its financial results for 2009 as it was executed at fair value .",
+   "example_out": "Reasoning: The sentence indicates that the deal has a positive impact on CapMan's cash flow, which is generally seen as beneficial for investors. However, it also clarifies that the transaction does not affect their financial results, suggesting no immediate change to profitability. Given these points, the overall sentiment leans positive as it highlights a direct benefit. Label: positive",
+   "mean_words": 35.9
+  },
+  "tw": {
+   "parsed_pct": 100.0,
+   "example_text": "Lebanon Turns to IMF as Fitch Sounds Alarm on Default",
+   "example_out": "This tweet suggests a potential negative development for Lebanon's economy, which could indirectly impact global markets due to its relationship with the International Monetary Fund (IMF). The mention of Fitch sounding an alarm on default implies concerns about financial stability and potential economic instability, which is typically viewed negatively by investors. Therefore, the sentiment leans towards bearish. Label: bearish",
+   "mean_words": 42.1
+  }
+ },
+ "probe": {
+  "pb": {
+   "C": 0.1,
+   "dim": 1536
+  },
+  "tw": {
+   "C": 0.01,
+   "dim": 1536
+  }
+ },
+ "cls": {
+  "pb": {
+   "majority": {
+    "f1": 25.4,
+    "acc": 61.4,
+    "lo": 24.4,
+    "hi": 26.3,
+    "ms": 0.0
+   },
+   "tfidf": {
+    "f1": 86.9,
+    "acc": 90.3,
+    "lo": 83.8,
+    "hi": 90.0,
+    "ms": 2.5
+   },
+   "zs_05B": {
+    "f1": 31.0,
+    "acc": 62.8,
+    "lo": 27.5,
+    "hi": 34.8,
+    "ms": 19.54
+   },
+   "zs_15B": {
+    "f1": 85.1,
+    "acc": 85.3,
+    "lo": 82.2,
+    "hi": 87.9,
+    "ms": 28.51
+   },
+   "zs_3B": {
+    "f1": 92.2,
+    "acc": 93.1,
+    "lo": 89.8,
+    "hi": 94.4,
+    "ms": 48.5
+   },
+   "fs_15B": {
+    "f1": 85.9,
+    "acc": 87.8,
+    "f1_min": 85.7,
+    "f1_max": 86.1,
+    "lo": 82.5,
+    "hi": 88.7,
+    "ms": 22.04
+   },
+   "fs_3B": {
+    "f1": 92.1,
+    "acc": 93.4,
+    "f1_min": 91.0,
+    "f1_max": 93.6,
+    "lo": 89.2,
+    "hi": 94.1,
+    "ms": 40.78
+   },
+   "cot_3B": {
+    "f1": 88.4,
+    "acc": 88.5,
+    "lo": 85.7,
+    "hi": 90.7,
+    "ms": 389.48
+   },
+   "probe": {
+    "f1": 87.5,
+    "acc": 91.3,
+    "lo": 84.5,
+    "hi": 90.7,
+    "ms": 25.37
+   },
+   "best": "zs_3B",
+   "best_llm": "zs_3B"
+  },
+  "tw": {
+   "majority": {
+    "f1": 26.4,
+    "acc": 65.6,
+    "lo": 25.7,
+    "hi": 27.1,
+    "ms": 0.0
+   },
+   "tfidf": {
+    "f1": 75.5,
+    "acc": 81.4,
+    "lo": 71.9,
+    "hi": 78.7,
+    "ms": 8.59
+   },
+   "zs_05B": {
+    "f1": 18.7,
+    "acc": 23.1,
+    "lo": 15.7,
+    "hi": 21.9,
+    "ms": 18.6
+   },
+   "zs_15B": {
+    "f1": 40.9,
+    "acc": 37.8,
+    "lo": 37.9,
+    "hi": 43.7,
+    "ms": 31.48
+   },
+   "zs_3B": {
+    "f1": 77.4,
+    "acc": 81.2,
+    "lo": 74.2,
+    "hi": 80.3,
+    "ms": 50.56
+   },
+   "fs_15B": {
+    "f1": 68.8,
+    "acc": 73.7,
+    "f1_min": 65.7,
+    "f1_max": 74.2,
+    "lo": 62.3,
+    "hi": 69.1,
+    "ms": 29.74
+   },
+   "fs_3B": {
+    "f1": 79.8,
+    "acc": 84.3,
+    "f1_min": 79.6,
+    "f1_max": 80.1,
+    "lo": 77.2,
+    "hi": 83.2,
+    "ms": 58.19
+   },
+   "cot_3B": {
+    "f1": 65.1,
+    "acc": 64.7,
+    "lo": 62.0,
+    "hi": 68.0,
+    "ms": 507.68
+   },
+   "probe": {
+    "f1": 79.0,
+    "acc": 83.0,
+    "lo": 75.7,
+    "hi": 82.0,
+    "ms": 9.8
+   },
+   "best": "fs_3B",
+   "best_llm": "fs_3B"
+  }
+ },
+ "fewshot": {
+  "15B": {
+   "0": {
+    "mean": 85.1,
+    "min": 85.1,
+    "max": 85.1
+   },
+   "1": {
+    "mean": 87.3,
+    "min": 86.0,
+    "max": 88.3
+   },
+   "2": {
+    "mean": 86.0,
+    "min": 85.0,
+    "max": 86.6
+   },
+   "4": {
+    "mean": 85.9,
+    "min": 85.7,
+    "max": 86.1
+   },
+   "8": {
+    "mean": 84.1,
+    "min": 83.3,
+    "max": 84.6
+   }
+  },
+  "3B": {
+   "0": {
+    "mean": 92.2,
+    "min": 92.2,
+    "max": 92.2
+   },
+   "1": {
+    "mean": 89.5,
+    "min": 87.5,
+    "max": 91.1
+   },
+   "2": {
+    "mean": 90.4,
+    "min": 89.3,
+    "max": 91.7
+   },
+   "4": {
+    "mean": 92.1,
+    "min": 91.0,
+    "max": 93.6
+   },
+   "8": {
+    "mean": 91.3,
+    "min": 90.8,
+    "max": 91.6
+   }
+  }
+ },
+ "sens": {
+  "pb_15B": {
+   "min": 72.8,
+   "max": 87.0,
+   "range": 14.2,
+   "vals": [
+    85.1,
+    87.0,
+    83.1,
+    72.8,
+    76.3
+   ]
+  },
+  "pb_3B": {
+   "min": 88.5,
+   "max": 92.2,
+   "range": 3.6,
+   "vals": [
+    92.2,
+    91.4,
+    88.5,
+    90.0,
+    90.7
+   ]
+  },
+  "tw_15B": {
+   "min": 34.3,
+   "max": 47.6,
+   "range": 13.3,
+   "vals": [
+    40.9,
+    39.8,
+    39.6,
+    34.3,
+    47.6
+   ]
+  },
+  "tw_3B": {
+   "min": 65.5,
+   "max": 78.4,
+   "range": 12.9,
+   "vals": [
+    77.4,
+    78.4,
+    65.6,
+    65.5,
+    77.0
+   ]
+  }
+ },
+ "calib": {
+  "zs_3B": 4.7,
+  "fs_3B_s0": 3.6,
+  "tfidf": 5.4
+ },
+ "agree": {
+  "tfidf": {
+   "100": 90.3,
+   "75": 72.8,
+   "66": 54.5,
+   "50": 54.9
+  },
+  "zs_3B": {
+   "100": 93.1,
+   "75": 77.2,
+   "66": 65.7,
+   "50": 53.7
+  },
+  "fs_3B": {
+   "100": 93.4,
+   "75": 80.5,
+   "66": 65.1,
+   "50": 58.2
+  }
+ },
+ "confusion": {
+  "model": "zs_3B",
+  "m": [
+   [
+    156,
+    2,
+    13
+   ],
+   [
+    1,
+    82,
+    8
+   ],
+   [
+    20,
+    3,
+    393
+   ]
+  ]
+ },
+ "hardware": "Apple silicon, PyTorch 2.15.0, device mps",
+ "rag": {
+  "n_speeches": 400,
+  "n_chunks": 8400,
+  "chunk_words": 200,
+  "overlap": 50,
+  "dense_dim": 384,
+  "embed_seconds": 56.8,
+  "tfidf": {
+   "r1": 35.2,
+   "r3": 59.0,
+   "r5": 67.0,
+   "r10": 75.0,
+   "mrr": 0.496
+  },
+  "bm25": {
+   "r1": 37.0,
+   "r3": 61.0,
+   "r5": 68.5,
+   "r10": 78.0,
+   "mrr": 0.515
+  },
+  "dense": {
+   "r1": 44.0,
+   "r3": 64.5,
+   "r5": 72.2,
+   "r10": 80.0,
+   "mrr": 0.567
+  },
+  "hybrid": {
+   "r1": 50.7,
+   "r3": 69.8,
+   "r5": 76.0,
+   "r10": 83.2,
+   "mrr": 0.622
+  },
+  "qa_n": 160,
+  "qa_first": "2025-01-15",
+  "qa_closed": {
+   "correct": 13.8,
+   "wrong": 86.2,
+   "abstain": 0.0
+  },
+  "closed_top_wrong": "Philip Lane",
+  "closed_top_wrong_n": 137,
+  "qa_closed_abstain": {
+   "correct": 0.0,
+   "wrong": 0.0,
+   "abstain": 100.0
+  },
+  "qa_rag": {
+   "correct": 81.2,
+   "wrong": 4.4,
+   "abstain": 14.4
+  },
+  "qa_oracle": {
+   "correct": 98.8,
+   "wrong": 0.0,
+   "abstain": 1.2
+  },
+  "qa_majority": {
+   "name": "Christine Lagarde",
+   "pct": 35.6
+  },
+  "qa_r3_hybrid": 73.1
+ },
+ "llmvar": {
+  "first": "2025-01-02",
+  "last": "2026-10-30",
+  "n": 459,
+  "window": 250,
+  "model": "Qwen2.5-3B-Instruct",
+  "parsed_05": 100.0,
+  "parsed_01": 100.0,
+  "llm_05": {
+   "viol": 28,
+   "rate": 6.1,
+   "kupiec_p": 0.295,
+   "mean": -1.99
+  },
+  "llm_01": {
+   "viol": 4,
+   "rate": 0.87,
+   "kupiec_p": 0.777,
+   "mean": -4.55
+  },
+  "hs_05": {
+   "viol": 23,
+   "rate": 5.01,
+   "kupiec_p": 0.991,
+   "mean": -1.56
+  },
+  "hs_01": {
+   "viol": 6,
+   "rate": 1.31,
+   "kupiec_p": 0.528,
+   "mean": -2.68
+  },
+  "garch_05": {
+   "viol": 35,
+   "rate": 7.63,
+   "kupiec_p": 0.016,
+   "mean": -1.42
+  },
+  "garch_01": {
+   "viol": 9,
+   "rate": 1.96,
+   "kupiec_p": 0.067,
+   "mean": -2.3
+  },
+  "exp_05": 23.0,
+  "exp_01": 4.6,
+  "corr_llm_garch_05": 0.05
+ },
+ "runtime_min": 2.2
+}

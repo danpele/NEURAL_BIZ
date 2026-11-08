@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_load_errors'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Day-ahead Romanian hourly load, test days 2024-2026: MAPE of seasonal naive, naive, ridge ARX, RNN, LSTM and GRU (mean of 3 seeds), and MAE by hour.'
+
+Keywords: 'load forecasting, LSTM, GRU, RNN, ridge regression, MAPE, Diebold-Mariano, Romania, electricity'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ro_load_generation_hourly_utc.csv; saved test forecasts of analysis_L5.py (load_errors_results.json)'
+
+Output: 'load_errors.png'

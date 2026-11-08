@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_price_history'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Daily mean day-ahead electricity prices in Romania and Germany-Luxembourg since 2015, with the means of 2019 and 2022, the highest day and the correlation of daily means. Source: energy-charts.info (Fraunhofer ISE), Romanian day-ahead prices.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv'
+
+Output: 'price_history.png'

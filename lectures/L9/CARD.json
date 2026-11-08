@@ -1,0 +1,41 @@
+{
+ "title": {
+  "en": "Graph neural networks",
+  "ro": "Rețele neuronale pe grafuri"
+ },
+ "topics": {
+  "en": [
+   "Financial data as graphs: adjacency, degree, normalised adjacency, Laplacian, permutation equivariance",
+   "Message passing, aggregators and the Weisfeiler–Leman test; receptive field and over-smoothing",
+   "GCN, GraphSAGE and GAT with full formulas; semi-supervised training on one large graph",
+   "Case study: anti-money laundering on the Elliptic Bitcoin graph (203,769 transactions), temporal split, against logistic regression and random forest",
+   "Precision, recall, PR-AUC, bootstrap intervals, alert budgets and concept drift after a dark-market shutdown",
+   "Explanation stability with graph embeddings; GNNs in production and across finance"
+  ],
+  "ro": [
+   "Datele financiare ca grafuri: adiacență, grad, adiacență normalizată, laplacian, echivarianță la permutări",
+   "Transmiterea mesajelor, agregatoarele și testul Weisfeiler–Leman; cîmpul receptiv și over-smoothing",
+   "GCN, GraphSAGE și GAT cu formulele complete; antrenare semi-supervizată pe un singur graf mare",
+   "Studiu de caz: combaterea spălării banilor pe graful Bitcoin Elliptic (203.769 de tranzacții), împărțire în timp, față de regresia logistică și pădurea aleatoare",
+   "Precizie, recall, PR-AUC, intervale bootstrap, bugete de alerte și schimbarea conceptului după închiderea unei piețe ilegale",
+   "Stabilitatea explicațiilor cu reprezentări de graf; rețelele GNN în producție și în finanțe"
+  ]
+ },
+ "further": [
+  {
+   "url": "https://arxiv.org/abs/1908.02591",
+   "en": "Weber et al. (2019), Anti-money laundering in Bitcoin (Elliptic data)",
+   "ro": "Weber et al. (2019), Anti-money laundering in Bitcoin (datele Elliptic)"
+  },
+  {
+   "url": "https://www.cs.mcgill.ca/~wlh/grl_book/",
+   "en": "W. L. Hamilton, Graph Representation Learning (book)",
+   "ro": "W. L. Hamilton, Graph Representation Learning (carte)"
+  },
+  {
+   "url": "https://pytorch-geometric.readthedocs.io",
+   "en": "PyTorch Geometric documentation",
+   "ro": "Documentația PyTorch Geometric"
+  }
+ ]
+}

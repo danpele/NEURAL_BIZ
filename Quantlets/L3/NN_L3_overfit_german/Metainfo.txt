@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_overfit_german'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Training and validation cross-entropy of an MLP 256-256 on 600 German credit applicants without regularisation and with dropout 0.5 plus weight decay, against logistic regression: overfitting within a few epochs.'
+
+Keywords: 'overfitting, generalisation gap, training curve, validation loss, dropout, weight decay, German credit'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit)'
+
+Output: 'overfit_german.png'

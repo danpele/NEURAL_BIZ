@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_context_length'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test-year mean absolute error of the zero-shot Chronos-2 forecast of Romanian day-ahead prices as a function of the context length (168 to 8,192 hours), against LEAR.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR, context length'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/forecasts_hourly.csv'
+
+Output: 'context_length.png'

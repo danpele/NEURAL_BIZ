@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_gd_paths'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Gradient descent and momentum on the real mean-squared-error surface of a one-variable regression of California house values on median income: raw (ill-conditioned) against standardised income.'
+
+Keywords: 'gradient descent, momentum, condition number, Hessian, feature scaling, loss surface, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'gd_paths.png'

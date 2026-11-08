@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_q_policy'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Policy learned by tabular Q-learning for a battery that sees only yesterday’s price ranking: action by hour and price quartile with 1 MWh stored.'
+
+Keywords: 'Q-learning, temporal difference, tabular reinforcement learning, battery dispatch, electricity prices'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'q_policy.png'

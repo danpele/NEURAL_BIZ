@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_model_comparison'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Macro-F1 on 2,388 test tweets for TF-IDF + logistic regression, an embedding bag, a small transformer with and without positions, and FinBERT zero-shot, frozen + logistic and fine-tuned (mean and sd over seeds).'
+
+Keywords: 'transformer, FinBERT, fine-tuning, TF-IDF, sentiment analysis, finance tweets, macro-F1'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L7/results/model_metrics.csv (from data/clean/twitter_fin_sentiment.csv)'
+
+Output: 'model_comparison.png'

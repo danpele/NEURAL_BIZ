@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_l1_l2_weights'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'First-layer weights of an MLP with 64 hidden units on German credit trained with an L1 penalty against an L2 penalty: L1 piles the weights at zero.'
+
+Keywords: 'L1 penalty, L2 penalty, lasso, ridge, sparsity, weight decay, German credit'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit)'
+
+Output: 'l1_l2_weights.png'

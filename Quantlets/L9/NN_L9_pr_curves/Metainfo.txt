@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_pr_curves'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Precision-recall curves on the test steps for logistic regression, random forest, GCN and random forest + GCN (scores averaged over seeds).'
+
+Keywords: 'precision-recall curve, PR-AUC, imbalanced classification, anti-money laundering'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/test_scores.csv'
+
+Output: 'pr_curves.png'

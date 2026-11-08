@@ -1,0 +1,43 @@
+{
+ "title": {
+  "en": "Generative models: autoencoders, VAE, GAN, diffusion",
+  "ro": "Modele generative: autoencodere, VAE, GAN, difuzie"
+ },
+ "topics": {
+  "en": [
+   "Discriminative vs generative models; latent-variable models and PCA",
+   "Autoencoders as anomaly detectors: ULB card fraud, against PCA and a supervised logistic regression",
+   "Variational autoencoders: ELBO, reparameterisation trick, beta-VAE, Fashion-MNIST latent space",
+   "GANs: minimax game, optimal discriminator, non-saturating loss, mode collapse, WGAN",
+   "Synthetic S&P 500 returns: fat tails, 1 % VaR backtest, missing volatility clustering",
+   "Diffusion models (DDPM): forward noising, noise prediction, euro-area yield-curve scenarios",
+   "Judging synthetic data: fidelity, diversity, utility (TSTR), privacy"
+  ],
+  "ro": [
+   "Modele discriminative și generative; modele cu variabile latente și PCA",
+   "Autoencodere ca detectoare de anomalii: fraude cu carduri ULB, comparate cu PCA și o regresie logistică supervizată",
+   "Autoencodere variaționale: ELBO, trucul reparametrizării, beta-VAE, spațiul latent Fashion-MNIST",
+   "GAN: jocul min-max, discriminatorul optim, pierderea nesaturată, colapsul modurilor, WGAN",
+   "Randamente S&P 500 sintetice: cozi groase, testul retrospectiv al VaR de 1 %, lipsa grupării volatilității",
+   "Modele de difuzie (DDPM): adăugarea zgomotului, predicția zgomotului, scenarii pentru curba randamentelor din zona euro",
+   "Evaluarea datelor sintetice: fidelitate, diversitate, utilitate (TSTR), confidențialitate"
+  ]
+ },
+ "further": [
+  {
+   "url": "https://arxiv.org/abs/2006.11239",
+   "en": "Ho, Jain & Abbeel (2020), Denoising diffusion probabilistic models",
+   "ro": "Ho, Jain și Abbeel (2020), Denoising diffusion probabilistic models"
+  },
+  {
+   "url": "https://arxiv.org/abs/1312.6114",
+   "en": "Kingma & Welling (2014), Auto-encoding variational Bayes",
+   "ro": "Kingma și Welling (2014), Auto-encoding variational Bayes"
+  },
+  {
+   "url": "https://lilianweng.github.io/posts/2021-07-11-diffusion-models/",
+   "en": "L. Weng, What are diffusion models? (notes)",
+   "ro": "L. Weng, What are diffusion models? (note)"
+  }
+ ]
+}

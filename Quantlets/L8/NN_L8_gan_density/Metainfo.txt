@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_gan_density'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Density (log scale) of standardised S&P 500 daily log returns 2005-2019, of 200,000 GAN samples (seed 1) and of the Gaussian.'
+
+Keywords: 'GAN, generative adversarial network, fat tails, kurtosis, S&P 500, synthetic returns'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance, SP500); lectures/L8/results/gan_samples.csv (50,000 GAN samples)'
+
+Output: 'gan_density.png'

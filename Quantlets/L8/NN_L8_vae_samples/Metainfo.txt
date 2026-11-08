@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_vae_samples'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Fashion-MNIST test images, their reconstructions through a 16-dimensional VAE code, and new images decoded from random codes.'
+
+Keywords: 'variational autoencoder, VAE, image generation, reconstruction, Fashion-MNIST'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L8/results/vae_samples.csv (images and VAE outputs, 784 grey levels per row)'
+
+Output: 'vae_samples.png'

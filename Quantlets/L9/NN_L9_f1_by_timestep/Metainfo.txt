@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_f1_by_timestep'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Illicit-class F1 per test time step for logistic regression, random forest, GCN and random forest + GCN; the dark-market shutdown at step 43 breaks all models.'
+
+Keywords: 'concept drift, temporal evaluation, dark market, Elliptic, F1'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/f1_by_step.csv'
+
+Output: 'f1_by_timestep.png'

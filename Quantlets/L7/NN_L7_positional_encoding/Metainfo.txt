@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_positional_encoding'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Sinusoidal positional encoding of Vaswani et al. (2017) for 64 positions and d = 64 dimensions (mechanism illustration).'
+
+Keywords: 'positional encoding, transformer, sinusoid, attention, order'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'none (formula)'
+
+Output: 'positional_encoding.png'

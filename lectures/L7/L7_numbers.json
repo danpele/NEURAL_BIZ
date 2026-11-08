@@ -1,0 +1,231 @@
+{
+ "charts": {
+  "context_lengths": {
+   "source_en": "Twitter financial news (zeroshot); Malo et al. (2014); European Central Bank speeches; tokenizer of the ProsusAI model",
+   "source_ro": "Twitter financial news (zeroshot); Malo et al. (2014); discursurile Băncii Centrale Europene; tokenizatorul modelului ProsusAI",
+   "period_en": "finance tweets; Financial PhraseBank; European Central Bank speeches 8 Jan 2022 to 30 Oct 2026",
+   "period_ro": "tweet-uri financiare; Financial PhraseBank; discursurile Băncii Centrale Europene 8 ianuarie 2022 - 30 octombrie 2026"
+  },
+  "positional_encoding": {
+   "source_en": "Vaswani et al. (2017), sinusoidal formula",
+   "source_ro": "Vaswani et al. (2017), formula sinusoidală",
+   "period_en": "mechanism illustration, $d=64$, 64 positions",
+   "period_ro": "ilustrarea mecanismului, $d=64$, 64 de poziții"
+  },
+  "attention_example": {
+   "source_en": "Twitter financial news datasets (Hugging Face, zeroshot)",
+   "source_ro": "Seturile Twitter financial news (Hugging Face, zeroshot)",
+   "period_en": "one test tweet; pretrained FinBERT, attention averaged over 12 heads",
+   "period_ro": "un tweet de test; FinBERT preantrenat, atenția mediată pe 12 capete"
+  },
+  "attention_entropy": {
+   "source_en": "Twitter financial news datasets (Hugging Face, zeroshot)",
+   "source_ro": "Seturile Twitter financial news (Hugging Face, zeroshot)",
+   "period_en": "500 test tweets; pretrained FinBERT",
+   "period_ro": "500 de tweet-uri de test; FinBERT preantrenat"
+  },
+  "tiny_learning_curve": {
+   "source_en": "Twitter financial news datasets (Hugging Face, zeroshot)",
+   "source_ro": "Seturile Twitter financial news (Hugging Face, zeroshot)",
+   "period_en": "own estimates; small transformer, seed 1",
+   "period_ro": "estimări proprii; transformer mic, sămînța 1"
+  },
+  "model_comparison": {
+   "source_en": "Twitter financial news datasets (Hugging Face, zeroshot)",
+   "source_ro": "Seturile Twitter financial news (Hugging Face, zeroshot)",
+   "period_en": "own estimates; 2,388 test tweets (published validation split)",
+   "period_ro": "estimări proprii; 2.388 tweet-uri de test (setul de validare publicat)"
+  },
+  "confusion": {
+   "source_en": "Twitter financial news datasets (Hugging Face, zeroshot)",
+   "source_ro": "Seturile Twitter financial news (Hugging Face, zeroshot)",
+   "period_en": "own estimates; 2,388 test tweets (published validation split)",
+   "period_ro": "estimări proprii; 2.388 tweet-uri de test (setul de validare publicat)"
+  },
+  "data_scaling": {
+   "source_en": "Twitter financial news datasets (Hugging Face, zeroshot)",
+   "source_ro": "Seturile Twitter financial news (Hugging Face, zeroshot)",
+   "period_en": "own estimates; 2,388 test tweets (published validation split)",
+   "period_ro": "estimări proprii; 2.388 tweet-uri de test (setul de validare publicat)"
+  }
+ },
+ "seed": 20261108,
+ "device": "mps",
+ "data": {
+  "n_train_pub": 9543,
+  "n_train": 8588,
+  "n_val": 955,
+  "n_test": 2388,
+  "pct_neutral_test": 65.6,
+  "pct_bearish_test": 14.5,
+  "pct_bullish_test": 19.9,
+  "n_bearish_test": 347,
+  "n_bullish_test": 475,
+  "n_neutral_test": 1566
+ },
+ "tok": {
+  "vocab": 30522
+ },
+ "len": {
+  "tw_median": 25,
+  "tw_p99": 57,
+  "tw_max": 82,
+  "pb_median": 28,
+  "sp_median": 3338,
+  "sp_max": 22646,
+  "sp_pct_over512": 98.8,
+  "n_speeches": 400,
+  "n_pb": 4838,
+  "tw_pct_over64": 0.19,
+  "sp_first": "2022-01-08",
+  "sp_last": "2026-10-30",
+  "cost_ratio": 17828
+ },
+ "tfidf": {
+  "C": 3,
+  "n_features": 17119
+ },
+ "probe": {
+  "C": 0.03,
+  "dim": 768
+ },
+ "models": {
+  "tfidf": {
+   "macro_f1": 75.5,
+   "acc": 81.5,
+   "rec_bearish": 70.3,
+   "prec_bearish": 63.5,
+   "macro_f1_sd": 0.0,
+   "n_runs": 1
+  },
+  "embbag": {
+   "macro_f1": 66.6,
+   "acc": 74.3,
+   "rec_bearish": 62.0,
+   "prec_bearish": 46.6,
+   "macro_f1_sd": 0.3,
+   "n_runs": 3,
+   "params": 1953603
+  },
+  "tiny_nopos": {
+   "macro_f1": 67.9,
+   "acc": 75.4,
+   "rec_bearish": 61.8,
+   "prec_bearish": 48.4,
+   "macro_f1_sd": 1.3,
+   "n_runs": 3
+  },
+  "tiny": {
+   "macro_f1": 68.8,
+   "acc": 76.7,
+   "rec_bearish": 59.7,
+   "prec_bearish": 51.1,
+   "macro_f1_sd": 1.5,
+   "n_runs": 3,
+   "params": 2020547,
+   "params_noemb": 67139,
+   "sec_per_seed": 43.7,
+   "epochs_median": 20,
+   "best_epoch_seed1": 18,
+   "minloss_epoch_seed1": 10,
+   "minloss_seed1": 0.753,
+   "lastloss_seed1": 1.024,
+   "epochs_seed1": 20
+  },
+  "finbert_zs": {
+   "macro_f1": 66.9,
+   "acc": 72.6,
+   "rec_bearish": 76.1,
+   "prec_bearish": 49.4,
+   "macro_f1_sd": 0.0,
+   "n_runs": 1
+  },
+  "finbert_probe": {
+   "macro_f1": 75.3,
+   "acc": 80.1,
+   "rec_bearish": 78.7,
+   "prec_bearish": 58.6,
+   "macro_f1_sd": 0.0,
+   "n_runs": 1
+  },
+  "finbert_ft": {
+   "macro_f1": 84.8,
+   "acc": 88.2,
+   "rec_bearish": 82.9,
+   "prec_bearish": 77.9,
+   "macro_f1_sd": 0.1,
+   "n_runs": 3,
+   "params_m": 109.5,
+   "min_per_seed": 5.2
+  }
+ },
+ "gain_ft_vs_tfidf": 9.3,
+ "gain_pos": 0.9,
+ "gain_ft_vs_zs": 17.9,
+ "boot": {
+  "ft_tfidf": {
+   "mean": 9.3,
+   "lo": 7.3,
+   "hi": 11.3
+  },
+  "tiny_tfidf": {
+   "mean": -6.6,
+   "lo": -8.3,
+   "hi": -4.9
+  },
+  "tiny_nopos": {
+   "mean": 0.9,
+   "lo": 0.1,
+   "hi": 1.7
+  },
+  "probe_tfidf": {
+   "mean": -0.2,
+   "lo": -2.5,
+   "hi": 2.0
+  }
+ },
+ "cm": {
+  "bear_as_neutral": 47,
+  "bull_as_neutral": 73,
+  "bear_as_bull": 12,
+  "bull_as_bear": 14,
+  "bear_ok": 288,
+  "bull_ok": 388,
+  "neu_ok": 1428
+ },
+ "cm_zs": {
+  "bear_ok": 264,
+  "bull_ok": 284,
+  "neu_ok": 1185
+ },
+ "scaling": {
+  "n_small": 429,
+  "tiny_small": 43.3,
+  "tfidf_small": 52.1,
+  "probe_small": 70.4,
+  "n_full": 8588
+ },
+ "attn": {
+  "ent_l1": 0.76,
+  "ent_min": 0.36,
+  "ent_min_layer": 8,
+  "sep_max_pct": 59.3,
+  "sep_max_layer": 6,
+  "sep_l1_pct": 5.2,
+  "n_tweets": 500,
+  "heads": 12,
+  "layers": 12,
+  "d_model": 768,
+  "d_head": 64
+ },
+ "example": {
+  "text": "BTIG points to breakfast pressure for Dunkin' Brands",
+  "n_tokens": 13,
+  "label": "bearish",
+  "p_neg_pct": 7.3,
+  "p_pos_pct": 17.8,
+  "cls_top_token": "points",
+  "cls_top_pct": 5.7
+ },
+ "runtime_min": 8.1
+}

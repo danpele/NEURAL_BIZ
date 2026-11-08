@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_mae_by_hour'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Mean absolute error by delivery hour of the naive, LEAR, DNN, Chronos-2 and ensemble forecasts of Romanian day-ahead prices in the test year.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/forecasts_hourly.csv'
+
+Output: 'mae_by_hour.png'

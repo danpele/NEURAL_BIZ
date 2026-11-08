@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_seed_stability'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Rank of each feature by mean |SHAP| for MLP credit models retrained with different seeds (Rashomon effect): equal accuracy, different explanations.'
+
+Keywords: 'Rashomon effect, explanation stability, random seeds, SHAP ranking, Kendall tau'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'seed_stability.png'

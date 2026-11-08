@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_agreement'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test accuracy on the Financial PhraseBank by the share of annotators who agreed on the label (50, 66, 75, 100%), 5 random splits.'
+
+Keywords: 'label noise, annotator agreement, sentiment, TF-IDF, embedding bag, Financial PhraseBank'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Financial PhraseBank; saved test predictions of analysis_L6.py (agreement_results.json)'
+
+Output: 'agreement.png'

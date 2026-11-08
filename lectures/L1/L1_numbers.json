@@ -1,0 +1,333 @@
+{
+ "charts": {
+  "default_rates": {
+   "source_en": "UCI Statlog German credit; Baesens, Roesch and Scheule (2016), HMEQ",
+   "source_ro": "UCI Statlog German credit; Baesens, Roesch și Scheule (2016), HMEQ",
+   "period_en": "1,000 applicants (German credit); 5,960 loans (HMEQ)",
+   "period_ro": "1\\,000 de solicitanți (German credit); 5\\,960 de credite (HMEQ)"
+  },
+  "logit_coef": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch și Scheule (2016), datele HMEQ",
+   "period_en": "3,576 training loans",
+   "period_ro": "3\\,576 de credite de antrenare"
+  },
+  "perceptron_errors": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch și Scheule (2016), datele HMEQ",
+   "period_en": "3,576 training loans",
+   "period_ro": "3\\,576 de credite de antrenare"
+  },
+  "activations": {
+   "source_en": "analytic functions (no data)",
+   "source_ro": "funcții analitice (fără date)",
+   "period_en": "functions plotted on [-4, 4]",
+   "period_ro": "funcții reprezentate pe [-4, 4]"
+  },
+  "xor": {
+   "source_en": "logical XOR table (no data)",
+   "source_ro": "tabelul funcției logice XOR (fără date)",
+   "period_en": "the four XOR inputs",
+   "period_ro": "cele patru intrări XOR"
+  },
+  "boundary_hmeq": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch și Scheule (2016), datele HMEQ",
+   "period_en": "2,708 training and 871 test loans with both variables",
+   "period_ro": "2\\,708 de credite de antrenare și 871 de testare cu ambele variabile"
+  },
+  "width_auc": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch și Scheule (2016), datele HMEQ",
+   "period_en": "3,576 training, 1,192 validation, 1,192 test loans",
+   "period_ro": "3\\,576 de credite de antrenare\\, 1\\,192 de validare\\, 1\\,192 de testare"
+  },
+  "roc_hmeq": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch și Scheule (2016), datele HMEQ",
+   "period_en": "1,192 test loans (238 defaults)",
+   "period_ro": "1\\,192 de credite de testare (238 de neplăți)"
+  },
+  "calibration": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch și Scheule (2016), datele HMEQ",
+   "period_en": "1,192 test loans",
+   "period_ro": "1\\,192 de credite de testare"
+  },
+  "german_cv": {
+   "source_en": "UCI Machine Learning Repository, Statlog German credit",
+   "source_ro": "UCI Machine Learning Repository, Statlog German credit",
+   "period_en": "1,000 applicants, 25 held-out folds",
+   "period_ro": "1\\,000 de solicitanți, 25 de pliuri de test"
+  },
+  "cost_threshold": {
+   "source_en": "UCI Machine Learning Repository, Statlog German credit",
+   "source_ro": "UCI Machine Learning Repository, Statlog German credit",
+   "period_en": "1,000 applicants, out-of-fold predictions",
+   "period_ro": "1\\,000 de solicitanți, predicții în afara pliului"
+  },
+  "uat_california": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "19,648 block groups below the source cap",
+   "period_ro": "19\\,648 de grupuri de locuințe sub plafonul sursei"
+  }
+ },
+ "seed": 20261108,
+ "data": {
+  "german_n": 1000,
+  "german_bad": 300,
+  "german_bad_pct": 30.0,
+  "german_vars": 20,
+  "hmeq_n": 5960,
+  "hmeq_bad": 1189,
+  "hmeq_bad_pct": 19.9,
+  "hmeq_vars": 12,
+  "hmeq_debtinc_missing_pct": 21.3,
+  "california_n": 20640,
+  "fraud_n_full": 284807,
+  "fraud_frauds": 492,
+  "fraud_rate_full_pct": 0.173,
+  "hmeq_bad_debtinc_missing_pct": 62.0,
+  "hmeq_bad_debtinc_present_pct": 8.6
+ },
+ "eda": {
+  "chk": {
+   "A11": {
+    "pct": 49.3,
+    "n": 274
+   },
+   "A12": {
+    "pct": 39.0,
+    "n": 269
+   },
+   "A13": {
+    "pct": 22.2,
+    "n": 63
+   },
+   "A14": {
+    "pct": 11.7,
+    "n": 394
+   }
+  },
+  "delinq": {
+   "0": {
+    "pct": 14.0,
+    "n": 4179
+   },
+   "1": {
+    "pct": 33.9,
+    "n": 654
+   },
+   "2": {
+    "pct": 44.8,
+    "n": 250
+   },
+   "3plus": {
+    "pct": 67.3,
+    "n": 297
+   },
+   "na": {
+    "pct": 12.4,
+    "n": 580
+   }
+  }
+ },
+ "hmeq": {
+  "n_train": 3576,
+  "n_val": 1192,
+  "n_test": 1192,
+  "d": 28,
+  "test_bad": 238,
+  "auc_logit": 0.92,
+  "auc_xgb": 0.961,
+  "auc_mlp_mean": 0.945,
+  "auc_mlp_sd": 0.004,
+  "auc_mlp_min": 0.942,
+  "auc_mlp_max": 0.951,
+  "best_width": 256,
+  "auc_w1": 0.901,
+  "auc_best_width": 0.953,
+  "n_params_6464": 6081,
+  "n_params_logit": 29,
+  "n_params_32": 961,
+  "auc_mlp_seed0": 0.942,
+  "tpr10_logit": 83.2,
+  "tpr10_mlp": 85.3,
+  "tpr10_xgb": 90.8,
+  "dauc_mlp_lr": 0.023,
+  "dauc_lo": 0.008,
+  "dauc_hi": 0.037
+ },
+ "logit": {
+  "intercept": -1.992,
+  "coef": {
+   "LOAN": -0.076,
+   "MORTDUE": -0.04,
+   "VALUE": 0.226,
+   "YOJ": -0.056,
+   "DEROG": 0.452,
+   "DELINQ": 0.774,
+   "CLAGE": -0.424,
+   "NINQ": 0.209,
+   "CLNO": -0.221,
+   "DEBTINC": 0.528,
+   "miss_DEBTINC": 1.062
+  },
+  "or": {
+   "LOAN": 0.93,
+   "MORTDUE": 0.96,
+   "VALUE": 1.25,
+   "YOJ": 0.95,
+   "DEROG": 1.57,
+   "DELINQ": 2.17,
+   "CLAGE": 0.65,
+   "NINQ": 1.23,
+   "CLNO": 0.8,
+   "DEBTINC": 1.7,
+   "miss_DEBTINC": 2.89
+  },
+  "n_params": 12,
+  "pseudo_r2": 0.374
+ },
+ "one": {
+  "z": -1.71,
+  "p": 0.153,
+  "p_pct": 15.3,
+  "loan": 15400,
+  "debtinc": 36.4,
+  "delinq": 2,
+  "derog": 0,
+  "clage": 196.0,
+  "top": [
+   {
+    "var": "DELINQ",
+    "x": 1.46,
+    "b": 0.774,
+    "c": 1.13
+   },
+   {
+    "var": "CLNO",
+    "x": 2.81,
+    "b": -0.221,
+    "c": -0.62
+   },
+   {
+    "var": "miss_DEBTINC",
+    "x": -0.51,
+    "b": 1.062,
+    "c": -0.54
+   }
+  ],
+  "rest": 0.31
+ },
+ "perceptron": {
+  "epochs": 60,
+  "err_last_pct": 15.9,
+  "err_min_pct": 13.2,
+  "err_max_pct": 23.4,
+  "updates": 35876,
+  "logit_err_pct": 11.7,
+  "majority_err_pct": 19.9
+ },
+ "act": {
+  "sigmoid_max_grad": 0.25,
+  "tanh_max_grad": 1.0
+ },
+ "xor": {
+  "logit_acc_pct": 50,
+  "mlp_acc_pct": 100
+ },
+ "two": {
+  "auc_logit": 0.744,
+  "auc_mlp": 0.736,
+  "n_test": 871,
+  "n_train": 2708
+ },
+ "width": {
+  "1": {
+   "mean": 0.901,
+   "sd": 0.013
+  },
+  "2": {
+   "mean": 0.908,
+   "sd": 0.013
+  },
+  "4": {
+   "mean": 0.923,
+   "sd": 0.005
+  },
+  "8": {
+   "mean": 0.931,
+   "sd": 0.006
+  },
+  "16": {
+   "mean": 0.943,
+   "sd": 0.005
+  },
+  "32": {
+   "mean": 0.946,
+   "sd": 0.002
+  },
+  "64": {
+   "mean": 0.948,
+   "sd": 0.002
+  },
+  "128": {
+   "mean": 0.95,
+   "sd": 0.002
+  },
+  "256": {
+   "mean": 0.953,
+   "sd": 0.003
+  }
+ },
+ "calib": {
+  "brier_logit": 0.0742,
+  "brier_mlp": 0.0625,
+  "brier_xgb": 0.0549,
+  "brier_base": 0.1598
+ },
+ "german": {
+  "auc_logit": 0.777,
+  "auc_mlp": 0.766,
+  "auc_xgb": 0.778,
+  "sd_logit": 0.035,
+  "sd_mlp": 0.033,
+  "sd_xgb": 0.031,
+  "n_folds": 25,
+  "d_mlp": -0.01,
+  "t_mlp": -0.93,
+  "p_mlp": 0.362,
+  "d_xgb": 0.001,
+  "t_xgb": 0.12,
+  "p_xgb": 0.909,
+  "thr_bayes": 0.167,
+  "cost_fn": 5.0,
+  "cost_fp": 1.0,
+  "cost_all_accept": 1.5,
+  "cost_all_reject": 0.7,
+  "d_onehot": 48,
+  "cost_logit_bayes": 0.554,
+  "cost_logit_05": 0.87,
+  "thr_logit_best": 0.18,
+  "cost_logit_best": 0.538,
+  "cost_mlp_bayes": 0.568,
+  "cost_mlp_05": 1.13,
+  "thr_mlp_best": 0.17,
+  "cost_mlp_best": 0.561,
+  "cost_xgb_bayes": 0.585,
+  "cost_xgb_05": 0.975,
+  "thr_xgb_best": 0.22,
+  "cost_xgb_best": 0.551
+ },
+ "uat": {
+  "n": 19648,
+  "n_capped": 992,
+  "mse_lin": 0.896,
+  "mse_w1": 0.855,
+  "mse_w3": 0.757,
+  "mse_w50": 0.731
+ },
+ "runtime_min": 0.5
+}

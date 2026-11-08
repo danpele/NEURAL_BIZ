@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_gradcam'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Grad-CAM maps of the fine-tuned ResNet-18 for six EuroSAT test tiles: where in the tile the class decision comes from.'
+
+Keywords: 'Grad-CAM, class activation map, explainability, ResNet-18, EuroSAT, satellite images'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT; saved tiles, Grad-CAM maps and predicted probabilities (gradcam_results.json)'
+
+Output: 'gradcam.png'

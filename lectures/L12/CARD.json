@@ -1,0 +1,36 @@
+{
+ "title": {
+  "en": "Large language models (LLM) in finance and prompt engineering",
+  "ro": "Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor (prompt engineering)"
+ },
+ "topics": {
+  "en": [
+   "Language models: next-token objective, tokens, perplexity and temperature, measured on speeches of the ECB (European Central Bank)",
+   "From pre-training to assistants: supervised fine-tuning, RLHF (reinforcement learning from human feedback), DPO (direct preference optimisation) and LoRA (low-rank adaptation)",
+   "Prompt engineering measured on Financial PhraseBank and finance tweets: zero-shot, few-shot, chain-of-thought, prompt sensitivity, calibration and cost",
+   "RAG (retrieval-augmented generation) on ECB speeches: BM25, dense and hybrid retrieval; hallucination without documents",
+   "LLM-VaR: a language model as a Value-at-Risk estimator, backtested against GARCH and historical simulation"
+  ],
+  "ro": [
+   "Modele de limbaj: obiectivul următorului token, tokeni, perplexitate și temperatură, măsurate pe discursurile BCE (Banca Centrală Europeană)",
+   "De la preantrenare la asistenți: ajustarea fină supervizată, RLHF (învățare prin recompensă din feedback uman), DPO (optimizarea directă a preferințelor) și LoRA (adaptare de rang mic)",
+   "Formularea instrucțiunilor evaluată pe Financial PhraseBank și pe tweet-uri financiare: zero-shot, few-shot, chain-of-thought, sensibilitatea la prompt, calibrare și cost",
+   "RAG (generare augmentată prin regăsire) pe discursurile BCE: regăsire BM25, densă și hibridă; halucinațiile fără documente",
+   "LLM-VaR: un model de limbaj ca estimator al valorii expuse la risc, testat retrospectiv față de GARCH și simularea istorică"
+  ]
+ },
+ "further": [
+  {
+   "title": "Hugging Face LLM course",
+   "url": "https://huggingface.co/learn/llm-course"
+  },
+  {
+   "title": "Qwen2.5 open models",
+   "url": "https://huggingface.co/Qwen"
+  },
+  {
+   "title": "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES",
+   "url": "https://doi.org/10.1016/j.eswa.2025.128676"
+  }
+ ]
+}

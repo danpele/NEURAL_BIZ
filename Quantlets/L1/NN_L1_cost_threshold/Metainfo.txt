@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_cost_threshold'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Expected cost per German credit applicant (UCI cost matrix: a missed bad risk costs 5, a rejected good applicant 1) as a function of the cut-off, out-of-fold predictions of logistic regression, an MLP and XGBoost; cost-optimal cut-off 1/6.'
+
+Keywords: 'cost-sensitive classification, cut-off, Bayes decision rule, credit scoring, German credit'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit)'
+
+Output: 'cost_threshold.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_reg_ablation'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test PR-AUC (population-weighted) of an MLP 256-256 on the ULB card-fraud data with no regularisation, early stopping, weight decay, dropout, batch normalisation and all combined; 5 seeds each, time-ordered split.'
+
+Keywords: 'regularisation, ablation, early stopping, weight decay, dropout, batch normalisation, fraud detection, PR-AUC'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'reg_ablation.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_hedge_pnl'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Hedging profit and loss of a short one-month at-the-money call on the S&P 500 on real 21-day paths (test from 2020): no hedge, Black-Scholes delta with the VIX, deep hedge.'
+
+Keywords: 'deep hedging, expected shortfall, Black-Scholes delta, option hedging, transaction costs, S&P 500, VIX'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance: SP500 and VIX closes)'
+
+Output: 'hedge_pnl.png'

@@ -42,13 +42,14 @@ OUT = os.path.join(ROOT, 'web')
 REPO = 'https://github.com/danpele/NEURAL_BIZ'
 COLAB = 'https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/'
 MATHJAX = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js'
-VER = '20261107a'
+VER = '20261108b'
 
 L = {
     'en': dict(course='Neural Networks and Deep Learning', lecture='Lecture', back='Course site', site='../index.html#chapters',
                pdf='Slides (PDF)', nb='Notebook', colab='Open in Colab', ql='Quantlets', toc='Contents', intro='Introduction',
                goals='What you will be able to do', plan='Lecture plan', synth='Section summary', practice='In practice',
-               src='Source', abbr='Abbreviations', slide='Slide {n} in the PDF', bib='References', author='Prof. dr. Daniel Traian PELE',
+               src='Source', abbr='Abbreviations', slide='Slide {n} in the PDF', bib='References',
+               videos='Videos: the intuition behind the mathematics (in English)', author='Prof. dr. Daniel Traian PELE',
                inst=['Bucharest University of Economic Studies (ASE), Department of Statistics and Econometrics',
                      'Romanian Academy, Institute for Economic Forecasting (IPE)'],
                foot='Text written for the web version of the lecture; numbers, charts and sources come from the slides and their Quantlets.',
@@ -56,7 +57,8 @@ L = {
     'ro': dict(course='Rețele neuronale și deep learning', lecture='Cursul', back='Site-ul cursului', site='../index_ro.html#chapters',
                pdf='Slide-uri (PDF)', nb='Notebook', colab='Deschide în Colab', ql='Quantlets', toc='Cuprins', intro='Introducere',
                goals='Ce veți ști să faceți', plan='Planul cursului', synth='Sinteza secțiunii', practice='În practică',
-               src='Sursa', abbr='Abrevieri', slide='Slide-ul {n} în PDF', bib='Bibliografie', author='Prof. dr. Daniel Traian PELE',
+               src='Sursa', abbr='Abrevieri', slide='Slide-ul {n} în PDF', bib='Bibliografie',
+               videos='Video: intuiția din spatele matematicii (în engleză)', author='Prof. dr. Daniel Traian PELE',
                inst=['Academia de Studii Economice din București (ASE), Departamentul de Statistică și Econometrie',
                      'Academia Română, Institutul de Prognoză Economică (IPE)'],
                foot='Text scris pentru versiunea web a cursului; cifrele, graficele și sursele provin din slide-uri și din Quantlet-urile lor.',
@@ -145,7 +147,8 @@ def tex_text(t, links=True):
 
 
 def norm_title(t):
-    t = unicodedata.normalize('NFKD', tex_text(t, links=False))
+    # html.unescape: tex_text turns \\& into &amp;, which must match the "&" of the PDF text (e.g. "S&P 500")
+    t = unicodedata.normalize('NFKD', html.unescape(tex_text(t, links=False)))
     return re.sub(r'[^a-z0-9]', '', t.lower())
 
 
@@ -217,11 +220,12 @@ def read_deck(k, lang):
         texts = [re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFKD', p.get_text()).lower()) for p in doc]
         cur = 0
         for f in frames:
-            key = norm_title(f['raw_title'])[:40]
-            if not key:
+            # the text pieces of the title around its math ($\\lambda_{\\max}$, $\\sqrt{d_k}$ are typeset as symbols in the PDF)
+            keys = [x[:40] for x in (norm_title(x) for x in re.split(r'\$[^$]*\$', f['raw_title'])) if x]
+            if not keys:
                 continue
             for p in range(cur, len(texts)):
-                if key in texts[p]:
+                if all(x in texts[p] for x in keys):
                     f['page'] = p + 1
                     cur = p
                     break
@@ -232,6 +236,28 @@ def read_deck(k, lang):
     except Exception as e:                                      # no PDF or no PyMuPDF: pages stay unknown
         print('  (no PDF pages:', e, ')')
     return dict(title=title, frames=frames, refs=refs, abbr=abbr, src=src)
+
+
+VIDEOS_JSON = os.path.join(HERE, 'videos.json')
+
+
+def lecture_videos(k):
+    """Verified YouTube videos of lecture k ([{id, by, title}]), read from assets/course-data.js (lectures[].videos) with node;
+    the list is cached in lectures/common/videos.json, which is used when node is not available."""
+    import subprocess
+    js = ("global.window={};require(process.argv[1]);const o={};"
+          "window.NN_DATA.lectures.forEach(l=>{o[l.id]=l.videos||[]});console.log(JSON.stringify(o))")
+    try:
+        r = subprocess.run(['node', '-e', js, os.path.join(ROOT, 'assets', 'course-data.js')], capture_output=True, text=True, check=True)
+        v = json.loads(r.stdout)
+        old = open(VIDEOS_JSON, encoding='utf-8').read() if os.path.exists(VIDEOS_JSON) else None
+        new = json.dumps(v, ensure_ascii=False, indent=1) + '\n'
+        if new != old:
+            with open(VIDEOS_JSON, 'w', encoding='utf-8') as fh:
+                fh.write(new)
+    except Exception:
+        v = json.load(open(VIDEOS_JSON, encoding='utf-8')) if os.path.exists(VIDEOS_JSON) else {}
+    return v.get(f'l{k}', [])
 
 
 def numbers_json(k):
@@ -315,6 +341,7 @@ def check_numbers(text, allowed):
 
 # ------------------------------------------------------------------ Romanian checks
 RO_A_OK = re.compile(r'^(?:ne)?r[oO]m[âÂ]n', re.I)
+RO_A_NAMES = {'Bâg'}                                             # surnames of authors, spelled as they are
 
 
 def check_ro(text):
@@ -323,7 +350,7 @@ def check_ro(text):
     plain = re.sub(r'\$\$.*?\$\$|\$[^$\n]*\$', ' ', plain, flags=re.S)
     plain = re.sub(r'\]\([^)]*\)|https?://\S+', ' ', plain)
     for w in set(re.findall(r'\w*[âÂ]\w*', plain)):
-        if not RO_A_OK.match(w):
+        if not RO_A_OK.match(w) and w not in RO_A_NAMES:
             issues.append(f'"â" outside the român- family: {w}')
     for ch in 'şţŞŢ':
         if ch in plain:
@@ -621,6 +648,12 @@ def build_page(k, lang, deck):
                         f'<div class="ctext">{md_blocks(b["lines"], cx)}</div></article>')
         if any(x.strip() for x in s['end']):
             body.append(f'<div class="send"><p class="send-t">{T["synth"]}</p>{md_blocks(s["end"], cx)}</div>')
+    vids = lecture_videos(k)
+    if vids:
+        toc.append(f'<li><a href="#videos">{T["videos"]}</a></li>')
+        body.append(f'<section class="wbib" id="videos"><h2 class="sec">{T["videos"]}</h2><ul class="bib videos">' +
+                    ''.join(f'<li><a href="https://www.youtube.com/watch?v={html.escape(v["id"], quote=True)}" target="_blank" rel="noopener">'
+                            f'{esc(v["title"])}</a> <span class="vby">({esc(v["by"])}, YouTube)</span></li>' for v in vids) + '</ul></section>')
     if deck['abbr']:
         toc.append(f'<li><a href="#abbr">{T["abbr"]}</a></li>')
         body.append(f'<section class="wbib" id="abbr"><h2 class="sec">{T["abbr"]}</h2><div class="tbl"><table class="abbr"><tbody>' +

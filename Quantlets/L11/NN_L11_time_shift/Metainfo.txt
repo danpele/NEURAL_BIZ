@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_time_shift'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Shift of explanations from day 1 to day 2 for a fraud MLP trained on day 1: share of the total |integrated gradients| by feature for held-out day-1 frauds and day-2 frauds.'
+
+Keywords: 'explanation drift, distribution shift, integrated gradients, forward-time validation, fraud detection'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'time_shift.png'

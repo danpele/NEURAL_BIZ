@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_vol_forecast'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'One-day-ahead forecasts of S&P 500 annualised volatility in 2020: HAR and LSTM (mean of 5 seeds) against the observed Garman-Klass volatility.'
+
+Keywords: 'volatility forecasting, LSTM, HAR, GARCH, COVID-19 crash, S&P 500'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv; saved test forecasts of analysis_L5.py (vol_forecast_results.json)'
+
+Output: 'vol_forecast.png'

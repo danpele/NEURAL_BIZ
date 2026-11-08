@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_chart_regime'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Market-stress detection on S&P 500 chart windows (120 trading days): logistic regression on numbers, logistic regression on CLIP image embeddings, CLIP zero-shot and Qwen2-VL zero-shot; ROC curves and AUC on 2019-2026, after Jheng, Pele, Tak and Găman (2026).'
+
+Keywords: 'vision-language models, CLIP, Qwen2-VL, market regimes, anomaly detection, S&P 500, ROC'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L14/results/chart_regime.csv (scores of analysis_L14.py; data/clean/markets_daily.csv)'
+
+Output: 'chart_regime.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_agreement'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Accuracy of TF-IDF with logistic regression and of zero-shot and few-shot Qwen2.5-3B on Financial PhraseBank sentences by annotator agreement (100, 75, 66 and 50 percent).'
+
+Keywords: 'large language models, prompt engineering, financial sentiment, Qwen2.5, zero-shot, few-shot, label quality, annotator agreement'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/agreement_labels.csv, predictions_pb.csv'
+
+Output: 'agreement.png'

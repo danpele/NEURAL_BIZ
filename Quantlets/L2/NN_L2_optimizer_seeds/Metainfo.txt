@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_optimizer_seeds'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test MSE of an MLP 64-64 on California housing for five seeds of each optimiser (SGD, momentum, RMSProp, Adam, AdamW), with a paired t-test of SGD against Adam.'
+
+Keywords: 'random seed, reproducibility, optimiser comparison, paired t-test, Adam, SGD, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'optimizer_seeds.png'

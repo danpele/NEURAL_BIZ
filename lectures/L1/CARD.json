@@ -1,0 +1,27 @@
+{
+ "title": {
+  "en": "Deep learning for business: from linear models to the perceptron and the multilayer perceptron (MLP)",
+  "ro": "Deep learning pentru afaceri: de la modelele liniare la perceptron și la perceptronul multistrat (MLP)"
+ },
+ "topics": {
+  "en": [
+   "Where deep learning creates value in business and finance, and why a logistic scorecard or gradient boosting is often enough on small tabular data",
+   "Linear and logistic regression as one-neuron networks: losses as likelihoods, the gradient as error times input, odds ratios and missing-value indicators on HMEQ (home equity) loans",
+   "Rosenblatt's perceptron: learning rule, Novikoff's convergence bound, why it never settles on real loans, and the exclusive or (XOR) limit",
+   "The multilayer perceptron (MLP): forward pass, activation functions, output layers and losses, parameter count, universal approximation shown on California house prices",
+   "Case study on real credit data: logistic regression, an MLP and XGBoost on HMEQ and German credit, with seeds, bootstrap intervals, a corrected t-test, calibration and the cost-optimal cut-off"
+  ],
+  "ro": [
+   "Unde creează valoare deep learning în afaceri și finanțe și de ce, pe date tabelare puține, un scorecard logistic sau gradient boosting sînt adesea suficiente",
+   "Regresia liniară și regresia logistică drept rețele cu un singur neuron: pierderile ca verosimilități, gradientul ca eroare înmulțită cu intrarea, rapoartele șanselor și indicatorii de valori lipsă pe creditele HMEQ (home equity)",
+   "Perceptronul lui Rosenblatt: regula de învățare, limita de convergență a lui Novikoff, de ce nu se stabilizează pe credite reale și limita sau-ului exclusiv (XOR)",
+   "Perceptronul multistrat (MLP): propagarea înainte, funcțiile de activare, straturile de ieșire și pierderile, numărul de parametri, aproximarea universală ilustrată pe prețurile locuințelor din California",
+   "Studiu de caz pe date reale de credit: regresia logistică, un MLP și XGBoost pe HMEQ și German credit, cu mai multe inițializări, intervale bootstrap, test t corectat, calibrare și pragul optim pentru cost"
+  ]
+ },
+ "further": [
+  {"en": "Bishop & Bishop (2024), Deep Learning: Foundations and Concepts, chapters 4-6", "ro": "Bishop și Bishop (2024), Deep Learning: Foundations and Concepts, capitolele 4-6", "url": "https://www.bishopbook.com"},
+  {"en": "Dive into Deep Learning, chapters 3-5 (PyTorch)", "ro": "Dive into Deep Learning, capitolele 3-5 (PyTorch)", "url": "https://d2l.ai"},
+  {"en": "Lessmann et al. (2015), benchmarking classification algorithms for credit scoring", "ro": "Lessmann et al. (2015), compararea algoritmilor de clasificare pentru scoringul de credit", "url": "https://doi.org/10.1016/j.ejor.2015.05.030"}
+ ]
+}

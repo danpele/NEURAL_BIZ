@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_vit_patches_attention'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Patch grid (14 x 14 patches of 16 x 16 pixels) and attention rollout of the class token of CLIP ViT-B/16 on four EuroSAT test images (highway, river, industrial, residential).'
+
+Keywords: 'vision-language models, CLIP, zero-shot classification, EuroSAT, satellite images, vision transformer, attention rollout'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT (torchvision, on demand); model openai/clip-vit-base-patch16 (Hugging Face)'
+
+Output: 'vit_patches_attention.png'

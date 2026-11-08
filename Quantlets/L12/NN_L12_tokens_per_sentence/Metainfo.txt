@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_tokens_per_sentence'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Length of the 4,838 Financial PhraseBank sentences in words, in Qwen2.5 byte-pair-encoding tokens and in FinBERT WordPiece tokens; tokens per word.'
+
+Keywords: 'tokenisation, byte-pair encoding, WordPiece, Qwen2.5, FinBERT, Financial PhraseBank'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/financial_phrasebank.csv; tokenizers Qwen/Qwen2.5-1.5B-Instruct and ProsusAI/finbert (Hugging Face)'
+
+Output: 'tokens_per_sentence.png'

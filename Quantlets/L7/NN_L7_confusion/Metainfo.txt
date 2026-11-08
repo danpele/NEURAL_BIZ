@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_confusion'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Confusion matrices of FinBERT on the test tweets, zero-shot and after fine-tuning (seed 1).'
+
+Keywords: 'confusion matrix, FinBERT, fine-tuning, domain shift, bearish news'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L7/results/test_predictions.csv (from data/clean/twitter_fin_sentiment.csv)'
+
+Output: 'confusion.png'

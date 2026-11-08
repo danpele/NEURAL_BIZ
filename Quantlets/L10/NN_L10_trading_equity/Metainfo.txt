@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_trading_equity'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test-period value of 1 USD: PPO agent (one seed) against buy-and-hold and the 200-day moving-average rule on the S&P 500, after costs.'
+
+Keywords: 'PPO, reinforcement learning trading, buy and hold, moving average rule, Sharpe ratio, backtest'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance: SP500 and VIX closes)'
+
+Output: 'trading_equity.png'

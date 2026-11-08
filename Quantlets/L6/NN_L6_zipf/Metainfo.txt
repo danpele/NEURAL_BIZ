@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_zipf'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Rank-frequency plot of the words of the European Central Bank speeches 2022-2026, log-log, with the fitted power law (Zipf’s law).'
+
+Keywords: 'Zipf’s law, word frequency, tokenisation, corpus statistics, ECB speeches, NLP'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ecb_speeches_2022plus.csv (European Central Bank, speeches dataset)'
+
+Output: 'zipf.png'

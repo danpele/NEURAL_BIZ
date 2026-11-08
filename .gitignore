@@ -24,3 +24,11 @@ tools/.chrome-profile/
 lectures/*/cache/
 *.pt
 *.ckpt
+# model weights, embeddings and image arrays (EuroSAT pixels, fine-tuned weights, Hugging Face caches): only in lectures/*/cache/
+*.safetensors
+*.npy
+*.npz
+*.h5
+*.onnx
+**/hf_cache/
+**/.cache/

@@ -1,0 +1,31 @@
+{
+ "title": {
+  "en": "Explainable AI: SHAP, LIME, gradient methods and the stability of explanations",
+  "ro": "Inteligența artificială explicabilă: SHAP, LIME, metode bazate pe gradient și stabilitatea explicațiilor"
+ },
+ "topics": {
+  "en": [
+   "Why explain: EU AI Act, GDPR, EBA guidelines, SR 11-7 model risk; a taxonomy of methods",
+   "Shapley values and SHAP: axioms, Kernel SHAP, TreeSHAP, linear SHAP; global importance, beeswarm, waterfall, dependence (HMEQ credit)",
+   "LIME and its sensitivity to sample size and kernel width; counterfactual explanations for a rejected applicant",
+   "Partial dependence and ICE curves (California housing)",
+   "Gradient methods on a fraud network: saliency, gradient x input, integrated gradients (completeness), SmoothGrad, TCAV",
+   "Agreement, faithfulness (deletion/AOPC), local robustness, seed stability (Rashomon effect) and drift of explanations over time",
+   "Research of our group: SHAP stability in graph-augmented fraud detection; explainable early warning of electricity price spikes"
+  ],
+  "ro": [
+   "De ce explicăm: Regulamentul UE privind AI, GDPR, ghidul EBA, riscul de model SR 11-7; o clasificare a metodelor",
+   "Valorile Shapley și SHAP: axiome, Kernel SHAP, TreeSHAP, SHAP liniar; importanța globală, diagrama roi, diagrama cascadă, dependența (credit HMEQ)",
+   "LIME și sensibilitatea la mărimea eșantionului și lățimea nucleului; explicații contrafactuale pentru un solicitant respins",
+   "Dependența parțială și curbele ICE (locuințele din California)",
+   "Metode bazate pe gradient pentru o rețea de detectare a fraudei: saliența, gradient x intrare, gradienții integrați (completitudinea), SmoothGrad, TCAV",
+   "Concordanța, fidelitatea (eliminare/AOPC), robustețea locală, stabilitatea la valoarea inițială (efectul Rashomon) și deplasarea explicațiilor în timp",
+   "Cercetările grupului: stabilitatea SHAP în detectarea fraudei cu informație din graf; avertizarea timpurie explicabilă a vîrfurilor de preț la energie"
+  ]
+ },
+ "further": [
+  {"url": "https://christophm.github.io/interpretable-ml-book/", "en": "C. Molnar, Interpretable Machine Learning (free online book)", "ro": "C. Molnar, Interpretable Machine Learning (carte gratuită online)"},
+  {"url": "https://shap.readthedocs.io", "en": "SHAP library documentation", "ro": "Documentația bibliotecii SHAP"},
+  {"url": "https://github.com/QuantLet/GNN_XAI_Stability", "en": "Replication code of Diaconu & Pele (2026), SHAP stability in graph-augmented fraud detection", "ro": "Codul de replicare pentru Diaconu & Pele (2026), stabilitatea SHAP în detectarea fraudei cu informație din graf"}
+ ]
+}

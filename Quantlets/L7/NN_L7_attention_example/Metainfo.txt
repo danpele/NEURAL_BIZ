@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_attention_example'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Attention weights of pretrained FinBERT, averaged over the 12 heads, in layers 6 and 12, for one bearish test tweet.'
+
+Keywords: 'attention map, FinBERT, BERT, self-attention, interpretability, financial sentiment'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L7/results/attention_example_layer6.csv, attention_example_last.csv (from data/clean/twitter_fin_sentiment.csv)'
+
+Output: 'attention_example.png'

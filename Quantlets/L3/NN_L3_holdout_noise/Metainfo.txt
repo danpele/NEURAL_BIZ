@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_holdout_noise'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Distribution of the test AUC of logistic regression on German credit over 200 random stratified 70/30 hold-out splits: how noisy a single split is on small data.'
+
+Keywords: 'hold-out validation, variance of the estimate, AUC, cross-validation, small data, German credit'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit)'
+
+Output: 'holdout_noise.png'

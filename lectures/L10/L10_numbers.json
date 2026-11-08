@@ -1,0 +1,303 @@
+{
+ "charts": {
+  "spread_monthly": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "2 Jan 2015 to 31 Oct 2026, monthly mean of the daily spread",
+   "period_ro": "2 ianuarie 2015 - 31 octombrie 2026, media lunar\u0103 a diferen\u021bei zilnice"
+  },
+  "dp_revenue_year": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "2015-2026 (*2026: January-October); days with 24 complete hours",
+   "period_ro": "2015-2026 (*2026: ianuarie-octombrie); zile cu 24 de ore complete"
+  },
+  "dp_day": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "Romania, 30 Jun 2026, hourly day-ahead prices",
+   "period_ro": "Rom\u00e2nia, 30 iunie 2026, pre\u021buri orare pentru ziua urm\u0103toare"
+  },
+  "dp_value": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "Romania, 30 Jun 2026; own computation (backward induction)",
+   "period_ro": "Rom\u00e2nia, 30 iunie 2026; calcul propriu (induc\u021bie \u00eenapoi)"
+  },
+  "battery_test_cum": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Jan 2025 to 24 Oct 2026 (test); trained on 2019-2023, validated on 2024",
+   "period_ro": "1 ianuarie 2025 - 24 octombrie 2026 (test); antrenare 2019-2023, validare 2024"
+  },
+  "battery_learning": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "validation year 2024; band = range over 5 seeds",
+   "period_ro": "anul de validare 2024; banda = intervalul celor 5 valori ini\u021biale"
+  },
+  "q_policy": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "rows = quartile of the hour's price yesterday; seed 20261108",
+   "period_ro": "r\u00eenduri = quartila pre\u021bului orei respective \u00een ziua precedent\u0103; valoarea ini\u021bial\u0103 20261108"
+  },
+  "trading_equity": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "2 Jan 2020 to 29 Oct 2026 (test), S\\&P 500, 5 bp cost per trade",
+   "period_ro": "2 ianuarie 2020 - 29 octombrie 2026 (test), S\\&P 500, cost de 5 pb pe tranzac\u021bie"
+  },
+  "trading_learning": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "training windows from 17 Oct 2005 to 30 Dec 2016; band = range over 5 seeds",
+   "period_ro": "ferestre de antrenare din 17 octombrie 2005 - 30 decembrie 2016; banda = intervalul celor 5 valori ini\u021biale"
+  },
+  "trading_exposure": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "2 Jan 2020 to 29 Oct 2026 (test)",
+   "period_ro": "2 ianuarie 2020 - 29 octombrie 2026 (test)"
+  },
+  "ppo_clip": {
+   "source_en": "Schulman et al. (2017), clipped surrogate objective",
+   "source_ro": "Schulman et al. (2017), obiectivul surogat plafonat",
+   "period_en": "analytic function, no data",
+   "period_ro": "func\u021bie analitic\u0103, f\u0103r\u0103 date"
+  },
+  "hedge_pnl": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "21-day paths starting 2 Jan 2020 to 1 Oct 2026 (test); S\\&P 500 and VIX; 10 bp cost",
+   "period_ro": "traiectorii de 21 de zile \u00eencepute 2 ianuarie 2020 - 1 octombrie 2026 (test); S\\&P 500 \u0219i VIX; cost 10 pb"
+  },
+  "hedge_delta": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "policy trained on 21-day paths starting 2005-2016",
+   "period_ro": "politic\u0103 antrenat\u0103 pe traiectorii de 21 de zile \u00eencepute \u00een 2005-2016"
+  },
+  "hedge_costs": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "test paths starting 2 Jan 2020 to 1 Oct 2026",
+   "period_ro": "traiectorii de test \u00eencepute 2 ianuarie 2020 - 1 octombrie 2026"
+  }
+ },
+ "seed": 20261108,
+ "n_seeds": 5,
+ "cutoff": {
+  "end": "2026-10-31",
+  "year": 2026,
+  "month": 10
+ },
+ "battery": {
+  "e_max": 2,
+  "eta_pct": 85
+ },
+ "data": {
+  "ro_first": "2015-01-02",
+  "ro_last": "2026-10-31",
+  "ro_days": 4292,
+  "sp_first": "2005-01-03"
+ },
+ "spread": {
+  "ro_2019": 47.9,
+  "ro_2025": 164.3,
+  "ro_ytd": 182.8,
+  "ro_max_month": "2024-07",
+  "ro_max_value": 394.4
+ },
+ "dp": {
+  "annual_k": {
+   "RO": {
+    "2015": 20.4,
+    "2016": 16.9,
+    "2017": 30.1,
+    "2018": 27.3,
+    "2019": 28.4,
+    "2020": 21.5,
+    "2021": 58.8,
+    "2022": 150.2,
+    "2023": 85.4,
+    "2024": 125.4,
+    "2025": 111.2,
+    "2026": 98.5
+   },
+   "HU": {
+    "2015": 22.1,
+    "2016": 16.3,
+    "2017": 28.6,
+    "2018": 21.0,
+    "2019": 24.3,
+    "2020": 20.7,
+    "2021": 52.4,
+    "2022": 122.9,
+    "2023": 73.0,
+    "2024": 121.4,
+    "2025": 109.9,
+    "2026": 106.5
+   },
+   "DE_LU": {
+    "2015": 18.5,
+    "2016": 14.5,
+    "2017": 18.4,
+    "2018": 19.0,
+    "2019": 18.2,
+    "2020": 20.8,
+    "2021": 49.6,
+    "2022": 119.6,
+    "2023": 64.1,
+    "2024": 75.5,
+    "2025": 84.3,
+    "2026": 88.0
+   },
+   "BG": {
+    "2016": 3.3,
+    "2017": 27.5,
+    "2018": 23.3,
+    "2019": 26.9,
+    "2020": 19.2,
+    "2021": 50.7,
+    "2022": 156.8,
+    "2023": 85.3,
+    "2024": 122.6,
+    "2025": 112.9,
+    "2026": 85.3
+   }
+  },
+  "ro_2025_k": 111.2,
+  "ro_2019_k": 28.4,
+  "ro_ytd_k": 98.5,
+  "ro_ytd_days": 302,
+  "de_2025_k": 84.3,
+  "hu_2025_k": 109.9,
+  "bg_2025_k": 112.9,
+  "ro_2022_k": 150.2
+ },
+ "day": {
+  "date": "2026-06-30",
+  "rev": 1541.0,
+  "pmin": 100.65,
+  "pmax": 954.59,
+  "h_min": 13,
+  "h_max": 20,
+  "v0_empty": 1541.0,
+  "n_charge": 2,
+  "n_dis": 2,
+  "v12_s0": 1541.0,
+  "v12_s2": 1760.0,
+  "v12_gain_per_mwh": 109.38
+ },
+ "split": {
+  "train_days": 1746,
+  "valid_days": 350,
+  "test_days": 638,
+  "test_first": "2025-01-01",
+  "test_last": "2026-10-24"
+ },
+ "bat": {
+  "pf_k": 202.1,
+  "naive_k": 163.1,
+  "naive_cap": 80.7,
+  "q_k": 115.2,
+  "q_cap": 57.0,
+  "q_cap_sd": 5.4,
+  "dqn_k": 101.3,
+  "dqn_cap": 50.1,
+  "dqn_cap_sd": 6.3,
+  "dqn_cap_min": 43.9,
+  "dqn_cap_max": 58.5,
+  "q_cap_min": 50.2,
+  "q_cap_max": 61.9,
+  "pf_day": 317.0,
+  "seconds": 1838.0,
+  "q_states": 288,
+  "dqn_inputs": 82,
+  "dm_t": -18.99,
+  "dm_p": 0.0,
+  "dqn_minus_naive_day": -96.8,
+  "dqn_beats_naive_seeds": 0,
+  "q_beats_naive_seeds": 0,
+  "naive_valid_day": 289.0,
+  "dqn_valid_day": 200.0,
+  "q_valid_day": 211.0,
+  "epochs": 40
+ },
+ "trade": {
+  "cost_bp": 5,
+  "train_first": "2005-10-17",
+  "train_last": "2016-12-30",
+  "valid_first": "2017-01-03",
+  "valid_last": "2019-12-31",
+  "test_first": "2020-01-02",
+  "test_last": "2026-10-29",
+  "n_feat": 8,
+  "n_test": 1716,
+  "bh_sharpe": 0.61,
+  "bh_ret": 13.2,
+  "bh_vol": 20.2,
+  "bh_dd": -33.9,
+  "ma_sharpe": 0.68,
+  "ma_ret": 8.9,
+  "ma_vol": 12.4,
+  "ma_dd": -20.5,
+  "ma_inv": 79.0,
+  "ppo_sharpe": 0.83,
+  "ppo_sharpe_min": 0.72,
+  "ppo_sharpe_max": 0.95,
+  "ppo_ret": 15.1,
+  "ppo_vol": 17.0,
+  "ppo_dd": -23.2,
+  "ppo_inv": 82.0,
+  "ppo_trades": 147.0,
+  "ma_trades": 41,
+  "ppo_beats_bh": 5,
+  "best_it_mean": 48.0,
+  "seconds": 160.0,
+  "dsh": 0.26,
+  "dsh_lo": -0.08,
+  "dsh_hi": 0.56,
+  "pm_sharpe": 0.87,
+  "bh_valid_sharpe": 0.95,
+  "ppo_inv_covid": 42.0,
+  "ma_inv_covid": 14.0,
+  "ppo_inv_2022": 63.0,
+  "ma_inv_2022": 15.0
+ },
+ "hedge": {
+  "n_train": 3021,
+  "n_valid": 754,
+  "n_test": 1696,
+  "cost_bp": 10,
+  "test_first": "2020-01-02",
+  "test_last": "2026-10-01",
+  "prem_mean": 2.38,
+  "payoff_mean": 2.53,
+  "nh_std": 2.6,
+  "nh_es": 6.82,
+  "nh_mean": -0.15,
+  "bs_std": 0.74,
+  "bs_es": 1.94,
+  "bs_mean": 0.24,
+  "dh_std": 0.69,
+  "dh_es": 1.15,
+  "dh_es_sd": 0.06,
+  "dh_mean": 0.27,
+  "dh_es_min": 1.1,
+  "dh_es_max": 1.24,
+  "dh_beats_bs": 5,
+  "bs_turnover": 1.71,
+  "dh_turnover": 1.32,
+  "seconds": 728.0,
+  "vix_mean_test": 20.7,
+  "atm_dh": 0.46,
+  "atm_bs": 0.51,
+  "bs_es_0": 1.75,
+  "dh_es_0": 0.9,
+  "bs_es_50": 2.76,
+  "dh_es_50": 2.34
+ },
+ "runtime_s": 26.0
+}

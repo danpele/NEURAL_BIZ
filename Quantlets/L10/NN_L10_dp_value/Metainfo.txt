@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_dp_value'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Value function V_h(s) of the battery problem on one real day: the euros still to be earned from hour h with s MWh stored (the shadow price of stored energy).'
+
+Keywords: 'value function, Bellman equation, dynamic programming, battery, shadow price'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'dp_value.png'

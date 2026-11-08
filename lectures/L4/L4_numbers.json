@@ -1,0 +1,300 @@
+{
+ "charts": {
+  "fmnist_samples": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "60,000 training images, 28 x 28 grey levels",
+   "period_ro": "60.000 de imagini de antrenare, 28 x 28 niveluri de gri"
+  },
+  "fmnist_curves": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "50,000 training and 10,000 validation images; seed 20261108",
+   "period_ro": "50.000 de imagini de antrenare \u0219i 10.000 de validare; s\u0103m\u00een\u021ba 20261108"
+  },
+  "fmnist_compare": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "10,000 test images; mean and standard deviation over 3 seeds",
+   "period_ro": "10.000 de imagini de test; media \u0219i abaterea standard pe 3 semin\u021be"
+  },
+  "fmnist_confusion": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "10,000 test images, CNN seed 20261108",
+   "period_ro": "10.000 de imagini de test, CNN cu s\u0103m\u00een\u021ba 20261108"
+  },
+  "fmnist_filters": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "first convolutional layer of the CNN (32 filters of 3 x 3), seed 20261108",
+   "period_ro": "primul strat convolu\u021bional al CNN (32 de filtre de 3 x 3), s\u0103m\u00een\u021ba 20261108"
+  },
+  "fmnist_featuremaps": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "one test image (ankle boot); 8 most active channels per block",
+   "period_ro": "o imagine de test (ghete); cele mai active 8 canale din fiecare bloc"
+  },
+  "conv_edges": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "one 64 x 64 Sentinel-2 tile (class Highway), grey levels",
+   "period_ro": "o imagine Sentinel-2 de 64 x 64 (clasa Autostrad\u0103), niveluri de gri"
+  },
+  "receptive_field": {
+   "source_en": "own computation from the receptive-field recursion",
+   "source_ro": "calcul propriu din recuren\u021ba c\u00eempului receptiv",
+   "period_en": "recursion of the receptive field, no data",
+   "period_ro": "recuren\u021ba c\u00eempului receptiv, f\u0103r\u0103 date"
+  },
+  "cifar_curves": {
+   "source_en": "CIFAR-10 (Krizhevsky, 2009)",
+   "source_ro": "CIFAR-10 (Krizhevsky, 2009)",
+   "period_en": "45,000 training and 5,000 validation images; seed 20261108",
+   "period_ro": "45.000 de imagini de antrenare \u0219i 5.000 de validare; s\u0103m\u00een\u021ba 20261108"
+  },
+  "transfer_curves": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "16,200 training, 5,400 validation, 5,400 test tiles; right: mean of 2 seeds",
+   "period_ro": "16.200 de imagini de antrenare, 5.400 de validare, 5.400 de test; dreapta: media pe 2 semin\u021be"
+  },
+  "eurosat_samples": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "27,000 tiles of 64 x 64 pixels, 10 classes",
+   "period_ro": "27.000 de imagini de 64 x 64 pixeli, 10 clase"
+  },
+  "eurosat_confusion": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "5,400 test tiles, fine-tuned ResNet-18, seed 20261108",
+   "period_ro": "5.400 de imagini de test, ResNet-18 ajustat fin, s\u0103m\u00een\u021ba 20261108"
+  },
+  "gradcam": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "six test tiles; Grad-CAM on the 7 x 7 maps of block 3 of the fine-tuned ResNet-18",
+   "period_ro": "\u0219ase imagini de test; Grad-CAM pe h\u0103r\u021bile de 7 x 7 ale blocului 3 din ResNet-18 ajustat fin"
+  }
+ },
+ "seed": 20261108,
+ "device": "mps",
+ "fmnist": {
+  "n_train": 50000,
+  "n_valid": 10000,
+  "n_test": 10000,
+  "size": 28,
+  "mu": 0.2859,
+  "sd": 0.353,
+  "softmax": {
+   "acc_mean": 84.5,
+   "acc_sd": 0.06,
+   "acc_min": 84.45,
+   "acc_max": 84.56,
+   "params": 7850,
+   "best_epoch": 12,
+   "valid_acc_last": 86.19
+  },
+  "mlp": {
+   "acc_mean": 89.0,
+   "acc_sd": 0.1,
+   "acc_min": 88.92,
+   "acc_max": 89.11,
+   "params": 235146,
+   "best_epoch": 12,
+   "valid_acc_last": 89.88
+  },
+  "cnn": {
+   "acc_mean": 93.08,
+   "acc_sd": 0.2,
+   "acc_min": 92.86,
+   "acc_max": 93.24,
+   "params": 140778,
+   "best_epoch": 11,
+   "valid_acc_last": 93.49
+  },
+  "epochs": 12,
+  "batch": 128,
+  "seconds": 298.9,
+  "cnn_vs_mlp_pp": 4.08,
+  "cnn_err_cut_pct": 37.1,
+  "params_ratio": 1.67,
+  "diff_t": 31.38,
+  "mcnemar": {
+   "cnn_only": 614,
+   "mlp_only": 226,
+   "chi2": 178.3
+  },
+  "recall": {
+   "T-shirt/top": 88.2,
+   "Trouser": 98.4,
+   "Pullover": 89.7,
+   "Dress": 93.1,
+   "Coat": 92.4,
+   "Sandal": 98.2,
+   "Shirt": 75.1,
+   "Sneaker": 98.6,
+   "Bag": 99.1,
+   "Ankle boot": 95.8
+  },
+  "worst_class": "Shirt",
+  "worst_class_ro": "C\u0103ma\u0219\u0103",
+  "worst_recall": 75.1,
+  "top_conf": {
+   "true": "Shirt",
+   "pred": "T-shirt/top",
+   "true_ro": "C\u0103ma\u0219\u0103",
+   "pred_ro": "Tricou",
+   "n": 102
+  },
+  "shirt_n": 1000,
+  "fmap_sizes": {
+   "l1": [
+    32,
+    14,
+    14
+   ],
+   "l3": [
+    128,
+    7,
+    7
+   ]
+  },
+  "fmap_l3_size": 7
+ },
+ "eurosat": {
+  "n": 27000,
+  "size": 64,
+  "classes": 10,
+  "per_class_min": 2000,
+  "per_class_max": 3000,
+  "n_train": 16200,
+  "n_valid": 5400,
+  "n_test": 5400,
+  "scratch_acc": 97.78,
+  "finetune_acc": 98.76,
+  "probe_acc": 93.48,
+  "probe_C": 0.01,
+  "scratch_params": 1176746,
+  "resnet_params": 11181642,
+  "scratch_epochs": 18,
+  "ft_epochs": 6,
+  "res": 112,
+  "seconds": 1225.4,
+  "ft_err_cut_pct": 44.2,
+  "top_conf": {
+   "true": "Annual crop",
+   "pred": "Permanent crop",
+   "true_ro": "Culturi anuale",
+   "pred_ro": "Culturi permanente",
+   "n": 8
+  },
+  "n_errors_ft": 67,
+  "worst": "Annual crop",
+  "worst_ro": "Culturi anuale",
+  "worst_recall": 97.7,
+  "macro_f1_ft": 98.72
+ },
+ "conv": {
+  "in": 64,
+  "out_same": 64,
+  "out_valid": 62,
+  "out_s2": 32
+ },
+ "rf": {
+  "plain_6": 13,
+  "plain_12": 25,
+  "pooled_8conv": 68,
+  "plain_8": 17
+ },
+ "cifar": {
+  "n_train": 45000,
+  "n_valid": 5000,
+  "n_test": 10000,
+  "size": 32,
+  "cnn": {
+   "test_acc": 86.56,
+   "params": 289194,
+   "train_acc": 96.07,
+   "valid_acc": 87.18,
+   "train_loss": 0.13,
+   "gap": 8.89
+  },
+  "cnn_aug": {
+   "test_acc": 86.86,
+   "params": 289194,
+   "train_acc": 88.19,
+   "valid_acc": 87.26,
+   "train_loss": 0.351,
+   "gap": 0.93
+  },
+  "plain32": {
+   "test_acc": 79.96,
+   "params": 466906,
+   "train_acc": 80.75,
+   "valid_acc": 80.2,
+   "train_loss": 0.557,
+   "gap": 0.55
+  },
+  "res32": {
+   "test_acc": 87.81,
+   "params": 466906,
+   "train_acc": 90.12,
+   "valid_acc": 87.28,
+   "train_loss": 0.291,
+   "gap": 2.84
+  },
+  "epochs": 12,
+  "seconds": 1283.9,
+  "aug_gain": 0.3,
+  "res_gain": 7.85,
+  "res32_worst": "cat",
+  "res32_worst_ro": "pisic\u0103",
+  "res32_worst_recall": 71.9,
+  "res32_best": "automobile",
+  "res32_best_ro": "automobil",
+  "res32_best_recall": 95.7
+ },
+ "budget": {
+  "scratch": {
+   "10": 69.9,
+   "25": 81.0,
+   "50": 85.1,
+   "100": 89.5,
+   "250": 86.6,
+   "1000": 94.7
+  },
+  "finetune": {
+   "10": 87.8,
+   "25": 92.3,
+   "50": 94.8,
+   "100": 96.4,
+   "250": 96.2,
+   "1000": 98.1
+  },
+  "probe": {
+   "10": 78.6,
+   "25": 83.7,
+   "50": 87.0,
+   "100": 88.9,
+   "250": 90.6,
+   "1000": 93.0
+  },
+  "seconds": 1857.3999999999999,
+  "n_small": 10,
+  "tiles_small": 100
+ },
+ "gradcam": {
+  "n": 6,
+  "map": 7,
+  "probs_min": 72.8,
+  "all_correct": true
+ },
+ "landuse": {
+  "max_abs_share_err_pp": 0.2,
+  "crop_true": 20.37,
+  "crop_pred": 20.54
+ }
+}

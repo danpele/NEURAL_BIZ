@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_sentiment_models'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test macro-F1 of seven text representations and classifiers on the Financial PhraseBank (5 random splits) and on finance tweets (3 seeds).'
+
+Keywords: 'sentiment analysis, TF-IDF, bag of words, word2vec, embedding bag, MLP, macro-F1, finance tweets'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Financial PhraseBank and Twitter financial news; saved test scores of analysis_L6.py (sentiment_models_results.json)'
+
+Output: 'sentiment_models.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_grad_lag'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Sensitivity of the trained day-ahead load forecasts (hour 12 UTC) to each of the 168 input hours: RNN vs LSTM vs GRU, 200 test days.'
+
+Keywords: 'vanishing gradient, memory, sensitivity, RNN, LSTM, GRU, backpropagation through time'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'saved gradient sensitivities of analysis_L5.py (grad_lag_results.json)'
+
+Output: 'grad_lag.png'

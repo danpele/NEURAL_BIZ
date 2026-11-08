@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_trading_exposure'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Share of capital invested by a PPO trading agent on the S&P 500 (21-day mean) against the 200-day moving-average rule, test period from 2020.'
+
+Keywords: 'PPO, policy interpretation, market exposure, trend following, S&P 500'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance: SP500 and VIX closes)'
+
+Output: 'trading_exposure.png'

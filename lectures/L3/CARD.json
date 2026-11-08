@@ -1,0 +1,27 @@
+{
+ "title": {
+  "en": "Regularisation and generalisation",
+  "ro": "Regularizare și generalizare"
+ },
+ "topics": {
+  "en": [
+   "Overfitting and the generalisation gap on 600 German credit applicants; the bias-variance decomposition and double descent with random ReLU features on California housing",
+   "Weight decay as an L2 penalty and a Gaussian prior, AdamW, L1 penalties and sparsity of the first-layer weights",
+   "Dropout, early stopping (and why it acts like an L2 penalty) and batch normalisation, measured on German credit, card fraud and a deep MLP",
+   "Validation design: cross-validation, the noise of one hold-out split, time-ordered splits and the leakage created by oversampling before the split",
+   "Case study on the ULB card-fraud data: weighted precision, recall and PR-AUC, an ablation of regularisers over five seeds, an MLP against logistic regression and XGBoost, the prior correction and a cost-based alert budget"
+  ],
+  "ro": [
+   "Supraînvățarea și diferența de generalizare pe 600 de solicitanți German credit; descompunerea deplasare-varianță și dubla coborîre cu caracteristici ReLU aleatoare pe California housing",
+   "Penalizarea ponderilor ca penalizare L2 și distribuție a priori gaussiană, AdamW, penalizarea L1 și raritatea ponderilor primului strat",
+   "Dropout, oprirea timpurie (și de ce acționează ca o penalizare L2) și normalizarea pe loturi, măsurate pe German credit, pe fraudele cu carduri și pe un MLP adînc",
+   "Schema de validare: validarea încrucișată, zgomotul unei singure împărțiri, împărțirea cronologică și scurgerea de informație produsă de supraeșantionarea înainte de împărțire",
+   "Studiu de caz pe datele ULB despre fraudele cu carduri: precizia, sensibilitatea și PR-AUC ponderate, compararea regularizatorilor pe cinci inițializări, un MLP față de regresia logistică și XGBoost, corecția pentru subeșantionare și un buget de alerte stabilit din costuri"
+  ]
+ },
+ "further": [
+  {"en": "Bishop & Bishop (2024), chapter 9: regularisation", "ro": "Bishop și Bishop (2024), capitolul 9: regularizarea", "url": "https://www.bishopbook.com"},
+  {"en": "Hastie, Tibshirani & Friedman (2009), chapter 7: model assessment and selection", "ro": "Hastie, Tibshirani și Friedman (2009), capitolul 7: evaluarea și selecția modelelor", "url": "https://hastie.su.domains/ElemStatLearn/"},
+  {"en": "Reproducible machine learning for credit card fraud detection: practical handbook (ULB)", "ro": "Manualul practic de detectare a fraudei cu carduri prin învățare automată (ULB)", "url": "https://fraud-detection-handbook.github.io/fraud-detection-handbook/"}
+ ]
+}

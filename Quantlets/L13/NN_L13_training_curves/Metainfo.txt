@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_training_curves'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Training and validation L1 loss by epoch of the DNN (first monthly recalibration) and of N-BEATS, with early stopping at the best validation epoch.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR, early stopping'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/training_hist.json'
+
+Output: 'training_curves.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_fraud_pr'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Precision-recall curves (population-weighted) on the time-ordered test hours of the ULB card-fraud data: logistic regression, a regularised MLP (ensemble of 5 seeds) and XGBoost.'
+
+Keywords: 'precision-recall curve, PR-AUC, imbalanced classification, fraud detection, XGBoost, regularised MLP'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'fraud_pr.png'

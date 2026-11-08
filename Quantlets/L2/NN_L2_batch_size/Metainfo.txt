@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_batch_size'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Validation MSE of an MLP 64-64 on California housing trained with Adam for batch sizes 16, 128 and 1,024, per epoch and per gradient step.'
+
+Keywords: 'mini-batch, batch size, stochastic gradient descent, Adam, training budget, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'batch_size.png'

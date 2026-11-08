@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_lime_instability'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Instability of LIME: spread of the local slopes over repeated runs with 500 and 5,000 samples, and their dependence on the kernel width.'
+
+Keywords: 'LIME instability, kernel width, sampling noise, explanation stability'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'lime_instability.png'

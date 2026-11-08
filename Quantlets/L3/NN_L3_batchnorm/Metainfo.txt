@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_batchnorm'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Validation MSE of a 6-layer MLP on California housing trained with SGD and momentum at learning rates 0.01 and 0.1, with and without batch normalisation (median of 3 seeds).'
+
+Keywords: 'batch normalisation, learning rate, divergence, deep MLP, SGD with momentum, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'batchnorm.png'

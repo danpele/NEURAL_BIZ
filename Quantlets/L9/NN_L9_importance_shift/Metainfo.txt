@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_importance_shift'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Impurity importance of the 10 most important features of the random forest, without and with the GCN embeddings as extra inputs (mean of 3 refits).'
+
+Keywords: 'feature importance, explanation stability, graph embeddings, random forest, explainable AI'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/importance.csv'
+
+Output: 'importance_shift.png'

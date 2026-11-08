@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_llm_var'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'LLM-VaR after Pele et al. (2026) with an open 3B model: the 5 and 1 percent Value-at-Risk of the S&P 500 written by Qwen2.5-3B-Instruct from the last 250 daily returns, against historical simulation and GARCH(1,1)-t, with Kupiec tests, 2025-2026.'
+
+Keywords: 'LLM-VaR, Value-at-Risk, backtesting, Kupiec, GARCH, S&P 500, large language models'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/llmvar_sp500.csv (from data/clean/markets_daily.csv)'
+
+Output: 'llm_var.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_shap_beeswarm'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Beeswarm of Kernel SHAP values of an MLP credit model on HMEQ: each dot is one applicant, colour = rank of the feature value.'
+
+Keywords: 'SHAP beeswarm, Kernel SHAP, local explanations, credit risk, explainable AI'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'shap_beeswarm.png'

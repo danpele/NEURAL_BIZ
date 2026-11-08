@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_zeroshot_confusion'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Confusion matrix (row percentages) of the best zero-shot CLIP classifier on the EuroSAT test set; per-class accuracy.'
+
+Keywords: 'vision-language models, CLIP, zero-shot classification, EuroSAT, satellite images, vision transformer, confusion matrix'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L14/results/eurosat_zeroshot.csv'
+
+Output: 'zeroshot_confusion.png'

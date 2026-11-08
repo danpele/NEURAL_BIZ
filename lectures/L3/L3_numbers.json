@@ -1,0 +1,357 @@
+{
+ "charts": {
+  "overfit_german": {
+   "source_en": "UCI Machine Learning Repository, Statlog German credit",
+   "source_ro": "UCI Machine Learning Repository, Statlog German credit",
+   "period_en": "600 training and 200 validation applicants; MLP 256-256",
+   "period_ro": "600 de solicitanți de antrenare și 200 de validare; MLP 256-256"
+  },
+  "wd_dropout": {
+   "source_en": "UCI Machine Learning Repository, Statlog German credit",
+   "source_ro": "UCI Machine Learning Repository, Statlog German credit",
+   "period_en": "1,000 applicants, 5-fold cross-validation, no early stopping (150 epochs)",
+   "period_ro": "1\\,000 de solicitanți, validare încrucișată cu 5 pliuri, fără oprire timpurie (150 de epoci)"
+  },
+  "l1_l2_weights": {
+   "source_en": "UCI Machine Learning Repository, Statlog German credit",
+   "source_ro": "UCI Machine Learning Repository, Statlog German credit",
+   "period_en": "600 training applicants; MLP with 64 hidden units, 3,072 first-layer weights",
+   "period_ro": "600 de solicitanți de antrenare; MLP cu 64 de neuroni ascunși\\, 3\\,072 de ponderi în primul strat"
+  },
+  "double_descent": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "400 training and 5,000 test block groups per draw, 10 draws",
+   "period_ro": "400 de grupuri de antrenare și 5\\,000 de testare la fiecare extragere, 10 extrageri"
+  },
+  "batchnorm": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "6 hidden layers of 64 units, SGD with momentum 0.9, 3 seeds",
+   "period_ro": "6 straturi ascunse de 64 de neuroni, SGD cu moment 0,9, 3 inițializări"
+  },
+  "fraud_by_hour": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "September 2013, 2 days, 284,807 transactions (weighted sample)",
+   "period_ro": "septembrie 2013, 2 zile, 284\\,807 tranzacții (eșantion ponderat)"
+  },
+  "early_stopping": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "time-ordered split: 17,354 training, 5,785 validation transactions",
+   "period_ro": "împărțire cronologică: 17\\,354 de tranzacții de antrenare\\, 5\\,785 de validare"
+  },
+  "reg_ablation": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "time-ordered test set: last 5,785 transactions (75 frauds); 5 seeds",
+   "period_ro": "setul de test cronologic: ultimele 5\\,785 de tranzacții (75 de fraude); 5 inițializări"
+  },
+  "fraud_pr": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "time-ordered test set: 5,785 transactions, 75 frauds, population-weighted",
+   "period_ro": "setul de test cronologic: 5\\,785 de tranzacții\\, 75 de fraude\\, ponderat la populație"
+  },
+  "fraud_cost": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "test period (last 20\\,\\% of the two days); review cost 5 EUR per alert",
+   "period_ro": "perioada de test (ultimele 20\\,\\% din cele două zile); costul verificării 5 EUR pe alertă"
+  },
+  "split_leakage": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "the same 28,924 transactions, MLP 128-128 with early stopping, 5 seeds",
+   "period_ro": "aceleași 28\\,924 de tranzacții, MLP 128-128 cu oprire timpurie, 5 inițializări"
+  },
+  "holdout_noise": {
+   "source_en": "UCI Machine Learning Repository, Statlog German credit",
+   "source_ro": "UCI Machine Learning Repository, Statlog German credit",
+   "period_en": "1,000 applicants, 200 random stratified splits",
+   "period_ro": "1\\,000 de solicitanți, 200 de împărțiri aleatoare stratificate"
+  }
+ },
+ "seed": 20261108,
+ "german": {
+  "n_train": 600,
+  "n_val": 200,
+  "n_test": 200,
+  "d": 48
+ },
+ "overfit": {
+  "params": 78593,
+  "best_ep": 3,
+  "val_min": 0.536,
+  "val_last": 2.187,
+  "train_last": 0.0001,
+  "reg_val_min": 0.538,
+  "reg_val_last": 1.767,
+  "epochs": 150,
+  "logit_val": 0.57,
+  "auc_over_last": 0.75,
+  "auc_reg_last": 0.758
+ },
+ "wd": {
+  "0": {
+   "auc": 0.749,
+   "sd": 0.048,
+   "norm": 18.0
+  },
+  "0p001": {
+   "auc": 0.749,
+   "sd": 0.049,
+   "norm": 18.0
+  },
+  "0p01": {
+   "auc": 0.75,
+   "sd": 0.049,
+   "norm": 17.8
+  },
+  "0p03": {
+   "auc": 0.749,
+   "sd": 0.049,
+   "norm": 17.5
+  },
+  "0p1": {
+   "auc": 0.748,
+   "sd": 0.049,
+   "norm": 16.5
+  },
+  "0p3": {
+   "auc": 0.749,
+   "sd": 0.047,
+   "norm": 14.4
+  },
+  "1": {
+   "auc": 0.75,
+   "sd": 0.051,
+   "norm": 12.2
+  },
+  "3": {
+   "auc": 0.742,
+   "sd": 0.042,
+   "norm": 10.6
+  }
+ },
+ "dp": {
+  "0": {
+   "auc": 0.749,
+   "sd": 0.048
+  },
+  "0p1": {
+   "auc": 0.735,
+   "sd": 0.054
+  },
+  "0p2": {
+   "auc": 0.748,
+   "sd": 0.044
+  },
+  "0p3": {
+   "auc": 0.745,
+   "sd": 0.045
+  },
+  "0p4": {
+   "auc": 0.753,
+   "sd": 0.043
+  },
+  "0p5": {
+   "auc": 0.753,
+   "sd": 0.046
+  },
+  "0p6": {
+   "auc": 0.747,
+   "sd": 0.049
+  },
+  "0p7": {
+   "auc": 0.755,
+   "sd": 0.043
+  }
+ },
+ "cv": {
+  "auc_logit": 0.772,
+  "sd_logit": 0.04,
+  "best_lam": 1.0,
+  "best_p": 0.7,
+  "auc_best_lam": 0.75,
+  "auc_best_p": 0.755,
+  "auc_none": 0.749,
+  "best_lam_key": "1",
+  "best_p_key": "0p7"
+ },
+ "l1l2": {
+  "share_small_l1_pct": 67.2,
+  "share_small_l2_pct": 26.3,
+  "thr": 0.01,
+  "n_weights": 3072,
+  "lam_l1": 0.001,
+  "lam_l2": 0.01,
+  "inputs_off_l1": 0,
+  "auc_l1": 0.768,
+  "auc_l2": 0.761
+ },
+ "dd": {
+  "n": 400,
+  "peak_p": 400,
+  "peak_mse": 1019219.2,
+  "best_under_p": 50,
+  "best_under_mse": 0.781,
+  "big_p": 8000,
+  "big_mse": 0.932,
+  "seeds": 10
+ },
+ "bn": {
+  "plain_001": {
+   "val_final": 0.271,
+   "val_ep5": 0.342,
+   "val_best": 0.265,
+   "diverged": 0
+  },
+  "plain_01": {
+   "val_final": 10.0,
+   "val_ep5": 10.0,
+   "val_best": 1.276,
+   "diverged": 3
+  },
+  "bn_001": {
+   "val_final": 0.474,
+   "val_ep5": 0.315,
+   "val_best": 0.277,
+   "diverged": 0
+  },
+  "bn_01": {
+   "val_final": 0.56,
+   "val_ep5": 0.368,
+   "val_best": 0.283,
+   "diverged": 0
+  }
+ },
+ "fraud": {
+  "n": 28924,
+  "frauds": 492,
+  "n_train": 17354,
+  "n_val": 5785,
+  "n_test": 5785,
+  "fr_train": 360,
+  "fr_val": 57,
+  "fr_test": 75,
+  "cut1_h": 33.4,
+  "cut2_h": 40.3,
+  "prev_full_pct": 0.173,
+  "prev_sample_pct": 1.7,
+  "n_full": 284807,
+  "legit_weight": 10.0,
+  "fraud_amount_median": 9.25,
+  "legit_amount_median": 22.2,
+  "fraud_amount_sum_test": 7729.0,
+  "rate_h_max_pct": 2.27,
+  "rate_h_max_hour": 26,
+  "rate_h_median_pct": 0.131
+ },
+ "es": {
+  "best_ep": 4,
+  "stop_ep": 24,
+  "patience": 20,
+  "val_min": 0.0159,
+  "val_last": 0.0593,
+  "train_last": 0.00013,
+  "epochs": 120
+ },
+ "abl": {
+  "none": {
+   "ap": 0.796,
+   "ap_sd": 0.009,
+   "auc": 0.97,
+   "epochs": 60.0
+  },
+  "es": {
+   "ap": 0.842,
+   "ap_sd": 0.002,
+   "auc": 0.975,
+   "epochs": 25.0
+  },
+  "wd": {
+   "ap": 0.787,
+   "ap_sd": 0.018,
+   "auc": 0.971,
+   "epochs": 60.0
+  },
+  "dropout": {
+   "ap": 0.798,
+   "ap_sd": 0.015,
+   "auc": 0.973,
+   "epochs": 60.0
+  },
+  "bn": {
+   "ap": 0.798,
+   "ap_sd": 0.018,
+   "auc": 0.955,
+   "epochs": 60.0
+  },
+  "all": {
+   "ap": 0.841,
+   "ap_sd": 0.003,
+   "auc": 0.976,
+   "epochs": 28.0
+  }
+ },
+ "final": {
+  "logit": {
+   "ap": 0.789,
+   "auc": 0.982,
+   "recall_at_p80_pct": 74.7
+  },
+  "mlp": {
+   "ap": 0.84,
+   "auc": 0.977,
+   "recall_at_p80_pct": 80.0
+  },
+  "xgb": {
+   "ap": 0.814,
+   "auc": 0.973,
+   "recall_at_p80_pct": 80.0
+  },
+  "base_ap": 0.0013
+ },
+ "cost": {
+  "review": 5.0,
+  "no_model": 7729.0,
+  "logit": {
+   "min": 3093.0,
+   "alerts": 142.0
+  },
+  "mlp": {
+   "min": 2694.0,
+   "alerts": 59.0
+  },
+  "xgb": {
+   "min": 2695.0,
+   "alerts": 59.0
+  }
+ },
+ "design": {
+  "time": {
+   "ap": 0.843,
+   "sd": 0.007
+  },
+  "random": {
+   "ap": 0.853,
+   "sd": 0.048
+  },
+  "oversample_first": {
+   "ap": 0.921,
+   "sd": 0.075
+  }
+ },
+ "holdout": {
+  "n_splits": 200,
+  "mean": 0.78,
+  "sd": 0.024,
+  "min": 0.702,
+  "max": 0.842,
+  "p05": 0.743,
+  "p95": 0.816
+ },
+ "runtime_min": 1.1
+}

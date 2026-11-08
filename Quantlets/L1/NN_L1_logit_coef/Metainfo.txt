@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_logit_coef'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Logistic regression of default on standardised HMEQ variables (with a missing-value indicator for the debt-to-income ratio): coefficients and 95 % confidence intervals.'
+
+Keywords: 'logistic regression, odds ratio, credit scoring, missing values, HMEQ, one-neuron network'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'logit_coef.png'

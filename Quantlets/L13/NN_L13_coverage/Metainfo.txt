@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_coverage'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Empirical coverage of 50, 80 and 90 percent intervals for Romanian day-ahead prices in the test year: raw Chronos-2 quantiles, the same after a rolling split-conformal correction (60 days), and LEAR with empirical errors.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR, conformal prediction, coverage'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/quantiles_hourly.csv'
+
+Output: 'coverage.png'

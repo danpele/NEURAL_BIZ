@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_xor'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'The XOR problem: no linear boundary (logistic regression) separates the four points; an MLP with two tanh hidden units does. Mechanism illustration on the logical XOR table.'
+
+Keywords: 'XOR, perceptron, linear separability, hidden layer, multilayer perceptron, Minsky and Papert'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'none (logical XOR table)'
+
+Output: 'xor.png'

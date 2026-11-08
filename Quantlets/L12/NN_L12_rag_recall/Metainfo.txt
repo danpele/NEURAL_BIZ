@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_rag_recall'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Recall@k of four retrievers (TF-IDF, BM25, dense bge-small embeddings, hybrid reciprocal rank fusion) that search 400 ECB speeches by their title.'
+
+Keywords: 'retrieval-augmented generation, BM25, dense retrieval, ECB speeches, recall'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/rag_ranks.csv (from data/clean/ecb_speeches_2022plus.csv)'
+
+Output: 'rag_recall.png'

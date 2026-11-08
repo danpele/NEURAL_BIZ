@@ -1,0 +1,34 @@
+{
+ "title": {
+  "en": "NLP foundations: text representation and word embeddings",
+  "ro": "Bazele NLP: reprezentarea textului și reprezentarea vectorială a cuvintelor"
+ },
+ "topics": {
+  "en": [
+   "Natural language processing (NLP) for finance: tokens, Zipf's law, bag of words and TF-IDF (term frequency–inverse document frequency), a learned finance lexicon",
+   "Our own word2vec (skip-gram with negative sampling) and GloVe (global vectors) trained on European Central Bank speeches, with the objectives written out",
+   "Sentence classifiers: TF-IDF + logistic regression, MLP, mean embeddings and an embedding-bag network, with macro-F1, paired tests and learning curves",
+   "Financial sentiment on the Financial PhraseBank and on finance tweets; topic classification of tweets in 20 classes"
+  ],
+  "ro": [
+   "Prelucrarea limbajului natural (NLP) în finanțe: unități lexicale, legea lui Zipf, sacul de cuvinte și TF-IDF (term frequency–inverse document frequency), un dicționar financiar învățat",
+   "Propriile modele word2vec (skip-gram cu eșantionare negativă) și GloVe (global vectors), antrenate pe discursurile Băncii Centrale Europene, cu funcțiile-obiectiv scrise complet",
+   "Clasificatoare de fraze: TF-IDF + regresie logistică, MLP, media vectorilor de cuvinte și o rețea embedding bag, cu macro-F1, teste pereche și curbe de învățare",
+   "Sentimentul financiar pe Financial PhraseBank și pe tweet-uri financiare; clasificarea tweet-urilor în 20 de teme"
+  ]
+ },
+ "further": [
+  {
+   "label": "Mikolov et al. (2013), Distributed representations of words and phrases",
+   "url": "https://arxiv.org/abs/1310.4546"
+  },
+  {
+   "label": "Pennington, Socher & Manning (2014), GloVe",
+   "url": "https://doi.org/10.3115/v1/D14-1162"
+  },
+  {
+   "label": "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES",
+   "url": "https://doi.org/10.1016/j.eswa.2025.128676"
+  }
+ ]
+}

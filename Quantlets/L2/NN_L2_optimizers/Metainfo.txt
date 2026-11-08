@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_optimizers'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Validation MSE per epoch of an MLP 64-64 on California housing trained with SGD, SGD with momentum, RMSProp, Adam and AdamW at their best learning rates (mean of 5 seeds), against linear regression.'
+
+Keywords: 'optimiser, SGD, momentum, RMSProp, Adam, AdamW, training curve, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'optimizers.png'

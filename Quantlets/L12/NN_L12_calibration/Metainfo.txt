@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_calibration'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Reliability diagram and expected calibration error of the label probabilities of zero-shot and few-shot Qwen2.5-3B and of TF-IDF with logistic regression on the Financial PhraseBank test set.'
+
+Keywords: 'large language models, prompt engineering, financial sentiment, Qwen2.5, zero-shot, few-shot, calibration, expected calibration error'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/predictions_pb.csv'
+
+Output: 'calibration.png'

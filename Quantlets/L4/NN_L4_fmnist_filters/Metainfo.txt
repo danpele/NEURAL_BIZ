@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_fmnist_filters'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'The 32 learned 3 x 3 filters of the first convolutional layer of the Fashion-MNIST CNN (seed 20261108).'
+
+Keywords: 'learned filters, convolution kernels, edge detectors, CNN, Fashion-MNIST'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Fashion-MNIST; saved first-layer weights of the trained CNN (fmnist_filters_results.json)'
+
+Output: 'fmnist_filters.png'

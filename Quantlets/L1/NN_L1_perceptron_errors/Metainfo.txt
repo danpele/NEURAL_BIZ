@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_perceptron_errors'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Rosenblatt’s perceptron trained on the HMEQ loans for 60 epochs: the training error never settles because the classes are not linearly separable; logistic regression and the majority rule as references.'
+
+Keywords: 'perceptron, learning rule, convergence theorem, linear separability, credit scoring, HMEQ'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'perceptron_errors.png'

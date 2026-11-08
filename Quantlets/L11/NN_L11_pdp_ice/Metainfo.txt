@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_pdp_ice'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Partial dependence (PDP) and individual conditional expectation (ICE) of the predicted house value on median income, MLP on California housing.'
+
+Keywords: 'partial dependence, ICE curves, global explanation, MLP regression, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'pdp_ice.png'

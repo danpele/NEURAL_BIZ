@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_dm_pvalues'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Multivariate Diebold-Mariano tests (daily L1 loss differential over 24 hours) between all pairs of nine day-ahead forecasts for Romania; one-sided p-values, chessboard plot.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR, Diebold-Mariano'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/forecasts_hourly.csv'
+
+Output: 'dm_pvalues.png'

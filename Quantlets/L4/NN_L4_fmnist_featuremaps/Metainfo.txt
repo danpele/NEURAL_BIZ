@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_fmnist_featuremaps'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'One Fashion-MNIST test image (ankle boot) and the eight most active feature maps of blocks 1 and 3 of the trained CNN.'
+
+Keywords: 'feature maps, activations, CNN, hierarchy of features, Fashion-MNIST'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Fashion-MNIST; saved feature maps of the trained CNN (fmnist_featuremaps_results.json)'
+
+Output: 'fmnist_featuremaps.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_spread_monthly'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Monthly mean of the daily max-min spread of day-ahead prices in Romania and Germany-Luxembourg, the income source of a battery.'
+
+Keywords: 'electricity prices, day-ahead market, price spread, battery storage, Romania, reinforcement learning'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'spread_monthly.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_lstm_gates'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Mean forget-gate and input-gate activations of the trained volatility LSTM (seed 20261108) over the S&P 500 test period 2020-2026.'
+
+Keywords: 'LSTM gates, forget gate, input gate, interpretability, volatility, S&P 500'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'saved gate activations of analysis_L5.py (lstm_gates_results.json)'
+
+Output: 'lstm_gates.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_rag_qa'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Which ECB board member gave the speech? Answers of Qwen2.5-3B-Instruct without documents, with the top-3 retrieved speeches (RAG) and with the right speech: share correct, wrong (hallucinated) and abstaining, speeches since 2025.'
+
+Keywords: 'retrieval-augmented generation, hallucination, question answering, ECB speeches'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/rag_qa.csv'
+
+Output: 'rag_qa.png'

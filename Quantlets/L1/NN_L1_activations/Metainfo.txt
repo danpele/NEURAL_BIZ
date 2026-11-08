@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_activations'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Activation functions of neural networks (sigmoid, tanh, ReLU, GELU) and their derivatives; analytic curves, a mechanism illustration without data.'
+
+Keywords: 'activation function, sigmoid, tanh, ReLU, GELU, vanishing gradient, multilayer perceptron'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'none (analytic functions)'
+
+Output: 'activations.png'

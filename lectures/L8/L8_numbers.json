@@ -1,0 +1,223 @@
+{
+ "charts": {
+  "ae_error_dist": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "own estimates; two days of September 2013; test = last 20\\,\\% of the time span",
+   "period_ro": "estimări proprii; două zile din septembrie 2013; test = ultimele 20\\,\\% din interval"
+  },
+  "ae_pr": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "own estimates; two days of September 2013; test = last 20\\,\\% of the time span",
+   "period_ro": "estimări proprii; două zile din septembrie 2013; test = ultimele 20\\,\\% din interval"
+  },
+  "ae_bottleneck": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "own estimates; two days of September 2013; test = last 20\\,\\% of the time span",
+   "period_ro": "estimări proprii; două zile din septembrie 2013; test = ultimele 20\\,\\% din interval"
+  },
+  "vae_latent": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "own estimates; 60,000 training and 10,000 test images",
+   "period_ro": "estimări proprii; 60.000 de imagini de antrenare și 10.000 de test"
+  },
+  "vae_samples": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "own estimates; 60,000 training and 10,000 test images",
+   "period_ro": "estimări proprii; 60.000 de imagini de antrenare și 10.000 de test"
+  },
+  "vae_elbo": {
+   "source_en": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "source_ro": "Fashion-MNIST, Zalando Research (Xiao et al., 2017)",
+   "period_en": "own estimates; 60,000 training and 10,000 test images",
+   "period_ro": "estimări proprii; 60.000 de imagini de antrenare și 10.000 de test"
+  },
+  "gan_density": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cotații zilnice",
+   "period_en": "own estimates; S\\&P 500 4 Jan 2005 to 31 Dec 2019, trading days",
+   "period_ro": "estimări proprii; S\\&P 500 4 ianuarie 2005 - 31 decembrie 2019, zile de tranzacționare"
+  },
+  "gan_losses": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cotații zilnice",
+   "period_en": "own estimates; S\\&P 500 4 Jan 2005 to 31 Dec 2019, trading days",
+   "period_ro": "estimări proprii; S\\&P 500 4 ianuarie 2005 - 31 decembrie 2019, zile de tranzacționare"
+  },
+  "gan_acf": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cotații zilnice",
+   "period_en": "own estimates; S\\&P 500 4 Jan 2005 to 31 Dec 2019, trading days",
+   "period_ro": "estimări proprii; S\\&P 500 4 ianuarie 2005 - 31 decembrie 2019, zile de tranzacționare"
+  },
+  "diffusion_forward": {
+   "source_en": "European Central Bank, euro area AAA yield curve",
+   "source_ro": "Banca Centrală Europeană, curba randamentelor AAA din zona euro",
+   "period_en": "curve of 30 Oct 2026; noise schedule of the lecture (mechanism)",
+   "period_ro": "curba din 30 octombrie 2026; programul de zgomot din curs (mecanism)"
+  },
+  "yc_density": {
+   "source_en": "European Central Bank, euro area AAA yield curve",
+   "source_ro": "Banca Centrală Europeană, curba randamentelor AAA din zona euro",
+   "period_en": "own estimates; 6 Sep 2004 to 30 Oct 2026, business days",
+   "period_ro": "estimări proprii; 6 septembrie 2004 - 30 octombrie 2026, zile lucrătoare"
+  },
+  "yc_scatter": {
+   "source_en": "European Central Bank, euro area AAA yield curve",
+   "source_ro": "Banca Centrală Europeană, curba randamentelor AAA din zona euro",
+   "period_en": "own estimates; 6 Sep 2004 to 30 Oct 2026, business days",
+   "period_ro": "estimări proprii; 6 septembrie 2004 - 30 octombrie 2026, zile lucrătoare"
+  },
+  "yc_latent_time": {
+   "source_en": "European Central Bank, euro area AAA yield curve",
+   "source_ro": "Banca Centrală Europeană, curba randamentelor AAA din zona euro",
+   "period_en": "own estimates; 6 Sep 2004 to 30 Oct 2026, business days",
+   "period_ro": "estimări proprii; 6 septembrie 2004 - 30 octombrie 2026, zile lucrătoare"
+  }
+ },
+ "seed": 20261108,
+ "device": "mps",
+ "fraud": {
+  "n_rows": 28924,
+  "n_fraud": 492,
+  "n_train_legit": 16994,
+  "n_test": 5785,
+  "n_test_fraud": 75,
+  "test_fraud_rate_pct": 0.131,
+  "n_full_test": 57174,
+  "d_in": 29,
+  "hours_train": 33.4,
+  "hours_total": 48.0
+ },
+ "ae": {
+  "ap": 14.2,
+  "ap_sd": 2.9,
+  "auc": 94.4,
+  "ap_pca": 7.6,
+  "auc_pca": 95.3,
+  "ap_logit": 80.4,
+  "auc_logit": 98.2,
+  "k": 8,
+  "params": 1253,
+  "pca_var_pct": 37.6,
+  "epochs_seed1": 60,
+  "base_ap": 0.131,
+  "top01_frauds_ae": 8,
+  "top01_recall_ae": 10.7,
+  "top01_frauds_pca": 0,
+  "top01_recall_pca": 0.0,
+  "top01_frauds_logit": 48,
+  "top01_recall_logit": 64.0,
+  "n_alerts_top01": 57,
+  "median_ratio": 12.7,
+  "bottleneck": {
+   "2": 7.8,
+   "4": 10.1,
+   "8": 15.8,
+   "16": 11.6,
+   "24": 12.1
+  },
+  "best_k": 8
+ },
+ "vae": {
+  "knn_acc_2d": 71.7,
+  "n_train": 60000,
+  "n_test": 10000,
+  "rec_2d": 250.4,
+  "kl_2d": 6.63,
+  "beta": {
+   "b05": {
+    "rec": 222.5,
+    "kl": 17.8,
+    "active": 9
+   },
+   "b1": {
+    "rec": 228.6,
+    "kl": 12.0,
+    "active": 6
+   },
+   "b4": {
+    "rec": 242.5,
+    "kl": 6.4,
+    "active": 4
+   }
+  },
+  "epochs": 20,
+  "params_16": 798816,
+  "elbo_16": -240.6
+ },
+ "gan": {
+  "n_train": 3774,
+  "n_test": 1717,
+  "train_first": "2005-01-04",
+  "test_first": "2020-01-02",
+  "test_last": "2026-10-30",
+  "kurt_real": 11.86,
+  "kurt_gan": 6.65,
+  "kurt_gan_sd": 0.48,
+  "var_real_pct": -3.48,
+  "var_gan_pct": -3.61,
+  "var_gan_sd": 0.11,
+  "var_norm_pct": -2.67,
+  "viol_hs_pct": 1.11,
+  "viol_gan_pct": 0.95,
+  "viol_norm_pct": 2.39,
+  "ks_gan": 0.03,
+  "ks_norm": 0.115,
+  "acf1_real": 0.28,
+  "acf1_gan": -0.01,
+  "acf20_real": 0.27,
+  "params_g": 4801,
+  "params_d": 4353,
+  "steps": 6000,
+  "sd_train_pct": 1.16,
+  "n_viol_expected": 17
+ },
+ "yc": {
+  "n_days": 5664,
+  "first": "2004-09-06",
+  "last": "2026-10-30",
+  "pct_inverted_real": 8.7,
+  "pct_neg10_real": 13.8,
+  "y10_min": -0.82,
+  "y10_max": 4.78,
+  "T": 200,
+  "steps": 12000,
+  "params": 145675,
+  "ddpm": {
+   "w_y10": 0.149,
+   "w_y10_sd": 0.012,
+   "w_slope": 0.099,
+   "pct_inverted": 10.2,
+   "pct_neg10": 10.3
+  },
+  "gauss": {
+   "w_y10": 0.325,
+   "w_y10_sd": 0.011,
+   "w_slope": 0.113,
+   "pct_inverted": 14.7,
+   "pct_neg10": 9.3
+  },
+  "vae": {
+   "w_y10": 0.191,
+   "w_y10_sd": 0.003,
+   "w_slope": 0.242,
+   "pct_inverted": 0.2,
+   "pct_neg10": 10.9
+  },
+  "vae_corr": {
+   "z1_level": 0.51,
+   "z1_slope": 0.66,
+   "z2_level": 0.99,
+   "z2_slope": -0.04,
+   "max_level": 0.99,
+   "max_slope": 0.66
+  },
+  "forward_date": "2026-10-30"
+ },
+ "runtime_min": 0.3
+}

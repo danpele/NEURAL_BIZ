@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_ae_pr'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Precision-recall curves of three fraud detectors on the test part: autoencoder (no labels), PCA reconstruction with 8 components (linear autoencoder, no labels), logistic regression trained with the labels; weighted to the full data.'
+
+Keywords: 'precision-recall curve, PR-AUC, autoencoder, PCA, logistic regression, credit card fraud'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L8/results/fraud_test_scores.csv (from data/clean/creditcard_fraud_sample.csv)'
+
+Output: 'ae_pr.png'

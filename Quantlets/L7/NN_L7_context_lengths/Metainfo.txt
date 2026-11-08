@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_context_lengths'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Length in WordPiece tokens (FinBERT tokenizer) of finance tweets, Financial PhraseBank sentences and ECB speeches, against the 512-token window of BERT.'
+
+Keywords: 'context window, tokenization, transformer, ECB speeches, tweets, quadratic attention cost'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/twitter_fin_sentiment.csv, financial_phrasebank.csv, ecb_speeches_2022plus.csv; lectures/L7/results/token_lengths.csv'
+
+Output: 'context_lengths.png'

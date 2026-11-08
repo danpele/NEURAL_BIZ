@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_early_stopping'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Training and validation loss of an MLP 256-256 on the ULB credit-card fraud data with a time-ordered split, with the best validation epoch and the patience window of early stopping.'
+
+Keywords: 'early stopping, patience, validation loss, overfitting, fraud detection, time-ordered split'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'early_stopping.png'

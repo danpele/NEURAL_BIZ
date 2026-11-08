@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_topic_f1'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'F1 per topic on the test tweets of the Twitter financial news topic data (20 classes): TF-IDF + logistic regression and an embedding bag with word2vec start.'
+
+Keywords: 'topic classification, finance tweets, TF-IDF, logistic regression, embedding bag, F1'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Twitter financial news topic (Hugging Face, zeroshot); saved test predictions of analysis_L6.py (topic_f1_results.json)'
+
+Output: 'topic_f1.png'

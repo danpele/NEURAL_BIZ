@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_zeroshot_prompts'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Zero-shot accuracy of CLIP ViT-B/32 and ViT-B/16 on 5,400 EuroSAT test images for four prompt designs: folder name, ’a photo of’, ’a satellite photo of’ and an ensemble of five satellite templates.'
+
+Keywords: 'vision-language models, CLIP, zero-shot classification, EuroSAT, satellite images, vision transformer, prompt engineering'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L14/results/eurosat_zeroshot.csv (predictions of analysis_L14.py on EuroSAT)'
+
+Output: 'zeroshot_prompts.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_attention_entropy'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Normalised entropy of the attention rows and the share of attention on [CLS] and [SEP], by layer of pretrained FinBERT, 500 test tweets.'
+
+Keywords: 'attention entropy, BERT layers, attention sink, separator token, interpretability'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L7/results/attention_entropy.csv'
+
+Output: 'attention_entropy.png'

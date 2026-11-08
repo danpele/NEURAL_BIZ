@@ -1,0 +1,543 @@
+{
+ "charts": {
+  "price_history": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Jan 2015 to 31 Oct 2026, daily means of hourly prices",
+   "period_ro": "1 ianuarie 2015 - 31 octombrie 2026, medii zilnice ale pre\u021burilor orare"
+  },
+  "hourly_profile": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "2019, 2022, 2024 and 2026 (*January-October), Romania",
+   "period_ro": "2019, 2022, 2024 \u0219i 2026 (*ianuarie-octombrie), Rom\u00e2nia"
+  },
+  "mae_models": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Nov 2025 to 31 Oct 2026, 360 days x 24 hours, Romania",
+   "period_ro": "1 noiembrie 2025 - 31 octombrie 2026, 360 de zile x 24 de ore, Rom\u00e2nia"
+  },
+  "mae_by_hour": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Nov 2025 to 31 Oct 2026, 360 days x 24 hours, Romania",
+   "period_ro": "1 noiembrie 2025 - 31 octombrie 2026, 360 de zile x 24 de ore, Rom\u00e2nia"
+  },
+  "forecast_week": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "19 Oct 2026 to 25 Oct 2026, hourly, Romania",
+   "period_ro": "19 octombrie 2026 - 25 octombrie 2026, orar, Rom\u00e2nia"
+  },
+  "dm_pvalues": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Nov 2025 to 31 Oct 2026, 360 days x 24 hours, Romania",
+   "period_ro": "1 noiembrie 2025 - 31 octombrie 2026, 360 de zile x 24 de ore, Rom\u00e2nia"
+  },
+  "training_curves": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "training windows before 1 Nov 2025, Romania",
+   "period_ro": "ferestre de antrenare dinainte de 1 noiembrie 2025, Rom\u00e2nia"
+  },
+  "context_length": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Nov 2025 to 31 Oct 2026, 360 days x 24 hours, Romania",
+   "period_ro": "1 noiembrie 2025 - 31 octombrie 2026, 360 de zile x 24 de ore, Rom\u00e2nia"
+  },
+  "coverage": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Nov 2025 to 31 Oct 2026, 360 days x 24 hours, Romania",
+   "period_ro": "1 noiembrie 2025 - 31 octombrie 2026, 360 de zile x 24 de ore, Rom\u00e2nia"
+  },
+  "chronos_fan": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "19 Oct 2026 to 25 Oct 2026, hourly, Romania",
+   "period_ro": "19 octombrie 2026 - 25 octombrie 2026, orar, Rom\u00e2nia"
+  },
+  "load_mape": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Nov 2025 to 31 Oct 2026, 360 days, Romanian load",
+   "period_ro": "1 noiembrie 2025 - 31 octombrie 2026, 360 de zile, consumul Rom\u00e2niei"
+  },
+  "var_sp500": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "2 Jan 2020 to 30 Oct 2026, trading days, S\\&P 500",
+   "period_ro": "2 ianuarie 2020 - 30 octombrie 2026, zile de tranzac\u021bionare, S\\&P 500"
+  }
+ },
+ "seed": 20261108,
+ "split": {
+  "test_start": "2025-11-01",
+  "test_end": "2026-10-31",
+  "win_days": 1092,
+  "ctx_hours": 2048,
+  "cal_days": 60,
+  "var_start": "2020-01-01",
+  "var_end": "2026-10-31"
+ },
+ "data": {
+  "first": "2015-01-01",
+  "last": "2026-10-31",
+  "n_days": 4322,
+  "n_full_days": 4304,
+  "n_hours": 103595,
+  "n_test_days": 364,
+  "n_test_hours": 8736,
+  "test_mean": 134.59,
+  "test_std": 77.19,
+  "test_min": -97.55,
+  "test_max": 954.59,
+  "test_neg_hours": 195
+ },
+ "facts": {
+  "mean_2019": 50.41,
+  "mean_2022": 265.31,
+  "max_daily": 738.28,
+  "max_daily_date": "2022-08-30",
+  "corr_ro_de_daily": 0.936,
+  "profile": {
+   "2019": {
+    "min_hour": 3,
+    "min": 30.16,
+    "max_hour": 19,
+    "max": 67.37
+   },
+   "2022": {
+    "min_hour": 3,
+    "min": 185.38,
+    "max_hour": 19,
+    "max": 364.88
+   },
+   "2024": {
+    "min_hour": 12,
+    "min": 62.82,
+    "max_hour": 19,
+    "max": 198.04
+   },
+   "2026": {
+    "min_hour": 13,
+    "min": 67.9,
+    "max_hour": 19,
+    "max": 217.05
+   }
+  }
+ },
+ "features": {
+  "n": 151,
+  "n_samples": 3819
+ },
+ "dnn": {
+  "hidden1": 256,
+  "hidden2": 128,
+  "n_seeds": 4,
+  "dropout": 0.1,
+  "lr": 0.001,
+  "batch": 64,
+  "patience": 30,
+  "n_params": 74904
+ },
+ "nbeats": {
+  "n_blocks": 6,
+  "width": 256,
+  "layers": 4,
+  "input": 168,
+  "output": 24,
+  "n_seeds": 3,
+  "n_params": 1739904
+ },
+ "acc": {
+  "naive": {
+   "mae": 27.74,
+   "rmse": 44.57,
+   "rmae": 1.0
+  },
+  "lear": {
+   "mae": 22.79,
+   "rmse": 36.27,
+   "rmae": 0.822
+  },
+  "dnn": {
+   "mae": 23.06,
+   "rmse": 38.42,
+   "rmae": 0.831
+  },
+  "nbeats": {
+   "mae": 23.23,
+   "rmse": 36.64,
+   "rmae": 0.837
+  },
+  "chronos2": {
+   "mae": 20.72,
+   "rmse": 34.23,
+   "rmae": 0.747
+  },
+  "chronos2_cov": {
+   "mae": 20.41,
+   "rmse": 33.88,
+   "rmae": 0.736
+  },
+  "bolt": {
+   "mae": 21.67,
+   "rmse": 34.51,
+   "rmae": 0.781
+  },
+  "timesfm": {
+   "mae": 22.37,
+   "rmse": 36.08,
+   "rmae": 0.806
+  },
+  "ens": {
+   "mae": 20.77,
+   "rmse": 34.27,
+   "rmae": 0.749
+  }
+ },
+ "acc_best": "chronos2_cov",
+ "acc_dnn_seeds": [
+  23.57,
+  23.63,
+  23.75,
+  24.03
+ ],
+ "acc_dnn_seed_min": 23.57,
+ "acc_dnn_seed_max": 24.03,
+ "acc_nb_seeds": [
+  24.04,
+  24.12,
+  23.69
+ ],
+ "acc_nb_seed_min": 23.69,
+ "acc_nb_seed_max": 24.12,
+ "byhour": {
+  "lear": {
+   "worst_hour": 19,
+   "worst": 35.78,
+   "best_hour": 1,
+   "best": 10.75
+  },
+  "dnn": {
+   "worst_hour": 20,
+   "worst": 40.19,
+   "best_hour": 0,
+   "best": 11.13
+  },
+  "chronos2": {
+   "worst_hour": 19,
+   "worst": 34.05,
+   "best_hour": 1,
+   "best": 8.57
+  }
+ },
+ "week": {
+  "start": "2026-10-19",
+  "end": "2026-10-25",
+  "mae": {
+   "lear": 43.34,
+   "dnn": 32.33,
+   "chronos2": 25.41
+  }
+ },
+ "dm": {
+  "naive__lear": 0.0,
+  "naive__dnn": 0.0,
+  "naive__nbeats": 0.0,
+  "naive__bolt": 0.0,
+  "naive__timesfm": 0.0,
+  "naive__chronos2": 0.0,
+  "naive__chronos2_cov": 0.0,
+  "naive__ens": 0.0,
+  "lear__naive": 1.0,
+  "lear__dnn": 0.7606,
+  "lear__nbeats": 0.8472,
+  "lear__bolt": 0.0035,
+  "lear__timesfm": 0.1524,
+  "lear__chronos2": 0.0,
+  "lear__chronos2_cov": 0.0,
+  "lear__ens": 0.0,
+  "dnn__naive": 1.0,
+  "dnn__lear": 0.2394,
+  "dnn__nbeats": 0.6437,
+  "dnn__bolt": 0.0011,
+  "dnn__timesfm": 0.0723,
+  "dnn__chronos2": 0.0,
+  "dnn__chronos2_cov": 0.0,
+  "dnn__ens": 0.0,
+  "nbeats__naive": 1.0,
+  "nbeats__lear": 0.1528,
+  "nbeats__dnn": 0.3563,
+  "nbeats__bolt": 0.0,
+  "nbeats__timesfm": 0.0098,
+  "nbeats__chronos2": 0.0,
+  "nbeats__chronos2_cov": 0.0,
+  "nbeats__ens": 0.0,
+  "bolt__naive": 1.0,
+  "bolt__lear": 0.9965,
+  "bolt__dnn": 0.9989,
+  "bolt__nbeats": 1.0,
+  "bolt__timesfm": 0.9912,
+  "bolt__chronos2": 0.0,
+  "bolt__chronos2_cov": 0.0,
+  "bolt__ens": 0.0009,
+  "timesfm__naive": 1.0,
+  "timesfm__lear": 0.8476,
+  "timesfm__dnn": 0.9277,
+  "timesfm__nbeats": 0.9902,
+  "timesfm__bolt": 0.0088,
+  "timesfm__chronos2": 0.0,
+  "timesfm__chronos2_cov": 0.0,
+  "timesfm__ens": 0.0,
+  "chronos2__naive": 1.0,
+  "chronos2__lear": 1.0,
+  "chronos2__dnn": 1.0,
+  "chronos2__nbeats": 1.0,
+  "chronos2__bolt": 1.0,
+  "chronos2__timesfm": 1.0,
+  "chronos2__chronos2_cov": 0.0074,
+  "chronos2__ens": 0.5652,
+  "chronos2_cov__naive": 1.0,
+  "chronos2_cov__lear": 1.0,
+  "chronos2_cov__dnn": 1.0,
+  "chronos2_cov__nbeats": 1.0,
+  "chronos2_cov__bolt": 1.0,
+  "chronos2_cov__timesfm": 1.0,
+  "chronos2_cov__chronos2": 0.9926,
+  "chronos2_cov__ens": 0.9165,
+  "ens__naive": 1.0,
+  "ens__lear": 1.0,
+  "ens__dnn": 1.0,
+  "ens__nbeats": 1.0,
+  "ens__bolt": 0.9991,
+  "ens__timesfm": 1.0,
+  "ens__chronos2": 0.4348,
+  "ens__chronos2_cov": 0.0835
+ },
+ "dm_n_days": 360,
+ "train": {
+  "dnn_epochs": 44,
+  "dnn_best_epoch": 14,
+  "nb_epochs": 10,
+  "nb_best_epoch": 2
+ },
+ "ctx": {
+  "168": 24.45,
+  "512": 21.34,
+  "2048": 20.72,
+  "8192": 20.95
+ },
+ "pinball": {
+  "chronos2": 8.25,
+  "bolt": 8.62,
+  "timesfm": 8.97,
+  "chronos2_cov": 8.11,
+  "lear_hs": 9.12
+ },
+ "cov": {
+  "chronos2": {
+   "50": {
+    "cov": 45.6,
+    "width": 29.31
+   },
+   "80": {
+    "cov": 76.5,
+    "width": 60.03
+   },
+   "90": {
+    "cov": 88.3,
+    "width": 83.05
+   }
+  },
+  "chronos2_conf": {
+   "50": {
+    "cov": 49.5,
+    "width": 31.37
+   },
+   "80": {
+    "cov": 79.3,
+    "width": 63.89
+   },
+   "90": {
+    "cov": 89.4,
+    "width": 86.78
+   }
+  },
+  "lear_hs": {
+   "50": {
+    "cov": 45.9,
+    "width": 30.95
+   },
+   "80": {
+    "cov": 74.4,
+    "width": 62.59
+   },
+   "90": {
+    "cov": 85.0,
+    "width": 88.7
+   }
+  },
+  "timesfm": {
+   "80": {
+    "cov": 79.6,
+    "width": 68.61
+   }
+  },
+  "timesfm_conf": {
+   "80": {
+    "cov": 79.7,
+    "width": 69.02
+   }
+  }
+ },
+ "load": {
+  "n_days": 360,
+  "mean_mw": 5932.0,
+  "week": {
+   "mae": 404.9,
+   "mape": 7.15
+  },
+  "chronos2": {
+   "mae": 214.4,
+   "mape": 3.8
+  },
+  "timesfm": {
+   "mae": 252.4,
+   "mape": 4.47
+  }
+ },
+ "var": {
+  "SP500": {
+   "n": 1717,
+   "first": "2020-01-02",
+   "last": "2026-10-30",
+   "hs_01": {
+    "viol": 31,
+    "rate": 1.81,
+    "kupiec_p": 0.003,
+    "chris_p": 0.002,
+    "tick": 0.0576
+   },
+   "hs_05": {
+    "viol": 89,
+    "rate": 5.18,
+    "kupiec_p": 0.729,
+    "chris_p": 0.002,
+    "tick": 0.1582
+   },
+   "garch_01": {
+    "viol": 32,
+    "rate": 1.86,
+    "kupiec_p": 0.001,
+    "chris_p": 0.607,
+    "tick": 0.041
+   },
+   "garch_05": {
+    "viol": 132,
+    "rate": 7.69,
+    "kupiec_p": 0.0,
+    "chris_p": 0.979,
+    "tick": 0.1347
+   },
+   "ch_01": {
+    "viol": 22,
+    "rate": 1.28,
+    "kupiec_p": 0.262,
+    "chris_p": 0.285,
+    "tick": 0.0408
+   },
+   "ch_05": {
+    "viol": 122,
+    "rate": 7.11,
+    "kupiec_p": 0.0,
+    "chris_p": 0.396,
+    "tick": 0.1368
+   },
+   "chc_01": {
+    "viol": 16,
+    "rate": 0.93,
+    "kupiec_p": 0.774,
+    "chris_p": 0.138,
+    "tick": 0.043
+   },
+   "chc_05": {
+    "viol": 93,
+    "rate": 5.42,
+    "kupiec_p": 0.434,
+    "chris_p": 0.995,
+    "tick": 0.1383
+   },
+   "exp_01": 17.2,
+   "exp_05": 85.9
+  },
+  "BTCUSD": {
+   "n": 2496,
+   "first": "2020-01-01",
+   "last": "2026-10-31",
+   "hs_01": {
+    "viol": 33,
+    "rate": 1.32,
+    "kupiec_p": 0.123,
+    "chris_p": 0.458,
+    "tick": 0.125
+   },
+   "hs_05": {
+    "viol": 126,
+    "rate": 5.05,
+    "kupiec_p": 0.912,
+    "chris_p": 0.158,
+    "tick": 0.3633
+   },
+   "garch_01": {
+    "viol": 22,
+    "rate": 0.88,
+    "kupiec_p": 0.543,
+    "chris_p": 0.189,
+    "tick": 0.1241
+   },
+   "garch_05": {
+    "viol": 128,
+    "rate": 5.13,
+    "kupiec_p": 0.77,
+    "chris_p": 0.341,
+    "tick": 0.3587
+   },
+   "ch_01": {
+    "viol": 31,
+    "rate": 1.24,
+    "kupiec_p": 0.242,
+    "chris_p": 0.402,
+    "tick": 0.1257
+   },
+   "ch_05": {
+    "viol": 134,
+    "rate": 5.37,
+    "kupiec_p": 0.404,
+    "chris_p": 0.038,
+    "tick": 0.3591
+   },
+   "chc_01": {
+    "viol": 21,
+    "rate": 0.84,
+    "kupiec_p": 0.413,
+    "chris_p": 0.17,
+    "tick": 0.1334
+   },
+   "chc_05": {
+    "viol": 120,
+    "rate": 4.81,
+    "kupiec_p": 0.657,
+    "chris_p": 0.355,
+    "tick": 0.3614
+   },
+   "exp_01": 25.0,
+   "exp_05": 124.8
+  }
+ },
+ "runtime_min": 2.7
+}

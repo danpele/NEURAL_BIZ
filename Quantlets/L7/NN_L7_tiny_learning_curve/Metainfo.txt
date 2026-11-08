@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_tiny_learning_curve'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Training and validation cross-entropy of the small transformer (2 blocks, 4 heads, d = 64) by epoch, seed 1, with the epoch kept by early stopping.'
+
+Keywords: 'learning curve, early stopping, transformer from scratch, overfitting'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L7/results/tiny_history.csv'
+
+Output: 'tiny_learning_curve.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_conv_edges'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Sobel edge filters and a mean filter applied by convolution (padding 1) to a real 64 x 64 Sentinel-2 tile (EuroSAT, class Highway).'
+
+Keywords: 'convolution, Sobel filter, edge detection, padding, stride, satellite images, EuroSAT'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT (Helber et al., 2019), Sentinel-2 RGB tiles, downloaded with torchvision'
+
+Output: 'conv_edges.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_method_agreement'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Spearman correlation between the global feature importances of saliency, gradient x input, SmoothGrad, integrated gradients and permutation importance for a fraud MLP.'
+
+Keywords: 'explanation agreement, saliency, integrated gradients, SmoothGrad, permutation importance, fraud detection'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'method_agreement.png'

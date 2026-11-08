@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_text_search'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Text-to-image search on the EuroSAT test set with CLIP: the 100 images most similar to each class prompt and the share that truly belong to the class (precision at 100).'
+
+Keywords: 'vision-language models, CLIP, zero-shot classification, EuroSAT, satellite images, vision transformer, image retrieval, precision at k'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L14/results/eurosat_scores_best.csv (image-prompt similarities of the best zero-shot CLIP model)'
+
+Output: 'text_search.png'

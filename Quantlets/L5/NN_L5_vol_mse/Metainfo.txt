@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_vol_mse'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test MSE of the log Garman-Klass variance of the S&P 500, 2020-2026: naive, GARCH(1,1), HAR and RNN, LSTM, GRU (5 seeds each), with Diebold-Mariano tests.'
+
+Keywords: 'volatility forecasting, RNN, LSTM, GRU, HAR, GARCH, Diebold-Mariano test, seeds'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv; saved test forecasts of analysis_L5.py (vol_mse_results.json)'
+
+Output: 'vol_mse.png'

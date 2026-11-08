@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_vae_latent'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Two-dimensional latent means of a variational autoencoder (VAE) for the 10,000 Fashion-MNIST test images, coloured by class (classes were not used in training); k-nearest-neighbour accuracy on the latent means.'
+
+Keywords: 'variational autoencoder, VAE, latent space, Fashion-MNIST, representation learning'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L8/results/vae_latent.csv (latent means of the trained VAE; images: Fashion-MNIST, Zalando Research)'
+
+Output: 'vae_latent.png'

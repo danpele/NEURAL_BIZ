@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_hedge_costs'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Expected shortfall (95 %) of the hedging loss as a function of the transaction cost: Black-Scholes delta against a deep hedge trained for each cost level.'
+
+Keywords: 'deep hedging, transaction costs, expected shortfall, Rockafellar-Uryasev, option hedging'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance: SP500 and VIX closes)'
+
+Output: 'hedge_costs.png'

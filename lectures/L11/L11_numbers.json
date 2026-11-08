@@ -1,0 +1,318 @@
+{
+ "charts": {
+  "shap_global": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "400 test applicants, 100 background applicants",
+   "period_ro": "400 de solicitan\u021bi din test, 100 de solicitan\u021bi de referin\u021b\u0103"
+  },
+  "shap_beeswarm": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "400 test applicants; colour = rank of the feature value",
+   "period_ro": "400 de solicitan\u021bi din test; culoarea = rangul valorii variabilei"
+  },
+  "shap_waterfall": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "test applicant (row 2411); values in original units",
+   "period_ro": "solicitant din test (r\u00eendul 2411); valori \u00een unit\u0103\u021bile originale"
+  },
+  "shap_dependence": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "400 test applicants, MLP",
+   "period_ro": "400 de solicitan\u021bi din test, MLP"
+  },
+  "lime_vs_shap": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "test applicant (row 2411); LIME with 5,000 samples",
+   "period_ro": "solicitant din test (r\u00eendul 2411); LIME cu 5 000 de e\u0219antioane"
+  },
+  "lime_instability": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "test applicant (row 2411); right panel: same five features, 5,000 samples",
+   "period_ro": "solicitant din test (r\u00eendul 2411); dreapta: acelea\u0219i cinci variabile, 5 000 de e\u0219antioane"
+  },
+  "seed_stability": {
+   "source_en": "Baesens, Roesch and Scheule (2016), HMEQ data",
+   "source_ro": "Baesens, Roesch \u0219i Scheule (2016), datele HMEQ",
+   "period_en": "10 training seeds; 200 test applicants",
+   "period_ro": "10 valori ini\u021biale de antrenare; 200 de solicitan\u021bi din test"
+  },
+  "method_agreement": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group \u0219i Worldline, tranzac\u021bii cu carduri (OpenML 1597)",
+   "period_en": "Spearman correlation of global importances; 211 frauds of day 2",
+   "period_ro": "corela\u021bia Spearman a importan\u021belor globale; 211 fraude din ziua a doua"
+  },
+  "ig_completeness": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group \u0219i Worldline, tranzac\u021bii cu carduri (OpenML 1597)",
+   "period_en": "211 frauds of day 2; baseline = mean legitimate transaction of day 1",
+   "period_ro": "211 fraude din ziua a doua; referin\u021ba = tranzac\u021bia legitim\u0103 medie din ziua \u00eent\u00eei"
+  },
+  "fraud_local": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group \u0219i Worldline, tranzac\u021bii cu carduri (OpenML 1597)",
+   "period_en": "one fraud of day 2 (median fraud score)",
+   "period_ro": "o fraud\u0103 din ziua a doua (scorul median al fraudelor)"
+  },
+  "deletion_curve": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group \u0219i Worldline, tranzac\u021bii cu carduri (OpenML 1597)",
+   "period_en": "211 frauds of day 2",
+   "period_ro": "211 fraude din ziua a doua"
+  },
+  "local_robustness": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group \u0219i Worldline, tranzac\u021bii cu carduri (OpenML 1597)",
+   "period_en": "60 frauds of day 2 x 10 perturbations (sigma = 0.05 standard deviations)",
+   "period_ro": "60 de fraude din ziua a doua x 10 perturb\u0103ri (sigma = 0,05 abateri standard)"
+  },
+  "time_shift": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group \u0219i Worldline, tranzac\u021bii cu carduri (OpenML 1597)",
+   "period_en": "model trained on day 1; integrated gradients",
+   "period_ro": "model antrenat pe ziua 1; gradien\u021bi integra\u021bi"
+  },
+  "pdp_ice": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuin\u021be din California, recens\u0103m\u00eentul din 1990 (Pace \u0219i Barry, 1997)",
+   "period_en": "MLP; 60 test block groups (ICE), 1,000 for the PDP",
+   "period_ro": "MLP; 60 de grupuri de test (ICE), 1 000 pentru PDP"
+  }
+ },
+ "seed": 20261108,
+ "hmeq": {
+  "n": 5960,
+  "bad_pct": 19.9,
+  "n_train": 3576,
+  "n_valid": 1192,
+  "n_test": 1192,
+  "n_feat": 18,
+  "debtinc_missing_pct": 21.3,
+  "bad_if_debtinc_missing": 62.0,
+  "bad_if_debtinc_present": 8.6
+ },
+ "perf": {
+  "mlp_auc": 0.935,
+  "mlp_auc_sd": 0.004,
+  "mlp_pr": 0.842,
+  "mlp_brier": 0.068,
+  "xgb_auc": 0.959,
+  "xgb_auc_sd": 0.001,
+  "xgb_pr": 0.889,
+  "xgb_brier": 0.058,
+  "lr_auc": 0.909,
+  "lr_pr": 0.785,
+  "lr_brier": 0.08,
+  "mlp0_auc": 0.937,
+  "mlp_epoch_mean": 260.0,
+  "base_pr": 0.2,
+  "seconds": 108.0
+ },
+ "shap": {
+  "add_err": 2.9e-06,
+  "base_logit": -3.613,
+  "base_pd": 2.6,
+  "n_bg": 100,
+  "n_explained": 400,
+  "nsamples": 600,
+  "top1": "DEBTINC_missing",
+  "top2": "DELINQ",
+  "top3": "JOB_Other",
+  "top1_val": 1.381,
+  "top2_val": 1.187,
+  "xgb_top1": "DEBTINC_missing",
+  "lr_top1": "DEBTINC_missing",
+  "rho_mlp_xgb": 0.55,
+  "rho_mlp_lr": 0.79,
+  "seconds": 16.0
+ },
+ "app": {
+  "row": 2411,
+  "pd": 65.6,
+  "logit": 0.648,
+  "base": -3.613,
+  "sum_phi": 4.261,
+  "f1": "DEBTINC_missing",
+  "f1_phi": 3.13,
+  "f2": "JOB_Other",
+  "f2_phi": 1.738,
+  "f3": "DELINQ",
+  "f3_phi": -0.714,
+  "debtinc": 34.7,
+  "delinq": 0,
+  "derog": 0,
+  "clage": 178.0,
+  "loan": 14500,
+  "ninq": 1,
+  "debtinc_missing": 1,
+  "default": 1,
+  "f1_raw": 1.0,
+  "f2_raw": 1.0,
+  "f3_raw": 0.0
+ },
+ "dep": {
+  "shap_hi": 9.89,
+  "shap_lo": -0.49,
+  "n_hi": 4,
+  "shap_missing_flag": 3.13
+ },
+ "lime": {
+  "kw_default": 3.18,
+  "top1": "DELINQ",
+  "top2": "DEBTINC",
+  "rho_shap": 0.8,
+  "top1_same_500": 73.0,
+  "top1_same_5000": 100.0,
+  "seconds": 1.0,
+  "jacc_500": 0.72,
+  "jacc_5000": 1.0,
+  "kw_top1_min": -2.042,
+  "kw_top1_max": -0.001,
+  "kw_sign_flips": 0,
+  "cv_500": 10.0,
+  "cv_5000": 2.0
+ },
+ "cf": {
+  "pd_before": 65.6,
+  "pd_after": 39.2,
+  "pd_doc": 5.1,
+  "debtinc_median": 34.7,
+  "n_changed": 3,
+  "rows": [
+   {
+    "f": "MORTDUE",
+    "before": 69115.0,
+    "after": 57456.5
+   },
+   {
+    "f": "DEBTINC",
+    "before": 34.7,
+    "after": 33.4
+   },
+   {
+    "f": "LOAN",
+    "before": 14500.0,
+    "after": 15700.0
+   }
+  ],
+  "actionable": "LOAN, DEBTINC, NINQ, DELINQ, DEROG, CLNO, MORTDUE",
+  "f0": "MORTDUE",
+  "b0": 69115.0,
+  "a0": 57456.5,
+  "f1": "DEBTINC",
+  "b1": 34.7,
+  "a1": 33.4,
+  "f2": "LOAN",
+  "b2": 14500.0,
+  "a2": 15700.0
+ },
+ "stab": {
+  "tau_mlp": 0.83,
+  "tau_xgb": 0.97,
+  "top3_mlp": 93.0,
+  "top3_xgb": 84.0,
+  "local_mlp": 78.0,
+  "local_xgb": 83.0,
+  "auc_range_mlp_lo": 0.929,
+  "auc_range_mlp_hi": 0.941,
+  "top1_mlp_share": 100.0,
+  "n_seeds": 10,
+  "seconds": 92.0
+ },
+ "fraud": {
+  "n_day1": 14703,
+  "n_day2": 14221,
+  "fr_day1": 281,
+  "fr_day2": 211,
+  "rate_full_day2_pct": 0.15,
+  "n_feat": 29,
+  "mlp_prauc": 0.815,
+  "mlp_auc": 0.961,
+  "lr_prauc": 0.742,
+  "lr_auc": 0.964,
+  "epoch": 3
+ },
+ "ig": {
+  "comp_2": 0.0748,
+  "comp_4": 0.0374,
+  "comp_8": 0.0259,
+  "comp_16": 0.0119,
+  "comp_32": 0.00413,
+  "comp_64": 0.00177,
+  "comp_128": 0.000891,
+  "comp_256": 0.000517,
+  "comp64_pct": 0.18,
+  "comp4_pct": 3.7,
+  "sum_check": 0.0147,
+  "n_frauds": 211
+ },
+ "agree": {
+  "ig_shap": 0.85,
+  "sal_shap": 0.83,
+  "lime_shap": 0.82,
+  "perm_shap": 0.58,
+  "sal_ig": 0.91,
+  "min": 0.52,
+  "max": 1.0,
+  "top_ig": "V12",
+  "top_shap": "V12",
+  "top_sal": "V12",
+  "top_perm": "V12"
+ },
+ "onefraud": {
+  "p": 99.9,
+  "top_shap": "V14",
+  "top_ig": "V14",
+  "top_sal": "V12"
+ },
+ "del": {
+  "saliency": 71.9,
+  "ig": 61.3,
+  "shap": 61.1,
+  "lime": 61.2,
+  "random": 83.9,
+  "start": 85.4,
+  "aopc_ig": 56.2,
+  "aopc_shap": 58.4,
+  "aopc_sal": 48.0,
+  "aopc_lime": 56.1,
+  "aopc_rand": 3.9
+ },
+ "rob": {
+  "saliency": 0.0,
+  "gradxinput": 0.028,
+  "ig": 0.03,
+  "smoothgrad": 0.036
+ },
+ "shift": {
+  "rho": 0.98,
+  "js": 0.003,
+  "n1": 70,
+  "n2": 211,
+  "top1_day1": "V12",
+  "top1_day2": "V12",
+  "top5_overlap": 4
+ },
+ "cal": {
+  "r2_mlp": 0.819,
+  "r2_lin": 0.62,
+  "n": 20640,
+  "rmse_mlp": 0.496
+ },
+ "pdp": {
+  "lo": 1.26,
+  "hi": 8.95,
+  "pdp_lo": 1.4,
+  "pdp_hi": 3.6,
+  "slope_lin": 0.429,
+  "ice_spread_hi": 0.95,
+  "corr_rooms": 0.33
+ },
+ "runtime_s": 22.0
+}

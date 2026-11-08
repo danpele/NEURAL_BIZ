@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_dp_revenue_year'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Perfect-foresight revenue of a 2 MWh battery (85 % round trip) by year and bidding zone, by exact dynamic programming (Bellman backward induction).'
+
+Keywords: 'dynamic programming, Bellman equation, battery arbitrage, perfect foresight, electricity prices, reinforcement learning'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'dp_revenue_year.png'

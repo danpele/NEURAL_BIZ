@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_alert_budget'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Share of all illicit test transactions found among the k highest scores (alerts reviewed), for four models.'
+
+Keywords: 'alert budget, recall at k, anti-money laundering, investigation capacity'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/alert_budget.csv'
+
+Output: 'alert_budget.png'

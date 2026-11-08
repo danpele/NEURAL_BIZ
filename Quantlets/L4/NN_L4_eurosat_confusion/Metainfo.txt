@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_eurosat_confusion'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Confusion matrix of the fine-tuned ResNet-18 on the 5,400 EuroSAT test tiles (seed 20261108).'
+
+Keywords: 'confusion matrix, macro-F1, transfer learning, ResNet-18, EuroSAT, land use'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT; saved confusion matrix (eurosat_confusion_results.json)'
+
+Output: 'eurosat_confusion.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_boundary_hmeq'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Predicted probability of default on two HMEQ variables (debt-to-income, age of the oldest credit line): straight bands of logistic regression against the curved regions of an MLP 64-64, with test loans.'
+
+Keywords: 'decision boundary, multilayer perceptron, logistic regression, credit scoring, AUC, HMEQ'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'boundary_hmeq.png'

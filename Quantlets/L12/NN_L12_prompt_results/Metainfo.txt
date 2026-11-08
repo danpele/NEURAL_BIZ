@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_prompt_results'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Macro-F1 with 95 percent bootstrap intervals of prompted Qwen2.5 models (zero-shot, few-shot, chain-of-thought), LLM embeddings with logistic regression, TF-IDF with logistic regression and the majority class, on Financial PhraseBank and Twitter financial news.'
+
+Keywords: 'large language models, prompt engineering, financial sentiment, Qwen2.5, zero-shot, few-shot'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/predictions_pb.csv, predictions_tw.csv'
+
+Output: 'prompt_results.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_fmnist_curves'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Training and validation cross-entropy and validation accuracy by epoch of softmax regression, MLP and CNN on Fashion-MNIST (seed 20261108).'
+
+Keywords: 'learning curves, cross-entropy, CNN, MLP, softmax regression, Fashion-MNIST, early stopping'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Fashion-MNIST; saved training histories (fmnist_curves_results.json, from lectures/L4/cache/fmnist.pkl)'
+
+Output: 'fmnist_curves.png'

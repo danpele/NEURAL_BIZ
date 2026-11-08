@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_var_sp500'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'One-day 1 percent Value-at-Risk of the S&P 500, January 2020 to October 2026: GARCH(1,1)-t and zero-shot Chronos-2 quantiles with a rolling one-sided conformal shift; violations, Kupiec and Christoffersen tests.'
+
+Keywords: 'Value-at-Risk, backtesting, Kupiec, Christoffersen, GARCH, Chronos, conformal prediction, S&P 500'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/var_SP500.csv (from data/clean/markets_daily.csv)'
+
+Output: 'var_sp500.png'

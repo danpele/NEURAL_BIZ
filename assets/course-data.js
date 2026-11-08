@@ -45,20 +45,20 @@
     const arxiv = a => ext('https://arxiv.org/abs/' + a, 'arXiv:' + a);
     const url = (u, t) => ext(u, t);
     const TITLES = {
-        1: { en: 'Deep learning for business: from linear models to the perceptron and the multilayer perceptron (MLP)', ro: 'Deep learning pentru afaceri: de la modelele liniare la perceptron și la perceptronul multistrat (MLP)' },
-        2: { en: 'Training: backpropagation and optimisation', ro: 'Antrenarea rețelelor: propagarea înapoi a erorii și optimizarea' },
-        3: { en: 'Regularisation and generalisation', ro: 'Regularizare și generalizare' },
-        4: { en: 'Convolutional neural networks (CNN) and transfer learning', ro: 'Rețele neuronale convoluționale (CNN) și transferul învățării' },
-        5: { en: 'Recurrent networks: RNN, LSTM and GRU for sequences and financial time series', ro: 'Rețele recurente: RNN, LSTM și GRU pentru secvențe și serii de timp financiare' },
-        6: { en: 'NLP foundations: text representation and word embeddings', ro: 'Bazele NLP: reprezentarea textului și reprezentarea vectorială a cuvintelor' },
-        7: { en: 'Attention and transformers', ro: 'Mecanismul de atenție și arhitectura transformer' },
-        8: { en: 'Generative models: autoencoders, VAEs, GANs and diffusion', ro: 'Modele generative: autoencodere, VAE, GAN și modele de difuzie' },
-        9: { en: 'Graph neural networks (GNN): transaction networks and fraud', ro: 'Rețele neuronale pe grafuri (GNN): rețele de tranzacții și frauda' },
-        10: { en: 'Reinforcement learning: trading, hedging and battery dispatch', ro: 'Învățarea prin recompensă: tranzacționare, acoperirea riscului și operarea bateriilor' },
-        11: { en: 'Explainability (XAI): SHAP, LIME, gradients and stability', ro: 'Explicabilitate (XAI): SHAP, LIME, gradienți și stabilitatea explicațiilor' },
-        12: { en: 'Large language models (LLM) in finance and prompt engineering', ro: 'Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor (prompt engineering)' },
-        13: { en: 'Deep learning for energy and financial time series; time-series foundation models', ro: 'Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp' },
-        14: { en: 'Multimodal and vision–language models; synthesis of the course', ro: 'Modele multimodale și modele viziune–limbaj; sinteza cursului' }
+        1: { en: "Deep learning for business: from linear models to the perceptron and the multilayer perceptron (MLP)", ro: "Deep learning pentru afaceri: de la modelele liniare la perceptron și la perceptronul multistrat (MLP)" },
+        2: { en: "Training: backpropagation and optimisation", ro: "Antrenarea rețelelor: propagarea înapoi a erorii și optimizarea" },
+        3: { en: "Regularisation and generalisation", ro: "Regularizare și generalizare" },
+        4: { en: "Convolutional neural networks (CNN) and transfer learning", ro: "Rețele neuronale convoluționale (CNN) și transferul învățării" },
+        5: { en: "Recurrent networks: RNN, LSTM and GRU for sequences and financial time series", ro: "Rețele recurente: RNN, LSTM și GRU pentru secvențe și serii de timp financiare" },
+        6: { en: "NLP foundations: text representation and word embeddings", ro: "Bazele NLP: reprezentarea textului și reprezentarea vectorială a cuvintelor" },
+        7: { en: "Attention and transformers", ro: "Atenția și transformerele" },
+        8: { en: "Generative models: autoencoders, VAE, GAN, diffusion", ro: "Modele generative: autoencodere, VAE, GAN, difuzie" },
+        9: { en: "Graph neural networks", ro: "Rețele neuronale pe grafuri" },
+        10: { en: "Reinforcement learning: trading, hedging and battery dispatch", ro: "Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor" },
+        11: { en: "Explainable AI: SHAP, LIME, gradient methods and the stability of explanations", ro: "Inteligența artificială explicabilă: SHAP, LIME, metode bazate pe gradient și stabilitatea explicațiilor" },
+        12: { en: "Large language models (LLM) in finance and prompt engineering", ro: "Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor (prompt engineering)" },
+        13: { en: "Deep learning for energy and financial time series; time-series foundation models", ro: "Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp" },
+        14: { en: "Multimodal and vision-language models; synthesis of the course", ro: "Modele multimodale și vizual-lingvistice; sinteza cursului" }
     };
     const lec = n => ({ en: `Lecture ${n}: ${TITLES[n].en}`, ro: `Cursul ${n}: ${TITLES[n].ro}` });
 
@@ -73,8 +73,7 @@
             en: {
                 pageTitle: 'Neural Networks and Deep Learning - Course Website',
                 courseTitle: 'Neural Networks and Deep Learning',
-                // TODO (instructor): name of the faculty and of the master's programme, academic year
-                subtitle: 'Master\'s programme | Bucharest University of Economic Studies',
+                subtitle: 'Master\'s programme Business Analytics, Faculty of Business Administration in Foreign Languages (FABIZ) | Bucharest University of Economic Studies',
                 nav: { home: 'Home', lectures: 'Lectures', cases: 'Case studies', data: 'Data', project: 'Project &amp; AI', quizzes: 'Quizzes', resources: 'Resources', contact: 'Contact' },
                 overview: 'Course Overview',
                 objectives: 'Learning Objectives',
@@ -105,6 +104,7 @@
                 episodesTitle: '',
                 episodesIntro: '',
                 further: 'Go deeper: talks and references',
+                videos: 'Videos: the intuition behind the mathematics (in English)',
                 quantinar: 'Further reading on Quantinar',
                 casesTitle: 'Case Studies',
                 casesIntro: 'Case studies built on papers of our research group (Bucharest University of Economic Studies and Romanian Academy, Institute for Economic Forecasting) and replicated on the real data of the course; each has a web page, a brief in English and Romanian, and a notebook that runs in Colab.',
@@ -152,8 +152,7 @@
             ro: {
                 pageTitle: 'Rețele neuronale și deep learning - Site-ul cursului',
                 courseTitle: 'Rețele neuronale și deep learning',
-                // TODO (instructor): numele facultății și al programului de master, anul universitar
-                subtitle: 'Program de master | Academia de Studii Economice din București',
+                subtitle: 'Programul de master Business Analytics, Facultatea de Administrarea Afacerilor, cu predare în limbi străine (FABIZ) | Academia de Studii Economice din București',
                 nav: { home: 'Acasă', lectures: 'Cursuri', cases: 'Studii de caz', data: 'Date', project: 'Proiect și AI', quizzes: 'Quiz-uri', resources: 'Resurse', contact: 'Contact' },
                 overview: 'Prezentarea cursului',
                 objectives: 'Obiective de învățare',
@@ -184,6 +183,7 @@
                 episodesTitle: '',
                 episodesIntro: '',
                 further: 'Aprofundare: prezentări și referințe',
+                videos: 'Video: intuiția din spatele matematicii (în engleză)',
                 quantinar: 'Lecturi suplimentare pe Quantinar',
                 casesTitle: 'Studii de caz',
                 casesIntro: 'Studii de caz bazate pe lucrări ale grupului nostru de cercetare (Academia de Studii Economice din București și Academia Română, Institutul de Prognoză Economică), replicate pe datele reale ale cursului; fiecare are o pagină web, o prezentare în engleză și în română și un notebook care rulează în Colab.',
@@ -235,14 +235,14 @@
         // ---------------------------------------------------------------
         overview: {
             en: [
-                { h: 'Course', p: ['Neural Networks and Deep Learning (NN)', 'TODO: master\'s programme and faculty, Bucharest University of Economic Studies (ASE)', 'TODO: year of study, semester and number of credits (ECTS, European Credit Transfer and Accumulation System)'] },
+                { h: 'Course', p: ['Neural Networks and Deep Learning (NN)', 'Master\'s programme Business Analytics, year 1, Faculty of Business Administration in Foreign Languages (FABIZ), Bucharest University of Economic Studies (ASE)', 'TODO: semester and number of credits (ECTS, European Credit Transfer and Accumulation System)'] },
                 { h: 'Goal', p: ['Deep learning for decisions in business and finance: credit scoring, fraud detection, forecasting, text and document analysis, and the use of large language models.', 'Every method is derived with its full formulas and estimated by the students on real public data.'] },
                 { h: 'Schedule', p: ['Fourteen lectures, each with a seminar', 'TODO: dates, times and rooms of the lectures and seminars'] },
                 { h: 'Assessment', p: ['TODO: components and weights of the final grade', 'Team project and AI policy: <a href="#project">see the Project section</a>'] },
                 { h: 'Tools', p: ['Python, PyTorch, scikit-learn, Hugging Face Transformers, PyTorch Geometric', 'Jupyter / Google Colab; GitHub: slides, notebooks, code and data'] }
             ],
             ro: [
-                { h: 'Curs', p: ['Rețele neuronale și deep learning (NN, Neural Networks and Deep Learning)', 'TODO: programul de master și facultatea, Academia de Studii Economice din București (ASE)', 'TODO: anul de studiu, semestrul și numărul de credite (ECTS, European Credit Transfer and Accumulation System)'] },
+                { h: 'Curs', p: ['Rețele neuronale și deep learning (NN, Neural Networks and Deep Learning)', 'Programul de master Business Analytics, anul 1, Facultatea de Administrarea Afacerilor, cu predare în limbi străine (FABIZ), Academia de Studii Economice din București (ASE)', 'TODO: semestrul și numărul de credite (ECTS, European Credit Transfer and Accumulation System)'] },
                 { h: 'Scop', p: ['Deep learning pentru decizii în afaceri și finanțe: scoringul de credit, detectarea fraudei, prognoza, analiza textelor și a documentelor și utilizarea modelelor lingvistice mari.', 'Fiecare metodă este prezentată cu formulele complete și estimată de studenți pe date publice reale.'] },
                 { h: 'Program', p: ['Paisprezece cursuri, fiecare cu un seminar', 'TODO: datele, orele și sălile cursurilor și seminarelor'] },
                 { h: 'Evaluare', p: ['TODO: componentele și ponderile notei finale', 'Proiectul de echipă și regulile privind AI: <a href="#project">secțiunea Proiect</a>'] },
@@ -278,130 +278,214 @@
         // ---------------------------------------------------------------
         lectures: [
             {
-                id: 'l1', num: 1, status: 'prep', files: files(1),
+                id: 'l1', num: 1, status: 'ready', files: files(1),
+                videos: [{ id: 'aircAruvnKk', by: '3Blue1Brown', title: 'But what is a neural network? | Deep learning chapter 1' }, { id: 'CqOfi41LfDw', by: 'StatQuest with Josh Starmer', title: 'The Essential Main Ideas of Neural Networks' }, { id: 'bxe2T-V8XRs', by: 'Welch Labs', title: 'Neural Networks Demystified [Part 1: Data and Architecture]' }, { id: '68BZ5f7P94E', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 3: ReLU In Action!!!' }, { id: '83LYR-1IcjA', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 4: Multiple Inputs and Outputs' }, { id: 'KpKog-L9veg', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 5: ArgMax and SoftMax' }, { id: 'ErnWZxJovaM', by: 'Alexander Amini', title: 'MIT Introduction to Deep Learning (2024) | 6.S191' }],
                 quantinar: [q('mlRisk'), q('digitalTransformation')],
                 title: TITLES[1],
                 topics: {
-                    en: ['Course overview: where deep learning creates value in business and finance, and where a linear model is enough', 'Linear and logistic regression as one-neuron networks; the perceptron and its learning rule', 'The multilayer perceptron (MLP): hidden layers, activation functions, universal approximation', 'Credit scoring on real data: German credit and HMEQ (home equity) loans, logistic regression against an MLP'],
-                    ro: ['Prezentarea cursului: unde creează valoare deep learning în afaceri și finanțe și unde este suficient un model liniar', 'Regresia liniară și regresia logistică văzute ca rețele cu un singur neuron; perceptronul și regula lui de învățare', 'Perceptronul multistrat (MLP, multilayer perceptron): straturi ascunse, funcții de activare, aproximarea universală', 'Scoringul de credit pe date reale: German credit și creditele HMEQ (home equity), regresia logistică față de un MLP']
-                }
+                    en: ["Where deep learning creates value in business and finance, and why a logistic scorecard or gradient boosting is often enough on small tabular data", "Linear and logistic regression as one-neuron networks: losses as likelihoods, the gradient as error times input, odds ratios and missing-value indicators on HMEQ (home equity) loans", "Rosenblatt's perceptron: learning rule, Novikoff's convergence bound, why it never settles on real loans, and the exclusive or (XOR) limit", "The multilayer perceptron (MLP): forward pass, activation functions, output layers and losses, parameter count, universal approximation shown on California house prices", "Case study on real credit data: logistic regression, an MLP and XGBoost on HMEQ and German credit, with seeds, bootstrap intervals, a corrected t-test, calibration and the cost-optimal cut-off"],
+                    ro: ["Unde creează valoare deep learning în afaceri și finanțe și de ce, pe date tabelare puține, un scorecard logistic sau gradient boosting sînt adesea suficiente", "Regresia liniară și regresia logistică drept rețele cu un singur neuron: pierderile ca verosimilități, gradientul ca eroare înmulțită cu intrarea, rapoartele șanselor și indicatorii de valori lipsă pe creditele HMEQ (home equity)", "Perceptronul lui Rosenblatt: regula de învățare, limita de convergență a lui Novikoff, de ce nu se stabilizează pe credite reale și limita sau-ului exclusiv (XOR)", "Perceptronul multistrat (MLP): propagarea înainte, funcțiile de activare, straturile de ieșire și pierderile, numărul de parametri, aproximarea universală ilustrată pe prețurile locuințelor din California", "Studiu de caz pe date reale de credit: regresia logistică, un MLP și XGBoost pe HMEQ și German credit, cu mai multe inițializări, intervale bootstrap, test t corectat, calibrare și pragul optim pentru cost"]
+                },
+                further: [
+                    { en: "Bishop &amp; Bishop (2024), Deep Learning: Foundations and Concepts, chapters 4-6", ro: "Bishop și Bishop (2024), Deep Learning: Foundations and Concepts, capitolele 4-6", url: "https://www.bishopbook.com" },
+                    { en: "Dive into Deep Learning, chapters 3-5 (PyTorch)", ro: "Dive into Deep Learning, capitolele 3-5 (PyTorch)", url: "https://d2l.ai" },
+                    { en: "Lessmann et al. (2015), benchmarking classification algorithms for credit scoring", ro: "Lessmann et al. (2015), compararea algoritmilor de clasificare pentru scoringul de credit", url: "https://doi.org/10.1016/j.ejor.2015.05.030" }
+                ]
             },
             {
-                id: 'l2', num: 2, status: 'prep', files: files(2),
+                id: 'l2', num: 2, status: 'ready', files: files(2),
+                videos: [{ id: 'IHZwWFHWa-w', by: '3Blue1Brown', title: 'Gradient descent, how neural networks learn | Deep Learning Chapter 2' }, { id: 'Ilg3gGewQ5U', by: '3Blue1Brown', title: 'Backpropagation, intuitively | Deep Learning Chapter 3' }, { id: 'tIeHLnjs5U8', by: '3Blue1Brown', title: 'Backpropagation calculus | Deep Learning Chapter 4' }, { id: 'IN2XmBhILt4', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 2: Backpropagation Main Ideas' }, { id: 'sDv4f4s2SB8', by: 'StatQuest with Josh Starmer', title: 'Gradient Descent, Step-by-Step' }, { id: 'vMh0zPT0tLI', by: 'StatQuest with Josh Starmer', title: 'Stochastic Gradient Descent, Clearly Explained!!!' }, { id: 'k8fTYJPd3_I', by: 'DeepLearningAI', title: 'Gradient Descent With Momentum (C2W2L06)' }, { id: 'JXQT_vxqwIs', by: 'DeepLearningAI', title: 'Adam Optimization Algorithm (C2W2L08)' }, { id: 'QzulmoOg2JE', by: 'DeepLearningAI', title: 'Learning Rate Decay (C2W2L09)' }, { id: 'VMj-3S1tku0', by: 'Andrej Karpathy', title: 'The spelled-out intro to neural networks and backpropagation: building micrograd' }],
                 quantinar: [q('mlRisk')],
                 title: TITLES[2],
                 topics: {
-                    en: ['Loss functions as likelihoods: mean squared error and cross-entropy', 'Backpropagation: the chain rule on a computational graph, written out for an MLP; automatic differentiation in PyTorch', 'Gradient descent, SGD (stochastic gradient descent), momentum, RMSProp and Adam', 'Learning-rate schedules and initialisation, compared on California housing and on the credit-card fraud data'],
-                    ro: ['Funcțiile de pierdere ca verosimilități: eroarea pătratică medie și entropia încrucișată', 'Propagarea înapoi a erorii: regula de derivare a funcțiilor compuse pe un graf de calcul, scrisă complet pentru un MLP; diferențierea automată în PyTorch', 'Coborîrea pe gradient, SGD (stochastic gradient descent, coborîrea stohastică pe gradient), metoda momentului, RMSProp și Adam', 'Programarea ratei de învățare și inițializarea ponderilor, comparate pe datele California housing și pe datele despre fraudele cu carduri']
-                }
+                    en: ["Training as empirical risk minimisation: gradient descent, the stability limit 2/λmax and conditioning, shown on the real loss surface of a California housing regression", "Backpropagation as the chain rule on a computational graph: written out for an MLP, computed by hand on one block group, checked against PyTorch autograd and finite differences", "Vanishing gradients in deep sigmoid networks and Xavier and He initialisation, measured layer by layer", "SGD (stochastic gradient descent), batch size, momentum, AdaGrad, RMSProp, Adam and AdamW, compared with tuned learning rates and five seeds; learning-rate schedules (step, cosine, one-cycle)", "Case study: a quantile MLP trained with the pinball loss for the 1-day 99 % value at risk of the S&amp;P 500, backtested from 2020 with the Kupiec test; CPU against GPU timing"],
+                    ro: ["Antrenarea ca minimizare a riscului empiric: coborîrea pe gradient, limita de stabilitate 2/λmax și condiționarea, ilustrate pe suprafața reală a pierderii unei regresii pe datele California", "Propagarea înapoi a erorii ca regulă de derivare a funcțiilor compuse pe un graf de calcul: scrisă complet pentru un MLP, calculată de mînă pentru un grup de locuințe și verificată cu diferențierea automată din PyTorch și cu diferențe finite", "Dispariția gradienților în rețelele adînci cu sigmoide și inițializările Xavier și He, măsurate strat cu strat", "SGD (coborîrea stohastică pe gradient), mărimea lotului, metoda momentului, AdaGrad, RMSProp, Adam și AdamW, comparate cu rate de învățare ajustate și cinci inițializări; programele ratei de învățare (în trepte, cosinus, un singur ciclu)", "Studiu de caz: un MLP cuantilic antrenat cu pierderea pinball pentru valoarea la risc de 99 % pe o zi a indicelui S&amp;P 500, testat retroactiv din 2020 cu testul Kupiec; durata antrenării pe CPU și pe GPU"]
+                },
+                further: [
+                    { en: "Bishop &amp; Bishop (2024), chapters 7-8: gradient descent and backpropagation", ro: "Bishop și Bishop (2024), capitolele 7-8: coborîrea pe gradient și propagarea înapoi", url: "https://www.bishopbook.com" },
+                    { en: "Dive into Deep Learning, chapter 12: optimisation algorithms", ro: "Dive into Deep Learning, capitolul 12: algoritmi de optimizare", url: "https://d2l.ai/chapter_optimization" },
+                    { en: "A. Karpathy, micrograd: backpropagation in about 100 lines", ro: "A. Karpathy, micrograd: propagarea înapoi în circa 100 de rînduri", url: "https://github.com/karpathy/micrograd" }
+                ]
             },
             {
-                id: 'l3', num: 3, status: 'prep', files: files(3),
+                id: 'l3', num: 3, status: 'ready', files: files(3),
+                videos: [{ id: 'SjQyLhQIXSM', by: 'DeepLearningAI', title: 'Bias/Variance (C2W1L02)' }, { id: 'Q81RR3yKn30', by: 'StatQuest with Josh Starmer', title: 'Regularization Part 1: Ridge (L2) Regression' }, { id: 'NGf0voTMlcs', by: 'StatQuest with Josh Starmer', title: 'Regularization Part 2: Lasso (L1) Regression' }, { id: 'D8PJAL-MZv8', by: 'DeepLearningAI', title: 'Dropout Regularization (C2W1L06)' }, { id: 'tNIpEZLv_eg', by: 'DeepLearningAI', title: 'Normalizing Activations in a Network (C2W3L04)' }, { id: 'nUUqwaxLnWs', by: 'DeepLearningAI', title: 'Why Does Batch Norm Work? (C2W3L06)' }, { id: '6ArSys5qHAU', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 6: Cross Entropy' }],
                 quantinar: [q('rf'), q('mlRisk')],
                 title: TITLES[3],
                 topics: {
-                    en: ['Overfitting, the bias–variance trade-off and double descent', 'Weight decay, dropout, early stopping and batch normalisation', 'Validation design: train, validation and test sets, cross-validation, time-ordered splits and data leakage', 'Imbalanced classes on the credit-card fraud data: class weights, precision–recall curves and the cost of errors'],
-                    ro: ['Supraînvățarea (overfitting), compromisul dintre deplasare și varianță și fenomenul de dublă coborîre', 'Penalizarea ponderilor (weight decay), dropout, oprirea timpurie și normalizarea pe loturi (batch normalisation)', 'Schema de validare: seturile de antrenare, validare și testare, validarea încrucișată, împărțirea în ordine cronologică și scurgerea de informație', 'Clase dezechilibrate pe datele despre fraudele cu carduri: ponderarea claselor, curbele precizie–sensibilitate și costul erorilor']
-                }
+                    en: ["Overfitting and the generalisation gap on 600 German credit applicants; the bias-variance decomposition and double descent with random ReLU features on California housing", "Weight decay as an L2 penalty and a Gaussian prior, AdamW, L1 penalties and sparsity of the first-layer weights", "Dropout, early stopping (and why it acts like an L2 penalty) and batch normalisation, measured on German credit, card fraud and a deep MLP", "Validation design: cross-validation, the noise of one hold-out split, time-ordered splits and the leakage created by oversampling before the split", "Case study on the ULB card-fraud data: weighted precision, recall and PR-AUC, an ablation of regularisers over five seeds, an MLP against logistic regression and XGBoost, the prior correction and a cost-based alert budget"],
+                    ro: ["Supraînvățarea și diferența de generalizare pe 600 de solicitanți German credit; descompunerea deplasare-varianță și dubla coborîre cu caracteristici ReLU aleatoare pe California housing", "Penalizarea ponderilor ca penalizare L2 și distribuție a priori gaussiană, AdamW, penalizarea L1 și raritatea ponderilor primului strat", "Dropout, oprirea timpurie (și de ce acționează ca o penalizare L2) și normalizarea pe loturi, măsurate pe German credit, pe fraudele cu carduri și pe un MLP adînc", "Schema de validare: validarea încrucișată, zgomotul unei singure împărțiri, împărțirea cronologică și scurgerea de informație produsă de supraeșantionarea înainte de împărțire", "Studiu de caz pe datele ULB despre fraudele cu carduri: precizia, sensibilitatea și PR-AUC ponderate, compararea regularizatorilor pe cinci inițializări, un MLP față de regresia logistică și XGBoost, corecția pentru subeșantionare și un buget de alerte stabilit din costuri"]
+                },
+                further: [
+                    { en: "Bishop &amp; Bishop (2024), chapter 9: regularisation", ro: "Bishop și Bishop (2024), capitolul 9: regularizarea", url: "https://www.bishopbook.com" },
+                    { en: "Hastie, Tibshirani &amp; Friedman (2009), chapter 7: model assessment and selection", ro: "Hastie, Tibshirani și Friedman (2009), capitolul 7: evaluarea și selecția modelelor", url: "https://hastie.su.domains/ElemStatLearn/" },
+                    { en: "Reproducible machine learning for credit card fraud detection: practical handbook (ULB)", ro: "Manualul practic de detectare a fraudei cu carduri prin învățare automată (ULB)", url: "https://fraud-detection-handbook.github.io/fraud-detection-handbook/" }
+                ]
             },
             {
-                id: 'l4', num: 4, status: 'prep', files: files(4),
+                id: 'l4', num: 4, status: 'ready', files: files(4),
+                videos: [{ id: 'KuXjwB4LzSA', by: '3Blue1Brown', title: 'But what is a convolution?' }, { id: 'HGwBXDKFk9I', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 8: Image Classification with Convolutional Neural Networks (CNNs)' }, { id: 'UZDiGooFs54', by: 'Welch Labs', title: 'The moment we stopped understanding AI [AlexNet]' }, { id: 'ZILIbUvp5lk', by: 'DeepLearningAI', title: 'C4W2L03 Resnets' }, { id: 'yofjFQddwHE', by: 'DeepLearningAI', title: 'Transfer Learning (C3W2L07)' }, { id: 'oGpzWAlP5p0', by: 'Alexander Amini', title: 'MIT 6.S191 (2025): Convolutional Neural Networks' }],
                 quantinar: [q('mlRisk')],
                 title: TITLES[4],
                 topics: {
-                    en: ['Convolution, padding, stride and pooling: the formulas and what a filter learns', 'Classic architectures from LeNet to ResNet; residual connections', 'Product images (Fashion-MNIST) and CIFAR-10 trained from scratch', 'Transfer learning on Sentinel-2 satellite images (EuroSAT): land use for agriculture, insurance and real estate'],
-                    ro: ['Convoluția, completarea marginilor (padding), pasul (stride) și agregarea (pooling): formulele și ce învață un filtru', 'Arhitecturi clasice, de la LeNet la ResNet; conexiunile reziduale', 'Imagini de produse (Fashion-MNIST) și CIFAR-10, cu rețele antrenate de la zero', 'Transferul învățării pe imaginile satelitare Sentinel-2 (EuroSAT): utilizarea terenurilor pentru agricultură, asigurări și imobiliare']
-                }
+                    en: ["The convolutional layer as a formula: kernel, padding, stride, channels, parameters, pooling and the receptive field; backpropagation through a convolution", "Product photos (Fashion-MNIST): softmax regression, multilayer perceptron (MLP) and CNN with three seeds, McNemar's test, learned filters and feature maps", "Architectures from LeNet to ResNet: residual connections and the degradation problem, data augmentation, measured on CIFAR-10", "Transfer learning on Sentinel-2 satellite images (EuroSAT): feature extraction versus fine-tuning, the label budget, Grad-CAM explanations and land-use shares for lenders and insurers"],
+                    ro: ["Stratul convoluțional ca formulă: nucleu, completarea marginilor (padding), pas (stride), canale, parametri, agregare (pooling) și cîmp receptiv; propagarea înapoi printr-o convoluție", "Fotografii de produse (Fashion-MNIST): regresia softmax, perceptronul multistrat (MLP) și CNN cu trei semințe, testul McNemar, filtrele învățate și hărțile de trăsături", "Arhitecturi de la LeNet la ResNet: conexiunile reziduale și problema degradării, augmentarea datelor, măsurate pe CIFAR-10", "Transferul învățării pe imagini satelitare Sentinel-2 (EuroSAT): extragerea trăsăturilor față de ajustarea fină, bugetul de etichete, explicații Grad-CAM și ponderile utilizării terenului pentru creditori și asigurători"]
+                },
+                further: [
+                    { en: "He et al. (2016), Deep residual learning for image recognition", ro: "He et al. (2016), Deep residual learning for image recognition", url: "https://doi.org/10.1109/CVPR.2016.90" },
+                    { en: "Helber et al. (2019), EuroSAT", ro: "Helber et al. (2019), EuroSAT", url: "https://doi.org/10.1109/JSTARS.2019.2918242" },
+                    { en: "Jheng, Pele, Tak &amp; Găman (2026), A multimodal vision-language framework for financial anomaly detection", ro: "Jheng, Pele, Tak &amp; Găman (2026), A multimodal vision-language framework for financial anomaly detection", url: "https://doi.org/10.2478/picbe-2026-0020" }
+                ]
             },
             {
-                id: 'l5', num: 5, status: 'prep', files: files(5),
+                id: 'l5', num: 5, status: 'ready', files: files(5),
+                videos: [{ id: 'AsNTP8Kwu80', by: 'StatQuest with Josh Starmer', title: 'Recurrent Neural Networks (RNNs), Clearly Explained!!!' }, { id: 'YCzL96nL7j0', by: 'StatQuest with Josh Starmer', title: 'Long Short-Term Memory (LSTM), Clearly Explained' }, { id: 'L8HKweZIOmg', by: 'StatQuest with Josh Starmer', title: 'Sequence-to-Sequence (seq2seq) Encoder-Decoder Neural Networks, Clearly Explained!!!' }, { id: 'RHGiXPuo_pI', by: 'StatQuest with Josh Starmer', title: 'Long Short-Term Memory with PyTorch + Lightning' }, { id: 'dqoEU9Ac3ek', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Recurrent Neural Networks, Transformers, and Attention' }],
                 quantinar: [q('tsaPython'), q('kalman')],
                 title: TITLES[5],
                 topics: {
-                    en: ['The recurrent neural network (RNN), backpropagation through time and vanishing gradients', 'LSTM (long short-term memory) and GRU (gated recurrent unit) cells, gate by gate', 'Forecasting returns, volatility and electricity load: windows, scaling and walk-forward validation', 'Benchmarks first: random walk, autoregressive and GARCH (generalised autoregressive conditional heteroskedasticity) models against recurrent networks on S&P 500, Bucharest Stock Exchange and Romanian load data'],
-                    ro: ['Rețeaua neuronală recurentă (RNN, recurrent neural network), propagarea înapoi în timp și dispariția gradienților', 'Celulele LSTM (long short-term memory) și GRU (gated recurrent unit), poartă cu poartă', 'Prognoza randamentelor, a volatilității și a consumului de energie electrică: ferestre, scalare și validare cu fereastră glisantă', 'Întîi modelele de referință: mersul aleator, modelele autoregresive și modelele GARCH (generalised autoregressive conditional heteroskedasticity) față de rețelele recurente, pe datele S&P 500, ale Bursei de Valori București și ale consumului din România']
-                }
+                    en: ["The recurrent neural network (RNN), backpropagation through time and vanishing or exploding gradients, with gradient clipping", "LSTM (long short-term memory) and GRU (gated recurrent unit) cells gate by gate; measured memory and gate activations on real data", "A leakage-free protocol: time-ordered splits, scaling on the training years, seeds and the Diebold–Mariano test; naive, HAR and GARCH benchmarks first", "Case studies: S&amp;P 500 volatility (Garman–Klass), next-day returns of the S&amp;P 500 and Banca Transilvania, and day-ahead hourly electricity load in Romania"],
+                    ro: ["Rețeaua neuronală recurentă (RNN), propagarea înapoi în timp și gradienții care dispar sau explodează, cu plafonarea gradientului", "Celulele LSTM (long short-term memory) și GRU (gated recurrent unit), poartă cu poartă; memoria măsurată și activările porților pe date reale", "Un protocol fără scurgeri de informație: împărțire cronologică, scalare pe anii de antrenare, semințe și testul Diebold–Mariano; întîi modelele de referință naiv, HAR și GARCH", "Studii de caz: volatilitatea S&amp;P 500 (Garman–Klass), randamentele de a doua zi ale S&amp;P 500 și Banca Transilvania și consumul orar de energie electrică din România pentru ziua următoare"]
+                },
+                further: [
+                    { en: "Hochreiter &amp; Schmidhuber (1997), Long short-term memory", ro: "Hochreiter &amp; Schmidhuber (1997), Long short-term memory", url: "https://doi.org/10.1162/neco.1997.9.8.1735" },
+                    { en: "Corsi (2009), The HAR model of realized volatility", ro: "Corsi (2009), The HAR model of realized volatility", url: "https://doi.org/10.1093/jjfinec/nbp001" },
+                    { en: "Jheng, Tak, Găman, Mazurencu-Marinescu-Pele &amp; Pele (2026), Zero-shot VaR and ES with conformal calibration", ro: "Jheng, Tak, Găman, Mazurencu-Marinescu-Pele &amp; Pele (2026), Zero-shot VaR and ES with conformal calibration", url: "https://doi.org/10.24818/18423264/60.2.26.14" }
+                ]
             },
             {
-                id: 'l6', num: 6, status: 'prep', files: files(6),
+                id: 'l6', num: 6, status: 'ready', files: files(6),
+                videos: [{ id: 'viZrOnJclY0', by: 'StatQuest with Josh Starmer', title: 'Word Embedding and Word2Vec, Clearly Explained!!!' }, { id: 'e9U0QAFbfLI', by: 'StatQuest with Josh Starmer', title: 'Cosine Similarity, Clearly Explained!!!' }, { id: 'zduSFxRajkE', by: 'Andrej Karpathy', title: 'Let\'s build the GPT Tokenizer' }, { id: 'wjZofJX0v4M', by: '3Blue1Brown', title: 'Transformers, the tech behind LLMs | Deep Learning Chapter 5' }],
                 quantinar: [q('nlp'), q('lda'), q('delta')],
                 title: TITLES[6],
                 topics: {
-                    en: ['Natural language processing (NLP) for finance: tokens, bag of words and TF-IDF (term frequency–inverse document frequency)', 'Word embeddings: word2vec and GloVe (global vectors), with the training objective written out', 'Sentence classification with embeddings and a small network', 'Financial sentiment on the Financial PhraseBank and on finance tweets'],
-                    ro: ['Prelucrarea limbajului natural (NLP, natural language processing) în finanțe: unități lexicale (tokens), modelul bag of words și TF-IDF (term frequency–inverse document frequency)', 'Reprezentarea vectorială a cuvintelor: word2vec și GloVe (global vectors), cu funcția-obiectiv scrisă complet', 'Clasificarea frazelor cu vectori de cuvinte și o rețea mică', 'Sentimentul financiar pe Financial PhraseBank și pe tweet-uri financiare']
-                }
+                    en: ["Natural language processing (NLP) for finance: tokens, Zipf's law, bag of words and TF-IDF (term frequency–inverse document frequency), a learned finance lexicon", "Our own word2vec (skip-gram with negative sampling) and GloVe (global vectors) trained on European Central Bank speeches, with the objectives written out", "Sentence classifiers: TF-IDF + logistic regression, MLP, mean embeddings and an embedding-bag network, with macro-F1, paired tests and learning curves", "Financial sentiment on the Financial PhraseBank and on finance tweets; topic classification of tweets in 20 classes"],
+                    ro: ["Prelucrarea limbajului natural (NLP) în finanțe: unități lexicale, legea lui Zipf, sacul de cuvinte și TF-IDF (term frequency–inverse document frequency), un dicționar financiar învățat", "Propriile modele word2vec (skip-gram cu eșantionare negativă) și GloVe (global vectors), antrenate pe discursurile Băncii Centrale Europene, cu funcțiile-obiectiv scrise complet", "Clasificatoare de fraze: TF-IDF + regresie logistică, MLP, media vectorilor de cuvinte și o rețea embedding bag, cu macro-F1, teste pereche și curbe de învățare", "Sentimentul financiar pe Financial PhraseBank și pe tweet-uri financiare; clasificarea tweet-urilor în 20 de teme"]
+                },
+                further: [
+                    { en: "Mikolov et al. (2013), Distributed representations of words and phrases", ro: "Mikolov et al. (2013), Distributed representations of words and phrases", url: "https://arxiv.org/abs/1310.4546" },
+                    { en: "Pennington, Socher &amp; Manning (2014), GloVe", ro: "Pennington, Socher &amp; Manning (2014), GloVe", url: "https://doi.org/10.3115/v1/D14-1162" },
+                    { en: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", ro: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", url: "https://doi.org/10.1016/j.eswa.2025.128676" }
+                ]
             },
             {
-                id: 'l7', num: 7, status: 'prep', files: files(7),
+                id: 'l7', num: 7, status: 'ready', files: files(7),
+                videos: [{ id: 'PSs6nxngL6k', by: 'StatQuest with Josh Starmer', title: 'Attention for Neural Networks, Clearly Explained!!!' }, { id: 'eMlx5fFNoYc', by: '3Blue1Brown', title: 'Attention in transformers, step-by-step | Deep Learning Chapter 6' }, { id: 'zxQyTK8quyY', by: 'StatQuest with Josh Starmer', title: 'Transformer Neural Networks, ChatGPT\'s foundation, Clearly Explained!!!' }, { id: 'bQ5BoolX9Ag', by: 'StatQuest with Josh Starmer', title: 'Decoder-Only Transformers, ChatGPTs specific Transformer, Clearly Explained!!!' }, { id: 'bCz4OMemCcA', by: 'Umar Jamil', title: 'Attention is all you need (Transformer) - Model explanation (including math), Inference and Training' }, { id: 'KJtZARuO3JY', by: 'Grant Sanderson', title: 'Visualizing transformers and attention | Talk for TNG Big Tech Day \'24' }, { id: 'kCc8FmEb1nY', by: 'Andrej Karpathy', title: 'Let\'s build GPT: from scratch, in code, spelled out.' }],
                 quantinar: [q('nextWord'), q('delta'), q('nlp')],
                 title: TITLES[7],
                 topics: {
-                    en: ['Attention as a weighted average: queries, keys and values; scaled dot-product and multi-head attention', 'The transformer block: positional encoding, residual connections and layer normalisation', 'Encoders (BERT, bidirectional encoder representations from transformers) and decoders (GPT, generative pre-trained transformer); FinBERT', 'Fine-tuning a transformer for financial sentiment and topic classification, with a fair comparison against Lecture 6'],
-                    ro: ['Atenția ca medie ponderată: interogări, chei și valori; atenția prin produs scalar normalizat și atenția cu mai multe capete', 'Blocul transformer: codificarea poziției, conexiunile reziduale și normalizarea pe strat', 'Codificatoare (BERT, bidirectional encoder representations from transformers) și decodificatoare (GPT, generative pre-trained transformer); FinBERT', 'Ajustarea fină a unui transformer pentru sentimentul financiar și pentru clasificarea pe teme, cu o comparație corectă cu modelele din Cursul 6']
-                }
+                    en: ["Why attention: recurrence, long-range dependencies, context length of tweets and ECB speeches", "Scaled dot-product attention, the √d_k scaling, masks and multi-head attention", "Positional encoding, the transformer block (residuals, layer norm, feed-forward), BERT versus GPT, subword tokens", "Real FinBERT attention maps and why attention is not an explanation", "Case study: sentiment of 2,388 finance tweets — TF-IDF, embedding bag, small transformer, FinBERT zero-shot, frozen and fine-tuned, with bootstrap intervals", "From sentiment scores to business signals; long documents; transformers beyond text"],
+                    ro: ["De ce atenția: recurența, dependențele lungi, lungimea tweet-urilor și a discursurilor BCE", "Atenția cu produs scalar scalat, scalarea cu √d_k, măștile și atenția cu mai multe capete", "Codificarea poziției, blocul transformer (conexiuni reziduale, normalizare, rețea directă), BERT față de GPT, tokenii de subcuvinte", "Hărți reale de atenție FinBERT și de ce atenția nu este o explicație", "Studiu de caz: sentimentul a 2.388 de tweet-uri financiare — TF-IDF, medie de embedding-uri, transformer mic, FinBERT fără antrenare, înghețat și ajustat, cu intervale bootstrap", "De la scoruri de sentiment la semnale de afaceri; documente lungi; transformerele dincolo de text"]
+                },
+                further: [
+                    { en: "Vaswani et al. (2017), Attention is all you need", ro: "Vaswani et al. (2017), Attention is all you need", url: "https://arxiv.org/abs/1706.03762" },
+                    { en: "J. Alammar, The Illustrated Transformer", ro: "J. Alammar, The Illustrated Transformer", url: "https://jalammar.github.io/illustrated-transformer/" },
+                    { en: "Hugging Face course: fine-tuning encoders", ro: "Cursul Hugging Face: ajustarea codificatoarelor", url: "https://huggingface.co/learn/llm-course" }
+                ]
             },
             {
-                id: 'l8', num: 8, status: 'prep', files: files(8),
+                id: 'l8', num: 8, status: 'ready', files: files(8),
+                videos: [{ id: 'xwrzh4e8DLs', by: 'Valerio Velardo - The Sound of AI', title: 'Autoencoders Explained Easily' }, { id: '9zKuYvjFFS8', by: 'Arxiv Insights', title: 'Variational Autoencoders' }, { id: 'iwEzwTTalbg', by: 'Umar Jamil', title: 'Variational Autoencoder - Model, ELBO, loss function and maths explained easily!' }, { id: '8L11aMN5KY8', by: 'Luis Serrano Academy', title: 'A Friendly Introduction to Generative Adversarial Networks (GANs)' }, { id: 'Sw9r8CL98N0', by: 'Computerphile', title: 'Generative Adversarial Networks (GANs) - Computerphile' }, { id: 'fbLgFrlTnGU', by: 'Ari Seff', title: 'What are Diffusion Models?' }, { id: 'iv-5mZ_9CPY', by: '3Blue1Brown', title: 'But how do AI images and videos actually work? | Guest video by Welch Labs' }, { id: 'I1sPXkm2NH4', by: 'Umar Jamil', title: 'How diffusion models work - explanation and code!' }, { id: 'Dmm4UG-6jxA', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Deep Generative Modeling' }],
                 quantinar: [q('gans')],
                 title: TITLES[8],
                 topics: {
-                    en: ['Autoencoders for anomaly detection on credit-card transactions', 'The variational autoencoder (VAE): the evidence lower bound derived; factors of the euro area yield curve', 'Generative adversarial networks (GAN): the minimax game, its failure modes, and synthetic return series judged against the real ones', 'Diffusion models: the forward noising process and the learned reverse process'],
-                    ro: ['Autoencodere pentru detectarea anomaliilor în tranzacțiile cu carduri', 'Autoencoderul variațional (VAE, variational autoencoder): deducerea marginii inferioare a verosimilității (ELBO); factorii curbei randamentelor din zona euro', 'Rețelele generative adversariale (GAN, generative adversarial networks): jocul minimax, modurile de eșec și serii sintetice de randamente comparate cu cele reale', 'Modele de difuzie: procesul direct de adăugare a zgomotului și procesul invers învățat']
-                }
+                    en: ["Discriminative vs generative models; latent-variable models and PCA", "Autoencoders as anomaly detectors: ULB card fraud, against PCA and a supervised logistic regression", "Variational autoencoders: ELBO, reparameterisation trick, beta-VAE, Fashion-MNIST latent space", "GANs: minimax game, optimal discriminator, non-saturating loss, mode collapse, WGAN", "Synthetic S&amp;P 500 returns: fat tails, 1 % VaR backtest, missing volatility clustering", "Diffusion models (DDPM): forward noising, noise prediction, euro-area yield-curve scenarios", "Judging synthetic data: fidelity, diversity, utility (TSTR), privacy"],
+                    ro: ["Modele discriminative și generative; modele cu variabile latente și PCA", "Autoencodere ca detectoare de anomalii: fraude cu carduri ULB, comparate cu PCA și o regresie logistică supervizată", "Autoencodere variaționale: ELBO, trucul reparametrizării, beta-VAE, spațiul latent Fashion-MNIST", "GAN: jocul min-max, discriminatorul optim, pierderea nesaturată, colapsul modurilor, WGAN", "Randamente S&amp;P 500 sintetice: cozi groase, testul retrospectiv al VaR de 1 %, lipsa grupării volatilității", "Modele de difuzie (DDPM): adăugarea zgomotului, predicția zgomotului, scenarii pentru curba randamentelor din zona euro", "Evaluarea datelor sintetice: fidelitate, diversitate, utilitate (TSTR), confidențialitate"]
+                },
+                further: [
+                    { en: "Ho, Jain &amp; Abbeel (2020), Denoising diffusion probabilistic models", ro: "Ho, Jain și Abbeel (2020), Denoising diffusion probabilistic models", url: "https://arxiv.org/abs/2006.11239" },
+                    { en: "Kingma &amp; Welling (2014), Auto-encoding variational Bayes", ro: "Kingma și Welling (2014), Auto-encoding variational Bayes", url: "https://arxiv.org/abs/1312.6114" },
+                    { en: "L. Weng, What are diffusion models? (notes)", ro: "L. Weng, What are diffusion models? (note)", url: "https://lilianweng.github.io/posts/2021-07-11-diffusion-models/" }
+                ]
             },
             {
-                id: 'l9', num: 9, status: 'prep', files: files(9),
+                id: 'l9', num: 9, status: 'ready', files: files(9),
+                videos: [{ id: 'JAB_plj2rbA', by: 'Stanford Online', title: 'Stanford CS224W: Machine Learning with Graphs | 2021 | Lecture 1.1 - Why Graphs' }, { id: 'fOctJB4kVlM', by: 'DeepFindr', title: 'Understanding Graph Neural Networks | Part 1/3 - Introduction' }, { id: 'ABCGCf8cJOE', by: 'DeepFindr', title: 'Understanding Graph Neural Networks | Part 2/3 - GNNs and it\'s Variants' }, { id: '8owQBFAHw7E', by: 'TensorFlow', title: 'Intro to graph neural networks (ML Tech Talks)' }],
                 quantinar: [q('cryptoNetworks'), q('centrality'), q('mst')],
                 title: TITLES[9],
                 topics: {
-                    en: ['Graphs in finance: payment flows, ownership and correlation networks; adjacency matrix and Laplacian', 'Message passing: GCN (graph convolutional network), GraphSAGE and GAT (graph attention network), with their update equations', 'Illicit Bitcoin transactions on the Elliptic graph: node classification with a time-ordered split', 'Correlation networks of Bucharest Stock Exchange shares'],
-                    ro: ['Grafurile în finanțe: fluxuri de plăți, rețele de proprietate și rețele de corelații; matricea de adiacență și laplacianul', 'Transmiterea mesajelor între noduri: GCN (graph convolutional network), GraphSAGE și GAT (graph attention network), cu ecuațiile de actualizare', 'Tranzacțiile Bitcoin ilicite din graful Elliptic: clasificarea nodurilor cu împărțire cronologică', 'Rețelele de corelații ale acțiunilor de la Bursa de Valori București']
-                }
+                    en: ["Financial data as graphs: adjacency, degree, normalised adjacency, Laplacian, permutation equivariance", "Message passing, aggregators and the Weisfeiler–Leman test; receptive field and over-smoothing", "GCN, GraphSAGE and GAT with full formulas; semi-supervised training on one large graph", "Case study: anti-money laundering on the Elliptic Bitcoin graph (203,769 transactions), temporal split, against logistic regression and random forest", "Precision, recall, PR-AUC, bootstrap intervals, alert budgets and concept drift after a dark-market shutdown", "Explanation stability with graph embeddings; GNNs in production and across finance"],
+                    ro: ["Datele financiare ca grafuri: adiacență, grad, adiacență normalizată, laplacian, echivarianță la permutări", "Transmiterea mesajelor, agregatoarele și testul Weisfeiler–Leman; cîmpul receptiv și over-smoothing", "GCN, GraphSAGE și GAT cu formulele complete; antrenare semi-supervizată pe un singur graf mare", "Studiu de caz: combaterea spălării banilor pe graful Bitcoin Elliptic (203.769 de tranzacții), împărțire în timp, față de regresia logistică și pădurea aleatoare", "Precizie, recall, PR-AUC, intervale bootstrap, bugete de alerte și schimbarea conceptului după închiderea unei piețe ilegale", "Stabilitatea explicațiilor cu reprezentări de graf; rețelele GNN în producție și în finanțe"]
+                },
+                further: [
+                    { en: "Weber et al. (2019), Anti-money laundering in Bitcoin (Elliptic data)", ro: "Weber et al. (2019), Anti-money laundering in Bitcoin (datele Elliptic)", url: "https://arxiv.org/abs/1908.02591" },
+                    { en: "W. L. Hamilton, Graph Representation Learning (book)", ro: "W. L. Hamilton, Graph Representation Learning (carte)", url: "https://www.cs.mcgill.ca/~wlh/grl_book/" },
+                    { en: "PyTorch Geometric documentation", ro: "Documentația PyTorch Geometric", url: "https://pytorch-geometric.readthedocs.io" }
+                ]
             },
             {
-                id: 'l10', num: 10, status: 'prep', files: files(10),
+                id: 'l10', num: 10, status: 'ready', files: files(10),
+                videos: [{ id: 'Z-T0iJEXiwM', by: 'StatQuest with Josh Starmer', title: 'Reinforcement Learning: Essential Concepts' }, { id: '9hbQieQh7-o', by: 'StatQuest with Josh Starmer', title: 'Reinforcement Learning with Neural Networks: Essential Concepts' }, { id: 'SgC6AZss478', by: 'Luis Serrano Academy', title: 'A friendly introduction to deep reinforcement learning, Q-networks and policy gradients' }, { id: '0MNVhXEX9to', by: 'Steve Brunton', title: 'Reinforcement Learning: Machine Learning Meets Control Theory' }, { id: '8JVRbHAVCws', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Reinforcement Learning' }, { id: '2pWv7GOvuf0', by: 'Google DeepMind', title: 'RL Course by David Silver - Lecture 1: Introduction to Reinforcement Learning' }],
                 quantinar: [q('rl')],
                 title: TITLES[10],
                 topics: {
-                    en: ['Markov decision processes, the Bellman equations, value and policy iteration', 'Q-learning and deep Q-networks (DQN); policy gradients and actor–critic methods', 'Battery dispatch on Romanian day-ahead prices, compared with the perfect-foresight optimum', 'Trading and hedging agents: transaction costs, risk and why backtests flatter reinforcement learning'],
-                    ro: ['Procese decizionale Markov, ecuațiile Bellman, iterarea valorilor și iterarea politicilor', 'Q-learning și rețelele Q profunde (DQN, deep Q-networks); gradientul politicii și metodele actor–critic', 'Operarea unei baterii pe prețurile pentru ziua următoare din România, comparată cu optimul obținut cunoscînd prețurile dinainte', 'Agenți de tranzacționare și de acoperire a riscului: costuri de tranzacționare, risc și motivele pentru care testarea retrospectivă avantajează învățarea prin recompensă']
-                }
+                    en: ["Markov decision processes, value functions and the Bellman equation", "Dynamic programming: the perfect-foresight battery on Romanian, Hungarian, German and Bulgarian day-ahead prices", "Value-based learning: tabular Q-learning and double DQN for battery dispatch, against yesterday's optimal plan", "Policy gradients, actor-critic, GAE and PPO: trading the S&amp;P 500 against buy-and-hold and the 200-day moving average, five seeds and a block bootstrap", "Deep hedging: a neural policy that minimises the expected shortfall of a short one-month call, against the Black-Scholes delta, with transaction costs", "Model risk of RL in production: reward design, simulator gap, seeds, guardrails", "Research of our group: joint probabilistic forecasting for battery arbitrage in day-ahead power markets"],
+                    ro: ["Procese decizionale Markov, funcții de valoare și ecuația Bellman", "Programarea dinamică: bateria cu previziune perfectă pe prețurile pentru ziua următoare din România, Ungaria, Germania și Bulgaria", "Învățarea bazată pe valoare: Q-learning tabelar și DQN dublu pentru dispecerizarea bateriei, față de planul optim de ieri", "Gradienți de politică, actor-critic, GAE și PPO: tranzacționarea S&amp;P 500 față de strategia cumpără și păstrează și media mobilă de 200 de zile, cinci valori inițiale și bootstrap pe blocuri", "Acoperirea neuronală: o politică ce minimizează pierderea așteptată în coadă a unei opțiuni call vîndute pe o lună, față de delta Black-Scholes, cu costuri de tranzacționare", "Riscul de model al RL în producție: proiectarea recompensei, diferența față de simulator, valorile inițiale, limitele de siguranță", "Cercetările grupului: prognoza probabilistică comună pentru arbitrajul cu baterii pe piețele pentru ziua următoare"]
+                },
+                further: [
+                    { en: "Sutton &amp; Barto, Reinforcement Learning: An Introduction (free online)", ro: "Sutton &amp; Barto, Reinforcement Learning: An Introduction (gratuit online)", url: "http://incompleteideas.net/book/the-book-2nd.html" },
+                    { en: "OpenAI Spinning Up in Deep RL: policy gradients and PPO", ro: "OpenAI Spinning Up in Deep RL: gradienți de politică și PPO", url: "https://spinningup.openai.com" },
+                    { en: "Andrei, Cepoi et al. (2026), Joint probabilistic forecasting for battery arbitrage (SSRN)", ro: "Andrei, Cepoi et al. (2026), Prognoza probabilistică comună pentru arbitrajul cu baterii (SSRN)", url: "https://doi.org/10.2139/ssrn.6872381" }
+                ]
             },
             {
-                id: 'l11', num: 11, status: 'prep', files: files(11),
+                id: 'l11', num: 11, status: 'ready', files: files(11),
+                videos: [{ id: '6xePkn3-LME', by: 'TensorFlow', title: 'Introduction to Explainable AI (ML Tech Talks)' }, { id: 'MQ6fFDwjuco', by: 'A Data Odyssey', title: 'SHAP values for beginners | What they mean and their applications' }, { id: '9haIOplEIGM', by: 'DeepFindr', title: 'Explainable AI explained! | #4 SHAP' }, { id: 'd6j6bofhj2M', by: 'DeepFindr', title: 'Explainable AI explained! | #3 LIME' }],
                 quantinar: [q('xai'), q('shapley'), q('rf')],
                 title: TITLES[11],
                 topics: {
-                    en: ['Why explainable artificial intelligence (XAI) matters for credit and supervision: global and local explanations', 'Shapley values and SHAP: the axioms and the formula; LIME as a local surrogate model', 'Gradient methods: saliency maps and integrated gradients', 'Stability and faithfulness of explanations on the German credit and HMEQ models'],
-                    ro: ['De ce contează inteligența artificială explicabilă (XAI, explainable artificial intelligence) în creditare și în supraveghere: explicații globale și locale', 'Valorile Shapley și SHAP: axiomele și formula; LIME ca model surogat local', 'Metode bazate pe gradient: hărți de saliență și gradienți integrați', 'Stabilitatea și fidelitatea explicațiilor pentru modelele estimate pe datele German credit și HMEQ']
-                }
+                    en: ["Why explain: EU AI Act, GDPR, EBA guidelines, SR 11-7 model risk; a taxonomy of methods", "Shapley values and SHAP: axioms, Kernel SHAP, TreeSHAP, linear SHAP; global importance, beeswarm, waterfall, dependence (HMEQ credit)", "LIME and its sensitivity to sample size and kernel width; counterfactual explanations for a rejected applicant", "Partial dependence and ICE curves (California housing)", "Gradient methods on a fraud network: saliency, gradient x input, integrated gradients (completeness), SmoothGrad, TCAV", "Agreement, faithfulness (deletion/AOPC), local robustness, seed stability (Rashomon effect) and drift of explanations over time", "Research of our group: SHAP stability in graph-augmented fraud detection; explainable early warning of electricity price spikes"],
+                    ro: ["De ce explicăm: Regulamentul UE privind AI, GDPR, ghidul EBA, riscul de model SR 11-7; o clasificare a metodelor", "Valorile Shapley și SHAP: axiome, Kernel SHAP, TreeSHAP, SHAP liniar; importanța globală, diagrama roi, diagrama cascadă, dependența (credit HMEQ)", "LIME și sensibilitatea la mărimea eșantionului și lățimea nucleului; explicații contrafactuale pentru un solicitant respins", "Dependența parțială și curbele ICE (locuințele din California)", "Metode bazate pe gradient pentru o rețea de detectare a fraudei: saliența, gradient x intrare, gradienții integrați (completitudinea), SmoothGrad, TCAV", "Concordanța, fidelitatea (eliminare/AOPC), robustețea locală, stabilitatea la valoarea inițială (efectul Rashomon) și deplasarea explicațiilor în timp", "Cercetările grupului: stabilitatea SHAP în detectarea fraudei cu informație din graf; avertizarea timpurie explicabilă a vîrfurilor de preț la energie"]
+                },
+                further: [
+                    { en: "C. Molnar, Interpretable Machine Learning (free online book)", ro: "C. Molnar, Interpretable Machine Learning (carte gratuită online)", url: "https://christophm.github.io/interpretable-ml-book/" },
+                    { en: "SHAP library documentation", ro: "Documentația bibliotecii SHAP", url: "https://shap.readthedocs.io" },
+                    { en: "Replication code of Diaconu &amp; Pele (2026), SHAP stability in graph-augmented fraud detection", ro: "Codul de replicare pentru Diaconu &amp; Pele (2026), stabilitatea SHAP în detectarea fraudei cu informație din graf", url: "https://github.com/QuantLet/GNN_XAI_Stability" }
+                ]
             },
             {
-                id: 'l12', num: 12, status: 'prep', files: files(12),
+                id: 'l12', num: 12, status: 'ready', files: files(12),
+                videos: [{ id: 'LPZh9BOjkQs', by: '3Blue1Brown', title: 'Large Language Models explained briefly' }, { id: 'zjkBMFhNj_g', by: 'Andrej Karpathy', title: '[1hr Talk] Intro to Large Language Models' }, { id: '7xTGNNLPyMI', by: 'Andrej Karpathy', title: 'Deep Dive into LLMs like ChatGPT' }, { id: '1c9iyoVIwDs', by: 'IBM Technology', title: '4 Methods of Prompt Engineering' }, { id: 'T-D1OfcDW1M', by: 'IBM Technology', title: 'What is Retrieval-Augmented Generation (RAG)?' }, { id: 'zYGDpG-pTho', by: 'IBM Technology', title: 'RAG vs Fine-Tuning vs Prompt Engineering: Optimizing AI Models' }, { id: '9-Jl0dxWQs8', by: '3Blue1Brown', title: 'How might LLMs store facts | Deep Learning Chapter 7' }],
                 quantinar: [q('nextWord'), q('delta')],
                 title: TITLES[12],
                 topics: {
-                    en: ['From GPT to instruction-tuned models: pre-training, fine-tuning and alignment', 'Prompt engineering: zero-shot, few-shot and chain-of-thought prompts, measured on labelled financial data', 'Retrieval-augmented generation (RAG) on central-bank speeches of the European Central Bank (ECB)', 'Risks: hallucination, data leakage, cost and the evaluation of LLM outputs'],
-                    ro: ['De la GPT la modelele ajustate pe instrucțiuni: preantrenarea, ajustarea fină și alinierea', 'Formularea instrucțiunilor (prompt engineering): prompturi fără exemple (zero-shot), cu cîteva exemple (few-shot) și cu raționament pas cu pas (chain-of-thought), evaluate pe date financiare etichetate', 'Generarea augmentată prin regăsire (RAG, retrieval-augmented generation) pe discursurile Băncii Centrale Europene (BCE)', 'Riscuri: halucinațiile, scurgerea de date, costul și evaluarea răspunsurilor unui LLM']
-                }
+                    en: ["Language models: next-token objective, tokens, perplexity and temperature, measured on speeches of the ECB (European Central Bank)", "From pre-training to assistants: supervised fine-tuning, RLHF (reinforcement learning from human feedback), DPO (direct preference optimisation) and LoRA (low-rank adaptation)", "Prompt engineering measured on Financial PhraseBank and finance tweets: zero-shot, few-shot, chain-of-thought, prompt sensitivity, calibration and cost", "RAG (retrieval-augmented generation) on ECB speeches: BM25, dense and hybrid retrieval; hallucination without documents", "LLM-VaR: a language model as a Value-at-Risk estimator, backtested against GARCH and historical simulation"],
+                    ro: ["Modele de limbaj: obiectivul următorului token, tokeni, perplexitate și temperatură, măsurate pe discursurile BCE (Banca Centrală Europeană)", "De la preantrenare la asistenți: ajustarea fină supervizată, RLHF (învățare prin recompensă din feedback uman), DPO (optimizarea directă a preferințelor) și LoRA (adaptare de rang mic)", "Formularea instrucțiunilor evaluată pe Financial PhraseBank și pe tweet-uri financiare: zero-shot, few-shot, chain-of-thought, sensibilitatea la prompt, calibrare și cost", "RAG (generare augmentată prin regăsire) pe discursurile BCE: regăsire BM25, densă și hibridă; halucinațiile fără documente", "LLM-VaR: un model de limbaj ca estimator al valorii expuse la risc, testat retrospectiv față de GARCH și simularea istorică"]
+                },
+                further: [
+                    { en: "Hugging Face LLM course", ro: "Hugging Face LLM course", url: "https://huggingface.co/learn/llm-course" },
+                    { en: "Qwen2.5 open models", ro: "Qwen2.5 open models", url: "https://huggingface.co/Qwen" },
+                    { en: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", ro: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", url: "https://doi.org/10.1016/j.eswa.2025.128676" }
+                ]
             },
             {
-                id: 'l13', num: 13, status: 'prep', files: files(13),
+                id: 'l13', num: 13, status: 'ready', files: files(13),
+                videos: [{ id: 'REzWTRKRwzk', by: 'Anastasia Borovykh', title: 'Time Series Foundation Models' }, { id: 'yKKWCqABspw', by: 'Arize AI', title: 'Chronos: Learning the Language of Time Series' }, { id: 'YCzL96nL7j0', by: 'StatQuest with Josh Starmer', title: 'Long Short-Term Memory (LSTM), Clearly Explained' }, { id: 'dqoEU9Ac3ek', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Recurrent Neural Networks, Transformers, and Attention' }],
                 quantinar: [q('tsaPython'), q('kalman')],
                 title: TITLES[13],
                 topics: {
-                    en: ['Deep forecasting architectures: DeepAR, N-BEATS (neural basis expansion analysis) and temporal transformers', 'Day-ahead electricity prices and load for Romania and its neighbours: features, calendar and the LEAR (Lasso-estimated autoregressive) benchmark', 'Time-series foundation models (Chronos): zero-shot point and probabilistic forecasts', 'Evaluation: rolling origin, MAE (mean absolute error), CRPS (continuous ranked probability score) and the Diebold–Mariano test'],
-                    ro: ['Arhitecturi profunde de prognoză: DeepAR, N-BEATS (neural basis expansion analysis) și arhitecturi transformer pentru serii de timp', 'Prețurile pentru ziua următoare și consumul de energie electrică din România și din țările vecine: variabile explicative, calendar și modelul de referință LEAR (Lasso-estimated autoregressive)', 'Modele fundație pentru serii de timp (Chronos): prognoze punctuale și probabilistice fără reantrenare (zero-shot)', 'Evaluarea: origine glisantă, MAE (mean absolute error, eroarea absolută medie), CRPS (continuous ranked probability score) și testul Diebold–Mariano']
-                }
+                    en: ["Day-ahead price forecasting for Romania without leakage: information set at gate closure, rolling origin, naive and LEAR (Lasso-estimated autoregressive) benchmarks", "Deep architectures: a DNN (deep neural network) with 24 outputs, DeepAR, N-BEATS (neural basis expansion analysis) and patch transformers", "Time-series foundation models used zero-shot: Chronos-2, Chronos-Bolt and TimesFM, with context length and covariates", "Evaluation: MAE (mean absolute error), the Diebold–Mariano test, pinball loss and conformal calibration of quantiles", "Value-at-Risk with a foundation model and a conformal shift, backtested on the S&amp;P 500 and Bitcoin"],
+                    ro: ["Prognoza prețurilor pentru ziua următoare în România fără scurgeri de informație: setul de informații la închiderea licitației, originea glisantă, reperele naiv și LEAR (model autoregresiv estimat prin Lasso)", "Arhitecturi profunde: o rețea DNN (rețea neuronală profundă) cu 24 de ieșiri, DeepAR, N-BEATS (analiza prin expansiune în baze neuronale) și arhitecturi transformer pe petice", "Modele fundație pentru serii de timp folosite fără reantrenare (zero-shot): Chronos-2, Chronos-Bolt și TimesFM, cu lungimea contextului și covariabile", "Evaluarea: MAE (eroarea absolută medie), testul Diebold–Mariano, pierderea pinball și calibrarea conformală a cuantilelor", "Valoarea expusă la risc cu un model fundație și o deplasare conformală, testată retrospectiv pe S&amp;P 500 și Bitcoin"]
+                },
+                further: [
+                    { en: "Chronos (Amazon Science)", ro: "Chronos (Amazon Science)", url: "https://github.com/amazon-science/chronos-forecasting" },
+                    { en: "TimesFM (Google Research)", ro: "TimesFM (Google Research)", url: "https://github.com/google-research/timesfm" },
+                    { en: "epftoolbox: open benchmark for electricity price forecasting", ro: "epftoolbox: open benchmark for electricity price forecasting", url: "https://github.com/jeslago/epftoolbox" }
+                ]
             },
             {
-                id: 'l14', num: 14, status: 'prep', files: files(14),
+                id: 'l14', num: 14, status: 'ready', files: files(14),
+                videos: [{ id: 'T9XSU0pKX2E', by: 'Yannic Kilcher', title: 'OpenAI CLIP: ConnectingText and Images (Paper Explained)' }, { id: 'TrdevFK_am4', by: 'Yannic Kilcher', title: 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale (Paper Explained)' }, { id: 'EWvNQjAaOHw', by: 'Andrej Karpathy', title: 'How I use LLMs' }, { id: 'iv-5mZ_9CPY', by: '3Blue1Brown', title: 'But how do AI images and videos actually work? | Guest video by Welch Labs' }],
                 quantinar: [q('digitalTransformation'), q('xai')],
                 title: TITLES[14],
                 topics: {
-                    en: ['Vision transformers (ViT) and contrastive image–text models (CLIP, contrastive language–image pre-training)', 'Zero-shot classification of satellite images (EuroSAT) from text prompts, against the CNN of Lecture 4', 'Documents, charts and tables as inputs: what multimodal models can and cannot read', 'Synthesis: choosing the model for a business problem, from logistic regression to foundation models'],
-                    ro: ['Arhitecturi transformer pentru imagini (ViT, vision transformer) și modele contrastive imagine–text (CLIP, contrastive language–image pre-training)', 'Clasificarea fără reantrenare (zero-shot) a imaginilor satelitare (EuroSAT) pe baza unor descrieri text, comparată cu rețeaua CNN din Cursul 4', 'Documente, grafice și tabele ca date de intrare: ce pot și ce nu pot citi modelele multimodale', 'Sinteză: alegerea modelului pentru o problemă de afaceri, de la regresia logistică la modelele fundație']
-                }
+                    en: ["Vision transformers (ViT): images as patch tokens, attention rollout on satellite images", "CLIP (contrastive language–image pre-training): contrastive loss, zero-shot classification of EuroSAT images, prompt design and text-to-image search", "Few labels or many: CLIP embeddings with logistic regression against a CNN (convolutional neural network) trained from scratch", "Vision-language models (VLM): market regimes from chart images and table reading, against models on the numbers", "Synthesis: choosing a model for a business problem, evaluation rules, responsible use and open problems"],
+                    ro: ["Transformere pentru imagini (ViT): imaginile ca tokeni-petic, propagarea atenției pe imagini satelitare", "CLIP (preantrenare contrastivă limbaj–imagine): pierderea contrastivă, clasificarea zero-shot a imaginilor EuroSAT, formularea prompturilor și căutarea imaginilor după text", "Puține sau multe etichete: embedding-uri CLIP cu regresie logistică față de o CNN (rețea neuronală convoluțională) antrenată de la zero", "Modele vizual-lingvistice (VLM): regimurile pieței din imaginile graficelor și citirea tabelelor, față de modelele pe cifre", "Sinteză: alegerea modelului pentru o problemă de afaceri, reguli de evaluare, utilizare responsabilă și probleme deschise"]
+                },
+                further: [
+                    { en: "OpenCLIP models and benchmarks", ro: "OpenCLIP models and benchmarks", url: "https://github.com/mlfoundations/open_clip" },
+                    { en: "Qwen2-VL", ro: "Qwen2-VL", url: "https://github.com/QwenLM/Qwen2-VL" },
+                    { en: "Jheng, Pele, Tak &amp; Găman (2026), A multimodal vision-language framework for financial anomaly detection", ro: "Jheng, Pele, Tak &amp; Găman (2026), A multimodal vision-language framework for financial anomaly detection", url: "https://doi.org/10.2478/picbe-2026-0020" }
+                ]
             }
         ],
 
@@ -511,101 +595,380 @@
             { icon: '&#127891;', img: 'assets/logos/qr_logo.png', href: 'https://quantinar.com', en: ['Quantinar', 'P2P (peer-to-peer) platform with advanced courses'], ro: ['Quantinar', 'Platformă P2P (peer-to-peer) cu cursuri avansate'] }
         ],
 
-        // Bibliography by lecture: core references, to be completed with every reference cited in the slides
-        // (REFS in lectures/Lk/build_Lk.py), each listed once and verified against Crossref/DOI pages.
+        // Bibliography by lecture: every reference cited in the slides (REFS of lectures/Lk/build_Lk.py), listed once under
+        // the first lecture that cites it, sorted alphabetically; converted from LaTeX by tools/update_course_data.py.
         bibliography: [
-            { h: { en: 'Textbooks', ro: 'Manuale' }, items: [
-                'Bishop, C. M. &amp; Bishop, H. (2024). <em>Deep Learning: Foundations and Concepts</em>. Springer. ' + doi('10.1007/978-3-031-45468-4'),
-                'Goodfellow, I., Bengio, Y. &amp; Courville, A. (2016). <em>Deep Learning</em>. MIT Press. ' + url('https://www.deeplearningbook.org/', 'deeplearningbook.org'),
-                'Zhang, A., Lipton, Z. C., Li, M. &amp; Smola, A. J. (2023). <em>Dive into Deep Learning</em>. Cambridge University Press. ' + url('https://d2l.ai/', 'd2l.ai')] },
             { h: lec(1), items: [
-                'Rosenblatt, F. (1958). The perceptron: A probabilistic model for information storage and organization in the brain. <em>Psychological Review</em>, 65(6), 386–408. ' + doi('10.1037/h0042519'),
-                'Hornik, K., Stinchcombe, M. &amp; White, H. (1989). Multilayer feedforward networks are universal approximators. <em>Neural Networks</em>, 2(5), 359–366. ' + doi('10.1016/0893-6080(89)90020-8')] },
+                "Baesens, B., Rösch, D. &amp; Scheule, H. (2016). <em>Credit Risk Analytics</em>. Wiley. <a href=\"https://doi.org/10.1002/9781119449560\" target=\"_blank\" rel=\"noopener\">doi:10.1002/9781119449560</a>",
+                "Będowska-Sójka, B., Wójcik, P. &amp; Pele, D. T. (2026). Early warning systems for cryptocurrency markets: Predicting ‘zombie’ assets using machine learning. <em>The North American Journal of Economics and Finance</em>, 81, 102543. <a href=\"https://doi.org/10.1016/j.najef.2025.102543\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.najef.2025.102543</a>",
+                "Bishop, C. M. &amp; Bishop, H. (2024). <em>Deep Learning: Foundations and Concepts</em>. Springer. <a href=\"https://doi.org/10.1007/978-3-031-45468-4\" target=\"_blank\" rel=\"noopener\">doi:10.1007/978-3-031-45468-4</a>",
+                "Chen, T. &amp; Guestrin, C. (2016). XGBoost: A scalable tree boosting system. <em>Proceedings of KDD 2016</em>, 785–794. <a href=\"https://doi.org/10.1145/2939672.2939785\" target=\"_blank\" rel=\"noopener\">doi:10.1145/2939672.2939785</a>",
+                "Cybenko, G. (1989). Approximation by superpositions of a sigmoidal function. <em>Mathematics of Control, Signals and Systems</em>, 2(4), 303–314. <a href=\"https://doi.org/10.1007/BF02551274\" target=\"_blank\" rel=\"noopener\">doi:10.1007/BF02551274</a>",
+                "Diaconu, D. &amp; Pele, D. T. (2026). Explainable AI in financial fraud detection: Evidence from the IEEE-CIS fraud dataset. <em>Proceedings of the International Conference on Business Excellence</em>, 20(1), 118–132. <a href=\"https://doi.org/10.2478/picbe-2026-0015\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2026-0015</a>",
+                "Grinsztajn, L., Oyallon, E. &amp; Varoquaux, G. (2022). Why do tree-based models still outperform deep learning on typical tabular data? <em>Advances in Neural Information Processing Systems</em>, 35. <a href=\"https://arxiv.org/abs/2207.08815\" target=\"_blank\" rel=\"noopener\">arXiv:2207.08815</a>",
+                "Hofmann, H. (1994). Statlog (German Credit Data). UCI Machine Learning Repository. <a href=\"https://doi.org/10.24432/C5NC77\" target=\"_blank\" rel=\"noopener\">doi:10.24432/C5NC77</a>",
+                "Hornik, K. (1991). Approximation capabilities of multilayer feedforward networks. <em>Neural Networks</em>, 4(2), 251–257. <a href=\"https://doi.org/10.1016/0893-6080(91)90009-T\" target=\"_blank\" rel=\"noopener\">doi:10.1016/0893-6080(91)90009-T</a>",
+                "Jheng, S.-L., Pele, D. T., Tak, R. &amp; Găman, Ș. (2026). A multimodal vision-language framework for financial anomaly detection. <em>Proceedings of the International Conference on Business Excellence</em>, 20(1), 191–201. <a href=\"https://doi.org/10.2478/picbe-2026-0020\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2026-0020</a>",
+                "Jheng, S.-L., Tak, R., Găman, Ș., Mazurencu-Marinescu-Pele, M. &amp; Pele, D. T. (2026). Can foundation models manage risk? Zero-shot VaR and ES forecasting with conformal calibration in CEE markets. <em>Economic Computation and Economic Cybernetics Studies and Research</em>, 60(2), 267–290. <a href=\"https://doi.org/10.24818/18423264/60.2.26.14\" target=\"_blank\" rel=\"noopener\">doi:10.24818/18423264/60.2.26.14</a>",
+                "LeCun, Y., Bengio, Y. &amp; Hinton, G. (2015). Deep learning. <em>Nature</em>, 521, 436–444. <a href=\"https://doi.org/10.1038/nature14539\" target=\"_blank\" rel=\"noopener\">doi:10.1038/nature14539</a>",
+                "Lessmann, S., Baesens, B., Seow, H.-V. &amp; Thomas, L. C. (2015). Benchmarking state-of-the-art classification algorithms for credit scoring: An update of research. <em>European Journal of Operational Research</em>, 247(1), 124–136. <a href=\"https://doi.org/10.1016/j.ejor.2015.05.030\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.ejor.2015.05.030</a>",
+                "McCulloch, W. S. &amp; Pitts, W. (1943). A logical calculus of the ideas immanent in nervous activity. <em>The Bulletin of Mathematical Biophysics</em>, 5(4), 115–133. <a href=\"https://doi.org/10.1007/BF02478259\" target=\"_blank\" rel=\"noopener\">doi:10.1007/BF02478259</a>",
+                "Minsky, M. &amp; Papert, S. (1969). <em>Perceptrons: An Introduction to Computational Geometry</em>. MIT Press.",
+                "Montúfar, G., Pascanu, R., Cho, K. &amp; Bengio, Y. (2014). On the number of linear regions of deep neural networks. <em>Advances in Neural Information Processing Systems</em>, 27. <a href=\"https://arxiv.org/abs/1402.1869\" target=\"_blank\" rel=\"noopener\">arXiv:1402.1869</a>",
+                "Nadeau, C. &amp; Bengio, Y. (2003). Inference for the generalization error. <em>Machine Learning</em>, 52(3), 239–281. <a href=\"https://doi.org/10.1023/A:1024068626366\" target=\"_blank\" rel=\"noopener\">doi:10.1023/A:1024068626366</a>",
+                "Novikoff, A. B. J. (1962). On convergence proofs on perceptrons. <em>Proceedings of the Symposium on the Mathematical Theory of Automata</em>, 12, 615–622. Polytechnic Institute of Brooklyn.",
+                "Pace, R. K. &amp; Barry, R. (1997). Sparse spatial autoregressions. <em>Statistics &amp; Probability Letters</em>, 33(3), 291–297. <a href=\"https://doi.org/10.1016/S0167-7152(96)00140-X\" target=\"_blank\" rel=\"noopener\">doi:10.1016/S0167-7152(96)00140-X</a>",
+                "Paszke, A. et al. (2019). PyTorch: An imperative style, high-performance deep learning library. <em>Advances in Neural Information Processing Systems</em>, 32. <a href=\"https://arxiv.org/abs/1912.01703\" target=\"_blank\" rel=\"noopener\">arXiv:1912.01703</a>",
+                "Pele, D. T., Bolovăneanu, V., Lin, M.-B., Ren, R., Ginavar, A. T., Spilak, B., Andrei, A.-V., Toma, F.-M., Lessmann, S. &amp; Härdle, W. K. (2026). In the beginning was the Word: LLM-VaR and LLM-ES. <em>Expert Systems with Applications</em>, 295, 128676. <a href=\"https://doi.org/10.1016/j.eswa.2025.128676\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.eswa.2025.128676</a>",
+                "Rosenblatt, F. (1958). The perceptron: A probabilistic model for information storage and organization in the brain. <em>Psychological Review</em>, 65(6), 386–408. <a href=\"https://doi.org/10.1037/h0042519\" target=\"_blank\" rel=\"noopener\">doi:10.1037/h0042519</a>",
+                "Rumelhart, D. E., Hinton, G. E. &amp; Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em>, 323, 533–536. <a href=\"https://doi.org/10.1038/323533a0\" target=\"_blank\" rel=\"noopener\">doi:10.1038/323533a0</a>"] },
             { h: lec(2), items: [
-                'Rumelhart, D. E., Hinton, G. E. &amp; Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em>, 323, 533–536. ' + doi('10.1038/323533a0'),
-                'Kingma, D. P. &amp; Ba, J. (2015). Adam: A method for stochastic optimization. <em>International Conference on Learning Representations</em>. ' + arxiv('1412.6980')] },
+                "Baydin, A. G., Pearlmutter, B. A., Radul, A. A. &amp; Siskind, J. M. (2018). Automatic differentiation in machine learning: a survey. <em>Journal of Machine Learning Research</em>, 18(153), 1–43. <a href=\"https://arxiv.org/abs/1502.05767\" target=\"_blank\" rel=\"noopener\">arXiv:1502.05767</a>",
+                "Bengio, Y., Simard, P. &amp; Frasconi, P. (1994). Learning long-term dependencies with gradient descent is difficult. <em>IEEE Transactions on Neural Networks</em>, 5(2), 157–166. <a href=\"https://doi.org/10.1109/72.279181\" target=\"_blank\" rel=\"noopener\">doi:10.1109/72.279181</a>",
+                "Dal Pozzolo, A., Caelen, O., Johnson, R. A. &amp; Bontempi, G. (2015). Calibrating probability with undersampling for unbalanced classification. <em>IEEE Symposium Series on Computational Intelligence</em>, 159–166. <a href=\"https://doi.org/10.1109/SSCI.2015.33\" target=\"_blank\" rel=\"noopener\">doi:10.1109/SSCI.2015.33</a>",
+                "Duchi, J., Hazan, E. &amp; Singer, Y. (2011). Adaptive subgradient methods for online learning and stochastic optimization. <em>Journal of Machine Learning Research</em>, 12, 2121–2159.",
+                "Glorot, X. &amp; Bengio, Y. (2010). Understanding the difficulty of training deep feedforward neural networks. <em>Proceedings of AISTATS</em>, PMLR 9, 249–256.",
+                "He, K., Zhang, X., Ren, S. &amp; Sun, J. (2015). Delving deep into rectifiers. <em>IEEE International Conference on Computer Vision</em>, 1026–1034. <a href=\"https://doi.org/10.1109/ICCV.2015.123\" target=\"_blank\" rel=\"noopener\">doi:10.1109/ICCV.2015.123</a>",
+                "Keskar, N. S., Mudigere, D., Nocedal, J., Smelyanskiy, M. &amp; Tang, P. T. P. (2017). On large-batch training for deep learning: Generalization gap and sharp minima. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1609.04836\" target=\"_blank\" rel=\"noopener\">arXiv:1609.04836</a>",
+                "Kingma, D. P. &amp; Ba, J. (2015). Adam: A method for stochastic optimization. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1412.6980\" target=\"_blank\" rel=\"noopener\">arXiv:1412.6980</a>",
+                "Koenker, R. &amp; Bassett, G. (1978). Regression quantiles. <em>Econometrica</em>, 46(1), 33–50. <a href=\"https://doi.org/10.2307/1913643\" target=\"_blank\" rel=\"noopener\">doi:10.2307/1913643</a>",
+                "Kupiec, P. H. (1995). Techniques for verifying the accuracy of risk measurement models. <em>The Journal of Derivatives</em>, 3(2), 73–84. <a href=\"https://doi.org/10.3905/jod.1995.407942\" target=\"_blank\" rel=\"noopener\">doi:10.3905/jod.1995.407942</a>",
+                "Loshchilov, I. &amp; Hutter, F. (2017). SGDR: Stochastic gradient descent with warm restarts. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1608.03983\" target=\"_blank\" rel=\"noopener\">arXiv:1608.03983</a>",
+                "Loshchilov, I. &amp; Hutter, F. (2019). Decoupled weight decay regularization. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1711.05101\" target=\"_blank\" rel=\"noopener\">arXiv:1711.05101</a>",
+                "Polyak, B. T. (1964). Some methods of speeding up the convergence of iteration methods. <em>USSR Computational Mathematics and Mathematical Physics</em>, 4(5), 1–17. <a href=\"https://doi.org/10.1016/0041-5553(64)90137-5\" target=\"_blank\" rel=\"noopener\">doi:10.1016/0041-5553(64)90137-5</a>",
+                "Robbins, H. &amp; Monro, S. (1951). A stochastic approximation method. <em>The Annals of Mathematical Statistics</em>, 22(3), 400–407. <a href=\"https://doi.org/10.1214/aoms/1177729586\" target=\"_blank\" rel=\"noopener\">doi:10.1214/aoms/1177729586</a>",
+                "Smith, L. N. &amp; Topin, N. (2019). Super-convergence: Very fast training of neural networks using large learning rates. <em>Proceedings of SPIE</em>, 11006. <a href=\"https://arxiv.org/abs/1708.07120\" target=\"_blank\" rel=\"noopener\">arXiv:1708.07120</a>",
+                "Tieleman, T. &amp; Hinton, G. (2012). Lecture 6.5 — RMSProp: Divide the gradient by a running average of its recent magnitude. <em>COURSERA: Neural Networks for Machine Learning</em>."] },
             { h: lec(3), items: [
-                'Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I. &amp; Salakhutdinov, R. (2014). Dropout: A simple way to prevent neural networks from overfitting. <em>Journal of Machine Learning Research</em>, 15, 1929–1958. ' + url('https://jmlr.org/papers/v15/srivastava14a.html', 'jmlr.org/papers/v15/srivastava14a'),
-                'Ioffe, S. &amp; Szegedy, C. (2015). Batch normalization: Accelerating deep network training by reducing internal covariate shift. <em>International Conference on Machine Learning</em>. ' + arxiv('1502.03167'),
-                'Dal Pozzolo, A., Caelen, O., Johnson, R. A. &amp; Bontempi, G. (2015). Calibrating probability with undersampling for unbalanced classification. <em>IEEE Symposium Series on Computational Intelligence</em>, 159–166. ' + doi('10.1109/SSCI.2015.33')] },
+                "Belkin, M., Hsu, D., Ma, S. &amp; Mandal, S. (2019). Reconciling modern machine-learning practice and the classical bias–variance trade-off. <em>Proceedings of the National Academy of Sciences</em>, 116(32), 15849–15854. <a href=\"https://doi.org/10.1073/pnas.1903070116\" target=\"_blank\" rel=\"noopener\">doi:10.1073/pnas.1903070116</a>",
+                "Bergmeir, C. &amp; Benítez, J. M. (2012). On the use of cross-validation for time series predictor evaluation. <em>Information Sciences</em>, 191, 192–213. <a href=\"https://doi.org/10.1016/j.ins.2011.12.028\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.ins.2011.12.028</a>",
+                "Hastie, T., Tibshirani, R. &amp; Friedman, J. (2009). <em>The Elements of Statistical Learning</em> (2nd ed.). Springer. <a href=\"https://doi.org/10.1007/978-0-387-84858-7\" target=\"_blank\" rel=\"noopener\">doi:10.1007/978-0-387-84858-7</a>",
+                "Hoerl, A. E. &amp; Kennard, R. W. (1970). Ridge regression: Biased estimation for nonorthogonal problems. <em>Technometrics</em>, 12(1), 55–67. <a href=\"https://doi.org/10.1080/00401706.1970.10488634\" target=\"_blank\" rel=\"noopener\">doi:10.1080/00401706.1970.10488634</a>",
+                "Ioffe, S. &amp; Szegedy, C. (2015). Batch normalization: Accelerating deep network training by reducing internal covariate shift. <em>Proceedings of ICML</em>, 448–456. <a href=\"https://arxiv.org/abs/1502.03167\" target=\"_blank\" rel=\"noopener\">arXiv:1502.03167</a>",
+                "Kaufman, S., Rosset, S., Perlich, C. &amp; Stitelman, O. (2012). Leakage in data mining: Formulation, detection, and avoidance. <em>ACM Transactions on Knowledge Discovery from Data</em>, 6(4), 1–21. <a href=\"https://doi.org/10.1145/2382577.2382579\" target=\"_blank\" rel=\"noopener\">doi:10.1145/2382577.2382579</a>",
+                "Nakkiran, P., Kaplun, G., Bansal, Y., Yang, T., Barak, B. &amp; Sutskever, I. (2021). Deep double descent: where bigger models and more data hurt. <em>Journal of Statistical Mechanics</em>, 124003. <a href=\"https://doi.org/10.1088/1742-5468/ac3a74\" target=\"_blank\" rel=\"noopener\">doi:10.1088/1742-5468/ac3a74</a>",
+                "Prechelt, L. (1998). Early stopping — but when? In <em>Neural Networks: Tricks of the Trade</em>, LNCS 1524, 55–69. Springer. <a href=\"https://doi.org/10.1007/3-540-49430-8_3\" target=\"_blank\" rel=\"noopener\">doi:10.1007/3-540-49430-8_3</a>",
+                "Saito, T. &amp; Rehmsmeier, M. (2015). The precision-recall plot is more informative than the ROC plot when evaluating binary classifiers on imbalanced datasets. <em>PLOS ONE</em>, 10(3), e0118432. <a href=\"https://doi.org/10.1371/journal.pone.0118432\" target=\"_blank\" rel=\"noopener\">doi:10.1371/journal.pone.0118432</a>",
+                "Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I. &amp; Salakhutdinov, R. (2014). Dropout: A simple way to prevent neural networks from overfitting. <em>Journal of Machine Learning Research</em>, 15, 1929–1958.",
+                "Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. <em>Journal of the Royal Statistical Society B</em>, 58(1), 267–288. <a href=\"https://doi.org/10.1111/j.2517-6161.1996.tb02080.x\" target=\"_blank\" rel=\"noopener\">doi:10.1111/j.2517-6161.1996.tb02080.x</a>"] },
             { h: lec(4), items: [
-                'LeCun, Y., Bottou, L., Bengio, Y. &amp; Haffner, P. (1998). Gradient-based learning applied to document recognition. <em>Proceedings of the IEEE</em>, 86(11), 2278–2324. ' + doi('10.1109/5.726791'),
-                'He, K., Zhang, X., Ren, S. &amp; Sun, J. (2016). Deep residual learning for image recognition. <em>IEEE Conference on Computer Vision and Pattern Recognition</em>, 770–778. ' + doi('10.1109/CVPR.2016.90'),
-                'Helber, P., Bischke, B., Dengel, A. &amp; Borth, D. (2019). EuroSAT: A novel dataset and deep learning benchmark for land use and land cover classification. <em>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em>, 12(7), 2217–2226. ' + doi('10.1109/JSTARS.2019.2918242')] },
+                "Găman, Ș., Winkel, J., Zuo, X., Härdle, W. K. &amp; Pele, D. T. (2026). Quantlet: the code snippet knowledge platform. <em>Computational Statistics</em>, 41(3), 66. <a href=\"https://doi.org/10.1007/s00180-026-01742-6\" target=\"_blank\" rel=\"noopener\">doi:10.1007/s00180-026-01742-6</a>",
+                "Goodfellow, I., Bengio, Y. &amp; Courville, A. (2016). <em>Deep Learning</em>, ch. 9. MIT Press. <a href=\"https://www.deeplearningbook.org\" target=\"_blank\" rel=\"noopener\">deeplearningbook.org</a>",
+                "He, K., Zhang, X., Ren, S. &amp; Sun, J. (2016). Deep residual learning for image recognition. <em>CVPR</em>, 770–778. <a href=\"https://doi.org/10.1109/CVPR.2016.90\" target=\"_blank\" rel=\"noopener\">doi:10.1109/CVPR.2016.90</a>",
+                "Helber, P., Bischke, B., Dengel, A. &amp; Borth, D. (2019). EuroSAT: A novel dataset and deep learning benchmark for land use and land cover classification. <em>IEEE JSTARS</em>, 12(7), 2217–2226. <a href=\"https://doi.org/10.1109/JSTARS.2019.2918242\" target=\"_blank\" rel=\"noopener\">doi:10.1109/JSTARS.2019.2918242</a>",
+                "Krizhevsky, A. (2009). Learning multiple layers of features from tiny images. Technical report, University of Toronto. <a href=\"https://www.cs.toronto.edu/ kriz/learning-features-2009-TR.pdf\" target=\"_blank\" rel=\"noopener\">cs.toronto.edu</a>",
+                "Krizhevsky, A., Sutskever, I. &amp; Hinton, G. E. (2012). ImageNet classification with deep convolutional neural networks. <em>NIPS</em>, 25, 1097–1105. <a href=\"https://doi.org/10.1145/3065386\" target=\"_blank\" rel=\"noopener\">doi:10.1145/3065386</a>",
+                "LeCun, Y., Bottou, L., Bengio, Y. &amp; Haffner, P. (1998). Gradient-based learning applied to document recognition. <em>Proceedings of the IEEE</em>, 86(11), 2278–2324. <a href=\"https://doi.org/10.1109/5.726791\" target=\"_blank\" rel=\"noopener\">doi:10.1109/5.726791</a>",
+                "McNemar, Q. (1947). Note on the sampling error of the difference between correlated proportions or percentages. <em>Psychometrika</em>, 12(2), 153–157. <a href=\"https://doi.org/10.1007/BF02295996\" target=\"_blank\" rel=\"noopener\">doi:10.1007/BF02295996</a>",
+                "Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R., Parikh, D. &amp; Batra, D. (2017). Grad-CAM: Visual explanations from deep networks via gradient-based localization. <em>ICCV</em>, 618–626. <a href=\"https://doi.org/10.1109/ICCV.2017.74\" target=\"_blank\" rel=\"noopener\">doi:10.1109/ICCV.2017.74</a>",
+                "Simonyan, K. &amp; Zisserman, A. (2015). Very deep convolutional networks for large-scale image recognition. <em>ICLR</em>. <a href=\"https://arxiv.org/abs/1409.1556\" target=\"_blank\" rel=\"noopener\">arXiv:1409.1556</a>",
+                "Xiao, H., Rasul, K. &amp; Vollgraf, R. (2017). Fashion-MNIST: A novel image dataset for benchmarking machine learning algorithms. <a href=\"https://arxiv.org/abs/1708.07747\" target=\"_blank\" rel=\"noopener\">arXiv:1708.07747</a>",
+                "Yosinski, J., Clune, J., Bengio, Y. &amp; Lipson, H. (2014). How transferable are features in deep neural networks? <em>NIPS</em>, 27, 3320–3328. <a href=\"https://arxiv.org/abs/1411.1792\" target=\"_blank\" rel=\"noopener\">arXiv:1411.1792</a>",
+                "Zeiler, M. D. &amp; Fergus, R. (2014). Visualizing and understanding convolutional networks. <em>ECCV</em>, 818–833. <a href=\"https://doi.org/10.1007/978-3-319-10590-1_53\" target=\"_blank\" rel=\"noopener\">doi:10.1007/978-3-319-10590-1_53</a>"] },
             { h: lec(5), items: [
-                'Hochreiter, S. &amp; Schmidhuber, J. (1997). Long short-term memory. <em>Neural Computation</em>, 9(8), 1735–1780. ' + doi('10.1162/neco.1997.9.8.1735'),
-                'Fischer, T. &amp; Krauss, C. (2018). Deep learning with long short-term memory networks for financial market predictions. <em>European Journal of Operational Research</em>, 270(2), 654–669. ' + doi('10.1016/j.ejor.2017.11.054')] },
+                "Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. <em>Journal of Econometrics</em>, 31(3), 307–327. <a href=\"https://doi.org/10.1016/0304-4076(86)90063-1\" target=\"_blank\" rel=\"noopener\">doi:10.1016/0304-4076(86)90063-1</a>",
+                "Cho, K., van Merriënboer, B., Gulcehre, C., Bahdanau, D., Bougares, F., Schwenk, H. &amp; Bengio, Y. (2014). Learning phrase representations using RNN encoder–decoder for statistical machine translation. <em>EMNLP</em>, 1724–1734. <a href=\"https://doi.org/10.3115/v1/D14-1179\" target=\"_blank\" rel=\"noopener\">doi:10.3115/v1/D14-1179</a>",
+                "Conda, A. I., Găman, Ș., Bâg, R. C., Mazurencu-Marinescu-Pele, M., Pele, D. T. &amp; Härdle, W. K. (2026). BitMood: AI analysis of Bitcoin trends via Facebook emotions. <em>Digital Finance</em>, 8(3), 42. <a href=\"https://doi.org/10.1007/s42521-026-00205-3\" target=\"_blank\" rel=\"noopener\">doi:10.1007/s42521-026-00205-3</a>",
+                "Corsi, F. (2009). A simple approximate long-memory model of realized volatility. <em>Journal of Financial Econometrics</em>, 7(2), 174–196. <a href=\"https://doi.org/10.1093/jjfinec/nbp001\" target=\"_blank\" rel=\"noopener\">doi:10.1093/jjfinec/nbp001</a>",
+                "Diebold, F. X. &amp; Mariano, R. S. (1995). Comparing predictive accuracy. <em>Journal of Business &amp; Economic Statistics</em>, 13(3), 253–263. <a href=\"https://doi.org/10.1080/07350015.1995.10524599\" target=\"_blank\" rel=\"noopener\">doi:10.1080/07350015.1995.10524599</a>",
+                "Garman, M. B. &amp; Klass, M. J. (1980). On the estimation of security price volatilities from historical data. <em>Journal of Business</em>, 53(1), 67–78. <a href=\"https://doi.org/10.1086/296072\" target=\"_blank\" rel=\"noopener\">doi:10.1086/296072</a>",
+                "Hochreiter, S. &amp; Schmidhuber, J. (1997). Long short-term memory. <em>Neural Computation</em>, 9(8), 1735–1780. <a href=\"https://doi.org/10.1162/neco.1997.9.8.1735\" target=\"_blank\" rel=\"noopener\">doi:10.1162/neco.1997.9.8.1735</a>",
+                "Pascanu, R., Mikolov, T. &amp; Bengio, Y. (2013). On the difficulty of training recurrent neural networks. <em>ICML</em>, PMLR 28(3), 1310–1318. <a href=\"https://arxiv.org/abs/1211.5063\" target=\"_blank\" rel=\"noopener\">arXiv:1211.5063</a>",
+                "Werbos, P. J. (1990). Backpropagation through time: What it does and how to do it. <em>Proceedings of the IEEE</em>, 78(10), 1550–1560. <a href=\"https://doi.org/10.1109/5.58337\" target=\"_blank\" rel=\"noopener\">doi:10.1109/5.58337</a>"] },
             { h: lec(6), items: [
-                'Mikolov, T., Chen, K., Corrado, G. &amp; Dean, J. (2013). Efficient estimation of word representations in vector space. ' + arxiv('1301.3781'),
-                'Pennington, J., Socher, R. &amp; Manning, C. D. (2014). GloVe: Global vectors for word representation. <em>Proceedings of EMNLP 2014</em>, 1532–1543. ' + doi('10.3115/v1/D14-1162'),
-                'Malo, P., Sinha, A., Korhonen, P., Wallenius, J. &amp; Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. <em>Journal of the Association for Information Science and Technology</em>, 65(4), 782–796. ' + doi('10.1002/asi.23062')] },
+                "Bojanowski, P., Grave, E., Joulin, A. &amp; Mikolov, T. (2017). Enriching word vectors with subword information. <em>TACL</em>, 5, 135–146. <a href=\"https://doi.org/10.1162/tacl_a_00051\" target=\"_blank\" rel=\"noopener\">doi:10.1162/tacl_a_00051</a>",
+                "Firth, J. R. (1957). A synopsis of linguistic theory 1930–1955. In <em>Studies in Linguistic Analysis</em>, 1–32. Blackwell.",
+                "Joulin, A., Grave, E., Bojanowski, P. &amp; Mikolov, T. (2017). Bag of tricks for efficient text classification. <em>EACL</em>, 427–431. <a href=\"https://doi.org/10.18653/v1/E17-2068\" target=\"_blank\" rel=\"noopener\">doi:10.18653/v1/E17-2068</a>",
+                "Levy, O. &amp; Goldberg, Y. (2014). Neural word embedding as implicit matrix factorization. <em>NIPS</em>, 27, 2177–2185. <a href=\"https://papers.nips.cc/paper/5477-neural-word-embedding-as-implicit-matrix-factorization\" target=\"_blank\" rel=\"noopener\">papers.nips.cc</a>",
+                "Loughran, T. &amp; McDonald, B. (2011). When is a liability not a liability? Textual analysis, dictionaries, and 10-Ks. <em>Journal of Finance</em>, 66(1), 35–65. <a href=\"https://doi.org/10.1111/j.1540-6261.2010.01625.x\" target=\"_blank\" rel=\"noopener\">doi:10.1111/j.1540-6261.2010.01625.x</a>",
+                "Malo, P., Sinha, A., Korhonen, P., Wallenius, J. &amp; Takala, P. (2014). Good debt or bad debt: Detecting semantic orientations in economic texts. <em>JASIST</em>, 65(4), 782–796. <a href=\"https://doi.org/10.1002/asi.23062\" target=\"_blank\" rel=\"noopener\">doi:10.1002/asi.23062</a>",
+                "Mikolov, T., Sutskever, I., Chen, K., Corrado, G. &amp; Dean, J. (2013). Distributed representations of words and phrases and their compositionality. <em>NIPS</em>, 26, 3111–3119. <a href=\"https://arxiv.org/abs/1310.4546\" target=\"_blank\" rel=\"noopener\">arXiv:1310.4546</a>",
+                "Pennington, J., Socher, R. &amp; Manning, C. D. (2014). GloVe: Global vectors for word representation. <em>EMNLP</em>, 1532–1543. <a href=\"https://doi.org/10.3115/v1/D14-1162\" target=\"_blank\" rel=\"noopener\">doi:10.3115/v1/D14-1162</a>",
+                "Salton, G. &amp; Buckley, C. (1988). Term-weighting approaches in automatic text retrieval. <em>Information Processing &amp; Management</em>, 24(5), 513–523. <a href=\"https://doi.org/10.1016/0306-4573(88)90021-0\" target=\"_blank\" rel=\"noopener\">doi:10.1016/0306-4573(88)90021-0</a>",
+                "Zipf, G. K. (1949). <em>Human Behavior and the Principle of Least Effort</em>. Addison-Wesley."] },
             { h: lec(7), items: [
-                'Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł. &amp; Polosukhin, I. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems</em>, 30. ' + arxiv('1706.03762'),
-                'Devlin, J., Chang, M.-W., Lee, K. &amp; Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. <em>Proceedings of NAACL-HLT 2019</em>, 4171–4186. ' + doi('10.18653/v1/N19-1423'),
-                'Araci, D. (2019). FinBERT: Financial sentiment analysis with pre-trained language models. ' + arxiv('1908.10063')] },
+                "Araci, D. (2019). FinBERT: Financial sentiment analysis with pre-trained language models. <a href=\"https://arxiv.org/abs/1908.10063\" target=\"_blank\" rel=\"noopener\">arXiv:1908.10063</a>",
+                "Ba, J. L., Kiros, J. R. &amp; Hinton, G. E. (2016). Layer normalization. <a href=\"https://arxiv.org/abs/1607.06450\" target=\"_blank\" rel=\"noopener\">arXiv:1607.06450</a>",
+                "Bahdanau, D., Cho, K. &amp; Bengio, Y. (2015). Neural machine translation by jointly learning to align and translate. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1409.0473\" target=\"_blank\" rel=\"noopener\">arXiv:1409.0473</a>",
+                "Clark, K., Khandelwal, U., Levy, O. &amp; Manning, C. D. (2019). What does BERT look at? An analysis of BERT’s attention. <em>BlackboxNLP Workshop</em>, 276–286. <a href=\"https://doi.org/10.18653/v1/W19-4828\" target=\"_blank\" rel=\"noopener\">doi:10.18653/v1/W19-4828</a>",
+                "Devlin, J., Chang, M.-W., Lee, K. &amp; Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. <em>Proceedings of NAACL</em>, 4171–4186. <a href=\"https://doi.org/10.18653/v1/N19-1423\" target=\"_blank\" rel=\"noopener\">doi:10.18653/v1/N19-1423</a>",
+                "Efron, B. &amp; Tibshirani, R. J. (1993). <em>An Introduction to the Bootstrap</em>. Chapman &amp; Hall. <a href=\"https://doi.org/10.1201/9780429246593\" target=\"_blank\" rel=\"noopener\">doi:10.1201/9780429246593</a>",
+                "Jain, S. &amp; Wallace, B. C. (2019). Attention is not explanation. <em>Proceedings of NAACL</em>, 3543–3556. <a href=\"https://doi.org/10.18653/v1/N19-1357\" target=\"_blank\" rel=\"noopener\">doi:10.18653/v1/N19-1357</a>",
+                "Pele, D. T., Bolovăneanu, V., Lin, M.-B., Ren, R., Ginavar, A. T., Spilak, B., Andrei, A.-V., Toma, F.-M., Lessmann, S. &amp; Härdle, W. K. (2026). In the beginning was the word: LLM-VaR and LLM-ES. SSRN Working Paper 5104383. <a href=\"https://doi.org/10.2139/ssrn.5104383\" target=\"_blank\" rel=\"noopener\">doi:10.2139/ssrn.5104383</a>",
+                "Radford, A., Narasimhan, K., Salimans, T. &amp; Sutskever, I. (2018). Improving language understanding by generative pre-training. OpenAI technical report. <a href=\"https://openai.com/research/language-unsupervised\" target=\"_blank\" rel=\"noopener\">openai.com/research/language-unsupervised</a>",
+                "Tetlock, P. C. (2007). Giving content to investor sentiment: The role of media in the stock market. <em>Journal of Finance</em>, 62(3), 1139–1168. <a href=\"https://doi.org/10.1111/j.1540-6261.2007.01232.x\" target=\"_blank\" rel=\"noopener\">doi:10.1111/j.1540-6261.2007.01232.x</a>",
+                "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł. &amp; Polosukhin, I. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems</em>, 30. <a href=\"https://arxiv.org/abs/1706.03762\" target=\"_blank\" rel=\"noopener\">arXiv:1706.03762</a>",
+                "Wu, Y., Schuster, M., Chen, Z. et al. (2016). Google’s neural machine translation system: Bridging the gap between human and machine translation. <a href=\"https://arxiv.org/abs/1609.08144\" target=\"_blank\" rel=\"noopener\">arXiv:1609.08144</a>"] },
             { h: lec(8), items: [
-                'Kingma, D. P. &amp; Welling, M. (2014). Auto-encoding variational Bayes. <em>International Conference on Learning Representations</em>. ' + arxiv('1312.6114'),
-                'Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. &amp; Bengio, Y. (2014). Generative adversarial nets. <em>Advances in Neural Information Processing Systems</em>, 27. ' + arxiv('1406.2661'),
-                'Ho, J., Jain, A. &amp; Abbeel, P. (2020). Denoising diffusion probabilistic models. <em>Advances in Neural Information Processing Systems</em>, 33. ' + arxiv('2006.11239')] },
+                "Arjovsky, M., Chintala, S. &amp; Bottou, L. (2017). Wasserstein generative adversarial networks. <em>Proceedings of ICML</em>, PMLR 70, 214–223. <a href=\"https://arxiv.org/abs/1701.07875\" target=\"_blank\" rel=\"noopener\">arXiv:1701.07875</a>",
+                "Cont, R. (2001). Empirical properties of asset returns: stylized facts and statistical issues. <em>Quantitative Finance</em>, 1(2), 223–236. <a href=\"https://doi.org/10.1080/713665670\" target=\"_blank\" rel=\"noopener\">doi:10.1080/713665670</a>",
+                "Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A. &amp; Bengio, Y. (2014). Generative adversarial nets. <em>Advances in Neural Information Processing Systems</em>, 27. <a href=\"https://arxiv.org/abs/1406.2661\" target=\"_blank\" rel=\"noopener\">arXiv:1406.2661</a>",
+                "Higgins, I., Matthey, L., Pal, A. et al. (2017). beta-VAE: Learning basic visual concepts with a constrained variational framework. <em>International Conference on Learning Representations</em>. <a href=\"https://openreview.net/forum?id=Sy2fzU9gl\" target=\"_blank\" rel=\"noopener\">openreview.net</a>",
+                "Ho, J., Jain, A. &amp; Abbeel, P. (2020). Denoising diffusion probabilistic models. <em>Advances in Neural Information Processing Systems</em>, 33. <a href=\"https://arxiv.org/abs/2006.11239\" target=\"_blank\" rel=\"noopener\">arXiv:2006.11239</a>",
+                "Kingma, D. P. &amp; Welling, M. (2014). Auto-encoding variational Bayes. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1312.6114\" target=\"_blank\" rel=\"noopener\">arXiv:1312.6114</a>",
+                "Sohl-Dickstein, J., Weiss, E., Maheswaranathan, N. &amp; Ganguli, S. (2015). Deep unsupervised learning using nonequilibrium thermodynamics. <em>Proceedings of ICML</em>, PMLR 37, 2256–2265. <a href=\"https://arxiv.org/abs/1503.03585\" target=\"_blank\" rel=\"noopener\">arXiv:1503.03585</a>",
+                "Svensson, L. E. O. (1994). Estimating and interpreting forward interest rates: Sweden 1992–1994. NBER Working Paper 4871. <a href=\"https://doi.org/10.3386/w4871\" target=\"_blank\" rel=\"noopener\">doi:10.3386/w4871</a>",
+                "Wiese, M., Knobloch, R., Korn, R. &amp; Kretschmer, P. (2020). Quant GANs: Deep generation of financial time series. <em>Quantitative Finance</em>, 20(9), 1419–1440. <a href=\"https://doi.org/10.1080/14697688.2020.1730426\" target=\"_blank\" rel=\"noopener\">doi:10.1080/14697688.2020.1730426</a>",
+                "Yoon, J., Jarrett, D. &amp; van der Schaar, M. (2019). Time-series generative adversarial networks. <em>Advances in Neural Information Processing Systems</em>, 32. <a href=\"https://papers.nips.cc/paper/8789\" target=\"_blank\" rel=\"noopener\">papers.nips.cc/paper/8789</a>"] },
             { h: lec(9), items: [
-                'Kipf, T. N. &amp; Welling, M. (2017). Semi-supervised classification with graph convolutional networks. <em>International Conference on Learning Representations</em>. ' + arxiv('1609.02907'),
-                'Hamilton, W. L., Ying, R. &amp; Leskovec, J. (2017). Inductive representation learning on large graphs. <em>Advances in Neural Information Processing Systems</em>, 30. ' + arxiv('1706.02216'),
-                'Weber, M., Domeniconi, G., Chen, J., Weidele, D. K. I., Bellei, C., Robinson, T. &amp; Leiserson, C. E. (2019). Anti-money laundering in Bitcoin: Experimenting with graph convolutional networks for financial forensics. <em>KDD Workshop on Anomaly Detection in Finance</em>. ' + arxiv('1908.02591')] },
+                "Breiman, L. (2001). Random forests. <em>Machine Learning</em>, 45(1), 5–32. <a href=\"https://doi.org/10.1023/A:1010933404324\" target=\"_blank\" rel=\"noopener\">doi:10.1023/A:1010933404324</a>",
+                "Diaconu, D. &amp; Pele, D. T. (2026). Testing SHAP stability under distribution shift in graph-enhanced fraud detection. Submitted to <em>Expert Systems with Applications</em>. Code: <a href=\"https://github.com/QuantLet/GNN_XAI_Stability\" target=\"_blank\" rel=\"noopener\">github.com/QuantLet/GNN_XAI_Stability</a>",
+                "Fey, M. &amp; Lenssen, J. E. (2019). Fast graph representation learning with PyTorch Geometric. ICLR Workshop on Representation Learning on Graphs and Manifolds. <a href=\"https://arxiv.org/abs/1903.02428\" target=\"_blank\" rel=\"noopener\">arXiv:1903.02428</a>",
+                "Gilmer, J., Schoenholz, S. S., Riley, P. F., Vinyals, O. &amp; Dahl, G. E. (2017). Neural message passing for quantum chemistry. <em>Proceedings of ICML</em>, PMLR 70, 1263–1272. <a href=\"https://arxiv.org/abs/1704.01212\" target=\"_blank\" rel=\"noopener\">arXiv:1704.01212</a>",
+                "Hamilton, W. L. (2020). <em>Graph Representation Learning</em>. Morgan &amp; Claypool. <a href=\"https://doi.org/10.2200/S01045ED1V01Y202009AIM046\" target=\"_blank\" rel=\"noopener\">doi:10.2200/S01045ED1V01Y202009AIM046</a>",
+                "Hamilton, W. L., Ying, R. &amp; Leskovec, J. (2017). Inductive representation learning on large graphs. <em>Advances in Neural Information Processing Systems</em>, 30. <a href=\"https://arxiv.org/abs/1706.02216\" target=\"_blank\" rel=\"noopener\">arXiv:1706.02216</a>",
+                "Kipf, T. N. &amp; Welling, M. (2017). Semi-supervised classification with graph convolutional networks. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1609.02907\" target=\"_blank\" rel=\"noopener\">arXiv:1609.02907</a>",
+                "Li, Q., Han, Z. &amp; Wu, X.-M. (2018). Deeper insights into graph convolutional networks for semi-supervised learning. <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, 32(1). <a href=\"https://doi.org/10.1609/aaai.v32i1.11604\" target=\"_blank\" rel=\"noopener\">doi:10.1609/aaai.v32i1.11604</a>",
+                "Lundberg, S. M. &amp; Lee, S.-I. (2017). A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems</em>, 30. <a href=\"https://arxiv.org/abs/1705.07874\" target=\"_blank\" rel=\"noopener\">arXiv:1705.07874</a>",
+                "Pareja, A., Domeniconi, G., Chen, J. et al. (2020). EvolveGCN: Evolving graph convolutional networks for dynamic graphs. <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, 34(4), 5363–5370. <a href=\"https://doi.org/10.1609/aaai.v34i04.5984\" target=\"_blank\" rel=\"noopener\">doi:10.1609/aaai.v34i04.5984</a>",
+                "Toma, F.-M., Dima, D.-M., Grecu, R., Pele, D. T. &amp; Lessmann, S. (2026). Energy Financial Risk Meter: Systemic risk in the EU energy sector. SSRN Working Paper 6985301. <a href=\"https://doi.org/10.2139/ssrn.6985301\" target=\"_blank\" rel=\"noopener\">doi:10.2139/ssrn.6985301</a>",
+                "Veličković, P., Cucurull, G., Casanova, A., Romero, A., Liò, P. &amp; Bengio, Y. (2018). Graph attention networks. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1710.10903\" target=\"_blank\" rel=\"noopener\">arXiv:1710.10903</a>",
+                "Weber, M., Domeniconi, G., Chen, J., Weidele, D. K. I., Bellei, C., Robinson, T. &amp; Leiserson, C. E. (2019). Anti-money laundering in Bitcoin: Experimenting with graph convolutional networks for financial forensics. KDD Workshop on Anomaly Detection in Finance. <a href=\"https://arxiv.org/abs/1908.02591\" target=\"_blank\" rel=\"noopener\">arXiv:1908.02591</a>",
+                "Xu, K., Hu, W., Leskovec, J. &amp; Jegelka, S. (2019). How powerful are graph neural networks? <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1810.00826\" target=\"_blank\" rel=\"noopener\">arXiv:1810.00826</a>",
+                "Ying, R., Bourgeois, D., You, J., Zitnik, M. &amp; Leskovec, J. (2019). GNNExplainer: Generating explanations for graph neural networks. <em>Advances in Neural Information Processing Systems</em>, 32. <a href=\"https://arxiv.org/abs/1903.03894\" target=\"_blank\" rel=\"noopener\">arXiv:1903.03894</a>"] },
             { h: lec(10), items: [
-                'Sutton, R. S. &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em>, 2nd ed. MIT Press. ' + url('http://incompleteideas.net/book/the-book-2nd.html', 'incompleteideas.net/book'),
-                'Mnih, V. et al. (2015). Human-level control through deep reinforcement learning. <em>Nature</em>, 518, 529–533. ' + doi('10.1038/nature14236'),
-                'Buehler, H., Gonon, L., Teichmann, J. &amp; Wood, B. (2019). Deep hedging. <em>Quantitative Finance</em>, 19(8), 1271–1291. ' + doi('10.1080/14697688.2019.1571683')] },
+                "Anagnoste, S., Andrei, A.-V., Bolovăneanu, V., Cepoi, C.-O., Clodnitchi, R., Cramer, A.-A., Grecu, R.-A., Lessmann, S., Pele, D. T., Petukhina, A. &amp; Strat, V. A. (2025). The role of AI in (re)shaping energy finance: A systematic literature review. <em>Energy Strategy Reviews</em>, 61, 101833. <a href=\"https://doi.org/10.1016/j.esr.2025.101833\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.esr.2025.101833</a>",
+                "Andrei, A.-V., Cepoi, C. O., Dumitrescu, B. A., Lessmann, S., Chiriac (Luchian), A.-C., Pele, D. T. &amp; Petukhina, A. (2026). Joint probabilistic forecasting for battery arbitrage in day-ahead power markets. SSRN Working Paper 6872381. <a href=\"https://doi.org/10.2139/ssrn.6872381\" target=\"_blank\" rel=\"noopener\">doi:10.2139/ssrn.6872381</a>",
+                "Andrei, A.-V., Velev, G., Toma, F.-M., Pele, D. T. &amp; Lessmann, S. (2024). Energy price modelling: A comparative evaluation of four generations of forecasting methods. <a href=\"https://arxiv.org/abs/2411.03372\" target=\"_blank\" rel=\"noopener\">arXiv:2411.03372</a>",
+                "Bellman, R. (1957). <em>Dynamic Programming</em>. Princeton University Press.",
+                "Buehler, H., Gonon, L., Teichmann, J. &amp; Wood, B. (2019). Deep hedging. <em>Quantitative Finance</em>, 19(8), 1271–1291. <a href=\"https://doi.org/10.1080/14697688.2019.1571683\" target=\"_blank\" rel=\"noopener\">doi:10.1080/14697688.2019.1571683</a>",
+                "Hambly, B., Xu, R. &amp; Yang, H. (2023). Recent advances in reinforcement learning in finance. <em>Mathematical Finance</em>, 33(3), 437–503. <a href=\"https://doi.org/10.1111/mafi.12382\" target=\"_blank\" rel=\"noopener\">doi:10.1111/mafi.12382</a>",
+                "Mnih, V. et al. (2015). Human-level control through deep reinforcement learning. <em>Nature</em>, 518, 529–533. <a href=\"https://doi.org/10.1038/nature14236\" target=\"_blank\" rel=\"noopener\">doi:10.1038/nature14236</a>",
+                "Moody, J. &amp; Saffell, M. (2001). Learning to trade via direct reinforcement. <em>IEEE Transactions on Neural Networks</em>, 12(4), 875–889. <a href=\"https://doi.org/10.1109/72.935097\" target=\"_blank\" rel=\"noopener\">doi:10.1109/72.935097</a>",
+                "Politis, D. N. &amp; Romano, J. P. (1994). The stationary bootstrap. <em>Journal of the American Statistical Association</em>, 89(428), 1303–1313. <a href=\"https://doi.org/10.1080/01621459.1994.10476870\" target=\"_blank\" rel=\"noopener\">doi:10.1080/01621459.1994.10476870</a>",
+                "Rockafellar, R. T. &amp; Uryasev, S. (2000). Optimization of conditional value-at-risk. <em>Journal of Risk</em>, 2(3), 21–41. <a href=\"https://doi.org/10.21314/JOR.2000.038\" target=\"_blank\" rel=\"noopener\">doi:10.21314/JOR.2000.038</a>",
+                "Schulman, J., Moritz, P., Levine, S., Jordan, M. &amp; Abbeel, P. (2016). High-dimensional continuous control using generalized advantage estimation. ICLR. <a href=\"https://arxiv.org/abs/1506.02438\" target=\"_blank\" rel=\"noopener\">arXiv:1506.02438</a>",
+                "Schulman, J., Wolski, F., Dhariwal, P., Radford, A. &amp; Klimov, O. (2017). Proximal policy optimization algorithms. <a href=\"https://arxiv.org/abs/1707.06347\" target=\"_blank\" rel=\"noopener\">arXiv:1707.06347</a>",
+                "Sutton, R. S. &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em>, 2nd ed. MIT Press. <a href=\"http://incompleteideas.net/book/the-book-2nd.html\" target=\"_blank\" rel=\"noopener\">incompleteideas.net/book</a>",
+                "Sutton, R. S., McAllester, D., Singh, S. &amp; Mansour, Y. (2000). Policy gradient methods for reinforcement learning with function approximation. <em>Advances in Neural Information Processing Systems</em>, 12, 1057–1063.",
+                "van Hasselt, H., Guez, A. &amp; Silver, D. (2016). Deep reinforcement learning with double Q-learning. <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, 30(1). <a href=\"https://doi.org/10.1609/aaai.v30i1.10295\" target=\"_blank\" rel=\"noopener\">doi:10.1609/aaai.v30i1.10295</a>",
+                "Watkins, C. J. C. H. &amp; Dayan, P. (1992). Q-learning. <em>Machine Learning</em>, 8, 279–292. <a href=\"https://doi.org/10.1007/BF00992698\" target=\"_blank\" rel=\"noopener\">doi:10.1007/BF00992698</a>",
+                "Williams, R. J. (1992). Simple statistical gradient-following algorithms for connectionist reinforcement learning. <em>Machine Learning</em>, 8, 229–256. <a href=\"https://doi.org/10.1007/BF00992696\" target=\"_blank\" rel=\"noopener\">doi:10.1007/BF00992696</a>"] },
             { h: lec(11), items: [
-                'Lundberg, S. M. &amp; Lee, S.-I. (2017). A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems</em>, 30. ' + arxiv('1705.07874'),
-                'Ribeiro, M. T., Singh, S. &amp; Guestrin, C. (2016). “Why should I trust you?” Explaining the predictions of any classifier. <em>Proceedings of the 22nd ACM SIGKDD Conference</em>, 1135–1144. ' + doi('10.1145/2939672.2939778'),
-                'Sundararajan, M., Taly, A. &amp; Yan, Q. (2017). Axiomatic attribution for deep networks. <em>International Conference on Machine Learning</em>. ' + arxiv('1703.01365')] },
+                "Alvarez-Melis, D. &amp; Jaakkola, T. S. (2018). On the robustness of interpretability methods. ICML Workshop on Human Interpretability in Machine Learning. <a href=\"https://arxiv.org/abs/1806.08049\" target=\"_blank\" rel=\"noopener\">arXiv:1806.08049</a>",
+                "Andrei, A.-V. &amp; Pele, D. T. (2025). Explainable AI for electricity price anomaly detection: A SHAP-driven approach in Romania’s energy market. <em>Preprints</em>. <a href=\"https://doi.org/10.20944/preprints202508.0410.v1\" target=\"_blank\" rel=\"noopener\">doi:10.20944/preprints202508.0410.v1</a>",
+                "Andrei, A.-V., Pele, D.-T. &amp; Cramer, A.-A. (2026). Multi-horizon explainability in energy price forecasting: Disentangling market dynamics and renewable intermittency in Romania’s liberalized electricity market. <em>Proceedings of the International Conference on Business Excellence</em>, 20(1), 104–117. <a href=\"https://doi.org/10.2478/picbe-2026-0014\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2026-0014</a>",
+                "Andrei, A.-V., Pele, D.-T., Cramer, A.-A., Amza, A. &amp; Diaconu, D. (2026). Explainable AI-based early warning system for electricity price spikes: Evidence from the Romanian market. <em>Proceedings of the International Conference on Business Excellence</em>, 20(1), 4820–4836. <a href=\"https://doi.org/10.2478/picbe-2026-0352\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2026-0352</a>",
+                "Baesens, B., Roesch, D. &amp; Scheule, H. (2016). <em>Credit Risk Analytics: Measurement Techniques, Applications, and Examples in SAS</em>. Wiley.",
+                "Board of Governors of the Federal Reserve System (2011). SR 11-7: Supervisory guidance on model risk management. <a href=\"https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm\" target=\"_blank\" rel=\"noopener\">federalreserve.gov</a>",
+                "Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. <em>Annals of Statistics</em>, 29(5), 1189–1232. <a href=\"https://doi.org/10.1214/aos/1013203451\" target=\"_blank\" rel=\"noopener\">doi:10.1214/aos/1013203451</a>",
+                "Goldstein, A., Kapelner, A., Bleich, J. &amp; Pitkin, E. (2015). Peeking inside the black box: Visualizing statistical learning with plots of individual conditional expectation. <em>Journal of Computational and Graphical Statistics</em>, 24(1), 44–65. <a href=\"https://doi.org/10.1080/10618600.2014.907095\" target=\"_blank\" rel=\"noopener\">doi:10.1080/10618600.2014.907095</a>",
+                "Kim, B. et al. (2018). Interpretability beyond feature attribution: Quantitative testing with concept activation vectors (TCAV). ICML. <a href=\"https://arxiv.org/abs/1711.11279\" target=\"_blank\" rel=\"noopener\">arXiv:1711.11279</a>",
+                "Lundberg, S. M. et al. (2020). From local explanations to global understanding with explainable AI for trees. <em>Nature Machine Intelligence</em>, 2, 56–67. <a href=\"https://doi.org/10.1038/s42256-019-0138-9\" target=\"_blank\" rel=\"noopener\">doi:10.1038/s42256-019-0138-9</a>",
+                "Regulation (EU) 2024/1689 (Artificial Intelligence Act), <em>Official Journal of the European Union</em>, L, 12 July 2024. <a href=\"http://data.europa.eu/eli/reg/2024/1689/oj\" target=\"_blank\" rel=\"noopener\">data.europa.eu/eli/reg/2024/1689/oj</a>",
+                "Ribeiro, M. T., Singh, S. &amp; Guestrin, C. (2016). “Why should I trust you?” Explaining the predictions of any classifier. KDD, 1135–1144. <a href=\"https://doi.org/10.1145/2939672.2939778\" target=\"_blank\" rel=\"noopener\">doi:10.1145/2939672.2939778</a>",
+                "Rudin, C. (2019). Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. <em>Nature Machine Intelligence</em>, 1, 206–215. <a href=\"https://doi.org/10.1038/s42256-019-0048-x\" target=\"_blank\" rel=\"noopener\">doi:10.1038/s42256-019-0048-x</a>",
+                "Samek, W., Binder, A., Montavon, G., Lapuschkin, S. &amp; Müller, K.-R. (2017). Evaluating the visualization of what a deep neural network has learned. <em>IEEE Transactions on Neural Networks and Learning Systems</em>, 28(11), 2660–2673. <a href=\"https://doi.org/10.1109/TNNLS.2016.2599820\" target=\"_blank\" rel=\"noopener\">doi:10.1109/TNNLS.2016.2599820</a>",
+                "Shapley, L. S. (1953). A value for n-person games. In <em>Contributions to the Theory of Games II</em>, 307–317. Princeton University Press.",
+                "Simonyan, K., Vedaldi, A. &amp; Zisserman, A. (2014). Deep inside convolutional networks: Visualising image classification models and saliency maps. ICLR Workshop. <a href=\"https://arxiv.org/abs/1312.6034\" target=\"_blank\" rel=\"noopener\">arXiv:1312.6034</a>",
+                "Smilkov, D., Thorat, N., Kim, B., Viégas, F. &amp; Wattenberg, M. (2017). SmoothGrad: Removing noise by adding noise. <a href=\"https://arxiv.org/abs/1706.03825\" target=\"_blank\" rel=\"noopener\">arXiv:1706.03825</a>",
+                "Sundararajan, M., Taly, A. &amp; Yan, Q. (2017). Axiomatic attribution for deep networks. ICML, 3319–3328. <a href=\"https://arxiv.org/abs/1703.01365\" target=\"_blank\" rel=\"noopener\">arXiv:1703.01365</a>",
+                "Wachter, S., Mittelstadt, B. &amp; Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Harvard Journal of Law &amp; Technology</em>, 31(2), 841–887. <a href=\"https://doi.org/10.2139/ssrn.3063289\" target=\"_blank\" rel=\"noopener\">doi:10.2139/ssrn.3063289</a>"] },
             { h: lec(12), items: [
-                'Brown, T. B. et al. (2020). Language models are few-shot learners. <em>Advances in Neural Information Processing Systems</em>, 33. ' + arxiv('2005.14165'),
-                'Wei, J. et al. (2022). Chain-of-thought prompting elicits reasoning in large language models. <em>Advances in Neural Information Processing Systems</em>, 35. ' + arxiv('2201.11903'),
-                'Wu, S. et al. (2023). BloombergGPT: A large language model for finance. ' + arxiv('2303.17564')] },
+                "Amza, A., Bolovăneanu, V. &amp; Pele, D. T. (2026). Inflation forecasting with monetary policy narratives: Evidence from an emerging economy. <em>Proceedings of the International Conference on Business Excellence</em>, 20(1), 75–83. <a href=\"https://doi.org/10.2478/picbe-2026-0012\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2026-0012</a>",
+                "Brown, T. B. et al. (2020). Language models are few-shot learners. <em>Advances in Neural Information Processing Systems</em>, 33. <a href=\"https://arxiv.org/abs/2005.14165\" target=\"_blank\" rel=\"noopener\">arXiv:2005.14165</a>",
+                "Guo, C., Pleiss, G., Sun, Y. &amp; Weinberger, K. Q. (2017). On calibration of modern neural networks. <em>Proceedings of the 34th International Conference on Machine Learning</em>, 1321–1330. <a href=\"https://arxiv.org/abs/1706.04599\" target=\"_blank\" rel=\"noopener\">arXiv:1706.04599</a>",
+                "Hoffmann, J. et al. (2022). Training compute-optimal large language models. <em>Advances in Neural Information Processing Systems</em>, 35. <a href=\"https://arxiv.org/abs/2203.15556\" target=\"_blank\" rel=\"noopener\">arXiv:2203.15556</a>",
+                "Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L. &amp; Chen, W. (2022). LoRA: Low-rank adaptation of large language models. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/2106.09685\" target=\"_blank\" rel=\"noopener\">arXiv:2106.09685</a>",
+                "Kaplan, J. et al. (2020). Scaling laws for neural language models. <a href=\"https://arxiv.org/abs/2001.08361\" target=\"_blank\" rel=\"noopener\">arXiv:2001.08361</a>",
+                "Lewis, P. et al. (2020). Retrieval-augmented generation for knowledge-intensive NLP tasks. <em>Advances in Neural Information Processing Systems</em>, 33. <a href=\"https://arxiv.org/abs/2005.11401\" target=\"_blank\" rel=\"noopener\">arXiv:2005.11401</a>",
+                "Ouyang, L. et al. (2022). Training language models to follow instructions with human feedback. <em>Advances in Neural Information Processing Systems</em>, 35. <a href=\"https://arxiv.org/abs/2203.02155\" target=\"_blank\" rel=\"noopener\">arXiv:2203.02155</a>",
+                "Qwen Team (2024). Qwen2.5 technical report. <a href=\"https://arxiv.org/abs/2412.15115\" target=\"_blank\" rel=\"noopener\">arXiv:2412.15115</a>",
+                "Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. &amp; Finn, C. (2023). Direct preference optimization: Your language model is secretly a reward model. <em>Advances in Neural Information Processing Systems</em>, 36. <a href=\"https://arxiv.org/abs/2305.18290\" target=\"_blank\" rel=\"noopener\">arXiv:2305.18290</a>",
+                "Robertson, S. &amp; Zaragoza, H. (2009). The probabilistic relevance framework: BM25 and beyond. <em>Foundations and Trends in Information Retrieval</em>, 3(4), 333–389. <a href=\"https://doi.org/10.1561/1500000019\" target=\"_blank\" rel=\"noopener\">doi:10.1561/1500000019</a>",
+                "Sennrich, R., Haddow, B. &amp; Birch, A. (2016). Neural machine translation of rare words with subword units. <em>Proceedings of the 54th Annual Meeting of the ACL</em>, 1715–1725. <a href=\"https://doi.org/10.18653/v1/P16-1162\" target=\"_blank\" rel=\"noopener\">doi:10.18653/v1/P16-1162</a>",
+                "Tak, R. &amp; Pele, D. T. (2025). LLM-driven stock prediction: Capturing market trends with LLaMA. <em>Proceedings of the International Conference on Business Excellence</em>, 19(1), 529–540. <a href=\"https://doi.org/10.2478/picbe-2025-0043\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2025-0043</a>",
+                "Wei, J. et al. (2022). Chain-of-thought prompting elicits reasoning in large language models. <em>Advances in Neural Information Processing Systems</em>, 35. <a href=\"https://arxiv.org/abs/2201.11903\" target=\"_blank\" rel=\"noopener\">arXiv:2201.11903</a>",
+                "Xiao, S., Liu, Z., Zhang, P. &amp; Muennighoff, N. (2023). C-Pack: Packaged resources to advance general Chinese embedding (BAAI general embedding). <a href=\"https://arxiv.org/abs/2309.07597\" target=\"_blank\" rel=\"noopener\">arXiv:2309.07597</a>",
+                "Zhao, Z., Wallace, E., Feng, S., Klein, D. &amp; Singh, S. (2021). Calibrate before use: Improving few-shot performance of language models. <em>Proceedings of the 38th International Conference on Machine Learning</em>, 12697–12706. <a href=\"https://arxiv.org/abs/2102.09690\" target=\"_blank\" rel=\"noopener\">arXiv:2102.09690</a>"] },
             { h: lec(13), items: [
-                'Lago, J., Marcjasz, G., De Schutter, B. &amp; Weron, R. (2021). Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark. <em>Applied Energy</em>, 293, 116983. ' + doi('10.1016/j.apenergy.2021.116983'),
-                'Oreshkin, B. N., Carpov, D., Chapados, N. &amp; Bengio, Y. (2020). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. <em>International Conference on Learning Representations</em>. ' + arxiv('1905.10437'),
-                'Ansari, A. F. et al. (2024). Chronos: Learning the language of time series. <em>Transactions on Machine Learning Research</em>. ' + arxiv('2403.07815')] },
+                "Ansari, A. F. et al. (2024). Chronos: Learning the language of time series. <em>Transactions on Machine Learning Research</em>. <a href=\"https://arxiv.org/abs/2403.07815\" target=\"_blank\" rel=\"noopener\">arXiv:2403.07815</a>",
+                "Ansari, A. F. et al. (2025). Chronos-2: From univariate to universal forecasting. <a href=\"https://arxiv.org/abs/2510.15821\" target=\"_blank\" rel=\"noopener\">arXiv:2510.15821</a>",
+                "Christoffersen, P. F. (1998). Evaluating interval forecasts. <em>International Economic Review</em>, 39(4), 841–862. <a href=\"https://doi.org/10.2307/2527341\" target=\"_blank\" rel=\"noopener\">doi:10.2307/2527341</a>",
+                "Das, A., Kong, W., Sen, R. &amp; Zhou, Y. (2024). A decoder-only foundation model for time-series forecasting. <em>Proceedings of the 41st International Conference on Machine Learning</em>. <a href=\"https://arxiv.org/abs/2310.10688\" target=\"_blank\" rel=\"noopener\">arXiv:2310.10688</a>",
+                "Lago, J., Marcjasz, G., De Schutter, B. &amp; Weron, R. (2021). Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark. <em>Applied Energy</em>, 293, 116983. <a href=\"https://doi.org/10.1016/j.apenergy.2021.116983\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.apenergy.2021.116983</a>",
+                "Nie, Y., Nguyen, N. H., Sinthong, P. &amp; Kalagnanam, J. (2023). A time series is worth 64 words: Long-term forecasting with transformers. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/2211.14730\" target=\"_blank\" rel=\"noopener\">arXiv:2211.14730</a>",
+                "Oreshkin, B. N., Carpov, D., Chapados, N. &amp; Bengio, Y. (2020). N-BEATS: Neural basis expansion analysis for interpretable time series forecasting. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/1905.10437\" target=\"_blank\" rel=\"noopener\">arXiv:1905.10437</a>",
+                "Romano, Y., Patterson, E. &amp; Candès, E. (2019). Conformalized quantile regression. <em>Advances in Neural Information Processing Systems</em>, 32. <a href=\"https://arxiv.org/abs/1905.03222\" target=\"_blank\" rel=\"noopener\">arXiv:1905.03222</a>",
+                "Salinas, D., Flunkert, V., Gasthaus, J. &amp; Januschowski, T. (2020). DeepAR: Probabilistic forecasting with autoregressive recurrent networks. <em>International Journal of Forecasting</em>, 36(3), 1181–1191. <a href=\"https://doi.org/10.1016/j.ijforecast.2019.07.001\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.ijforecast.2019.07.001</a>",
+                "Uniejewski, B., Weron, R. &amp; Ziel, F. (2018). Variance stabilizing transformations for electricity spot price forecasting. <em>IEEE Transactions on Power Systems</em>, 33(2), 2219–2229. <a href=\"https://doi.org/10.1109/TPWRS.2017.2734563\" target=\"_blank\" rel=\"noopener\">doi:10.1109/TPWRS.2017.2734563</a>",
+                "Weron, R. (2014). Electricity price forecasting: A review of the state-of-the-art with a look into the future. <em>International Journal of Forecasting</em>, 30(4), 1030–1081. <a href=\"https://doi.org/10.1016/j.ijforecast.2014.08.008\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.ijforecast.2014.08.008</a>",
+                "Ziel, F. &amp; Weron, R. (2018). Day-ahead electricity price forecasting with high-dimensional structures: Univariate vs. multivariate modeling frameworks. <em>Energy Economics</em>, 70, 396–420. <a href=\"https://doi.org/10.1016/j.eneco.2017.12.016\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.eneco.2017.12.016</a>"] },
             { h: lec(14), items: [
-                'Dosovitskiy, A. et al. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. <em>International Conference on Learning Representations</em>. ' + arxiv('2010.11929'),
-                'Radford, A. et al. (2021). Learning transferable visual models from natural language supervision. <em>International Conference on Machine Learning</em>. ' + arxiv('2103.00020')] }
+                "Abnar, S. &amp; Zuidema, W. (2020). Quantifying attention flow in transformers. <em>Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</em>, 4190–4197. <a href=\"https://doi.org/10.18653/v1/2020.acl-main.385\" target=\"_blank\" rel=\"noopener\">doi:10.18653/v1/2020.acl-main.385</a>",
+                "Dosovitskiy, A. et al. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. <em>International Conference on Learning Representations</em>. <a href=\"https://arxiv.org/abs/2010.11929\" target=\"_blank\" rel=\"noopener\">arXiv:2010.11929</a>",
+                "Găman, Ș., Tak, R., Jheng, S.-L. &amp; Pele, D. T. (2026). ESG-aware asset selection and portfolio optimization: A comparative study of multi-criteria decision-making methods. <em>Proceedings of the International Conference on Business Excellence</em>, 20(1), 133–147. <a href=\"https://doi.org/10.2478/picbe-2026-0016\" target=\"_blank\" rel=\"noopener\">doi:10.2478/picbe-2026-0016</a>",
+                "Liu, H., Li, C., Wu, Q. &amp; Lee, Y. J. (2023). Visual instruction tuning. <em>Advances in Neural Information Processing Systems</em>, 36. <a href=\"https://arxiv.org/abs/2304.08485\" target=\"_blank\" rel=\"noopener\">arXiv:2304.08485</a>",
+                "Oord, A. van den, Li, Y. &amp; Vinyals, O. (2018). Representation learning with contrastive predictive coding. <a href=\"https://arxiv.org/abs/1807.03748\" target=\"_blank\" rel=\"noopener\">arXiv:1807.03748</a>",
+                "Radford, A. et al. (2021). Learning transferable visual models from natural language supervision. <em>Proceedings of the 38th International Conference on Machine Learning</em>, 8748–8763. <a href=\"https://arxiv.org/abs/2103.00020\" target=\"_blank\" rel=\"noopener\">arXiv:2103.00020</a>",
+                "Wang, P. et al. (2024). Qwen2-VL: Enhancing vision-language model’s perception of the world at any resolution. <a href=\"https://arxiv.org/abs/2409.12191\" target=\"_blank\" rel=\"noopener\">arXiv:2409.12191</a>"] }
         ],
 
         // acronym, English, Romanian (when different)
         abbreviations: [
-            ['AI', 'Artificial Intelligence', 'inteligență artificială'],
-            ['ASE', 'Bucharest University of Economic Studies (Academia de Studii Economice din București)', 'Academia de Studii Economice din București'],
-            ['BERT', 'Bidirectional Encoder Representations from Transformers'],
-            ['CLIP', 'Contrastive Language–Image Pre-training'],
-            ['CNN', 'Convolutional Neural Network', 'rețea neuronală convoluțională'],
-            ['CRPS', 'Continuous Ranked Probability Score'],
-            ['DOI', 'Digital Object Identifier', 'identificator digital al documentului'],
-            ['DQN', 'Deep Q-Network', 'rețea Q profundă'],
-            ['ECB / BCE', 'European Central Bank', 'Banca Centrală Europeană'],
-            ['GAN', 'Generative Adversarial Network', 'rețea generativă adversarială'],
-            ['GAT / GCN', 'Graph Attention Network / Graph Convolutional Network'],
-            ['GARCH', 'Generalised AutoRegressive Conditional Heteroskedasticity'],
-            ['GNN', 'Graph Neural Network', 'rețea neuronală pe grafuri'],
-            ['GPT', 'Generative Pre-trained Transformer'],
-            ['GRU', 'Gated Recurrent Unit'],
-            ['HMEQ', 'Home Equity (loan dataset)', 'Home Equity (set de date despre credite)'],
-            ['IPE', 'Institute for Economic Forecasting, Romanian Academy', 'Institutul de Prognoză Economică, Academia Română'],
-            ['LEAR', 'Lasso-Estimated AutoRegressive model', 'model autoregresiv estimat cu Lasso'],
-            ['LIME', 'Local Interpretable Model-agnostic Explanations'],
-            ['LLM', 'Large Language Model', 'model lingvistic mare'],
-            ['LSTM', 'Long Short-Term Memory'],
-            ['MAE', 'Mean Absolute Error', 'eroarea absolută medie'],
-            ['MLP', 'Multilayer Perceptron', 'perceptron multistrat'],
-            ['NLP', 'Natural Language Processing', 'prelucrarea limbajului natural'],
-            ['RAG', 'Retrieval-Augmented Generation', 'generare augmentată prin regăsire'],
-            ['RNN', 'Recurrent Neural Network', 'rețea neuronală recurentă'],
-            ['SGD', 'Stochastic Gradient Descent', 'coborîrea stohastică pe gradient'],
-            ['SHAP', 'SHapley Additive exPlanations', 'explicații aditive bazate pe valorile Shapley'],
-            ['TF-IDF', 'Term Frequency–Inverse Document Frequency'],
-            ['VAE', 'Variational Autoencoder', 'autoencoder variațional'],
-            ['ViT', 'Vision Transformer', 'arhitectură transformer pentru imagini'],
-            ['XAI', 'Explainable Artificial Intelligence', 'inteligență artificială explicabilă']
+            ["A2C", "Advantage actor-critic", "Actor-critic cu avantaj (advantage actor-critic)"],
+            ["AdamW", "Adam with decoupled weight decay", "Adam cu penalizarea ponderilor decuplată"],
+            ["AE", "Autoencoder", "Autoencoder (rețea de autocodificare)"],
+            ["AI", "Artificial intelligence", "Inteligență artificială"],
+            ["AIC", "Akaike information criterion", "Criteriul informațional Akaike"],
+            ["AML", "Anti-money laundering", "Combaterea spălării banilor (anti-money laundering)"],
+            ["AOPC", "Area over the perturbation curve", "Aria de deasupra curbei de perturbare"],
+            ["API", "Application programming interface", "Interfață de programare a aplicațiilor"],
+            ["AR", "Autoregressive model", "Model autoregresiv"],
+            ["ARX", "Autoregressive model with exogenous inputs", "Model autoregresiv cu variabile exogene"],
+            ["ASE", "Bucharest University of Economic Studies (Academia de Studii Economice din București)", "Academia de Studii Economice din București"],
+            ["ATM", "At the money (strike = current price)", "La bani (prețul de exercitare = prețul curent)"],
+            ["AUC", "Area under the receiver operating characteristic curve", "Aria de sub curba caracteristică de operare a receptorului"],
+            ["BERT", "Bidirectional encoder representations from transformers", "Reprezentări bidirecționale ale codificatorului transformer (BERT)"],
+            ["BG", "Bulgaria (bidding zone)", "Bulgaria (zonă de ofertare)"],
+            ["BiLSTM", "Bidirectional LSTM", "LSTM bidirecțional"],
+            ["BM25", "Best Matching 25 ranking function", "Funcția de ordonare Best Matching 25"],
+            ["BN", "Batch normalisation", "Normalizarea pe loturi (batch normalisation)"],
+            ["BoW", "Bag of words", "Sac de cuvinte (bag of words)"],
+            ["BPE", "Byte-pair encoding", "Codificare prin perechi de octeți (byte-pair encoding)"],
+            ["BPTT", "Backpropagation through time", "Propagarea înapoi în timp"],
+            ["BTC", "Bitcoin (currency unit)", "Bitcoin (unitate monetară)"],
+            ["BVB", "Bucharest Stock Exchange", "Bursa de Valori București"],
+            ["CAM", "Class activation map", "Harta de activare a clasei (class activation map)"],
+            ["CBOW", "Continuous bag of words (word2vec variant)", "Sac continuu de cuvinte (varianta word2vec)"],
+            ["CEE", "Central and Eastern Europe", "Europa Centrală și de Est"],
+            ["CET", "Central European Time", "Ora Europei Centrale"],
+            ["CIFAR", "Canadian Institute for Advanced Research (CIFAR-10 image set)", "Canadian Institute for Advanced Research (setul de imagini CIFAR-10)"],
+            ["CLIP", "Contrastive language–image pre-training", "Preantrenare contrastivă limbaj–imagine"],
+            ["CNN", "Convolutional neural network", "Rețea neuronală convoluțională"],
+            ["CPU", "Central processing unit", "Procesor central"],
+            ["CQR", "Conformalised quantile regression", "Regresie cuantilă conformală"],
+            ["CRPS", "Continuous Ranked Probability Score"],
+            ["DDPM", "Denoising diffusion probabilistic model", "Model probabilistic de difuzie cu eliminarea zgomotului (denoising diffusion)"],
+            ["DE-LU", "Germany-Luxembourg bidding zone", "Zona de ofertare Germania-Luxemburg"],
+            ["DeepAR", "Deep autoregressive recurrent network (Salinas et al., 2020)", "Rețea recurentă autoregresivă profundă (Salinas et al., 2020)"],
+            ["DM", "Diebold–Mariano test; also Deutsche Mark (currency of the German credit data)", "Testul Diebold–Mariano; de asemenea, marca germană (moneda din datele German credit)"],
+            ["DNN", "Deep neural network (here: a multilayer perceptron with 24 outputs)", "Rețea neuronală profundă (aici: perceptron multistrat cu 24 de ieșiri)"],
+            ["DOI", "Digital Object Identifier", "identificator digital al documentului"],
+            ["DP", "Dynamic programming", "Programare dinamică"],
+            ["DPO", "Direct preference optimisation", "Optimizarea directă a preferințelor"],
+            ["DQN", "Deep Q-network", "Rețea Q profundă (deep Q-network)"],
+            ["EBA", "European Banking Authority", "Autoritatea Bancară Europeană"],
+            ["ECB / BCE", "European Central Bank", "Banca Centrală Europeană"],
+            ["ECE", "Expected calibration error", "Eroarea de calibrare așteptată"],
+            ["ELBO", "Evidence lower bound", "Marginea inferioară a verosimilității (evidence lower bound)"],
+            ["ENTSO-E", "European Network of Transmission System Operators for Electricity", "Rețeaua europeană a operatorilor de transport și de sistem pentru energie electrică"],
+            ["EODHD", "End of Day Historical Data (data provider)", "End of Day Historical Data (furnizor de date)"],
+            ["ES", "Expected shortfall", "Pierderea așteptată în coada distribuției (expected shortfall)"],
+            ["ESG", "Environmental, social and governance", "Mediu, social și guvernanță"],
+            ["EU", "European Union", "Uniunea Europeană (abrevierea engleză, în citări)"],
+            ["EU / UE", "European Union", "Uniunea Europeană"],
+            ["EUR", "Euro"],
+            ["EWMA", "Exponentially weighted moving average", "Medie mobilă ponderată exponențial"],
+            ["FFN", "Position-wise feed-forward network", "Rețea directă aplicată fiecărei poziții (feed-forward)"],
+            ["FinBERT", "BERT model adapted to financial text", "Model BERT adaptat textelor financiare"],
+            ["GAE", "Generalised advantage estimation", "Estimarea generalizată a avantajului"],
+            ["GAN", "Generative adversarial network", "Rețea generativă adversarială"],
+            ["GAP", "Global average pooling", "Agregare prin medie globală (global average pooling)"],
+            ["GARCH", "Generalised autoregressive conditional heteroskedasticity", "Heteroscedasticitate condiționată autoregresivă generalizată"],
+            ["GAT", "Graph attention network", "Rețea cu atenție pe graf (graph attention network)"],
+            ["GCN", "Graph convolutional network", "Rețea convoluțională pe graf (graph convolutional network)"],
+            ["GD", "Gradient descent", "Coborîrea pe gradient"],
+            ["GDPR", "General Data Protection Regulation", "Regulamentul general privind protecția datelor"],
+            ["GELU", "Gaussian error linear unit", "Unitate liniară cu eroare gaussiană"],
+            ["GIN", "Graph isomorphism network", "Rețea de izomorfism pe graf (graph isomorphism network)"],
+            ["GK", "Garman–Klass range estimator of variance", "Estimatorul Garman–Klass al varianței, bazat pe amplitudine"],
+            ["GNN", "Graph neural network", "Rețea neuronală pe grafuri"],
+            ["GPT", "Generative pre-trained transformer", "Transformer generativ preantrenat"],
+            ["GPU", "Graphics processing unit", "Procesor grafic"],
+            ["GraphSAGE", "Graph sample and aggregate (a GNN architecture)", "Eșantionare și agregare pe graf (o arhitectură GNN)"],
+            ["GRU", "Gated recurrent unit", "Unitate recurentă cu porți (gated recurrent unit)"],
+            ["GW", "Gigawatt"],
+            ["HAR", "Heterogeneous autoregressive model", "Model autoregresiv heterogen"],
+            ["HMEQ", "Home equity loans dataset", "Setul de date despre creditele garantate cu locuința (home equity)"],
+            ["HS", "Historical simulation", "Simulare istorică"],
+            ["HU", "Hungary (bidding zone)", "Ungaria (zonă de ofertare)"],
+            ["ICBE", "International Conference on Business Excellence", "International Conference on Business Excellence (conferința internațională de excelență în afaceri)"],
+            ["ICE", "Individual conditional expectation", "Așteptarea condiționată individuală"],
+            ["IEEE-CIS", "Institute of Electrical and Electronics Engineers, Computational Intelligence Society"],
+            ["IG", "Integrated gradients", "Gradienți integrați"],
+            ["InfoNCE", "Information noise-contrastive estimation loss", "Funcția de pierdere contrastivă InfoNCE (information noise-contrastive estimation)"],
+            ["IPE", "Institute for Economic Forecasting, Romanian Academy", "Institutul de Prognoză Economică, Academia Română"],
+            ["ISE", "Fraunhofer Institute for Solar Energy Systems", "Institutul Fraunhofer pentru Sisteme de Energie Solară"],
+            ["JS", "Jensen–Shannon divergence", "Divergența Jensen–Shannon"],
+            ["KL", "Kullback–Leibler divergence", "Divergența Kullback–Leibler"],
+            ["LEAR", "Lasso-estimated autoregressive model", "Model autoregresiv estimat prin Lasso"],
+            ["LIME", "Local interpretable model-agnostic explanations", "Explicații locale interpretabile, independente de model"],
+            ["LLaVA", "Large language and vision assistant", "Asistentul lingvistic și vizual LLaVA (large language and vision assistant)"],
+            ["LLM", "Large language model", "Model lingvistic mare"],
+            ["LN", "Layer normalisation", "Normalizarea pe strat (layer normalisation)"],
+            ["LoRA", "Low-rank adaptation", "Adaptare de rang mic (low-rank adaptation)"],
+            ["LR", "Likelihood ratio", "Raportul de verosimilitate"],
+            ["LSTM", "Long short-term memory network", "Rețea cu memorie pe termen scurt și lung"],
+            ["MAD", "Median absolute deviation", "Abaterea absolută mediană"],
+            ["MAE", "Mean absolute error", "Eroarea absolută medie"],
+            ["MAP", "Maximum a posteriori"],
+            ["MAPE", "Mean absolute percentage error", "Eroarea procentuală absolută medie"],
+            ["MDP", "Markov decision process", "Proces decizional Markov"],
+            ["MHA", "Multi-head attention", "Atenția cu mai multe capete (multi-head attention)"],
+            ["MLM", "Masked language modelling", "Modelarea limbajului cu cuvinte mascate (masked language modelling)"],
+            ["MLP", "Multilayer perceptron", "Perceptron multistrat"],
+            ["MNIST", "Modified National Institute of Standards and Technology (digit images)", "Modified National Institute of Standards and Technology (imagini cu cifre)"],
+            ["MPNN", "Message-passing neural network", "Rețea neuronală cu transmitere de mesaje (message passing)"],
+            ["MPS", "Metal Performance Shaders (Apple GPU back-end of PyTorch)", "Metal Performance Shaders (interfața PyTorch pentru procesorul grafic Apple)"],
+            ["MRR", "Mean reciprocal rank", "Rangul reciproc mediu"],
+            ["MSE", "Mean squared error", "Eroarea pătratică medie"],
+            ["MW", "Megawatt"],
+            ["MWh", "Megawatt-hour", "Megawatt-oră"],
+            ["N-BEATS", "Neural basis expansion analysis for time series", "Analiza prin expansiune în baze neuronale pentru serii de timp"],
+            ["NLP", "Natural language processing", "Prelucrarea limbajului natural"],
+            ["OCR", "Optical character recognition", "Recunoașterea optică a caracterelor"],
+            ["OOV", "Out of vocabulary", "În afara vocabularului"],
+            ["OPCOM", "Romanian electricity and gas market operator", "Operatorul pieței de energie electrică și gaze naturale din România"],
+            ["OpenML", "Open Machine Learning platform", "Platforma Open Machine Learning"],
+            ["PatchTST", "Patch time-series transformer", "Arhitectura transformer pe petice de serie de timp"],
+            ["PCA", "Principal component analysis", "Analiza componentelor principale"],
+            ["PD", "Probability of default", "Probabilitatea de neplată"],
+            ["PDP", "Partial dependence plot", "Graficul dependenței parțiale"],
+            ["PICBE", "Proceedings of the International Conference on Business Excellence"],
+            ["PMI", "Pointwise mutual information", "Informația mutuală punctuală"],
+            ["PPO", "Proximal policy optimisation", "Optimizarea proximală a politicii (proximal policy optimisation)"],
+            ["PR-AUC", "Area under the precision-recall curve", "Aria de sub curba precizie-sensibilitate"],
+            ["PyG", "PyTorch Geometric (library)", "PyTorch Geometric (bibliotecă de programe)"],
+            ["RAG", "Retrieval-augmented generation", "Generare augmentată prin regăsire (retrieval-augmented generation)"],
+            ["ReLU", "Rectified linear unit", "Unitate liniară rectificată"],
+            ["RGB", "Red, green, blue (colour channels)", "Roșu, verde, albastru (canalele de culoare)"],
+            ["RL", "Reinforcement learning", "Învățare prin întărire (reinforcement learning)"],
+            ["RLHF", "Reinforcement learning from human feedback", "Învățare prin recompensă din feedback uman"],
+            ["RMSE", "Root mean squared error", "Rădăcina erorii pătratice medii"],
+            ["RMSProp", "Root mean square propagation", "Propagarea cu medie pătratică (root mean square propagation)"],
+            ["RNN", "Recurrent neural network", "Rețea neuronală recurentă"],
+            ["RO", "Romania (bidding zone)", "România (zonă de ofertare)"],
+            ["ROC", "Receiver operating characteristic", "Caracteristica de operare a receptorului"],
+            ["ROC-AUC", "Area under the ROC curve", "Aria de sub curba ROC"],
+            ["SFT", "Supervised fine-tuning", "Ajustare fină supervizată"],
+            ["SGD", "Stochastic gradient descent", "Coborîrea stohastică pe gradient"],
+            ["SGNS", "Skip-gram with negative sampling", "Skip-gram cu eșantionare negativă"],
+            ["SHAP", "Shapley additive explanations", "Explicații aditive Shapley"],
+            ["SR", "Supervisory Guidance on Model Risk Management (Federal Reserve SR 11-7)", "Ghidul de supraveghere privind riscul de model (Federal Reserve SR 11-7)"],
+            ["SSRN", "Social Science Research Network"],
+            ["SVD", "Singular value decomposition", "Descompunerea în valori singulare"],
+            ["TCAV", "Testing with concept activation vectors", "Testarea cu vectori de activare a conceptelor"],
+            ["TD", "Temporal difference", "Diferență temporală"],
+            ["TF-IDF", "Term frequency–inverse document frequency", "Frecvența termenului–frecvența inversă în documente"],
+            ["TimesFM", "Time-series Foundation Model (Google Research)", "Modelul fundație pentru serii de timp al Google Research"],
+            ["TLV", "Banca Transilvania (Bucharest Stock Exchange ticker)", "Banca Transilvania (simbolul la Bursa de Valori București)"],
+            ["TRPO", "Trust region policy optimisation", "Optimizarea politicii în regiune de încredere"],
+            ["TSTR", "Train on synthetic, test on real", "Antrenare pe date sintetice, test pe date reale (train on synthetic, test on real)"],
+            ["UCI", "University of California, Irvine (Machine Learning Repository)", "Universitatea California din Irvine (Machine Learning Repository)"],
+            ["ULB", "Université libre de Bruxelles"],
+            ["USD", "US dollar", "Dolar american"],
+            ["VAE", "Variational autoencoder", "Autoencoder variațional"],
+            ["VaR", "Value-at-Risk", "Valoarea expusă la risc (Value-at-Risk)"],
+            ["VGG", "Visual Geometry Group, University of Oxford", "Visual Geometry Group, Universitatea Oxford"],
+            ["ViT", "Vision transformer", "Transformer pentru imagini (vision transformer)"],
+            ["VIX", "Cboe Volatility Index (30-day implied volatility of the S&amp;P 500)", "Indicele de volatilitate Cboe (volatilitatea implicită pe 30 de zile a indicelui S&amp;P 500)"],
+            ["VLM", "Vision-language model", "Model vizual-lingvistic"],
+            ["WGAN", "Wasserstein GAN", "GAN Wasserstein"],
+            ["WL", "Weisfeiler–Leman graph isomorphism test", "Testul de izomorfism Weisfeiler–Leman"],
+            ["XAI", "Explainable artificial intelligence", "Inteligență artificială explicabilă"],
+            ["XGBoost", "Extreme gradient boosting", "Extreme gradient boosting (arbori de decizie cu amplificare pe gradient)"],
+            ["XOR", "Exclusive or", "Sau exclusiv"]
         ],
 
         contact: {

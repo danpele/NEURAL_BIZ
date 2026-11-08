@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_sp500_vol'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'S&P 500 daily log returns and annualised Garman-Klass range volatility, from daily open, high, low and close.'
+
+Keywords: 'volatility clustering, Garman-Klass estimator, S&P 500, returns, range volatility'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance, ticker SP500)'
+
+Output: 'sp500_vol.png'

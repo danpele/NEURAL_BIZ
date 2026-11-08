@@ -1,0 +1,330 @@
+{
+ "charts": {
+  "gd_paths": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "20,640 block groups, 1990 census",
+   "period_ro": "20\\,640 de grupuri de locuințe\\, recensămîntul din 1990"
+  },
+  "lr_sweep": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "12,384 training and 4,128 validation block groups; 30 epochs",
+   "period_ro": "12\\,384 de grupuri de antrenare și 4\\,128 de validare; 30 de epoci"
+  },
+  "optimizers": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "12,384 training and 4,128 validation block groups",
+   "period_ro": "12\\,384 de grupuri de antrenare și 4\\,128 de validare"
+  },
+  "optimizer_seeds": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "4,128 test block groups",
+   "period_ro": "4\\,128 de grupuri de testare"
+  },
+  "batch_size": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "Adam, learning rate 0.001, 40 epochs",
+   "period_ro": "Adam, rata de învățare 0,001, 40 de epoci"
+  },
+  "schedules": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "SGD with momentum 0.9, peak rate 0.01, 3 seeds",
+   "period_ro": "SGD cu moment 0,9, rata maximă 0,01, 3 inițializări"
+  },
+  "vanishing": {
+   "source_en": "StatLib, California housing, 1990 census (Pace and Barry, 1997)",
+   "source_ro": "StatLib, locuințe din California, recensămîntul din 1990 (Pace și Barry, 1997)",
+   "period_en": "10 hidden layers of 64 units, one batch of 512 training block groups, 5 seeds",
+   "period_ro": "10 straturi ascunse de 64 de neuroni, un lot de 512 grupuri de antrenare, 5 inițializări"
+  },
+  "fraud_optimizers": {
+   "source_en": "ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597)",
+   "source_ro": "ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597)",
+   "period_en": "September 2013, 2 days; train = first 33.4 hours, validation to hour 40.3; 5 seeds",
+   "period_ro": "septembrie 2013, 2 zile; antrenare = primele 33,4 ore, validare pînă la ora 40,3; 5 inițializări"
+  },
+  "var_backtest": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cotații zilnice",
+   "period_en": "3 Jan 2020 to 30 Oct 2026, trading days (test period)",
+   "period_ro": "3 ianuarie 2020 - 30 octombrie 2026, zile de tranzacționare (perioada de test)"
+  }
+ },
+ "seed": 20261108,
+ "cal": {
+  "n": 20640,
+  "n_train": 12384,
+  "n_val": 4128,
+  "n_test": 4128,
+  "d": 8,
+  "mse_lin_val": 0.5,
+  "mse_lin_test": 0.518,
+  "var_y": 1.362
+ },
+ "surface": {
+  "cond_raw": 104.3,
+  "cond_std": 1.0,
+  "lr_raw": 0.0258,
+  "lr_std": 0.5,
+  "lr_max_raw": 0.0515,
+  "lam_max_raw": 38.81,
+  "lam_min_raw": 0.372,
+  "slope": 0.4179,
+  "intercept": 0.4509,
+  "mse_star": 0.7011,
+  "mse_gd_raw_60": 1.4864,
+  "mse_mom_raw_60": 0.7037,
+  "mse_gd_std_60": 0.7011,
+  "mse_start": 3.742,
+  "steps": 60
+ },
+ "bp": {
+  "x1": -0.21,
+  "x2": -0.67,
+  "y": 2.067,
+  "W11": -0.28,
+  "W12": -0.56,
+  "W21": 0.5,
+  "W22": -0.02,
+  "w21": -0.87,
+  "w22": -0.19,
+  "z1": 0.433,
+  "z2": -0.093,
+  "h1": 0.433,
+  "h2": 0.0,
+  "yhat": -0.377,
+  "L": 2.987,
+  "d2": -2.444,
+  "gw21": -1.059,
+  "gw22": -0.0,
+  "d11": 2.126,
+  "d12": 0.0,
+  "gW11": -0.453,
+  "gW12": -1.419,
+  "gW21": -0.0,
+  "gW22": -0.0,
+  "max_abs_diff_autograd": 0.0
+ },
+ "gradcheck": {
+  "n_checked": 30,
+  "max_rel_err": 7e-07,
+  "n_params": 4801
+ },
+ "lrsweep": {
+  "best_lr": 0.1,
+  "best_mse": 0.281,
+  "smallest_mse": 1.093,
+  "first_diverged": 0.3,
+  "epochs": 30,
+  "batch": 128
+ },
+ "opt": {
+  "sgd": {
+   "lr": 0.1,
+   "val_final": 0.311,
+   "test_mean": 0.314,
+   "test_sd": 0.091,
+   "test_min": 0.266,
+   "test_max": 0.476,
+   "val_ep10": 0.342,
+   "ep_to_target": 12.8
+  },
+  "momentum": {
+   "lr": 0.01,
+   "val_final": 0.265,
+   "test_mean": 0.288,
+   "test_sd": 0.044,
+   "test_min": 0.262,
+   "test_max": 0.366,
+   "val_ep10": 0.31,
+   "ep_to_target": 11.6
+  },
+  "rmsprop": {
+   "lr": 0.003,
+   "val_final": 0.301,
+   "test_mean": 0.302,
+   "test_sd": 0.058,
+   "test_min": 0.265,
+   "test_max": 0.401,
+   "val_ep10": 0.313,
+   "ep_to_target": 9.4
+  },
+  "adam": {
+   "lr": 0.003,
+   "val_final": 0.265,
+   "test_mean": 0.272,
+   "test_sd": 0.01,
+   "test_min": 0.26,
+   "test_max": 0.283,
+   "val_ep10": 0.305,
+   "ep_to_target": 11.4
+  },
+  "adamw": {
+   "lr": 0.003,
+   "val_final": 0.261,
+   "test_mean": 0.266,
+   "test_sd": 0.006,
+   "test_min": 0.259,
+   "test_max": 0.274,
+   "val_ep10": 0.304,
+   "ep_to_target": 11.4
+  }
+ },
+ "opt_target": 0.3,
+ "opt_test": {
+  "diff_sgd_adam": 0.043,
+  "t": 1.01,
+  "p": 0.371
+ },
+ "batch": {
+  "16": {
+   "val_final": 0.27,
+   "val_ep5": 0.294,
+   "steps_per_epoch": 774,
+   "sec": 25.8
+  },
+  "128": {
+   "val_final": 0.276,
+   "val_ep5": 0.367,
+   "steps_per_epoch": 97,
+   "sec": 3.7
+  },
+  "1024": {
+   "val_final": 0.335,
+   "val_ep5": 0.87,
+   "steps_per_epoch": 13,
+   "sec": 1.0
+  }
+ },
+ "sched": {
+  "const": {
+   "val_final": 0.279,
+   "test": 0.286,
+   "val_sd": 0.005
+  },
+  "step": {
+   "val_final": 0.27,
+   "test": 0.27,
+   "val_sd": 0.003
+  },
+  "cosine": {
+   "val_final": 0.266,
+   "test": 0.265,
+   "val_sd": 0.003
+  },
+  "onecycle": {
+   "val_final": 0.266,
+   "test": 0.267,
+   "val_sd": 0.001
+  }
+ },
+ "vanish": {
+  "sig": {
+   "first": 8.48e-07,
+   "last": 7.53,
+   "ratio": 1.13e-07
+  },
+  "tanh": {
+   "first": 1.0,
+   "last": 1.74,
+   "ratio": 0.576
+  },
+  "relu_he": {
+   "first": 3.07,
+   "last": 35.0,
+   "ratio": 0.0876
+  },
+  "relu_small": {
+   "first": 6.9e-13,
+   "last": 3.18e-12,
+   "ratio": 0.217
+  },
+  "depth": 10
+ },
+ "fraud": {
+  "n": 28924,
+  "frauds": 492,
+  "n_train": 17354,
+  "n_val": 5785,
+  "n_test": 5785,
+  "fr_train": 360,
+  "fr_val": 57,
+  "fr_test": 75,
+  "cut1_h": 33.4,
+  "cut2_h": 40.3,
+  "prev_full_pct": 0.173,
+  "ap_logit_test": 0.789,
+  "sgd": {
+   "ap_ep1": 0.004,
+   "ap_ep5": 0.24,
+   "ap_final": 0.655,
+   "ap_test": 0.786,
+   "ap_test_sd": 0.019,
+   "auc_test": 0.924
+  },
+  "momentum": {
+   "ap_ep1": 0.488,
+   "ap_ep5": 0.686,
+   "ap_final": 0.738,
+   "ap_test": 0.823,
+   "ap_test_sd": 0.003,
+   "auc_test": 0.976
+  },
+  "adam": {
+   "ap_ep1": 0.592,
+   "ap_ep5": 0.709,
+   "ap_final": 0.721,
+   "ap_test": 0.803,
+   "ap_test_sd": 0.033,
+   "auc_test": 0.974
+  }
+ },
+ "var": {
+  "tau_pct": 1,
+  "n_test": 1716,
+  "test_start": "2020-01-03",
+  "test_end": "2026-10-30",
+  "train_start": "2005-04-08",
+  "expected": 17.2,
+  "seeds": 5,
+  "nn": {
+   "viol": 18,
+   "rate_pct": 1.05,
+   "lr": 0.04,
+   "p": 0.84,
+   "pinball": 0.042,
+   "mean_var": 2.96
+  },
+  "hs": {
+   "viol": 31,
+   "rate_pct": 1.81,
+   "lr": 9.1,
+   "p": 0.003,
+   "pinball": 0.0577,
+   "mean_var": 3.28
+  },
+  "ewma": {
+   "viol": 41,
+   "rate_pct": 2.39,
+   "lr": 24.08,
+   "p": 0.0,
+   "pinball": 0.0473,
+   "mean_var": 2.52
+  },
+  "nn_seed_rate_min": 1.05,
+  "nn_seed_rate_max": 1.22
+ },
+ "timing": {
+  "cpu_ms": 333.6,
+  "mps_ms": 32.5,
+  "speedup": 10.3,
+  "machine": "arm64, Darwin",
+  "params": 4216833
+ },
+ "runtime_min": 0.1
+}

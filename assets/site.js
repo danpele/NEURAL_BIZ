@@ -207,6 +207,10 @@
                 const c = (D.cases || []).find(x => x.id === id);
                 return c ? `<a href="#episode-${id}">${c[LANG].h}</a>` : '';
             }).join(', ')}</p>` : '');
+        const vids = (l.videos || []).length
+            ? `<div class="quantinar-box video-box"><h4>${T.videos}</h4><ul>` +
+              l.videos.map(v => `<li><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">${esc(v.title)}</a> <span class="muted-note">${esc(v.by)}</span></li>`).join('') + '</ul></div>'
+            : '';
         const further = (l.further || []).length
             ? `<div class="quantinar-box"><h4>${T.further}</h4><ul>` +
               l.further.map(f => `<li><a href="${f.url}" target="_blank" rel="noopener">${f[LANG]}</a></li>`).join('') + '</ul></div>'
@@ -223,6 +227,7 @@
                 ${cases}
                 ${formulas}
                 <div class="chapter-links">${links}</div>
+                ${vids}
                 ${further}
                 ${qn}
             </div>
@@ -259,7 +264,9 @@
         publishedFiles().then(pub => D.lectures.forEach(l => {
             if (!pub && l.status !== 'ready' && !READY.includes(l.num)) return;
             const has = p => pub ? Promise.resolve(pub.has(p)) : exists(p);
-            Promise.all([has(pageOf('web', l)), has(pageOf('interactive', l))]).then(([w, i]) => {
+            // interactive companions are probed only for lectures that declare one (interactive: true in course-data.js),
+            // so a local copy sends no request for a page that does not exist
+            Promise.all([has(pageOf('web', l)), l.interactive ? has(pageOf('interactive', l)) : Promise.resolve(false)]).then(([w, i]) => {
                 if (!w && !i) return;
                 avail[l.id] = Object.assign(avail[l.id] || {}, { web: w, interactive: i });
                 rerenderLecture(l);

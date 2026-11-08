@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_gan_acf'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Autocorrelation of absolute daily returns, S&P 500 2005-2019 against GAN samples: the GAN draws days independently.'
+
+Keywords: 'volatility clustering, autocorrelation, stylized facts, GAN, synthetic data'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv; lectures/L8/results/gan_acf.csv'
+
+Output: 'gan_acf.png'

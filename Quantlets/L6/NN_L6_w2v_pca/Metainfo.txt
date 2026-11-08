@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_w2v_pca'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Two-dimensional principal-component projection of 32 words in four groups (monetary policy, energy, banking, digital payments) in our word2vec space trained on ECB speeches.'
+
+Keywords: 'word2vec, embeddings, PCA, semantic space, ECB speeches, NLP'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ecb_speeches_2022plus.csv; saved word vectors of analysis_L6.py (w2v_pca_results.json)'
+
+Output: 'w2v_pca.png'

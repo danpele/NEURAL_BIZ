@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_lr_sweep'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Validation MSE of an MLP 64-64 on California housing after 30 epochs of plain SGD, for nine learning rates from 0.0001 to 1 and three seeds; diverged runs marked.'
+
+Keywords: 'learning rate, stochastic gradient descent, divergence, hyperparameter tuning, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'lr_sweep.png'

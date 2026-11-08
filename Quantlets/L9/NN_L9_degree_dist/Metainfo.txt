@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_degree_dist'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Complementary cumulative distribution of the node degree (in + out), all transactions and illicit transactions, log-log scale.'
+
+Keywords: 'graph, degree distribution, heavy tail, hubs, Elliptic'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/degree_counts.csv'
+
+Output: 'degree_dist.png'

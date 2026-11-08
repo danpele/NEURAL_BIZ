@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_acf_abs'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Autocorrelation of S&P 500 daily returns and absolute returns, lags 1-50, with the 1.96/sqrt(T) band.'
+
+Keywords: 'autocorrelation, volatility clustering, long memory, absolute returns, S&P 500'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance, ticker SP500)'
+
+Output: 'acf_abs.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_var_backtest'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'One-day 99 % value at risk of the S&P 500 from a quantile MLP trained with the pinball loss (ensemble of 5 seeds), against 250-day historical simulation, with violations and the Kupiec test, test period from 2020.'
+
+Keywords: 'value at risk, quantile regression, pinball loss, backtesting, Kupiec test, S&P 500, neural network'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance, ticker SP500)'
+
+Output: 'var_backtest.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_double_descent'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Double descent on California housing: training and test MSE of a two-layer network with p random, frozen ReLU features and a minimum-norm output layer, n = 400 training block groups, median of 10 draws.'
+
+Keywords: 'double descent, interpolation threshold, bias-variance trade-off, random features, minimum-norm least squares, California housing'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'double_descent.png'

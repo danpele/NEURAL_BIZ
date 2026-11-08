@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_hourly_profile'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Mean Romanian day-ahead price by delivery hour in 2019, 2022, 2024 and 2026 (January-October): the solar trough at midday. Source: energy-charts.info (Fraunhofer ISE), Romanian day-ahead prices.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR, duck curve, solar'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv'
+
+Output: 'hourly_profile.png'

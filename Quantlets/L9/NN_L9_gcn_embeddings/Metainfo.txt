@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_gcn_embeddings'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Hidden representations of the GCN for the test transactions, projected on their first two principal components; illicit and licit.'
+
+Keywords: 'node embeddings, GCN, PCA, representation learning, Elliptic'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/embeddings_pca.csv'
+
+Output: 'gcn_embeddings.png'

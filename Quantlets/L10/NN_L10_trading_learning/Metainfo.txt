@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_trading_learning'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'PPO actor-critic agent trading the S&P 500 (flat or long, 5 bp cost): Sharpe ratio on training and validation years during training.'
+
+Keywords: 'proximal policy optimisation, PPO, actor-critic, policy gradient, trading, S&P 500, validation'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance: SP500 and VIX closes)'
+
+Output: 'trading_learning.png'

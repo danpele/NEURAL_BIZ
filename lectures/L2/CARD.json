@@ -1,0 +1,27 @@
+{
+ "title": {
+  "en": "Training: backpropagation and optimisation",
+  "ro": "Antrenarea rețelelor: propagarea înapoi a erorii și optimizarea"
+ },
+ "topics": {
+  "en": [
+   "Training as empirical risk minimisation: gradient descent, the stability limit 2/λmax and conditioning, shown on the real loss surface of a California housing regression",
+   "Backpropagation as the chain rule on a computational graph: written out for an MLP, computed by hand on one block group, checked against PyTorch autograd and finite differences",
+   "Vanishing gradients in deep sigmoid networks and Xavier and He initialisation, measured layer by layer",
+   "SGD (stochastic gradient descent), batch size, momentum, AdaGrad, RMSProp, Adam and AdamW, compared with tuned learning rates and five seeds; learning-rate schedules (step, cosine, one-cycle)",
+   "Case study: a quantile MLP trained with the pinball loss for the 1-day 99 % value at risk of the S&P 500, backtested from 2020 with the Kupiec test; CPU against GPU timing"
+  ],
+  "ro": [
+   "Antrenarea ca minimizare a riscului empiric: coborîrea pe gradient, limita de stabilitate 2/λmax și condiționarea, ilustrate pe suprafața reală a pierderii unei regresii pe datele California",
+   "Propagarea înapoi a erorii ca regulă de derivare a funcțiilor compuse pe un graf de calcul: scrisă complet pentru un MLP, calculată de mînă pentru un grup de locuințe și verificată cu diferențierea automată din PyTorch și cu diferențe finite",
+   "Dispariția gradienților în rețelele adînci cu sigmoide și inițializările Xavier și He, măsurate strat cu strat",
+   "SGD (coborîrea stohastică pe gradient), mărimea lotului, metoda momentului, AdaGrad, RMSProp, Adam și AdamW, comparate cu rate de învățare ajustate și cinci inițializări; programele ratei de învățare (în trepte, cosinus, un singur ciclu)",
+   "Studiu de caz: un MLP cuantilic antrenat cu pierderea pinball pentru valoarea la risc de 99 % pe o zi a indicelui S&P 500, testat retroactiv din 2020 cu testul Kupiec; durata antrenării pe CPU și pe GPU"
+  ]
+ },
+ "further": [
+  {"en": "Bishop & Bishop (2024), chapters 7-8: gradient descent and backpropagation", "ro": "Bishop și Bishop (2024), capitolele 7-8: coborîrea pe gradient și propagarea înapoi", "url": "https://www.bishopbook.com"},
+  {"en": "Dive into Deep Learning, chapter 12: optimisation algorithms", "ro": "Dive into Deep Learning, capitolul 12: algoritmi de optimizare", "url": "https://d2l.ai/chapter_optimization"},
+  {"en": "A. Karpathy, micrograd: backpropagation in about 100 lines", "ro": "A. Karpathy, micrograd: propagarea înapoi în circa 100 de rînduri", "url": "https://github.com/karpathy/micrograd"}
+ ]
+}

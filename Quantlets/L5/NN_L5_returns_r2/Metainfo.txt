@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_returns_r2'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Out-of-sample R^2 of next-day returns, 2020-2026: training mean, AR(1) and LSTM (5 seeds), for the S&P 500 and Banca Transilvania (TLV).'
+
+Keywords: 'return predictability, out-of-sample R2, LSTM, AR(1), efficient markets, S&P 500, Bucharest Stock Exchange'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv and bvb_equities_daily.csv; saved test forecasts of analysis_L5.py (returns_r2_results.json)'
+
+Output: 'returns_r2.png'

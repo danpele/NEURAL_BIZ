@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_top_words'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'The words with the largest positive and negative difference between the positive and negative coefficients of a bag-of-words logistic regression on the Financial PhraseBank.'
+
+Keywords: 'sentiment, bag of words, logistic regression, financial lexicon, Financial PhraseBank'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Financial PhraseBank (Malo et al., 2014); saved coefficients of analysis_L6.py, split 1 (top_words_results.json)'
+
+Output: 'top_words.png'

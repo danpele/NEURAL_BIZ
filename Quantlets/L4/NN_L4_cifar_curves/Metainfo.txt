@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_cifar_curves'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'CIFAR-10: a small CNN with and without data augmentation, and plain vs residual 32-layer networks (training loss), seed 20261108.'
+
+Keywords: 'CIFAR-10, data augmentation, ResNet, residual connection, degradation problem, CNN'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'CIFAR-10 (Krizhevsky, 2009); saved training histories and test accuracies (cifar_curves_results.json)'
+
+Output: 'cifar_curves.png'

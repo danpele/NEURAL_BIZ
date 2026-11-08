@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L7_data_scaling'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 7 of Neural Networks and Deep Learning (NN), attention and transformers. Test macro-F1 as a function of the number of training tweets (5-100 % of the training set, seed 1): TF-IDF, small transformer from scratch, frozen FinBERT + logistic regression.'
+
+Keywords: 'learning curve, sample size, pretraining, transfer learning, FinBERT'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L7/results/data_scaling.csv'
+
+Output: 'data_scaling.png'

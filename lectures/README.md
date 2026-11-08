@@ -31,6 +31,7 @@ python3 lectures/Lk/make_notebook_Lk.py        # lecture + seminar notebooks, EN
 python3 lectures/common/build_web_lecture.py k --frames   # frame hashes for web_en.md / web_ro.md
 python3 lectures/common/build_web_lecture.py k            # web/Lk.html, web/Lk_ro.html + web/Lk_log.txt
 python3 assets/make_showcase.py                # chart carousels of the lecture cards (from the Quantlets)
+python3 tools/update_course_data.py            # cards (CARD.json), bibliography (REFS) and abbreviations (ABBR) of course-data.js
 python3 tools/check_site.py                    # headless Chrome: console errors, failed requests, broken links
 ```
 

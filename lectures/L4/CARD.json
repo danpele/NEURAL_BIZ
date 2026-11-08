@@ -1,0 +1,34 @@
+{
+ "title": {
+  "en": "Convolutional neural networks (CNN) and transfer learning",
+  "ro": "Rețele neuronale convoluționale (CNN) și transferul învățării"
+ },
+ "topics": {
+  "en": [
+   "The convolutional layer as a formula: kernel, padding, stride, channels, parameters, pooling and the receptive field; backpropagation through a convolution",
+   "Product photos (Fashion-MNIST): softmax regression, multilayer perceptron (MLP) and CNN with three seeds, McNemar's test, learned filters and feature maps",
+   "Architectures from LeNet to ResNet: residual connections and the degradation problem, data augmentation, measured on CIFAR-10",
+   "Transfer learning on Sentinel-2 satellite images (EuroSAT): feature extraction versus fine-tuning, the label budget, Grad-CAM explanations and land-use shares for lenders and insurers"
+  ],
+  "ro": [
+   "Stratul convoluțional ca formulă: nucleu, completarea marginilor (padding), pas (stride), canale, parametri, agregare (pooling) și cîmp receptiv; propagarea înapoi printr-o convoluție",
+   "Fotografii de produse (Fashion-MNIST): regresia softmax, perceptronul multistrat (MLP) și CNN cu trei semințe, testul McNemar, filtrele învățate și hărțile de trăsături",
+   "Arhitecturi de la LeNet la ResNet: conexiunile reziduale și problema degradării, augmentarea datelor, măsurate pe CIFAR-10",
+   "Transferul învățării pe imagini satelitare Sentinel-2 (EuroSAT): extragerea trăsăturilor față de ajustarea fină, bugetul de etichete, explicații Grad-CAM și ponderile utilizării terenului pentru creditori și asigurători"
+  ]
+ },
+ "further": [
+  {
+   "label": "He et al. (2016), Deep residual learning for image recognition",
+   "url": "https://doi.org/10.1109/CVPR.2016.90"
+  },
+  {
+   "label": "Helber et al. (2019), EuroSAT",
+   "url": "https://doi.org/10.1109/JSTARS.2019.2918242"
+  },
+  {
+   "label": "Jheng, Pele, Tak & Găman (2026), A multimodal vision-language framework for financial anomaly detection",
+   "url": "https://doi.org/10.2478/picbe-2026-0020"
+  }
+ ]
+}

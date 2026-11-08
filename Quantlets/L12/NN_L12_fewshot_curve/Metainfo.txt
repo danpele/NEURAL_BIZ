@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_fewshot_curve'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Macro-F1 on Financial PhraseBank of Qwen2.5-1.5B and 3B with 0, 3, 6, 12 and 24 balanced examples in the prompt (three seeds for the choice of examples), against TF-IDF with logistic regression.'
+
+Keywords: 'large language models, prompt engineering, financial sentiment, Qwen2.5, zero-shot, few-shot, in-context learning'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/fewshot_labels_pb.csv, predictions_pb.csv'
+
+Output: 'fewshot_curve.png'

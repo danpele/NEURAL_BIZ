@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_shap_dependence'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'SHAP dependence of the debt-to-income ratio (DEBTINC) in an MLP credit model on HMEQ, with median-imputed missing values marked.'
+
+Keywords: 'SHAP dependence plot, missing values, debt-to-income, credit scoring'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'shap_dependence.png'

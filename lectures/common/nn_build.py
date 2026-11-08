@@ -391,6 +391,7 @@ def first_use_audit(tex, acronyms, start_marker="% END-FRONT-MATTER"):
     body = re.sub(r"% BEGIN-ABBR.*?% END-ABBR", " ", body, flags=re.S)
     body = re.sub(r"\\framesubtitle\{[^\n]*\}", " ", body)          # citation lines are not first uses
     body = re.sub(r"\\noindent\{\\scriptsize\\color\{FooterGray\}[^\n]*", " ", body)   # bottom citation line (new layout)
+    body = re.sub(r"\\href\{[^{}]*\}\{[^{}]*/[^{}]*\}", " ", body)        # links shown as a URL or path (e.g. a repository name)
     body = _strip(body)
     body = re.sub(r"(?<!\\)\\\[.*?(?<!\\)\\\]", " ", body, flags=re.S)                  # display math: symbols, defined in the text
     body = re.sub(r"(?<!\\)\$.*?(?<!\\)\$", " ", body, flags=re.S)           # inline math

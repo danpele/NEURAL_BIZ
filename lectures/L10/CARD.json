@@ -1,0 +1,31 @@
+{
+ "title": {
+  "en": "Reinforcement learning: trading, hedging and battery dispatch",
+  "ro": "Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor"
+ },
+ "topics": {
+  "en": [
+   "Markov decision processes, value functions and the Bellman equation",
+   "Dynamic programming: the perfect-foresight battery on Romanian, Hungarian, German and Bulgarian day-ahead prices",
+   "Value-based learning: tabular Q-learning and double DQN for battery dispatch, against yesterday's optimal plan",
+   "Policy gradients, actor-critic, GAE and PPO: trading the S&P 500 against buy-and-hold and the 200-day moving average, five seeds and a block bootstrap",
+   "Deep hedging: a neural policy that minimises the expected shortfall of a short one-month call, against the Black-Scholes delta, with transaction costs",
+   "Model risk of RL in production: reward design, simulator gap, seeds, guardrails",
+   "Research of our group: joint probabilistic forecasting for battery arbitrage in day-ahead power markets"
+  ],
+  "ro": [
+   "Procese decizionale Markov, funcții de valoare și ecuația Bellman",
+   "Programarea dinamică: bateria cu previziune perfectă pe prețurile pentru ziua următoare din România, Ungaria, Germania și Bulgaria",
+   "Învățarea bazată pe valoare: Q-learning tabelar și DQN dublu pentru dispecerizarea bateriei, față de planul optim de ieri",
+   "Gradienți de politică, actor-critic, GAE și PPO: tranzacționarea S&P 500 față de strategia cumpără și păstrează și media mobilă de 200 de zile, cinci valori inițiale și bootstrap pe blocuri",
+   "Acoperirea neuronală: o politică ce minimizează pierderea așteptată în coadă a unei opțiuni call vîndute pe o lună, față de delta Black-Scholes, cu costuri de tranzacționare",
+   "Riscul de model al RL în producție: proiectarea recompensei, diferența față de simulator, valorile inițiale, limitele de siguranță",
+   "Cercetările grupului: prognoza probabilistică comună pentru arbitrajul cu baterii pe piețele pentru ziua următoare"
+  ]
+ },
+ "further": [
+  {"url": "http://incompleteideas.net/book/the-book-2nd.html", "en": "Sutton & Barto, Reinforcement Learning: An Introduction (free online)", "ro": "Sutton & Barto, Reinforcement Learning: An Introduction (gratuit online)"},
+  {"url": "https://spinningup.openai.com", "en": "OpenAI Spinning Up in Deep RL: policy gradients and PPO", "ro": "OpenAI Spinning Up in Deep RL: gradienți de politică și PPO"},
+  {"url": "https://doi.org/10.2139/ssrn.6872381", "en": "Andrei, Cepoi et al. (2026), Joint probabilistic forecasting for battery arbitrage (SSRN)", "ro": "Andrei, Cepoi et al. (2026), Prognoza probabilistică comună pentru arbitrajul cu baterii (SSRN)"}
+ ]
+}

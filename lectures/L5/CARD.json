@@ -1,0 +1,34 @@
+{
+ "title": {
+  "en": "Recurrent networks: RNN, LSTM and GRU for sequences and financial time series",
+  "ro": "Rețele recurente: RNN, LSTM și GRU pentru secvențe și serii de timp financiare"
+ },
+ "topics": {
+  "en": [
+   "The recurrent neural network (RNN), backpropagation through time and vanishing or exploding gradients, with gradient clipping",
+   "LSTM (long short-term memory) and GRU (gated recurrent unit) cells gate by gate; measured memory and gate activations on real data",
+   "A leakage-free protocol: time-ordered splits, scaling on the training years, seeds and the Diebold–Mariano test; naive, HAR and GARCH benchmarks first",
+   "Case studies: S&P 500 volatility (Garman–Klass), next-day returns of the S&P 500 and Banca Transilvania, and day-ahead hourly electricity load in Romania"
+  ],
+  "ro": [
+   "Rețeaua neuronală recurentă (RNN), propagarea înapoi în timp și gradienții care dispar sau explodează, cu plafonarea gradientului",
+   "Celulele LSTM (long short-term memory) și GRU (gated recurrent unit), poartă cu poartă; memoria măsurată și activările porților pe date reale",
+   "Un protocol fără scurgeri de informație: împărțire cronologică, scalare pe anii de antrenare, semințe și testul Diebold–Mariano; întîi modelele de referință naiv, HAR și GARCH",
+   "Studii de caz: volatilitatea S&P 500 (Garman–Klass), randamentele de a doua zi ale S&P 500 și Banca Transilvania și consumul orar de energie electrică din România pentru ziua următoare"
+  ]
+ },
+ "further": [
+  {
+   "label": "Hochreiter & Schmidhuber (1997), Long short-term memory",
+   "url": "https://doi.org/10.1162/neco.1997.9.8.1735"
+  },
+  {
+   "label": "Corsi (2009), The HAR model of realized volatility",
+   "url": "https://doi.org/10.1093/jjfinec/nbp001"
+  },
+  {
+   "label": "Jheng, Tak, Găman, Mazurencu-Marinescu-Pele & Pele (2026), Zero-shot VaR and ES with conformal calibration",
+   "url": "https://doi.org/10.24818/18423264/60.2.26.14"
+  }
+ ]
+}

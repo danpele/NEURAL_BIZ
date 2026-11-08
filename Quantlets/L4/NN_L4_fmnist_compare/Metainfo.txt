@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_fmnist_compare'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test accuracy (mean and standard deviation over three seeds) and number of parameters of softmax regression, MLP and CNN on Fashion-MNIST.'
+
+Keywords: 'CNN, MLP, parameters, weight sharing, test accuracy, seeds, McNemar test'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Fashion-MNIST; saved test accuracies of 3 seeds per model and test predictions (fmnist_compare_results.json)'
+
+Output: 'fmnist_compare.png'

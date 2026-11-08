@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_fraud_by_hour'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Hourly fraud rate (weighted to the full data) over the two days of the ULB credit-card fraud data, with the start of the validation and test periods of the time-ordered split.'
+
+Keywords: 'fraud detection, class imbalance, time-ordered split, credit cards, ULB fraud data'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'fraud_by_hour.png'

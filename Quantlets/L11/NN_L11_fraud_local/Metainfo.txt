@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_fraud_local'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Attributions of saliency, gradient x input and integrated gradients for one fraudulent transaction of day 2 (median fraud score), normalised to shares of the total.'
+
+Keywords: 'local explanation, saliency, integrated gradients, fraud detection, credit-card transactions'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'fraud_local.png'

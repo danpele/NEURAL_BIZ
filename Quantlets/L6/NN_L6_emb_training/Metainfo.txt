@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_emb_training'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Training loss of word2vec (SGNS) by epoch and distribution of the GloVe co-occurrence counts, both on ECB speeches.'
+
+Keywords: 'word2vec, GloVe, negative sampling, co-occurrence, weighting function, embeddings'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ecb_speeches_2022plus.csv; saved losses and co-occurrence histogram of analysis_L6.py (emb_training_results.json)'
+
+Output: 'emb_training.png'

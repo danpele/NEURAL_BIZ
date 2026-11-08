@@ -1,0 +1,36 @@
+{
+ "title": {
+  "en": "Multimodal and vision-language models; synthesis of the course",
+  "ro": "Modele multimodale și vizual-lingvistice; sinteza cursului"
+ },
+ "topics": {
+  "en": [
+   "Vision transformers (ViT): images as patch tokens, attention rollout on satellite images",
+   "CLIP (contrastive language–image pre-training): contrastive loss, zero-shot classification of EuroSAT images, prompt design and text-to-image search",
+   "Few labels or many: CLIP embeddings with logistic regression against a CNN (convolutional neural network) trained from scratch",
+   "Vision-language models (VLM): market regimes from chart images and table reading, against models on the numbers",
+   "Synthesis: choosing a model for a business problem, evaluation rules, responsible use and open problems"
+  ],
+  "ro": [
+   "Transformere pentru imagini (ViT): imaginile ca tokeni-petic, propagarea atenției pe imagini satelitare",
+   "CLIP (preantrenare contrastivă limbaj–imagine): pierderea contrastivă, clasificarea zero-shot a imaginilor EuroSAT, formularea prompturilor și căutarea imaginilor după text",
+   "Puține sau multe etichete: embedding-uri CLIP cu regresie logistică față de o CNN (rețea neuronală convoluțională) antrenată de la zero",
+   "Modele vizual-lingvistice (VLM): regimurile pieței din imaginile graficelor și citirea tabelelor, față de modelele pe cifre",
+   "Sinteză: alegerea modelului pentru o problemă de afaceri, reguli de evaluare, utilizare responsabilă și probleme deschise"
+  ]
+ },
+ "further": [
+  {
+   "title": "OpenCLIP models and benchmarks",
+   "url": "https://github.com/mlfoundations/open_clip"
+  },
+  {
+   "title": "Qwen2-VL",
+   "url": "https://github.com/QwenLM/Qwen2-VL"
+  },
+  {
+   "title": "Jheng, Pele, Tak & Găman (2026), A multimodal vision-language framework for financial anomaly detection",
+   "url": "https://doi.org/10.2478/picbe-2026-0020"
+  }
+ ]
+}

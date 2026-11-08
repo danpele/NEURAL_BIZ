@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_local_robustness'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Local robustness of gradient explanations for a fraud MLP: relative change of the attribution vector per unit of a small input perturbation.'
+
+Keywords: 'local Lipschitz, explanation robustness, saliency, SmoothGrad, integrated gradients'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'local_robustness.png'

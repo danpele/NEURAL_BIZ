@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_fmnist_samples'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Two training images of each of the ten Fashion-MNIST product classes (Zalando catalogue photos, 28 x 28 grey levels).'
+
+Keywords: 'Fashion-MNIST, images, product classification, convolutional neural network, e-commerce'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Fashion-MNIST (Zalando Research), downloaded with torchvision'
+
+Output: 'fmnist_samples.png'

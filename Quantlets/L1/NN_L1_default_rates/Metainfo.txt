@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_default_rates'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Default rates of German credit applicants by checking-account status and of HMEQ home-equity loans by number of delinquent credit lines, against the sample average.'
+
+Keywords: 'credit risk, default rate, probability of default, exploratory data analysis, German credit, HMEQ'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit); data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'default_rates.png'

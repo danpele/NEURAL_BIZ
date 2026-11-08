@@ -1,0 +1,401 @@
+date,speaker,title,rank_tfidf,rank_bm25,rank_dense,rank_hybrid
+2022-01-08,Isabel Schnabel,Looking through higher energy prices? Monetary policy and the green transition,2,2,2,3
+2022-01-11,Christine Lagarde,Remarks by Christine Lagarde at a virtual ceremony marking the change of office of the President of the Bundesbank,1,1,1,1
+2022-01-14,Christine Lagarde,Conference of Parliamentary Committees for Union Affairs (COSAC)  ,1,1,1,1
+2022-02-07,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,34,59,13,19
+2022-02-10,Luis de Guindos,Managing Europe’s economic recovery after the pandemic,1,1,1,1
+2022-02-14,Christine Lagarde,20th anniversary of the entry into circulation of euro banknotes and coins,12,11,2,4
+2022-02-14,Christine Lagarde,European Parliament plenary debate on the ECB Annual Report,11,11,3,7
+2022-02-17,Philip R. Lane,Inflation in the near-term and the medium-term,1,2,1,1
+2022-02-18,Fabio Panetta,"Central bank digital currencies: defining the problems, designing the solutions",11,14,1,1
+2022-02-18,Frank Elderson,Towards an immersive supervisory approach to the management of climate-related and environmental risks in the banking sector,4,3,5,2
+2022-02-23,Frank Elderson,Towards a stronger AML/CFT framework in the EU,1,1,1,1
+2022-02-23,Frank Elderson,Prudential pathways to Paris,2,1,1,1
+2022-02-24,Isabel Schnabel,Finding the right sequence,1,3,9,5
+2022-02-28,Fabio Panetta,Small steps in a dark room: guiding policy on the path out of the pandemic,4,4,2,3
+2022-03-02,Philip R. Lane,The monetary policy strategy of the ECB: the playbook for monetary policy decisions,1,2,4,1
+2022-03-14,Frank Elderson,Full disclosure: coming to grips with an inconvenient truth,1,1,1,1
+2022-03-15,Christine Lagarde,Remarks on the euro area economy  ,76,25,38,17
+2022-03-17,Isabel Schnabel,"A new age of energy inflation: climateflation, fossilflation and greenflation",1,2,1,3
+2022-03-17,Christine Lagarde,Monetary policy in an uncertain world,165,150,4,23
+2022-03-22,Fabio Panetta,Building a robust and diversified clearing ecosystem,1,1,3,1
+2022-03-24,Frank Elderson,Proportioning policy action to the evidence: making the monetary policy strategy of the ECB concrete,6,2,1,1
+2022-03-30,Fabio Panetta,A digital euro that serves the needs of the public: striking the right balance,4,4,1,1
+2022-03-30,Christine Lagarde,Finding resilience in times of uncertainty,3,2,136,12
+2022-03-31,Philip R. Lane,Monetary policy during the pandemic: the role of the PEPP,2,2,1,1
+2022-04-02,Isabel Schnabel,Managing policy trade-offs,3,1,5,2
+2022-04-06,Luis de Guindos,An EU financial system for the future,1,1,1,1
+2022-04-06,Fabio Panetta,"Europe’s shared destiny, economics and the law",3,3,2,4
+2022-04-08,Fabio Panetta,More than an intellectual game: exploring the monetary policy and financial stability implications of central bank digital currencies ,1,1,1,1
+2022-04-21,Christine Lagarde,IMFC Statement,295,295,11,26
+2022-04-22,Christine Lagarde,A new global map: European resilience in a changing world,5,2,1,1
+2022-04-25,Fabio Panetta,For a few cryptos more: the Wild West of crypto finance,1,1,1,1
+2022-04-27,Christine Lagarde,Leadership in times of crisis,4,2,1,1
+2022-04-27,Philip R. Lane,Statistical implications of the ECB’s monetary policy strategy review,1,1,1,1
+2022-04-28,Luis de Guindos,Presentation of the ECB Annual Report 2021 to the Committee on Economic and Monetary Affairs of the European Parliament,2,1,1,1
+2022-05-05,Philip R. Lane,The euro area outlook: some analytical considerations,1,1,5,2
+2022-05-11,Isabel Schnabel,The globalisation of inflation,1,1,1,1
+2022-05-11,Christine Lagarde,Challenges along Europe’s road,1,1,1,1
+2022-05-16,Fabio Panetta,Public money for the digital era: towards a digital euro,2,2,3,2
+2022-05-19,Luis de Guindos,Building the Financial System of the 21st Century,1,1,1,1
+2022-05-25,Fabio Panetta,Normalising monetary policy in non-normal times,2,1,1,1
+2022-06-01,Fabio Panetta,The ECB’s 2022 Convergence Report ,1,1,1,1
+2022-06-01,Fabio Panetta,Adapting to the fast-moving cyber threat landscape: no room for complacency,1,1,4,3
+2022-06-11,Frank Elderson,"Supervising banks’ governance: structure, behaviour and culture",1,1,1,1
+2022-06-14,Isabel Schnabel,United in diversity – Challenges for monetary policy in a currency union,1,1,4,1
+2022-06-15,Fabio Panetta,The digital euro and the evolution of the financial system,1,1,1,1
+2022-06-16,Fabio Panetta,Bringing European payments to the next stage: a public-private endeavour,1,1,1,1
+2022-06-20,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,1,1,1,1
+2022-06-22,Frank Elderson,"Good, bad and hopeful news: the latest on the supervision of climate risks",1,1,2,1
+2022-06-28,Christine Lagarde,Price stability and policy transmission in the euro area,13,15,21,8
+2022-07-01,Fabio Panetta,Europe as a common shield: protecting the euro area economy from global shocks,13,13,15,14
+2022-07-04,Luis de Guindos,Challenges for monetary policy,161,235,114,142
+2022-08-27,Isabel Schnabel,Monetary policy and the Great Volatility,1,1,1,1
+2022-08-29,Philip R. Lane,Monetary policy in the euro area: the next phase,1,1,2,1
+2022-09-12,Isabel Schnabel,Reconciling the macro and micro evidence on the effects of monetary policy,1,1,1,1
+2022-09-14,Philip R. Lane,Monetary policy and the money market,1,1,3,1
+2022-09-15,Luis de Guindos,Euro area current policy challenges,58,85,178,115
+2022-09-20,Christine Lagarde,Monetary policy in the euro area,1,3,2,1
+2022-09-26,Fabio Panetta,Demystifying wholesale central bank digital currency,5,5,1,2
+2022-09-26,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,16,18,6,14
+2022-09-28,Frank Elderson,The ECB’s monetary policy strategy: delivering our mandate in all circumstances,25,30,54,21
+2022-09-29,Frank Elderson,Natura finis magistra – acknowledging nature-related risks to make finance thrive,2,1,1,1
+2022-09-29,Luis de Guindos,"Policy mix of the future: the role of monetary, fiscal and macroprudential policies",1,1,1,1
+2022-09-29,Fabio Panetta,Building on our strengths: the role of the public and private sectors in the digital euro ecosystem ,2,2,1,1
+2022-09-30,Isabel Schnabel,Monetary policy in a cost-of-living crisis,6,8,1,1
+2022-10-11,Philip R. Lane,The transmission of monetary policy,4,2,3,2
+2022-10-14,Christine Lagarde,IMFC Statement,272,272,51,97
+2022-11-03,Fabio Panetta,Mind the step: calibrating monetary policy in a volatile environment,4,4,20,3
+2022-11-04,Luis de Guindos,The euro area economy and the energy transition,1,1,1,1
+2022-11-04,Christine Lagarde,Monetary policy in a high inflation environment: commitment and clarity ,3,2,2,2
+2022-11-07,Christine Lagarde,Digital euro: a common European project,16,8,15,9
+2022-11-09,Frank Elderson,Delivering on the Glasgow Declaration: actions by the ECB on the road through Sharm El-Sheikh to a Paris-compatible path,1,1,1,1
+2022-11-11,Fabio Panetta,Investing in Europe’s future: The case for a rethink,4,4,4,2
+2022-11-14,Fabio Panetta,The complexity of monetary policy,105,85,5,16
+2022-11-14,Luis de Guindos,Outlook for the euro area economy and financial stability,1,1,11,3
+2022-11-15,Frank Elderson,Maintaining prudence when navigating unexpected tides and firming currents,1,1,1,1
+2022-11-16,Fabio Panetta,Greener and cheaper: could the transition away from fossil fuels generate a divine coincidence?,1,3,1,1
+2022-11-18,Christine Lagarde,Monetary policy in a new environment,2,3,9,2
+2022-11-24,Isabel Schnabel,Finding the right mix: monetary-fiscal interaction at times of high inflation,6,8,6,6
+2022-11-28,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,59,58,11,16
+2022-12-01,Frank Elderson,The European Climate Law and the European Central Bank,1,1,2,2
+2022-12-07,Fabio Panetta,Crypto dominos: the bursting crypto bubbles and the destiny of digital finance,2,2,1,1
+2022-12-08,Christine Lagarde,Macroprudential policy in Europe: building resilience in a challenging environment,23,12,11,20
+2023-01-10,Isabel Schnabel,Monetary policy tightening and the green transition,1,1,6,4
+2023-01-23,Fabio Panetta,"The digital euro: our money wherever, whenever we need it  ",5,5,1,3
+2023-01-23,Christine Lagarde,New challenges in a changing world,2,2,5,3
+2023-02-15,Christine Lagarde,European Parliament plenary debate on the ECB Annual Report,9,13,10,10
+2023-02-16,Philip R. Lane,The euro area hiking cycle: an interim assessment,2,6,1,2
+2023-02-16,Fabio Panetta,Monetary policy after the energy shock,59,51,11,17
+2023-03-02,Isabel Schnabel,Quantitative tightening: rationale and market impact,2,2,2,1
+2023-03-06,Philip R. Lane,Underlying inflation,2,1,1,1
+2023-03-08,Christine Lagarde,Empowering women in a changing global economy,1,1,1,1
+2023-03-08,Fabio Panetta,The Quick and the Dead: building up cyber resilience in the financial sector,4,6,11,5
+2023-03-20,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,35,44,12,13
+2023-03-22,Christine Lagarde,The path ahead,2,2,2,2
+2023-03-22,Fabio Panetta,Everything everywhere all at once: responding to multiple global shocks ,1,1,1,1
+2023-03-27,Frank Elderson,Urgent and vitally important: 2023 as a key milestone in stepping up the management of climate and environmental risks ,1,1,1,1
+2023-03-27,Isabel Schnabel,Back to normal? Balance sheet size and interest rate control,3,3,8,5
+2023-04-01,Luis de Guindos,Outlook for the euro area economy and financial stability,40,40,84,61
+2023-04-14,Christine Lagarde,IMFC Statement,266,266,8,22
+2023-04-17,Christine Lagarde,Central banks in a fragmenting world,5,5,1,4
+2023-04-19,Philip R. Lane,Monetary policy tightening and the financing of firms,6,6,1,3
+2023-04-21,Frank Elderson,Policymakers as policy takers – accounting for climate-related and environmental factors in banking supervision and monetary policy,2,3,1,1
+2023-04-24,Fabio Panetta,United we stand: European integration as a response to global fragmentation,2,3,2,1
+2023-04-24,Fabio Panetta,A digital euro: widely available and easy to use,1,1,4,1
+2023-05-05,Frank Elderson,Closing gaps to bend the trend: embedding the flow of finance in the transition,1,1,60,4
+2023-05-16,Christine Lagarde,Laudatory speech,273,187,48,117
+2023-05-17,Luis de Guindos,A resilient banking sector for the euro area,29,32,9,13
+2023-05-19,Isabel Schnabel,Monetary and financial stability – can they be separated?,1,1,1,1
+2023-05-23,Luis de Guindos,Towards a stronger non-bank financial sector ,1,1,2,2
+2023-05-24,Christine Lagarde,Twenty-five years of the ECB,48,18,19,35
+2023-05-25,Luis de Guindos,Presentation of the ECB Annual Report 2022 to the Committee on Economic and Monetary Affairs of the European Parliament,4,3,5,2
+2023-06-01,Luis de Guindos,Financial stability in the euro area,28,27,2,8
+2023-06-01,Christine Lagarde,The fight against inflation,5,5,6,1
+2023-06-05,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,44,48,4,9
+2023-06-07,Luis de Guindos,Banking Union and Capital Markets Union: high time to move on,9,6,5,5
+2023-06-09,Luis de Guindos,EU banking package,3,2,88,11
+2023-06-16,Christine Lagarde,Remarks at G30 dinner,312,305,342,377
+2023-06-19,Isabel Schnabel,The risks of stubborn inflation,13,8,2,2
+2023-06-20,Luis de Guindos,Matteo Maggiori’s contribution to research on international finance and macroeconomics ,1,1,1,1
+2023-06-22,Fabio Panetta,Central clearing in turbulent times: frontiers in regulation and oversight,2,1,1,1
+2023-06-23,Christine Lagarde,Remarks at the Summit for a new global financing pact,23,11,62,40
+2023-06-23,Fabio Panetta,Paradise lost? How crypto failed to deliver on its promises and what to do about it,7,5,2,1
+2023-06-27,Christine Lagarde,Breaking the persistence of inflation,3,8,4,2
+2023-07-07,Luis de Guindos,The inflation outlook and monetary policy in the euro area ,1,1,39,7
+2023-07-12,Philip R. Lane,The banking channel of monetary policy tightening in the euro area,1,1,2,1
+2023-07-17,Christine Lagarde,Strengthening resilience in a changing geopolitical landscape,1,1,8,1
+2023-08-03,Fabio Panetta,Getting disinflation right,42,26,9,5
+2023-08-25,Christine Lagarde,Policymaking in an age of shifts and breaks,1,1,1,1
+2023-08-31,Isabel Schnabel,Disinflation and the Phillips curve,2,2,2,2
+2023-09-04,Christine Lagarde,Communication and monetary policy,3,2,1,2
+2023-09-04,Fabio Panetta,Shaping Europe’s digital future: the path towards a digital euro,11,11,5,3
+2023-09-04,Frank Elderson,“Come hell or high water”: addressing the risks of climate and environment-related litigation for the banking sector,1,3,1,1
+2023-09-05,Isabel Schnabel,What is special about climate-related and environmental risks?,1,1,4,1
+2023-09-20,Fabio Panetta,Investing in tomorrow: Future-proofing fiscal policies and governance in Europe,2,2,1,1
+2023-09-20,Frank Elderson,Beacons of hope to navigate the spring tide of urgency: from Terschelling to Frankfurt to Paris,1,1,1,1
+2023-09-21,Christine Lagarde,A Mediterranean Odyssey: from ancient origins to future strength,2,2,1,1
+2023-09-22,Philip R. Lane,Disinflation and monetary policy in the euro area,7,7,55,15
+2023-09-25,Isabel Schnabel,Money and inflation,1,1,1,1
+2023-09-25,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,30,56,7,12
+2023-09-29,Christine Lagarde,Towards an orderly energy transition ,1,1,1,1
+2023-10-04,Luis de Guindos,The inflation outlook and monetary policy in the euro area,25,26,1,4
+2023-10-04,Christine Lagarde,Welcome address,113,81,118,75
+2023-10-14,Christine Lagarde,IMFC Statement,380,380,34,75
+2023-10-17,Luis de Guindos,Macroprudential policy and research: learning from challenging times,2,1,1,1
+2023-10-25,Christine Lagarde,Remarks delivered at the Bank of Greece on the occasion of the external Governing Council monetary policy meeting in Athens,2,1,1,1
+2023-10-30,Luis de Guindos,The euro area economy and our monetary policy stance,16,9,12,6
+2023-11-02,Isabel Schnabel,The last mile,1,1,1,1
+2023-11-09,Philip R. Lane,Central bank liquidity: a macroeconomic perspective,2,1,1,1
+2023-11-13,Luis de Guindos,Outlook for the euro area economy and financial stability,7,8,5,4
+2023-11-14,Frank Elderson,Making finance fit for Paris: achieving “negative splits”,2,2,1,1
+2023-11-16,Christine Lagarde,The ESRB’s first general warning one year on,1,1,1,1
+2023-11-17,Christine Lagarde,A Kantian shift for the capital markets union,6,3,1,1
+2023-11-21,Christine Lagarde,Monetary policy in the euro area: attentive and focused,1,1,20,1
+2023-11-22,Frank Elderson,Monetary policy in the climate and nature crises: preserving a “Stabilitätskultur”,3,3,1,2
+2023-11-27,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,74,87,126,125
+2023-11-30,Christine Lagarde,Welcome address at the fifth ECB Forum on Banking Supervision,1,1,3,1
+2023-12-04,Christine Lagarde,Governance at a turning point,1,1,1,1
+2023-12-07,Frank Elderson,"Powers, ability and willingness to act – the mainstay of effective banking supervision",4,3,1,1
+2024-01-10,Luis de Guindos,The economic outlook and monetary policy in the euro area ,25,25,9,10
+2024-01-17,Piero Cipollone,One step ahead: protecting the cyber resilience of financial infrastructures,4,4,2,1
+2024-02-08,Philip R. Lane,Disinflation in the euro area,1,3,16,2
+2024-02-09,Piero Cipollone,Modernising finance: the role of central bank money,1,1,16,8
+2024-02-12,Philip R. Lane,Euro area international financial flows: analytical insights and measurement challenges ,1,1,1,1
+2024-02-12,Piero Cipollone,The euro at 25: what next for Economic and Monetary Union?,14,14,2,3
+2024-02-14,Piero Cipollone,Preserving people’s freedom to use a public means of payment: insights into the digital euro preparation phase,1,1,1,1
+2024-02-14,Luis de Guindos,"Monetary policy, financial stability and medium-term growth in the euro area ",3,1,1,1
+2024-02-15,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,50,66,3,10
+2024-02-16,Isabel Schnabel,From laggard to leader? Closing the euro area’s technology gap,7,7,1,5
+2024-02-26,Christine Lagarde,European Parliament plenary debate on the ECB Annual Report,4,4,7,6
+2024-03-14,Isabel Schnabel,The Eurosystem’s operational framework,4,4,1,1
+2024-03-20,Christine Lagarde,Building confidence in the path ahead,6,6,1,1
+2024-03-20,Isabel Schnabel,R(ising) star?,2,2,1,1
+2024-03-27,Piero Cipollone,The confidence to act: monetary policy and the role of wages during the disinflation process,3,2,3,1
+2024-03-27,Frank Elderson,Taking into account climate and nature in monetary policy and banking supervision around the world,2,2,2,1
+2024-04-12,Frank Elderson,“Know thyself” – avoiding policy mistakes in light of the prevailing climate science,5,5,1,1
+2024-04-15,Philip R. Lane,Disinflation in the euro area: an update,18,10,1,6
+2024-04-17,Isabel Schnabel,The future of inflation (forecast) targeting,1,1,2,1
+2024-04-18,Luis de Guindos,Presentation of the ECB Annual Report 2023 to the Committee on Economic and Monetary Affairs of the European Parliament,4,5,1,2
+2024-04-19,Christine Lagarde,IMFC Statement,332,332,6,20
+2024-04-22,Christine Lagarde,Unlocking the power of ideas,1,1,1,1
+2024-04-24,Piero Cipollone,"Innovation, integration and independence: taking the Single Euro Payments Area to the next level",2,2,2,1
+2024-04-29,Luis de Guindos,Monetary policy and financial stability in the euro area,142,127,118,138
+2024-05-02,Philip R. Lane,The analytics of the monetary policy tightening cycle,9,9,4,4
+2024-05-14,Isabel Schnabel,From laggard to leader? Closing the euro area’s technology gap,391,394,397,400
+2024-05-26,Piero Cipollone,Europe’s tragedy of the horizon: the green transition and the role of the ECB,1,1,1,1
+2024-05-27,Philip R. Lane,Inflation in the euro area,124,72,20,45
+2024-05-28,Isabel Schnabel,The benefits and costs of asset purchases,1,1,2,1
+2024-06-07,Isabel Schnabel,Is monetary policy dominated by fiscal policy?,1,1,1,1
+2024-06-07,Christine Lagarde,Central banks in a changing world: the role of the ECB in the face of climate and environmental risks,21,3,1,1
+2024-06-11,Frank Elderson,Family ties: ten years of monetary policy and banking supervision under one European roof ,1,1,1,1
+2024-06-11,Philip R. Lane,Monetary policy and the disinflation process,11,12,49,17
+2024-06-14,Christine Lagarde,Policymaking in a new risk environment,11,11,19,9
+2024-06-18,Luis de Guindos,Strengthening European financial markets to ensure a more resilient future ,1,1,1,1
+2024-06-26,Philip R. Lane,Modern monetary analysis,1,1,1,1
+2024-07-01,Christine Lagarde,"Monetary policy in an unusual cycle: the risks, the path and the costs",5,6,3,2
+2024-07-04,Piero Cipollone,Artificial intelligence: a central bank’s view,1,1,1,2
+2024-07-23,Philip R. Lane,Opening remarks,11,15,169,16
+2024-08-24,Philip R. Lane,The effectiveness and transmission of monetary policy in the euro area,1,1,1,1
+2024-08-30,Isabel Schnabel,The euro area inflation outlook: a scenario analysis,1,1,8,1
+2024-09-06,Frank Elderson,"Nature-related risk: legal implications for central banks, supervisors and financial institutions",1,1,1,1
+2024-09-16,Philip R. Lane,Moving from 3.75 to 3.50: explaining the latest rate decision,10,10,34,5
+2024-09-20,Christine Lagarde,Setbacks and strides forward: structural shifts and monetary policy in the twenties,1,2,1,1
+2024-09-23,Piero Cipollone,From dependency to autonomy: the role of a digital euro in the European payment landscape,15,4,26,9
+2024-09-26,Christine Lagarde,Technology as a new frontier for macroprudential policy,1,1,1,1
+2024-09-27,Piero Cipollone,Monetary sovereignty in the digital age: the case for a digital euro,9,5,7,2
+2024-09-30,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,18,19,5,4
+2024-10-01,Luis de Guindos,"Expectations surveys, central banks and the economy",1,1,1,1
+2024-10-02,Isabel Schnabel,Escaping stagnation: towards a stronger euro area ,1,1,1,1
+2024-10-02,Luis de Guindos,"Bridging the gap: reviving the euro area’s productivity growth through innovation, investment and integration",2,2,1,1
+2024-10-04,Frank Elderson,Sustainable finance: from “eureka!” to action,1,1,16,3
+2024-10-07,Piero Cipollone,Towards a digital capital markets union,2,1,1,1
+2024-10-16,Christine Lagarde,Lessons from Ljubljana in uncertain times,2,1,1,1
+2024-10-24,Philip R. Lane,Underlying inflation: an update,1,1,1,1
+2024-10-25,Christine Lagarde,IMFC Statement ,1,2,1,1
+2024-10-28,Frank Elderson,Transcript of video recording for Finance and Biodiversity Day of 16th United Nations Conference on Biological Diversity (COP16) ,1,1,1,1
+2024-10-28,Luis de Guindos,Monetary policy and financial stability in the euro area,25,28,137,58
+2024-11-04,Frank Elderson,The first decade of European supervision: taking stock and looking ahead,4,4,1,1
+2024-11-05,Christine Lagarde,Competition policy in a changing world,1,1,1,1
+2024-11-05,Isabel Schnabel,The ECB’s monetary policy: towards price stability,398,397,398,398
+2024-11-06,Christine Lagarde,Welcome address at the tenth anniversary of the Single Supervisory Mechanism,1,1,2,1
+2024-11-06,Luis de Guindos,Economic developments and monetary policy in the euro area,6,6,9,2
+2024-11-07,Isabel Schnabel,The ECB’s balance sheet reduction: an interim assessment,1,2,2,1
+2024-11-14,Isabel Schnabel,Reassessing monetary policy tools in a volatile macroeconomic environment,2,2,1,1
+2024-11-15,Piero Cipollone,Some like it hotter: the conditions for a cyclical recovery in euro area productivity,1,1,1,1
+2024-11-16,Isabel Schnabel,Reassessing monetary policy tools in a rapidly changing world,399,398,398,397
+2024-11-18,Christine Lagarde,The economic and human challenges of a transforming era,218,186,7,21
+2024-11-18,Luis de Guindos,Financial stability in the euro area,10,10,18,6
+2024-11-18,Philip R. Lane,The 2021-2022 inflation surges and the monetary policy response through the lens of macroeconomic models,1,2,1,1
+2024-11-19,Frank Elderson,"Taking account of nature, naturally",1,2,1,2
+2024-11-21,Piero Cipollone,Building a solid cyber defence for the new geopolitical season,2,2,1,1
+2024-11-21,Frank Elderson,Securing stability in an insecure environment: navigating a bottleneck economy,3,2,1,1
+2024-11-22,Christine Lagarde,Follow the money: channelling savings into investment and innovation in Europe,18,18,4,6
+2024-11-22,Isabel Schnabel,Reassessing monetary policy tools in a volatile macroeconomic environment,393,391,398,399
+2024-11-25,Philip R. Lane,Monetary policy under uncertainty,10,2,9,2
+2024-11-28,Philip R. Lane,The 25th anniversary of the Euro50 Group: looking ahead to the 50th anniversary,1,1,1,1
+2024-12-04,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,21,28,2,5
+2024-12-16,Isabel Schnabel,Navigating towards neutral,58,47,48,18
+2024-12-16,Christine Lagarde,Monetary policy in the euro area,180,138,220,175
+2024-12-18,Philip R. Lane,The euro area outlook and monetary policy,24,25,19,11
+2025-01-15,Luis de Guindos,The economic outlook and monetary policy in the euro area,38,70,29,54
+2025-01-27,Christine Lagarde,Central bank independence in an era of volatility,1,1,1,1
+2025-02-05,Philip R. Lane,A middle path for ECB monetary policy,3,1,37,2
+2025-02-10,Christine Lagarde,European Parliament plenary debate on the ECB Annual Report,2,3,1,1
+2025-02-12,Frank Elderson,From concept to delivery: accounting for climate and nature in maintaining price stability and keeping banks safe and sound,3,3,5,2
+2025-02-18,Piero Cipollone,Striking the right balance: the ECB’s balance sheet and its implications for monetary policy,1,1,1,1
+2025-02-25,Isabel Schnabel,No longer convenient? Safe asset abundance and r*,16,13,1,1
+2025-03-12,Christine Lagarde,A robust strategy for a new era,3,1,2,1
+2025-03-19,Frank Elderson,"Resilience offers a competitive advantage, especially in uncertain times",8,7,1,2
+2025-03-20,Philip R. Lane,The digital euro: maintaining the autonomy of the monetary system,30,24,5,6
+2025-03-20,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,10,29,14,7
+2025-03-27,Isabel Schnabel,Financial literacy and monetary policy transmission,1,1,1,1
+2025-04-01,Christine Lagarde,The transformative power of AI,6,3,1,1
+2025-04-01,Piero Cipollone,Enhancing cross-border payments in Europe and beyond,4,2,2,3
+2025-04-02,Christine Lagarde,A “European moment” in an inverted world,2,2,2,2
+2025-04-03,Luis de Guindos,Financial stability in uncertain times,79,123,1,12
+2025-04-08,Piero Cipollone,Empowering Europe: boosting strategic autonomy through the digital euro,6,8,2,2
+2025-04-25,Christine Lagarde,IMFC Statement,132,156,197,163
+2025-04-28,Luis de Guindos,Presentation of the ECB Annual Report 2024 to the Committee on Economic and Monetary Affairs of the European Parliament,8,7,3,3
+2025-04-29,Piero Cipollone,Navigating a fractured horizon: risks and policy options in a fragmenting world,4,4,9,2
+2025-05-10,Isabel Schnabel,Keeping a steady hand in an unsteady world,3,2,1,1
+2025-05-15,Luis de Guindos,Financial stability in the euro area,2,2,8,2
+2025-05-15,Piero Cipollone,Harnessing the digital future of payments: Europe's path to sovereignty and innovation,37,29,3,10
+2025-05-16,Philip R. Lane,The communication of monetary policy decisions: incorporating risks and uncertainty,1,1,1,1
+2025-05-22,Frank Elderson,"Nature’s bell tolls for thee, economy!",1,1,1,1
+2025-05-26,Christine Lagarde,Earning influence: lessons from the history of international currencies,10,11,2,5
+2025-06-07,Christine Lagarde,Stemming the tide: safeguarding our ocean and economy,1,1,1,1
+2025-06-09,Frank Elderson,The rule of law as a constitutional pillar of European central banking,1,2,1,1
+2025-06-11,Philip R. Lane,The euro area bond market,1,1,7,4
+2025-06-11,Christine Lagarde,Drawing a common map: sustaining global cooperation in a fragmenting world,2,2,1,1
+2025-06-12,Luis de Guindos,“More Europe” and financial integration,10,9,1,3
+2025-06-12,Frank Elderson,What good supervision looks like,7,7,4,3
+2025-06-18,Frank Elderson,Europe at a crossroads: it is high time to complete the Single Market,2,2,1,1
+2025-06-19,Christine Lagarde,Strengthening economies in a stormy and fragmenting world,1,1,70,5
+2025-06-23,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,67,79,74,68
+2025-06-24,Philip R. Lane,Monetary policy: new challenges,82,69,3,23
+2025-06-26,Christine Lagarde,Culture and the economy,1,1,1,1
+2025-06-27,Piero Cipollone,The quest for cheaper and faster cross-border payments: regional and global solutions,3,4,1,1
+2025-06-30,Christine Lagarde,Strategy assessment: lessons learned,2,2,4,1
+2025-06-30,"Christine Lagarde,Philip R. Lane",Opening remarks on the ECB strategy assessment press conference (with Q&A),1,1,1,1
+2025-07-04,Frank Elderson,Deepening our commitment to confronting the climate and nature crises,4,6,5,6
+2025-07-09,Philip R. Lane,The monetary agenda at the ECB,2,4,1,1
+2025-07-10,Piero Cipollone,Shifting payment landscape: what a digital euro will bring,2,2,1,1
+2025-07-14,Piero Cipollone,The digital euro: legal tender in the digital age,1,2,3,1
+2025-08-20,Christine Lagarde,Panel remarks at the International Business Council of the World Economic Forum,201,255,198,251
+2025-08-23,Christine Lagarde,Beyond hysteresis: resilience in Europe’s labour market,1,2,2,2
+2025-09-01,Christine Lagarde,Building European autonomy: cooperation and the rule of law,1,1,1,1
+2025-09-03,Christine Lagarde,Cutting through the noise: exercising good judgment in a world of change,2,2,2,1
+2025-09-04,Piero Cipollone,The digital euro: ensuring resilience and inclusion in digital payments ,4,6,1,1
+2025-09-15,Christine Lagarde,Stability through balance: rethinking power in a connected world,2,1,1,1
+2025-09-17,Piero Cipollone,What resilience takes: strengthening the financial system in an era of heightened risk,1,2,2,1
+2025-09-17,Christine Lagarde,This time is never different: the importance of safeguarding financial stability,22,4,3,2
+2025-09-26,Piero Cipollone,Preparing the future of payments and money: the role of research and innovation,3,3,1,1
+2025-09-29,Piero Cipollone,"Digital euro: protecting our freedom, autonomy and security",1,1,7,3
+2025-09-30,Christine Lagarde,Trade wars and central banks: lessons from 2025,5,4,6,2
+2025-09-30,Piero Cipollone,Innovating for stability: central bank money in the digital era,13,11,2,1
+2025-10-01,Frank Elderson,From charting the course to staying the course: the path ahead for climate and nature risk supervision,2,3,3,3
+2025-10-03,Christine Lagarde,Monetary policy and financial stability: past lessons for future resilience,11,7,2,7
+2025-10-03,Isabel Schnabel,Resisting deregulation: safeguarding bank resilience in an evolving financial landscape,3,5,20,3
+2025-10-06,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,66,82,189,155
+2025-10-06,Philip R. Lane,The conduct of monetary policy,4,4,2,1
+2025-10-07,Christine Lagarde,Turning openness into strength: the moment of the euro,21,7,4,3
+2025-10-15,Luis de Guindos,From crisis to collective strength: a successful decade of the Single Resolution Mechanism and the road ahead ,1,1,1,1
+2025-10-17,Christine Lagarde,IMFC Statement,226,222,27,44
+2025-10-18,Christine Lagarde,Opening remarks,210,216,351,368
+2025-10-21,Christine Lagarde,Europe’s road to renewables,1,1,1,1
+2025-10-21,Philip R. Lane,The transmission of monetary policy: financial conditions and credit dynamics,1,1,1,1
+2025-10-23,Philip R. Lane,Acceptance speech 2025 Pádraig Ó hUiginn Award,1,1,3,1
+2025-10-27,Frank Elderson,Making supervision simpler: the role of supervisory guides,1,1,1,1
+2025-10-29,Christine Lagarde,Remarks delivered at the Palazzo Vecchio on the occasion of the external Governing Council monetary policy meeting in Florence,21,20,30,8
+2025-11-04,Christine Lagarde,Bulgaria on the euro’s doorstep: towards a shared future,2,2,1,1
+2025-11-06,Isabel Schnabel,Towards a new Eurosystem balance sheet,3,1,1,1
+2025-11-14,Frank Elderson,Resilient banks through effective supervision: a pillar of Europe’s competitiveness ,1,1,1,1
+2025-11-17,Luis de Guindos,Financial stability in the euro area,46,48,16,21
+2025-11-17,Piero Cipollone,The digital euro: a collective step forward for Europe,3,2,11,4
+2025-11-21,Christine Lagarde,From resilience to strength: unleashing Europe’s domestic market,5,5,3,1
+2025-11-22,Christine Lagarde,Fiscal policy and growth in Europe,3,1,10,5
+2025-11-24,Christine Lagarde,The transformative power of AI: Europe’s moment to act,12,6,3,3
+2025-12-03,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,46,50,8,11
+2025-12-03,Philip R. Lane,Inflation deviations and monetary policy,1,1,2,1
+2025-12-08,Piero Cipollone,The transformation of money: technological disruption and the future of financial services,3,3,1,1
+2025-12-19,Piero Cipollone,The future of money: a central bank perspective,8,8,9,10
+2026-01-09,Philip R. Lane,The euro in a changing world ,3,3,1,1
+2026-01-14,Luis de Guindos,Monetary policy and financial stability in the euro area,110,92,12,33
+2026-01-28,Frank Elderson,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,99,90,220,132
+2026-02-06,Piero Cipollone,The digital euro: strengthening Europe’s payments ecosystem,6,7,26,21
+2026-02-09,Christine Lagarde,European Parliament plenary debate on the ECB Annual Report,3,2,4,2
+2026-02-11,Isabel Schnabel,Made in Europe,2,1,4,1
+2026-02-12,Philip R. Lane,Bulgaria and the euro,2,2,2,2
+2026-02-12,Piero Cipollone,Europe and monetary sovereignty,1,1,1,1
+2026-02-14,Christine Lagarde,Preparing for geoeconomic fragmentation,218,218,254,328
+2026-02-19,Piero Cipollone,The digital euro: enhancing payments in the euro area,15,8,13,27
+2026-02-20,Christine Lagarde,The order that took centuries to build,2,3,1,1
+2026-02-23,Christine Lagarde,Turning size into scale: Europe’s new growth model,2,2,2,2
+2026-02-26,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,139,139,21,34
+2026-03-05,Christine Lagarde,"Technology, fragmentation and the new uncertainty",2,1,2,1
+2026-03-06,Isabel Schnabel,Navigating inflation and employment in an era of supply shocks and AI,11,5,2,2
+2026-03-09,Frank Elderson,"Nature in decline, economy on the line: the importance of international cooperation for managing nature-related risks ",1,1,1,1
+2026-03-23,Philip R. Lane,AI and the euro area economy,1,1,2,1
+2026-03-23,Piero Cipollone,Building the rails for Europe’s tokenised financial markets,6,7,7,6
+2026-03-24,Piero Cipollone,The digital euro: preparing for a potential launch ,3,3,1,1
+2026-03-25,Christine Lagarde,Navigating energy shocks: risks and policy responses,33,27,5,2
+2026-03-26,Luis de Guindos,Navigating turbulence: challenges for Europe and the path ahead,4,2,15,8
+2026-04-01,Piero Cipollone,The digital euro in a fragmenting world: ensuring Europe’s resilience and autonomy in payments,5,1,20,10
+2026-04-15,Piero Cipollone,Sparking the transformation of finance: tokenisation and the role of central banks ,3,3,2,2
+2026-04-17,Christine Lagarde,IMFC Statement ,3,3,2,3
+2026-04-20,Christine Lagarde,The energy shock: where we stand and what we need to know,17,7,3,4
+2026-04-22,Philip R. Lane,Expanding the supply of euro safe assets,2,2,1,1
+2026-05-04,Piero Cipollone,"Digital assets, payment efficiency and monetary policy ",1,1,1,1
+2026-05-04,Luis de Guindos,Presentation of the ECB Annual Report 2025 to the Committee on Economic and Monetary Affairs of the European Parliament,12,9,1,2
+2026-05-05,Philip R. Lane,Climate change and monetary policy ,1,1,2,1
+2026-05-05,Christine Lagarde,"Climate, nature and monetary policy",13,11,3,5
+2026-05-06,Piero Cipollone,The new energy shock: economic scenarios and policy implications,2,1,2,3
+2026-05-07,Isabel Schnabel,The quiet erosion of central bank independence,7,4,2,2
+2026-05-07,Luis de Guindos,Deepening financial integration to support Europe’s prosperity,1,2,1,1
+2026-05-08,Christine Lagarde,Stablecoins and the future of money: separating functions from instruments,3,3,1,1
+2026-05-12,Frank Elderson,Boosting prosperity through deeper integration ,3,2,2,1
+2026-05-13,Philip R. Lane,Analytical perspectives on energy supply shocks,12,32,2,3
+2026-05-13,Christine Lagarde,The courage to build a Europe that endures,1,1,2,1
+2026-05-22,Philip R. Lane,Europe and the world economy,2,2,1,1
+2026-05-28,Christine Lagarde,When It Matters Most: Upholding Independence in Challenging Times,2,2,3,1
+2026-05-28,Piero Cipollone,Money in the digital age,37,42,1,15
+2026-06-01,Isabel Schnabel,From money market funds to stablecoins: lessons for central banks,2,2,1,1
+2026-06-02,Boris Vujčić,A European perspective on currency and convergence,2,1,1,1
+2026-06-03,Piero Cipollone,Europe’s money evolves so people’s freedom to pay remains,1,1,59,15
+2026-06-03,Frank Elderson,Strengthening operational resilience for the age of AI,1,4,2,2
+2026-06-04,Christine Lagarde,Women and leadership: widening the pipeline,1,1,1,1
+2026-06-15,Christine Lagarde,Money in transition,86,106,196,174
+2026-06-19,Piero Cipollone,The foundations of national sovereignty: the role of central bank money,3,3,3,2
+2026-06-19,Frank Elderson,Fireside chat,2,2,2,2
+2026-06-22,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,100,103,27,39
+2026-06-23,Philip R. Lane,Introductory remarks,91,130,217,159
+2026-06-29,Christine Lagarde,Back to basics in an uncertain environment,1,1,4,1
+2026-07-02,Frank Elderson,The green transition – benefits and barriers ,1,1,1,1
+2026-07-06,Philip R. Lane,AI and monetary policy,4,3,1,2
+2026-07-17,Piero Cipollone,The cooperative spirit at the heart of the digital euro,1,1,1,1
+2026-08-19,Christine Lagarde,Panel remarks about the European economy during a discussion on the global economic outlook at the World Economic Forum,274,251,125,182
+2026-08-26,Piero Cipollone,From vision to delivery: building Europe’s tokenised financial market,3,3,1,1
+2026-08-28,Isabel Schnabel,Central banks on-chain,1,1,1,1
+2026-09-01,Boris Vujčić,"Listening to households: expectations, behaviour and monetary policy",1,1,1,1
+2026-09-08,Frank Elderson,Fireside chat,1,1,1,1
+2026-09-09,Christine Lagarde,The choice facing Europeans,1,1,1,1
+2026-09-12,Christine Lagarde,Europe seen from Normandy,1,1,1,1
+2026-09-14,Piero Cipollone,"The future of euro cash: trusted today, designed for tomorrow	",1,1,1,1
+2026-09-14,Christine Lagarde,"A new age of capital: growth, sovereignty and AI",7,4,8,2
+2026-09-28,Christine Lagarde,Hearing of the Committee on Economic and Monetary Affairs of the European Parliament,54,60,19,25
+2026-09-30,Isabel Schnabel,Monetary policy in a world of overlapping shocks,1,1,2,1
+2026-09-30,Frank Elderson,"Supervisory risk appetite, efficiency and effectiveness",1,2,1,1
+2026-10-01,Christine Lagarde,Where AI risks meet,8,6,3,1
+2026-10-02,Boris Vujčić,"Resilience, integration and competitiveness: building the future of European banking",3,4,1,1
+2026-10-05,Philip R. Lane,Diagnostic Challenges for ECB Monetary Policy,1,1,1,1
+2026-10-06,Frank Elderson,Effective supervision through timely remediation,1,1,1,1
+2026-10-06,Piero Cipollone,"Money in the digital age: digital euro, tokenisation and the role of central banks",18,6,2,8
+2026-10-13,Philip R. Lane,The AI opportunity for Europe ,1,1,12,4
+2026-10-14,Frank Elderson,Ensuring resilience in the face of uncertainty ,2,1,1,1
+2026-10-17,Christine Lagarde,IMFC Statement ,2,1,3,2
+2026-10-19,Frank Elderson,From climate and nature risks to economic resilience and competitiveness,3,1,1,1
+2026-10-21,Philip R. Lane,Euro liquidity lines and the international monetary system,1,1,1,1
+2026-10-26,Frank Elderson,Taking action for nature – investing in economic resilience and prosperity,1,1,1,1
+2026-10-29,Piero Cipollone,"Next-day securities settlement, tokenisation and the transformation of Europe’s financial infrastructure",2,2,3,1
+2026-10-30,Philip R. Lane,AI adoption in Europe,2,1,2,3

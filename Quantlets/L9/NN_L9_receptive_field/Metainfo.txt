@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_receptive_field'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Number of distinct transactions within k hops of a test transaction (2,000 sampled test nodes): median and 90th percentile.'
+
+Keywords: 'receptive field, message passing, GNN depth, k-hop neighbourhood'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/receptive_field.csv'
+
+Output: 'receptive_field.png'

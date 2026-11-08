@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_fewshot_eurosat'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'EuroSAT test accuracy against labelled images per class: logistic regression on CLIP ViT-B/16 embeddings (5 seeds) and a CNN trained from scratch (3 seeds), with zero-shot CLIP and the CNN on all training images as references.'
+
+Keywords: 'vision-language models, CLIP, zero-shot classification, EuroSAT, satellite images, vision transformer, few-shot learning, linear probe, transfer learning'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L14/results/fewshot_eurosat.csv, eurosat_zeroshot.csv'
+
+Output: 'fewshot_eurosat.png'

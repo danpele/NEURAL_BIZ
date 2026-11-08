@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L14_zeroshot_examples'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Eight random EuroSAT test images with their true class and the zero-shot CLIP prediction.'
+
+Keywords: 'vision-language models, CLIP, zero-shot classification, EuroSAT, satellite images, vision transformer'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT (torchvision, on demand); lectures/L14/results/eurosat_zeroshot.csv'
+
+Output: 'zeroshot_examples.png'

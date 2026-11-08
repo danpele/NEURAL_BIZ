@@ -1,0 +1,41 @@
+{
+ "title": {
+  "en": "Attention and transformers",
+  "ro": "Atenția și transformerele"
+ },
+ "topics": {
+  "en": [
+   "Why attention: recurrence, long-range dependencies, context length of tweets and ECB speeches",
+   "Scaled dot-product attention, the √d_k scaling, masks and multi-head attention",
+   "Positional encoding, the transformer block (residuals, layer norm, feed-forward), BERT versus GPT, subword tokens",
+   "Real FinBERT attention maps and why attention is not an explanation",
+   "Case study: sentiment of 2,388 finance tweets — TF-IDF, embedding bag, small transformer, FinBERT zero-shot, frozen and fine-tuned, with bootstrap intervals",
+   "From sentiment scores to business signals; long documents; transformers beyond text"
+  ],
+  "ro": [
+   "De ce atenția: recurența, dependențele lungi, lungimea tweet-urilor și a discursurilor BCE",
+   "Atenția cu produs scalar scalat, scalarea cu √d_k, măștile și atenția cu mai multe capete",
+   "Codificarea poziției, blocul transformer (conexiuni reziduale, normalizare, rețea directă), BERT față de GPT, tokenii de subcuvinte",
+   "Hărți reale de atenție FinBERT și de ce atenția nu este o explicație",
+   "Studiu de caz: sentimentul a 2.388 de tweet-uri financiare — TF-IDF, medie de embedding-uri, transformer mic, FinBERT fără antrenare, înghețat și ajustat, cu intervale bootstrap",
+   "De la scoruri de sentiment la semnale de afaceri; documente lungi; transformerele dincolo de text"
+  ]
+ },
+ "further": [
+  {
+   "url": "https://arxiv.org/abs/1706.03762",
+   "en": "Vaswani et al. (2017), Attention is all you need",
+   "ro": "Vaswani et al. (2017), Attention is all you need"
+  },
+  {
+   "url": "https://jalammar.github.io/illustrated-transformer/",
+   "en": "J. Alammar, The Illustrated Transformer",
+   "ro": "J. Alammar, The Illustrated Transformer"
+  },
+  {
+   "url": "https://huggingface.co/learn/llm-course",
+   "en": "Hugging Face course: fine-tuning encoders",
+   "ro": "Cursul Hugging Face: ajustarea codificatoarelor"
+  }
+ ]
+}

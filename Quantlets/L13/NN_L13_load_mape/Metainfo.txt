@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_load_mape'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Mean absolute percentage error of day-ahead forecasts of Romanian hourly load in the test year: same hour last week, TimesFM 2.5 and Chronos-2, both zero-shot.'
+
+Keywords: 'load forecasting, Romania, foundation models, TimesFM, Chronos, MAPE'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/load_actual.csv, load_forecasts.csv'
+
+Output: 'load_mape.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L3_wd_dropout'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Held-out AUC (5-fold cross-validation) of an MLP 256-256 on German credit for a grid of weight-decay strengths and dropout rates, against logistic regression.'
+
+Keywords: 'weight decay, dropout, regularisation strength, cross-validation, AUC, small data, German credit'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit)'
+
+Output: 'wd_dropout.png'

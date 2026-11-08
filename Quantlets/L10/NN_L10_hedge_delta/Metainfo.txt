@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_hedge_delta'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Hedge ratio learned by a deep-hedging network against the Black-Scholes delta, 10 trading days before maturity with the VIX at 20.'
+
+Keywords: 'deep hedging, hedge ratio, Black-Scholes delta, no-trade band, transaction costs'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/markets_daily.csv (Yahoo Finance: SP500 and VIX closes)'
+
+Output: 'hedge_delta.png'

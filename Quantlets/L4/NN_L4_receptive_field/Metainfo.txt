@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_receptive_field'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Receptive field of stacked 3 x 3 convolutions, with and without 2 x 2 pooling, from the recursion r_l = r_(l-1) + (k_l - 1) prod s_i.'
+
+Keywords: 'receptive field, convolution, pooling, stride, depth, CNN architecture'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'none (formula)'
+
+Output: 'receptive_field.png'

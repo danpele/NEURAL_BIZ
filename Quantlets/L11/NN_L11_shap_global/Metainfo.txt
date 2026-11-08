@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_shap_global'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Global importance (mean absolute SHAP value) of an MLP credit-scoring model (Kernel SHAP) and of a logistic regression (linear SHAP) on HMEQ home-equity loans.'
+
+Keywords: 'SHAP, Shapley values, global feature importance, credit scoring, explainable AI, MLP'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'shap_global.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_deletion_curve'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Faithfulness of explanations for a fraud MLP: mean fraud score after resetting the k top-ranked features to the baseline, for integrated gradients, saliency and a random order.'
+
+Keywords: 'deletion curve, faithfulness, AOPC, integrated gradients, saliency, fraud detection'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'deletion_curve.png'

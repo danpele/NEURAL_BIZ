@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_transfer_curves'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'EuroSAT: validation accuracy of a CNN from scratch and of a fine-tuned ResNet-18, frozen ResNet-18 + logistic regression, and test accuracy against the label budget.'
+
+Keywords: 'transfer learning, fine-tuning, feature extraction, ResNet-18, ImageNet, label budget, EuroSAT'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT; saved learning curves and test accuracies (transfer_curves_results.json, from lectures/L4/cache)'
+
+Output: 'transfer_curves.png'

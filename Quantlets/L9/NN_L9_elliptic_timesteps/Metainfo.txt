@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_elliptic_timesteps'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Labelled transactions per time step (licit and illicit) and the temporal split: training steps 1-34, test steps 35-49.'
+
+Keywords: 'Elliptic, Bitcoin, anti-money laundering, temporal split, class imbalance'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/timesteps.csv'
+
+Output: 'elliptic_timesteps.png'

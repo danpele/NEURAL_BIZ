@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_mae_models'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test-year mean absolute error of nine day-ahead forecasts for Romania: naive, LEAR, DNN, N-BEATS, Chronos-2 (with and without covariates), Chronos-Bolt, TimesFM 2.5 and an ensemble; rMAE relative to the naive forecast.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/forecasts_hourly.csv (from analysis_L13.py)'
+
+Output: 'mae_models.png'

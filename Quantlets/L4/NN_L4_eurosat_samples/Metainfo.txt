@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_eurosat_samples'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Two training tiles of each of the ten EuroSAT land-use classes (Sentinel-2, 64 x 64 RGB).'
+
+Keywords: 'EuroSAT, Sentinel-2, satellite images, land use, agriculture, insurance, real estate'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'EuroSAT (Helber et al., 2019), downloaded with torchvision'
+
+Output: 'eurosat_samples.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_battery_learning'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Learning curves of tabular Q-learning and a double deep Q-network for battery dispatch: revenue per day on the 2024 validation year after each training epoch.'
+
+Keywords: 'learning curve, Q-learning, deep Q-network, validation, battery dispatch'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'battery_learning.png'

@@ -1,0 +1,263 @@
+{
+ "charts": {
+  "elliptic_timesteps": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each)",
+   "period_ro": "graful tranzacțiilor Bitcoin Elliptic, 49 de pași de timp (circa două săptămîni fiecare)"
+  },
+  "degree_dist": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each)",
+   "period_ro": "graful tranzacțiilor Bitcoin Elliptic, 49 de pași de timp (circa două săptămîni fiecare)"
+  },
+  "homophily": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each)",
+   "period_ro": "graful tranzacțiilor Bitcoin Elliptic, 49 de pași de timp (circa două săptămîni fiecare)"
+  },
+  "receptive_field": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each)",
+   "period_ro": "graful tranzacțiilor Bitcoin Elliptic, 49 de pași de timp (circa două săptămîni fiecare)"
+  },
+  "model_comparison": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  },
+  "f1_by_timestep": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  },
+  "alert_budget": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  },
+  "oversmoothing": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  },
+  "gcn_embeddings": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  },
+  "pr_curves": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  },
+  "importance_shift": {
+   "source_en": "Elliptic Bitcoin transaction graph (Weber et al., 2019)",
+   "source_ro": "Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019)",
+   "period_en": "own estimates; training steps 1-34, test time steps 35-49",
+   "period_ro": "estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49"
+  }
+ },
+ "seed": 20261108,
+ "data": {
+  "n_nodes": 203769,
+  "n_edges": 234355,
+  "n_features": 165,
+  "n_local": 93,
+  "n_agg": 72,
+  "n_steps": 49,
+  "n_illicit": 4545,
+  "n_licit": 42019,
+  "n_unknown": 157205,
+  "pct_labelled": 22.9,
+  "pct_illicit_lab": 9.76,
+  "n_train": 29894,
+  "n_train_illicit": 3462,
+  "n_test": 16670,
+  "n_test_illicit": 1083,
+  "pct_test_illicit": 6.5,
+  "mean_degree": 2.3,
+  "median_degree": 2,
+  "max_degree": 473,
+  "pct_deg1": 34.5,
+  "pct_same_step": 100.0,
+  "nodes_per_step_mean": 4159,
+  "train_steps": "1-34",
+  "test_steps": "35-49",
+  "max_illicit_step": 32,
+  "max_illicit_n": 342
+ },
+ "homophily": {
+  "illicit_nb_of_illicit_pct": 51.0,
+  "illicit_nb_of_licit_pct": 1.8,
+  "base_pct": 9.8,
+  "edge_pct": 95.4,
+  "edge_random_pct": 82.4,
+  "n_illicit_with_lab_nb": 2484,
+  "n_licit_with_lab_nb": 33390
+ },
+ "receptive": {
+  "k1_median": 2,
+  "k2_median": 11,
+  "k3_median": 87,
+  "k4_median": 325,
+  "k1_p90": 4,
+  "k2_p90": 102,
+  "k3_p90": 395,
+  "k4_p90": 1356
+ },
+ "models": {
+  "lr_local": {
+   "f1": 0.329,
+   "f1_sd": 0.0,
+   "prec": 0.208,
+   "rec": 0.789,
+   "ap": 0.239,
+   "ap_sd": 0.0,
+   "n_runs": 1,
+   "sec": 0.8
+  },
+  "lr_all": {
+   "f1": 0.343,
+   "f1_sd": 0.0,
+   "prec": 0.22,
+   "rec": 0.771,
+   "ap": 0.311,
+   "ap_sd": 0.0,
+   "n_runs": 1,
+   "sec": 1.8
+  },
+  "rf": {
+   "f1": 0.808,
+   "f1_sd": 0.005,
+   "prec": 0.914,
+   "rec": 0.725,
+   "ap": 0.782,
+   "ap_sd": 0.002,
+   "n_runs": 3,
+   "sec": 4.9
+  },
+  "mlp": {
+   "f1": 0.498,
+   "f1_sd": 0.02,
+   "prec": 0.517,
+   "rec": 0.483,
+   "ap": 0.361,
+   "ap_sd": 0.023,
+   "n_runs": 3,
+   "sec": 59.2,
+   "best_epoch_median": 169
+  },
+  "gcn": {
+   "f1": 0.447,
+   "f1_sd": 0.046,
+   "prec": 0.484,
+   "rec": 0.494,
+   "ap": 0.442,
+   "ap_sd": 0.113,
+   "n_runs": 3,
+   "sec": 65.5,
+   "best_epoch_median": 47
+  },
+  "sage": {
+   "f1": 0.564,
+   "f1_sd": 0.022,
+   "prec": 0.569,
+   "rec": 0.561,
+   "ap": 0.582,
+   "ap_sd": 0.037,
+   "n_runs": 3,
+   "sec": 143.2,
+   "best_epoch_median": 145
+  },
+  "gat": {
+   "f1": 0.489,
+   "f1_sd": 0.048,
+   "prec": 0.488,
+   "rec": 0.5,
+   "ap": 0.496,
+   "ap_sd": 0.077,
+   "n_runs": 3,
+   "sec": 231.2,
+   "best_epoch_median": 96
+  },
+  "rf_emb": {
+   "f1": 0.778,
+   "f1_sd": 0.03,
+   "prec": 0.933,
+   "rec": 0.668,
+   "ap": 0.763,
+   "ap_sd": 0.012,
+   "n_runs": 3,
+   "sec": 186.0
+  }
+ },
+ "best_f1_model": "rf",
+ "gcn_vs_mlp_ap_pts": 8.1,
+ "rfemb_vs_rf_f1_pts": -3.0,
+ "gcn_params": 26902,
+ "gat_params": 27302,
+ "boot": {
+  "rf_minus_gcn_ap": 0.285,
+  "lo": 0.259,
+  "hi": 0.313,
+  "rfemb_minus_rf_ap": -0.008,
+  "lo2": -0.015,
+  "hi2": -0.002,
+  "n_boot": 1000
+ },
+ "shutdown": {
+  "rf_f1_pre": 0.898,
+  "rf_f1_post": 0.048,
+  "gcn_f1_pre": 0.473,
+  "gcn_f1_post": 0.0,
+  "ill_pre": 914,
+  "ill_post": 169
+ },
+ "alerts": {
+  "k": 1000,
+  "lr_all": 36.6,
+  "rf": 72.9,
+  "gcn": 44.8,
+  "rf_emb": 72.9,
+  "n_test_illicit": 1083,
+  "rf_prec": 78.9,
+  "gcn_prec": 48.5,
+  "rf_emb_prec": 78.9
+ },
+ "depth": {
+  "ap_1": 0.504,
+  "ap_2": 0.458,
+  "ap_6": 0.371,
+  "cos_1": 0.57,
+  "cos_6": 0.96,
+  "best_layers": 1
+ },
+ "stability": {
+  "rf": 0.973,
+  "rf_emb": 0.896,
+  "emb_share_pct": 73.9,
+  "n_refits": 3,
+  "top_feature": "f53",
+  "top_local_count": 9,
+  "top10_share_rf_pct": 58.2,
+  "top10_share_rfemb_pct": 7.4
+ },
+ "emb": {
+  "var2_pct": 79.2,
+  "dim": 100,
+  "n_licit_shown": 3000,
+  "n_illicit_shown": 1083
+ },
+ "runtime_min": 0.1,
+ "hardware": "Apple silicon laptop, CPU"
+}

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L4_fmnist_confusion'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Confusion matrix of the CNN on the 10,000 Fashion-MNIST test images (seed 20261108).'
+
+Keywords: 'confusion matrix, recall, CNN, Fashion-MNIST, product classification'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Fashion-MNIST; saved confusion matrix (fmnist_confusion_results.json)'
+
+Output: 'fmnist_confusion.png'

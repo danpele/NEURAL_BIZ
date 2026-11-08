@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_cost_accuracy'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Macro-F1 against measured milliseconds per sentence on a laptop for TF-IDF, prompted Qwen2.5 models and LLM embeddings with logistic regression, Financial PhraseBank test set.'
+
+Keywords: 'large language models, prompt engineering, financial sentiment, Qwen2.5, zero-shot, few-shot, cost, latency'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/predictions_pb.csv, lm_outputs.json'
+
+Output: 'cost_accuracy.png'

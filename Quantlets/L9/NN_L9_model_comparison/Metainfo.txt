@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L9_model_comparison'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 9 of Neural Networks and Deep Learning (NN), Elliptic Bitcoin transaction graph (Weber et al., 2019). Illicit-class F1 and PR-AUC on test steps 35-49 for logistic regression, MLP, GCN, GraphSAGE, GAT, random forest and random forest + GCN embeddings (mean and sd over seeds).'
+
+Keywords: 'graph convolutional network, GraphSAGE, graph attention network, random forest, Elliptic, anti-money laundering'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Elliptic data set (on demand: python3 data/download_all.py elliptic); lectures/L9/results/model_metrics.csv'
+
+Output: 'model_comparison.png'

@@ -1,0 +1,267 @@
+{
+ "charts": {
+  "sp500_vol": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "4 Jan 2005 to 30 Oct 2026, trading days",
+   "period_ro": "4 ianuarie 2005 - 30 octombrie 2026, zile de tranzac\u021bionare"
+  },
+  "acf_abs": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "4 Jan 2005 to 30 Oct 2026, trading days",
+   "period_ro": "4 ianuarie 2005 - 30 octombrie 2026, zile de tranzac\u021bionare"
+  },
+  "vol_forecast": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "test year 2020 (one-day-ahead forecasts), trading days",
+   "period_ro": "anul de test 2020 (prognoze pentru ziua urm\u0103toare), zile de tranzac\u021bionare"
+  },
+  "vol_mse": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "test 2 Jan 2020 to 31 Oct 2026; 5 seeds per network",
+   "period_ro": "test 2 ianuarie 2020 - 31 octombrie 2026; 5 semin\u021be pentru fiecare re\u021bea"
+  },
+  "lstm_gates": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cota\u021bii zilnice",
+   "period_en": "test period 2020-2026, LSTM seed 20261108, last step of each 22-day window",
+   "period_ro": "perioada de test 2020-2026, LSTM cu s\u0103m\u00een\u021ba 20261108, ultimul pas al fiec\u0103rei ferestre de 22 de zile"
+  },
+  "returns_r2": {
+   "source_en": "Yahoo Finance; EODHD",
+   "source_ro": "Yahoo Finance; EODHD",
+   "period_en": "test 2020 to Oct 2026; S\\&P 500 (Yahoo Finance) and TLV (EODHD, Bucharest Stock Exchange)",
+   "period_ro": "test 2020 - octombrie 2026; S\\&P 500 (Yahoo Finance) \u0219i TLV (EODHD, Bursa de Valori Bucure\u0219ti)"
+  },
+  "load_series": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Jan 2016 to 31 Oct 2026, hourly, mean MW per day",
+   "period_ro": "1 ianuarie 2016 - 31 octombrie 2026, orar, MW medii pe zi"
+  },
+  "load_fortnight": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "14 test days from 20 Jan 2025 to 2 Feb 2025",
+   "period_ro": "14 zile de test, 20 ianuarie 2025 - 2 februarie 2025"
+  },
+  "load_errors": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "1 Jan 2024 to 31 Oct 2026 (test days)",
+   "period_ro": "1 ianuarie 2024 - 31 octombrie 2026 (zile de test)"
+  },
+  "load_window": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "test days 2024-2026; LSTM with 2 seeds per window",
+   "period_ro": "zile de test 2024-2026; LSTM cu 2 semin\u021be pentru fiecare fereastr\u0103"
+  },
+  "grad_lag": {
+   "source_en": "energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data",
+   "source_ro": "energy-charts.info (Fraunhofer ISE), din datele burselor \u0219i ale ENTSO-E",
+   "period_en": "200 test days of 2024; models with seed 20261108; forecast for noon (hour 12, universal time)",
+   "period_ro": "200 de zile de test din 2024; modele cu s\u0103m\u00een\u021ba 20261108; prognoza pentru ora 12 (timpul universal)"
+  }
+ },
+ "seed": 20261108,
+ "data": {
+  "first": "2005-01-04",
+  "last": "2026-10-30",
+  "n_days": 5491,
+  "train_end": "2016-12-31",
+  "valid_end": "2019-12-31",
+  "test_start": "2020-01-01",
+  "n_train": 3020,
+  "n_valid": 754,
+  "n_test": 1717,
+  "gk_ann_median": 8.77,
+  "gk_ann_max": 122.12,
+  "gk_ann_max_date": "2008-10-10",
+  "r_sd": 1.2,
+  "r_kurt": 13.31
+ },
+ "acf": {
+  "r1": -0.119,
+  "a1": 0.315,
+  "a50": 0.126,
+  "band": 0.026,
+  "n_sig_r": 15,
+  "n_sig_a": 50
+ },
+ "har": {
+  "b0": -0.778,
+  "bd": 0.192,
+  "bw": 0.439,
+  "bm": 0.293
+ },
+ "garch": {
+  "omega": 0.018,
+  "alpha": 0.117,
+  "beta": 0.873,
+  "nu": 5.781,
+  "persistence": 0.99
+ },
+ "vol": {
+  "W": 22,
+  "hidden": 32,
+  "seeds": 5,
+  "naive": {
+   "mse": 0.9657,
+   "r2": 0.259
+  },
+  "har": {
+   "mse": 0.7063,
+   "r2": 0.458
+  },
+  "garch": {
+   "mse": 0.7861,
+   "r2": 0.397
+  },
+  "rnn": {
+   "mse_mean": 0.6491,
+   "mse_sd": 0.0054,
+   "mse_min": 0.6438,
+   "mse_max": 0.6552,
+   "mse_ens": 0.6427,
+   "r2_ens": 0.507,
+   "epochs": 12
+  },
+  "lstm": {
+   "mse_mean": 0.6277,
+   "mse_sd": 0.0048,
+   "mse_min": 0.6233,
+   "mse_max": 0.635,
+   "mse_ens": 0.6245,
+   "r2_ens": 0.521,
+   "epochs": 19
+  },
+  "gru": {
+   "mse_mean": 0.629,
+   "mse_sd": 0.0055,
+   "mse_min": 0.6234,
+   "mse_max": 0.6364,
+   "mse_ens": 0.6239,
+   "r2_ens": 0.521,
+   "epochs": 20
+  },
+  "best_net": "GRU",
+  "dm_lstm_har": {
+   "stat": -5.52,
+   "p": 0.0
+  },
+  "dm_lstm_garch": {
+   "stat": -6.8,
+   "p": 0.0
+  },
+  "lstm_vs_har_pct": -11.6,
+  "lstm_vs_naive_pct": -35.3,
+  "crash": {
+   "har": 1.014,
+   "lstm": 0.521,
+   "garch": 1.032,
+   "naive": 0.705
+  }
+ },
+ "gates": {
+  "f_mean": 0.547,
+  "i_mean": 0.544,
+  "f_corr_y": 0.743,
+  "i_corr_y": -0.616
+ },
+ "ret": {
+  "tlv_first": "2008-01-03",
+  "tlv_n": 4171,
+  "W": 22,
+  "SP500": {
+   "r2_mean": 0.10199999809265137,
+   "r2_ar": 2.366,
+   "r2_lstm_mean": 0.776,
+   "r2_lstm_min": 0.572,
+   "r2_lstm_max": 0.969,
+   "ar_slope": -0.102,
+   "hit_lstm": 52.1,
+   "up_share": 54.0,
+   "n_test": 1717
+  },
+  "TLV": {
+   "r2_mean": 0.12300000339746475,
+   "r2_ar": 0.201,
+   "r2_lstm_mean": 0.213,
+   "r2_lstm_min": 0.09,
+   "r2_lstm_max": 0.394,
+   "ar_slope": 0.015,
+   "hit_lstm": 52.9,
+   "up_share": 55.1,
+   "n_test": 1573
+  }
+ },
+ "load": {
+  "first": "2016-01-01",
+  "last": "2026-10-31",
+  "mean_mw": 6510,
+  "missing_hours": 129,
+  "train_end": "2022-12-31",
+  "valid_end": "2023-12-31",
+  "n_train": 2186,
+  "n_valid": 365,
+  "n_test": 1035,
+  "test_first": "2024-01-01",
+  "test_last": "2026-10-31",
+  "ridge_alpha": 1,
+  "snaive": 6.79,
+  "yday": 7.41,
+  "ridge": 4.86,
+  "rnn": {
+   "mean": 5.48,
+   "sd": 0.09,
+   "ens": 5.29
+  },
+  "lstm": {
+   "mean": 6.11,
+   "sd": 0.48,
+   "ens": 5.81
+  },
+  "gru": {
+   "mean": 5.33,
+   "sd": 0.17,
+   "ens": 5.17
+  },
+  "window": {
+   "24": 6.77,
+   "72": 7.17,
+   "168": 5.91,
+   "336": 5.93
+  },
+  "seconds": 67.2,
+  "best": "GRU",
+  "best_vs_ridge_pct": 6.4,
+  "lstm_vs_snaive_pct": -14.4,
+  "dm_lstm_ridge": {
+   "stat": 9.8,
+   "p": 0.0
+  },
+  "mae_lstm_mw": 331,
+  "mae_ridge_mw": 269,
+  "mae_snaive_mw": 396,
+  "lstm_gain_mwh_day": 1560,
+  "fortnight_first": "2025-01-20"
+ },
+ "grad": {
+  "rnn": {
+   "lag168_rel": 0.261,
+   "lag24_rel": 0.586
+  },
+  "lstm": {
+   "lag168_rel": 0.131,
+   "lag24_rel": 0.282
+  },
+  "gru": {
+   "lag168_rel": 0.14,
+   "lag24_rel": 0.309
+  }
+ }
+}

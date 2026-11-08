@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_ppo_clip'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'The clipped surrogate objective of proximal policy optimisation (PPO) as a function of the probability ratio, for a positive and a negative advantage (analytic, no data).'
+
+Keywords: 'PPO, clipped surrogate objective, policy gradient, trust region, mechanism'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'none (analytic function)'
+
+Output: 'ppo_clip.png'

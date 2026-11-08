@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_calibration'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Reliability diagram (deciles of predicted probability of default against observed default rate) and Brier scores of logistic regression, an MLP 64-64 and XGBoost on the HMEQ test loans.'
+
+Keywords: 'calibration, reliability diagram, Brier score, probability of default, multilayer perceptron, HMEQ'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'calibration.png'

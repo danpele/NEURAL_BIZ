@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_perplexity_size'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Perplexity of Qwen2.5-0.5B, 1.5B and 3B on 40 ECB speeches of 2022-2023 and 40 speeches from July 2025 (first 1,024 tokens), and the slope of log loss on log parameters.'
+
+Keywords: 'perplexity, scaling, training cut-off, contamination, ECB speeches'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/lm_outputs.json (mean negative log-likelihood per token)'
+
+Output: 'perplexity_size.png'

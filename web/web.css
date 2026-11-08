@@ -94,6 +94,7 @@ a.eqref:hover { text-decoration: underline; }
 .wbib { margin-top: 2.4rem; }
 ul.bib { list-style: none; margin: 0.6rem 0 1rem; padding: 0; max-width: 52rem; }
 ul.bib li { padding-left: 1.6rem; text-indent: -1.6rem; margin: 0 0 0.55rem; line-height: 1.5; overflow-wrap: anywhere; font-size: 0.93rem; }
+ul.bib.videos .vby { color: var(--mid-gray); font-size: 0.88rem; }
 .src.foot { margin-top: 1.5rem; font-size: 0.82rem; color: var(--mid-gray); }
 
 @media (max-width: 1000px) {

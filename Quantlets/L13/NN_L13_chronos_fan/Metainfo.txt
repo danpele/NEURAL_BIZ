@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_chronos_fan'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Zero-shot Chronos-2 quantile forecasts (50, 80 and 90 percent bands and the median) of Romanian day-ahead prices for 19-25 October 2026, with the realised prices.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR, probabilistic forecast'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/quantiles_hourly.csv'
+
+Output: 'chronos_fan.png'

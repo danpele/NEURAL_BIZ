@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_diffusion_forward'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Forward diffusion process applied to the last euro-area AAA yield curve of the sample: the curve at noise steps 0, 20, 60, 120 and 199.'
+
+Keywords: 'diffusion model, DDPM, forward process, noise schedule, yield curve'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ecb_yield_curve_daily.csv (European Central Bank, YC)'
+
+Output: 'diffusion_forward.png'

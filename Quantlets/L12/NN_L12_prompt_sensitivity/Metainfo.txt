@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_prompt_sensitivity'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Macro-F1 of zero-shot Qwen2.5-1.5B and 3B under five paraphrases of the same instruction, on Financial PhraseBank and Twitter financial news: the range is a measure of prompt risk.'
+
+Keywords: 'large language models, prompt engineering, financial sentiment, Qwen2.5, zero-shot, few-shot, prompt sensitivity, model risk'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/sensitivity_labels_pb.csv, sensitivity_labels_tw.csv'
+
+Output: 'prompt_sensitivity.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_ae_bottleneck'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Test PR-AUC of the fraud autoencoder as a function of the bottleneck size k (mean of 2 seeds), against PCA with 8 components.'
+
+Keywords: 'autoencoder, bottleneck, latent dimension, anomaly detection, PR-AUC'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L8/results/ae_bottleneck.csv, fraud_test_scores.csv'
+
+Output: 'ae_bottleneck.png'

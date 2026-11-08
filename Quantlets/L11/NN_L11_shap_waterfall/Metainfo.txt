@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_shap_waterfall'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'SHAP waterfall for one rejected HMEQ applicant: from the average log-odds of default to this applicant’s score, feature by feature.'
+
+Keywords: 'SHAP waterfall, local explanation, adverse action, credit decision, explainable AI'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/hmeq.csv (Baesens, Roesch and Scheule, 2016)'
+
+Output: 'shap_waterfall.png'

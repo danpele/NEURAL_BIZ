@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L13_forecast_week'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'One week of hourly Romanian day-ahead prices (19-25 October 2026) with the LEAR, DNN and Chronos-2 forecasts.'
+
+Keywords: 'electricity price forecasting, day-ahead market, Romania, deep learning, foundation models, Chronos, LEAR'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L13/results/forecasts_hourly.csv'
+
+Output: 'forecast_week.png'

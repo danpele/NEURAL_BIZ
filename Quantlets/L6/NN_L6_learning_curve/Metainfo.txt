@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L6_learning_curve'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Test macro-F1 on the Financial PhraseBank against the number of labelled sentences (TF-IDF, mean word2vec, embedding bag random or word2vec start), and against the embedding dimension.'
+
+Keywords: 'learning curve, transfer learning, word2vec, few labels, embedding dimension, sentiment'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'Financial PhraseBank; saved test scores of analysis_L6.py (learning_curve_results.json)'
+
+Output: 'learning_curve.png'

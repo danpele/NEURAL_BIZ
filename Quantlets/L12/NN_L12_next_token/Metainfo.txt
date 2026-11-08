@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L12_next_token'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Top next-token probabilities of Qwen2.5-1.5B-Instruct after the start of a sentence from the latest ECB speech, at temperatures 0.5, 1 and 2, with the entropy of each distribution.'
+
+Keywords: 'next-token prediction, temperature, softmax, entropy, ECB speeches'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'lectures/L12/results/lm_outputs.json (model outputs); data/clean/ecb_speeches_2022plus.csv'
+
+Output: 'next_token.png'

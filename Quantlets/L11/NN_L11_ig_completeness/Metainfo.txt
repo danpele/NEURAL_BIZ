@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L11_ig_completeness'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Completeness of integrated gradients for a fraud MLP: relative gap between the sum of attributions and f(x) - f(baseline) as a function of the number of Riemann steps.'
+
+Keywords: 'integrated gradients, completeness axiom, Riemann sum, attribution, fraud detection'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB Machine Learning Group and Worldline, OpenML 1597)'
+
+Output: 'ig_completeness.png'

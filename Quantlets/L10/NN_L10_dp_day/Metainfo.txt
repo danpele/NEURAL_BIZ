@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_dp_day'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Optimal charge and discharge schedule of a 2 MWh battery on the 2026 day with the largest price spread in Romania (exact dynamic programming).'
+
+Keywords: 'dynamic programming, battery dispatch, electricity prices, optimal control, Romania'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'dp_day.png'

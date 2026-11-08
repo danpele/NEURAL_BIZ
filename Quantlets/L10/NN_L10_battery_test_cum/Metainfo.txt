@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L10_battery_test_cum'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Cumulative test revenue (2025 - October 2026) of a battery run by a double deep Q-network and by tabular Q-learning, against perfect foresight and yesterday’s optimal plan.'
+
+Keywords: 'deep Q-network, double DQN, experience replay, Q-learning, battery arbitrage, out-of-sample test'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/power_da_prices_hourly_utc.csv (energy-charts.info, Fraunhofer ISE, from exchange and ENTSO-E data)'
+
+Output: 'battery_test_cum.png'

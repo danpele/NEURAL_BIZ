@@ -1,0 +1,257 @@
+{
+ "charts": {
+  "zeroshot_prompts": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "5400 test images, no training",
+   "period_ro": "5400 de imagini de test, fără antrenare"
+  },
+  "zeroshot_confusion": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "5400 test images; row percentages",
+   "period_ro": "5400 de imagini de test; procente pe rînd"
+  },
+  "text_search": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "5400 test images; model CLIP ViT-B/16, 5 templates",
+   "period_ro": "5400 de imagini de test; modelul CLIP ViT-B/16, 5 șabloane"
+  },
+  "fewshot_eurosat": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "5400 test images; shaded = range over seeds",
+   "period_ro": "5400 de imagini de test; zona colorată = intervalul pe valorile generatorului aleator"
+  },
+  "zeroshot_examples": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "8 random test images (seeded); green = correct, red = wrong",
+   "period_ro": "8 imagini de test alese aleator (valoare fixă); verde = corect, roșu = greșit"
+  },
+  "vit_patches_attention": {
+   "source_en": "EuroSAT, Sentinel-2 images (Helber et al., 2019)",
+   "source_ro": "EuroSAT, imagini Sentinel-2 (Helber et al., 2019)",
+   "period_en": "4 test images upscaled to 224 x 224 pixels = 14 x 14 patches of 16 x 16; model CLIP ViT-B/16",
+   "period_ro": "4 imagini de test mărite la 224 x 224 de pixeli = 14 x 14 petice de 16 x 16; modelul CLIP ViT-B/16"
+  },
+  "chart_regime": {
+   "source_en": "Yahoo Finance, daily quotes",
+   "source_ro": "Yahoo Finance, cotații zilnice",
+   "period_en": "S\\&P 500, windows of 120 trading days every 5 days; test 7 Jan 2019 to 30 Oct 2026",
+   "period_ro": "S\\&P 500, ferestre de 120 de zile de tranzacționare la fiecare 5 zile; test 7 ianuarie 2019 - 30 octombrie 2026"
+  }
+ },
+ "seed": 20261108,
+ "data": {
+  "n": 27000,
+  "n_train": 21600,
+  "n_test": 5400,
+  "n_classes": 10,
+  "px": 64
+ },
+ "clip": {
+  "B32": {
+   "params_m": 151.3,
+   "ms_per_image": 4.23,
+   "dim": 512
+  },
+  "B16": {
+   "params_m": 149.6,
+   "ms_per_image": 20.49,
+   "dim": 512
+  }
+ },
+ "zs": {
+  "B32_name": 34.1,
+  "B32_photo": 42.7,
+  "B32_sat": 44.9,
+  "B32_ens": 49.1,
+  "B16_name": 42.4,
+  "B16_photo": 46.7,
+  "B16_sat": 55.4,
+  "B16_ens": 56.4
+ },
+ "zs_best": "B16_ens",
+ "zs_class": {
+  "AnnualCrop": 58.0,
+  "Forest": 36.8,
+  "HerbaceousVegetation": 73.0,
+  "Highway": 74.4,
+  "Industrial": 93.6,
+  "Pasture": 34.8,
+  "PermanentCrop": 18.6,
+  "Residential": 92.3,
+  "River": 50.4,
+  "SeaLake": 26.5
+ },
+ "zs_worst": "PermanentCrop",
+ "zs_best_class": "Industrial",
+ "zs_top_conf": {
+  "true": "SeaLake",
+  "pred": "Highway",
+  "n": 399,
+  "n_true": 600
+ },
+ "search": {
+  "k": 100,
+  "mean": 58.9,
+  "per_class": {
+   "AnnualCrop": 20.0,
+   "Forest": 57.0,
+   "HerbaceousVegetation": 56.0,
+   "Highway": 85.0,
+   "Industrial": 99.0,
+   "Pasture": 27.0,
+   "PermanentCrop": 85.0,
+   "Residential": 79.0,
+   "River": 60.0,
+   "SeaLake": 21.0
+  },
+  "best": "Industrial",
+  "worst": "AnnualCrop"
+ },
+ "probe_full": 95.5,
+ "probe_full_b32": 94.8,
+ "fewshot": {
+  "probe": {
+   "1": {
+    "mean": 59.0,
+    "min": 51.4,
+    "max": 68.3
+   },
+   "2": {
+    "mean": 61.6,
+    "min": 54.6,
+    "max": 67.9
+   },
+   "4": {
+    "mean": 73.8,
+    "min": 68.8,
+    "max": 78.4
+   },
+   "8": {
+    "mean": 80.3,
+    "min": 78.8,
+    "max": 80.9
+   },
+   "16": {
+    "mean": 84.7,
+    "min": 83.7,
+    "max": 85.5
+   },
+   "32": {
+    "mean": 87.5,
+    "min": 87.2,
+    "max": 87.7
+   },
+   "64": {
+    "mean": 90.1,
+    "min": 89.4,
+    "max": 90.9
+   },
+   "128": {
+    "mean": 91.6,
+    "min": 91.1,
+    "max": 92.1
+   }
+  },
+  "cnn": {
+   "4": {
+    "mean": 50.3,
+    "min": 44.1,
+    "max": 56.8
+   },
+   "16": {
+    "mean": 78.5,
+    "min": 75.8,
+    "max": 80.2
+   },
+   "64": {
+    "mean": 90.9,
+    "min": 90.6,
+    "max": 91.6
+   },
+   "128": {
+    "mean": 94.1,
+    "min": 93.7,
+    "max": 94.8
+   }
+  }
+ },
+ "cnn_full": {
+  "mean": 97.4,
+  "min": 97.2,
+  "max": 97.5,
+  "params_k": 289.2
+ },
+ "probe_beats_zs_k": 1,
+ "examples": {
+  "n_right": 5,
+  "n": 8
+ },
+ "vit": {
+  "patch": 16,
+  "grid": 14,
+  "n_tokens": 197,
+  "layers": 12,
+  "heads": 12,
+  "width": 768
+ },
+ "charts_task": {
+  "n": 945,
+  "n_train": 551,
+  "n_test": 394,
+  "window": 120,
+  "stride": 5,
+  "first": "2008-01-28",
+  "last": "2026-10-30",
+  "base_test": 8.4,
+  "base_train": 14.7
+ },
+ "regime": {
+  "clip_zs": {
+   "auc": 0.907,
+   "ap": 0.605
+  },
+  "clip_probe": {
+   "auc": 0.88,
+   "ap": 0.449
+  },
+  "numeric": {
+   "auc": 0.933,
+   "ap": 0.578
+  },
+  "vlm_zs": {
+   "auc": 0.758,
+   "ap": 0.302
+  }
+ },
+ "vl": {
+  "ms_per_image": 262.0,
+  "trend_acc": 57.1,
+  "trend_auc": 0.974,
+  "trend_base": 74.9,
+  "trend_n": 394
+ },
+ "table": {
+  "n": 60,
+  "exact": 25.0,
+  "mae": 0.192,
+  "parsed": 100.0,
+  "wrong_example": {
+   "date": "2015-05-04",
+   "true": 0.48,
+   "read": 0.07
+  }
+ },
+ "cost": {
+  "cnn_params_k": 289.2,
+  "b32_params_m": 151.3,
+  "b16_params_m": 149.6,
+  "vl_params_b": 2.21,
+  "hardware": "Apple silicon, PyTorch 2.15.0, device mps"
+ },
+ "runtime_min": 0.6
+}

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L1_german_cv'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'AUC of logistic regression, an MLP 64-64 and XGBoost on German credit over 5 x 5-fold cross-validation (25 held-out folds), with the Nadeau-Bengio corrected t-test.'
+
+Keywords: 'cross-validation, corrected resampled t-test, AUC, credit scoring, small data, German credit'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/german_credit.csv (UCI Statlog German credit)'
+
+Output: 'german_cv.png'

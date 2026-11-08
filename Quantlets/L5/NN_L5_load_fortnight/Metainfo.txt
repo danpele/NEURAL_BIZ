@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L5_load_fortnight'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Two winter test weeks of Romanian hourly load: observed, seasonal naive and LSTM day-ahead forecasts.'
+
+Keywords: 'load forecasting, LSTM, seasonal naive, Romania, electricity, day-ahead'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'saved test forecasts of analysis_L5.py (load_fortnight_results.json)'
+
+Output: 'load_fortnight.png'

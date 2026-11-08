@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_ae_error_dist'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Reconstruction error of an autoencoder trained on legitimate card transactions only, for the legitimate and the fraudulent transactions of the test part (last 20 % of the time span); weights restore the full data.'
+
+Keywords: 'autoencoder, anomaly detection, credit card fraud, reconstruction error, unsupervised learning'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/creditcard_fraud_sample.csv (ULB, OpenML 1597); lectures/L8/results/fraud_test_scores.csv (scores of the trained models)'
+
+Output: 'ae_error_dist.png'

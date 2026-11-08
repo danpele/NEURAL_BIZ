@@ -1,0 +1,36 @@
+{
+ "title": {
+  "en": "Deep learning for energy and financial time series; time-series foundation models",
+  "ro": "Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp"
+ },
+ "topics": {
+  "en": [
+   "Day-ahead price forecasting for Romania without leakage: information set at gate closure, rolling origin, naive and LEAR (Lasso-estimated autoregressive) benchmarks",
+   "Deep architectures: a DNN (deep neural network) with 24 outputs, DeepAR, N-BEATS (neural basis expansion analysis) and patch transformers",
+   "Time-series foundation models used zero-shot: Chronos-2, Chronos-Bolt and TimesFM, with context length and covariates",
+   "Evaluation: MAE (mean absolute error), the Diebold–Mariano test, pinball loss and conformal calibration of quantiles",
+   "Value-at-Risk with a foundation model and a conformal shift, backtested on the S&P 500 and Bitcoin"
+  ],
+  "ro": [
+   "Prognoza prețurilor pentru ziua următoare în România fără scurgeri de informație: setul de informații la închiderea licitației, originea glisantă, reperele naiv și LEAR (model autoregresiv estimat prin Lasso)",
+   "Arhitecturi profunde: o rețea DNN (rețea neuronală profundă) cu 24 de ieșiri, DeepAR, N-BEATS (analiza prin expansiune în baze neuronale) și arhitecturi transformer pe petice",
+   "Modele fundație pentru serii de timp folosite fără reantrenare (zero-shot): Chronos-2, Chronos-Bolt și TimesFM, cu lungimea contextului și covariabile",
+   "Evaluarea: MAE (eroarea absolută medie), testul Diebold–Mariano, pierderea pinball și calibrarea conformală a cuantilelor",
+   "Valoarea expusă la risc cu un model fundație și o deplasare conformală, testată retrospectiv pe S&P 500 și Bitcoin"
+  ]
+ },
+ "further": [
+  {
+   "title": "Chronos (Amazon Science)",
+   "url": "https://github.com/amazon-science/chronos-forecasting"
+  },
+  {
+   "title": "TimesFM (Google Research)",
+   "url": "https://github.com/google-research/timesfm"
+  },
+  {
+   "title": "epftoolbox: open benchmark for electricity price forecasting",
+   "url": "https://github.com/jeslago/epftoolbox"
+  }
+ ]
+}

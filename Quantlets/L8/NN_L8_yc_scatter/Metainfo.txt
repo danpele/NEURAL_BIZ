@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L8_yc_scatter'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Lecture 8 of Neural Networks and Deep Learning (NN). Level (10-year yield) against slope (10 years minus 3 months) of euro-area AAA curves: real days and the share of inverted curves.'
+
+Keywords: 'yield curve, slope, inversion, diffusion model, synthetic scenarios'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/ecb_yield_curve_daily.csv (European Central Bank, YC)'
+
+Output: 'yc_scatter.png'

@@ -1,0 +1,15 @@
+Name of QuantLet: 'NN_L2_vanishing'
+
+Published in: 'Neural Networks and Deep Learning (NN)'
+
+Description: 'Gradient norm per layer at initialisation in a 10-layer MLP on one batch of real California data: sigmoid and tanh with Xavier initialisation, ReLU with He and with too small weights (mean of 5 seeds).'
+
+Keywords: 'vanishing gradient, exploding gradient, Xavier initialisation, He initialisation, backpropagation, deep networks'
+
+Author: 'Daniel Traian Pele'
+
+Submitted: 'Sunday, 08 November 2026'
+
+Datafile: 'data/clean/california_housing.csv (StatLib, Pace and Barry, 1997)'
+
+Output: 'vanishing.png'
