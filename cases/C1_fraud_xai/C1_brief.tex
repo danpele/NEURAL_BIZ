@@ -1,0 +1,202 @@
+% C1_brief.tex -- ONE source for the English and Romanian case brief of Case 1 (Lectures 3 and 11).
+\input{numbers_\lang}
+\renewcommand{\emqacase}{\T{Research case 1 (Lectures 3 and 11)}{Studiul de caz 1 (cursurile 3 și 11)}}
+\begin{document}
+\emqatitle{\T{Case 1: Explainable fraud detection --- which model, which explanation, which alert?}%
+                {Studiul de caz 1: Detectarea explicabilă a fraudei --- ce model, ce explicație, ce alertă?}}%
+          {\T{Based on}{Studiu bazat pe lucrarea} Diaconu \& Pele (2026), \emph{Explainable AI in financial fraud detection: Evidence from the IEEE-CIS fraud dataset},
+           PICBE 20(1), 118--132, \href{https://doi.org/10.2478/picbe-2026-0015}{doi:10.2478/picbe-2026-0015}}
+
+\begin{scenario}
+\T{The head of fraud operations at a card issuer receives a model score for every payment. The team can review only a few hundred payments a day; each review costs analyst time and annoys a customer, each missed fraud costs the amount stolen.
+The risk committee and the supervisor ask two further questions before the model goes live: \textbf{why} is a payment flagged, and \textbf{would a different model give the same reasons}?
+The decisions are: \textbf{which model} to deploy (a simple logistic regression, gradient-boosted trees or a neural network), \textbf{how to explain it}, and \textbf{when to raise an alert}.}%
+{Directorul operațiunilor antifraudă al unui emitent de carduri primește un scor de risc pentru fiecare plată. Echipa poate verifica doar cîteva sute de plăți pe zi; fiecare verificare consumă timpul unui analist și deranjează un client, iar fiecare fraudă ratată costă suma furată.
+Înainte ca modelul să fie folosit, comitetul de risc și autoritatea de supraveghere pun încă două întrebări: \textbf{de ce} este semnalată o plată și \textbf{ar indica un alt model aceleași motive}?
+Deciziile sînt: \textbf{ce model} se folosește (o regresie logistică simplă, arbori de decizie construiți secvențial sau o rețea neuronală), \textbf{cum este explicat} și \textbf{cînd se emite o alertă}.}
+\end{scenario}
+
+\section{\T{What the paper did}{Lucrarea de referință}}
+\textbf{\T{Question.}{Întrebarea de cercetare.}} \T{How do tabular models and graph models differ, not only in accuracy but in what they can explain about fraud, and how can feature-level and network-level explanations be combined into one framework (p.~119, 121)?}%
+{Cum diferă modelele tabelare de modelele pe grafuri, nu doar prin acuratețe, ci și prin ceea ce pot explica despre fraudă, și cum pot fi combinate explicațiile la nivelul variabilelor cu cele la nivelul rețelei într-un singur cadru (p.~119, 121)?}
+
+\textbf{\T{Data.}{Datele.}} \T{The IEEE-CIS (Institute of Electrical and Electronics Engineers, Computational Intelligence Society) fraud detection data: 590,540 e-commerce transactions, 20,663 frauds (3.50\,\%), 432 features (Table~1, p.~125); a random 70/30 split into training and validation (p.~122).
+For the graph model, transactions are linked to identity, device, address and e-mail-domain nodes, with reverse edges for two-way message passing (p.~125--126).}%
+{Datele IEEE-CIS (Institute of Electrical and Electronics Engineers, Computational Intelligence Society) pentru detectarea fraudei: 590.540 de tranzacții de comerț electronic, 20.663 de fraude (3,50\,\%), 432 de variabile (Tabelul~1, p.~125); împărțire aleatoare 70/30 în eșantioane de antrenare și de validare (p.~122).
+Pentru modelul pe graf, tranzacțiile sînt legate de noduri pentru identitate, dispozitiv, adresă și domeniul de e-mail, cu muchii inverse pentru transmiterea mesajelor în ambele sensuri (p.~125--126).}
+
+\textbf{\T{Method.}{Metoda.}} \T{Two gradient-boosting models, XGBoost (eXtreme Gradient Boosting) and CatBoost, against a heterogeneous GraphSAGE (graph sample and aggregate) network (eq.~1--5, p.~121--122).
+Explanations at two levels: SHAP (SHapley Additive exPlanations) values for the tabular models (eq.~6--7, p.~123), and, for the graph, edge-type ablation (remove one relation type, measure the loss of the area under the receiver operating characteristic curve, ROC-AUC, eq.~8) and hop ablation (keep only $k$-hop neighbourhoods, eq.~9, p.~123--124).
+Performance is reported with ROC-AUC, precision, recall and the F1-score at an optimal threshold (p.~123).}%
+{Două modele de tip \emph{gradient boosting}, XGBoost (\emph{eXtreme Gradient Boosting}) și CatBoost, comparate cu o rețea GraphSAGE (\emph{graph sample and aggregate}) pe un graf eterogen (ec.~1--5, p.~121--122).
+Explicații pe două niveluri: valorile SHAP (\emph{SHapley Additive exPlanations}) pentru modelele tabelare (ec.~6--7, p.~123) și, pentru graf, eliminarea cîte unui tip de relație (se măsoară scăderea ariei de sub curba ROC, ROC-AUC, \emph{receiver operating characteristic}, ec.~8) și eliminarea vecinilor după distanță (se păstrează doar vecinătățile de ordin $k$, ec.~9, p.~123--124).
+Performanța este raportată prin ROC-AUC, precizie, sensibilitate și scorul F1 la un prag optim (p.~123).}
+
+\textbf{\T{Main findings of the paper.}{Principalele rezultate ale lucrării.}}
+\begin{itemize}
+\item \T{XGBoost (1,000 trees, depth 10) reaches ROC-AUC 0.9763, precision 0.8955, recall 0.7509, F1 0.8169 at threshold 0.2055; CatBoost 0.9636, 0.8915, 0.7091 and 0.7899 (Table~2, p.~126--127).}%
+{XGBoost (1.000 de arbori, adîncime 10) atinge ROC-AUC 0,9763, precizie 0,8955, sensibilitate 0,7509 și F1 0,8169 la pragul 0,2055; CatBoost obține 0,9636, 0,8915, 0,7091 și, respectiv, 0,7899 (Tabelul~2, p.~126--127).}
+\item \T{Global SHAP shows that fraud scores are driven by behavioural-consistency, identity and transaction-pattern variables, and the ranking is ``largely consistent across the two models'' (p.~128).}%
+{Valorile SHAP globale arată că scorurile de fraudă sînt determinate de variabile de consecvență comportamentală, de identitate și de tipare ale tranzacțiilor, iar ordinea variabilelor este în mare măsură aceeași pentru cele două modele (p.~128).}
+\item \T{GraphSAGE reaches ROC-AUC 0.8729 and adds relational explanations: removing the links to the id\_31 and addr1 entities lowers the ROC-AUC by 0.0303 and 0.0255 (Table~3); without any neighbours ($k=0$) the ROC-AUC falls to 0.754, while first-order neighbours ($k=1$) restore it fully (Table~4, p.~129--130).}%
+{GraphSAGE atinge ROC-AUC 0,8729 și adaugă explicații relaționale: eliminarea legăturilor către entitățile id\_31 și addr1 reduce ROC-AUC cu 0,0303 și, respectiv, 0,0255 (Tabelul~3); fără niciun vecin ($k=0$), ROC-AUC scade la 0,754, iar vecinii de ordinul întîi ($k=1$) îl readuc integral la nivelul de bază (Tabelul~4, p.~129--130).}
+\item \T{Conclusion: explainable fraud detection should combine several model types, the boosting models for feature-level risk and the graph models for the relational structure of fraud (p.~131).}%
+{Concluzia: detectarea explicabilă a fraudei trebuie să combine mai multe tipuri de modele, modelele de tip \emph{boosting} pentru riscul la nivelul variabilelor și modelele pe grafuri pentru structura relațională a fraudei (p.~131).}
+\end{itemize}
+
+\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\begin{intuition}
+\T{A fraud model ranks payments by risk; an explanation tells the analyst which characteristics of a payment pushed it up the list.
+If two very different models, trees and a neural network, point to the same characteristics, the explanation is about the \emph{data}, not about one model's quirks.
+Removing the most important characteristics and refitting shows how much of the performance they really carry --- the same logic as removing a relation type from the paper's graph.}%
+{Un model antifraudă ordonează plățile după risc; o explicație îi arată analistului ce caracteristici ale unei plăți au urcat-o în această ordine.
+Dacă două modele foarte diferite, arborii de decizie și o rețea neuronală, indică aceleași caracteristici, explicația descrie \emph{datele}, nu particularitățile unui singur model.
+Eliminarea celor mai importante caracteristici și reestimarea modelului arată cîtă performanță poartă ele de fapt --- aceeași logică precum eliminarea unui tip de relație din graful din lucrare.}
+\end{intuition}
+\T{Let $y_i\in\{0,1\}$ mark a fraud and $\mathbf x_i\in\mathbb R^{p}$ the $p=29$ inputs of payment $i$.
+\textbf{Logistic regression:} $\Pr(y_i=1\mid\mathbf x_i)=\sigma(\beta_0+\boldsymbol\beta^\top\mathbf x_i)$, $\sigma(z)=1/(1+e^{-z})$.
+\textbf{Gradient-boosted trees} (paper eq.~1--2): $\hat y_i=\sum_{m=1}^{M}f_m(\mathbf x_i)$, each tree $f_m$ fitted to minimise $\sum_i l(y_i,\hat y_i)+\sum_m\Omega(f_m)$, with $l$ the log-loss and $\Omega(f)=\gamma T+\tfrac12\lambda\lVert\mathbf w\rVert^2$ penalising the number of leaves $T$ and the leaf weights $\mathbf w$.
+\textbf{Multilayer perceptron (MLP):} $\mathbf h_1=\mathrm{ReLU}(\mathbf W_1\mathbf x+\mathbf b_1)$, $\mathbf h_2=\mathrm{ReLU}(\mathbf W_2\mathbf h_1+\mathbf b_2)$, $\hat\pi=\sigma(\mathbf w_3^\top\mathbf h_2+b_3)$, with 64 and 32 units, dropout 0.2 after each hidden layer, and loss $-\frac1n\sum_i[y_i\log\hat\pi_i+(1-y_i)\log(1-\hat\pi_i)]+\lambda_w\lVert\boldsymbol\theta\rVert^2$ (weight decay $\lambda_w=10^{-4}$, rectified linear unit ReLU$(z)=\max(0,z)$); training stops when the validation score stops improving (early stopping).}%
+{Fie $y_i\in\{0,1\}$ indicatorul de fraudă și $\mathbf x_i\in\mathbb R^{p}$ cele $p=29$ de variabile de intrare ale plății $i$.
+\textbf{Regresia logistică:} $\Pr(y_i=1\mid\mathbf x_i)=\sigma(\beta_0+\boldsymbol\beta^\top\mathbf x_i)$, $\sigma(z)=1/(1+e^{-z})$.
+\textbf{Arborii construiți secvențial} (ec.~1--2 din lucrare): $\hat y_i=\sum_{m=1}^{M}f_m(\mathbf x_i)$, fiecare arbore $f_m$ fiind ales pentru a minimiza $\sum_i l(y_i,\hat y_i)+\sum_m\Omega(f_m)$, unde $l$ este funcția de pierdere logaritmică, iar $\Omega(f)=\gamma T+\tfrac12\lambda\lVert\mathbf w\rVert^2$ penalizează numărul de frunze $T$ și ponderile frunzelor $\mathbf w$.
+\textbf{Perceptronul multistrat (MLP):} $\mathbf h_1=\mathrm{ReLU}(\mathbf W_1\mathbf x+\mathbf b_1)$, $\mathbf h_2=\mathrm{ReLU}(\mathbf W_2\mathbf h_1+\mathbf b_2)$, $\hat\pi=\sigma(\mathbf w_3^\top\mathbf h_2+b_3)$, cu 64 și 32 de neuroni, \emph{dropout} 0,2 după fiecare strat ascuns și funcția de pierdere $-\frac1n\sum_i[y_i\log\hat\pi_i+(1-y_i)\log(1-\hat\pi_i)]+\lambda_w\lVert\boldsymbol\theta\rVert^2$ (penalizarea ponderilor $\lambda_w=10^{-4}$, funcția de activare liniară rectificată ReLU$(z)=\max(0,z)$); antrenarea se oprește cînd scorul pe eșantionul de validare nu se mai îmbunătățește (oprire timpurie).}
+
+\T{\textbf{Sampling correction.} Our file keeps every fraud and a share $\beta$ = \Nbeta\ of the legitimate payments. A score $p_s$ learnt on this sample is mapped back to the population with $p=\beta p_s/(\beta p_s-p_s+1)$ (Lecture~3), and every metric weights legitimate rows by $1/\beta$.
+\textbf{Metrics.} Precision $=TP/(TP+FP)$, recall $=TP/(TP+FN)$ ($TP$, $FP$, $FN$: true positives, false positives, false negatives); the area under the precision--recall curve, PR-AUC $=\sum_k(R_k-R_{k-1})P_k$ over the ranked scores, is the headline metric for a rare event (a random score has PR-AUC equal to the fraud rate).}%
+{\textbf{Corecția eșantionării.} Fișierul nostru păstrează toate fraudele și o proporție $\beta$ = \Nbeta\ din plățile legitime. Un scor $p_s$ estimat pe acest eșantion este readus la nivelul populației prin $p=\beta p_s/(\beta p_s-p_s+1)$ (cursul~3), iar toate măsurile de performanță ponderează rîndurile legitime cu $1/\beta$.
+\textbf{Măsurile de performanță.} Precizia $=TP/(TP+FP)$, sensibilitatea $=TP/(TP+FN)$ ($TP$, $FP$, $FN$: rezultate pozitive adevărate, pozitive false, negative false); aria de sub curba precizie--sensibilitate, PR-AUC $=\sum_k(R_k-R_{k-1})P_k$, calculată pe scorurile ordonate, este măsura principală pentru un eveniment rar (un scor aleator are PR-AUC egal cu rata fraudei).}
+
+\T{\textbf{Explanations.} SHAP writes a score as $f(\mathbf x)=\phi_0+\sum_{j=1}^{p}\phi_j$ (paper eq.~6), with the Shapley value $\phi_j=\sum_{S\subseteq F\setminus\{j\}}\frac{|S|!(p-|S|-1)!}{p!}\,[f_{S\cup\{j\}}(\mathbf x_{S\cup\{j\}})-f_S(\mathbf x_S)]$ (eq.~7), $F$ the set of features and $f_S$ the model using only the features in $S$.
+For trees, TreeSHAP computes it exactly; for the MLP we use expected gradients, $\phi_j=\E_{\mathbf x'\sim\mathcal B,\,\alpha\sim U(0,1)}\big[(x_j-x'_j)\,\partial f(\mathbf x'+\alpha(\mathbf x-\mathbf x'))/\partial x_j\big]$ with a background sample $\mathcal B$ of training rows; for the logistic regression $\phi_j=\beta_j(x_j-\bar x_j)$.
+Global importance is the mean $|\phi_j|$; agreement between two models is the Spearman rank correlation of their importances.
+\textbf{Ablation} (analogue of eq.~8): $\Delta_k=\text{PR-AUC}(F)-\text{PR-AUC}(F\setminus\text{top-}k)$, refitting the model without the $k$ most important variables, against the same number of randomly chosen ones.}%
+{\textbf{Explicațiile.} SHAP scrie un scor ca $f(\mathbf x)=\phi_0+\sum_{j=1}^{p}\phi_j$ (ec.~6 din lucrare), cu valoarea Shapley $\phi_j=\sum_{S\subseteq F\setminus\{j\}}\frac{|S|!(p-|S|-1)!}{p!}\,[f_{S\cup\{j\}}(\mathbf x_{S\cup\{j\}})-f_S(\mathbf x_S)]$ (ec.~7), unde $F$ este mulțimea variabilelor, iar $f_S$ modelul care folosește doar variabilele din $S$.
+Pentru arbori, metoda TreeSHAP o calculează exact; pentru MLP folosim gradienții așteptați, $\phi_j=\E_{\mathbf x'\sim\mathcal B,\,\alpha\sim U(0,1)}\big[(x_j-x'_j)\,\partial f(\mathbf x'+\alpha(\mathbf x-\mathbf x'))/\partial x_j\big]$, cu un eșantion de referință $\mathcal B$ din datele de antrenare; pentru regresia logistică, $\phi_j=\beta_j(x_j-\bar x_j)$.
+Importanța globală este media lui $|\phi_j|$; concordanța dintre două modele este corelația rangurilor Spearman a importanțelor lor.
+\textbf{Eliminarea variabilelor} (analogul ec.~8): $\Delta_k=\text{PR-AUC}(F)-\text{PR-AUC}(F\setminus\text{primele }k)$, cu modelul reestimat fără cele mai importante $k$ variabile, comparat cu eliminarea aceluiași număr de variabile alese aleator.}
+
+\T{\textbf{Decision rule.} Reviewing a payment costs $c$; not reviewing a fraud loses its amount $A_i$. Reviewing is worth it when the expected loss exceeds the review cost: alert if $\hat p_i\,A_i>c$.}%
+{\textbf{Regula de decizie.} Verificarea unei plăți costă $c$; o fraudă neverificată înseamnă pierderea sumei $A_i$. Verificarea merită atunci cînd pierderea așteptată depășește costul verificării: se emite o alertă dacă $\hat p_i\,A_i>c$.}
+\begin{decision}
+\T{Rank payments with the model, explain the top of the list with SHAP, check that a second model points to the same variables, and set the alert rule from your own review cost and the amount at risk, not from a fixed probability of 0.5.}%
+{Ordonați plățile cu ajutorul modelului, explicați primele cazuri din listă cu SHAP, verificați că un al doilea model indică aceleași variabile și stabiliți regula de alertă pe baza propriului cost de verificare și a sumei expuse riscului, nu pe baza unei probabilități fixe de 0,5.}
+\end{decision}
+
+\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\T{Notebook \texttt{C1\_notebook\_EN.ipynb}: the credit-card fraud data of the course (Worldline and the Machine Learning Group of ULB, Université Libre de Bruxelles; European cardholders, two days of September 2013): all \NnFraud\ frauds and a 10\,\% sample of the legitimate payments, \NnRows\ rows.
+The 29 inputs are the 28 principal components V1--V28 released by the data owner and $\log(1+\text{amount})$. The rows are split \emph{in time order}: training (first 60\,\%, \NnTrainFraud\ frauds), validation (next 20\,\%, \NnValFraud\ frauds, used for early stopping), test (last \NhoursTest\ hours, \NnTestFraud\ frauds among about \NpopTest\ payments, fraud rate \NrateTest\,\%).
+Every model is trained with five seeds (0--4). The graph layer of the paper needs entity keys (devices, addresses, e-mail domains) that these data do not contain; Case~3 applies graph models to a transaction graph.}%
+{Notebook-ul \texttt{C1\_notebook\_RO.ipynb} folosește datele cursului privind frauda cu carduri (Worldline și Machine Learning Group din ULB, Université Libre de Bruxelles; deținători europeni de carduri, două zile din septembrie 2013): toate cele \NnFraud\ fraude și un eșantion de 10\,\% din plățile legitime, în total \NnRows\ de rînduri.
+Cele 29 de variabile de intrare sînt cele 28 de componente principale V1--V28 publicate de proprietarul datelor și $\log(1+\text{sumă})$. Rîndurile sînt împărțite \emph{în ordine cronologică}: antrenare (primele 60\,\%, \NnTrainFraud\ de fraude), validare (următoarele 20\,\%, \NnValFraud\ de fraude, folosite pentru oprirea timpurie), test (ultimele \NhoursTest\ ore, \NnTestFraud\ de fraude din aproximativ \NpopTest\ de plăți, rata fraudei \NrateTest\,\%).
+Fiecare model este antrenat cu cinci valori inițiale ale generatorului aleator (0--4). Nivelul de graf din lucrare are nevoie de chei ale entităților (dispozitive, adrese, domenii de e-mail), pe care aceste date nu le conțin; studiul de caz~3 aplică modele pe grafuri unui graf de tranzacții.}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f1_time_split}
+\caption{\T{Frauds per hour and the time-ordered split.}{Fraudele pe oră și împărțirea cronologică.}}
+\src{\T{ULB credit-card data (OpenML 1597); September 2013.}{datele ULB privind cardurile (OpenML 1597); septembrie 2013.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f2_pr_curves}
+\caption{\T{Precision--recall curves on the test period (mean score of five seeds).}{Curbele precizie--sensibilitate în perioada de test (scorul mediu din cinci rulări).}}
+\src{\T{our computation; population weights.}{calcule proprii; ponderi la nivelul populației.}}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{Test-period performance, mean of five seeds (sd = standard deviation across seeds); recall and precision when the top 0.5\,\% of payments are reviewed. Best value in bold.}%
+{Performanța în perioada de test, media a cinci rulări (abaterea standard între rulări); sensibilitatea și precizia atunci cînd sînt verificate primele 0,5\,\% dintre plăți. Cea mai bună valoare este marcată cu aldine.}}
+\tabin{models}
+\src{\T{our computation. Paper (IEEE-CIS, random split): XGBoost ROC-AUC 0.9763, CatBoost 0.9636, GraphSAGE 0.8729 (Table~2, p.~127; p.~129).}%
+{calcule proprii. Lucrarea (IEEE-CIS, împărțire aleatoare): XGBoost ROC-AUC 0,9763, CatBoost 0,9636, GraphSAGE 0,8729 (Tabelul~2, p.~127; p.~129).}}
+\end{table}
+
+\T{\textbf{What our data show: performance.} All three models rank payments very well (ROC-AUC \NlAUC--\NxAUC), so the headline is PR-AUC: XGBoost \NxPR\ (sd \NxPRsd), MLP \NmPR\ (sd \NmPRsd), logistic regression \NlPR.
+A paired bootstrap on the test payments (2,000 resamples) gives a 95\,\% interval for MLP minus logistic regression of [\NdMLlo, \NdMLhi], and for XGBoost minus MLP of [\NdXMlo, \NdXMhi]: the network improves on the benchmark, while XGBoost and the MLP are not distinguishable on \NnTestFraud\ test frauds. Reviewing the top 0.5\,\% of payments catches about \NxRec\ of the frauds with any of the models.}%
+{\textbf{Ce arată datele: performanța.} Toate cele trei modele ordonează foarte bine plățile (ROC-AUC între \NlAUC\ și \NxAUC), de aceea măsura relevantă este PR-AUC: XGBoost \NxPR\ (abaterea standard \NxPRsd), MLP \NmPR\ (abaterea standard \NmPRsd), regresia logistică \NlPR.
+O procedură \emph{bootstrap} pereche pe plățile din perioada de test (2.000 de reeșantionări) dă un interval de încredere de 95\,\% pentru diferența MLP minus regresia logistică de [\NdMLlo; \NdMLhi], iar pentru XGBoost minus MLP de [\NdXMlo; \NdXMhi]: rețeaua îmbunătățește reperul, iar XGBoost și MLP nu pot fi deosebite pe baza celor \NnTestFraud\ de fraude din perioada de test. Verificarea primelor 0,5\,\% dintre plăți detectează aproximativ \NxRec\ din fraude, cu oricare dintre modele.}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.52\linewidth}\centering
+\includegraphics[width=\linewidth]{f3_shap_global}
+\caption{\T{Global SHAP importance of the top 10 variables of XGBoost, for the three models.}{Importanța SHAP globală a primelor 10 variabile ale XGBoost, pentru cele trei modele.}}
+\src{\T{our SHAP values; test period.}{valorile noastre SHAP; perioada de test.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{f4_local}
+\caption{\T{Why was this fraud flagged? Hour \NlocHour, amount \NlocAmount\ EUR, probability \NlocProb.}{De ce a fost semnalată această fraudă? Ora \NlocHour, suma \NlocAmount\ EUR, probabilitatea \NlocProb.}}\label{fig:local}
+\src{\T{our TreeSHAP values (XGBoost, seed 0).}{valorile noastre TreeSHAP (XGBoost, rularea 0).}}
+\end{minipage}
+\end{figure}
+
+\T{\textbf{What our data show: explanations.} For XGBoost, the three leading variables are \Ntop, \Nsecond\ and \Nthird; they carry \NtopThreeShare\,\% of the mean $|$SHAP$|$. The MLP's leading variable is \NmlpTop; trees and network share \NoverlapXM\ of their top 10 variables (Spearman rank correlation \NrhoXM\ over all 29 inputs; XGBoost versus logistic regression \NrhoXL).
+As in the paper, where XGBoost and CatBoost agree on the main drivers, the leading variables are common to very different models, while the order of the weaker ones depends on the model --- a reason to report the top of the ranking, not the full list.
+The local explanation (Figure~\ref{fig:local}) shows a large payment flagged mainly because of \NlocTop\ and \NlocSecond.}%
+{\textbf{Ce arată datele: explicațiile.} Pentru XGBoost, primele trei variabile sînt \Ntop, \Nsecond\ și \Nthird; ele concentrează \NtopThreeShare\,\% din media $|$SHAP$|$. Variabila principală a MLP este \NmlpTop; arborii și rețeaua au în comun \NoverlapXM\ dintre primele 10 variabile (corelația rangurilor Spearman pe toate cele 29 de variabile este \NrhoXM; între XGBoost și regresia logistică, \NrhoXL).
+Ca în lucrare, unde XGBoost și CatBoost indică aceiași factori principali, variabilele de top sînt comune unor modele foarte diferite, iar ordinea variabilelor mai puțin importante depinde de model --- un motiv pentru a raporta partea de sus a clasamentului, nu întreaga listă.
+Explicația locală (Figura~\ref{fig:local}) arată o plată de valoare mare, semnalată în principal din cauza variabilelor \NlocTop\ și \NlocSecond.}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f5_ablation}
+\caption{\T{Ablation: test PR-AUC after removing $k$ variables and refitting (mean $\pm$ sd, three seeds).}{Eliminarea variabilelor: PR-AUC pe test după eliminarea a $k$ variabile și reestimare (media $\pm$ abaterea standard, trei rulări).}}
+\src{\T{our computation (XGBoost).}{calcule proprii (XGBoost).}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f6_cost}
+\caption{\T{Cost of the test period by alert rule: review cost $c$ = \NcRev\ EUR, missed fraud = its amount.}{Costul perioadei de test după regula de alertă: costul verificării $c$ = \NcRev\ EUR, frauda ratată = suma ei.}}
+\src{\T{our computation (XGBoost).}{calcule proprii (XGBoost).}}
+\end{minipage}
+\end{figure}
+
+\T{\textbf{Ablation.} Removing the five most important variables and refitting lowers the test PR-AUC from \NablBase\ to \NablTopFive\ ($\Delta_5$ = \NdTopFive); removing five random variables costs only \NdRandFive. The SHAP ranking therefore identifies variables that carry the signal, the same check as the paper's edge-type ablation, applied to feature groups instead of relation types.}%
+{\textbf{Eliminarea variabilelor.} Eliminarea celor mai importante cinci variabile și reestimarea modelului reduc PR-AUC pe test de la \NablBase\ la \NablTopFive\ ($\Delta_5$ = \NdTopFive); eliminarea a cinci variabile aleatoare costă doar \NdRandFive. Ordinea SHAP identifică așadar variabilele care poartă semnalul; este aceeași verificare ca eliminarea tipurilor de relații din lucrare, aplicată unor grupuri de variabile în locul tipurilor de relații.}
+
+\begin{table}[H]\centering\small
+\caption{\T{Alert policies on the test period (population scale): alerts reviewed, frauds and amounts caught, total cost (reviews plus missed amounts). Lowest cost in bold.}%
+{Politici de alertă în perioada de test (la nivelul populației): alerte verificate, fraude și sume recuperate, costul total (verificări plus sumele ratate). Costul cel mai mic este marcat cu aldine.}}
+\tabin{cost}
+\src{\T{our computation; $c$ = \NcRev\ EUR per review (assumption); mean probability of five seeds.}{calcule proprii; $c$ = \NcRev\ EUR pe verificare (ipoteză); probabilitatea medie din cinci rulări.}}
+\end{table}
+
+\T{\textbf{Decision number.} Without alerts, the frauds of the test period cost \NcostNone\ thousand EUR. A fixed threshold of 0.5 on the XGBoost probability reviews the clearest cases (\NcaughtHalf\ frauds caught) and cuts the cost to \NcostHalf\ thousand. The cost rule $\hat p_i A_i>c$ reviews about \NalertsRule\ payments, catches fewer frauds (\NcaughtRule) but the largest ones (\NcaughtEurRule\ thousand EUR), and lowers the cost to \NcostRule\ thousand EUR, a saving of \NsaveRule\ thousand EUR in \NhoursTest\ hours.
+The best fixed threshold found afterwards on the test data (\NbestFixedThr) would give \NbestFixedCost\ thousand EUR; the cost rule reaches nearly the same cost without looking at the test outcomes.}%
+{\textbf{Cifra relevantă pentru decizie.} Fără alerte, fraudele din perioada de test costă \NcostNone\ mii EUR. Un prag fix de 0,5 pentru probabilitatea XGBoost verifică doar cazurile cele mai clare (\NcaughtHalf\ de fraude detectate) și reduce costul la \NcostHalf\ mii EUR. Regula de cost $\hat p_i A_i>c$ verifică aproximativ \NalertsRule\ de plăți, detectează mai puține fraude (\NcaughtRule), dar pe cele mai mari (\NcaughtEurRule\ mii EUR), și reduce costul la \NcostRule\ mii EUR, adică o economie de \NsaveRule\ mii EUR în \NhoursTest\ ore.
+Cel mai bun prag fix, găsit ulterior pe datele de test (\NbestFixedThr), ar da \NbestFixedCost\ mii EUR; regula de cost ajunge aproape la același cost fără a folosi rezultatele din perioada de test.}
+
+\section{\T{Discussion questions for managers}{Întrebări pentru discuție}}
+\begin{enumerate}
+\item \T{XGBoost and the MLP are statistically tied on our data. Which one would you deploy, and what weight would you give to explainability, stability across seeds and maintenance cost?}%
+{XGBoost și MLP sînt la egalitate statistică pe datele noastre. Pe care l-ați folosi și ce importanță ați acorda explicabilității, stabilității între rulări și costului de întreținere?}
+\item \T{The variables V1--V28 are anonymised principal components. Is a SHAP explanation in terms of ``V14'' useful to an analyst or to a customer who asks why a payment was blocked? What would you need to make it useful?}%
+{Variabilele V1--V28 sînt componente principale anonimizate. Este utilă o explicație SHAP formulată în termenii lui „V14” pentru un analist sau pentru un client care întreabă de ce i-a fost blocată o plată? De ce ați avea nevoie pentru a o face utilă?}
+\item \T{The cost rule catches fewer frauds but more euros. Is that acceptable for your company's reputation, for customers and for the supervisor?}%
+{Regula de cost detectează mai puține fraude, dar recuperează mai mulți euro. Este acest lucru acceptabil pentru reputația companiei, pentru clienți și pentru autoritatea de supraveghere?}
+\item \T{Fraudsters adapt. How often would you retrain the model, and how would you check that its explanations have not changed (Case~3)?}%
+{Autorii fraudelor se adaptează. Cît de des ați reantrena modelul și cum ați verifica faptul că explicațiile lui nu s-au modificat (studiul de caz~3)?}
+\item \T{The paper shows that links between transactions (shared devices, addresses, e-mail domains) carry fraud signal. Which links does your company record, and what would it take to build such a graph?}%
+{Lucrarea arată că legăturile dintre tranzacții (dispozitive, adrese și domenii de e-mail comune) poartă semnal de fraudă. Ce legături înregistrează compania dumneavoastră și ce ar fi necesar pentru a construi un astfel de graf?}
+\end{enumerate}
+
+\section{\T{Limitations of the classroom replication}{Limitele replicării}}
+\T{(i) Our data cover two days and 492 frauds, so the test period has only \NnTestFraud\ frauds and the intervals are wide; the paper uses 590,540 transactions. (ii) The inputs are anonymised principal components, so explanations are statistical, not business variables --- a feature that the paper also notes for IEEE-CIS (p.~130).
+(iii) Without entity keys, the graph layer of the paper (GraphSAGE, edge and hop ablation) is replaced by a feature ablation. (iv) The cost rule uses the transaction amount as the loss and a fixed review cost; chargebacks, recoveries and customer attrition are not modelled.}%
+{(i) Datele noastre acoperă două zile și 492 de fraude, astfel încît perioada de test are doar \NnTestFraud\ de fraude, iar intervalele de încredere sînt largi; lucrarea folosește 590.540 de tranzacții. (ii) Variabilele de intrare sînt componente principale anonimizate, de aceea explicațiile sînt statistice, nu în termenii unor variabile de afaceri --- o caracteristică pe care lucrarea o semnalează și pentru IEEE-CIS (p.~130).
+(iii) În lipsa cheilor entităților, nivelul de graf din lucrare (GraphSAGE, eliminarea muchiilor și a vecinilor) este înlocuit cu eliminarea variabilelor. (iv) Regula de cost folosește suma tranzacției drept pierdere și un cost fix al verificării; rambursările, recuperările și pierderea clienților nu sînt modelate.}
+
+\newpage
+\section*{\T{Case 1 at a glance}{Studiul de caz 1 pe scurt}}
+\glance{\T{Which fraud model, which explanation, and when to raise an alert?}{Ce model antifraudă, ce explicație și cînd se emite o alertă?}}%
+{\T{ULB card payments, September 2013; \NnFraud\ frauds; time-ordered split.}{Plăți cu carduri ULB, septembrie 2013; \NnFraud\ de fraude; împărțire cronologică.}}%
+{\T{Logistic regression, XGBoost, MLP (5 seeds); SHAP; ablation; cost rule.}{Regresie logistică, XGBoost, MLP (5 rulări); SHAP; eliminarea variabilelor; regula de cost.}}%
+{\T{PR-AUC \NxPR\ (XGBoost), \NmPR\ (MLP); top variables \Ntop, \Nsecond, \Nthird.}{PR-AUC \NxPR\ (XGBoost), \NmPR\ (MLP); variabilele principale \Ntop, \Nsecond, \Nthird.}}%
+{\T{Alert when probability $\times$ amount $>$ review cost.}{Alertă cînd probabilitatea $\times$ suma $>$ costul verificării.}}
+\begin{center}
+\includegraphics[width=0.62\linewidth]{fig_headline_\lang}
+\src{\T{our SHAP values on the ULB credit-card data; test period (last \NhoursTest\ hours).}{valorile noastre SHAP pe datele ULB privind cardurile; perioada de test (ultimele \NhoursTest\ ore).}}
+\end{center}
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NxPR}\\ \small \T{test PR-AUC of XGBoost (fraud rate \NrateTest\,\%)}{PR-AUC al XGBoost pe test (rata fraudei \NrateTest\,\%)}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NoverlapXM\ / 10}\\ \small \T{top variables shared by trees and network}{variabile de top comune arborilor și rețelei}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{IDAred}\Huge\bfseries \NsaveRule}\\ \small \T{thousand EUR saved in \NhoursTest\ hours by the cost rule}{mii EUR economisiți în \NhoursTest\ ore cu regula de cost}\end{minipage}
+\end{document}

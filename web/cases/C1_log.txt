@@ -1,0 +1,3 @@
+NN web case C1
+[en] 6 sections, 6 numbered figures, 2 tables; acronyms: IEEE-CIS, GraphSAGE, SHAP, ROC-AUC, MLP, ReLU, PR-AUC, TreeSHAP, ULB
+[ro] 6 sections, 6 numbered figures, 2 tables; acronyms: IEEE-CIS, GraphSAGE, SHAP, ROC, ROC-AUC, MLP, ReLU, PR-AUC, TreeSHAP, ULB

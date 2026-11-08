@@ -1,0 +1,3 @@
+NN web case C5
+[en] 6 sections, 4 numbered figures, 2 tables; acronyms: VaR, ES, LLM, GPT, US, GARCH, EWMA, DCS, DM, HS
+[ro] 6 sections, 4 numbered figures, 2 tables; acronyms: VaR, ES, LLM, GPT, GARCH, EWMA, DCS, DM, HS

@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Strategy (1 MW / 1 MWh, Romania) & Profit, EUR & SD over seeds & EUR/year & NPV, EUR & Payback, years \\
+\midrule
+Perfect foresight (ex post bound) & 95,053 & -- & 52,727 & $-$19,766 & 9.5 \\
+Fixed hours 12:00$\rightarrow$19:00 (chosen on 2024) & 71,205 & -- & 39,498 & $-$140,253 & 12.7 \\
+Naive forecast (yesterday's prices) & 78,176 & -- & 43,365 & $-$105,035 & 11.5 \\
+Quantile MLP, median pair, market orders & 82,878 & 1,038 & 45,973 & $-$81,278 & 10.9 \\
+Quantile MLP, quantile bids ($\alpha$ = 0.8) & 75,169 & 1,450 & 41,697 & $-$120,225 & 12.0 \\
+Q-learning agent, signal: yesterday's prices & 68,755 & 140 & 38,139 & $-$152,633 & 13.1 \\
+Q-learning agent, signal: quantile MLP & 70,488 & 1,679 & 39,100 & $-$143,878 & 12.8 \\
+\bottomrule
+\end{tabular}

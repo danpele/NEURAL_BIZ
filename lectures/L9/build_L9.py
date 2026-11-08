@@ -46,7 +46,7 @@ REFS = [
     "Bishop, C.\\,M.\\ \\& Bishop, H.\\ (2024). \\textit{Deep Learning: Foundations and Concepts}, ch.\\ 13. Springer. "
     "\\href{https://doi.org/10.1007/978-3-031-45468-4}{doi:10.1007/978-3-031-45468-4}",
     "Breiman, L.\\ (2001). Random forests. \\textit{Machine Learning}, 45(1), 5--32. \\href{https://doi.org/10.1023/A:1010933404324}{doi:10.1023/A:1010933404324}",
-    "Diaconu, D.\\ \\& Pele, D.\\,T.\\ (2026). Testing SHAP stability under distribution shift in graph-enhanced fraud detection. "
+    "Diaconu, D.\\ \\& Pele, D.\\,T.\\ (2026). SHAP stability across random and forward-time validation in graph-augmented fraud detection. "
     "Submitted to \\textit{Expert Systems with Applications}. Code: "
     "\\href{https://github.com/QuantLet/GNN_XAI_Stability}{github.com/QuantLet/GNN\\_XAI\\_Stability}",
     "Efron, B.\\ \\& Tibshirani, R.\\,J.\\ (1993). \\textit{An Introduction to the Bootstrap}. Chapman \\& Hall. "

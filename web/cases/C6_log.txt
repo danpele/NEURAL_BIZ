@@ -1,0 +1,3 @@
+NN web case C6
+[en] 6 sections, 3 numbered figures, 3 tables; acronyms: VaR, ES, CEE, BET, RON, TimesFM, HS, GJR-GARCH, GARCH, ARIMA, LSTM, TSFM, DM, AR, BVB, EODHD, TLV, BRD, SNP, SNG, SNN, TGN, EL, TEL
+[ro] 6 sections, 3 numbered figures, 3 tables; acronyms: VaR, ES, TSFM, ECE, BET, RON, TimesFM, SI, GJR-GARCH, GARCH, ARIMA, LSTM, DM, AR, BVB, EODHD, TLV, BRD, SNP, SNG, SNN, TGN, EL, TEL

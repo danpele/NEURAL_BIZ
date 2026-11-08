@@ -1,0 +1,3 @@
+NN web case C7
+[en] 6 sections, 4 numbered figures, 2 tables; acronyms: VLM, FINDER-LLM, MACD, RSI, VaR, ES, ROC, AUC, LSTM, EMA, CLIP, CI
+[ro] 6 sections, 4 numbered figures, 2 tables; acronyms: VLM, FINDER-LLM, MACD, RSI, VaR, ES, ROC, AUC, LSTM, EMA, CLIP

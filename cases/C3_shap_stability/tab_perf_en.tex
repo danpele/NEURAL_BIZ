@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Model, test period & AUC & PR-AUC & Precision & Recall & F1 \\
+\midrule
+Tabular XGBoost, steps 35--42 & 0.974 & 0.921 & 0.967 & 0.856 & 0.908 \\
+Tabular XGBoost, steps 43--49 & 0.715 & 0.046 & 0.083 & 0.018 & 0.029 \\
+Graph model (XGBoost + GraphSAGE), steps 35--42 & 0.970 & 0.916 & 0.982 & 0.832 & 0.901 \\
+Graph model (XGBoost + GraphSAGE), steps 43--49 & 0.665 & 0.039 & 0.114 & 0.011 & 0.020 \\
+Gaussian control, steps 35--42 & 0.973 & 0.920 & 0.966 & 0.854 & 0.906 \\
+Gaussian control, steps 43--49 & 0.700 & 0.043 & 0.088 & 0.018 & 0.030 \\
+\bottomrule
+\end{tabular}

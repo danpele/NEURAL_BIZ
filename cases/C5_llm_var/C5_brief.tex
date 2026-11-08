@@ -1,0 +1,173 @@
+% C5_brief.tex -- ONE source for the English and Romanian case brief of Case 5 (Lecture 12).
+\input{numbers_\lang}
+\renewcommand{\emqacase}{\T{Research case 5 (Lecture 12)}{Studiul de caz 5 (cursul 12)}}
+\begin{document}
+\emqatitle{\T{Case 5: LLM-VaR and LLM-ES --- can a language model measure market risk?}%
+                {Studiul de caz 5: LLM-VaR și LLM-ES --- poate un model de limbaj să măsoare riscul de piață?}}%
+          {\T{Based on}{Studiu bazat pe lucrarea} Pele, Bolovăneanu, Lin, Ren, Ginavar, Spilak, Andrei, Toma, Lessmann \& Härdle (2026), \emph{In the beginning was the Word: LLM-VaR and LLM-ES},
+           Expert Systems with Applications 295, 128676, \href{https://doi.org/10.1016/j.eswa.2025.128676}{doi:10.1016/j.eswa.2025.128676}}
+
+\begin{scenario}
+\T{The market-risk desk of a bank holds a long position in the S\&P 500. Every evening it must report the Value-at-Risk (VaR), the loss that tomorrow should exceed only with probability 1\,\%, and the Expected Shortfall (ES), the average loss on the days when it does.
+The supervisor checks the VaR against the realised losses every quarter; too many violations raise the capital the bank must hold.
+A vendor now offers a ``risk assistant'' built on a large language model (LLM): it reads the recent returns as text and writes the risk numbers, with no model to estimate.
+The head of market risk asks: \textbf{would such a model pass the regulatory backtest, and what would it do to our capital?}}%
+{Departamentul de risc de piață al unei bănci deține o poziție lungă pe indicele S\&P 500. În fiecare seară trebuie să raporteze valoarea la risc (VaR, \emph{Value-at-Risk}), adică pierderea care ar trebui depășită a doua zi doar cu probabilitatea de 1\,\%, și pierderea așteptată în coada distribuției (ES, \emph{Expected Shortfall}), adică pierderea medie din zilele în care VaR este depășită.
+Autoritatea de supraveghere compară trimestrial VaR cu pierderile realizate; prea multe depășiri cresc capitalul pe care banca trebuie să îl dețină.
+Un furnizor oferă acum un „asistent de risc” construit pe un model lingvistic mare (LLM, \emph{large language model}): acesta citește randamentele recente ca text și scrie măsurile de risc, fără vreun model care să fie estimat.
+Directorul de risc de piață întreabă: \textbf{ar trece un astfel de model testarea retrospectivă cerută de reglementare și ce efect ar avea asupra capitalului nostru?}}
+\end{scenario}
+
+\section{\T{What the paper did}{Lucrarea de referință}}
+\textbf{\T{Question.}{Întrebarea de cercetare.}} \T{Can general-purpose LLMs, used zero-shot, forecast the VaR and the ES of financial returns as well as the econometric risk models used in practice?}%
+{Pot modelele lingvistice mari de uz general, folosite fără antrenare suplimentară (\emph{zero-shot}), să prognozeze VaR și ES ale randamentelor financiare la fel de bine ca modelele econometrice de risc folosite în practică?}
+
+\textbf{\T{Design.}{Construcția studiului.}} \T{The paper defines two new risk measures, LLM-VaR and LLM-ES, on the input encoding of the LLMTime framework (Gruver et al., 2023): a window of the last $w$ daily log returns is written as a string of numbers, the LLM continues it, and many sampled continuations give a forecast distribution of tomorrow's return.
+Three generations of generative pre-trained transformers (GPT) are evaluated --- GPT-3.5, GPT-4 and GPT-4o --- on daily data for nine assets (a cryptocurrency index, equity indices including the S\&P 500, a clean-energy index, a United States (US) Treasury bond fund and a commodity index), with rolling windows of 30 to 150 days.
+The benchmarks are GARCH (generalised autoregressive conditional heteroskedasticity) with Student-$t$ innovations and EWMA (exponentially weighted moving average) models with Dynamic Conditional Score (DCS) volatility.
+The forecasts are backtested at 1\,\% for VaR and 2.5\,\% for ES with the Basel traffic light, the Kupiec and Christoffersen tests and the Acerbi--Székely tests for ES.}%
+{Lucrarea definește două noi măsuri de risc, LLM-VaR și LLM-ES, pornind de la codificarea datelor din cadrul LLMTime (Gruver et al., 2023): o fereastră cu ultimele $w$ randamente logaritmice zilnice este scrisă ca un șir de numere, LLM-ul îl continuă, iar numeroasele continuări eșantionate formează o distribuție de prognoză a randamentului din ziua următoare.
+Sînt evaluate trei generații de modele GPT (\emph{generative pre-trained transformer}) --- GPT-3.5, GPT-4 și GPT-4o --- pe date zilnice pentru nouă active (un indice al criptomonedelor, indici bursieri, printre care S\&P 500, un indice al energiei curate, un fond de obligațiuni de stat ale Statelor Unite ale Americii și un indice al mărfurilor), cu ferestre mobile de 30 pînă la 150 de zile.
+Reperele sînt modelul GARCH (heteroscedasticitate condiționată autoregresivă generalizată) cu inovații Student-$t$ și modele EWMA (media mobilă ponderată exponențial) cu volatilitate de tip DCS (\emph{Dynamic Conditional Score}).
+Prognozele sînt testate retrospectiv la nivelul de 1\,\% pentru VaR și de 2,5\,\% pentru ES, cu semaforul Basel, testele Kupiec și Christoffersen și testele Acerbi--Székely pentru ES.}
+
+\textbf{\T{Main findings of the paper.}{Principalele rezultate ale lucrării.}}
+\begin{itemize}
+\item \T{``LLMs perform well when short rolling windows are used, particularly in volatile markets like cryptocurrencies'' (abstract).}%
+{LLM-urile au rezultate bune atunci cînd se folosesc ferestre mobile scurte, în special pe piețele volatile, cum sînt cele ale criptomonedelor (rezumat).}
+\item \T{``GPT-3.5 frequently outperforms or matches the performance of newer models, raising questions about model complexity, alignment, and biases'' (abstract).}%
+{GPT-3.5 depășește sau egalează frecvent performanța modelelor mai noi, ceea ce ridică întrebări privind complexitatea modelelor, alinierea și distorsiunile acestora (rezumat).}
+\item \T{With longer windows the performance of the LLMs deteriorates and ``the econometric models prove more reliable'' (abstract); the paper contributes ``a first-of-its-kind benchmark for LLM-based VaR/ES estimation'' and shows the potential of general-purpose LLMs as adaptive tools for short-horizon risk assessment.}%
+{La ferestre mai lungi, performanța LLM-urilor scade, iar modelele econometrice se dovedesc mai fiabile (rezumat); lucrarea oferă un prim reper de evaluare pentru estimarea VaR și ES cu LLM și arată potențialul LLM-urilor de uz general ca instrumente adaptive pentru evaluarea riscului pe orizonturi scurte.}
+\end{itemize}
+{\footnotesize\color{FooterGray}\T{Related work of our group for Lecture 12 and Lecture 13: time-series foundation models for VaR and ES with conformal calibration in Central and Eastern European markets (Jheng, Tak, Găman, Mazurencu-Marinescu-Pele \& Pele, 2026, \emph{Economic Computation and Economic Cybernetics Studies and Research} 60(2), 267--290, \href{https://doi.org/10.24818/18423264/60.2.26.14}{doi:10.24818/18423264/60.2.26.14}; Case~6).}%
+{Alte lucrări ale grupului nostru relevante pentru cursurile 12 și 13: modele fundație pentru serii de timp, folosite pentru VaR și ES cu calibrare conformală pe piețele din Europa Centrală și de Est (Jheng, Tak, Găman, Mazurencu-Marinescu-Pele și Pele, 2026, \emph{Economic Computation and Economic Cybernetics Studies and Research} 60(2), 267--290, \href{https://doi.org/10.24818/18423264/60.2.26.14}{doi:10.24818/18423264/60.2.26.14}; studiul de caz~6).}}
+
+\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\begin{intuition}
+\T{A language model has read a great deal of text with numbers in it. Shown a list of recent returns, it can be asked to ``write the next number'' many times; each answer is one possible tomorrow.
+If the answers are as spread out as real returns, their worst 1\,\% is a VaR. The question is empirical: does the model reproduce the tails of the market, or only its typical day?}%
+{Un model de limbaj a citit un volum foarte mare de text care conține numere. Dacă primește o listă de randamente recente, i se poate cere de multe ori să „scrie numărul următor”; fiecare răspuns este o evoluție posibilă pentru ziua de mîine.
+Dacă răspunsurile sînt la fel de dispersate ca randamentele reale, cel mai slab 1\,\% dintre ele dă o estimare a VaR. Întrebarea este empirică: reproduce modelul cozile distribuției pieței sau doar ziua obișnuită?}
+\end{intuition}
+\T{Let $r_t=100\ln(P_t/P_{t-1})$ be the daily log return in percent and $\mathcal X_{t-1}=(r_{t-w},\dots,r_{t-1})$ the window. LLMTime rescales the window, $z_s=(r_s-m)/c$ with $m=\min\mathcal X-\beta(\max\mathcal X-\min\mathcal X)$ and $c$ the $a$-quantile of $r_s-m$ ($\beta=0.3$, $a=0.95$), and writes each $z_s$ with two decimals and no decimal point, separated by commas.
+The LLM with parameters $\Theta$ samples $n$ continuations at temperature $T$, which give simulated returns $\hat r^{(i)}_t=m+c\,\hat z^{(i)}_t$, $i=1,\dots,n$, and the empirical distribution $\hat F_t$. The paper defines}%
+{Fie $r_t=100\ln(P_t/P_{t-1})$ randamentul logaritmic zilnic, în procente, și $\mathcal X_{t-1}=(r_{t-w},\dots,r_{t-1})$ fereastra de date. LLMTime rescalează fereastra, $z_s=(r_s-m)/c$, cu $m=\min\mathcal X-\beta(\max\mathcal X-\min\mathcal X)$ și $c$ cuantila de ordin $a$ a valorilor $r_s-m$ ($\beta=0{,}3$, $a=0{,}95$), și scrie fiecare $z_s$ cu două zecimale, fără virgulă zecimală, valorile fiind separate prin virgule.
+LLM-ul, cu parametrii $\Theta$, eșantionează $n$ continuări la temperatura $T$, din care rezultă randamentele simulate $\hat r^{(i)}_t=m+c\,\hat z^{(i)}_t$, $i=1,\dots,n$, și distribuția empirică $\hat F_t$. Lucrarea definește}
+\[
+\mathrm{LLM\text{-}VaR}^{\alpha}_t=-\hat F_t^{-1}(\alpha),\qquad
+\mathrm{LLM\text{-}ES}^{\alpha}_t=-\E\!\left[\hat r_t\,\middle|\,\hat r_t\le-\mathrm{LLM\text{-}VaR}^{\alpha}_t\right]=\frac1\alpha\int_0^\alpha \mathrm{LLM\text{-}VaR}^{\gamma}_t\,d\gamma .
+\]
+\T{\textbf{Backtests.} With the violation indicator $I_t=\1\{r_t<-\mathrm{VaR}_t\}$, $n_1=\sum I_t$ violations in $N$ days and $\hat\pi=n_1/N$, the Kupiec unconditional-coverage statistic is
+$LR_{uc}=-2\ln\frac{(1-\alpha)^{N-n_1}\alpha^{n_1}}{(1-\hat\pi)^{N-n_1}\hat\pi^{n_1}}\sim\chi^2_1$; the Christoffersen independence statistic $LR_{ind}\sim\chi^2_1$ compares a first-order Markov chain for $I_t$ with independence, and $LR_{cc}=LR_{uc}+LR_{ind}\sim\chi^2_2$.
+\textbf{Scores.} The quantile (tick) loss $S_Q=(\alpha-I_t)(r_t-q_t)$, with $q_t=-\mathrm{VaR}_t$, and the FZ0 loss of Fissler and Ziegel, in the form of Patton, Ziegel and Chen (2019), for the pair $(q_t,e_t)$, $e_t=-\mathrm{ES}_t$:
+$S_{FZ0}=-\frac{1}{\alpha e_t}I_t(q_t-r_t)+\frac{q_t}{e_t}+\ln(-e_t)-1$; both are minimised in expectation by the true quantile and ES, so lower average loss is better. Two models are compared with the Diebold--Mariano (DM) statistic $DM=\bar d/\sqrt{\hat V(\bar d)}$ on the loss differences $d_t$, with a Newey--West variance.
+\textbf{Benchmark.} GARCH(1,1)-$t$: $r_t=\mu+\sigma_t\varepsilon_t$, $\sigma_t^2=\omega+\alpha_1(r_{t-1}-\mu)^2+\beta_1\sigma_{t-1}^2$, $\varepsilon_t$ a standardised Student-$t$ with $\nu$ degrees of freedom.}%
+{\textbf{Testarea retrospectivă.} Cu indicatorul de depășire $I_t=\1\{r_t<-\mathrm{VaR}_t\}$, $n_1=\sum I_t$ depășiri în $N$ zile și $\hat\pi=n_1/N$, statistica Kupiec de acoperire necondiționată este
+$LR_{uc}=-2\ln\frac{(1-\alpha)^{N-n_1}\alpha^{n_1}}{(1-\hat\pi)^{N-n_1}\hat\pi^{n_1}}\sim\chi^2_1$; statistica Christoffersen de independență, $LR_{ind}\sim\chi^2_1$, compară un lanț Markov de ordinul întîi pentru $I_t$ cu ipoteza de independență, iar $LR_{cc}=LR_{uc}+LR_{ind}\sim\chi^2_2$.
+\textbf{Funcțiile de pierdere.} Pierderea pentru cuantile $S_Q=(\alpha-I_t)(r_t-q_t)$, cu $q_t=-\mathrm{VaR}_t$, și pierderea FZ0 a lui Fissler și Ziegel, în forma lui Patton, Ziegel și Chen (2019), pentru perechea $(q_t,e_t)$, $e_t=-\mathrm{ES}_t$:
+$S_{FZ0}=-\frac{1}{\alpha e_t}I_t(q_t-r_t)+\frac{q_t}{e_t}+\ln(-e_t)-1$; ambele au valoarea așteptată minimă pentru cuantila și ES adevărate, deci o pierdere medie mai mică este mai bună. Două modele sînt comparate cu statistica Diebold--Mariano (DM), $DM=\bar d/\sqrt{\hat V(\bar d)}$, pe diferențele de pierdere $d_t$, cu o varianță de tip Newey--West.
+\textbf{Reperul.} GARCH(1,1)-$t$: $r_t=\mu+\sigma_t\varepsilon_t$, $\sigma_t^2=\omega+\alpha_1(r_{t-1}-\mu)^2+\beta_1\sigma_{t-1}^2$, unde $\varepsilon_t$ are o distribuție Student-$t$ standardizată cu $\nu$ grade de libertate.}
+\begin{decision}
+\T{Judge a risk model by its backtest, not by its architecture: count the violations, test their frequency and clustering, and compare the joint VaR--ES loss with a GARCH benchmark before any number reaches the risk report.}%
+{Judecați un model de risc după testarea retrospectivă, nu după arhitectura sa: numărați depășirile, testați frecvența și gruparea lor și comparați pierderea comună VaR--ES cu cea a unui reper GARCH înainte ca vreo cifră să ajungă în raportul de risc.}
+\end{decision}
+
+\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\T{Notebook \texttt{C5\_notebook\_EN.ipynb}: daily log returns of the S\&P 500 (Yahoo Finance), one-day-ahead forecasts for the \NnTest\ trading days from \NtestStart\ to \NtestEnd. Two open models of the Qwen2.5 family (1.5 and 3 billion parameters) run on a laptop; for every day and configuration the encoded window of $w=30$ or $w=120$ returns is continued 1,024 times at temperature 0.7, with the LLMTime scaling settings reported for the paper ($a=0.95$, $\beta=0.3$, two digits).
+In the main setting the number string is continued as plain text; a fifth configuration places the same string inside the LLMTime instruction prompt for chat models. Benchmarks: historical simulation (HS) on 250 days, EWMA with $\lambda=0.94$ and normal innovations, GARCH(1,1)-$t$ and filtered HS (GARCH(1,1) with normal innovations, empirical quantiles of the standardised residuals), all on rolling windows and re-estimated every day.
+The main language-model configuration, fixed before the backtest, is the 3B model with $w=30$ (the short window favoured by the paper).}%
+{Notebook-ul \texttt{C5\_notebook\_RO.ipynb} folosește randamentele logaritmice zilnice ale indicelui S\&P 500 (Yahoo Finance) și prognoze pentru ziua următoare în cele \NnTest\ de zile de tranzacționare dintre \NtestStart\ și \NtestEnd. Două modele deschise din familia Qwen2.5 (1,5 și 3 miliarde de parametri) rulează pe un laptop; pentru fiecare zi și configurație, fereastra codificată de $w=30$ sau $w=120$ randamente este continuată de 1.024 de ori la temperatura 0,7, cu setările de scalare LLMTime raportate pentru lucrare ($a=0{,}95$, $\beta=0{,}3$, două cifre).
+În varianta principală, șirul de numere este continuat ca text simplu; o a cincea configurație include același șir în promptul cu instrucțiuni folosit de LLMTime pentru modelele conversaționale. Reperele sînt simularea istorică (HS, \emph{historical simulation}) pe 250 de zile, EWMA cu $\lambda=0{,}94$ și inovații normale, GARCH(1,1)-$t$ și simularea istorică filtrată (GARCH(1,1) cu inovații normale și cuantilele empirice ale reziduurilor standardizate), toate pe ferestre mobile și reestimate zilnic.
+Configurația principală a modelului de limbaj, stabilită înainte de testare, este modelul de 3B cu $w=30$ (fereastra scurtă favorizată de lucrare).}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.92\linewidth]{f1_var_path}
+\caption{\T{S\&P 500 daily log returns and the 1\,\% return quantile ($-$VaR) of the language model and of GARCH(1,1)-$t$; red dots: violations of the LLM-VaR.}{Randamentele logaritmice zilnice ale S\&P 500 și cuantila de 1\,\% a randamentului ($-$VaR) pentru modelul de limbaj și pentru GARCH(1,1)-$t$; punctele roșii: depășiri ale LLM-VaR.}}\label{fig:f1_var_path}
+\src{\T{Yahoo Finance; our computation; \NtestStart--\NtestEnd.}{Yahoo Finance; calcule proprii; \NtestStart--\NtestEnd.}}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{Backtest of the 1\,\% VaR over \NnTest\ days (expected violations: \NexpOne). $p$-values of the Kupiec ($uc$), Christoffersen independence ($ind$) and conditional-coverage ($cc$) tests; mean VaR in \%. Best $p$-value in bold.}{Testarea retrospectivă a VaR de 1\,\% pe \NnTest\ de zile (depășiri așteptate: \NexpOne). Valorile $p$ ale testelor Kupiec ($uc$), Christoffersen de independență ($ind$) și de acoperire condiționată ($cc$); VaR medie în \%. Cea mai mare valoare $p$ este marcată cu aldine.}}
+\tabin{backtest}
+\src{\T{our computation. Paper: 1\,\% VaR, nine assets, October 2021 -- March 2024.}{calcule proprii. Lucrarea: VaR de 1\,\%, nouă active, octombrie 2021 -- martie 2024.}}
+\end{table}
+
+\begin{table}[H]\centering\small
+\caption{\T{Expected-shortfall level (2.5\,\%): violation rate, mean ES (\%), mean quantile loss at 1\,\%, mean FZ0 loss for (VaR, ES) at 2.5\,\% and the Diebold--Mariano test of the FZ0 loss against GARCH(1,1)-$t$ (positive: worse than GARCH). Lowest loss in bold.}{Nivelul pentru pierderea așteptată (2,5\,\%): frecvența depășirilor, ES medie (\%), pierderea medie pentru cuantila de 1\,\%, pierderea medie FZ0 pentru (VaR, ES) la 2,5\,\% și testul Diebold--Mariano al pierderii FZ0 față de GARCH(1,1)-$t$ (valoare pozitivă: mai slab decît GARCH). Cea mai mică pierdere este marcată cu aldine.}}
+\tabin{loss}
+\src{\T{our computation. ``--'': not defined (reference model; or an ES above zero on \NcEsPos\ days for the chat prompt).}{calcule proprii. „--”: nedefinit (modelul de referință; sau ES peste zero în \NcEsPos\ de zile pentru promptul conversațional).}}
+\end{table}
+
+\T{\textbf{What our data show.} (1) \emph{The plain-text continuation produces a usable risk distribution.} The sampled returns of the main configuration have an average standard deviation of \NsdLlm\,\% (realised: \NsdReal\,\%) and the LLM 1\,\% quantile moves with the market: its correlation with the GARCH quantile is \NcorrMain\ (Figure~\ref{fig:f1_var_path}).
+(2) \emph{The test period is demanding for every model.} The four text configurations have \NllmViolMin--\NllmViolMax\ violations of the 1\,\% VaR, the classical benchmarks \NbmViolMin--\NbmViolMax, against \NexpOne\ expected; only HS ($p_{uc}=\NhPuc$) and filtered HS ($p_{uc}=\NfPuc$) are not rejected by the Kupiec test at 5\,\%. The main configuration has \NmViol\ violations; GARCH(1,1)-$t$ has \NgViol.
+(3) \emph{Short windows cover the tail better, as in the paper.} At the 2.5\,\% level the violation rate is \NsTwo\,\% with $w=30$ and \NsTwoL\,\% with $w=120$ for the 1.5B model, and \NbTwo\,\% versus \NbTwoL\,\% for the 3B model; the larger model is not the better risk model, in line with the paper's finding that GPT-3.5 matches newer models.
+(4) \emph{Joint VaR--ES accuracy.} The lowest FZ0 loss among the language models is \NbestLlmFz\ (\NbestLlm), among the benchmarks \NbestBmFz\ (\NbestBm); against GARCH(1,1)-$t$ (\NgFz) the differences of the text configurations are not significant at 5\,\% (Diebold--Mariano $p$ between \NmDmp\ and \NsDmp\ for the 30-day windows).
+(5) \emph{The prompt matters.} Wrapped in the chat instruction, the same 3B model and data give \NcViol\ violations (\NcRate\,\%): the continuations are shifted upwards, with a mean of \NcMean\,\% against \NtMean\,\% for plain text and \NrMean\,\% realised.}%
+{\textbf{Ce arată datele.} (1) \emph{Continuarea ca text simplu produce o distribuție de risc utilizabilă.} Randamentele eșantionate în configurația principală au o abatere standard medie de \NsdLlm\,\% (realizată: \NsdReal\,\%), iar cuantila de 1\,\% a LLM urmează evoluția pieței: corelația sa cu cuantila GARCH este \NcorrMain\ (figura~\ref{fig:f1_var_path}).
+(2) \emph{Perioada de test este dificilă pentru toate modelele.} Cele patru configurații text au între \NllmViolMin\ și \NllmViolMax\ depășiri ale VaR de 1\,\%, iar reperele clasice între \NbmViolMin\ și \NbmViolMax, față de \NexpOne\ așteptate; numai simularea istorică ($p_{uc}=\NhPuc$) și simularea istorică filtrată ($p_{uc}=\NfPuc$) nu sînt respinse de testul Kupiec la pragul de 5\,\%. Configurația principală are \NmViol\ depășiri, iar GARCH(1,1)-$t$ are \NgViol.
+(3) \emph{Ferestrele scurte acoperă mai bine coada distribuției, ca în lucrare.} La nivelul de 2,5\,\%, frecvența depășirilor este \NsTwo\,\% cu $w=30$ și \NsTwoL\,\% cu $w=120$ pentru modelul de 1,5B, respectiv \NbTwo\,\% față de \NbTwoL\,\% pentru modelul de 3B; modelul mai mare nu este și modelul de risc mai bun, în acord cu rezultatul lucrării potrivit căruia GPT-3.5 egalează modelele mai noi.
+(4) \emph{Acuratețea comună VaR--ES.} Cea mai mică pierdere FZ0 dintre modelele de limbaj este \NbestLlmFz\ (\NbestLlm), iar dintre repere \NbestBmFz\ (\NbestBm); față de GARCH(1,1)-$t$ (\NgFz), diferențele configurațiilor text nu sînt semnificative la pragul de 5\,\% (valorile $p$ ale testului Diebold--Mariano sînt între \NmDmp\ și \NsDmp\ pentru ferestrele de 30 de zile).
+(5) \emph{Promptul contează.} Inclus în instrucțiunea conversațională, același model de 3B, cu aceleași date, produce \NcViol\ de depășiri (\NcRate\,\%): continuările sînt deplasate în sus, cu o medie de \NcMean\,\%, față de \NtMean\,\% pentru textul simplu și \NrMean\,\% în realitate.}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.78\linewidth]{f2_violation_rates}
+\caption{\T{Share of days with a 1\,\% VaR violation; grey band: 95\,\% binomial range for a correct model.}{Ponderea zilelor cu depășirea VaR de 1\,\%; banda gri: intervalul binomial de 95\,\% pentru un model corect.}}
+\src{\T{our computation; \NnTest\ days.}{calcule proprii; \NnTest\ de zile.}}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.66\linewidth]{f3_predictive}
+\caption{\T{The 1,024 continuations of the 3B model for \NexDate\ (realised return \NexRet\,\%).}{Cele 1.024 de continuări ale modelului de 3B pentru \NexDate\ (randamentul realizat: \NexRet\,\%).}}
+\src{\T{our computation; GARCH(1,1)-$t$ density with zero mean.}{calcule proprii; densitatea GARCH(1,1)-$t$ cu medie zero.}}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.74\linewidth]{f4_capital}
+\caption{\T{Basel traffic light: violations in the last 250 test days and the implied market-risk capital, $(3+k)\cdot\overline{\mathrm{VaR}}_{60}\cdot\sqrt{10}$, in \% of the position (the chat prompt, in the red zone, is reported in the tables).}{Semaforul Basel: depășirile din ultimele 250 de zile de test și capitalul implicit pentru riscul de piață, $(3+k)\cdot\overline{\mathrm{VaR}}_{60}\cdot\sqrt{10}$, în \% din poziție (promptul conversațional, aflat în zona roșie, este raportat în tabele).}}
+\src{\T{our computation; Basel Committee on Banking Supervision (1996) plus factors.}{calcule proprii; factorii suplimentari ai Comitetului de la Basel pentru Supraveghere Bancară (1996).}}
+\end{figure}
+
+\T{\textbf{Decision number.} On the largest loss of the test period (\NexDate, \NexRet\,\%) the language model's 1\,\% quantile was \NexLlm\,\%, the GARCH(1,1)-$t$ quantile \NexGarch\,\%: both were breached.
+Over the last 250 test days the main configuration has \NmXtf\ violations (\NzM\ zone, plus factor $k=\NkM$), GARCH(1,1)-$t$ has \NgXtf\ (\NzG\ zone, $k=\NkG$). Although its average VaR is lower (\NmVar\,\% against \NgVar\,\%), the plus factor brings the language model's capital to \NcapM\,\% of the position, against \NcapG\,\% for GARCH:
+a model that underestimates the tail does not save capital, it only moves the cost from the VaR to the supervisory penalty.}%
+{\textbf{Cifra relevantă pentru decizie.} În ziua cu cea mai mare pierdere din perioada de test (\NexDate, \NexRet\,\%), cuantila de 1\,\% a modelului de limbaj a fost \NexLlm\,\%, iar cea a modelului GARCH(1,1)-$t$ \NexGarch\,\%: ambele au fost depășite.
+În ultimele 250 de zile de test, configurația principală are \NmXtf\ depășiri (zona \NzM, factor suplimentar $k=\NkM$), iar GARCH(1,1)-$t$ are \NgXtf\ (zona \NzG, $k=\NkG$). Deși VaR medie este mai mică (\NmVar\,\% față de \NgVar\,\%), factorul suplimentar aduce capitalul modelului de limbaj la \NcapM\,\% din poziție, față de \NcapG\,\% pentru GARCH:
+un model care subestimează coada distribuției nu economisește capital, ci doar mută costul de la VaR la penalizarea impusă de autoritatea de supraveghere.}
+
+
+\section{\T{Discussion questions for managers}{Întrebări pentru discuție}}
+\begin{enumerate}
+\item \T{A vendor shows you a language model whose VaR violations are close to 1\,\% over two years. Which other evidence from this case would you ask for before you let it into the risk report?}%
+{Un furnizor vă prezintă un model de limbaj ale cărui depășiri ale VaR sînt apropiate de 1\,\% pe o perioadă de doi ani. Ce alte dovezi din acest studiu de caz ați cere înainte de a-l include în raportul de risc?}
+\item \T{The same model, with the same numbers, gives a different risk when the numbers are wrapped in a chat instruction. What does this imply for model governance and for the documentation a supervisor would require?}%
+{Același model, cu aceleași date, indică un alt nivel de risc atunci cînd numerele sînt incluse într-o instrucțiune conversațională. Ce implicații are acest lucru pentru guvernanța modelelor și pentru documentația pe care ar cere-o autoritatea de supraveghere?}
+\item \T{A conservative VaR passes the backtest but raises capital. How would you trade off the plus factor of the traffic light against the cost of holding more capital?}%
+{O valoare VaR prudentă trece testarea retrospectivă, dar crește capitalul necesar. Cum ați pune în balanță factorul suplimentar al semaforului Basel și costul capitalului suplimentar?}
+\item \T{The paper finds that LLMs work best with short windows. Which business situations (new assets, crypto-assets, regime changes) favour a model that reads only the last 30 days?}%
+{Lucrarea arată că LLM-urile funcționează cel mai bine cu ferestre scurte. Ce situații din practică (active noi, criptoactive, schimbări de regim) favorizează un model care citește doar ultimele 30 de zile?}
+\item \T{The LLM produces a whole sample of possible returns, not one number. How could the risk function use the full sample (ES, stress scenarios, intraday limits) rather than only its 1\,\% quantile?}%
+{LLM-ul produce un eșantion întreg de randamente posibile, nu un singur număr. Cum ar putea folosi departamentul de risc întregul eșantion (ES, scenarii de criză, limite intrazilnice), nu doar cuantila sa de 1\,\%?}
+\end{enumerate}
+
+\section{\T{Limitations of the classroom replication}{Limitele replicării}}
+\T{(i) We use two small open models (1.5 and 3 billion parameters) run locally instead of the GPT models of the paper, one index instead of nine, and two windows (30 and 120 days) instead of six. (ii) The test period, \NtestStart\ to \NtestEnd, is later than the paper's sample and contains one large shock (April 2025).
+(iii) The forecasts depend on the random draws of the sampler; we fix the seeds and use 1,024 draws per day, as the paper. (iv) The capital figure follows the Basel 1996 internal-models formula with the square-root-of-time rule and serves to compare models, not to compute a bank's actual requirement. (v) The Acerbi--Székely ES tests of the paper are replaced by the FZ0 score.}%
+{(i) Folosim două modele deschise de mici dimensiuni (1,5 și 3 miliarde de parametri), rulate local, în locul modelelor GPT din lucrare, un singur indice în locul celor nouă și două ferestre (30 și 120 de zile) în locul celor șase. (ii) Perioada de test, \NtestStart--\NtestEnd, este ulterioară eșantionului din lucrare și conține un șoc puternic (aprilie 2025).
+(iii) Prognozele depind de extragerile aleatoare ale eșantionării; fixăm semințele și folosim 1.024 de extrageri pe zi, ca în lucrare. (iv) Capitalul urmează formula din 1996 a abordării bazate pe modele interne, cu regula rădăcinii pătrate a timpului, și servește la compararea modelelor, nu la calculul cerinței efective a unei bănci. (v) Testele Acerbi--Székely pentru ES din lucrare sînt înlocuite cu funcția de pierdere FZ0.}
+
+\newpage
+\section*{\T{Case 5 at a glance}{Studiul de caz 5 pe scurt}}
+\glance{\T{Can a language model, reading only recent returns, give a VaR and an ES that pass the backtest?}{Poate un model de limbaj, care citește doar randamentele recente, să dea VaR și ES care trec testarea retrospectivă?}}%
+{\T{S\&P 500 daily log returns; \NnTest\ test days, \NtestStart--\NtestEnd.}{Randamentele logaritmice zilnice ale S\&P 500; \NnTest\ zile de test, \NtestStart--\NtestEnd.}}%
+{\T{Qwen2.5 continues the encoded series 1,024 times (LLMTime); HS, EWMA, GARCH-$t$, filtered HS as benchmarks.}{Qwen2.5 continuă de 1.024 de ori seria codificată (LLMTime); repere: HS, EWMA, GARCH-$t$, HS filtrată.}}%
+{\T{1\,\% VaR: \NmViol\ violations for the main LLM, \NgViol\ for GARCH-$t$ (\NexpOne\ expected); short windows cover better; chat prompt: \NcViol.}{VaR de 1\,\%: \NmViol\ depășiri pentru LLM-ul principal, \NgViol\ pentru GARCH-$t$ (\NexpOne\ așteptate); ferestrele scurte acoperă mai bine; promptul conversațional: \NcViol.}}%
+{\T{Admit a model only after the backtest; a low VaR in the red zone costs as much capital (\NcapM\,\%) as GARCH (\NcapG\,\%).}{Admiteți un model doar după testarea retrospectivă; o VaR mică în zona roșie costă tot atît capital (\NcapM\,\%) cît GARCH (\NcapG\,\%).}}
+\begin{center}
+\includegraphics[width=0.66\linewidth]{fig_headline_\lang}
+\src{\T{our computation; S\&P 500 (Yahoo Finance), \NtestStart--\NtestEnd.}{calcule proprii; S\&P 500 (Yahoo Finance), \NtestStart--\NtestEnd.}}
+\end{center}
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NmViol}\\ \small \T{1\,\% VaR violations of the main LLM (expected \NexpOne)}{depășiri ale VaR de 1\,\% pentru LLM-ul principal (așteptate \NexpOne)}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NcorrMain}\\ \small \T{correlation of the LLM and GARCH 1\,\% quantiles}{corelația dintre cuantilele de 1\,\% ale LLM și GARCH}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{IDAred}\Huge\bfseries \NcViol}\\ \small \T{violations with the chat prompt: same model, same data}{depășiri cu promptul conversațional: același model, aceleași date}\end{minipage}
+\end{document}

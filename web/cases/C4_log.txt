@@ -1,0 +1,3 @@
+NN web case C4
+[en] 6 sections, 5 numbered figures, 1 tables; acronyms: BESS, CEE, TTF, CAPEX, DRF, QB, NH, NPV, MAE, RMSE, CRPS, MLP, CET
+[ro] 6 sections, 5 numbered figures, 1 tables; acronyms: BESS, TTF, CAPEX, DRF, QB, NH, VAN, MAE, RMSE, CRPS, MLP, CET

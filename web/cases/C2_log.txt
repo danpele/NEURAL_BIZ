@@ -1,0 +1,7 @@
+NN web case C2
+[en] 6 sections, 5 numbered figures, 1 tables; acronyms: XAI, ENTSO-E, SHAP, LIME, PICBE, CET, LSTM, GRU, PR-AUC, AUC, ROC, RO
+[en] expanded at first use: PICBE -> Proceedings of the International Conference on Business Excellence  [...rizon explainability in energy price forecasting, | 20(1), 104–117, doi:10.2478/p...]
+[en] expanded at first use: RO -> Romania  [...y, and is a recurrent network worth it?DataHourly | prices, load and generation, ...]
+[ro] 6 sections, 5 numbered figures, 1 tables; acronyms: XAI, ENTSO-E, SHAP, LIME, PICBE, CET, LSTM, GRU, PR-AUC, AUC, ROC, RO
+[ro] expanded at first use: PICBE -> Proceedings of the International Conference on Business Excellence  [...rizon explainability in energy price forecasting, | 20(1), 104–117, doi:10.2478/p...]
+[ro] expanded at first use: RO -> România  [... ce și merită o rețea recurentă?DatePrețuri orare |, consum și producție, 2023–oc...]

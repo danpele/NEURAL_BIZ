@@ -1,0 +1,11 @@
+\begin{tabular}{lrrrrrrr}
+\toprule
+Early-warning rule (test period) & Precision & Recall & F1 & s.d. & PR-AUC & s.d. & AUC \\
+\midrule
+XGBoost (paper), 5-seed ensemble & \textbf{0.821} & 0.524 & 0.640 & 0.019 & 0.811 & 0.006 & \textbf{0.946} \\
+LSTM, 5-seed ensemble & 0.725 & 0.522 & 0.607 & 0.018 & 0.718 & 0.005 & 0.865 \\
+GRU, 5-seed ensemble & 0.735 & 0.544 & 0.625 & 0.012 & 0.736 & 0.008 & 0.875 \\
+Indicator warning score (paper) & 0.716 & 0.409 & 0.521 & -- & 0.649 & -- & 0.871 \\
+Naive: spike on day d-1, same hour & 0.782 & \textbf{0.776} & \textbf{0.779} & -- & \textbf{0.843} & -- & 0.934 \\
+\bottomrule
+\end{tabular}

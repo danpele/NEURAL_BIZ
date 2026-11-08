@@ -1,0 +1,189 @@
+% C4_brief.tex -- ONE source for the English and Romanian case brief of Case 4 (Lectures 10 and 13).
+\input{numbers_\lang}
+\renewcommand{\emqacase}{\T{Research case 4 (Lectures 10 and 13)}{Studiul de caz 4 (cursurile 10 și 13)}}
+\begin{document}
+\emqatitle{\T{Case 4: A battery on the day-ahead market --- quantile networks and reinforcement learning}%
+                {Studiul de caz 4: O baterie pe piața pentru ziua următoare --- rețele neuronale cuantilice și învățare prin recompensă}}%
+          {\T{Based on}{Studiu bazat pe lucrarea} Andrei, Cepoi, Dumitrescu, Lessmann, Chiriac (Luchian), Pele \& Petukhina (2026), \emph{Joint probabilistic forecasting for battery arbitrage in day-ahead power markets},
+           SSRN 6872381, \href{https://doi.org/10.2139/ssrn.6872381}{doi:10.2139/ssrn.6872381}}
+
+\begin{scenario}
+\T{An energy trader in Bucharest runs a 1 MW / 1 MWh battery energy storage system (BESS). Every day before noon it must submit tomorrow's bids to the day-ahead market without knowing tomorrow's prices.
+Two teams pitch a tool. The data-science team proposes \textbf{a neural network that forecasts the whole distribution of tomorrow's 24 prices}, followed by a simple rule that picks the hours.
+The quant team proposes \textbf{a reinforcement-learning agent that learns by itself when to charge and when to discharge}.
+The board asks two questions: \textbf{which tool earns more on unseen data, and does any of them earn enough to repay the battery?}}%
+{Un trader de energie din București operează un sistem de stocare a energiei în baterii (BESS, \emph{battery energy storage system}) de 1 MW / 1 MWh. În fiecare zi, înainte de prînz, trebuie să depună ofertele pentru ziua următoare, fără să cunoască prețurile de a doua zi.
+Două echipe propun cîte un instrument. Echipa de știința datelor propune \textbf{o rețea neuronală care prognozează întreaga distribuție a celor 24 de prețuri din ziua următoare}, urmată de o regulă simplă care alege orele.
+Echipa de analiză cantitativă propune \textbf{un agent cu învățare prin recompensă care învață singur cînd să încarce și cînd să descarce bateria}.
+Consiliul de administrație pune două întrebări: \textbf{care instrument cîștigă mai mult pe date noi și cîștigă vreunul suficient pentru a recupera investiția în baterie?}}
+\end{scenario}
+
+\section{\T{What the paper did}{Lucrarea de referință}}
+\textbf{\T{Question.}{Întrebarea de cercetare.}} \T{How much arbitrage value can a battery capture \emph{ex ante}, when it is operated on probabilistic price forecasts, and does that value justify the investment, in four interconnected Central and Eastern European (CEE) day-ahead markets (Sections~1 and 3)?}%
+{Ce parte din valoarea de arbitraj poate capta o baterie \emph{ex ante}, atunci cînd este operată pe baza prognozelor probabilistice ale prețului, și justifică această valoare investiția, pe patru piețe interconectate pentru ziua următoare din Europa Centrală și de Est (secțiunile~1 și 3)?}
+
+\textbf{\T{Data.}{Datele.}} \T{Hourly day-ahead prices of Romania, Bulgaria, Hungary and the Czech Republic, January 2018 -- September 2024 (59,160 hours per country), with 37 predictors: load, generation and their forecasts, lagged prices, Brent, TTF (Title Transfer Facility) gas and carbon prices, weather and calendar (Section~5.1).
+Battery: 1 MW / 1 MWh, efficiency 90\,\%, CAPEX (capital expenditure) 500,000 EUR, 15 years, 7\,\% discount rate, at most one cycle per day (Section~4).}%
+{Prețurile orare pentru ziua următoare din România, Bulgaria, Ungaria și Cehia, ianuarie 2018 -- septembrie 2024 (59.160 de ore pentru fiecare țară), cu 37 de variabile explicative: consumul, producția și prognozele acestora, prețurile anterioare, prețul petrolului Brent, prețul gazelor naturale TTF (\emph{Title Transfer Facility}) și prețul certificatelor de emisii de CO$_2$, variabile meteorologice și calendaristice (secțiunea~5.1).
+Bateria: 1 MW / 1 MWh, randament de 90\,\%, CAPEX (cheltuieli de capital) de 500.000 EUR, durată de viață de 15 ani, rată de actualizare de 7\,\%, cel mult un ciclu pe zi (secțiunea~4).}
+
+\textbf{\T{Method.}{Metoda.}} \T{Distributional Random Forests (DRF) forecast the \emph{joint} distribution of the 96 next-day prices (24 hours $\times$ 4 countries), refitted on the last 365 days every 30 days.
+A quantile-based (QB) rule chooses the buy hour and the sell hour from the forecast medians and places limit bids at forecast quantiles; the benchmarks are a fixed pair of hours (NH) and daily perfect foresight (PF-Daily); the investment is judged with net present value (NPV), payback and break-even CAPEX.}%
+{Modelele DRF (\emph{Distributional Random Forests}, păduri aleatoare care estimează distribuții întregi) prognozează distribuția \emph{comună} a celor 96 de prețuri din ziua următoare (24 de ore $\times$ 4 țări) și sînt reestimate la fiecare 30 de zile pe ultimele 365 de zile.
+O regulă bazată pe cuantile (QB) alege ora de cumpărare și ora de vînzare pe baza medianelor prognozate și plasează oferte cu preț limită la cuantilele prognozei; reperele sînt o pereche fixă de ore (NH) și previziunea perfectă zilnică (PF-Daily); investiția este evaluată prin valoarea actualizată netă (VAN), perioada de recuperare și CAPEX-ul de echilibru.}
+
+\textbf{\T{Main findings of the paper.}{Principalele rezultate ale lucrării.}}
+\begin{itemize}
+\item \T{At $\alpha=0.8$, QB beats NH in cumulative profit in all four markets, with relative gains of about 13\,\% in Czechia and 7\,\% in Romania (Section~6.2).
+Romania, January 2019 -- September 2024: QB 142,671 EUR, NH 133,230 EUR, PF-Daily 188,249 EUR; payback 20.1 years for QB (single-country strategy table for Romania).}%
+{Pentru $\alpha=0{,}8$, strategia QB obține un profit cumulat mai mare decît NH pe toate cele patru piețe, cu cîștiguri relative de aproximativ 13\,\% în Cehia și 7\,\% în România (secțiunea~6.2).
+România, ianuarie 2019 -- septembrie 2024: QB 142.671 EUR, NH 133.230 EUR, PF-Daily 188.249 EUR; perioada de recuperare a investiției este de 20,1 ani pentru QB (tabelul pentru România).}
+\item \T{Under the baseline CAPEX of 500,000 EUR none of the strategies covers the investment cost; the break-even CAPEX of the QB rule lies between 48\,\% and 75\,\% of the baseline (Section~6.2).}%
+{La CAPEX-ul de referință de 500.000 EUR, nicio strategie nu acoperă costul investiției; pentru regula QB, CAPEX-ul de echilibru se situează între 48\,\% și 75\,\% din valoarea de referință (secțiunea~6.2).}
+\item \T{Joint cross-border dispatch adds about 5\,\% to QB profit in Romania (149.9 vs 142.7 thousand EUR), ``driven by persistent regional price differences'' (Abstract; Table ``Multi-zone joint-dispatch'').
+DRF accuracy for Romania: MAE (mean absolute error) 39.63, RMSE (root mean squared error) 49.60, CRPS (continuous ranked probability score) 28.12 EUR/MWh over 70 rolling windows (Table ``DRF forecasting performance'').}%
+{Operarea comună, transfrontalieră, crește profitul QB în România cu aproximativ 5\,\% (149,9 față de 142,7 mii EUR), datorită diferențelor regionale persistente de preț (rezumat; tabelul pentru operarea în mai multe zone).
+Acuratețea DRF pentru România: eroarea absolută medie (MAE, \emph{mean absolute error}) 39,63, rădăcina erorii pătratice medii (RMSE, \emph{root mean squared error}) 49,60 și scorul probabilistic ordonat continuu (CRPS, \emph{continuous ranked probability score}) 28,12 EUR/MWh, pe 70 de ferestre mobile (tabelul privind performanța prognozelor DRF).}
+\end{itemize}
+{\footnotesize\color{FooterGray}\T{The same paper is the basis of Case~6 of the course Energy Markets Quantitative Analysis (random forests); here we replace the forest by a neural network and add a reinforcement-learning agent. Related case of this course: explainable early warning of price spikes (Case~2).}%
+{Aceeași lucrare stă la baza studiului de caz~6 din cursul Analiza cantitativă a piețelor de energie (cu păduri aleatoare); aici înlocuim pădurea aleatoare cu o rețea neuronală și adăugăm un agent cu învățare prin recompensă. Studiu de caz înrudit din acest curs: avertizarea timpurie explicabilă pentru vîrfurile de preț (studiul de caz~2).}}
+
+\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\begin{intuition}
+\T{A battery earns the spread between a cheap hour and a dear hour, minus the energy lost in charging and discharging. Looking back, the best two hours are obvious; looking forward, they are a forecast.
+Two ways to decide: \emph{forecast, then optimise} (a network predicts the distribution of tomorrow's prices; a rule picks the hours), or \emph{learn the policy directly} (an agent tries charging and discharging on past days and keeps what paid).}%
+{O baterie cîștigă diferența dintre prețul unei ore ieftine și cel al unei ore scumpe, minus energia pierdută la încărcare și descărcare. Retrospectiv, cele mai bune două ore sînt evidente; în momentul deciziei, ele sînt o prognoză.
+Există două moduri de a decide: \emph{întîi prognoza, apoi optimizarea} (o rețea prognozează distribuția prețurilor de mîine, iar o regulă alege orele) sau \emph{învățarea directă a politicii} (un agent încearcă încărcarea și descărcarea pe zilele trecute și păstrează ceea ce a adus profit).}
+\end{intuition}
+\T{\textbf{Profit of a cycle.} With $p_{d,h}$ the price of hour $h$ on day $d$ and efficiency $\eta=0.9$ on each leg, buying in hour $h_1$ and selling in $h_2>h_1$ earns $\pi_d(h_1,h_2)=\eta\,p_{d,h_2}-p_{d,h_1}/\eta$.
+Perfect foresight takes $\max_{h_1<h_2}\pi_d$ each day (an ex post upper bound); fixed hours use the pair with the highest total profit in the previous year.
+
+\textbf{Quantile network.} A multilayer perceptron (MLP) maps the information known at gate closure, $\mathbf x_d$ (the 24 prices of $d-1$ and of $d-7$, the mean prices of Bulgaria and Hungary on $d-1$, day of the week, season), through two hidden layers $\mathbf h^{(l)}=\mathrm{ReLU}(\mathbf W^{(l)}\mathbf h^{(l-1)}+\mathbf b^{(l)})$ with 128 units to $24\times9$ outputs $\hat q_{\tau,d,h}$, $\tau\in\{0.1,\dots,0.9\}$.
+It is trained with the pinball (quantile) loss $\mathcal L=\frac{1}{24\cdot 9\,n}\sum_{d,h,\tau}\rho_\tau(p_{d,h}-\hat q_{\tau,d,h})$, $\rho_\tau(u)=\max\{\tau u,(\tau-1)u\}$, whose minimiser is the conditional $\tau$-quantile; Adam, weight decay $10^{-4}$, dropout 0.1, early stopping on a later validation window; quantiles are sorted afterwards so that they do not cross.
+Quality: $\mathrm{CRPS}\approx\frac{2}{9}\sum_\tau\rho_\tau(p-\hat q_\tau)$ in EUR/MWh (lower is better) and the coverage of the 10\,\%--90\,\% band (target 80\,\%).
+\textbf{Rules.} \emph{Median pair}: choose $(h_1,h_2)$ maximising $\eta\hat q_{0.5,h_2}-\hat q_{0.5,h_1}/\eta$, trade only if it is positive, with market orders. \emph{Quantile bids} (the paper's QB idea): bid to buy at $\hat q_{1-q,h_1}$ and to sell at $\hat q_{q,h_2}$, $q=(1-\alpha)/2$, $\alpha=0.8$.
+
+\textbf{Q-learning agent.} A day is an episode of 24 steps. The state is $s_h=(\mathit{soc}_h,\,b_h,\,b^{\max}_{>h},\,b^{\min}_{>h})$: the state of charge (empty/full), the octile of hour $h$ in the forecast ranking of the day, and the highest and lowest octiles still to come. Actions: wait, charge, discharge; reward $r_h$ = the cash flow of the hour.
+The action values are updated by $Q(s_h,a_h)\leftarrow Q(s_h,a_h)+\lambda_n\big[r_h+\max_{a'}Q(s_{h+1},a')-Q(s_h,a_h)\big]$ (discount factor 1 within the day, step $\lambda_n=n^{-0.6}$ after $n$ visits), with $\varepsilon$-greedy exploration from 1 down to 0.05; the policy is then $\arg\max_aQ(s,a)$.
+\textbf{Investment.} $\bar\pi_{\mathrm{year}}=365\,\bar\pi_d$; $\mathrm{NPV}=-\mathrm{CAPEX}+\bar\pi_{\mathrm{year}}\sum_{t=1}^{15}1.07^{-t}$; payback $=\mathrm{CAPEX}/\bar\pi_{\mathrm{year}}$; NPV $=0$ needs $\bar\pi_{\mathrm{year}}=\Nneed$ EUR.}%
+{\textbf{Profitul unui ciclu.} Fie $p_{d,h}$ prețul orei $h$ din ziua $d$ și $\eta=0{,}9$ randamentul fiecărei operații. Cumpărarea în ora $h_1$ și vînzarea în ora $h_2>h_1$ aduc $\pi_d(h_1,h_2)=\eta\,p_{d,h_2}-p_{d,h_1}/\eta$.
+Previziunea perfectă alege în fiecare zi $\max_{h_1<h_2}\pi_d$ (o limită superioară, stabilită \emph{ex post}); strategia cu ore fixe folosește perechea cu cel mai mare profit total din anul anterior.
+
+\textbf{Rețeaua cuantilică.} Un perceptron multistrat (MLP, \emph{multilayer perceptron}) transformă informația cunoscută la închiderea porții, $\mathbf x_d$ (cele 24 de prețuri din zilele $d-1$ și $d-7$, prețurile medii din Bulgaria și Ungaria în ziua $d-1$, ziua săptămînii, sezonul), prin două straturi ascunse $\mathbf h^{(l)}=\mathrm{ReLU}(\mathbf W^{(l)}\mathbf h^{(l-1)}+\mathbf b^{(l)})$ cu cîte 128 de neuroni, în $24\times9$ ieșiri $\hat q_{\tau,d,h}$, $\tau\in\{0{,}1,\dots,0{,}9\}$.
+Rețeaua este antrenată cu funcția de pierdere \emph{pinball} (cuantilică) $\mathcal L=\frac{1}{24\cdot 9\,n}\sum_{d,h,\tau}\rho_\tau(p_{d,h}-\hat q_{\tau,d,h})$, $\rho_\tau(u)=\max\{\tau u,(\tau-1)u\}$, al cărei minim se atinge în cuantila condiționată de ordin $\tau$; optimizatorul Adam, penalizare a ponderilor $10^{-4}$, \emph{dropout} 0,1, oprire timpurie pe o fereastră de validare ulterioară; cuantilele sînt apoi ordonate, ca să nu se intersecteze.
+Calitatea prognozei: $\mathrm{CRPS}\approx\frac{2}{9}\sum_\tau\rho_\tau(p-\hat q_\tau)$, în EUR/MWh (valorile mici sînt preferabile), și acoperirea intervalului 10\,\%--90\,\% (nivelul-țintă este 80\,\%).
+\textbf{Regulile.} \emph{Perechea medianei}: se aleg $(h_1,h_2)$ care maximizează $\eta\hat q_{0.5,h_2}-\hat q_{0.5,h_1}/\eta$ și se tranzacționează numai dacă valoarea este pozitivă, cu ordine la prețul pieței. \emph{Ofertele la cuantile} (ideea regulii QB din lucrare): cumpărare la $\hat q_{1-q,h_1}$ și vînzare la $\hat q_{q,h_2}$, cu $q=(1-\alpha)/2$ și $\alpha=0{,}8$.
+
+\textbf{Agentul Q-learning.} O zi este un episod de 24 de pași. Starea este $s_h=(\mathit{soc}_h,\,b_h,\,b^{\max}_{>h},\,b^{\min}_{>h})$: starea de încărcare (goală/plină), octila orei $h$ în ordinea prognozată a zilei și cea mai mare, respectiv cea mai mică octilă din orele rămase. Acțiunile: așteptare, încărcare, descărcare; recompensa $r_h$ este fluxul de numerar al orei.
+Valorile acțiunilor se actualizează prin $Q(s_h,a_h)\leftarrow Q(s_h,a_h)+\lambda_n\big[r_h+\max_{a'}Q(s_{h+1},a')-Q(s_h,a_h)\big]$ (factor de actualizare 1 în cadrul zilei, pas $\lambda_n=n^{-0{,}6}$ după $n$ vizite), cu explorare $\varepsilon$-lacomă, de la 1 pînă la 0,05; politica este apoi $\arg\max_aQ(s,a)$.
+\textbf{Investiția.} $\bar\pi_{\mathrm{an}}=365\,\bar\pi_d$; $\mathrm{VAN}=-\mathrm{CAPEX}+\bar\pi_{\mathrm{an}}\sum_{t=1}^{15}1{,}07^{-t}$; perioada de recuperare $=\mathrm{CAPEX}/\bar\pi_{\mathrm{an}}$; pentru VAN $=0$ este nevoie de $\bar\pi_{\mathrm{an}}=\Nneed$ EUR.}
+\begin{decision}
+\T{Judge a trading tool on profit in a later test period, over several seeds, next to fixed hours and perfect foresight; judge the battery on the realistic profit against the \Nneed\ EUR per year needed to repay it.}%
+{Evaluați un instrument de tranzacționare după profitul dintr-o perioadă de test ulterioară, pe mai multe seeds, alături de orele fixe și de previziunea perfectă; evaluați bateria după profitul realist, comparat cu cei \Nneed\ EUR pe an necesari pentru recuperarea investiției.}
+\end{decision}
+
+\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\T{Notebook \texttt{C4\_notebook\_EN.ipynb}: hourly day-ahead prices of Romania, Bulgaria and Hungary (energy-charts.info), delivery days in Central European Time (CET) with 24 prices.
+Final forecaster trained on 2019 -- August 2024 (\NnTrainTwo\ days), validation September--December 2024; the agent learns on 2023--2024 (\NnAgentDays\ days) from the out-of-sample forecasts of a network trained on 2019--2022; test: January 2025 -- October 2026 (\NnTest\ days), after the paper's sample. Five seeds for every network and every agent.
+Classroom implementation: a neural network instead of DRF; only lagged prices and calendar as predictors; Romania only; one cycle per day.
+\textbf{Check on the paper's window} (8 January 2019 -- 30 September 2024), where no forecast is needed: our perfect-foresight profit is \NpfW\ EUR (paper 188,249) and the fixed hours \NnhWPair\ CET earn \NnhW\ EUR (paper 133,230).}%
+{Notebook-ul \texttt{C4\_notebook\_RO.ipynb} folosește prețurile orare pentru ziua următoare din România, Bulgaria și Ungaria (energy-charts.info), zilele de livrare în ora Europei Centrale (CET, \emph{Central European Time}) cu 24 de prețuri.
+Prognoza finală este antrenată pe ianuarie 2019 -- august 2024 (\NnTrainTwo\ de zile), cu validare pe septembrie--decembrie 2024; agentul învață pe 2023--2024 (\NnAgentDays\ de zile) din prognozele, făcute pe date noi, ale unei rețele antrenate pe 2019--2022; perioada de test este ianuarie 2025 -- octombrie 2026 (\NnTest\ de zile), după eșantionul lucrării. Fiecare rețea și fiecare agent sînt estimați cu cinci seeds.
+Față de lucrare, implementarea de la curs folosește o rețea neuronală în locul DRF, numai prețurile anterioare și variabilele calendaristice ca variabile explicative, numai România și un singur ciclu pe zi.
+\textbf{Verificare pe perioada din lucrare} (8 ianuarie 2019 -- 30 septembrie 2024), unde nu este nevoie de prognoză: profitul nostru în ipoteza previziunii perfecte este de \NpfW\ EUR (lucrarea: 188.249), iar orele fixe \NnhWPair\ CET aduc \NnhW\ EUR (lucrarea: 133.230).}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f1_daily_shape}
+\caption{\T{Mean hourly price shape in Romania, four periods.}{Profilul orar mediu al prețului în România, în patru perioade.}}
+\src{energy-charts.info; 2019--2026.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f2_forecast_fan}
+\caption{\T{Quantile MLP forecast of one test day (mean of five seeds).}{Prognoza MLP cuantilic pentru o zi de test (media celor cinci seeds).}}
+\src{\T{our network; energy-charts.info.}{rețeaua noastră; energy-charts.info.}}
+\end{minipage}
+\end{figure}
+
+\T{\textbf{Forecast quality on the test period.} The quantile MLP has MAE \Nmae\ EUR/MWh (standard deviation over seeds \NmaeSd), CRPS \Ncrps\ EUR/MWh and a 10\,\%--90\,\% band that covers \Ncover\,\% of hours (target 80\,\%); the naive ``same hour yesterday'' has MAE \NmaeNaive.
+The paper's DRF figures (MAE 39.63, CRPS 28.12) refer to 2019--2024, which includes the 2022 crisis, so the levels are not directly comparable.}%
+{\textbf{Calitatea prognozei în perioada de test.} MLP-ul cuantilic are MAE \Nmae\ EUR/MWh (abaterea standard între seeds este \NmaeSd), CRPS \Ncrps\ EUR/MWh, iar intervalul 10\,\%--90\,\% cuprinde prețul efectiv în \Ncover\,\% din ore (nivelul-țintă este 80\,\%); prognoza naivă „aceeași oră din ziua precedentă” are MAE \NmaeNaive.
+Valorile DRF din lucrare (MAE 39,63, CRPS 28,12) se referă la 2019--2024, perioadă care include criza din 2022, astfel că nivelurile nu sînt direct comparabile.}
+
+\begin{table}[H]\centering\small
+\caption{\T{Battery strategies in Romania, 1 MW / 1 MWh, test period January 2025 -- October 2026; networks and agents: mean of five seeds (SD = standard deviation of the profit over seeds).}%
+{Strategiile de operare a bateriei în România, 1 MW / 1 MWh, perioada de test ianuarie 2025 -- octombrie 2026; rețele și agenți: media celor cinci seeds (AS = abaterea standard a profitului între seeds).}}
+\tabin{strategies}
+\src{\T{our computation; CAPEX 500,000 EUR, 15 years, 7\,\% (the paper's assumptions).}{calcule proprii; CAPEX 500.000 EUR, 15 ani, 7\,\% (ipotezele lucrării).}}
+\end{table}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.52\linewidth}\centering
+\includegraphics[width=\linewidth]{f3_cumulative_profit}
+\caption{\T{Cumulative profit on the test period, by strategy.}{Profitul cumulat în perioada de test, pe strategii.}}
+\src{\T{our computation; energy-charts.info, 2025--2026.}{calcule proprii; energy-charts.info, 2025--2026.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{f5_learning_curve}
+\caption{\T{Learning curve of the Q-learning agents (band: range over five seeds).}{Curba de învățare a agenților Q-learning (banda: intervalul celor cinci seeds).}}
+\src{\T{our computation; training days 2023--2024.}{calcule proprii; zilele de antrenare 2023--2024.}}
+\end{minipage}
+\end{figure}
+
+\T{\textbf{What our data show.} The daily shape changed: the fixed pair chosen on 2024 is \NpairNew\ CET (solar middays are cheap), whereas on the paper's window it was \NnhWPair.
+On the test period perfect foresight earns \Npf\ EUR; the fixed hours earn \Nnh\ EUR and the naive forecast \Nnaive.
+The quantile MLP with the median pair earns \Nmkt\ EUR (SD over seeds \NmktSd), \NbestShare\,\% of the perfect-foresight profit; with the paper's quantile bids it earns \Nqb\ EUR (both bids accepted on \NqbBoth\,\% of days).
+The Q-learning agent learns a sensible policy (Figure~\ref{fig:hours}) and earns \Nrl\ EUR with the MLP signal (SD \NrlSd) and \Nrln\ EUR with yesterday's prices (SD \NrlnSd), about as much as the fixed hours: forecast-then-optimise wins here, because the planner sees the whole forecast curve while the agent sees it through a few ranks, and the agent learnt in 2023--2024, a different daily shape.}%
+{\textbf{Ce arată datele.} Profilul zilnic s-a schimbat: perechea fixă aleasă pe 2024 este \NpairNew\ CET (energia de la prînz este ieftină datorită producției solare), în timp ce pe perioada din lucrare era \NnhWPair.
+În perioada de test, previziunea perfectă aduce \Npf\ EUR; orele fixe aduc \Nnh\ EUR, iar prognoza naivă \Nnaive.
+MLP-ul cuantilic cu perechea medianei cîștigă \Nmkt\ EUR (abaterea standard între seeds este \NmktSd), adică \NbestShare\,\% din profitul previziunii perfecte; cu ofertele la cuantile din lucrare cîștigă \Nqb\ EUR (ambele oferte sînt acceptate în \NqbBoth\,\% din zile).
+Agentul Q-learning învață o politică rezonabilă (Figura~\ref{fig:hours}), și cîștigă \Nrl\ EUR cu semnalul MLP (AS \NrlSd) și \Nrln\ EUR cu prețurile de ieri (AS \NrlnSd), aproximativ cît orele fixe: aici cîștigă abordarea „întîi prognoza, apoi optimizarea”, deoarece regula vede întreaga curbă prognozată, iar agentul o vede doar prin cîteva ranguri, și pentru că agentul a învățat pe 2023--2024, cu un alt profil zilnic.}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.78\linewidth]{f4_hours_used}
+\caption{\T{When does each strategy charge and discharge? Share of test days by hour (agents and networks: five seeds pooled).}{Cînd încarcă și cînd descarcă fiecare strategie? Proporția zilelor de test pe ore (agenți și rețele: cele cinci seeds cumulate).}}\label{fig:hours}
+\src{\T{our computation; January 2025 -- October 2026.}{calcule proprii; ianuarie 2025 -- octombrie 2026.}}
+\end{figure}
+
+\T{\textbf{Decision number.} The best realistic tool, the quantile MLP with the median pair, earns \NbestYear\ EUR per year against the \Nneed\ EUR needed: NPV \NbestNPV\ EUR, payback \NbestPay\ years, break-even CAPEX \NbestBe\ EUR.
+Even perfect foresight (\NpfYear\ EUR per year, NPV \NpfNPV\ EUR) stays below the threshold: as in the paper, arbitrage alone does not repay a 500,000 EUR battery; a lower CAPEX or other revenues are needed.}%
+{\textbf{Cifra relevantă pentru decizie.} Cel mai bun instrument realist, MLP-ul cuantilic cu perechea medianei, cîștigă \NbestYear\ EUR pe an, față de cei \Nneed\ EUR necesari: VAN \NbestNPV\ EUR, perioadă de recuperare de \NbestPay\ ani, CAPEX de echilibru \NbestBe\ EUR.
+Chiar și previziunea perfectă (\NpfYear\ EUR pe an, VAN \NpfNPV\ EUR) rămîne sub prag: ca în lucrare, arbitrajul singur nu recuperează o baterie de 500.000 EUR; este nevoie de un CAPEX mai mic sau de alte surse de venit.}
+
+\section{\T{Discussion questions for managers}{Întrebări pentru discuție}}
+\begin{enumerate}
+\item \T{The quant team says the agent will improve with more data. What evidence (test period, seeds, benchmarks) would you require before giving it the battery?}%
+{Echipa de analiză cantitativă susține că agentul se va îmbunătăți cu mai multe date. Ce dovezi (perioadă de test, seeds, repere) ați cere înainte de a-i încredința bateria?}
+\item \T{The fixed pair moved from night$\rightarrow$evening to midday$\rightarrow$evening. How often would you retrain the network and the agent, and who decides it?}%
+{Perechea fixă s-a mutat de la noapte$\rightarrow$seară la prînz$\rightarrow$seară. Cît de des ați reantrena rețeaua și agentul și cine decide acest lucru?}
+\item \T{Why can quantile bids earn less than market orders when the forecast is good, although the paper finds them better? What does the acceptance rate tell you?}%
+{De ce pot aduce ofertele la cuantile mai puțin decît ordinele la prețul pieței cînd prognoza este bună, deși lucrarea le găsește mai avantajoase? Ce vă spune rata de acceptare?}
+\item \T{Which other revenues (balancing, frequency reserves, capacity payments, a second daily cycle) would you add to close the gap to \Nneed\ EUR per year, and how certain are they?}%
+{Ce alte venituri (din piața de echilibrare, din rezervele de reglaj al frecvenței, din plățile pentru capacitate, dintr-un al doilea ciclu zilnic) ați adăuga pentru a atinge \Nneed\ EUR pe an și cît de sigure sînt acestea?}
+\item \T{When is reinforcement learning worth its complexity for storage: one battery and one market, or many assets, several markets and degradation costs?}%
+{Cînd își merită învățarea prin recompensă complexitatea în cazul stocării: pentru o baterie și o piață sau pentru mai multe active, mai multe piețe și costuri de degradare?}
+\end{enumerate}
+
+\section{\T{Limitations of the classroom replication}{Limitele replicării}}
+\T{(i) One cycle per day and 1 MWh; real projects use 2--4 hour batteries and several revenue streams. (ii) Romania only, no cross-border dispatch, fees, intraday or balancing markets, no price impact.
+(iii) The network uses only lagged prices and calendar variables (the paper's DRF uses 37 predictors) and forecasts the 24 marginal distributions, not their joint distribution.
+(iv) The agent's state compresses the forecast into ranks, and it is trained once on 2023--2024; perfect foresight is an ex post bound. (v) No degradation cost and no grid tariffs.}%
+{(i) Un singur ciclu pe zi și o capacitate de 1 MWh; proiectele reale folosesc baterii cu durata de descărcare de 2--4 ore și mai multe surse de venit. (ii) Numai România, fără operare transfrontalieră, tarife, piață intrazilnică sau de echilibrare și fără efectul ofertelor asupra prețului.
+(iii) Rețeaua folosește numai prețurile anterioare și variabilele calendaristice (modelul DRF din lucrare folosește 37 de variabile explicative) și prognozează cele 24 de distribuții marginale, nu distribuția lor comună.
+(iv) Starea agentului rezumă prognoza prin ranguri, iar agentul este antrenat o singură dată, pe 2023--2024; previziunea perfectă este o limită stabilită \emph{ex post}. (v) Nu includem costul degradării bateriei și nici tarifele de rețea.}
+
+\newpage
+\section*{\T{Case 4 at a glance}{Studiul de caz 4 pe scurt}}
+\glance{\T{Forecast-then-optimise or a learning agent: which earns more with a 1 MW / 1 MWh battery, and does it repay the battery?}{Prognoză și optimizare sau un agent care învață: care cîștigă mai mult cu o baterie de 1 MW / 1 MWh și se recuperează investiția?}}%
+{\T{Hourly day-ahead prices of Romania, Bulgaria and Hungary, 2019--October 2026; test 2025--2026.}{Prețuri orare pentru ziua următoare din România, Bulgaria și Ungaria, 2019--octombrie 2026; test 2025--2026.}}%
+{\T{Quantile MLP (pinball loss) + hour-picking rules; tabular Q-learning; five seeds; NPV.}{MLP cuantilic (pierdere \emph{pinball}) + reguli de alegere a orelor; Q-learning tabelar; cinci seeds; VAN.}}%
+{\T{MLP rule \NbestShare\,\% of perfect foresight; agent about as much as fixed hours; \NbestYear\ EUR/year vs \Nneed\ needed.}{Regula MLP: \NbestShare\,\% din previziunea perfectă; agentul, aproximativ cît orele fixe; \NbestYear\ EUR/an față de \Nneed\ necesari.}}%
+{\T{Trade on the network's forecast; do not invest on arbitrage alone at 500,000 EUR CAPEX.}{Tranzacționați pe baza prognozei rețelei; nu investiți numai pentru arbitraj la un CAPEX de 500.000 EUR.}}
+\begin{center}
+\includegraphics[width=0.64\linewidth]{fig_headline_\lang}
+\src{\T{our computation on energy-charts.info prices, January 2025 -- October 2026.}{calcule proprii pe prețurile energy-charts.info, ianuarie 2025 -- octombrie 2026.}}
+\end{center}
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NbestShare\,\%}\\ \small \T{of the perfect-foresight profit captured by the quantile MLP}{din profitul previziunii perfecte, captat de MLP-ul cuantilic}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NbestPay}\\ \small \T{years payback, best realistic tool}{ani, perioada de recuperare pentru cel mai bun instrument realist}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{IDAred}\Huge\bfseries \NbestNPV}\\ \small \T{EUR NPV at 500,000 EUR CAPEX}{EUR, VAN la un CAPEX de 500.000 EUR}\end{minipage}
+\end{document}

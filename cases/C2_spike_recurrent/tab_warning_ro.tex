@@ -1,0 +1,11 @@
+\begin{tabular}{lrrrrrrr}
+\toprule
+Regula de avertizare (perioada de test) & Precizia & Sensibilitatea & F1 & a.s. & PR-AUC & a.s. & AUC \\
+\midrule
+XGBoost (lucrarea), ansamblu de 5 rulări & \textbf{0,821} & 0,524 & 0,640 & 0,019 & 0,811 & 0,006 & \textbf{0,946} \\
+LSTM, ansamblu de 5 rulări & 0,725 & 0,522 & 0,607 & 0,018 & 0,718 & 0,005 & 0,865 \\
+GRU, ansamblu de 5 rulări & 0,735 & 0,544 & 0,625 & 0,012 & 0,736 & 0,008 & 0,875 \\
+Scorul de avertizare cu indicatori (lucrarea) & 0,716 & 0,409 & 0,521 & -- & 0,649 & -- & 0,871 \\
+Naiv: vîrf în ziua d-1, la aceeași oră & 0,782 & \textbf{0,776} & \textbf{0,779} & -- & \textbf{0,843} & -- & 0,934 \\
+\bottomrule
+\end{tabular}

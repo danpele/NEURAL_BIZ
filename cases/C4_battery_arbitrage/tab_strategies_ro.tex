@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Strategia (1 MW / 1 MWh, România) & Profit, EUR & AS între seeds & EUR/an & VAN, EUR & Recuperare, ani \\
+\midrule
+Previziune perfectă (limită ex post) & 95.053 & -- & 52.727 & $-$19.766 & 9,5 \\
+Ore fixe 12:00$\rightarrow$19:00 (alese pe 2024) & 71.205 & -- & 39.498 & $-$140.253 & 12,7 \\
+Prognoză naivă (prețurile de ieri) & 78.176 & -- & 43.365 & $-$105.035 & 11,5 \\
+MLP cuantilic, perechea medianei, ordine la piață & 82.878 & 1.038 & 45.973 & $-$81.278 & 10,9 \\
+MLP cuantilic, oferte la cuantile ($\alpha$ = 0,8) & 75.169 & 1.450 & 41.697 & $-$120.225 & 12,0 \\
+Agent Q-learning, semnal: prețurile de ieri & 68.755 & 140 & 38.139 & $-$152.633 & 13,1 \\
+Agent Q-learning, semnal: MLP cuantilic & 70.488 & 1.679 & 39.100 & $-$143.878 & 12,8 \\
+\bottomrule
+\end{tabular}

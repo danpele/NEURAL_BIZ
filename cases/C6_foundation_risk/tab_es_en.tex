@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Violations (\%) & Mean $Z_2$ & Min $Z_2$ & Max $Z_2$ & $Z_2$ rej. & FZ0 loss \\
+\midrule
+Historical simulation & 3.39 & $-$0.49 & $-$0.74 & $-$0.36 & 8 & 1.608 \\
+GJR-GARCH & 3.24 & $-$0.32 & $-$0.49 & $-$0.13 & 5 & \textbf{1.445} \\
+AR(1) + conformal & 3.35 & $-$0.49 & $-$0.66 & $-$0.38 & 8 & 1.611 \\
+Chronos-2, zero-shot & 2.10 & 0.34 & 0.26 & 0.51 & \textbf{0} & 1.490 \\
+TimesFM 2.5, zero-shot & 4.54 & $-$0.94 & $-$1.06 & $-$0.71 & 8 & 1.508 \\
+Chronos-2, conformal & 3.00 & \textbf{0.10} & 0.01 & 0.23 & 0 & 1.521 \\
+TimesFM 2.5, conformal & 3.11 & $-$0.35 & $-$0.41 & $-$0.27 & 7 & 1.476 \\
+\bottomrule
+\end{tabular}

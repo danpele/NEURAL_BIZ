@@ -25,7 +25,7 @@ COLAB = 'https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/'
 MATHJAX = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js'
 VER = '20261108a'
 
-# ------------------------------------------------------------------ the eight cases
+# ------------------------------------------------------------------ the cases
 LECT = {1: ('Deep learning for business: from linear models to the multilayer perceptron', 'Deep learning pentru afaceri: de la modelele liniare la perceptronul multistrat'),
         2: ('Training: backpropagation and optimisation', 'Antrenarea: propagarea înapoi a erorii și optimizarea'),
         3: ('Regularisation and generalisation', 'Regularizare și generalizare'),
@@ -47,7 +47,37 @@ SSRN = {'en': 'SSRN (Social Science Research Network) Working Paper', 'ro': 'SSR
 #   1: dict(folder='C1_fraud_mlp', lectures=[1, 3],
 #           authors='Surname, A. & Pele, D. T.', year=2026, title='...', venue='Journal, vol(issue), pages',
 #           link='https://doi.org/...', linktext='doi:...'),
+ESWA = 'Expert Systems with Applications'
 CASE = {
+    1: dict(folder='C1_fraud_xai', lectures=[3, 11, 1],
+            authors='Diaconu, D. & Pele, D. T.', year=2026,
+            title='Explainable AI in financial fraud detection: Evidence from the IEEE-CIS fraud dataset',
+            venue=PICBE + ', 20(1), 118–132', link='https://doi.org/10.2478/picbe-2026-0015', linktext='doi:10.2478/picbe-2026-0015'),
+    2: dict(folder='C2_spike_recurrent', lectures=[5, 11],
+            authors='Andrei, A.-V., Pele, D.-T., Cramer, A.-A., Amza, A. & Diaconu, D.', year=2026,
+            title='Explainable AI-based early warning system for electricity price spikes: Evidence from the Romanian market',
+            venue=PICBE + ', 20(1), 4820–4836', link='https://doi.org/10.2478/picbe-2026-0352', linktext='doi:10.2478/picbe-2026-0352'),
+    3: dict(folder='C3_shap_stability', lectures=[9, 11],
+            authors='Diaconu, D. & Pele, D. T.', year=2026,
+            title='SHAP stability across random and forward-time validation in graph-augmented fraud detection',
+            venue='submitted to ' + ESWA, link='https://github.com/QuantLet/GNN_XAI_Stability', linktext='code: github.com/QuantLet/GNN_XAI_Stability'),
+    4: dict(folder='C4_battery_arbitrage', lectures=[10, 13],
+            authors='Andrei, A.-V., Cepoi, C. O., Dumitrescu, B. A., Lessmann, S., Chiriac (Luchian), A.-C., Pele, D. T. & Petukhina, A.', year=2026,
+            title='Joint probabilistic forecasting for battery arbitrage in day-ahead power markets',
+            venue='SSRN 6872381', link='https://doi.org/10.2139/ssrn.6872381', linktext='doi:10.2139/ssrn.6872381'),
+    5: dict(folder='C5_llm_var', lectures=[12],
+            authors='Pele, D. T., Bolovăneanu, V., Lin, M.-B., Ren, R., Ginavar, A. T., Spilak, B., Andrei, A.-V., Toma, F.-M., Lessmann, S. & Härdle, W. K.', year=2026,
+            title='In the beginning was the Word: LLM-VaR and LLM-ES',
+            venue=ESWA + ', 295, 128676', link='https://doi.org/10.1016/j.eswa.2025.128676', linktext='doi:10.1016/j.eswa.2025.128676'),
+    6: dict(folder='C6_foundation_risk', lectures=[13],
+            authors='Jheng, S.-L., Tak, R., Găman, Ș., Mazurencu-Marinescu-Pele, M. & Pele, D. T.', year=2026,
+            title='Can foundation models manage risk? Zero-shot VaR and ES forecasting with conformal calibration in CEE markets',
+            venue='Economic Computation and Economic Cybernetics Studies and Research, 60(2), 267–290',
+            link='https://doi.org/10.24818/18423264/60.2.26.14', linktext='doi:10.24818/18423264/60.2.26.14'),
+    7: dict(folder='C7_vlm_anomaly', lectures=[14],
+            authors='Jheng, S.-L., Pele, D. T., Tak, R. & Găman, Ș.', year=2026,
+            title='A multimodal vision-language framework for financial anomaly detection',
+            venue=PICBE + ', 20(1), 191–201', link='https://doi.org/10.2478/picbe-2026-0020', linktext='doi:10.2478/picbe-2026-0020'),
 }
 
 L = {
@@ -192,9 +222,44 @@ ACR = {
     'VIF': ('variance inflation factor', 'factorul de inflație a varianței'),
     'PICBE': ('Proceedings of the International Conference on Business Excellence', 'Proceedings of the International Conference on Business Excellence'),
     'JSES': ('Journal of Social and Economic Statistics', 'Journal of Social and Economic Statistics'),
+    'ULB': ('Université Libre de Bruxelles', 'Université Libre de Bruxelles'),
+    'IEEE-CIS': ('Institute of Electrical and Electronics Engineers, Computational Intelligence Society', 'Institute of Electrical and Electronics Engineers, Computational Intelligence Society'),
+    'ROC-AUC': ('area under the receiver operating characteristic curve', 'aria de sub curba ROC (receiver operating characteristic)'),
+    'PR-AUC': ('area under the precision–recall curve', 'aria de sub curba precizie–sensibilitate'),
+    'GraphSAGE': ('graph sample and aggregate', 'eșantionare și agregare pe graf'),
+    'ReLU': ('rectified linear unit', 'unitate liniară rectificată'),
+    'AML': ('anti-money laundering', 'combaterea spălării banilor'),
+    'GNN': ('graph neural network', 'rețea neuronală pe grafuri'),
+    'JS': ('Jensen–Shannon', 'Jensen–Shannon'),
+    'TreeSHAP': ('SHAP for tree ensembles', 'SHAP pentru ansambluri de arbori'),
+    'TSFM': ('time series foundation model', 'model fundație pentru serii de timp'),
+    'BVB': ('Bucharest Stock Exchange', 'Bursa de Valori București'),
+    'HS': ('historical simulation', 'simulare istorică'),
+    'LLM': ('large language model', 'model lingvistic mare'),
+    'EWMA': ('exponentially weighted moving average', 'medie mobilă ponderată exponențial'),
+    'DCS': ('Dynamic Conditional Score', 'Dynamic Conditional Score'),
+    'SI': (None, 'simulare istorică'),
+    'GJR-GARCH': ('Glosten–Jagannathan–Runkle GARCH model', 'modelul GARCH Glosten–Jagannathan–Runkle'),
+    'FZ0': ('Fissler–Ziegel loss of Patton, Ziegel and Chen (2019)', 'funcția de pierdere Fissler–Ziegel a lui Patton, Ziegel și Chen (2019)'),
+    'TLV': ('stock-exchange ticker of Banca Transilvania', 'simbolul bursier al Banca Transilvania'),
+    'BRD': ('stock-exchange ticker of BRD – Groupe Société Générale', 'simbolul bursier al BRD – Groupe Société Générale'),
+    'TGN': ('stock-exchange ticker of Transgaz', 'simbolul bursier al Transgaz'),
+    'EL': ('stock-exchange ticker of Electrica', 'simbolul bursier al Electrica'),
+    'TEL': ('stock-exchange ticker of Transelectrica', 'simbolul bursier al Transelectrica'),
+    'GRU': ('Gated Recurrent Unit', 'Gated Recurrent Unit'),
+    'VLM': ('vision-language model', 'model vizual-lingvistic'),
+    'CLIP': ('Contrastive Language-Image Pre-training', 'Contrastive Language-Image Pre-training'),
+    'MACD': ('moving average convergence divergence', 'moving average convergence divergence'),
+    'RSI': ('relative strength index', 'relative strength index'),
+    'GPT': ('generative pre-trained transformer', 'transformer generativ preantrenat'),
+    'ICBE': ('International Conference on Business Excellence', 'Conferința internațională Business Excellence'),
+    'EMA': ('exponential moving average', 'medie mobilă exponențială'),
+    'ViT': ('vision transformer', 'vision transformer'),
+    'FINDER-LLM': ('FINancial Anomaly DEtection and Recognition using Large Language Models', 'FINancial Anomaly DEtection and Recognition using Large Language Models'),
+    'CI': ('confidence interval', None),
 }
 # described in words next to their first use (or band definitions given with their numbers): listed, never expanded in the text
-NOINS = {'PCCB-LE', 'PCCB-NC', 'PC-OTC', 'DC', 'ID', 'SNP', 'SNG', 'SNN', 'NH', 'QB'}
+NOINS = {'PCCB-LE', 'PCCB-NC', 'PC-OTC', 'DC', 'ID', 'SNP', 'SNG', 'SNN', 'NH', 'QB', 'TLV', 'BRD', 'TGN', 'EL', 'TEL', 'FINDER-LLM', 'ROC-AUC', 'PR-AUC', 'ReLU', 'TreeSHAP', 'CI', 'EMA'}
 
 
 class Stop(Exception):
@@ -864,7 +929,7 @@ def main(k):
 
 if __name__ == '__main__':
     a = sys.argv[1:]
-    ks = [int(x.lstrip('Cc')) for x in a] if a else list(range(1, 9))
+    ks = [int(x.lstrip('Cc')) for x in a] if a else sorted(CASE)
     try:
         for k in ks:
             main(k)

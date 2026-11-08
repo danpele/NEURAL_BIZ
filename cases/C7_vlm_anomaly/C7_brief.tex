@@ -1,0 +1,182 @@
+% C7_brief.tex -- ONE source for the English and Romanian case brief of Case 7 (Lecture 14).
+\input{numbers_\lang}
+\renewcommand{\emqacase}{\T{Research case 7 (Lecture 14)}{Studiul de caz 7 (cursul 14)}}
+\begin{document}
+\emqatitle{\T{Case 7: Reading market charts with vision-language models}%
+                {Studiul de caz 7: Citirea graficelor de piață cu modele vizual-lingvistice}}%
+          {\T{Based on}{Studiu bazat pe lucrarea} Jheng, Pele, Tak \& Găman (2026), \emph{A multimodal vision-language framework for financial anomaly detection},
+           PICBE 20(1), 191--201, \href{https://doi.org/10.2478/picbe-2026-0020}{doi:10.2478/picbe-2026-0020}
+           \T{(Best Paper Award, ICBE 2026)}{(premiul pentru cea mai bună lucrare, ICBE 2026)}}
+
+\begin{scenario}
+\T{Every evening, the risk desk of an asset manager looks at the charts of the markets in which it holds positions: price, momentum, volatility, drawdown.
+An experienced analyst ``sees'' trouble in a chart before it shows in a single number, but there are hundreds of charts and few analysts.
+The chief risk officer asks: \textbf{can a model read the chart like an analyst, flag the days before a sharp fall and say why?}
+And, before buying such a tool: \textbf{how many alerts per month would the desk have to review, and how many of the bad days would they catch?}}%
+{În fiecare seară, departamentul de risc al unei societăți de administrare a investițiilor analizează graficele piețelor în care are poziții: prețul, impulsul, volatilitatea, scăderea față de maxim.
+Un analist cu experiență „vede” o problemă într-un grafic înainte ca ea să apară într-un singur indicator, dar graficele sînt sute, iar analiștii sînt puțini.
+Directorul de risc întreabă: \textbf{poate un model să citească graficul asemenea unui analist, să semnaleze zilele dinaintea unei scăderi puternice și să explice de ce?}
+Iar, înainte de a cumpăra un astfel de instrument: \textbf{cîte alerte pe lună ar trebui verificate și cîte dintre zilele proaste ar fi semnalate?}}
+\end{scenario}
+
+\section{\T{What the paper did}{Lucrarea de referință}}
+\textbf{\T{Question.}{Întrebarea de cercetare.}} \T{Can market regime classification be reframed as a visual recognition task, so that a vision-language model (VLM) detects financial anomalies from charts of market indicators and explains its decision in words (p.~192)? The framework is called FINDER-LLM (FINancial Anomaly DEtection and Recognition using Large Language Models).}%
+{Poate clasificarea regimurilor de piață să fie reformulată ca o problemă de recunoaștere vizuală, astfel încît un model vizual-lingvistic (VLM, \emph{vision-language model}) să detecteze anomaliile financiare din graficele indicatorilor de piață și să își explice în cuvinte decizia (p.~192)? Cadrul propus se numește FINDER-LLM (\emph{FINancial Anomaly DEtection and Recognition using Large Language Models}).}
+
+\textbf{\T{Data.}{Datele.}} \T{Daily open, high, low, close and volume of the S\&P 500 (Standard \& Poor's 500 index), 1 January 2005 -- 30 June 2025; training and calibration to 30 June 2024, the knowledge cutoff of GPT-4.1 (generative pre-trained transformer); strictly out-of-sample test 1 July 2024 -- 30 June 2025 (p.~197).}%
+{Prețurile zilnice de deschidere, maxim, minim și închidere și volumul tranzacționat pentru S\&P 500 (indicele Standard \& Poor's 500), 1 ianuarie 2005 -- 30 iunie 2025; antrenare și calibrare pînă la 30 iunie 2024, data limită a cunoștințelor modelului GPT-4.1 (\emph{generative pre-trained transformer}); test strict pe date noi, 1 iulie 2024 -- 30 iunie 2025 (p.~197).}
+
+\textbf{\T{Method.}{Metoda.}} \T{Rolling windows of $w=126$ trading days (eq.~1); fifteen technical indicators --- historical volatility, average true range, MACD (moving average convergence divergence), RSI (relative strength index), Bollinger bands, golden and death crosses, maximum drawdown, Ulcer index, VaR (Value-at-Risk), ES (Expected Shortfall) and on-balance volume (eq.~2--14) --- rendered as one multi-panel chart per day; a zero-shot prompt to GPT-4.1 with the chart, a table of indicators, news headlines and price context (p.~196); the model returns a label, an anomaly score, the anomaly type and a written rationale; a second variant uses an embedding of the model's answer (p.~197).
+A day is a crash day when the future log return falls below the rolling $\alpha$-quantile of the previous 126 log returns, $\alpha\in\{1\,\%, 5\,\%\}$ (eq.~15--16, p.~197).}%
+{Ferestre glisante de $w=126$ zile de tranzacționare (ec.~1); cincisprezece indicatori tehnici --- volatilitatea istorică, amplitudinea medie reală (\emph{average true range}), MACD (\emph{moving average convergence divergence}), RSI (\emph{relative strength index}), benzile Bollinger, intersecțiile mediilor mobile (\emph{golden cross} și \emph{death cross}), scăderea maximă față de vîrf, indicele Ulcer, VaR (\emph{Value-at-Risk}), ES (\emph{Expected Shortfall}) și volumul cumulat după direcție (\emph{on-balance volume}) (ec.~2--14) --- desenați zilnic într-un singur grafic cu mai multe panouri; o întrebare zero-shot adresată modelului GPT-4.1, însoțită de grafic, de un tabel cu indicatori, de titluri de știri și de contextul prețurilor (p.~196); modelul returnează o etichetă, un scor de anomalie, tipul anomaliei și o justificare scrisă; o a doua variantă folosește o reprezentare vectorială (\emph{embedding}) a răspunsului modelului (p.~197).
+O zi este zi de prăbușire atunci cînd randamentul logaritmic viitor scade sub cuantila glisantă de ordin $\alpha$ a ultimelor 126 de randamente logaritmice, $\alpha\in\{1\,\%, 5\,\%\}$ (ec.~15--16, p.~197).}
+
+\textbf{\T{Main findings of the paper.}{Principalele rezultate ale lucrării.}}
+\begin{itemize}
+\item \T{On 12 September 2008, the trading day before the collapse of Lehman Brothers, the framework returned an anomaly score of 0.85, label 1 and the type ``regime shift / pre-crash warning'', with a rationale that reads like an analyst's note (Figure~2, p.~198).}%
+{Pe 12 septembrie 2008, ultima zi de tranzacționare dinaintea prăbușirii Lehman Brothers, cadrul a returnat un scor de anomalie de 0,85, eticheta 1 și tipul „schimbare de regim / avertizare înaintea unei prăbușiri”, cu o justificare asemănătoare notei unui analist (Figura~2, p.~198).}
+\item \T{On the test year, the zero-shot prompt reaches ROC AUC (area under the receiver operating characteristic curve) 0.59 at $\alpha=1\,\%$ and 0.58 at $\alpha=5\,\%$, the embedding variant 0.66 at $\alpha=1\,\%$, while the LSTM (Long Short-Term Memory) baseline on the same indicators reaches 0.31 and 0.42 (Table~1, p.~199).}%
+{Pe anul de test, întrebarea zero-shot atinge o arie de sub curba ROC (AUC, \emph{area under the receiver operating characteristic curve}) de 0,59 la $\alpha=1\,\%$ și 0,58 la $\alpha=5\,\%$, varianta cu reprezentări vectoriale 0,66 la $\alpha=1\,\%$, în timp ce reperul LSTM (\emph{Long Short-Term Memory}) pe aceiași indicatori obține 0,31 și 0,42 (Tabelul~1, p.~199).}
+\item \T{At $\alpha=5\,\%$ the prompt identifies 4 of the 20 crash days with 26 false alarms (accuracy 0.83); the authors conclude that LLM-based detection provides interpretable daily risk signals with moderate predictive accuracy and outperforms classical technical indicators (p.~199--200).}%
+{La $\alpha=5\,\%$, întrebarea zero-shot identifică 4 dintre cele 20 de zile de prăbușire, cu 26 de alarme false (acuratețe 0,83); autorii conchid că detectarea bazată pe modele lingvistice mari oferă semnale zilnice de risc interpretabile, cu o acuratețe predictivă moderată, superioare indicatorilor tehnici clasici (p.~199--200).}
+\end{itemize}
+
+\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\begin{intuition}
+\T{A chart compresses fifteen indicators and six months of history into one picture that a trained eye reads in seconds: falling price at the lower Bollinger band, negative momentum, volatility rising, a deepening drawdown.
+A vision-language model has seen millions of images and texts; it turns the chart into a vector (an embedding) or into an answer in words.
+We test three ways to use it: compare the chart with text descriptions (zero-shot), learn a simple logistic layer on top of the image vectors (a probe), or ask a question and read the answer.}%
+{Un grafic comprimă cincisprezece indicatori și șase luni de istorie într-o singură imagine pe care un ochi format o citește în cîteva secunde: prețul coboară spre banda Bollinger inferioară, impulsul este negativ, volatilitatea crește, scăderea față de maxim se adîncește.
+Un model vizual-lingvistic a văzut milioane de imagini și texte; el transformă graficul într-un vector (o reprezentare, \emph{embedding}) sau într-un răspuns formulat în cuvinte.
+Testăm trei moduri de utilizare: comparăm graficul cu descrieri text (zero-shot), învățăm un strat logistic simplu peste vectorii imaginilor (o sondă, \emph{probe}) sau punem o întrebare și citim răspunsul.}
+\end{intuition}
+\T{\textbf{Label.} With closing price $C_t$ and log return $r_t=\log(C_t/C_{t-1})$, the future return is $R_{t,h}=\log(C_{t+h}/C_t)$ (paper eq.~15) and the crash label is $y_t=\1\{R_{t,h}<q_{\alpha,t}\}$, where $q_{\alpha,t}$ is the empirical $\alpha$-quantile of $r_{t-125},\dots,r_t$ (eq.~16); we use $h=1$.
+\textbf{Chart.} For each day, the image $I_t$ shows the last $w=126$ days in five panels: price with Bollinger bands $\mathrm{SMA}_{20}\pm2\,\mathrm{sd}_{20}$ and the 50- and 200-day averages; MACD $=\mathrm{EMA}_{12}(C)-\mathrm{EMA}_{26}(C)$ and its histogram (MACD minus its 9-day EMA, exponential moving average); RSI $=100-100/(1+\overline{G}_{14}/\overline{L}_{14})$, with $\overline{G}$, $\overline{L}$ the EMAs of gains and losses; volatility $\mathrm{HV}_w=\sqrt{252}\,\mathrm{sd}(r_{t-w+1},\dots,r_t)$ for $w=10,30$; and the drawdown $C_t/\max(C_{t-19},\dots,C_t)-1$.
+\textbf{CLIP} (Contrastive Language-Image Pre-training) maps an image to $\mathbf u_t=f(I_t)$ and a text to $\mathbf v=g(\text{text})$, both of unit length.
+The zero-shot score is $s_t=\mathbf u_t^\top\bar{\mathbf v}_1-\mathbf u_t^\top\bar{\mathbf v}_0$, with $\bar{\mathbf v}_c$ the mean embedding of three descriptions of a calm ($c=0$) or stressed ($c=1$) market.
+The \textbf{probe} is a logistic regression on the 512 standardised image coordinates, $\Pr(y_t=1\mid I_t)=\sigma(\beta_0+\boldsymbol\beta^\top\mathbf z_t)$, $\sigma(x)=1/(1+e^{-x})$, fitted with an $L_2$ penalty whose strength is chosen on the validation period.
+\textbf{Qwen2-VL-2B} receives the chart and the question ``is there a high risk of a sharp fall on the next trading day? Answer yes or no''; its score is $p_t=P(\text{yes})/(P(\text{yes})+P(\text{no}))$, read from the probabilities of the first answer token.
+\textbf{Benchmarks} use the 15 indicators as numbers: the volatility rule ($s_t=\mathrm{HV}_{10,t}$), a logistic regression, gradient-boosted trees and an LSTM on the last 20 days of indicators (three seeds averaged).
+\textbf{Evaluation.} $\mathrm{AUC}=\Pr(s_i>s_j\mid y_i=1,y_j=0)$; an alert is raised when $s_t\ge\tau$, with $\tau$ maximising F1 on the validation period; precision $=TP/(TP+FP)$, recall $=TP/(TP+FN)$, $F1=2PR/(P+R)$, balanced accuracy $=\tfrac12\,[TP/(TP+FN)+TN/(TN+FP)]$, where $TP$, $FP$, $TN$, $FN$ count true positives, false positives, true negatives and false negatives.}%
+{\textbf{Eticheta.} Cu prețul de închidere $C_t$ și randamentul logaritmic $r_t=\log(C_t/C_{t-1})$, randamentul viitor este $R_{t,h}=\log(C_{t+h}/C_t)$ (ec.~15 din lucrare), iar eticheta de prăbușire este $y_t=\1\{R_{t,h}<q_{\alpha,t}\}$, unde $q_{\alpha,t}$ este cuantila empirică de ordin $\alpha$ a valorilor $r_{t-125},\dots,r_t$ (ec.~16); folosim $h=1$.
+\textbf{Graficul.} Pentru fiecare zi, imaginea $I_t$ arată ultimele $w=126$ de zile în cinci panouri: prețul, cu benzile Bollinger $\mathrm{SMA}_{20}\pm2\,\mathrm{sd}_{20}$ și mediile pe 50 și 200 de zile; MACD $=\mathrm{EMA}_{12}(C)-\mathrm{EMA}_{26}(C)$ și histograma sa (MACD minus media sa mobilă exponențială, EMA, pe 9 zile); RSI $=100-100/(1+\overline{G}_{14}/\overline{L}_{14})$, unde $\overline{G}$ și $\overline{L}$ sînt mediile mobile exponențiale ale cîștigurilor și pierderilor; volatilitatea $\mathrm{HV}_w=\sqrt{252}\,\mathrm{sd}(r_{t-w+1},\dots,r_t)$ pentru $w=10,30$; scăderea $C_t/\max(C_{t-19},\dots,C_t)-1$.
+\textbf{CLIP} (\emph{Contrastive Language-Image Pre-training}) transformă o imagine în vectorul $\mathbf u_t=f(I_t)$ și un text în vectorul $\mathbf v=g(\text{text})$, ambii de normă 1.
+Scorul zero-shot este $s_t=\mathbf u_t^\top\bar{\mathbf v}_1-\mathbf u_t^\top\bar{\mathbf v}_0$, unde $\bar{\mathbf v}_c$ este media reprezentărilor a trei descrieri ale unei piețe calme ($c=0$) sau sub presiune ($c=1$).
+\textbf{Sonda} este o regresie logistică pe cele 512 coordonate standardizate ale imaginii, $\Pr(y_t=1\mid I_t)=\sigma(\beta_0+\boldsymbol\beta^\top\mathbf z_t)$, $\sigma(x)=1/(1+e^{-x})$, estimată cu o penalizare $L_2$ a cărei intensitate se alege pe perioada de validare.
+\textbf{Qwen2-VL-2B} primește graficul și întrebarea „există un risc ridicat de scădere puternică în următoarea zi de tranzacționare? Răspundeți cu da sau nu”; scorul său este $p_t=P(\text{da})/(P(\text{da})+P(\text{nu}))$, citit din probabilitățile primului cuvînt al răspunsului.
+\textbf{Reperele} folosesc cei 15 indicatori ca numere: regula volatilității ($s_t=\mathrm{HV}_{10,t}$), o regresie logistică, arbori construiți secvențial (\emph{gradient boosting}) și o rețea LSTM pe ultimele 20 de zile de indicatori (media a trei inițializări aleatoare).
+\textbf{Evaluarea.} $\mathrm{AUC}=\Pr(s_i>s_j\mid y_i=1,y_j=0)$; alerta se emite atunci cînd $s_t\ge\tau$, iar pragul $\tau$ maximizează F1 pe perioada de validare; precizia $=TP/(TP+FP)$, sensibilitatea $=TP/(TP+FN)$, $F1=2PR/(P+R)$, acuratețea echilibrată $=\tfrac12\,[TP/(TP+FN)+TN/(TN+FP)]$, unde $TP$, $FP$, $TN$ și $FN$ reprezintă numărul rezultatelor pozitive adevărate, pozitive false, negative adevărate și negative false.}
+\begin{decision}
+\T{Treat the model as an alert layer, not as a decision maker: set the threshold on a validation period, give the analyst the chart and the rationale, and measure the alerts against a plain volatility rule before paying for anything more complex.}%
+{Tratați modelul ca pe un nivel de alertă, nu ca pe un decident: stabiliți pragul pe o perioadă de validare, puneți la dispoziția analistului graficul și justificarea și comparați alertele cu o simplă regulă de volatilitate înainte de a plăti pentru ceva mai complex.}
+\end{decision}
+
+\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\T{Notebook \texttt{C7\_notebook\_EN.ipynb}: daily S\&P 500 prices and volume (Yahoo Finance), \NnDays\ trading days with a complete chart and label: training July 2006 -- December 2019 (\NnTrain\ days), validation January 2020 -- June 2024 (\NnVal), test \NtestStart\ -- \NtestEnd\ (\NnTest\ days, \NcrashTest\ crash days at $\alpha=5\,\%$, \NcrashTestOne\ at $\alpha=1\,\%$).
+Classroom implementation: open models that run on a laptop (CLIP ViT-B/16, vision transformer with 16-pixel patches, and Qwen2-VL-2B-Instruct) instead of GPT-4.1, the chart image only (no indicator table, news or price context), next-day horizon $h=1$, and a test period extended by sixteen months. All charts are drawn from the real prices; the models see them exactly as in Figure~\ref{fig:f1}.}%
+{Notebook-ul \texttt{C7\_notebook\_RO.ipynb} folosește prețurile zilnice și volumul indicelui S\&P 500 (Yahoo Finance), \NnDays\ zile de tranzacționare cu grafic și etichetă complete: antrenare iulie 2006 -- decembrie 2019 (\NnTrain\ de zile), validare ianuarie 2020 -- iunie 2024 (\NnVal\ de zile), test \NtestStart\ -- \NtestEnd\ (\NnTest\ de zile, dintre care \NcrashTest\ de zile de prăbușire la $\alpha=5\,\%$ și \NcrashTestOne\ la $\alpha=1\,\%$).
+Față de lucrare, implementarea de la curs folosește modele deschise, care rulează pe un laptop (CLIP ViT-B/16, \emph{vision transformer} cu blocuri de 16 pixeli, și Qwen2-VL-2B-Instruct), în locul lui GPT-4.1, numai imaginea graficului (fără tabelul de indicatori, știri sau contextul prețurilor), orizontul de o zi ($h=1$) și o perioadă de test extinsă cu șaisprezece luni. Toate graficele sînt desenate din prețurile reale; modelele le văd exact ca în Figura~\ref{fig:f1}.}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.86\linewidth]{f1_images}
+\caption{\T{Model input: the five-panel chart of a calm test day (\NcalmDay) and of \NcrashDay, the evening before the largest one-day fall of the test period (\NcrashRet\,\% on \NcrashNext).}%
+{Intrarea modelelor: graficul cu cinci panouri pentru o zi calmă din perioada de test (\NcalmDay) și pentru \NcrashDay, seara dinaintea celei mai mari scăderi zilnice din perioada de test (\NcrashRet\,\% pe \NcrashNext).}}\label{fig:f1}
+\src{\T{our charts of Yahoo Finance S\&P 500 data; the models read the English version.}{graficele noastre, pe date Yahoo Finance pentru S\&P 500; modelele citesc versiunea în limba engleză.}}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.86\linewidth]{f2_labels}
+\caption{\T{Daily log returns, the rolling 5\,\% quantile and the crash days (paper eq.~16).}{Randamentele logaritmice zilnice, cuantila glisantă de 5\,\% și zilele de prăbușire (ec.~16 din lucrare).}}
+\src{\T{Yahoo Finance; our labels; shaded: validation and test periods.}{Yahoo Finance; etichetele noastre; zonele colorate: perioadele de validare și de test.}}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{Out-of-sample performance (\NtestStart\ -- \NtestEnd), crash = next-day return below the rolling 5\,\% quantile; last column: 1\,\% quantile. Best value in bold.}%
+{Performanța pe date noi (\NtestStart\ -- \NtestEnd), prăbușire = randamentul din ziua următoare sub cuantila glisantă de 5\,\%; ultima coloană: cuantila de 1\,\%. Cea mai bună valoare este marcată cu aldine.}}
+\tabin{perf}
+\src{\T{our computation; CI = 95\,\% bootstrap interval (1,000 resamples of test days); alert threshold chosen on the validation period. Paper (GPT-4.1, test July 2024 -- June 2025, Table~1): AUC 0.58 (5\,\%) and 0.59 (1\,\%) for the zero-shot prompt, 0.42 and 0.31 for the LSTM.}%
+{calcule proprii; IÎ = interval de încredere bootstrap de 95\,\% (1.000 de reeșantionări ale zilelor de test); pragul de alertă este ales pe perioada de validare. Lucrarea (GPT-4.1, test iulie 2024 -- iunie 2025, Tabelul~1): AUC 0,58 (5\,\%) și 0,59 (1\,\%) pentru întrebarea zero-shot, 0,42 și 0,31 pentru LSTM.}}
+\end{table}
+
+\begin{table}[H]\centering\small
+\caption{\T{Confusion counts on the test period; subscript 5: crash below the 5\,\% quantile, subscript 1: below the 1\,\% quantile.}{Matricea de confuzie pe perioada de test; indicele 5: prăbușire sub cuantila de 5\,\%, indicele 1: sub cuantila de 1\,\%.}}
+\tabin{confusion}
+\src{\T{our computation; TP, FP, TN, FN = true positives, false positives, true negatives, false negatives. Paper at 5\,\% (zero-shot prompt): TP 4, FP 26, TN 201, FN 16.}%
+{calcule proprii; TP, FP, TN, FN = pozitive adevărate, pozitive false, negative adevărate, negative false. Lucrarea la 5\,\% (întrebarea zero-shot): TP 4, FP 26, TN 201, FN 16.}}
+\end{table}
+
+\T{\textbf{What our data show.} On the test period, the models that use the 15 indicators as numbers rank the evenings before a crash best: logistic regression (AUC \NaucLogit), gradient boosting (\NaucHgb) and the LSTM (\NaucLstm; \NlstmMin--\NlstmMax\ across the three seeds).
+Among the chart readers, the logistic probe on the CLIP embeddings is above chance (AUC \NaucProbe, 95\,\% interval \NloProbe--\NhiProbe): the image vectors do carry information about risk once a simple layer is trained on them.
+Used zero-shot, without any training on our labels, CLIP (\NaucZs) and Qwen2-VL-2B (\NaucQwen, interval \NloQwen--\NhiQwen) are at chance level: small general-purpose models do not know, from text alone, which chart precedes a crash.
+The plain volatility rule reaches \NaucVol. The ranking differs from the paper's test year (GPT-4.1 with news and an indicator table: 0.58; LSTM: 0.42); the model, the information given to it and the test period all differ, and with \NcrashTest\ crash days the intervals are wide.}%
+{\textbf{Ce arată datele.} Pe perioada de test, modelele care folosesc cei 15 indicatori ca numere ordonează cel mai bine serile dinaintea unei prăbușiri: regresia logistică (AUC \NaucLogit), gradient boosting (\NaucHgb) și rețeaua LSTM (\NaucLstm; între \NlstmMin\ și \NlstmMax\ pentru cele trei inițializări).
+Dintre modelele care citesc graficul, sonda logistică pe reprezentările CLIP depășește nivelul alegerii aleatoare (AUC \NaucProbe, interval de 95\,\% \NloProbe--\NhiProbe): vectorii imaginilor conțin informație despre risc, odată ce peste ei se antrenează un strat simplu.
+Folosite zero-shot, fără nicio antrenare pe etichetele noastre, CLIP (\NaucZs) și Qwen2-VL-2B (\NaucQwen, interval \NloQwen--\NhiQwen) se află la nivelul alegerii aleatoare: modelele generale de mici dimensiuni nu știu, numai din descrieri text, ce grafic precede o prăbușire.
+Simpla regulă a volatilității atinge \NaucVol. Ordinea diferă de cea din anul de test al lucrării (GPT-4.1 cu știri și tabel de indicatori: 0,58; LSTM: 0,42); diferă modelul, informația primită și perioada de test, iar cu \NcrashTest\ de zile de prăbușire intervalele sînt largi.}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\linewidth]{f3_auc}
+\caption{\T{Test AUC of each model, with 95\,\% bootstrap intervals.}{AUC pe perioada de test pentru fiecare model, cu intervale bootstrap de 95\,\%.}}
+\src{\T{our computation.}{calcule proprii.}}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.86\linewidth]{f4_timeline}
+\caption{\T{Alerts of the model with the best validation AUC and the crash days of the test period.}{Alertele modelului cu cel mai bun AUC pe validare și zilele de prăbușire din perioada de test.}}
+\src{\T{our computation; Yahoo Finance.}{calcule proprii; Yahoo Finance.}}
+\end{figure}
+
+{\small
+\T{\textbf{Reading the rationale against the chart.} Asked for the paper's structured answer on the evening of \NcrashDay\ (right panel of Figure~\ref{fig:f1}), Qwen2-VL-2B returned anomaly score \NjsScore, label \NjsLabel, type ``\NjsType'', key signals ``\NjsSignals'' and the reasoning: \emph{``\NjsReason''}
+The chart says otherwise: MACD \NmacdCrash\,\% of the price with histogram \NhistCrash, price \NvsTwoHundred\,\% from its 200-day average, HV10 \NhvCrash\,\%, RSI \NrsiCrash\ and a drawdown of \NddCrash\,\% from the 20-day high; the next day the index fell \NcrashRet\,\%.
+The model answered ``no anomaly'' for \NjsNoAnomaly\ of the \NjsAsked\ charts we asked about. A rationale is useful only if someone checks it against the chart --- the reason the paper extracts structured signals that an analyst can verify.}%
+{\textbf{Justificarea, citită în paralel cu graficul.} Întrebat, în formatul structurat din lucrare, despre seara de \NcrashDay\ (panoul din dreapta al Figurii~\ref{fig:f1}), Qwen2-VL-2B a răspuns (textul original, în engleză): scorul de anomalie \NjsScore, eticheta \NjsLabel, tipul „\NjsType”, semnalele principale „\NjsSignals” și justificarea: \emph{„\NjsReason”}
+Graficul arată altceva: MACD de \NmacdCrash\,\% din preț, cu histograma \NhistCrash, prețul la \NvsTwoHundred\,\% față de media pe 200 de zile, HV10 de \NhvCrash\,\%, RSI de \NrsiCrash\ și o scădere de \NddCrash\,\% față de maximul pe 20 de zile; în ziua următoare, indicele a scăzut cu \NcrashRet\,\%.
+Modelul a răspuns „nicio anomalie” pentru \NjsNoAnomaly\ dintre cele \NjsAsked\ grafice analizate. O justificare este utilă numai dacă cineva o verifică pe grafic --- motiv pentru care lucrarea extrage semnale structurate, pe care un analist le poate verifica.}}
+
+\T{\textbf{Decision number.} The model with the best validation AUC is the \Nbest\ (validation \NbestAUCval, test \NbestAUC). With its validation threshold it raised \Nalerts\ alerts in the test period, \NperMonth\ per month, and caught \Ncaught\,\% of the crash days and \NworstCaught\ of the 10 largest falls.
+On alert evenings the next-day return had a standard deviation of \NsdAlert\,\% against \NsdQuiet\,\% on the other days (mean \NretAlert\,\% vs \NretQuiet\,\%): the alert marks turbulent days, with large moves in both directions, not a forecast of the direction.
+For the desk this is a manageable review load; a vision-language model can add the written explanation as a second layer, provided the analyst checks it against the chart.}%
+{\textbf{Cifra relevantă pentru decizie.} Modelul cu cel mai bun AUC pe validare este \Nbest\ (validare \NbestAUCval, test \NbestAUC). Cu pragul ales pe validare, el a emis \Nalerts\ de alerte în perioada de test, adică \NperMonth\ pe lună, și a semnalat \Ncaught\,\% dintre zilele de prăbușire și \NworstCaught\ dintre cele mai mari 10 scăderi.
+În serile cu alertă, randamentul din ziua următoare a avut o abatere standard de \NsdAlert\,\%, față de \NsdQuiet\,\% în celelalte zile (medie \NretAlert\,\%, față de \NretQuiet\,\%): alerta marchează zilele agitate, cu mișcări mari în ambele direcții, nu prognozează direcția.
+Pentru departamentul de risc, volumul de verificare este gestionabil; un model vizual-lingvistic poate adăuga, ca al doilea nivel, explicația scrisă, cu condiția ca analistul să o verifice pe grafic.}
+
+\section{\T{Discussion questions for managers}{Întrebări pentru discuție}}
+\begin{enumerate}
+\item \T{A simple volatility rule is on the table next to the vision-language models. What would you need to see before paying for the more complex tool?}%
+{Alături de modelele vizual-lingvistice se află o simplă regulă de volatilitate. Ce ați vrea să vedeți înainte de a plăti pentru instrumentul mai complex?}
+\item \T{The rationale of the model reads like an analyst's note. How would you check that it describes the chart correctly, and who signs off the alert?}%
+{Justificarea modelului se citește ca nota unui analist. Cum ați verifica faptul că descrie corect graficul și cine aprobă alerta?}
+\item \T{With \NperMonth\ alerts per month, what does one false alarm cost your desk (analyst time, a hedge), and what does a missed crash cost? Where would you put the threshold?}%
+{La \NperMonth\ alerte pe lună, cît costă o alarmă falsă (timpul analistului, o acoperire a riscului) și cît costă o prăbușire ratată? Unde ați stabili pragul?}
+\item \T{The paper adds news headlines and an indicator table to the chart. Which information would you add for your own portfolio, and how would you keep the test free of look-ahead?}%
+{Lucrarea adaugă graficului titluri de știri și un tabel de indicatori. Ce informații ați adăuga pentru propriul portofoliu și cum ați păstra testul fără informații din viitor?}
+\item \T{Open models run in-house; a commercial model is accessed over the internet. How do data confidentiality, cost per chart and reproducibility enter your choice?}%
+{Modelele deschise rulează pe infrastructura proprie; un model comercial este accesat prin internet. Cum intră în decizie confidențialitatea datelor, costul pe grafic și reproductibilitatea?}
+\end{enumerate}
+
+\section{\T{Limitations of the classroom replication}{Limitele replicării}}
+\T{(i) Our models are small open models (CLIP ViT-B/16 with 150 million parameters, Qwen2-VL with 2 billion), not GPT-4.1, and receive the chart only, without the indicator table, news and price context of the paper's prompt.
+(ii) The models and thresholds are fitted once (training to December 2019, validation to June 2024) and not re-estimated during the test.
+(iii) With \NcrashTest\ crash days at 5\,\% and \NcrashTestOne\ at 1\,\% in the test period, the AUC intervals are wide; the 1\,\% results rest on very few events.
+(iv) The zero-shot scores depend on the wording of the prompts; we report one fixed wording chosen before the test.}%
+{(i) Modelele noastre sînt modele deschise mici (CLIP ViT-B/16, cu 150 de milioane de parametri, și Qwen2-VL, cu 2 miliarde), nu GPT-4.1, și primesc numai graficul, fără tabelul de indicatori, știrile și contextul prețurilor din întrebarea folosită în lucrare.
+(ii) Modelele și pragurile sînt estimate o singură dată (antrenare pînă în decembrie 2019, validare pînă în iunie 2024) și nu sînt reestimate în perioada de test.
+(iii) Cu \NcrashTest\ de zile de prăbușire la 5\,\% și \NcrashTestOne\ la 1\,\% în perioada de test, intervalele pentru AUC sînt largi; rezultatele la 1\,\% se bazează pe foarte puține evenimente.
+(iv) Scorurile zero-shot depind de formularea descrierilor și a întrebării; raportăm o singură formulare, fixată înainte de test.}
+
+\newpage
+\section*{\T{Case 7 at a glance}{Studiul de caz 7 pe scurt}}
+\glance{\T{Can a model read a market chart, flag the evening before a sharp fall and say why?}{Poate un model să citească graficul pieței, să semnaleze seara dinaintea unei scăderi puternice și să explice de ce?}}%
+{\T{S\&P 500, 2006--2026; five-panel charts of 15 indicators; crash = next-day return below the rolling 5\,\% quantile.}{S\&P 500, 2006--2026; grafice cu cinci panouri pentru 15 indicatori; prăbușire = randament sub cuantila glisantă de 5\,\%.}}%
+{\T{CLIP zero-shot and probe, Qwen2-VL-2B; volatility rule, logistic, boosting, LSTM; threshold set on validation.}{CLIP zero-shot și sondă, Qwen2-VL-2B; regula volatilității, logistică, boosting, LSTM; prag ales pe validare.}}%
+{\T{Test AUC: numeric indicators \NaucHgb\ (boosting), CLIP probe \NaucProbe, zero-shot VLMs at chance (\NaucQwen).}{AUC pe test: indicatori numerici \NaucHgb\ (boosting), sonda CLIP \NaucProbe, modelele zero-shot la nivelul alegerii aleatoare (\NaucQwen).}}%
+{\T{Use as an alert layer with an analyst in the loop; benchmark against the volatility rule.}{Folosiți modelul ca nivel de alertă, cu un analist în buclă; comparați-l cu regula volatilității.}}
+\begin{center}
+\includegraphics[width=0.66\linewidth]{fig_headline_\lang}
+\src{\T{our computation on Yahoo Finance S\&P 500 data; test period \NtestStart\ -- \NtestEnd.}{calcule proprii pe date Yahoo Finance pentru S\&P 500; perioada de test \NtestStart\ -- \NtestEnd.}}
+\end{center}
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NaucProbe}\\ \small \T{test AUC of the CLIP chart probe}{AUC pe test al sondei CLIP pe grafice}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NaucHgb}\\ \small \T{test AUC of gradient boosting on the 15 indicators}{AUC pe test pentru gradient boosting pe cei 15 indicatori}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{IDAred}\Huge\bfseries \NperMonth}\\ \small \T{alerts per month to review (\Ncaught\,\% of crash days caught)}{alerte pe lună de verificat (\Ncaught\,\% din zilele de prăbușire semnalate)}\end{minipage}
+\end{document}

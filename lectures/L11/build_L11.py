@@ -68,7 +68,7 @@ REFS = [
     "Breiman, L.\\ (2001). Random forests. \\textit{Machine Learning}, 45, 5--32. \\href{https://doi.org/10.1023/A:1010933404324}{doi:10.1023/A:1010933404324}",
     "Dal Pozzolo, A., Caelen, O., Johnson, R.\\,A.\\ \\& Bontempi, G.\\ (2015). Calibrating probability with undersampling for unbalanced "
     "classification. IEEE SSCI, 159--166. \\href{https://doi.org/10.1109/SSCI.2015.33}{doi:10.1109/SSCI.2015.33}",
-    "Diaconu, D.\\ \\& Pele, D.\\,T.\\ (2026). Testing SHAP stability under distribution shift in graph-enhanced fraud detection. "
+    "Diaconu, D.\\ \\& Pele, D.\\,T.\\ (2026). SHAP stability across random and forward-time validation in graph-augmented fraud detection. "
     "Submitted to \\textit{Expert Systems with Applications}. Code: "
     "\\href{https://github.com/QuantLet/GNN_XAI_Stability}{github.com/QuantLet/GNN\\_XAI\\_Stability}",
     "Friedman, J.\\,H.\\ (2001). Greedy function approximation: A gradient boosting machine. \\textit{Annals of Statistics}, 29(5), "

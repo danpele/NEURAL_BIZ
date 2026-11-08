@@ -16,7 +16,7 @@ if (document.body.getAttribute('data-mj') === 'done') fitMath();
 let rt = null;
 window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fitMath, 200); });
 // highlight the current section in the table of contents
-const links = [...document.querySelectorAll('.wtoc a')];
+const links = [...document.querySelectorAll('.wtoc a')].filter(a => (a.getAttribute('href') || '').startsWith('#'));   // in-page anchors only
 const heads = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 function mark() {
   let cur = null;

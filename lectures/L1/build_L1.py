@@ -741,11 +741,11 @@ def build(lang, H=None):
         t("\\textbf{Explainable fraud detection} (Diaconu \\& Pele, 2026): compared XGBoost and CatBoost with a graph neural network (GNN), "
           "graph sample and aggregate (GraphSAGE), on the Institute of Electrical and Electronics Engineers, Computational Intelligence Society "
           "(IEEE-CIS) fraud data; boosting had the higher AUC, the graph model captured relational fraud patterns; a multi-level explainable "
-          "artificial intelligence (XAI) framework joins Shapley additive explanations (SHAP) with node and edge ablation --- Lectures 9, 11.",
+          "artificial intelligence (XAI) framework joins Shapley additive explanations (SHAP) with node and edge ablation --- replicated in Case study 1 (course site).",
           "\\textbf{Detectarea explicabilă a fraudei} (Diaconu \\& Pele, 2026): a comparat XGBoost și CatBoost cu o rețea neuronală pe grafuri (GNN), "
           "eșantionare și agregare pe graf (GraphSAGE), pe datele de fraudă Institute of Electrical and Electronics Engineers, Computational "
           "Intelligence Society (IEEE-CIS); boosting a avut AUC mai mare, modelul pe graf a surprins tiparele relaționale ale fraudei; un cadru "
-          "multinivel de inteligență artificială explicabilă (XAI) combină explicațiile aditive Shapley (SHAP) cu eliminarea de noduri și muchii --- cursurile 9, 11."),
+          "multinivel de inteligență artificială explicabilă (XAI) combină explicațiile aditive Shapley (SHAP) cu eliminarea de noduri și muchii --- replicat în studiul de caz 1 (site-ul cursului)."),
         t("\\textbf{Early warning of crypto `zombies'} (Będowska-Sójka, Wójcik \\& Pele, 2026): machine-learning early warning of crypto-assets "
           "that become `zombie' assets --- Lecture 3.",
           "\\textbf{Criptoactivele „zombie”} (Będowska-Sójka, Wójcik \\& Pele, 2026): avertizare timpurie, prin învățare automată, "

@@ -535,8 +535,8 @@ def build(lang, H=None):
           "\\textbf{Detectarea anomaliilor cu modele vizual-lingvistice} (premiul pentru cea mai bună lucrare, Conferința internațională Business Excellence (ICBE) 2026): "
           "indicatorii de piață sînt proiectați pe imagini cu mai multe panouri, iar un VLM (GPT-4.1, transformer generativ preantrenat) clasifică regimul zero-shot, cu etichete "
           "bazate pe cuantile glisante, și își explică alegerea; validare pe date noi pentru S\\&P 500 (Jheng, Pele, Tak \\& Găman, 2026, PICBE)."),
-        t("\\textbf{Explainable fraud detection}: tabular models and graph networks combined with SHAP and graph ablation (Diaconu \\& Pele, 2026, PICBE) --- Lectures 9 and 11.",
-          "\\textbf{Detectarea explicabilă a fraudei}: modele tabulare și rețele pe grafuri, combinate cu SHAP și ablația grafului (Diaconu \\& Pele, 2026, PICBE) --- cursurile 9 și 11."),
+        t("\\textbf{Explainable fraud detection}: tabular models and graph networks combined with SHAP and graph ablation (Diaconu \\& Pele, 2026, PICBE) --- Case study 1.",
+          "\\textbf{Detectarea explicabilă a fraudei}: modele tabulare și rețele pe grafuri, combinate cu SHAP și ablația grafului (Diaconu \\& Pele, 2026, PICBE) --- studiul de caz 1."),
         t("\\textbf{LLM-VaR and LLM-ES}: language models as zero-shot risk models (Pele et al., 2026, Expert Systems with Applications) --- Lectures 12 and 13.",
           "\\textbf{LLM-VaR și LLM-ES}: modelele de limbaj ca modele de risc zero-shot (Pele et al., 2026, Expert Systems with Applications) --- cursurile 12 și 13."),
         t("\\textbf{ESG-aware portfolios}: multi-criteria selection of assets with ESG scores (Găman, Tak, Jheng \\& Pele, 2026, PICBE).",

@@ -18,6 +18,9 @@ import sys
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "lectures", "common"))
+from colab_cell import colab_code   # first code cell: on Google Colab, clone the repository and move into the case folder
+
 SETUP = """import os, sys, warnings
 warnings.filterwarnings("ignore")
 sys.path.insert(0, os.path.join("..", "common"))   # shared helpers: cases/common/case_utils.py
@@ -46,6 +49,7 @@ def build(case, execute=True):
                "Master - Rețele neuronale și deep learning (NN) - Prof. Daniel Traian Pele\n\n"
                "Academia de Studii Economice din București - Academia Română, Institutul de Prognoză Economică")
         cells = [nbformat.v4.new_markdown_cell(f"# {title}\n\n{sub}"),
+                 nbformat.v4.new_code_cell(colab_code(lang, f"cases/{case}")),
                  nbformat.v4.new_code_cell(SETUP.format(lang=lang))]
         for c in mod.CELLS:
             if c[0] == "md":

@@ -1,0 +1,15 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Dep.\ 2,5\,\% (\%) & ES 2,5\,\% & Pierdere cuantilă & Pierdere FZ0 & DM & $p_{DM}$ \\
+\midrule
+LLM-VaR Qwen2.5-1.5B, w = 30 & 3,37 & 2,27 & 0,0465 & 1,391 & 1,41 & 0,157 \\
+LLM-VaR Qwen2.5-1.5B, w = 120 & 6,14 & 2,01 & \textbf{0,0450} & 1,334 & 0,98 & 0,325 \\
+LLM-VaR Qwen2.5-3B, w = 30 & 4,75 & 1,99 & 0,0477 & 1,427 & 1,66 & 0,096 \\
+LLM-VaR Qwen2.5-3B, w = 120 & 7,33 & 1,83 & 0,0501 & 1,539 & 1,84 & 0,065 \\
+LLM-VaR Qwen2.5-3B, w = 30, conversațional & 18,02 & 1,70 & 0,1796 & -- & -- & -- \\
+HS (250 de zile) & 2,97 & 2,84 & 0,0493 & 1,249 & 0,22 & 0,829 \\
+EWMA-N & 3,76 & 2,15 & 0,0489 & 1,309 & 1,96 & 0,050 \\
+GARCH(1,1)-t & 2,97 & 2,35 & 0,0463 & 1,214 & -- & -- \\
+HS filtrată & 2,38 & 2,59 & 0,0453 & \textbf{1,158} & $-$1,11 & 0,266 \\
+\bottomrule
+\end{tabular}

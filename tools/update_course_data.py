@@ -98,9 +98,26 @@ for k in range(1, 15):
            f"                further: [\n" + ',\n'.join('                    ' + x for x in fur) + "\n                ]\n            }")
     s = s[:m.start()] + new + s[m.end():]
 
-# 3. bibliography
+# 3. bibliography (+ one group with the papers replicated in the research case studies, from cases/common/build_web_case.py CASE)
 bl = ',\n'.join(f"            {{ h: lec({k}), items: [\n" + ',\n'.join('                ' + J(x) for x in items) + "] }" for k, items in groups)
-s, n = re.subn(r"        // Bibliography by lecture:.*?\n        bibliography: \[\n.*?\n        \],\n",
+sys.path.insert(0, os.path.join(ROOT, 'cases', 'common'))
+import build_web_case as bwc  # noqa: E402
+
+
+def case_ref(c):
+    v = c['venue']
+    v = v if v.startswith(('submitted', 'SSRN')) else f'<em>{html.escape(v, quote=False)}</em>'
+    v = v.replace('SSRN ', 'SSRN Working Paper ') if v.startswith('SSRN') else v[:1].upper() + v[1:]
+    return (f"{html.escape(c['authors'], quote=False).replace(' & ', ' &amp; ')} ({c['year']}). {html.escape(c['title'], quote=False)}. {v}. "
+            f"<a href=\"{c['link']}\" target=\"_blank\" rel=\"noopener\">{html.escape(c['linktext'], quote=False)}</a>")
+
+
+cs = [case_ref(bwc.CASE[k]) for k in sorted(bwc.CASE) if bwc.CASE[k].get('paper', True)]
+if cs:
+    n_ = len(bwc.CASE)
+    bl += (",\n            { h: { en: 'Case studies C1–C%d: the papers replicated', ro: 'Studiile de caz C1–C%d: lucrările replicate' }, items: [\n" % (n_, n_)
+           + ',\n'.join('                ' + J(x) for x in cs) + "] }")
+s, n = re.subn(r"        // Bibliography by lecture:[^\n]*\n(?:        //[^\n]*\n)*        bibliography: \[\n.*?\n        \],\n",
                lambda m: "        // Bibliography by lecture: every reference cited in the slides (REFS of lectures/Lk/build_Lk.py), listed once under\n"
                          "        // the first lecture that cites it, sorted alphabetically; converted from LaTeX by tools/update_course_data.py.\n"
                          "        bibliography: [\n" + bl + "\n        ],\n", s, flags=re.S); assert n == 1

@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & TP$_{5}$ & FP$_{5}$ & TN$_{5}$ & FN$_{5}$ & TP$_{1}$ & FP$_{1}$ & TN$_{1}$ & FN$_{1}$ \\
+\midrule
+Regula volatilității (HV10) & 3 & 10 & 539 & 39 & 0 & 10 & 568 & 13 \\
+Regresie logistică, 15 indicatori & 22 & 138 & 411 & 20 & 3 & 11 & 567 & 10 \\
+Gradient boosting, 15 indicatori & 29 & 172 & 377 & 13 & 5 & 100 & 478 & 8 \\
+LSTM, 20 de zile de indicatori & 7 & 47 & 502 & 35 & 0 & 8 & 570 & 13 \\
+CLIP zero-shot (grafic + descrieri text) & 4 & 27 & 522 & 38 & 1 & 30 & 548 & 12 \\
+Reprezentarea CLIP a graficului + sondă logistică & 1 & 36 & 513 & 41 & 2 & 70 & 508 & 11 \\
+Qwen2-VL-2B zero-shot (da/nu) & 13 & 176 & 373 & 29 & 0 & 50 & 528 & 13 \\
+\bottomrule
+\end{tabular}

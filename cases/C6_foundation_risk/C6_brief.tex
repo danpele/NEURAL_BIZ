@@ -1,0 +1,171 @@
+% C6_brief.tex -- ONE source for the English and Romanian case brief of Case 6 (Lecture 13).
+\input{numbers_\lang}
+\renewcommand{\emqacase}{\T{Research case 6 (Lecture 13)}{Studiul de caz 6 (cursul 13)}}
+\begin{document}
+\emqatitle{\T{Case 6: Can foundation models manage risk?}%
+                {Studiul de caz 6: Pot modelele fundație gestiona riscul?}}%
+          {\T{Based on}{Studiu bazat pe lucrarea} Jheng, Tak, Găman, Mazurencu-Marinescu-Pele \& Pele (2026), \emph{Can foundation models manage risk? Zero-shot VaR and ES forecasting with conformal calibration in CEE markets},
+           ECECSR 60(2), 267--290, \href{https://doi.org/10.24818/18423264/60.2.26.14}{doi:10.24818/18423264/60.2.26.14}}
+
+\begin{scenario}
+\T{The risk committee of a Romanian asset manager sets, every evening, a daily loss limit for each equity position: the Value-at-Risk (VaR), the loss that should be exceeded on only 1\,\% of the days, and the Expected Shortfall (ES), the average loss on the worst days.
+A vendor offers a pretrained \emph{time series foundation model} that forecasts any series ``out of the box''. The chief risk officer asks two questions:
+\textbf{can a model that has never seen Romanian shares produce a daily VaR that passes the Basel backtests}, and \textbf{what must be added before it can be used for a limit?}
+Too low a limit triggers breaches, capital surcharges and questions from the regulator; too high a limit ties up capital and blocks trading.}%
+{Comitetul de risc al unei societăți de administrare a investițiilor din România stabilește, în fiecare seară, o limită zilnică de pierdere pentru fiecare poziție pe acțiuni: valoarea la risc (VaR, \emph{Value-at-Risk}), adică pierderea care ar trebui depășită numai în 1\,\% din zile, și pierderea așteptată în coada distribuției (ES, \emph{Expected Shortfall}), adică pierderea medie din zilele cele mai nefavorabile.
+Un furnizor oferă un \emph{model fundație pentru serii de timp}, preantrenat, care prognozează orice serie fără nicio adaptare. Directorul de risc pune două întrebări:
+\textbf{poate un model care nu a văzut niciodată acțiuni românești să producă un VaR zilnic care trece testele Basel} și \textbf{ce trebuie adăugat înainte ca modelul să fie folosit pentru o limită?}
+O limită prea mică produce depășiri, majorări ale cerinței de capital și întrebări din partea autorității de supraveghere; o limită prea mare imobilizează capital și blochează tranzacțiile.}
+\end{scenario}
+
+\section{\T{What the paper did}{Lucrarea de referință}}
+\textbf{\T{Question.}{Întrebarea de cercetare.}} \T{Can modern time series foundation models (TSFMs) produce regulatory-grade VaR and ES forecasts for Central and Eastern European (CEE) markets in a zero-shot setting, and can conformal calibration bridge any remaining gap to full Basel compliance (p.~268)?}%
+{Pot modelele fundație moderne pentru serii de timp (TSFM, \emph{time series foundation models}) să producă, fără antrenare suplimentară (\emph{zero-shot}), prognoze VaR și ES de calitatea cerută de reglementări pentru piețele din Europa Centrală și de Est (ECE)? Poate calibrarea conformală să acopere diferența rămasă pînă la conformitatea deplină cu standardele Basel (p.~268)?}
+
+\textbf{\T{Data.}{Datele.}} \T{Ten daily return series from five CEE markets: the stock indices BET (Romania), WIG20, PX, BUX and SOFIX and the exchange rates of the euro against the Romanian leu (RON), the Polish zloty, the Czech koruna and the Hungarian forint, and of the American dollar against the Bulgarian lev, January 2007 -- December 2025; out-of-sample period January 2018 -- December 2025, about 2,000 trading days (Table~1, p.~270--271). All series are fat-tailed (Table~2).}%
+{Zece serii de randamente zilnice din cinci piețe ECE: indicii bursieri BET (România), WIG20, PX, BUX și SOFIX și cursurile de schimb ale euro față de leul românesc (RON), zlotul polonez, coroana cehă și forintul maghiar, precum și al dolarului american față de levă, ianuarie 2007 -- decembrie 2025; perioada de evaluare este ianuarie 2018 -- decembrie 2025, circa 2.000 de zile de tranzacționare (Tabelul~1, p.~270--271). Toate seriile au cozi groase (Tabelul~2).}
+
+\textbf{\T{Method.}{Metoda.}} \T{Three TSFMs used zero-shot with a context of 512 days --- Chronos-2 (120 million parameters), TimesFM 2.5 (Time Series Foundation Model, 200 million) and Moirai 2.0 (11.4 million) --- against historical simulation (HS), a GJR-GARCH(1,1) model with skewed-t innovations, and autoregressive integrated moving average (ARIMA) and LSTM (Long Short-Term Memory) forecasts turned into VaR by split conformal prediction (Table~3, p.~273).
+Chronos-2 and TimesFM 2.5 return nine deciles; a Student-t distribution fitted to them by quantile matching gives the 1\,\% and 2.5\,\% VaR and ES (section~3.2.3). A rolling conformal wrapper with a 250-day calibration window corrects each TSFM (eqs.~5--6). Backtests: Kupiec, Christoffersen, the Acerbi--Székely $Z_2$ test for ES, the Basel traffic light and Diebold--Mariano (DM) tests on the tick loss (section~3.2.5).}%
+{Trei modele TSFM folosite \emph{zero-shot}, cu un context de 512 zile --- Chronos-2 (120 de milioane de parametri), TimesFM 2.5 (Time Series Foundation Model, 200 de milioane) și Moirai 2.0 (11,4 milioane) --- sînt comparate cu simularea istorică (SI), cu un model GJR-GARCH(1,1) cu inovații Student asimetrice și cu prognoze ale unui model autoregresiv integrat cu medie mobilă (ARIMA) și ale unei rețele LSTM (\emph{Long Short-Term Memory}) transformate în VaR prin predicție conformală (Tabelul~3, p.~273).
+Chronos-2 și TimesFM 2.5 furnizează nouă decile; o distribuție Student ajustată la acestea prin potrivirea cuantilelor dă VaR și ES la 1\,\% și 2,5\,\% (secțiunea~3.2.3). Un strat de calibrare conformală glisantă, cu o fereastră de 250 de zile, corectează fiecare TSFM (ec.~5--6). Testarea retrospectivă folosește testele Kupiec și Christoffersen, testul $Z_2$ al lui Acerbi și Székely pentru ES, semaforul Basel și testele Diebold--Mariano (DM) pe funcția de pierdere \emph{tick} (secțiunea~3.2.5).}
+
+\textbf{\T{Main findings of the paper.}{Principalele rezultate ale lucrării.}}
+\begin{itemize}
+\item \T{All three raw TSFMs reach competitive Basel Green-zone rates zero-shot; Chronos-2 attains 90\,\%, matching GJR-GARCH, with an average 1\,\% violation rate of 1.09\,\% (p.~276, Table~4).}%
+{Toate cele trei modele TSFM fără calibrare ating rate competitive în zona verde Basel; Chronos-2 ajunge la 90\,\%, la fel ca GJR-GARCH, cu o rată medie a depășirilor VaR 1\,\% de 1,09\,\% (p.~276, Tabelul~4).}
+\item \T{Conformal calibration lifts Chronos-2-Conf to the highest Green-zone rate, 96.7\,\%, and to the best ES statistic, an average $Z_2$ of 0.23, the only positive value; raw TSFMs have $Z_2$ between $-$0.71 and $-$1.18 (Table~5, p.~279--280).}%
+{Calibrarea conformală ridică modelul Chronos-2-Conf la cea mai mare rată în zona verde, 96,7\,\%, și la cea mai bună statistică pentru ES, un $Z_2$ mediu de 0,23, singura valoare pozitivă; modelele TSFM fără calibrare au $Z_2$ între $-$0,71 și $-$1,18 (Tabelul~5, p.~279--280).}
+\item \T{Conformalised foundation models rank first by Green-zone rate and have lower tick losses than most benchmarks in the Diebold--Mariano tests (Figures~5--6, p.~281--282); during the COVID-19 and 2022 war episodes they recover faster, because the rolling scores absorb recent errors (p.~282--283).}%
+{Modelele fundație calibrate conformal ocupă primul loc după rata zonei verzi și au pierderi \emph{tick} mai mici decît majoritatea modelelor de referință în testele Diebold--Mariano (Figurile~5--6, p.~281--282); în episoadele COVID-19 și în 2022, la începutul războiului, își revin mai repede, deoarece scorurile glisante preiau erorile recente (p.~282--283).}
+\item \T{The wrapper ``requires no retraining or proprietary data'' and works as a post-processing layer on any foundation model (p.~283).}%
+{Stratul de calibrare nu necesită reantrenare sau date proprietare și funcționează ca o etapă de postprocesare pentru orice model fundație (p.~283).}
+\end{itemize}
+{\footnotesize\color{FooterGray}\T{Related work of our group for Lecture 13: language models as zero-shot risk models (Pele et al., 2026, \emph{Expert Systems with Applications} 295, 128676, \href{https://doi.org/10.1016/j.eswa.2025.128676}{doi:10.1016/j.eswa.2025.128676}; Case~5).}%
+{Altă lucrare a grupului nostru relevantă pentru cursul 13: modelele lingvistice mari ca modele de risc zero-shot (Pele et al., 2026, \emph{Expert Systems with Applications} 295, 128676, \href{https://doi.org/10.1016/j.eswa.2025.128676}{doi:10.1016/j.eswa.2025.128676}; studiul de caz~5).}}
+
+\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\begin{intuition}
+\T{A foundation model has read millions of series from energy, retail, traffic and weather; it ``knows'' what usually follows a calm or a turbulent stretch, and returns a whole set of quantiles for tomorrow.
+It has not seen Romanian shares, so its quantiles may be slightly too narrow or too wide. Conformal calibration is a thermostat: it looks at how often the model's VaR was breached in the last 250 days and moves today's VaR by exactly the amount that would have produced the right breach rate.}%
+{Un model fundație a „citit” milioane de serii din energie, comerț, trafic și meteorologie; el „știe” ce urmează de obicei după o perioadă calmă sau agitată și furnizează un set complet de cuantile pentru ziua următoare.
+Modelul nu a văzut acțiuni românești, de aceea cuantilele sale pot fi puțin prea înguste sau prea largi. Calibrarea conformală funcționează ca un termostat: verifică de cîte ori a fost depășit VaR-ul modelului în ultimele 250 de zile și deplasează VaR-ul de azi exact cu valoarea care ar fi produs rata corectă a depășirilor.}
+\end{intuition}
+\T{Let $r_t=100\ln(P_t/P_{t-1})$ be the daily log return in percent, with $P_t$ the closing price adjusted for dividends and splits. For a long position, $\mathrm{VaR}_{\alpha,t}=F_t^{-1}(\alpha)$, the $\alpha$-quantile of the forecast distribution $F_t$ of $r_t$ given the information up to $t-1$, and $\mathrm{ES}_{\alpha,t}=\E[r_t\mid r_t\le\mathrm{VaR}_{\alpha,t}]$ (paper eqs.~1--2; both are negative returns). We use $\alpha=1\,\%$ and $2.5\,\%$.
+\textbf{Benchmarks.} HS: the empirical $\alpha$-quantile and tail mean of the last $W=250$ returns. GJR-GARCH: $r_t=\mu+\varepsilon_t$, $\varepsilon_t=\sigma_t z_t$, $\sigma_t^2=\omega+a\,\varepsilon_{t-1}^2+\gamma\,\varepsilon_{t-1}^2\1(\varepsilon_{t-1}<0)+\beta\sigma_{t-1}^2$ (eq.~3), $z_t$ skewed-t with $\nu$ degrees of freedom and asymmetry $\lambda$; $\mathrm{VaR}=\mu+\sigma_t q_\alpha(z)$, $\mathrm{ES}=\mu+\sigma_t\,\E[z\mid z\le q_\alpha(z)]$; re-estimated every day on the last 250 returns. AR(1) with conformal prediction: $\hat r_t=c+\phi r_{t-1}$ estimated on the last 250 days, $\mathrm{VaR}_{\alpha,t}=\hat r_t+Q_\alpha(\{r_i-\hat r_i\}_{i=t-250}^{t-1})$ (eq.~4), with $Q_\alpha$ the empirical $\alpha$-quantile.
+\textbf{Foundation models.} Given the last 512 returns, Chronos-2 and TimesFM 2.5 return the deciles $q_k$ at $\tau_k=0.1,\dots,0.9$. We fit $(\mu,\sigma,\nu)$ by $\min\sum_{k=1}^{9}\big(q_k-\mu-\sigma\,t_\nu^{-1}(\tau_k)\big)^2$, with $t_\nu^{-1}$ the quantile function of the Student-t with $\nu$ degrees of freedom, and read $\mathrm{VaR}_\alpha=\mu+\sigma t_\nu^{-1}(\alpha)$ and $\mathrm{ES}_\alpha=\mu-\sigma\,\frac{f_\nu(t_\nu^{-1}(\alpha))}{\alpha}\,\frac{\nu+(t_\nu^{-1}(\alpha))^2}{\nu-1}$, with $f_\nu$ the Student-t density.
+\textbf{Conformal wrapper.} Scores $s_i=r_i-\mathrm{VaR}^{raw}_{\alpha,i}$ for $i=t-250,\dots,t-1$ and $\mathrm{VaR}^{conf}_{\alpha,t}=\mathrm{VaR}^{raw}_{\alpha,t}+Q_\alpha(\{s_i\})$ (eqs.~5--6); we shift the ES by the same amount.
+\textbf{Backtests.} With $I_t=\1(r_t<\mathrm{VaR}_{\alpha,t})$, $N=\sum_t I_t$ violations in $T$ days and $\hat\alpha=N/T$: $LR_{UC}=-2\ln[(1-\alpha)^{T-N}\alpha^N]+2\ln[(1-\hat\alpha)^{T-N}\hat\alpha^N]\sim\chi^2(1)$ (Kupiec, eq.~7); $LR_{CC}=LR_{UC}+LR_{IND}\sim\chi^2(2)$, with $LR_{IND}$ the test of a first-order Markov chain of violations (Christoffersen, eq.~8);
+$Z_2=1-\frac{1}{T\alpha}\sum_t I_t\,r_t/\mathrm{ES}_{\alpha,t}$ (eq.~9 written for negative ES; $Z_2<0$ means the ES is too mild), with a bootstrap $p$-value from 1,000 resamples; Basel traffic light per block of 250 days at 1\,\%: Green 0--4 exceptions, Yellow 5--9, Red 10 or more.
+Tick loss $L^{\tau}_t=(\alpha-I_t)(r_t-\mathrm{VaR}_{\alpha,t})$; FZ0 loss of Patton, Ziegel and Chen (2019) for the pair, $L^{FZ}_t=-\frac{I_t(\mathrm{VaR}_t-r_t)}{\alpha\,\mathrm{ES}_t}+\frac{\mathrm{VaR}_t}{\mathrm{ES}_t}+\ln(-\mathrm{ES}_t)-1$.
+Diebold--Mariano: $DM=\bar d/\sqrt{\hat V(\bar d)}$, with $d_t$ the tick-loss difference between two models averaged over the shares and $\hat V$ the Newey--West variance; $DM<0$ means the first model has the smaller loss.}%
+{Fie $r_t=100\ln(P_t/P_{t-1})$ randamentul logaritmic zilnic, în procente, unde $P_t$ este prețul de închidere ajustat pentru dividende și divizări. Pentru o poziție lungă, $\mathrm{VaR}_{\alpha,t}=F_t^{-1}(\alpha)$ este cuantila de ordin $\alpha$ a distribuției prognozate $F_t$ a lui $r_t$, condiționată de informația pînă în $t-1$, iar $\mathrm{ES}_{\alpha,t}=\E[r_t\mid r_t\le\mathrm{VaR}_{\alpha,t}]$ (ec.~1--2 din lucrare; ambele sînt randamente negative). Folosim $\alpha=1\,\%$ și $2{,}5\,\%$.
+\textbf{Modelele de referință.} SI: cuantila empirică de ordin $\alpha$ și media cozii pentru ultimele $W=250$ de randamente. GJR-GARCH: $r_t=\mu+\varepsilon_t$, $\varepsilon_t=\sigma_t z_t$, $\sigma_t^2=\omega+a\,\varepsilon_{t-1}^2+\gamma\,\varepsilon_{t-1}^2\1(\varepsilon_{t-1}<0)+\beta\sigma_{t-1}^2$ (ec.~3), unde $z_t$ urmează o distribuție Student asimetrică, cu $\nu$ grade de libertate și parametrul de asimetrie $\lambda$; $\mathrm{VaR}=\mu+\sigma_t q_\alpha(z)$, $\mathrm{ES}=\mu+\sigma_t\,\E[z\mid z\le q_\alpha(z)]$; modelul este reestimat zilnic pe ultimele 250 de randamente. AR(1) cu predicție conformală: $\hat r_t=c+\phi r_{t-1}$, estimat pe ultimele 250 de zile, $\mathrm{VaR}_{\alpha,t}=\hat r_t+Q_\alpha(\{r_i-\hat r_i\}_{i=t-250}^{t-1})$ (ec.~4), unde $Q_\alpha$ este cuantila empirică de ordin $\alpha$.
+\textbf{Modelele fundație.} Pe baza ultimelor 512 randamente, Chronos-2 și TimesFM 2.5 furnizează decilele $q_k$ pentru $\tau_k=0{,}1,\dots,0{,}9$. Estimăm $(\mu,\sigma,\nu)$ prin $\min\sum_{k=1}^{9}\big(q_k-\mu-\sigma\,t_\nu^{-1}(\tau_k)\big)^2$, unde $t_\nu^{-1}$ este funcția cuantilă a distribuției Student cu $\nu$ grade de libertate, și obținem $\mathrm{VaR}_\alpha=\mu+\sigma t_\nu^{-1}(\alpha)$ și $\mathrm{ES}_\alpha=\mu-\sigma\,\frac{f_\nu(t_\nu^{-1}(\alpha))}{\alpha}\,\frac{\nu+(t_\nu^{-1}(\alpha))^2}{\nu-1}$, unde $f_\nu$ este densitatea distribuției Student.
+\textbf{Calibrarea conformală.} Scorurile sînt $s_i=r_i-\mathrm{VaR}^{brut}_{\alpha,i}$ pentru $i=t-250,\dots,t-1$, iar $\mathrm{VaR}^{conf}_{\alpha,t}=\mathrm{VaR}^{brut}_{\alpha,t}+Q_\alpha(\{s_i\})$ (ec.~5--6); deplasăm ES cu aceeași valoare.
+\textbf{Testarea retrospectivă.} Cu $I_t=\1(r_t<\mathrm{VaR}_{\alpha,t})$, $N=\sum_t I_t$ depășiri în $T$ zile și $\hat\alpha=N/T$: $LR_{UC}=-2\ln[(1-\alpha)^{T-N}\alpha^N]+2\ln[(1-\hat\alpha)^{T-N}\hat\alpha^N]\sim\chi^2(1)$ (Kupiec, ec.~7); $LR_{CC}=LR_{UC}+LR_{IND}\sim\chi^2(2)$, unde $LR_{IND}$ testează independența depășirilor față de un lanț Markov de ordinul întîi (Christoffersen, ec.~8);
+$Z_2=1-\frac{1}{T\alpha}\sum_t I_t\,r_t/\mathrm{ES}_{\alpha,t}$ (ec.~9, scrisă pentru ES negativ; $Z_2<0$ înseamnă că ES subestimează pierderile), cu valoarea $p$ obținută prin 1.000 de reeșantionări \emph{bootstrap}; semaforul Basel pe blocuri de 250 de zile, la 1\,\%: verde pentru 0--4 depășiri, galben pentru 5--9, roșu pentru 10 sau mai multe.
+Pierderea \emph{tick} este $L^{\tau}_t=(\alpha-I_t)(r_t-\mathrm{VaR}_{\alpha,t})$; pierderea FZ0 a lui Patton, Ziegel și Chen (2019) pentru perechea (VaR, ES) este $L^{FZ}_t=-\frac{I_t(\mathrm{VaR}_t-r_t)}{\alpha\,\mathrm{ES}_t}+\frac{\mathrm{VaR}_t}{\mathrm{ES}_t}+\ln(-\mathrm{ES}_t)-1$.
+Testul Diebold--Mariano: $DM=\bar d/\sqrt{\hat V(\bar d)}$, unde $d_t$ este diferența pierderilor \emph{tick} dintre două modele, mediată pe acțiuni, iar $\hat V$ este varianța Newey--West; $DM<0$ înseamnă că primul model are pierderea mai mică.}
+\begin{decision}
+\T{Judge a risk model by its backtest, not by its size: count breaches per 250 days, test their clustering and the severity of the tail, and keep a calibration layer that can be audited line by line.}%
+{Judecați un model de risc după testarea retrospectivă, nu după mărimea sa: numărați depășirile pe 250 de zile, testați gruparea lor și severitatea cozii și păstrați un strat de calibrare care poate fi verificat pas cu pas.}
+\end{decision}
+
+\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\T{Notebook \texttt{C6\_notebook\_EN.ipynb}: daily closing prices, adjusted for dividends and splits, of \NnStocks\ shares of the Bucharest Stock Exchange (BVB) from 2015, downloaded from EODHD (EOD Historical Data): Banca Transilvania (TLV), BRD - Groupe Société Générale (BRD), OMV Petrom (SNP), Romgaz (SNG), Nuclearelectrica (SNN), Transgaz (TGN), Electrica (EL) and Transelectrica (TEL); only days with traded volume are kept.
+Out-of-sample period \NoosStart\ -- \NoosEnd: \NnOOS\ share-days per model and level, \NnBlocks\ blocks of 250 days for the traffic light. The returns are fat-tailed (kurtosis \NkurtMin--\NkurtMax) and thinly traded on some days (\NzeroMin--\NzeroMax\,\% of trading days with an unchanged price; Table~\ref{tab:desc}).
+Classroom implementation: eight Romanian shares instead of ten CEE indices and exchange rates; Chronos-2 and TimesFM 2.5 (both with decile outputs) without Moirai 2.0; an AR(1) model instead of ARIMA and no conformal LSTM; the degrees of freedom of the Student-t fit are searched on a grid from 2.1 to 60 (the paper uses the Nelder--Mead algorithm). The foundation-model forecasts take about four minutes on a laptop with an Apple GPU and are cached.}%
+{Notebook-ul \texttt{C6\_notebook\_RO.ipynb} folosește prețurile zilnice de închidere, ajustate pentru dividende și divizări, ale celor \NnStocks\ acțiuni de la Bursa de Valori București (BVB), începînd din 2015, descărcate de la EODHD (EOD Historical Data): Banca Transilvania (TLV), BRD - Groupe Société Générale (BRD), OMV Petrom (SNP), Romgaz (SNG), Nuclearelectrica (SNN), Transgaz (TGN), Electrica (EL) și Transelectrica (TEL); păstrăm numai zilele cu volum tranzacționat.
+Perioada de evaluare este \NoosStart\ -- \NoosEnd: \NnOOS\ de observații (acțiune $\times$ zi) pentru fiecare model și nivel și \NnBlocks\ de blocuri de 250 de zile pentru semaforul Basel. Randamentele au cozi groase (aplatizare între \NkurtMin\ și \NkurtMax) și, în unele zile, o tranzacționare redusă (între \NzeroMin\ și \NzeroMax\,\% din zilele de tranzacționare au prețul neschimbat; Tabelul~\ref{tab:desc}).
+Față de lucrare, implementarea de la curs folosește opt acțiuni românești în locul celor zece indici și cursuri de schimb din ECE; modelele Chronos-2 și TimesFM 2.5 (ambele cu ieșiri sub formă de decile), fără Moirai 2.0; un model AR(1) în locul modelului ARIMA și nicio rețea LSTM conformală; numărul gradelor de libertate al distribuției Student este căutat pe o grilă între 2,1 și 60 (lucrarea folosește algoritmul Nelder--Mead). Prognozele modelelor fundație durează circa patru minute pe un laptop cu procesor grafic Apple și sînt salvate.}
+
+\begin{table}[H]\centering\small
+\caption{\T{Daily log returns (\%) of the eight BVB shares in the out-of-sample period.}{Randamentele logaritmice zilnice (\%) ale celor opt acțiuni BVB în perioada de evaluare.}}\label{tab:desc}
+\tabin{desc}
+\src{\T{EODHD; our computation. Kurtosis is not in excess of 3.}{EODHD; calcule proprii. Aplatizarea este cea absolută (valoarea 3 corespunde distribuției normale).}}
+\end{table}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.9\linewidth]{f1_var_path}
+\caption{\T{Banca Transilvania (TLV): daily return and one-day 1\,\% VaR of three models.}{Banca Transilvania (TLV): randamentul zilnic și VaR la 1\,\% pentru ziua următoare, după trei modele.}}
+\src{\T{EODHD; our forecasts; \NoosStart\ -- \NoosEnd. The axis is cut at $-16\,\%$.}{EODHD; prognozele noastre; \NoosStart\ -- \NoosEnd. Axa este trunchiată la $-16\,\%$.}}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{VaR at 1\,\%: backtests over the eight shares. Rejections are counted out of 8 shares at the 5\,\% level; Green = share of the \NnBlocks\ blocks of 250 days with at most 4 exceptions. Best value in bold.}%
+{VaR la 1\,\%: testarea retrospectivă pentru cele opt acțiuni. Respingerile sînt numărate din 8 acțiuni, la pragul de 5\,\%; Verde = ponderea celor \NnBlocks\ de blocuri de 250 de zile cu cel mult 4 depășiri. Cea mai bună valoare este marcată cu aldine.}}\label{tab:var}
+\tabin{var}
+\src{\T{our computation; tick loss in basis points; DM = Diebold--Mariano statistic of the tick-loss difference, positive when the model has the larger loss. Paper (10 CEE series, 2018--2025): Green rate 90\,\% for Chronos-2 and GJR-GARCH, 96.7\,\% for Chronos-2-Conf (p.~276).}%
+{calcule proprii; pierderea \emph{tick} este exprimată în puncte de bază (pb); DM = statistica Diebold--Mariano a diferenței pierderilor \emph{tick}, pozitivă atunci cînd modelul are pierderea mai mare. Lucrarea (10 serii din ECE, 2018--2025): rata zonei verzi este de 90\,\% pentru Chronos-2 și GJR-GARCH și de 96,7\,\% pentru Chronos-2-Conf (p.~276).}}
+\end{table}
+
+\T{\textbf{What our data show.} The zero-shot foundation models land on opposite sides of the target. Chronos-2's deciles imply very fat tails (median fitted $\nu$ = \NnuCh), so its 1\,\% VaR is breached on only \NvCh\,\% of the days: it is in the Green zone in every block, but Kupiec rejects it for all eight shares --- for too \emph{few} violations --- and its average limit is the widest of all models. TimesFM 2.5 implies thinner tails ($\nu$ = \NnuTf) and is breached on \NvTf\,\% of the days (Green \NgTf\,\%).
+The conformal wrapper corrects both in the right direction: on average it shifts the Chronos-2 VaR by \NshCh\ percentage points (upwards, less conservative) and the TimesFM VaR by \NshTf\ percentage points (downwards, more conservative; Figure~\ref{fig:shift}). Conformal Chronos-2 then has \NvChC\,\% violations, a Green rate of \NgChC\,\% (GJR-GARCH: \NgGJR\,\%), Kupiec rejections for \NkChC\ of 8 shares (GJR-GARCH: \NkGJR) and the fewest Christoffersen rejections (Table~\ref{tab:var}).
+For the ES at 2.5\,\% the result is the paper's: conformal Chronos-2 has the mean $Z_2$ closest to zero, \NzChC\ (paper: 0.23), and no rejection, while historical simulation (\NzHS) and GJR-GARCH (\NzGJR) understate the tail (Table~\ref{tab:es}).
+On the scoring rules, GJR-GARCH has the lowest tick and FZ0 losses on these individual shares; the DM statistic of conformal Chronos-2 against GJR-GARCH is \NdmChCgjr\ ($p$ = \NpdmChCgjr), and against historical simulation \NdmChChs. The paper's sample is made of indices and exchange rates; on single, thinly traded shares a daily re-estimated GJR-GARCH remains a strong benchmark.}%
+{\textbf{Ce arată datele.} Modelele fundație folosite \emph{zero-shot} se situează de o parte și de alta a țintei. Decilele modelului Chronos-2 implică cozi foarte groase (mediana lui $\nu$ estimat este \NnuCh), astfel că VaR la 1\,\% este depășit numai în \NvCh\,\% din zile: modelul este în zona verde în toate blocurile, dar testul Kupiec îl respinge pentru toate cele opt acțiuni --- pentru că are prea \emph{puține} depășiri ---, iar limita sa medie este cea mai largă dintre toate modelele. TimesFM 2.5 implică cozi mai subțiri ($\nu$ = \NnuTf) și este depășit în \NvTf\,\% din zile (zona verde: \NgTf\,\%).
+Calibrarea conformală le corectează pe amîndouă în direcția potrivită: în medie, deplasează VaR al modelului Chronos-2 cu \NshCh\ puncte procentuale (în sus, spre o limită mai puțin prudentă) și VaR al modelului TimesFM cu \NshTf\ puncte procentuale (în jos, spre o limită mai prudentă; Figura~\ref{fig:shift}). Modelul Chronos-2 conformal are apoi \NvChC\,\% depășiri, o rată a zonei verzi de \NgChC\,\% (GJR-GARCH: \NgGJR\,\%), respingeri Kupiec pentru \NkChC\ din 8 acțiuni (GJR-GARCH: \NkGJR) și cele mai puține respingeri Christoffersen (Tabelul~\ref{tab:var}).
+Pentru ES la 2,5\,\%, rezultatul este cel din lucrare: modelul Chronos-2 conformal are $Z_2$ mediu cel mai apropiat de zero, \NzChC\ (în lucrare: 0,23), și nicio respingere, în timp ce simularea istorică (\NzHS) și GJR-GARCH (\NzGJR) subestimează coada (Tabelul~\ref{tab:es}).
+După funcțiile de pierdere, GJR-GARCH are cele mai mici pierderi \emph{tick} și FZ0 pe aceste acțiuni individuale; statistica DM a modelului Chronos-2 conformal față de GJR-GARCH este \NdmChCgjr\ ($p$ = \NpdmChCgjr), iar față de simularea istorică \NdmChChs. Eșantionul lucrării este format din indici și cursuri de schimb; pentru acțiuni individuale, cu tranzacționare redusă în unele zile, un model GJR-GARCH reestimat zilnic rămîne un reper puternic.}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\linewidth]{f3_traffic_light}
+\caption{\T{Basel traffic light: Green-zone share of the blocks of 250 days, by model and share.}{Semaforul Basel: ponderea blocurilor de 250 de zile aflate în zona verde, pe modele și acțiuni.}}
+\src{\T{our backtests; VaR at 1\,\%.}{testarea noastră retrospectivă; VaR la 1\,\%.}}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.8\linewidth]{f4_conformal_shift}
+\caption{\T{Conformal shift of the 1\,\% VaR, mean of the eight shares (21-day moving average).}{Corecția conformală a VaR la 1\,\%, media celor opt acțiuni (medie mobilă pe 21 de zile).}}\label{fig:shift}
+\src{\T{our computation; positive = higher (less conservative) VaR.}{calcule proprii; valoare pozitivă = VaR mai ridicat (mai puțin prudent).}}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{ES at 2.5\,\%: Acerbi--Székely $Z_2$ (bootstrap, 1,000 resamples; rejections out of 8 at 5\,\%) and FZ0 loss. Best value in bold.}%
+{ES la 2,5\,\%: statistica $Z_2$ a lui Acerbi și Székely (\emph{bootstrap}, 1.000 de reeșantionări; respingeri din 8 acțiuni, la pragul de 5\,\%) și pierderea FZ0. Cea mai bună valoare este marcată cu aldine.}}\label{tab:es}
+\tabin{es}
+\src{\T{our computation. Paper (Table~5): mean $Z_2$ 0.23 for Chronos-2-Conf, $-$0.44 for GJR-GARCH, $-$0.48 for historical simulation, $-$0.71 for raw Chronos-2.}%
+{calcule proprii. Lucrarea (Tabelul~5): $Z_2$ mediu de 0,23 pentru Chronos-2-Conf, $-$0,44 pentru GJR-GARCH, $-$0,48 pentru simularea istorică și $-$0,71 pentru Chronos-2 fără calibrare.}}
+\end{table}
+
+\T{\textbf{Decision number.} For a position of 10 million RON (Romanian leu) in each share, the average daily 1\,\% VaR limit is \NlimGJR\ thousand RON with GJR-GARCH, \NlimCh\ thousand with raw Chronos-2 and \NlimChC\ thousand with conformal Chronos-2.
+The raw model buys its perfect traffic light with about \NlimDiff\ thousand RON of extra limit per position and per day and only \NexcCh\ exceptions per 1,000 days (target: 10); the conformal version releases that capital at \NexcChC\ exceptions per 1,000 days, close to GJR-GARCH (\NexcGJR).}%
+{\textbf{Cifra relevantă pentru decizie.} Pentru o poziție de 10 milioane RON în fiecare acțiune, limita zilnică medie dată de VaR la 1\,\% este de \NlimGJR\ mii RON cu GJR-GARCH, de \NlimCh\ mii RON cu Chronos-2 fără calibrare și de \NlimChC\ mii RON cu Chronos-2 conformal.
+Modelul fără calibrare își obține semaforul perfect cu o limită mai mare cu aproximativ \NlimDiff\ mii RON pe poziție și pe zi și cu numai \NexcCh\ depășiri la 1.000 de zile (ținta: 10); varianta conformală eliberează acest capital, la \NexcChC\ depășiri la 1.000 de zile, aproape de GJR-GARCH (\NexcGJR).}
+
+\section{\T{Discussion questions for managers}{Întrebări pentru discuție}}
+\begin{enumerate}
+\item \T{Raw Chronos-2 is in the Green zone in every block, yet Kupiec rejects it everywhere. Would you approve it as your limit model? What does the traffic light not see?}%
+{Chronos-2 fără calibrare este în zona verde în toate blocurile, dar testul Kupiec îl respinge peste tot. L-ați aproba ca model pentru limite? Ce nu vede semaforul Basel?}
+\item \T{The conformal wrapper needs only the last 250 forecast errors. Who in your company should own it, and how would you document it for the regulator?}%
+{Calibrarea conformală are nevoie numai de ultimele 250 de erori de prognoză. Cine din companie ar trebui să răspundă de ea și cum ați documenta-o pentru autoritatea de supraveghere?}
+\item \T{GJR-GARCH has the lowest tick loss on our shares, conformal Chronos-2 the best ES backtest. Which criterion matters more for a daily limit, and which for capital?}%
+{GJR-GARCH are cea mai mică pierdere \emph{tick} pe acțiunile noastre, iar Chronos-2 conformal are cel mai bun rezultat la testarea ES. Ce criteriu contează mai mult pentru o limită zilnică și care pentru capital?}
+\item \T{A foundation model is a vendor product that can change version overnight. What controls (re-backtesting, version pinning, fallback model) would you require?}%
+{Un model fundație este un produs al unui furnizor care își poate schimba versiunea de la o zi la alta. Ce controale ați cere (o nouă testare retrospectivă, fixarea versiunii, un model de rezervă)?}
+\item \T{Some BVB shares trade thinly and often close unchanged. How does this affect any VaR model, and would you set limits on single shares or on the portfolio?}%
+{Unele acțiuni de la BVB se tranzacționează rar și închid adesea la același preț. Cum afectează acest lucru orice model VaR și ați stabili limitele pe acțiuni individuale sau pe portofoliu?}
+\end{enumerate}
+
+\section{\T{Limitations of the classroom replication}{Limitele replicării}}
+\T{(i) Our sample is eight individual shares of one market, while the paper uses ten indices and exchange rates of five markets; results on single shares need not carry over to indices. (ii) We use two of the paper's three foundation models and simpler versions of the ARIMA and LSTM benchmarks. (iii) The Student-t is fitted to nine deciles only, so the 1\,\% quantile is an extrapolation, as the paper notes (p.~284); the lower bound of 2.1 degrees of freedom binds for many Chronos-2 forecasts.
+(iv) The ES of the conformal models is shifted by the VaR correction, one of several possible choices. (v) The 10 million RON position is a constant chosen for illustration; it ignores liquidity costs of selling a large block of a thinly traded share.}%
+{(i) Eșantionul nostru este format din opt acțiuni individuale de pe o singură piață, în timp ce lucrarea folosește zece indici și cursuri de schimb din cinci piețe; rezultatele pentru acțiuni individuale nu se transferă neapărat la indici. (ii) Folosim două dintre cele trei modele fundație din lucrare și variante mai simple ale modelelor de referință ARIMA și LSTM. (iii) Distribuția Student este ajustată numai la nouă decile, deci cuantila de 1\,\% este o extrapolare, așa cum se precizează și în lucrare (p.~284); limita inferioară de 2,1 grade de libertate este atinsă pentru multe dintre prognozele Chronos-2.
+(iv) ES al modelelor conformale este deplasat cu corecția VaR, una dintre mai multe alegeri posibile. (v) Poziția de 10 milioane RON este o constantă aleasă pentru ilustrare; calculul ignoră costurile de lichiditate ale vînzării unui pachet mare dintr-o acțiune cu tranzacționare redusă.}
+
+\newpage
+\section*{\T{Case 6 at a glance}{Studiul de caz 6 pe scurt}}
+\glance{\T{Can a pretrained foundation model set a daily VaR limit for Romanian shares?}{Poate un model fundație preantrenat să stabilească o limită zilnică VaR pentru acțiuni românești?}}%
+{\T{8 BVB shares, daily returns; out of sample 2018--2026, \NnOOS\ share-days.}{8 acțiuni BVB, randamente zilnice; evaluare 2018--2026, \NnOOS\ de observații.}}%
+{\T{Chronos-2, TimesFM 2.5 zero-shot + Student-t fit; rolling conformal wrapper; HS, GJR-GARCH, AR(1)-conformal.}{Chronos-2, TimesFM 2.5 zero-shot + ajustare Student; calibrare conformală glisantă; SI, GJR-GARCH, AR(1) conformal.}}%
+{\T{1\,\% violations: raw \NvCh\,\%, conformal \NvChC\,\% (GJR \NvGJR\,\%); ES $Z_2$ best for conformal Chronos-2 (\NzChC).}{Depășiri la 1\,\%: \NvCh\,\% fără calibrare, \NvChC\,\% cu calibrare (GJR \NvGJR\,\%); cel mai bun $Z_2$ pentru ES: Chronos-2 conformal (\NzChC).}}%
+{\T{Use the foundation model only inside the conformal wrapper and a full backtest; keep GJR-GARCH as benchmark.}{Folosiți modelul fundație numai cu calibrare conformală și testare retrospectivă completă; păstrați GJR-GARCH ca reper.}}
+\begin{center}
+\includegraphics[width=0.72\linewidth]{fig_headline_\lang}
+\src{\T{our forecasts on EODHD data; VaR at 1\,\%, \NoosStart\ -- \NoosEnd.}{prognozele noastre pe date EODHD; VaR la 1\,\%, \NoosStart\ -- \NoosEnd.}}
+\end{center}
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NvChC\,\%}\\ \small \T{1\,\% VaR violations of conformal Chronos-2 (raw: \NvCh\,\%)}{depășiri ale VaR 1\,\% pentru Chronos-2 conformal (fără calibrare: \NvCh\,\%)}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NgChC\,\%}\\ \small \T{of 250-day blocks in the Basel Green zone (GJR-GARCH: \NgGJR\,\%)}{din blocurile de 250 de zile în zona verde Basel (GJR-GARCH: \NgGJR\,\%)}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{IDAred}\Huge\bfseries \NlimChC}\\ \small \T{thousand RON daily 1\,\% VaR per 10 million RON (raw: \NlimCh)}{mii RON VaR zilnic la 1\,\% pe 10 milioane RON (fără calibrare: \NlimCh)}\end{minipage}
+\end{document}

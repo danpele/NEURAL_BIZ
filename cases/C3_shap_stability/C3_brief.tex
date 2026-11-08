@@ -1,0 +1,173 @@
+% C3_brief.tex -- ONE source for the English and Romanian case brief of Case 3 (Lectures 9 and 11).
+\input{numbers_\lang}
+\renewcommand{\emqacase}{\T{Research case 3 (Lectures 9 and 11)}{Studiul de caz 3 (cursurile 9 și 11)}}
+\begin{document}
+\emqatitle{\T{Case 3: Can an anti-money-laundering team trust a changing explanation?}%
+                {Studiul de caz 3: Poate o echipă de combatere a spălării banilor să aibă încredere într-o explicație care se schimbă?}}%
+          {\T{Based on}{Studiu bazat pe lucrarea} Diaconu \& Pele (2026), \emph{SHAP stability across random and forward-time validation in graph-augmented fraud detection},
+           \T{manuscript submitted to}{manuscris trimis la} Expert Systems with Applications; \T{code}{cod}: \href{https://github.com/QuantLet/GNN_XAI_Stability}{github.com/QuantLet/GNN\_XAI\_Stability}}
+
+\begin{scenario}
+\T{The anti-money-laundering (AML) unit of a crypto-asset exchange screens Bitcoin transactions with a gradient-boosted tree model. Every alert reaches an investigator together with its ``top reasons'', the features with the largest SHAP (SHapley Additive exPlanations) contributions.
+The data-science team proposes to add features learnt from the transaction graph by a graph neural network (GNN). The head of compliance must answer the model-risk committee:
+\textbf{if we add the graph and retrain the model on new data, will the reasons shown to investigators stay the same?} And \textbf{how do we monitor them} after each update, so that a change in the explanation is noticed before it confuses a case review?}%
+{Departamentul de combatere a spălării banilor (AML, \emph{anti-money laundering}) al unei platforme de tranzacționare a criptoactivelor verifică tranzacțiile Bitcoin cu un model de arbori de decizie construiți secvențial (\emph{gradient boosting}). Fiecare alertă ajunge la un analist împreună cu „motivele principale”, adică variabilele cu cele mai mari contribuții SHAP (\emph{SHapley Additive exPlanations}).
+Echipa de știința datelor propune adăugarea unor variabile învățate din graful tranzacțiilor de o rețea neuronală pe grafuri (GNN, \emph{graph neural network}). Directorul de conformitate trebuie să răspundă comitetului pentru riscul de model:
+\textbf{dacă adăugăm graful și reantrenăm modelul pe date noi, rămîn aceleași motivele afișate analiștilor?} Și \textbf{cum le monitorizăm} după fiecare actualizare, astfel încît o schimbare a explicației să fie observată înainte de a crea confuzie în analiza unui caz?}
+\end{scenario}
+
+\section{\T{What the paper did}{Lucrarea de referință}}
+\textbf{\T{Question.}{Întrebarea de cercetare.}} \T{When a fraud model moves from random to forward-time validation, do the SHAP contributions of the original transaction fields change more if the model also uses features learnt from a payment graph, and is the difference due to the graph or simply to adding more columns (Sections 1 and 3.1)?}%
+{Atunci cînd un model de fraudă trece de la validarea aleatoare la validarea înainte în timp, se schimbă mai mult contribuțiile SHAP ale variabilelor originale ale tranzacțiilor dacă modelul folosește și variabile învățate dintr-un graf al plăților, iar diferența se datorează grafului sau numai adăugării de coloane noi (secțiunile 1 și 3.1)?}
+
+\textbf{\T{Data.}{Datele.}} \T{The IEEE-CIS (Institute of Electrical and Electronics Engineers, Computational Intelligence Society) fraud data: 590,540 card transactions over about six months, fraud rate 3.50\,\%, 486 tabular features; payments are linked through four entity fields (address, device type, e-mail domain, device identity).
+Random split: 30\,\% stratified holdout; forward-time split: payments after the 70th percentile of time; 20 refits (Sections 3.2, 4.1--4.3).}%
+{Datele de fraudă IEEE-CIS (\emph{Institute of Electrical and Electronics Engineers, Computational Intelligence Society}): 590.540 de tranzacții cu carduri din aproximativ șase luni, cu o rată a fraudei de 3,50\,\% și 486 de variabile tabelare; plățile sînt legate prin patru cîmpuri de entitate (adresa, tipul dispozitivului, domeniul de e-mail, identitatea dispozitivului).
+Împărțirea aleatoare păstrează pentru evaluare 30\,\% din tranzacții, stratificat după fraudă; împărțirea înainte în timp evaluează plățile de după percentila 70 a timpului; 20 de reestimări (secțiunile 3.2, 4.1--4.3).}
+
+\textbf{\T{Method.}{Metoda.}} \T{The same XGBoost (eXtreme Gradient Boosting) classifier is trained on three input sets: the transaction fields alone (tabular model), the fields plus the 64-dimensional first-layer embedding of a two-layer GraphSAGE (graph sample and aggregate) network (graph model), and the fields plus 64 Gaussian columns drawn with the covariance of the training embeddings (Gaussian control).
+Interventional TreeSHAP explains the same 5,000 held-out payments; stability is measured by the Jensen--Shannon (JS) divergence and the Wasserstein distance between the SHAP distributions of each original field under the two validation schemes, and by the overlap of the leading fields for the same payment (Sections 3.3--3.7).}%
+{Același clasificator XGBoost (\emph{eXtreme Gradient Boosting}) este antrenat pe trei seturi de variabile de intrare: numai cîmpurile tranzacției (modelul tabelar), cîmpurile plus reprezentarea (\emph{embedding}) cu 64 de dimensiuni din primul strat al unei rețele GraphSAGE (\emph{graph sample and aggregate}) cu două straturi (modelul cu graf) și cîmpurile plus 64 de coloane gaussiene generate cu covarianța reprezentărilor din eșantionul de antrenare (controlul gaussian).
+Metoda TreeSHAP intervențională explică aceleași 5.000 de plăți din eșantionul de evaluare; stabilitatea se măsoară prin divergența Jensen--Shannon (JS) și distanța Wasserstein dintre distribuțiile SHAP ale fiecărui cîmp original în cele două scheme de validare, precum și prin suprapunerea cîmpurilor principale pentru aceeași plată (secțiunile 3.3--3.7).}
+
+\textbf{\T{Main findings of the paper.}{Principalele rezultate ale lucrării.}}
+\begin{itemize}
+\item \T{Switching from random to forward-time validation changed the SHAP distributions of the original fields slightly more in the graph model than in the Gaussian control: paired JS difference +0.00534 nats, 95\,\% interval [+0.00204, +0.00864], in 15 of 20 refits; against the tabular model the difference was $-$0.00356 and its interval included zero (Table~1, Section~5.1).}%
+{Trecerea de la validarea aleatoare la cea înainte în timp a modificat distribuțiile SHAP ale cîmpurilor originale puțin mai mult în modelul cu graf decît în controlul gaussian: diferența JS pereche este +0,00534 nats, cu intervalul de 95\,\% [+0,00204; +0,00864], în 15 din 20 de reestimări; față de modelul tabelar, diferența a fost $-$0,00356, iar intervalul conține valoarea zero (Tabelul~1, secțiunea~5.1).}
+\item \T{For the same later payment, the graph model retained 6.53 of the tabular model's ten leading fields, the Gaussian control 7.33; the leading field changed for 44.2\,\% of payments with graph features and 31.1\,\% with Gaussian ones (Section~5.2).}%
+{Pentru aceeași plată ulterioară, modelul cu graf a păstrat 6,53 din primele zece cîmpuri ale modelului tabelar, iar controlul gaussian 7,33; cîmpul principal s-a schimbat pentru 44,2\,\% din plăți cu variabilele din graf și pentru 31,1\,\% cu cele gaussiene (secțiunea~5.2).}
+\item \T{The 64 graph features took 42.0\,\% of the total absolute SHAP mass, the Gaussian ones 18.8\,\%; the original fields shrank (median scale ratio 0.612). On the raw SHAP scale the graph model moved less in every refit; relative to each field's own contribution it moved more in 19 of 20 (+0.0451); on a common scale it moved less ($-$0.4833) (Section~5.3, Table~3).}%
+{Cele 64 de variabile din graf au preluat 42,0\,\% din masa totală a valorilor SHAP absolute, iar cele gaussiene 18,8\,\%; contribuțiile cîmpurilor originale s-au micșorat (raportul median al scalelor este 0,612). Pe scala SHAP brută, modelul cu graf s-a deplasat mai puțin în toate reestimările; raportat la contribuția obișnuită a fiecărui cîmp, s-a deplasat mai mult în 19 din 20 (+0,0451); pe o scală comună s-a deplasat mai puțin ($-$0,4833) (secțiunea~5.3, Tabelul~3).}
+\item \T{On later payments the tabular model had an AUC (area under the receiver operating characteristic curve) of 0.9099, the graph model 0.9042 and the Gaussian control 0.9105; training the graph on an earlier period than the tree narrowed the gap (Sections 5.4--5.6). Table~7 turns these measures into a monitoring guide for a validation team; for these data the authors would retain the tabular model (Section~6.1).}%
+{Pe plățile ulterioare, modelul tabelar a avut un AUC (aria de sub curba ROC, \emph{receiver operating characteristic}) de 0,9099, modelul cu graf 0,9042, iar controlul gaussian 0,9105; antrenarea grafului pe o perioadă anterioară celei a arborilor a redus diferența (secțiunile 5.4--5.6). Tabelul~7 transformă aceste măsuri într-un ghid de monitorizare pentru echipa de validare; pentru aceste date, autorii ar păstra modelul tabelar (secțiunea~6.1).}
+\end{itemize}
+{\footnotesize\color{FooterGray}\T{Related work of our group: the multi-level XAI (explainable artificial intelligence) framework on IEEE-CIS that combines SHAP with node and edge ablation (Diaconu \& Pele, 2026, \emph{Proceedings of the International Conference on Business Excellence} (PICBE) 20(1), 118--132, \href{https://doi.org/10.2478/picbe-2026-0015}{doi:10.2478/picbe-2026-0015}; Case~1). The Elliptic data used below come from Weber et al.\ (2019), \href{https://arxiv.org/abs/1908.02591}{arXiv:1908.02591}.}%
+{Alte lucrări ale grupului nostru: cadrul XAI (\emph{explainable artificial intelligence}, inteligență artificială explicabilă) pe mai multe niveluri pentru datele IEEE-CIS, care combină SHAP cu eliminarea de noduri și muchii (Diaconu și Pele, 2026, \emph{Proceedings of the International Conference on Business Excellence} (PICBE) 20(1), 118--132, \href{https://doi.org/10.2478/picbe-2026-0015}{doi:10.2478/picbe-2026-0015}; studiul de caz~1). Datele Elliptic folosite mai jos provin din Weber et al.\ (2019), \href{https://arxiv.org/abs/1908.02591}{arXiv:1908.02591}.}}
+
+\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\begin{intuition}
+\T{SHAP shares the score of a transaction among its inputs. Add 64 new columns and they take part of the credit: the old fields get smaller contributions and, measured in raw units, they also move less --- they look ``more stable'' only because they are smaller.
+A fair test therefore compares the graph model with a control that adds the same number of columns with the same covariance but no graph information, and refits everything several times, because a single fit hides how much explanations vary from one training run to the next.}%
+{SHAP împarte scorul unei tranzacții între variabilele de intrare. Dacă adăugăm 64 de coloane noi, ele preiau o parte din merit: cîmpurile vechi primesc contribuții mai mici și, măsurate în unități brute, se deplasează și mai puțin --- par „mai stabile” numai pentru că sînt mai mici.
+Un test corect compară, așadar, modelul cu graf cu un control care adaugă același număr de coloane, cu aceeași covarianță, dar fără informație din graf, și reestimează totul de mai multe ori, deoarece o singură estimare ascunde cît de mult variază explicațiile de la o antrenare la alta.}
+\end{intuition}
+\T{\textbf{Graph embedding.} A GraphSAGE layer updates transaction $v$ from its own features and the mean of its neighbours': $\mathbf z_v=\mathrm{ReLU}\big(\mathbf W_1\mathbf x_v+\mathbf W_2\,\tfrac{1}{|\mathcal N(v)|}\sum_{u\in\mathcal N(v)}\mathbf x_u+\mathbf b\big)$, where $\mathbf x_v$ are the standardised features, $\mathcal N(v)$ the transactions linked to $v$ by a payment flow, $\mathbf W_1,\mathbf W_2,\mathbf b$ learnt weights and ReLU the rectified linear unit.
+The network is trained with class-weighted cross-entropy on the training labels only and then frozen; the 64 coordinates $\mathbf z_v$ of its first layer are appended to $\mathbf x_v$.
+\textbf{Gaussian control.} $\mathbf g_v=\mathbf L\mathbf u_v$, with $\mathbf u_v\sim N(\mathbf 0,\mathbf I_{64})$ and $\mathbf L\mathbf L^\top=\hat{\boldsymbol\Sigma}_z+10^{-6}\mathbf I$, the Cholesky factor of the training covariance of the embeddings: same dimension and covariance, no information about the graph.
+\textbf{SHAP.} The tree score is split as $f(\mathbf x_i)=\phi_0+\sum_j\phi_{ij}$, where $\phi_{ij}$ is the Shapley value of feature $j$ for transaction $i$ (its average marginal contribution over all orders of adding the features) and $\phi_0$ the mean score of a background sample of 100 training rows.
+\textbf{Stability across validation schemes.} For model $m$, refit $s$ and original feature $k$, let $P_b,Q_b$ be the shares of the random- and forward-time SHAP values in bin $b$ (50 quantile bins) and $M_b=(P_b+Q_b)/2$:
+$J_{msk}=\tfrac12\sum_b P_b\log\frac{P_b}{M_b}+\tfrac12\sum_b Q_b\log\frac{Q_b}{M_b}$ (in nats), and the paired difference $\Delta_s(C)=\tfrac1p\sum_{k=1}^{p}(J_{Gsk}-J_{Csk})$ compares the graph model $G$ with a comparator $C$ over the $p$ shared features.
+The Wasserstein distance pairs the sorted values, $W_{mk}=\tfrac1n\sum_{i}|\phi^{R}_{mk(i)}-\phi^{T}_{mk(i)}|$, and is read on three scales: raw, relative to the field's own mean absolute contribution $a_{mk}$ ($W_{mk}/a_{mk}$) and relative to a common scale $c_k=(a_{Gk}+a_{Bk})/2$.
+\textbf{Same transaction.} $O(m,B)=\tfrac1n\sum_i|T_{mi}\cap T_{Bi}|/10$, with $T_{mi}$ the ten features with the largest $|\phi_{ij}|$ for transaction $i$ under model $m$ and $B$ the tabular model.
+Each paired difference is averaged over $S$ refits with the interval $\bar\Delta\pm t_{0.975,S-1}\,s_\Delta/\sqrt S$.}%
+{\textbf{Reprezentarea din graf.} Un strat GraphSAGE actualizează tranzacția $v$ pe baza propriilor variabile și a mediei variabilelor vecinilor: $\mathbf z_v=\mathrm{ReLU}\big(\mathbf W_1\mathbf x_v+\mathbf W_2\,\tfrac{1}{|\mathcal N(v)|}\sum_{u\in\mathcal N(v)}\mathbf x_u+\mathbf b\big)$, unde $\mathbf x_v$ sînt variabilele standardizate, $\mathcal N(v)$ tranzacțiile legate de $v$ printr-un flux de plăți, $\mathbf W_1,\mathbf W_2,\mathbf b$ ponderile învățate, iar ReLU este funcția de activare liniară rectificată (\emph{rectified linear unit}).
+Rețeaua este antrenată cu entropia încrucișată ponderată pe clase, numai cu etichetele din eșantionul de antrenare, apoi este înghețată; cele 64 de coordonate $\mathbf z_v$ din primul strat sînt adăugate la $\mathbf x_v$.
+\textbf{Controlul gaussian.} $\mathbf g_v=\mathbf L\mathbf u_v$, cu $\mathbf u_v\sim N(\mathbf 0,\mathbf I_{64})$ și $\mathbf L\mathbf L^\top=\hat{\boldsymbol\Sigma}_z+10^{-6}\mathbf I$, factorul Cholesky al covarianței reprezentărilor din eșantionul de antrenare: aceeași dimensiune și aceeași covarianță, fără nicio informație despre graf.
+\textbf{SHAP.} Scorul arborilor se descompune în $f(\mathbf x_i)=\phi_0+\sum_j\phi_{ij}$, unde $\phi_{ij}$ este valoarea Shapley a variabilei $j$ pentru tranzacția $i$ (contribuția marginală medie pe toate ordinile de adăugare a variabilelor), iar $\phi_0$ este scorul mediu al unui eșantion de referință de 100 de rînduri de antrenare.
+\textbf{Stabilitatea între schemele de validare.} Pentru modelul $m$, reestimarea $s$ și variabila originală $k$, fie $P_b,Q_b$ proporțiile valorilor SHAP din validarea aleatoare și din cea înainte în timp aflate în intervalul $b$ (50 de intervale cuantilice) și $M_b=(P_b+Q_b)/2$:
+$J_{msk}=\tfrac12\sum_b P_b\log\frac{P_b}{M_b}+\tfrac12\sum_b Q_b\log\frac{Q_b}{M_b}$ (în nats), iar diferența pereche $\Delta_s(C)=\tfrac1p\sum_{k=1}^{p}(J_{Gsk}-J_{Csk})$ compară modelul cu graf $G$ cu un model de comparație $C$, pe cele $p$ variabile comune.
+Distanța Wasserstein împerechează valorile ordonate, $W_{mk}=\tfrac1n\sum_{i}|\phi^{R}_{mk(i)}-\phi^{T}_{mk(i)}|$, și se citește pe trei scale: brută, raportată la contribuția absolută medie a variabilei în propriul model, $a_{mk}$ ($W_{mk}/a_{mk}$), și raportată la o scală comună $c_k=(a_{Gk}+a_{Bk})/2$.
+\textbf{Aceeași tranzacție.} $O(m,B)=\tfrac1n\sum_i|T_{mi}\cap T_{Bi}|/10$, unde $T_{mi}$ sînt cele zece variabile cu cele mai mari valori $|\phi_{ij}|$ pentru tranzacția $i$ în modelul $m$, iar $B$ este modelul tabelar.
+Fiecare diferență pereche este mediată pe cele $S$ reestimări, cu intervalul $\bar\Delta\pm t_{0.975,S-1}\,s_\Delta/\sqrt S$.}
+\begin{decision}
+\T{Compare a new model's explanations with a control that has the same number of added columns; report stability on the scale your users read (raw score units for score monitoring, relative units for small fields, the displayed reasons for investigators); and always refit several times before calling a difference real.}%
+{Comparați explicațiile unui model nou cu un control care are același număr de coloane adăugate; raportați stabilitatea pe scala pe care o citesc utilizatorii (unități brute ale scorului pentru monitorizarea scorurilor, unități relative pentru variabilele cu contribuții mici, motivele afișate pentru analiști) și reestimați întotdeauna de mai multe ori înainte de a considera reală o diferență.}
+\end{decision}
+
+\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\T{Notebook \texttt{C3\_notebook\_EN.ipynb}: the Elliptic Bitcoin transaction graph (Weber et al., 2019), \NnTx\ transactions, \NnEdges\ payment flows, 49 time steps of about two weeks, 165 features; \NnLab\ transactions are labelled (\NnIllicit\ illicit, \NnLicit\ licit).
+Forward-time split: training on steps 1--34 (\NnTrain\ labelled transactions, \NillTrain\,\% illicit), test on steps 35--49 (\NnTest, \NillTest\,\% illicit); the random split holds out the same number of transactions, stratified by class.
+In each of \NnSeeds\ refits, the seed changes the random split, the GraphSAGE initialisation and the Gaussian draws; SHAP explains \NnExpl\ held-out transactions per scheme (the same \NnExpl\ later transactions in every forward-time fit).
+Classroom implementation: Elliptic instead of IEEE-CIS, a transaction-to-transaction graph instead of payments linked through entities, 400 trees of depth 6 instead of 1,000 of depth 10, \NnSeeds\ refits instead of 20.}%
+{Notebook-ul \texttt{C3\_notebook\_RO.ipynb} folosește graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019): \NnTx\ de tranzacții, \NnEdges\ de fluxuri de plăți, 49 de pași de timp de aproximativ două săptămîni și 165 de variabile; \NnLab\ de tranzacții sînt etichetate (\NnIllicit\ ilicite, \NnLicit\ licite).
+Împărțirea înainte în timp: antrenare pe pașii 1--34 (\NnTrain\ de tranzacții etichetate, \NillTrain\,\% ilicite), test pe pașii 35--49 (\NnTest, \NillTest\,\% ilicite); împărțirea aleatoare păstrează pentru evaluare același număr de tranzacții, stratificat după clasă.
+În fiecare dintre cele \NnSeeds\ reestimări, sămînța aleatoare schimbă împărțirea aleatoare, inițializarea GraphSAGE și valorile gaussiene; SHAP explică \NnExpl\ de tranzacții din eșantionul de evaluare pentru fiecare schemă (aceleași \NnExpl\ de tranzacții ulterioare în toate estimările înainte în timp).
+Implementarea de la curs: Elliptic în loc de IEEE-CIS, un graf între tranzacții în locul plăților legate prin entități, 400 de arbori de adîncime 6 în loc de 1.000 de adîncime 10, \NnSeeds\ reestimări în loc de 20.}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.47\linewidth}\centering
+\includegraphics[width=\linewidth]{f1_steps}
+\caption{\T{Illicit transactions per time step; the test period starts at step 35.}{Tranzacțiile ilicite pe pași de timp; perioada de test începe la pasul 35.}}
+\src{\T{Elliptic data set (Weber et al., 2019).}{setul de date Elliptic (Weber et al., 2019).}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.51\linewidth}\centering
+\includegraphics[width=\linewidth]{f2_paired}
+\caption{\T{Paired differences, graph model minus comparator; one dot per refit.}{Diferențe pereche, modelul cu graf minus modelul de comparație; un punct pentru fiecare reestimare.}}
+\src{\T{our computation; \NnSeeds\ refits.}{calcule proprii; \NnSeeds\ reestimări.}}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{How much do the SHAP distributions of the 165 original features move between random and forward-time validation? Graph model minus comparator.}{Cît se deplasează distribuțiile SHAP ale celor 165 de variabile originale între validarea aleatoare și cea înainte în timp? Modelul cu graf minus modelul de comparație.}}
+\tabin{stability}
+\src{\T{our computation on Elliptic (\NnSeeds\ refits; positive = the graph model moves more); paper: IEEE-CIS, 20 refits (Tables~1 and 3).}{calcule proprii pe Elliptic (\NnSeeds\ reestimări; pozitiv = modelul cu graf se deplasează mai mult); lucrarea: IEEE-CIS, 20 de reestimări (Tabelele~1 și 3).}}
+\end{table}
+
+\T{\textbf{What our data show.} On Elliptic the pattern of the paper reappears, more strongly. Moving from random to forward-time validation changes the SHAP distributions of the original features more in the graph model than in the Gaussian control (paired JS difference \NjsGC\ nats, 95\,\% interval [\NjsGClo; \NjsGChi], positive in \NjsGCpos\ of \NnSeeds\ refits) and, here, also more than in the tabular model (\NjsGB\ nats).
+The SHAP mass shows why: the 64 graph coordinates take \NmassG\,\% of the total absolute SHAP values, the 64 Gaussian ones only \NmassC\,\%; the sum of the absolute contributions of the original features per transaction falls from \NsumB\ in the tabular model to \NsumG\ with the graph (\NsumC\ with the Gaussian control), a median scale ratio of \NratioG.
+Because the original features shrink, the graph model moves \emph{less} on the raw SHAP scale (\NwRaw, positive in \NwRawPos\ of \NnSeeds\ refits) and on a common scale (\NwCom), but \emph{more} when each feature's movement is measured relative to its own usual contribution (\NwOwn, positive in \NwOwnPos\ of \NnSeeds) --- the reversal described in Section~5.3 of the paper. Which model is ``more stable'' depends on the scale, as the paper shows.}%
+{\textbf{Ce arată datele.} Pe Elliptic, tiparul din lucrare reapare, mai pronunțat. Trecerea de la validarea aleatoare la cea înainte în timp modifică distribuțiile SHAP ale variabilelor originale mai mult în modelul cu graf decît în controlul gaussian (diferența JS pereche este \NjsGC\ nats, cu intervalul de 95\,\% [\NjsGClo; \NjsGChi], pozitivă în \NjsGCpos\ din cele \NnSeeds\ reestimări) și, aici, mai mult și decît în modelul tabelar (\NjsGB\ nats).
+Masa SHAP explică de ce: cele 64 de coordonate din graf preiau \NmassG\,\% din totalul valorilor SHAP absolute, iar cele 64 de coordonate gaussiene numai \NmassC\,\%; suma contribuțiilor absolute ale variabilelor originale pentru o tranzacție scade de la \NsumB\ în modelul tabelar la \NsumG\ cu graful (\NsumC\ cu controlul gaussian), ceea ce corespunde unui raport median al scalelor de \NratioG.
+Deoarece variabilele originale se micșorează, modelul cu graf se deplasează \emph{mai puțin} pe scala SHAP brută (\NwRaw, pozitivă în \NwRawPos\ din cele \NnSeeds\ reestimări) și pe scala comună (\NwCom), dar \emph{mai mult} atunci cînd deplasarea fiecărei variabile este raportată la contribuția sa obișnuită (\NwOwn, pozitivă în \NwOwnPos\ din \NnSeeds) --- inversarea descrisă în secțiunea~5.3 a lucrării. Care model este „mai stabil” depinde de scală, așa cum arată lucrarea.}
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f3_overlap}
+\caption{\T{How many of the tabular model's ten leading features stay in the top ten for the same transaction?}{Cîte dintre primele zece variabile ale modelului tabelar rămîn în primele zece pentru aceeași tranzacție?}}
+\src{\T{our computation; lines join the two models of one refit.}{calcule proprii; liniile unesc cele două modele din aceeași reestimare.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{f4_perf}
+\caption{\T{F1 of the illicit class per test time step (mean of the refits).}{F1 pentru clasa ilicită, pe pași de timp din perioada de test (media reestimărilor).}}
+\src{\T{our computation; alert if the illicit probability exceeds 0.5.}{calcule proprii; alertă dacă probabilitatea de tranzacție ilicită depășește 0,5.}}
+\end{minipage}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{\T{Detection quality on the test period, before and after the dark-market shutdown (mean of \NnSeeds\ refits; illicit class, threshold 0.5).}{Calitatea detectării în perioada de test, înainte și după închiderea pieței de pe darknet (media celor \NnSeeds\ reestimări; clasa ilicită, prag 0,5).}}
+\tabin{perf}
+\src{\T{our computation. PR-AUC = area under the precision--recall curve.}{calcule proprii. PR-AUC = aria de sub curba precizie--sensibilitate.}}
+\end{table}
+
+\T{\textbf{One transaction at a time.} On the same later transactions, the graph model keeps \NtopGT\ of the tabular model's ten leading features (Gaussian control: \NtopCT; paper: 6.53 and 7.33) and \NtopThreeG\ of the top three (\NtopThreeC). Detection does not improve: on steps 35--49 the AUC difference, graph minus tabular, is \NaucDiff\ (95\,\% interval [\NaucDiffLo; \NaucDiffHi]).
+Before the dark-market shutdown all three models find most illicit transactions (tabular recall \NrecBpre, F1 \NfBpre); from step 43 recall falls to \NrecBpost\ (graph model: \NrecGpost). The explanations can still be computed, but they describe a pattern that no longer finds the illicit transactions --- explanation monitoring does not replace performance monitoring.
+\textbf{Decision number.} With the graph model, the leading reason shown to an investigator changes for \NleadG\,\% of later transactions, against \NleadC\,\% for a model with the same number of uninformative columns (paper: 44.2\,\% and 31.1\,\%): a gap of \NleadGap\ percentage points. These are the cases a validation team should sample and reopen before switching models (Table~7 of the paper).}%
+{\textbf{O tranzacție pe rînd.} Pentru aceleași tranzacții ulterioare, modelul cu graf păstrează \NtopGT\ din primele zece variabile ale modelului tabelar (controlul gaussian: \NtopCT; lucrarea: 6,53 și 7,33) și \NtopThreeG\ din primele trei (\NtopThreeC). Detectarea nu se îmbunătățește: pe pașii 35--49, diferența de AUC dintre modelul cu graf și cel tabelar este \NaucDiff\ (intervalul de 95\,\% [\NaucDiffLo; \NaucDiffHi]).
+Înainte de închiderea pieței de pe darknet, toate cele trei modele găsesc majoritatea tranzacțiilor ilicite (modelul tabelar: sensibilitate \NrecBpre, F1 \NfBpre); de la pasul 43, sensibilitatea scade la \NrecBpost\ (modelul cu graf: \NrecGpost). Explicațiile pot fi calculate în continuare, dar descriu un tipar care nu mai găsește tranzacțiile ilicite --- monitorizarea explicațiilor nu înlocuiește monitorizarea performanței.
+\textbf{Cifra relevantă pentru decizie.} Cu modelul cu graf, motivul principal afișat analistului se schimbă pentru \NleadG\,\% din tranzacțiile ulterioare, față de \NleadC\,\% pentru un model cu același număr de coloane fără informație (lucrarea: 44,2\,\% și 31,1\,\%): o diferență de \NleadGap\ puncte procentuale. Acestea sînt cazurile pe care echipa de validare ar trebui să le eșantioneze și să le reanalizeze înainte de schimbarea modelului (Tabelul~7 din lucrare).}
+
+\section{\T{Discussion questions for managers}{Întrebări pentru discuție}}
+\begin{enumerate}
+\item \T{Your data scientists show that the raw SHAP values of the old fields move less after adding the graph. What question do you ask before accepting that the new model is ``more stable''?}%
+{Echipa de știința datelor arată că valorile SHAP brute ale cîmpurilor vechi se deplasează mai puțin după adăugarea grafului. Ce întrebare puneți înainte de a accepta că noul model este „mai stabil”?}
+\item \T{An investigator sees a different leading reason for the same alert after a model update. Who should be informed, and what should be recorded in the case file?}%
+{Un analist vede un alt motiv principal pentru aceeași alertă după actualizarea modelului. Cine trebuie informat și ce trebuie consemnat în dosarul cazului?}
+\item \T{Which of the measures in this case (JS divergence, Wasserstein on three scales, top-ten overlap, change of the leading field) would you put on the monthly model-risk dashboard, and with which alarm level?}%
+{Care dintre măsurile din acest studiu de caz (divergența JS, distanța Wasserstein pe trei scale, suprapunerea primelor zece variabile, schimbarea variabilei principale) le-ați include în raportul lunar privind riscul de model și cu ce prag de alarmă?}
+\item \T{After step 43 the illicit transactions change their pattern and recall collapses for all models. Is an explanation still useful when the model no longer detects the fraud it explains?}%
+{După pasul 43, tranzacțiile ilicite își schimbă tiparul, iar sensibilitatea scade puternic pentru toate modelele. Mai este utilă o explicație atunci cînd modelul nu mai detectează frauda pe care o explică?}
+\item \T{The graph model must ``earn its place'' (Section 6.1 of the paper). What evidence --- better detection on later data, or better case reviews --- would you require before replacing a working model?}%
+{Modelul cu graf trebuie să își „cîștige locul” (secțiunea 6.1 a lucrării). Ce dovezi --- o detectare mai bună pe date ulterioare sau analize de caz mai bune --- ați cere înainte de a înlocui un model care funcționează?}
+\end{enumerate}
+
+\section{\T{Limitations of the classroom replication}{Limitele replicării}}
+\T{(i) Elliptic is a different network from IEEE-CIS: transactions are linked directly by payment flows, its 165 features are anonymised and already include neighbourhood aggregates, so part of the graph information is present in the tabular model too. (ii) We use \NnSeeds\ refits, 400 trees of depth 6 and \NnExpl\ explained transactions per scheme, fewer than in the paper, so our intervals are wider.
+(iii) In the random split, the GraphSAGE messages use the features (not the labels) of held-out transactions; the forward-time graph is built from steps 1--34 only. (iv) The comparison describes one cut-off (step 34) and one data set; the dark-market shutdown after step 43 is a strong shift specific to this period.}%
+{(i) Elliptic este o rețea diferită de IEEE-CIS: tranzacțiile sînt legate direct prin fluxuri de plăți, iar cele 165 de variabile sînt anonimizate și includ deja agregări pe vecinătăți, astfel încît o parte din informația din graf se află și în modelul tabelar. (ii) Folosim \NnSeeds\ reestimări, 400 de arbori de adîncime 6 și \NnExpl\ de tranzacții explicate pentru fiecare schemă, mai puțin decît în lucrare, de aceea intervalele noastre sînt mai largi.
+(iii) În împărțirea aleatoare, mesajele GraphSAGE folosesc variabilele (nu etichetele) tranzacțiilor din eșantionul de evaluare; graful pentru validarea înainte în timp este construit numai din pașii 1--34. (iv) Comparația descrie un singur prag (pasul 34) și un singur set de date; închiderea pieței de pe darknet după pasul 43 este o schimbare puternică, specifică acestei perioade.}
+
+\newpage
+\section*{\T{Case 3 at a glance}{Studiul de caz 3 pe scurt}}
+\glance{\T{If we add graph features and retrain, do the reasons shown to investigators stay the same?}{Dacă adăugăm variabile din graf și reantrenăm, rămîn aceleași motivele afișate analiștilor?}}%
+{\T{Elliptic Bitcoin graph: \NnLab\ labelled transactions, 49 time steps; train steps 1--34, test 35--49.}{Graful Bitcoin Elliptic: \NnLab\ de tranzacții etichetate, 49 de pași de timp; antrenare 1--34, test 35--49.}}%
+{\T{XGBoost on features, + GraphSAGE embedding, + Gaussian control; SHAP; JS, Wasserstein, top-$k$; \NnSeeds\ refits.}{XGBoost pe variabile, + reprezentare GraphSAGE, + control gaussian; SHAP; JS, Wasserstein, primele $k$; \NnSeeds\ reestimări.}}%
+{\T{Graph block takes \NmassG\,\% of SHAP; leading reason changes for \NleadG\,\% of cases (control \NleadC\,\%); stability depends on the scale.}{Blocul din graf preia \NmassG\,\% din SHAP; motivul principal se schimbă în \NleadG\,\% din cazuri (control \NleadC\,\%); stabilitatea depinde de scală.}}%
+{\T{Monitor against a matched control, on the scale users read; require better detection before replacing a working model.}{Monitorizați față de un control echivalent, pe scala citită de utilizatori; cereți o detectare mai bună înainte de a înlocui un model care funcționează.}}
+\begin{center}
+\includegraphics[width=0.62\linewidth]{fig_headline_\lang}
+\src{\T{our XGBoost refits on the Elliptic data; tabular top-ten features retained for the same transactions.}{reestimările noastre XGBoost pe datele Elliptic; variabilele din primele zece ale modelului tabelar păstrate pentru aceleași tranzacții.}}
+\end{center}
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NleadG\,\%}\\ \small \T{of later transactions get a new leading reason with the graph (control: \NleadC\,\%)}{din tranzacțiile ulterioare primesc un alt motiv principal cu graful (control: \NleadC\,\%)}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{MainBlue}\Huge\bfseries \NmassG\,\%}\\ \small \T{of the SHAP mass goes to the 64 graph features (Gaussian: \NmassC\,\%)}{din masa SHAP revine celor 64 de variabile din graf (gaussiene: \NmassC\,\%)}\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\centering{\color{IDAred}\Huge\bfseries \NrecBpost}\\ \small \T{recall of the tabular model after the dark-market shutdown (before: \NrecBpre)}{sensibilitatea modelului tabelar după închiderea pieței de pe darknet (înainte: \NrecBpre)}\end{minipage}
+\end{document}

@@ -32,3 +32,6 @@ lectures/*/cache/
 *.onnx
 **/hf_cache/
 **/.cache/
+# case caches that are quick to recompute (C5 and C6 caches hold slow LLM/foundation-model runs and are kept)
+cases/C3_shap_stability/cache/
+cases/C7_vlm_anomaly/cache/

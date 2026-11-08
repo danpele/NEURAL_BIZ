@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrr}
+\toprule
+Alert policy (test period) & Alerts & Frauds caught & EUR caught & Cost, thousand EUR \\
+\midrule
+No model: no alerts & 0 & 0 & 0 & 7.73 \\
+Logistic regression, threshold 0.5 & 58 & 48 & 3,672 & 4.35 \\
+Logistic regression, cost rule $p\cdot A>c$ & 93 & 23 & 5,277 & 2.92 \\
+XGBoost, threshold 0.5 & 51 & 51 & 3,756 & 4.23 \\
+XGBoost, cost rule $p\cdot A>c$ & 84 & 24 & 5,286 & \textbf{2.86} \\
+MLP, threshold 0.5 & 49 & 49 & 4,906 & 3.07 \\
+MLP, cost rule $p\cdot A>c$ & 83 & 23 & 5,277 & 2.87 \\
+\bottomrule
+\end{tabular}

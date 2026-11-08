@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrrrr}
+\toprule
+Model & AUC & IÎ 95\,\% & Precizie & Sensibilitate & F1 & Acur.\ echil. & AUC, $\alpha$=1\,\% \\
+\midrule
+Regula volatilității (HV10) & 0,552 & [0,46; 0,65] & \textbf{0,231} & 0,071 & 0,109 & 0,527 & 0,548 \\
+Regresie logistică, 15 indicatori & 0,735 & [0,67; 0,80] & 0,138 & 0,524 & 0,218 & 0,636 & \textbf{0,685} \\
+Gradient boosting, 15 indicatori & \textbf{0,749} & [0,68; 0,81] & 0,144 & \textbf{0,690} & \textbf{0,239} & \textbf{0,689} & 0,669 \\
+LSTM, 20 de zile de indicatori & 0,726 & [0,66; 0,79] & 0,130 & 0,167 & 0,146 & 0,541 & 0,643 \\
+CLIP zero-shot (grafic + descrieri text) & 0,459 & [0,36; 0,56] & 0,129 & 0,095 & 0,110 & 0,523 & 0,385 \\
+Reprezentarea CLIP a graficului + sondă logistică & 0,598 & [0,53; 0,68] & 0,027 & 0,024 & 0,025 & 0,479 & 0,652 \\
+Qwen2-VL-2B zero-shot (da/nu) & 0,496 & [0,40; 0,59] & 0,069 & 0,310 & 0,113 & 0,494 & 0,543 \\
+\bottomrule
+\end{tabular}

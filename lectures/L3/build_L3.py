@@ -510,9 +510,9 @@ def build(lang, H=None):
           "Society (IEEE-CIS), XGBoost și CatBoost au avut AUC mai mare, în timp ce o rețea neuronală pe grafuri (GNN), eșantionare și agregare pe graf (GraphSAGE), a surprins "
           "tipare relaționale ale fraudei pe care modelele tabelare nu le pot descrie."),
         t("\\textbf{Explaining at several levels}: their explainable AI (XAI) framework combines Shapley additive explanations (SHAP) for "
-          "variables with node and edge ablation for the graph; the paper concludes that fraud explanations should combine several model types --- Lectures 9 and 11.",
+          "variables with node and edge ablation for the graph; the paper concludes that fraud explanations should combine several model types --- replicated in Case study 1 (course site).",
           "\\textbf{Explicații pe mai multe niveluri}: cadrul lor de AI explicabilă (XAI) combină explicațiile aditive Shapley (SHAP) pentru variabile "
-          "cu eliminarea de noduri și muchii pentru graf; lucrarea conchide că explicarea fraudei trebuie să combine mai multe tipuri de modele --- cursurile 9 și 11."),
+          "cu eliminarea de noduri și muchii pentru graf; lucrarea conchide că explicarea fraudei trebuie să combine mai multe tipuri de modele --- replicat în studiul de caz 1 (site-ul cursului)."),
         t("\\textbf{Early warning of crypto `zombies'} (Będowska-Sójka, Wójcik \\& Pele, 2026): machine-learning early warning systems that predict which "
           "crypto-assets become `zombie' assets; an early-warning model must be validated forward in time, as in Section 4.",
           "\\textbf{Avertizarea timpurie pentru criptoactivele „zombie”} (Będowska-Sójka, Wójcik \\& Pele, 2026): sisteme de avertizare timpurie bazate pe învățare "
