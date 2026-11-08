@@ -8,5 +8,5 @@
 // ============================================================
 window.NN_CONFIG = {
     GOOGLE_CLIENT_ID: '1095360272769-rhjjncfor0gumhev6a0l6tnnrnmdrnna.apps.googleusercontent.com',
-    QUIZ_SCORES_URL: 'YOUR_QUIZ_SCORES_URL'
+    QUIZ_SCORES_URL: 'https://script.google.com/macros/s/AKfycbzgRElx9qmwZafcxlU6wMAyPrBLAzdHwHr78xxumkGTwGEc21I0UOWo0GKJANfjAKw/exec'
 };
