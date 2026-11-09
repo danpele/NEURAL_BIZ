@@ -299,11 +299,11 @@ q(1, ("Group research", "What is the inferential unit in the explanation-stabili
    ["O singură variabilă", "Reantrenarea completă a modelului", "O singură tranzacție", "O singură valoare SHAP"],
    "Lucrarea tratează reantrenarea completă ca unitate de inferență și compară modelele cu variabile de graf cu controale fără graf, cu aceeași dimensiune și covarianță.",
    "Compararea variabilelor izolate înainte și după o intervenție poate induce în eroare, pentru că reantrenarea însăși mișcă atribuirile; de aceea lucrarea raționează pe reantrenări repetate."))
-q(3, ("Shallow by design", "A practitioner wants a GNN to see 10 hops of money flow. What is the recommended design?",
+q(3, ("Number of layers in a GNN", "A practitioner wants a GNN to see 10 hops of money flow. What is the recommended design?",
       ["Stack 10 plain GCN layers", "Use a single layer with a larger hidden size", "Remove the degree normalisation", "Keep 2–3 layers and add residual links or skip connections if more depth is needed"],
       "Plain deep GCNs over-smooth; residual or jumping-knowledge connections let information from early layers survive.",
       "Ten averaging layers would blur all nodes together; shallow models with residual links are the standard remedy."),
-  ("Puțin adînci prin construcție", "Un practician vrea ca o rețea GNN să vadă 10 salturi ale fluxului de bani. Care este arhitectura recomandată?",
+  ("Numărul de straturi într-o rețea GNN", "Un practician vrea ca o rețea GNN să vadă 10 salturi ale fluxului de bani. Care este arhitectura recomandată?",
    ["10 straturi GCN simple", "Un singur strat cu o dimensiune ascunsă mai mare", "Eliminarea normalizării după grad", "2–3 straturi și conexiuni reziduale dacă este nevoie de mai multă adîncime"],
    "Rețelele GCN simple și adînci netezesc excesiv; conexiunile reziduale lasă informația din primele straturi să supraviețuiască.",
    "Zece straturi de mediere ar estompa toate nodurile; modelele puțin adînci, cu conexiuni reziduale, sînt remediul obișnuit."))

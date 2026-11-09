@@ -20,7 +20,7 @@ Prognozăm prețurile pentru ziua următoare din România pe un an de test într
 
 O prognoză nu poate fi mai bună decît informația pe care are voie să o folosească. Secțiunea descrie datele, faptele stilizate ale prețurilor energiei electrice din România și regulile jocului: ce se știe la închiderea licitației, cum rămîne anul de test neatins și ce reper trebuie să depășească orice model.
 
-## Două decizii de afaceri care au nevoie de o prognoză mîine dimineață {h=e5b188ae}
+## Două decizii de afaceri bazate pe prognoze pentru ziua următoare {h=636fbf17}
 
 Pe piața pentru ziua următoare, prețul fiecărei ore de mîine este stabilit de o singură licitație, cuplată la nivel european și organizată în România de operatorul pieței de energie electrică și gaze naturale (OPCOM). Ofertele se închid la ora 12:00, ora Europei Centrale (CET), în ziua dinaintea livrării. O eroare de 1 EUR/MWh pe 100 MW timp de 24 de ore costă 2 400 de euro pe zi, așa că și îmbunătățirile mici contează. În finanțe, valoarea expusă la risc este cuantila randamentului de mîine care ar trebui depășită în 1 % din zile; după regulile Basel, numărul depășirilor dintr-un an modifică cerința de capital.
 
@@ -52,7 +52,7 @@ unde $\mathbf y_d\in\mathbb R^{24}$ sînt prețurile din România în ziua $d$, 
 
 @practice consumul zilei $d-1$ nu este complet la prînz; folosirea lui ar introduce viitorul în prognoză.
 
-## Măsurile erorii și reperul pe care orice model trebuie să-l depășească {h=c8ffcbdd}
+## Măsurile erorii și modelul de referință {h=f23332fb}
 
 Raportăm eroarea absolută medie (MAE) în EUR/MWh și MAE relativă, $\mathrm{rMAE}=\mathrm{MAE}/\mathrm{MAE}^{\text{naiv}}$, unde prognoza naivă este prețul aceleiași ore de acum o săptămînă pentru luni, sîmbătă și duminică și prețul din ziua precedentă în celelalte zile. Erorile procentuale nu au sens cînd prețurile sînt aproape de zero sau negative; în anul de test au existat 195 de ore cu preț negativ, prețul mediu a fost de 134,59 EUR/MWh, iar prognoza naivă a avut o MAE de 27,74 EUR/MWh.
 
@@ -175,7 +175,7 @@ MAE Chronos-2 în funcție de lungimea contextului.
 
 Cu o săptămînă de context (168 de ore), MAE a lui Chronos-2 este de 24,45 EUR/MWh; cu 2 048 de ore scade la 20,72, iar 8 192 de ore nu mai ajută (20,95). Lungimea contextului este principalul parametru de ajustare al unui model folosit fără reantrenare.
 
-## Este diferența reală? Testul Diebold–Mariano {h=8fba3822}
+## Testul Diebold–Mariano {h=8fba3822}
 
 O eroare medie mai mică poate fi noroc. Cu diferența zilnică a pierderilor $\Delta_d=\lVert\mathbf e^{A}_d\rVert_1-\lVert\mathbf e^{B}_d\rVert_1$ pe cele 24 de ore ale fiecărei zile,
 

@@ -248,7 +248,7 @@ def build(lang, H=None):
                           f"cea mai mare confuzie: {tc['n']} din {tc['n_true']} imagini „{nm[tc['true']]}” clasificate drept „{nm[tc['pred']]}”.")],
                height="0.6\\textheight", tryit=NB + " \\S2")
     se = N["search"]
-    D.figframe(t("Searching images with words: the same embeddings, used the other way", "Căutarea imaginilor cu ajutorul cuvintelor: aceleași embedding-uri, folosite invers"),
+    D.figframe(t("Text-to-image search with the same embeddings", "Căutarea imaginilor după text cu aceleași embedding-uri"),
                t("rank all test images by their similarity to a sentence; a bank can find flooded fields or new buildings without labels.",
                  "ordonăm toate imaginile de test după similaritatea cu o propoziție; o bancă poate găsi terenuri inundate sau clădiri noi fără etichete."),
                "\\[ \\mathrm{P@}k(c)=\\frac{1}{k}\\sum_{j\\in\\mathrm{top}_k(\\mathbf w_c)}\\mathbb 1\\{y_j=c\\},\\quad \\mathrm{top}_k(\\mathbf w_c)=\\text{" +
@@ -275,7 +275,7 @@ def build(lang, H=None):
               t("a probe trains in seconds on a laptop: the first thing to try when you have a few hundred labels.",
                 "un astfel de clasificator se antrenează în cîteva secunde pe laptop: primul lucru de încercat cînd aveți cîteva sute de etichete."),
               tryit=NB + " \\S3")
-    D.figframe(t("Pre-trained features win with few labels; a trained CNN wins with many", "Trăsăturile preantrenate cîștigă cu puține etichete; o CNN antrenată cîștigă cu multe"),
+    D.figframe(t("Pre-trained features and a CNN trained from scratch, by number of labels", "Trăsăturile preantrenate și o CNN antrenată de la zero, după numărul de etichete"),
                t("one labelled image per class already beats zero-shot; from about 64 per class a small network trained from scratch catches up.",
                  "o imagine etichetată pe clasă depășește deja zero-shot; de la circa 64 pe clasă, o rețea mică antrenată de la zero o ajunge din urmă."),
                None, "fewshot_eurosat",
@@ -329,7 +329,7 @@ def build(lang, H=None):
                   t("Qwen2-VL zero-shot: ``is the market turbulent?'' yes or no", "Qwen2-VL zero-shot: „este piața agitată?” da sau nu"))),
               t("a rolling-quantile label avoids hand-labelling and look-ahead.", "o etichetă bazată pe cuantile glisante evită etichetarea manuală și folosirea viitorului."),
               cite="(Jheng, Pele, Tak \\& Găman, 2026)", tryit=NB + " \\S4")
-    D.figframe(t("From the picture or from the numbers? Detecting market stress", "Din imagine sau din cifre? Detectarea crizelor de piață"),
+    D.figframe(t("Detecting market stress from charts and from numbers", "Detectarea crizelor de piață din grafice și din cifre"),
                t("left: a calm and a stress window as the models see them; right: receiver operating characteristic (ROC) curves on the test years.",
                  "stînga: o fereastră calmă și una de criză, așa cum le văd modelele; dreapta: curbele caracteristicii de operare a receptorului (ROC) pe anii de test."),
                None, "chart_regime",
@@ -545,7 +545,7 @@ def build(lang, H=None):
                             "Rezultatele sînt preluate din rezumatele lucrărilor; cifrele de pe celelalte slide-uri provin din datele noastre.")),
         "footnotesize", cite=t("(Bucharest University of Economic Studies, ASE; Romanian Academy, Institute for Economic Forecasting, IPE)",
                                "(Academia de Studii Economice din București, ASE; Academia Română, Institutul de Prognoză Economică, IPE)"))
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{OpenCLIP} models and benchmarks: ", "\\textbf{OpenCLIP}, modele și evaluări: ") + "\\href{https://github.com/mlfoundations/open_clip}{github.com/mlfoundations/open\\_clip}.",
         t("\\textbf{Qwen2-VL}: ", "\\textbf{Qwen2-VL}: ") + "\\href{https://github.com/QwenLM/Qwen2-VL}{github.com/QwenLM/Qwen2-VL}.",
         t("\\textbf{Bishop \\& Bishop (2024)}, chapters 12 and 20: ", "\\textbf{Bishop \\& Bishop (2024)}, capitolele 12 și 20: ") + "\\href{https://www.bishopbook.com}{bishopbook.com}.", sep="4pt"),

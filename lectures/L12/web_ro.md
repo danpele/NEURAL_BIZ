@@ -58,7 +58,7 @@ Cei mai probabili tokeni următori ai Qwen2.5-1.5B-Instruct, la trei temperaturi
 
 Pierderea scade ca o putere a dimensiunii modelului și a datelor, $\mathcal L(P,D)=E+A/P^{\alpha}+B/D^{\beta}$ (Kaplan et al., 2020; Hoffmann et al., 2022). Pe cele trei dimensiuni ale modelului nostru, panta logaritmului pierderii în raport cu logaritmul numărului de parametri este −0,100: trei puncte descriu eșantionul, nu o lege.
 
-## Discursurile mai vechi par mai ușoare {h=8eab6207}
+## Limita datelor de antrenare {h=b45df7ae}
 
 @chart perplexity_size
 Perplexitatea pe discursurile BCE din 2022–2023 și din iulie 2025.
@@ -85,7 +85,7 @@ Oamenii aleg răspunsul mai bun dintr-o pereche; un model de recompensă $r_\phi
 
 Qwen2.5-Instruct cu 0,49, 1,54 și 3,09 miliarde de parametri (Qwen Team, 2024), modelul de embedding bge-small pentru regăsire și reprezentarea frecvența termenului–frecvența inversă în documente (TF-IDF), cu regresie logistică, drept reper clasic.
 
-# Formularea instrucțiunilor, evaluată pe date etichetate
+# Evaluarea formulării instrucțiunilor pe date etichetate
 
 Un prompt este un model. Se alege pe date de validare și se evaluează o singură dată pe un set de test separat, cu aceleași statistici ca orice clasificator.
 
@@ -120,7 +120,7 @@ Pe PhraseBank, modelul de 3B ajunge la 92,2 % macro-F1 fără exemple, peste cla
 
 Macro-F1 face media celor trei scoruri F1 pe clase, astfel încît clasa mică negativă contează cît cea neutră. Intervalele de 95 % provin din 1 000 de reeșantionări bootstrap ale setului de test: pentru zero-shot 3B pe PhraseBank intervalul este [89,8; 94,4] %, pentru TF-IDF [83,8; 90,0] %.
 
-## Exemple în prompt {h=0a6142ee}
+## Exemple în prompt {h=06860e1c}
 
 @chart fewshot_curve
 Macro-F1 în funcție de numărul de exemple din prompt, trei rulări.
@@ -138,7 +138,7 @@ Cinci instrucțiuni cu același sens dau o amplitudine de 3,6 puncte pe PhraseBa
 
 Dacă îl lăsăm pe model să scrie două propoziții de raționament înainte de etichetă (Wei et al., 2022), obținem 88,4 % macro-F1 pe PhraseBank și 65,1 % pe Twitter, sub răspunsul direct zero-shot, cu circa 389 ms pe propoziție în loc de 48,5 ms. Chain-of-thought ajută la raționamentele în mai mulți pași, nu la etichete de un cuvînt pe propoziții scurte.
 
-## Calibrarea {h=5ece6711}
+## Calibrarea {h=9233fa92}
 
 @chart calibration
 Diagrama de fiabilitate a probabilităților prezise ale etichetelor.
@@ -169,7 +169,7 @@ Media ultimelor stări ascunse ale Qwen2.5-1.5B, cu o regresie logistică deasup
 
 # Generare augmentată prin regăsire pe discursurile BCE
 
-## Întîi regăsim, apoi răspundem {h=641c2912}
+## Regăsirea urmată de generare {h=641c2912}
 
 $$ p(y\mid q)\approx\sum_{z\in\mathrm{top}_k(q)}p_\eta(z\mid q)\,p_{\boldsymbol\theta}(y\mid q,z) $$
 
@@ -195,13 +195,13 @@ Pe 160 de discursuri ținute după datele de antrenare ale modelului, un răspun
 
 @practice un nume greșit spus cu siguranță este eșecul costisitor: cereți surse în fiecare răspuns și verificați-le.
 
-## Proiectarea unui sistem RAG pentru o bancă {h=e52e4321}
+## Proiectarea unui sistem RAG pentru o bancă {h=1c68405f}
 
 Dimensiunea fragmentelor, metadatele care însoțesc fiecare fragment, o metodă de regăsire hibridă (recall@3 de 73,1 % pe setul de întrebări), permisiunea de a se abține și un set fix de evaluare, rulat din nou după fiecare schimbare, sînt deciziile care contează.
 
 # Modelele de limbaj ca modele de risc: LLM-VaR
 
-## LLM-VaR {h=a19b5e69}
+## LLM-VaR {h=5a25e5f4}
 
 În cadrul LLM-VaR (Pele et al., 2026), un model general citește ultimele 250 de randamente zilnice într-un prompt și scrie valoarea expusă la risc, fără estimare și fără ajustare fină. Testăm ideea cu un model deschis de 3B pe S&P 500, din 2 ianuarie 2025 pînă la 30 octombrie 2026 (459 de zile), față de simularea istorică (HS) și un model GARCH(1,1) cu erori Student-t, cu testul Kupiec al acoperirii.
 

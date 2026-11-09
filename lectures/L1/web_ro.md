@@ -100,7 +100,7 @@ Un neuron cu ieșirea și pierderea potrivite este un model statistic clasic; pe
 
 Perceptronul lui Rosenblatt învață o frontieră liniară din propriile greșeli. Converge cînd clasele sînt separabile și eșuează în caz contrar, care este situația obișnuită în credit, și nu poate reprezenta XOR.
 
-## De la neuronul logic la mașina care învață {h=f00dc622}
+## De la neuronul McCulloch–Pitts la perceptron {h=71117be8}
 
 McCulloch și Pitts (1943) au scris neuronul ca unitate cu prag, $\hat y=\operatorname{step}(\mathbf w^\top\mathbf x+b)$; Rosenblatt (1958) a făcut ca ponderile lui să învețe din exemple etichetate. Minsky și Papert (1969) au demonstrat că un singur strat nu poate reprezenta XOR, iar domeniul și-a revenit abia cînd propagarea înapoi a erorii a permis antrenarea mai multor straturi (Rumelhart, Hinton și Williams, 1986).
 
@@ -140,7 +140,7 @@ Prin suprapunerea transformărilor afine și a activărilor neliniare obținem M
 
 Fiecare strat ascuns calculează $\mathbf h^{(l)}=a(\mathbf W^{(l)}\mathbf h^{(l-1)}+\mathbf b^{(l)})$, pornind de la $\mathbf h^{(0)}=\mathbf x$, iar stratul de ieșire este o regresie logistică pe ultimele variabile ascunse. Fără activarea $a$, straturile se reduc la o singură transformare liniară. Rețeaua noastră de credit are $d=$ 28 de intrări și două straturi ascunse a cîte 64 de unități liniare rectificate (ReLU).
 
-## Funcțiile de activare: netede, ieftine și cu un gradient utilizabil {h=3486ca6d}
+## Funcțiile de activare și proprietățile lor {h=e099dd2e}
 
 Sigmoida și tanh se saturează: derivata sigmoidei este cel mult 0,25, iar ambele derivate dispar pentru intrări mari, ceea ce încetinește învățarea în rețelele adînci (cursul 2). ReLU, $\max(0,z)$, are panta 1 pentru intrări pozitive și este alegerea implicită în straturile ascunse; unitatea liniară cu eroare gaussiană (GELU), $z\Phi(z)$, este varianta ei netedă, folosită în arhitecturile transformer.
 
@@ -187,7 +187,7 @@ Un MLP este o suprapunere de transformări afine și activări; ReLU în stratur
 
 Regresia logistică, un MLP și extreme gradient boosting (XGBoost) sînt comparate pe HMEQ și German credit cu aceleași împărțiri, intrări și metrici, cu mai multe inițializări, intervale bootstrap, un test corectat, calibrare și costul erorilor.
 
-## Protocolul: aceeași împărțire, aceleași intrări, trei modele {h=4a4a7665}
+## Protocolul experimental: aceeași împărțire și aceleași intrări pentru trei modele {h=c386942d}
 
 MLP-urile folosesc straturi ReLU, Adam cu rata de învățare 0,001 și ponderile din epoca cea mai bună pe validare, fiecare cu 5 inițializări; XGBoost folosește adîncimea 4, rata de învățare 0,03 și oprire timpurie pe validare. HMEQ are o împărțire stratificată 60/20/20; German credit folosește validarea încrucișată cu 5 pliuri repetată de 5 ori (25 de pliuri de test). Toate modelele au fost antrenate pe procesorul central (CPU), cu valoarea inițială 20261108.
 
@@ -229,7 +229,7 @@ AUC pe fiecare pliu de test în validarea încrucișată 5 x 5 pe German credit;
 
 Scorurile pliurilor sînt corelate pentru că seturile de antrenare se suprapun, deci testul t naiv este prea optimist. Corecția Nadeau-Bengio mărește varianța cu $1/J+n_{\text{test}}/n_{\text{train}}$; MLP față de regresia logistică dă $t=$ −0,93 și $p=$ 0,362, deci nu există dovezi ale unei diferențe.
 
-## O neplată ratată costă de cinci ori cît un client bun respins: pragul este 1/6, nu 1/2 {h=5d00b23b}
+## Pragul de 1/6, sensibil la costuri, cînd o neplată ratată costă de cinci ori cît un client bun respins {h=a8b2898e}
 
 Matricea de cost UCI ponderează un risc prost acceptat de 5 ori mai mult decît un client bun respins. Respingerea cînd $5p\ge1-p$ dă pragul $1/6$. Cu predicții în afara pliului, modelul logistic costă 0,554 pe solicitant la 1/6 și 0,870 la 1/2; MLP 0,568 și 1,130; acceptarea tuturor costă 1,50.
 
@@ -238,7 +238,7 @@ Costul pe solicitant German credit în funcție de prag, cu predicții în afara
 
 @practice pragul este locul unde se pierd sau se cîștigă cei mai mulți bani.
 
-## Un MLP minimal în PyTorch: circa cincisprezece rînduri {h=20aee1bc}
+## Implementarea minimală a unui MLP în PyTorch {h=d766f401}
 
 Cincisprezece rînduri sînt suficiente: un `nn.Sequential` de straturi liniare și ReLU, `BCEWithLogitsLoss` (sigmoida și entropia încrucișată într-o singură funcție stabilă), optimizatorul Adam și o buclă cu `zero_grad`, `backward` și `step`. Notebook-ul acestui curs adaugă pregătirea datelor, oprirea pe baza validării și inițializările.
 

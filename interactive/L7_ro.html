@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L7.js?v=20261108s">
+<link rel="preload" as="script" href="L7.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261108s", "L7_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L7.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261109m", "L7_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L7.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Răspuns</summary><p>În stratul 12, [CLS] își împarte atenția între „points”, „to”, „pressure” și „breakfast” (circa 14–17% fiecare); în stratul 6 pune 66% pe [SEP]. Multe capete își „parchează” atenția pe [SEP] cînd nu au nimic util de făcut. FinBERT clasifică tweet-ul ca neutru (75%), deși eticheta lui este pesimist: ponderile atenției arată pe unde circulă informația, nu de ce decide modelul, deci nu sînt o explicație.</p></details>
 </section>
 <section class="blk" id="softmax-temperature">
-  <h3>De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori</h3>
+  <h3>De la un strat la altul, atenția se concentrează pe tokenii separatori</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=14" target="_blank" rel="noopener"><img src="slides/L7_attention_entropy_ro.jpg" alt="Slide-ul 14: De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=14" target="_blank" rel="noopener"><img src="slides/L7_attention_entropy_ro.jpg" alt="Slide-ul 14: De la un strat la altul, atenția se concentrează pe tokenii separatori" loading="lazy"></a>
       <figcaption>Slide-ul 14</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="st-c">Împărțitorul scorurilor: c · √d_k, c =: <b id="st-c-v"></b></label><input type="range" id="st-c" min="-3" max="3" step="0.25" value="0"></div><div class="ctl"><label for="st-l">Stratul: <b id="st-l-v"></b></label><input type="range" id="st-l" min="1" max="12" step="1" value="6"></div><div class="ctl"><label for="st-h">Capul de atenție</label><select id="st-h"><option value="0" selected>capul 1</option><option value="1">capul 2</option><option value="2">capul 3</option><option value="3">capul 4</option><option value="4">capul 5</option><option value="5">capul 6</option><option value="6">capul 7</option><option value="7">capul 8</option><option value="8">capul 9</option><option value="9">capul 10</option><option value="10">capul 11</option><option value="11">capul 12</option></select></div><div class="ctl"><label for="st-q">Tokenul care întreabă (query): <b id="st-q-v"></b></label><input type="range" id="st-q" min="0" max="12" step="1" value="0"></div><button class="btn play" id="st-play" type="button"></button></div><div class="charts "><div class="chart" id="st-row"></div><div class="chart" id="st-ent"></div></div><ul class="out" id="st-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_attention_entropy" target="_blank" rel="noopener">NN_L7_attention_entropy</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_attention_entropy/NN_L7_attention_entropy.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

@@ -47,7 +47,7 @@ Cuvintele cu cea mai mare diferență între coeficienții pozitiv și negativ, 
 
 # Reprezentări dense: vectorii de cuvinte
 
-## Contexte asemănătoare, vectori asemănători
+## Ipoteza distribuțională
 
 Vectorul unui cuvînt este un rînd $\mathbf e_w$ al unei matrice $\mathbf E$ de dimensiune $V\times d$; aici vocabularul are 8 539 de cuvinte, iar $d=100$. Asemănarea este cosinusul dintre doi vectori. În vectorii noștri, cos(inflation, prices) = 0,49, în timp ce cos(inflation, climate) = 0,16.
 

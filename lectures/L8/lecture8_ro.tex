@@ -365,9 +365,9 @@ Regresie logistică (cu etichete) & 48 & 64{,}0\,\% \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L8\_vae\_latent}{Quantlets/L8/NN_L8_vae_latent}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Reconstrucțiile sînt fidele, dar estompate; eșantioanele sînt plauzibile, dar neclare}
+\begin{frame}{Calitatea reconstrucțiilor VAE și a eșantioanelor generate}
 \small
-\begin{center}\includegraphics[width=\textwidth,height=0.428\textheight,keepaspectratio]{charts/ro/vae_samples.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.480\textheight,keepaspectratio]{charts/ro/vae_samples.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Fashion-MNIST, Zalando Research (Xiao et al., 2017). Date: estimări proprii; 60.000 de imagini de antrenare și 10.000 de test.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -565,7 +565,7 @@ Normală & \ensuremath{-}2{,}67\,\% & 2{,}39\,\% \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Cont, 2001; Yoon et al., 2019; Wiese et al., 2020)}\hfill\qlink{NN\_L8\_gan\_acf}{Quantlets/L8/NN_L8_gan_acf}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Colapsul modurilor și soluția Wasserstein}
+\begin{frame}{Colapsul modurilor și GAN-ul Wasserstein}
 \footnotesize
 \intuition{Un generator poate cîștiga producînd cîteva eșantioane convingătoare; distanța Wasserstein dă gradienți utili chiar cînd suporturile nu se suprapun.}
 \begin{columns}[T,onlytextwidth]

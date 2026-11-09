@@ -102,7 +102,7 @@ După 5 epoci cu Adam, MSE pe validare este 0,294 cu loturi de 16, 0,367 cu 128 
 @chart batch_size
 MSE pe validare pe epoci (stînga) și pe pași de gradient (dreapta), pentru trei mărimi ale lotului.
 
-## Metoda momentului mediază gradienții trecuți și traversează văile înguste {h=9856f7be}
+## Metoda momentului: media mobilă a gradienților trecuți {h=2082365e}
 
 Metoda momentului păstrează o viteză $\mathbf v_{t+1}=\beta\mathbf v_t+\mathbf g_t$ și face pași în direcția ei. Componentele în zigzag se anulează, direcția constantă se acumulează, iar pe o funcție pătratică momentul optim îmbunătățește contracția de la $(\kappa-1)/(\kappa+1)$ la $(\sqrt\kappa-1)/(\sqrt\kappa+1)$ (Polyak, 1964).
 
@@ -132,7 +132,7 @@ MSE pe test pe 5 inițializări este 0,314 (abaterea standard 0,091) pentru SGD,
 @chart optimizer_seeds
 MSE pe test pentru cinci inițializări la fiecare optimizator; barele sînt mediile; linia punctată: regresia liniară.
 
-## Programele ratei de învățare: pași mari la început, pași mici la final {h=1a0e9f91}
+## Programele ratei de învățare: în trepte, cosinus și one-cycle {h=800e16f2}
 
 Scăderea în trepte înmulțește rata cu $\gamma$ la fiecare $s$ pași, descreșterea cosinus urmează $\eta_t=\tfrac{\eta_0}{2}(1+\cos\pi t/T)$ (Loshchilov și Hutter, 2017), iar programul cu un singur ciclu crește liniar, apoi scade (Smith și Topin, 2019). Încălzirea protejează primii pași, cînd statisticile optimizatorului nu sînt încă fiabile.
 
@@ -143,7 +143,7 @@ Cu SGD și moment, la o rată maximă de 0,01, MSE final pe validare este 0,279 
 @chart schedules
 Programele ratei de învățare (stînga) și MSE pe validare (dreapta), media a 3 inițializări.
 
-## La fraudele cu carduri, optimizatorul decide cît de repede devine modelul util {h=d6817fe2}
+## La fraudele cu carduri, optimizatorul determină viteza învățării {h=84a15c94}
 
 Cu doar 360 de fraude în primele 60 % din cele două zile, aria de sub curba precizie-sensibilitate (PR-AUC) pe orele de validare, după o epocă, este 0,004 pentru SGD simplu, 0,488 cu moment și 0,592 cu Adam; pe orele de test, cele trei ajung la 0,786, 0,823 și 0,803, față de 0,789 pentru regresia logistică.
 
@@ -173,7 +173,7 @@ Randamentele logaritmice zilnice S&P 500 în perioada de test, cu VaR de 99 % al
 
 Pentru un VaR corect, depășirile sînt de tip Bernoulli cu probabilitatea $\tau$; statistica raportului de verosimilitate a lui Kupiec dă $p=$ 0,840 pentru MLP, 0,003 pentru simularea istorică și 0,000 pentru EWMA. Pierderile pinball, scorul potrivit pentru cuantile, sînt 0,0420, 0,0577 și 0,0473.
 
-## Unde rulează antrenarea: procesorul grafic al unui laptop este de zece ori mai rapid decît procesorul central pe un MLP mare {h=42230620}
+## Echipamentul de calcul: procesorul grafic al unui laptop este de zece ori mai rapid decît procesorul central pe un MLP mare {h=a3f7d0cc}
 
 Pe laptopul cursului, un pas Adam pentru un MLP 2048-2048 durează 333,6 ms pe procesorul central (CPU) și 32,5 ms pe GPU prin Metal Performance Shaders (MPS), de 10,3 ori mai repede. Rețelele tabelare mici din cursurile 1--3 sînt mai rapide pe un singur fir al procesorului: copierea loturilor mici costă mai mult decît economisește.
 

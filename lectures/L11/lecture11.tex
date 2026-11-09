@@ -292,7 +292,7 @@ XGBoost, 10 & 0.959 & 0.889 & 0.058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L11\_shap\_beeswarm}{Quantlets/L11/NN_L11_shap_beeswarm}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Why was this applicant rejected? A SHAP waterfall}
+\begin{frame}{Local explanation of a rejected applicant: SHAP waterfall}
 \small
 \intuition{from the average log-odds $\phi_0$ to this applicant's score, one feature at a time.}
 \begin{center}\includegraphics[width=\textwidth,height=0.475\textheight,keepaspectratio]{charts/en/shap_waterfall.pdf}\end{center}\vspace{-3mm}
@@ -555,7 +555,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 \end{frame}
 
 
-\section{Do explanations agree, are they faithful, are they stable?}
+\section{Agreement, faithfulness and stability of explanations}
 
 \begin{frame}{Agreement between methods: high but not perfect}
 \small
@@ -586,7 +586,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Samek et al., 2017)}\hfill\qlink{NN\_L11\_deletion\_curve}{Quantlets/L11/NN_L11_deletion_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Local robustness: small input change, small explanation change?}
+\begin{frame}{Local robustness of explanations to small input changes}
 \small
 \intuition{relative change of the attribution vector per unit of a small perturbation (Lipschitz-type ratio).}
 \vspace{-1mm}\[ \hat L(\vx)=\frac{\|\mathbf a(\vx+\boldsymbol\varepsilon)-\mathbf a(\vx)\|/\|\mathbf a(\vx)\|}{\|\boldsymbol\varepsilon\|},\quad \boldsymbol\varepsilon\sim\mathcal N(\mathbf 0,0.05^{2}\mathbf I) \]\vspace{-2mm}
@@ -602,7 +602,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Alvarez-Melis \& Jaakkola, 2018)}\hfill\qlink{NN\_L11\_local\_robustness}{Quantlets/L11/NN_L11_local_robustness}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The Rashomon effect: same accuracy, different explanations}
+\begin{frame}{The Rashomon effect: equally accurate models with different explanations}
 \small
 \intuition{rank of each feature by mean $|$SHAP$|$ for 10 retrained networks and 10 boosted ensembles (different seeds only).}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/seed_stability.pdf}\end{center}\vspace{-3mm}
@@ -776,7 +776,7 @@ Time (day 1 $\to$ day 2) & Spearman, JS divergence & 0.98; 0.003 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies (ASE); Romanian Academy, Institute for Economic Forecasting (IPE))}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

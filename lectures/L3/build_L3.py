@@ -430,8 +430,8 @@ def build(lang, H=None):
                job=t("with 60 fixed epochs, the other regularisers stay within the seed noise.",
                      "cu 60 de epoci fixe, ceilalți regularizatori rămîn în zgomotul inițializărilor."),
                tryit=NB + " \\S10", cite=OWN, height="0.60\\textheight")
-    D.figframe(t("Against logistic regression and gradient boosting, the regularised MLP holds its own",
-                 "Față de regresia logistică și gradient boosting, MLP regularizat se descurcă bine"),
+    D.figframe(t("The regularised MLP compared with logistic regression and gradient boosting",
+                 "MLP regularizat comparat cu regresia logistică și cu gradient boosting"),
                t("test hours (last 20\\,\\%); the MLP averages 5 seeds with early stopping, decay and dropout.",
                  "orele de test (ultimele 20\\,\\%); MLP mediază 5 inițializări cu oprire timpurie, penalizare și dropout."),
                None, "fraud_pr",
@@ -519,7 +519,7 @@ def build(lang, H=None):
           "automată, care prezic ce criptoactive devin active „zombie”; un model de avertizare timpurie trebuie validat înainte în timp, ca în secțiunea 4."), sep="5pt") +
         note(t("Findings as stated in the papers; numbers on the other slides come from our own computations.",
                "Rezultatele sînt cele declarate în lucrări; cifrele de pe celelalte slide-uri provin din calculele noastre.")))
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapter 9: regularisation: ", "\\textbf{Bishop \\& Bishop (2024)}, capitolul 9: regularizarea: ") +
         "\\href{https://www.bishopbook.com}{bishopbook.com}.",
         t("\\textbf{Hastie, Tibshirani \\& Friedman (2009)}, chapter 7: model assessment and selection: ",

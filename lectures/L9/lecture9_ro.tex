@@ -355,7 +355,7 @@ Antrenare / test & pașii 1--34 (29\,894 etichetate) / pașii 35--49 (16\,670 et
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Gilmer et al., 2017; Bishop \& Bishop, 2024, sec.\ 13.2)}\hfill\tryit{notebook, secțiunea 3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Agregatorul decide ce poate deosebi o rețea GNN}
+\begin{frame}{Agregatorul și puterea de discriminare a unei rețele GNN}
 \footnotesize
 \intuition{Media și maximul uită cîți vecini au trimis mesaje; suma păstrează această informație și devine la fel de puternică precum testul Weisfeiler--Leman.}
 \begin{columns}[T,onlytextwidth]
@@ -653,7 +653,7 @@ Pădure + GCN & 0{,}933 & 0{,}668 & \cellcolor{Forest!48}0{,}778 & \cellcolor{Fo
 \par\vfill\noindent{\scriptsize\color{FooterGray}$\text{PR-AUC}=\sum_k (R_k-R_{k-1})P_k$}\hfill\qlink{NN\_L9\_pr\_curves}{Quantlets/L9/NN_L9_pr_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Este diferența reală? Un bootstrap al tranzacțiilor de test}
+\begin{frame}{Testul bootstrap al diferenței pe tranzacțiile de test}
 \footnotesize
 \intuition{Un singur set de test dă un singur număr; reeșantionarea nodurilor de test arată cît s-ar putea mișca acest număr.}
 \begin{columns}[T,onlytextwidth]
@@ -686,7 +686,7 @@ Pădure + GCN & 0{,}933 & 0{,}668 & \cellcolor{Forest!48}0{,}778 & \cellcolor{Fo
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Efron \& Tibshirani, 1993)}\hfill\tryit{notebook, secțiunea 2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De ce pădurea este greu de bătut aici: variabilele ei transmit deja mesaje}
+\begin{frame}{De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -791,7 +791,7 @@ Pădure + GCN & 0{,}933 & 0{,}668 & \cellcolor{Forest!48}0{,}778 & \cellcolor{Fo
 
 \section{Rețelele GNN în producție}
 
-\begin{frame}{Patru capcane ale modelelor pe graf în finanțe}
+\begin{frame}{Erori frecvente în aplicarea modelelor pe graf în finanțe}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}

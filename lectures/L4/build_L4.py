@@ -216,7 +216,7 @@ def build(lang, H=None):
                 "GAP este motivul pentru care o CNN modernă are puțini parametri în partea finală și poate fi explicată cu hărți de activare ale claselor."),
               cite=t("(Bishop \\& Bishop, 2024, sec.~10.2)", "(Bishop \\& Bishop, 2024, secț.~10.2)"))
 
-    D.figframe(t("Depth and pooling widen what a unit can see", "Adîncimea și agregarea lărgesc ce poate vedea o unitate"),
+    D.figframe(t("Depth, pooling and the receptive field", "Adîncimea, agregarea și cîmpul receptiv"),
                t("the receptive field is the patch of the input that can influence one unit.",
                  "cîmpul receptiv este zona din intrare care poate influența o unitate."),
                "\\[ r_l=r_{l-1}+(k_l-1)\\prod_{i<l}s_i,\\qquad r_0=1 \\]",
@@ -293,7 +293,7 @@ def build(lang, H=None):
                           "CNN elimină @{fmnist.cnn_err_cut_pct|.1f}\\,\\% din erorile MLP, cu de @{fmnist.params_ratio|.2f} ori mai puțini parametri.")],
                height="0.42\\textheight", cite=OWN)
 
-    D.concept(t("Is the gain real? McNemar's test on the same test images", "Este cîștigul real? Testul McNemar pe aceleași imagini de test"),
+    D.concept(t("McNemar's test of the accuracy gain on the same test images", "Testul McNemar pentru cîștigul de acuratețe pe aceleași imagini de test"),
               t("two classifiers scored on the same images differ only through the images on which exactly one of them is right.",
                 "două clasificatoare evaluate pe aceleași imagini diferă doar prin imaginile pe care exact unul dintre ele le clasifică bine."),
               "\\[ \\chi^2=\\frac{(|b-c|-1)^2}{b+c}\\;\\overset{H_0}{\\sim}\\;\\chi^2_1 \\]"
@@ -425,7 +425,7 @@ def build(lang, H=None):
                 "extragerea trăsăturilor este cea mai ieftină: o singură trecere prin imagini și o regresie logistică."),
               cite=t("(Yosinski et al., 2014)", "(Yosinski et al., 2014)"))
 
-    D.frame(t("Protocol: same split, same test, three strategies", "Protocolul: aceeași împărțire, același test, trei strategii"), cols(it(
+    D.frame(t("Experimental protocol for the three transfer strategies", "Protocolul experimental pentru cele trei strategii de transfer"), cols(it(
         t(("\\textbf{Split}, stratified by class", "@{eurosat.n_train|,d} train / @{eurosat.n_valid|,d} validation / @{eurosat.n_test|,d} test tiles"),
           ("\\textbf{Împărțirea}, stratificată pe clase", "@{eurosat.n_train|,d} de imagini de antrenare / @{eurosat.n_valid|,d} de validare / @{eurosat.n_test|,d} de test")),
         t(("\\textbf{Input}", "tiles resized to $@{eurosat.res}\\times@{eurosat.res}$ for ResNet-18, scaled with the ImageNet mean and standard deviation per channel",
@@ -442,7 +442,7 @@ def build(lang, H=None):
                      "fixarea imaginilor de test înaintea oricărei modelări face comparabile cele trei strategii."), tryit=NB + "5"),
         "footnotesize", cite=OWN)
 
-    D.figframe(t("Fine-tuning wins, and transfer matters most when labels are few", "Ajustarea fină cîștigă, iar transferul contează cel mai mult cînd etichetele sînt puține"),
+    D.figframe(t("Fine-tuning is the most accurate, and transfer matters most when labels are few", "Ajustarea fină este cea mai precisă, iar transferul contează cel mai mult cînd etichetele sînt puține"),
                t("left: learning with all labels; right: test accuracy when only $n$ labelled tiles per class are available.",
                  "stînga: învățarea cu toate etichetele; dreapta: acuratețea pe test cînd sînt disponibile doar $n$ imagini etichetate pe clasă."),
                None, "transfer_curves",
@@ -455,7 +455,7 @@ def build(lang, H=None):
     rows = []
     for n in ["10", "25", "50", "100", "250", "1000"]:
         rows.append([n, f"@{{budget.scratch.{n}|.1f}}", f"@{{budget.probe.{n}|.1f}}", f"@{{budget.finetune.{n}|.1f}}"])
-    D.frame(t("The label budget: what transfer learning saves", "Bugetul de etichete: cît economisește transferul învățării"), cols(
+    D.frame(t("The label budget and the savings from transfer learning", "Bugetul de etichete și economia obținută prin transferul învățării"), cols(
         table("@{}rrrr@{}", [t("Tiles/class", "Imagini/clasă"), t("Scratch", "De la zero"), t("Frozen", "Înghețat"), t("Fine-tuned", "Ajustat fin")], rows) +
         note(t("Test accuracy (\\%), mean of 2 random draws of the labelled tiles; same 5,400 test tiles.",
                "Acuratețea pe test (\\%), media a 2 extrageri aleatoare ale imaginilor etichetate; aceleași 5.400 de imagini de test.")),
@@ -476,7 +476,7 @@ def build(lang, H=None):
                           "@{eurosat.n_errors_ft} de erori la @{eurosat.n_test|,d} de imagini; cea mai mare: @{eurosat.top_conf.true_ro} clasificat drept @{eurosat.top_conf.pred_ro} (@{eurosat.top_conf.n}); macro-F1 @{eurosat.macro_f1_ft|.2f}\\,\\%.")],
                height="0.5\\textheight", cite=OWN)
 
-    D.concept(t("Grad-CAM: where in the tile does the decision come from?", "Grad-CAM: din ce parte a imaginii vine decizia?"),
+    D.concept(t("Grad-CAM: image regions behind the classification", "Grad-CAM: regiunile imaginii care determină clasificarea"),
               t("weight each feature map by how much the class score reacts to it, sum, and keep the positive part.",
                 "ponderăm fiecare hartă de trăsături după cît reacționează scorul clasei la ea, adunăm și păstrăm partea pozitivă."),
               "\\[ \\alpha^{c}_o=\\frac{1}{HW}\\sum_{i,j}\\frac{\\partial z_c}{\\partial A_o(i,j)} \\]\\vspace{-2mm}\\[ M^{c}=\\ReLU\\Big(\\sum_o\\alpha^{c}_oA_o\\Big) \\]"
@@ -586,7 +586,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
-    D.frame(t("Want to learn more?", "Lecturi și resurse suplimentare"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, ch.~10: convolutional networks, with the derivations of this lecture.",
           "\\textbf{Bishop \\& Bishop (2024)}, cap.~10: rețele convoluționale, cu derivările din acest curs."),
         t("\\textbf{Goodfellow, Bengio \\& Courville (2016)}, ch.~9: convolution, pooling, variants.",

@@ -281,7 +281,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation; mean over the 12 heads)}\hfill\qlink{NN\_L7\_attention\_example}{Quantlets/L7/NN_L7_attention_example}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Across layers, attention sharpens and parks on separator tokens}
+\begin{frame}{Across layers, attention becomes concentrated on separator tokens}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.520\textheight,keepaspectratio]{charts/en/attention_entropy.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Twitter financial news datasets (Hugging Face, zeroshot). Data: 500 test tweets; pretrained FinBERT.}
@@ -593,7 +593,7 @@ FinBERT fine-tuned & \cellcolor{Forest!55}84.8 & \cellcolor{Forest!55}88.2 & \ce
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Are the differences real? Paired bootstrap of the test tweets}
+\begin{frame}{Paired bootstrap test of the differences on the test tweets}
 \footnotesize
 \intuition{Resampling the test tweets, with the same draw for both models, shows how much a gap in macro-F1 could move by chance.}
 \begin{columns}[T,onlytextwidth]
@@ -866,7 +866,7 @@ FinBERT fine-tuned & \cellcolor{Forest!55}84.8 & \cellcolor{Forest!55}88.2 & \ce
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

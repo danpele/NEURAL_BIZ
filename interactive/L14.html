@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L14.js?v=20261108s">
+<link rel="preload" as="script" href="L14.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261108s", "L14_text_en.js?v=20261108s", "common.js?v=20261109m"], "L14.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261109m", "L14_text_en.js?v=20261109m", "common.js?v=20261109m"], "L14.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>With ViT-B/16 and 5 templates, 399 of the 600 sea or lake images are called highway, and permanent crops are recognised in only 18.6% of cases, while industrial areas (93.6%) and residential areas (92.3%) are almost always right. The prompt matters a lot: the bare folder name gives 34.1% (ViT-B/32) and 42.4% (ViT-B/16), the average of 5 satellite templates 49.1% and 56.4%. Words that describe the image as a satellite photo move the text embedding closer to this kind of picture.</p></details>
 </section>
 <section class="blk" id="text-search">
-  <h3>Searching images with words: the same embeddings, used the other way</h3>
+  <h3>Text-to-image search with the same embeddings</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L14_text_search_en.jpg" alt="Slide 17: Searching images with words: the same embeddings, used the other way" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L14_text_search_en.jpg" alt="Slide 17: Text-to-image search with the same embeddings" loading="lazy"></a>
       <figcaption>Slide 17</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ts-c">Query (class in the prompt)</label><select id="ts-c"><option value="0" selected>Annual crop</option><option value="1">Forest</option><option value="2">Herbaceous vegetation</option><option value="3">Highway</option><option value="4">Industrial</option><option value="5">Pasture</option><option value="6">Permanent crop</option><option value="7">Residential</option><option value="8">River</option><option value="9">Sea or lake</option></select></div><div class="ctl"><label for="ts-k">Number of images returned, k: <b id="ts-k-v"></b></label><input type="range" id="ts-k" min="10" max="1000" step="10" value="100"></div><div class="ctl ctl-tg" id="ts-a"><span class="lbl">Comparison</span><div class="tgs"><label class="tg"><input type="checkbox" name="ts-a" value="avg" checked> Mean of the 10 queries</label></div></div></div><div class="charts one"><div class="chart" id="ts-chart"></div></div><div class="thumbs" id="ts-thumbs" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"></div><ul class="out" id="ts-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_text_search" target="_blank" rel="noopener">NN_L14_text_search</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_text_search/NN_L14_text_search.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>No. Among the 100 images most similar to the prompt, 99% are industrial for the industrial query, but only 20% are annual crops for the annual crop query, and 21% for sea or lake; the mean over the 10 queries is 58.9%. Move k: precision usually falls as more images are returned, and it cannot stay at 100% once k exceeds the number of test images of the class (400 to 600, given in the readout). A search engine on a bank's satellite archive would need checking class by class.</p></details>
 </section>
 <section class="blk" id="few-shot">
-  <h3>Pre-trained features win with few labels; a trained CNN wins with many</h3>
+  <h3>Pre-trained features and a CNN trained from scratch, by number of labels</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L14_fewshot_eurosat_en.jpg" alt="Slide 19: Pre-trained features win with few labels; a trained CNN wins with many" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L14_fewshot_eurosat_en.jpg" alt="Slide 19: Pre-trained features and a CNN trained from scratch, by number of labels" loading="lazy"></a>
       <figcaption>Slide 19</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fs-k">Labelled images per class: <b id="fs-k-v"></b></label><input type="range" id="fs-k" min="0" max="7" step="1" value="4"></div><div class="ctl ctl-tg" id="fs-s"><span class="lbl">Series</span><div class="tgs"><label class="tg"><input type="checkbox" name="fs-s" value="probe" checked> CLIP + logistic regression</label><label class="tg"><input type="checkbox" name="fs-s" value="cnn" checked> CNN trained from scratch</label><label class="tg"><input type="checkbox" name="fs-s" value="zs" checked> CLIP zero-shot (no labels)</label></div></div></div><div class="charts one"><div class="chart" id="fs-chart"></div></div><ul class="out" id="fs-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_fewshot_eurosat" target="_blank" rel="noopener">NN_L14_fewshot_eurosat</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_fewshot_eurosat/NN_L14_fewshot_eurosat.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -106,9 +106,9 @@
   <details><summary>Answer</summary><p>With few labels the pre-trained features win: one image per class gives 59.0% with the CLIP probe, already above zero-shot (56.4%); with 4 per class the probe reaches 73.8% and the CNN 50.3%, with 16 per class 84.7% against 78.5%. At 64 per class the CNN catches up (90.9% against 90.1%) and at 128 it is ahead (94.1% against 91.6%); on all 21,600 training images the CNN reaches 97.4%, the probe 95.5%. Labels are expensive: pre-trained embeddings are the cheap start, a dedicated model pays off once the labels exist.</p></details>
 </section><h2 class="sec" id="s-vlm">Vision-language models: reading charts</h2>
 <section class="blk" id="chart-regime">
-  <h3>From the picture or from the numbers? Detecting market stress</h3>
+  <h3>Detecting market stress from charts and from numbers</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L14_chart_regime_en.jpg" alt="Slide 24: From the picture or from the numbers? Detecting market stress" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L14_chart_regime_en.jpg" alt="Slide 24: Detecting market stress from charts and from numbers" loading="lazy"></a>
       <figcaption>Slide 24</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cr-m">Model</label><select id="cr-m"><option value="numeric" selected>Numbers + logistic regression</option><option value="clip_probe">CLIP image + logistic regression</option><option value="clip_zs">CLIP zero-shot</option><option value="vlm_stress">Qwen2-VL zero-shot</option></select></div><div class="ctl"><label for="cr-a">Windows flagged as stress (% of the test set): <b id="cr-a-v"></b></label><input type="range" id="cr-a" min="2" max="40" step="1" value="10"></div></div><div class="charts "><div class="chart" id="cr-roc"></div><div class="chart" id="cr-time"></div></div><ul class="out" id="cr-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_chart_regime" target="_blank" rel="noopener">NN_L14_chart_regime</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_chart_regime/NN_L14_chart_regime.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

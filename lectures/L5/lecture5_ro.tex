@@ -322,11 +322,11 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Cho et al., 2014)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Memoria măsurată: rețelele privesc la ziua de ieri și la săptămîna trecută}
+\begin{frame}{Sensibilitatea la intrări pe decalaje: rețelele se bazează pe ziua și pe săptămîna precedentă}
 \small
 \intuition{sensibilitatea ieșirii rețelelor de consum antrenate la fiecare dintre cele 168 de ore de intrare, mediată pe 200 de zile de test.}
 \vspace{-1mm}\[ S(k)=\frac1n\sum_{i=1}^{n}\Big|\frac{\partial\hat y_{i,12}}{\partial x_{i,\,T+1-k}}\Big| \]\vspace{-2mm}
-\begin{center}\includegraphics[width=\textwidth,height=0.319\textheight,keepaspectratio]{charts/ro/grad_lag.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.258\textheight,keepaspectratio]{charts/ro/grad_lag.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: energy-charts.info (Fraunhofer ISE), din datele burselor și ale ENTSO-E. Date: 200 de zile de test din 2024; modele cu sămînța 20261108; prognoza pentru ora 12 (timpul universal).}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -423,7 +423,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{\S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Întîi modelele de referință: naiv, HAR și GARCH}
+\begin{frame}{Modelele de referință: naiv, HAR și GARCH}
 \footnotesize
 \intuition{o rețea trebuie să depășească modele pe care econometria le-a rafinat de decenii.}
 \begin{columns}[T,onlytextwidth]
@@ -452,7 +452,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Corsi, 2009; Bollerslev, 1986)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Este o prognoză într-adevăr mai bună? Testul Diebold--Mariano}
+\begin{frame}{Testul Diebold--Mariano pentru acuratețe predictivă egală}
 \footnotesize
 \intuition{comparăm zi de zi pierderile a două prognoze și testăm dacă diferența lor medie este zero.}
 \begin{columns}[T,onlytextwidth]

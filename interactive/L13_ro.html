@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L13.js?v=20261108s">
+<link rel="preload" as="script" href="L13.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261108s", "L13_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L13.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261109m", "L13_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L13.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -53,7 +53,7 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din prognozele cursului cînd modificați un control. Prognozele sînt cele din anul de test, 1 noiembrie 2025 – 31 octombrie 2026 (360 de zile cu toate cele 24 de ore și toate modelele disponibile): regula naivă, LEAR (model autoregresiv estimat prin Lasso), DNN (rețea neuronală profundă cu 24 de ieșiri), N-BEATS (analiza prin expansiune în baze neuronale) și modelele fundație Chronos-2, Chronos-Bolt și TimesFM (model fundație pentru serii de timp), folosite zero-shot, adică fără nicio antrenare pe datele noastre. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
-<p class="toc"><a href="#s-epf">Prognoza prețurilor pentru ziua următoare în România</a> · <a href="#s-eval">Este o prognoză cu adevărat mai bună?</a> · <a href="#s-fm">Modele fundație: contextul și cuantilele</a> · <a href="#s-risk">Valoarea expusă la risc cu un model fundație</a></p>
+<p class="toc"><a href="#s-epf">Prognoza prețurilor pentru ziua următoare în România</a> · <a href="#s-eval">Testarea diferențelor de acuratețe a prognozelor</a> · <a href="#s-fm">Modele fundație: contextul și cuantilele</a> · <a href="#s-risk">Valoarea expusă la risc cu un model fundație</a></p>
 <h2 class="sec" id="s-epf">Prognoza prețurilor pentru ziua următoare în România</h2>
 <section class="blk" id="forecast-week">
   <h3>Prognozele pentru o săptămînă din anul de test</h3>
@@ -74,7 +74,7 @@
   </div>
   <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> La ce ore ale zilei sînt prognozele cele mai slabe și de ce?</div>
   <details><summary>Răspuns</summary><p>Seara: pentru LEAR, ora cea mai slabă este 19:00 (35,78 EUR/MWh), iar cea mai bună 01:00 (10,75 EUR/MWh); Chronos-2 are aceeași oră cea mai slabă (34,05) și cea mai bună (8,57 EUR/MWh). Vîrful de seară vine cînd producția solară a dispărut și prețurile sar; noaptea este liniștită și previzibilă. Alegeți primăvara sau vara pentru a vedea a doua cocoașă a erorilor, la amiază, cînd producția solară împinge prețurile în jos, uneori sub zero.</p></details>
-</section><h2 class="sec" id="s-eval">Este o prognoză cu adevărat mai bună?</h2>
+</section><h2 class="sec" id="s-eval">Testarea diferențelor de acuratețe a prognozelor</h2>
 <section class="blk" id="dm-test">
   <h3>Testele Diebold–Mariano pe perechi de modele</h3>
   <div class="pair">

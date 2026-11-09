@@ -120,7 +120,7 @@ Cu doar două dimensiuni latente și fără etichete, încălțămintea, gențil
 @chart vae_latent
 Mediile latente ale celor 10 000 de imagini de test, VAE cu $k=2$, colorate după clasă.
 
-## Reconstrucțiile sînt fidele, dar estompate; eșantioanele sînt plauzibile, dar neclare {h=e25325d1}
+## Calitatea reconstrucțiilor VAE și a eșantioanelor generate {h=cf43fe6d}
 
 Primul rînd arată imagini reale de test, al doilea reconstrucția lor printr-un cod cu 16 dimensiuni, al treilea imagini noi, decodate din coduri aleatoare. Neclaritatea vine din distribuția a posteriori gaussiană și din pierderea calculată pixel cu pixel: decodorul face media detaliilor plauzibile.
 
@@ -187,7 +187,7 @@ Autocorelația randamentelor reale în valoare absolută este 0,28 la decalajul 
 @chart gan_acf
 Autocorelația randamentelor în valoare absolută, decalajele 1–20, randamente reale și eșantioane GAN.
 
-## Colapsul modurilor și soluția Wasserstein {h=599b904d}
+## Colapsul modurilor și GAN-ul Wasserstein {h=55a15b76}
 
 Un generator poate cîștiga producînd doar cîteva eșantioane convingătoare, de exemplu numai zile calme și niciodată o prăbușire: colapsul modurilor. GAN-ul Wasserstein (WGAN) înlocuiește divergența Jensen–Shannon cu distanța Wasserstein $W_1(p_{data},p_G)=\sup_{\|f\|_L\le1}\mathbb E_{p_{data}}[f]-\mathbb E_{p_G}[f]$, calculată de o rețea critic 1-Lipschitz, care dă gradienți utili chiar cînd cele două distribuții nu se suprapun.
 

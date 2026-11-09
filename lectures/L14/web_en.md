@@ -77,7 +77,7 @@ Confusion matrix of the best zero-shot model, row percentages.
 
 Industrial and residential areas are recognised in more than nine cases out of ten (93.6 % and 92.3 %), but permanent crops only in 18.6 % of cases, and 399 of the 600 sea-or-lake images were called highway. Look-alike classes need examples.
 
-## Searching images with words {h=2cbf6133}
+## Text-to-image search {h=05ff8d45}
 
 @chart text_search
 Precision of the 100 images closest to each class prompt.
@@ -88,7 +88,7 @@ The same embeddings, used the other way round, turn a sentence into an image sea
 
 Keeping CLIP frozen and training only a logistic regression on its image embeddings already beats zero-shot with one labelled image per class (59.0 %), and reaches 95.5 % with all 21,600 training images.
 
-## Pre-trained features win with few labels {h=aaab70d7}
+## Pre-trained features and the number of labels {h=a2516dbd}
 
 @chart fewshot_eurosat
 Test accuracy against labelled images per class: CLIP probe, CNN from scratch, zero-shot.
@@ -111,7 +111,7 @@ Image patches are projected into the word-embedding space of a large language mo
 
 Following Jheng, Pele, Tak and Găman (2026), each window of 120 trading days of the S&P 500 is drawn as a two-panel image (price and drawdown) and labelled "stress" when the 20-day volatility at its end exceeds its rolling 90th percentile of the previous three years. Models are trained on windows up to 2018 and tested on 394 windows from 2019, where the stress share is 8.4 %.
 
-## From the picture or from the numbers? {h=bdf6f3e9}
+## Stress detection from charts and from numbers {h=ee939f9e}
 
 @chart chart_regime
 A calm and a stress window, and the ROC curves of four detectors on the test years.

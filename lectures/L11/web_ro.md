@@ -100,7 +100,7 @@ Diagrama roi reprezintă fiecare solicitant printr-un punct, poziționat la valo
 @chart shap_beeswarm
 Valorile SHAP ale celor mai importante zece variabile pentru 400 de solicitanți din test; culoarea merge de la albastru (valoare mică) la roșu (valoare mare).
 
-## De ce a fost respins acest solicitant? Diagrama cascadă SHAP {h=e9441f9e}
+## Explicația locală pentru un solicitant respins: diagrama cascadă SHAP {h=0d78eecb}
 
 Pentru un solicitant din test (rîndul 2411 al datelor), rețeaua dă o PD de 65,6 %, cu log-șansele 0,648. Diagrama cascadă pornește de la log-șansele medii $\phi_0=-3{,}613$ și adaugă contribuțiile una cîte una pînă la scorul solicitantului: $-3{,}613+4{,}261=0{,}648$. Cele mai mari contribuții sînt DEBTINC_missing ($+3{,}13$), ocupația „Other” ($+1{,}74$) și DELINQ ($-0{,}71$; acest solicitant nu are linii cu restanțe).
 
@@ -211,7 +211,7 @@ Pentru frauda cu scorul median din ziua 2 (scor de fraudă 99,9 %), Kernel SHAP 
 @chart fraud_local
 Atribuirile cu semn ale salienței, ale produsului gradient × intrare, ale gradienților integrați și ale Kernel SHAP pentru o fraudă, ca ponderi în atribuirea absolută totală.
 
-# Sînt explicațiile concordante, fidele și stabile?
+# Concordanța, fidelitatea și stabilitatea explicațiilor
 
 Trei teste ar trebui să însoțească orice explicație: concordanța între metode, fidelitatea față de model și stabilitatea atunci cînd nu se schimbă nimic important.
 
@@ -231,14 +231,14 @@ O explicație fidelă numește variabilele a căror eliminare schimbă prognoza.
 @chart deletion_curve
 Scorul mediu de fraudă al fraudelor din ziua 2 după readucerea la referință a primelor $k$ variabile, pentru patru metode și o ordine aleatoare.
 
-## Robustețea locală: o mică schimbare a intrării, o mică schimbare a explicației? {h=65665637}
+## Robustețea locală a explicațiilor la mici modificări ale intrării {h=0e5db012}
 
 Adăugăm de zece ori zgomot gaussian cu abaterea standard 0,05 pentru 60 de fraude și măsurăm variația relativă a atribuirii pe unitatea de variație a intrării (Alvarez-Melis & Jaakkola, 2018). Medianele sînt 0,000 pentru saliență, 0,028 pentru gradient × intrare, 0,030 pentru IG și 0,036 pentru SmoothGrad. Saliența nu se mișcă deoarece, în interiorul unei regiuni liniare a unei rețele ReLU, gradientul este constant: robustețea la zgomot mic vine împreună cu salturi bruște între regiuni.
 
 @chart local_robustness
 Variația relativă a explicației pe unitatea de variație a intrării pentru patru metode bazate pe gradient (60 de fraude × 10 perturbări).
 
-## Efectul Rashomon: aceeași acuratețe, explicații diferite {h=33a9e791}
+## Efectul Rashomon: modele la fel de precise, cu explicații diferite {h=c316bb68}
 
 Am reantrenat modelele de credit cu zece valori inițiale. AUC-ul de test al rețelei rămîne între 0,929 și 0,941, dar ordinea variabilelor se schimbă: tau Kendall mediu pe perechi al importanțelor globale este 0,83 pentru MLP și 0,97 pentru XGBoost. Pentru un singur solicitant, variabila de top este aceeași în 78 % din perechile de valori inițiale la rețea și în 83 % la XGBoost. Multe modele se potrivesc la fel de bine datelor, dar nu toate spun aceeași poveste.
 

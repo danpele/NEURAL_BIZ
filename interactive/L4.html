@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L4.js?v=20261108s">
+<link rel="preload" as="script" href="L4.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261108s", "L4_text_en.js?v=20261108s", "common.js?v=20261109m"], "L4.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261109m", "L4_text_en.js?v=20261109m", "common.js?v=20261109m"], "L4.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -66,9 +66,9 @@
   <details><summary>Answer</summary><p>Nine weights and one bias, whatever the size of the image (a dense layer from 4,096 pixels to 4,096 outputs would need about 16.8 million weights). With zero padding the output keeps 64 × 64 pixels; without it, (64 − 3)/1 + 1 = 62; with stride 2, (64 + 2 − 3)/2 + 1 = 32 (integer part). The vertical Sobel filter computes a left-minus-right difference: large positive or negative values where brightness changes from left to right, as on the edges of the highway, and zero on uniform fields. Switch to the river or the residential tile: the same filter finds other edges.</p></details>
 </section>
 <section class="blk" id="receptive-field">
-  <h3>Depth and pooling widen what a unit can see</h3>
+  <h3>Depth, pooling and the receptive field</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L4_receptive_field_en.jpg" alt="Slide 13: Depth and pooling widen what a unit can see" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L4_receptive_field_en.jpg" alt="Slide 13: Depth, pooling and the receptive field" loading="lazy"></a>
       <figcaption>Slide 13</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="rf-l">Number of convolutional layers: <b id="rf-l-v"></b></label><input type="range" id="rf-l" min="1" max="12" step="1" value="6"></div><div class="ctl"><label for="rf-k">Kernel size</label><select id="rf-k"><option value="3" selected>3 × 3</option><option value="5">5 × 5</option><option value="7">7 × 7</option></select></div><div class="ctl ctl-tg" id="rf-p"><span class="lbl">Pooling</span><div class="tgs"><label class="tg"><input type="checkbox" name="rf-p" value="pool"> 2 × 2 pooling every two layers</label></div></div><button class="btn play" id="rf-play" type="button"></button></div><div class="charts "><div class="chart" id="rf-chart"></div><div class="chart" id="rf-tile"></div></div><ul class="out" id="rf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_receptive_field" target="_blank" rel="noopener">NN_L4_receptive_field</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_receptive_field/NN_L4_receptive_field.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -106,9 +106,9 @@
   <details><summary>Answer</summary><p>This is the degradation problem: after 12 epochs the plain network still has a training loss of 0.557 and 80.0% test accuracy, while the residual one reaches 0.291 and 87.8%. The deeper plain network is not overfitting (its training accuracy is low too); it is hard to optimise. Skip connections let each block learn a correction to the identity and let the gradient flow back unchanged. The small CNN shows the other problem: without augmentation the training accuracy reaches 96.1% against 87.2% on validation; with augmentation the gap falls to 0.9 points.</p></details>
 </section>
 <section class="blk" id="transfer">
-  <h3>Fine-tuning wins, and transfer matters most when labels are few</h3>
+  <h3>Fine-tuning is the most accurate, and transfer matters most when labels are few</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L4_transfer_curves_en.jpg" alt="Slide 33: Fine-tuning wins, and transfer matters most when labels are few" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L4_transfer_curves_en.jpg" alt="Slide 33: Fine-tuning is the most accurate, and transfer matters most when labels are few" loading="lazy"></a>
       <figcaption>Slide 33</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="tl-n">Labelled tiles per class: <b id="tl-n-v"></b></label><input type="range" id="tl-n" min="0" max="5" step="1" value="0"></div><div class="ctl ctl-tg" id="tl-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="tl-m" value="scratch" checked> CNN from scratch</label><label class="tg"><input type="checkbox" name="tl-m" value="probe" checked> Frozen ResNet-18 + logistic regression</label><label class="tg"><input type="checkbox" name="tl-m" value="finetune" checked> Fine-tuned ResNet-18</label></div></div><button class="btn play" id="tl-play" type="button"></button></div><div class="charts "><div class="chart" id="tl-hist"></div><div class="chart" id="tl-budget"></div></div><ul class="out" id="tl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_transfer_curves" target="_blank" rel="noopener">NN_L4_transfer_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_transfer_curves/NN_L4_transfer_curves.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

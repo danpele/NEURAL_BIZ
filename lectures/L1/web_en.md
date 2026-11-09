@@ -100,7 +100,7 @@ One neuron with the right output and loss is a classical statistical model; the 
 
 Rosenblatt's perceptron learns a linear boundary from its mistakes. It converges when the classes are separable and fails otherwise, which is the usual case in credit, and it cannot represent XOR.
 
-## From a logical neuron to a learning machine {h=31f948ac}
+## From the McCulloch–Pitts neuron to the perceptron {h=f626d592}
 
 McCulloch and Pitts (1943) wrote the neuron as a threshold unit, $\hat y=\operatorname{step}(\mathbf w^\top\mathbf x+b)$; Rosenblatt (1958) made its weights learn from labelled examples. Minsky and Papert (1969) proved that one layer cannot represent XOR, and the field recovered only when backpropagation trained several layers (Rumelhart, Hinton and Williams, 1986).
 
@@ -140,7 +140,7 @@ Stacking affine maps and nonlinear activations gives the MLP: we write its forwa
 
 Each hidden layer computes $\mathbf h^{(l)}=a(\mathbf W^{(l)}\mathbf h^{(l-1)}+\mathbf b^{(l)})$, starting from $\mathbf h^{(0)}=\mathbf x$, and the output layer is a logistic regression on the last hidden features. Without the activation $a$ the layers collapse into one linear map. Our credit network has $d=$ 28 inputs and two hidden layers of 64 rectified linear units (ReLU).
 
-## Activation functions: smooth, cheap, and with a usable gradient {h=2b9aa09b}
+## Activation functions and their properties {h=da79c3f1}
 
 Sigmoid and tanh saturate: the derivative of the sigmoid is at most 0.25 and both derivatives vanish for large inputs, which slows learning in deep networks (Lecture 2). ReLU, $\max(0,z)$, has slope 1 for positive inputs and is the default in hidden layers; the Gaussian error linear unit (GELU), $z\Phi(z)$, is its smooth variant used in transformers.
 
@@ -187,7 +187,7 @@ An MLP is a stack of affine maps and activations; ReLU in the hidden layers, an 
 
 Logistic regression, an MLP and extreme gradient boosting (XGBoost) are compared on HMEQ and German credit with the same splits, inputs and metrics, several seeds, bootstrap intervals, a corrected test, calibration and the cost of errors.
 
-## The protocol: same split, same inputs, three models {h=c39197d0}
+## Experimental protocol: a common split and common inputs for three models {h=690f9f2e}
 
 The MLPs use ReLU layers, Adam with learning rate 0.001 and the weights of the best validation epoch, each with 5 seeds; XGBoost uses depth 4, learning rate 0.03 and early stopping on validation. HMEQ has one stratified 60/20/20 split; German credit uses 5 times repeated 5-fold cross-validation (25 test folds). All models trained on the central processing unit (CPU) with seed 20261108.
 
@@ -229,7 +229,7 @@ AUC of each held-out fold in 5 x 5-fold cross-validation on German credit; bars 
 
 The fold scores are correlated because the training sets overlap, so the naive t-test is too optimistic. The Nadeau-Bengio correction inflates the variance by $1/J+n_{\text{test}}/n_{\text{train}}$; the MLP against logistic regression gives $t=$ −0.93 and $p=$ 0.362, so there is no evidence of a difference.
 
-## A missed default costs five times a rejected good applicant: cut at 1/6, not 1/2 {h=a710fe48}
+## Cost-sensitive cut-off of 1/6 when a missed default costs five times a rejected good applicant {h=ceb0f2c9}
 
 The UCI cost matrix weighs a missed bad risk 5 times a rejected good applicant. Rejecting when $5p\ge1-p$ gives the cut-off $1/6$. With out-of-fold predictions, the logistic model costs 0.554 per applicant at 1/6 and 0.870 at 1/2; the MLP 0.568 and 1.130; accepting everyone costs 1.50.
 
@@ -238,7 +238,7 @@ Cost per German credit applicant against the cut-off, out-of-fold predictions; d
 
 @practice the cut-off is where most money is lost or saved.
 
-## A minimal MLP in PyTorch: about fifteen lines {h=0a1f2a30}
+## A minimal MLP implementation in PyTorch {h=38d88248}
 
 Fifteen lines are enough: an `nn.Sequential` of linear layers and ReLUs, `BCEWithLogitsLoss` (sigmoid and cross-entropy in one stable function), the Adam optimiser and a loop of `zero_grad`, `backward` and `step`. The notebook of this lecture adds the data pipeline, the validation stopping and the seeds.
 

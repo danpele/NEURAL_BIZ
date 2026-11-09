@@ -342,7 +342,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Gilmer et al., 2017; Bishop \& Bishop, 2024, sec.\ 13.2)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The aggregator decides what a GNN can tell apart}
+\begin{frame}{The aggregator and the expressive power of a GNN}
 \footnotesize
 \intuition{Mean and max forget how many neighbours sent a message; the sum keeps it, which makes it as powerful as the Weisfeiler--Leman test.}
 \begin{columns}[T,onlytextwidth]
@@ -640,7 +640,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}$\text{PR-AUC}=\sum_k (R_k-R_{k-1})P_k$}\hfill\qlink{NN\_L9\_pr\_curves}{Quantlets/L9/NN_L9_pr_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Is the gap real? A bootstrap of the test transactions}
+\begin{frame}{Bootstrap test of the gap on the test transactions}
 \footnotesize
 \intuition{One test set gives one number; resampling the test nodes shows how much that number could move.}
 \begin{columns}[T,onlytextwidth]
@@ -673,7 +673,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Efron \& Tibshirani, 1993)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Why the forest is hard to beat here: its features already pass messages}
+\begin{frame}{Why the forest performs well here: its features already pass messages}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -778,7 +778,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 
 \section{GNNs in production}
 
-\begin{frame}{Four pitfalls of graph models in finance}
+\begin{frame}{Common errors in applying graph models in finance}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -889,7 +889,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

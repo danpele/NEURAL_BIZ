@@ -20,7 +20,7 @@ We forecast Romanian day-ahead electricity prices for a full test year (1 Novemb
 
 A forecast is only as good as the information it is allowed to use. This section describes the data, the stylised facts of Romanian power prices and the rules of the game: what is known when the auction closes, how the test year is kept untouched, and which benchmark every model has to beat.
 
-## Two business decisions that need a forecast tomorrow morning {h=a5e30f45}
+## Two business decisions based on day-ahead forecasts {h=5cc60ca7}
 
 On the day-ahead market, the price of every hour of tomorrow is set by one auction coupled across Europe and run in Romania by the Romanian electricity and gas market operator (OPCOM). Bids close at 12:00 Central European Time (CET) on the day before delivery. An error of 1 EUR/MWh on 100 MW over 24 hours costs 2,400 euro per day, so even small improvements matter. In finance, the Value-at-Risk is the quantile of tomorrow's return that should be breached on 1 % of days; under the Basel rules the number of breaches in a year moves the capital charge.
 
@@ -52,7 +52,7 @@ where $\mathbf y_d\in\mathbb R^{24}$ are the Romanian prices of day $d$, $\mathb
 
 @practice the load of day $d-1$ is not complete at noon; using it would leak the future into the forecast.
 
-## Error measures and the benchmark every model must beat {h=2231383d}
+## Error measures and the benchmark model {h=641b9f3a}
 
 We report the mean absolute error (MAE) in EUR/MWh and the relative MAE, $\mathrm{rMAE}=\mathrm{MAE}/\mathrm{MAE}^{\text{naive}}$, where the naive forecast is the price of the same hour one week earlier for Monday, Saturday and Sunday and the price of the day before otherwise. Percentage errors are useless when prices are close to zero or negative; in the test year there were 195 negative hours, the mean price was 134.59 EUR/MWh and the naive forecast reached an MAE of 27.74 EUR/MWh.
 
@@ -175,7 +175,7 @@ Chronos-2 MAE as a function of the context length.
 
 With one week of context (168 hours) the MAE of Chronos-2 is 24.45 EUR/MWh; with 2,048 hours it falls to 20.72, and 8,192 hours do not help further (20.95). The context length is the main tuning knob of a zero-shot model.
 
-## Is the difference real? The Diebold–Mariano test {h=bb2572e1}
+## The Diebold–Mariano test {h=bb2572e1}
 
 A lower average error can be luck. With the daily loss differential $\Delta_d=\lVert\mathbf e^{A}_d\rVert_1-\lVert\mathbf e^{B}_d\rVert_1$ over the 24 hours of each day,
 
@@ -183,7 +183,7 @@ $$ \mathrm{DM}=\frac{\bar\Delta}{\hat\sigma_\Delta/\sqrt{|\mathcal T|}}\ \overse
 
 tests whether model B is more accurate than model A (Diebold & Mariano, 1995; Ziel & Weron, 2018). Working with daily rather than hourly losses respects the fact that the 24 hours of a day share the same information.
 
-## Pairwise Diebold–Mariano tests {h=31abb1c0}
+## Pairwise Diebold–Mariano tests {h=60ffe5a4}
 
 @chart dm_pvalues
 One-sided p-values of the multivariate Diebold–Mariano test.

@@ -100,7 +100,7 @@ The beeswarm shows each applicant as a dot, placed at its SHAP value and coloure
 @chart shap_beeswarm
 SHAP values of the ten most important features for 400 test applicants; colour from blue (low value) to red (high value).
 
-## Why was this applicant rejected? A SHAP waterfall {h=d3a386db}
+## Local explanation of a rejected applicant: SHAP waterfall {h=58f4332a}
 
 For one test applicant (row 2411 of the data) the network gives a PD of 65.6 %, log-odds 0.648. The waterfall starts from the average log-odds $\phi_0=-3.613$ and adds the contributions one by one until it reaches the applicant's score: $-3.613+4.261=0.648$. The largest pushes are DEBTINC_missing ($+3.13$), the job category "Other" ($+1.74$) and DELINQ ($-0.71$, this applicant has no delinquent lines).
 
@@ -211,7 +211,7 @@ For the median-score fraud of day 2 (fraud score 99.9 %), Kernel SHAP and integr
 @chart fraud_local
 Signed attributions of saliency, gradient × input, integrated gradients and Kernel SHAP for one fraud, as shares of the total absolute attribution.
 
-# Do explanations agree, are they faithful, are they stable?
+# Agreement, faithfulness and stability of explanations
 
 Three tests should accompany every explanation: agreement between methods, faithfulness to the model and stability when nothing important changes.
 
@@ -231,14 +231,14 @@ A faithful explanation names the features whose removal changes the prediction. 
 @chart deletion_curve
 Mean fraud score of the day-2 frauds after resetting the $k$ top-ranked features to the baseline, for four methods and a random order.
 
-## Local robustness: small input change, small explanation change? {h=cba6086e}
+## Local robustness of explanations to small input changes {h=76396327}
 
 We add Gaussian noise with a standard deviation of 0.05 to 60 frauds, ten times, and measure the relative change of the attribution per unit of input change (Alvarez-Melis & Jaakkola, 2018). The medians are 0.000 for saliency, 0.028 for gradient × input, 0.030 for IG and 0.036 for SmoothGrad. Saliency does not move because inside one linear region of a ReLU network the gradient is constant: robustness to small noise comes with abrupt jumps between regions.
 
 @chart local_robustness
 Relative change of the explanation per unit of input change for four gradient methods (60 frauds × 10 perturbations).
 
-## The Rashomon effect: same accuracy, different explanations {h=8c29c34d}
+## The Rashomon effect: equally accurate models with different explanations {h=f6c7f234}
 
 We retrained the credit models with ten seeds. The test AUC of the network stays between 0.929 and 0.941, but the order of the features moves: the mean pairwise Kendall $\tau$ of the global importances is 0.83 for the MLP and 0.97 for XGBoost. For a single applicant the top feature is the same in 78 % of the seed pairs for the network and 83 % for XGBoost. Many models fit the data equally well, and they do not all tell the same story.
 

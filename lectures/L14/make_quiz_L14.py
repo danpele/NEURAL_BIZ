@@ -142,11 +142,11 @@ q(3, ("Rolling-quantile label", "How were the 'stress' labels of the S&P 500 win
    ["De un analist care s-a uitat la grafice", "De modelul VLM însuși", "După semnul randamentului din luna următoare", "Volatilitatea pe 20 de zile peste percentila 90 glisantă din ultimii trei ani, folosind doar date din trecut"],
    "O regulă bazată pe cuantile din trecut este obiectivă, reproductibilă și nu folosește viitorul, ca în cadrul grupului.",
    "Etichetarea umană este subiectivă, iar randamentele viitoare ar introduce informație din viitor; eticheta folosește doar date disponibile la sfîrșitul ferestrei."))
-q(0, ("Pictures or numbers", f"On the test years the AUC was {en(RG['numeric']['auc'], 3)} for logistic regression on numbers, {en(RG['clip_zs']['auc'], 3)} for CLIP zero-shot and {en(RG['vlm_zs']['auc'], 3)} for Qwen2-VL zero-shot. What is the lesson?",
+q(0, ("Charts or numerical data", f"On the test years the AUC was {en(RG['numeric']['auc'], 3)} for logistic regression on numbers, {en(RG['clip_zs']['auc'], 3)} for CLIP zero-shot and {en(RG['vlm_zs']['auc'], 3)} for Qwen2-VL zero-shot. What is the lesson?",
       ["When the numbers behind a chart exist, they are the better input; images help when numbers are missing", "Images always beat numbers", "VLMs are better than CLIP for charts", "AUC cannot compare these models"],
       "The chart is drawn from the same numbers with loss of resolution; the numeric model reads volatility directly.",
       "All four scores are on the same windows and labels, so the AUCs are comparable; the numbers came first here."),
-  ("Imagini sau cifre", f"Pe anii de test, AUC a fost {ro(RG['numeric']['auc'], 3)} pentru regresia logistică pe cifre, {ro(RG['clip_zs']['auc'], 3)} pentru CLIP zero-shot și {ro(RG['vlm_zs']['auc'], 3)} pentru Qwen2-VL zero-shot. Care este lecția?",
+  ("Grafice sau date numerice", f"Pe anii de test, AUC a fost {ro(RG['numeric']['auc'], 3)} pentru regresia logistică pe cifre, {ro(RG['clip_zs']['auc'], 3)} pentru CLIP zero-shot și {ro(RG['vlm_zs']['auc'], 3)} pentru Qwen2-VL zero-shot. Care este lecția?",
    ["Cînd cifrele din spatele unui grafic există, ele sînt intrarea mai bună; imaginile ajută cînd cifrele lipsesc", "Imaginile bat întotdeauna cifrele", "Modelele VLM sînt mai bune decît CLIP pentru grafice", "AUC nu poate compara aceste modele"],
    "Graficul este desenat din aceleași cifre, cu pierdere de rezoluție; modelul numeric citește direct volatilitatea.",
    "Toate cele patru scoruri sînt pe aceleași ferestre și etichete, deci AUC-urile sînt comparabile; aici cifrele au fost pe primul loc."))
@@ -190,11 +190,11 @@ q(2, ("Choosing a model", "A team has 16 labelled images per class and needs a l
    ["Un ViT antrenat de la zero", "O CNN antrenată de la zero doar pe aceste imagini", "O regresie logistică pe embedding-uri CLIP fixe, comparată cu CLIP zero-shot", "Niciun model pînă nu există 100.000 de etichete"],
    f"Cu 16 imagini pe clasă, clasificatorul pe CLIP a ajuns la {ro(F['probe']['16']['mean'])} %, față de {ro(F['cnn']['16']['mean'])} % pentru CNN.",
    "Antrenarea de la zero are nevoie de mult mai multe etichete; un model fundație cu un mic clasificator este începutul potrivit."))
-q(1, ("Benchmark first", "Which principle held in every lecture of the course?",
+q(1, ("The benchmark principle", "Which principle held in every lecture of the course?",
       ["Deep networks always beat linear models", "Every network is reported next to a simple benchmark on the same data and test period", "Only accuracy is reported", "The test set can be reused for tuning"],
       "A network is useful only if it beats the benchmark that a practitioner would otherwise use, on the same test data.",
       "Networks often do not beat good benchmarks, metrics depend on the problem, and the test set is used once."),
-  ("Întîi reperul", "Ce principiu a fost valabil în fiecare curs?",
+  ("Principiul modelului de referință", "Ce principiu a fost valabil în fiecare curs?",
    ["Rețelele profunde bat întotdeauna modelele liniare", "Fiecare rețea este raportată lîngă un reper simplu, pe aceleași date și pe aceeași perioadă de test", "Se raportează doar acuratețea", "Setul de test poate fi refolosit pentru ajustare"],
    "O rețea este utilă doar dacă depășește reperul pe care un practician l-ar folosi altfel, pe aceleași date de test.",
    "Rețelele adesea nu depășesc reperele bune, metricile depind de problemă, iar setul de test se folosește o singură dată."))

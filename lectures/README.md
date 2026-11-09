@@ -59,7 +59,7 @@ that overflow, until the deck fits. Check both contact sheets frame by frame.
 
 1. Copy the four scripts of `L0_smoke/` (`analysis_L0.py`, `build_L0.py`, `make_notebook_L0.py`, `make_quantlets_L0.py`)
    to `Lk/` and rename them; for a full-size example of the structure (objectives, sections, concept frames, wrap-up,
-   "Research from our group", "Want to learn more?", appendix), read EMQA's `lectures/L1/build_L1.py`.
+   "Research from our group", "Further reading and resources", appendix), read EMQA's `lectures/L1/build_L1.py`.
 2. **Analysis** (`analysis_Lk.py`): load data only through `nn_plot` loaders; cut-off and splits at the top; call
    `npl.seed_all()`; put every number shown anywhere in `N` (rounded as shown); draw each chart for `lang in ("en", "ro")`
    with `npl.out(fig, HERE, lang, name)` and register it with `npl.chart_meta(N, name, src_key, period_en, period_ro)`.

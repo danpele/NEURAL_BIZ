@@ -603,7 +603,7 @@ window.NN_DATA.quizzes['l5'] = {
         {
             "correct": 2,
             "en": {
-                "title": "Measured memory",
+                "title": "Sensitivity to past inputs",
                 "text": "What did the gradient sensitivity at a lag of 168 hours show for the trained load models?",
                 "options": [
                     "All three models ignore the last week",
@@ -615,7 +615,7 @@ window.NN_DATA.quizzes['l5'] = {
                 "incorrectExplanation": "The values on the slide compare the three trained networks directly; gradients with respect to inputs exist for every differentiable model."
             },
             "ro": {
-                "title": "Memoria măsurată",
+                "title": "Sensibilitatea la intrările trecute",
                 "text": "Ce a arătat sensibilitatea gradientului la decalajul de 168 de ore pentru modelele de consum antrenate?",
                 "options": [
                     "Toate trei modelele ignoră ultima săptămînă",

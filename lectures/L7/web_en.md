@@ -75,7 +75,7 @@ For the bearish test tweet shown, pretrained FinBERT gives only 7.3 % probabilit
 @chart attention_example
 Attention of pretrained FinBERT, averaged over the 12 heads, layers 6 and 12; rows are queries, columns keys.
 
-## Across layers, attention sharpens and parks on separator tokens {h=487c4245}
+## Across layers, attention becomes concentrated on separator tokens {h=0ac5578e}
 
 Over 500 test tweets, the entropy of the attention rows divided by $\log n$ is 0.76 in layer 1 and falls to 0.36 in layer 8 (1 would be uniform attention). Up to 59.3 % of all attention (layer 6) goes to the separator [SEP], a “no-op” that a head uses when it has nothing to add (Clark et al., 2019).
 
@@ -165,7 +165,7 @@ Fine-tuned FinBERT finds 82.9 % of the bearish tweets with a precision of 77.9 %
 
 @practice report per-class recall and precision: an average can hide a model that misses the news that matter.
 
-## Are the differences real? Paired bootstrap of the test tweets {h=045f8be9}
+## Paired bootstrap test of the differences on the test tweets {h=e19589a3}
 
 Resampling the test tweets 1,000 times, with the same draw for both models, gives these differences in macro-F1 (percentage points, 95 % interval): fine-tuned FinBERT minus TF-IDF +9.3 [+7.3; +11.3]; small transformer minus TF-IDF −6.6 [−8.3; −4.9]; frozen FinBERT minus TF-IDF −0.2 [−2.5; +2.0].
 

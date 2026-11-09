@@ -381,7 +381,7 @@ def build(lang, H=None):
                 "pentru un sistem de alertă, raportați sensibilitatea clasei negative alături de macro-F1: aceasta este clasa care costă bani."),
               cite=OWN, tryit=NB + "3")
 
-    D.figframe(t("On short financial sentences, TF-IDF is hard to beat", "Pe frazele financiare scurte, TF-IDF este greu de depășit"),
+    D.figframe(t("On short financial sentences, TF-IDF with logistic regression has the highest macro-F1", "Pe frazele financiare scurte, TF-IDF cu regresie logistică are cel mai mare macro-F1"),
                t("test macro-F1 of seven representations and classifiers, PhraseBank and finance tweets (bars: mean, whiskers: standard deviation).",
                  "macro-F1 pe test pentru șapte reprezentări și clasificatoare, PhraseBank și tweet-uri financiare (bare: media, mustăți: abaterea standard)."),
                None, "sentiment_models",
@@ -452,7 +452,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 5. topics
     D.section(t("Case study: topics of finance tweets", "Studiu de caz: temele tweet-urilor financiare"))
-    D.figframe(t("Twenty topics: easy for earnings and the Fed, hard for general news", "Douăzeci de teme: ușor pentru rezultate și Fed, greu pentru știrile generale"),
+    D.figframe(t("Topic classification: F1 is high for earnings and the Fed, low for general news", "Clasificarea pe teme: F1 este mare pentru rezultate și Fed, mic pentru știrile generale"),
                t("per-topic F1 on the @{topic.n_test|,d} test tweets (published validation split).",
                  "F1 pe fiecare temă, pentru cele @{topic.n_test|,d} de tweet-uri de test (setul de validare publicat)."),
                None, "topic_f1",
@@ -460,7 +460,7 @@ def build(lang, H=None):
                           "Macro-F1: TF-IDF + logistic @{topic.lr_f1|.2f}\\,\\%, embedding bag (start word2vec) @{topic.eb_f1|.2f}\\,\\%; acuratețe @{topic.lr_acc|.2f}\\,\\%, față de @{topic.majority_acc|.2f}\\,\\% pentru tema majoritară.")],
                height="0.55\\textheight", cite=OWN, tryit=NB + "5")
 
-    D.frame(t("Text models at work in finance", "Modele de text la lucru în finanțe"), cols(it(
+    D.frame(t("Applications of text models in finance", "Aplicații ale modelelor de text în finanțe"), cols(it(
         t(("\\textbf{News and tweet triage}", "route items by topic (best: @{topic.best_class}, F1 @{topic.best_f1|.1f}\\,\\%) and flag negative ones for the analyst"),
           ("\\textbf{Triajul știrilor și al tweet-urilor}", "direcționarea pe teme (cea mai bună: @{topic.best_class_ro}, F1 @{topic.best_f1|.1f}\\,\\%) și semnalarea celor negative pentru analist")),
         t(("\\textbf{Central-bank communication}", "track words near ``inflation'' or ``energy'' speech by speech"),
@@ -529,7 +529,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
-    D.frame(t("Want to learn more?", "Lecturi și resurse suplimentare"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Mikolov et al. (2013)} and \\textbf{Pennington et al. (2014)}: the two embedding papers, both short.",
           "\\textbf{Mikolov et al. (2013)} și \\textbf{Pennington et al. (2014)}: cele două articole despre vectorii de cuvinte, ambele scurte."),
         t("\\textbf{Levy \\& Goldberg (2014)}: why word2vec is a matrix factorisation.", "\\textbf{Levy \\& Goldberg (2014)}: de ce word2vec este o factorizare de matrice."),

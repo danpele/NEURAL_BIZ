@@ -167,7 +167,7 @@ Attention of pretrained FinBERT, averaged over the 12 heads, layers 6 and 12; ro
 
 @chart attention_example
 Atenția FinBERT preantrenat, mediată pe cele 12 capete, straturile 6 și 12; rîndurile sînt întrebările, coloanele cheile."""))
-    P.block(T("Across layers, attention sharpens and parks on separator tokens", "De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori"), text=T(
+    P.block(T("Across layers, attention becomes concentrated on separator tokens", "De la un strat la altul, atenția se concentrează pe tokenii separatori"), text=T(
         f"""Over {v('attn.n_tweets')} test tweets, the entropy of the attention rows divided by $\\log n$ is {v('attn.ent_l1', '.2f')} in layer 1 and falls to {v('attn.ent_min', '.2f')} in layer {v('attn.ent_min_layer')} (1 would be uniform attention). Up to {v('attn.sep_max_pct', '.1f')} % of all attention (layer {v('attn.sep_max_layer')}) goes to the separator [SEP], a “no-op” that a head uses when it has nothing to add (Clark et al., 2019).
 
 @chart attention_entropy
@@ -272,7 +272,7 @@ Macro-F1 pe tweet-urile de test, media pe semințe, cu abaterea standard."""))
         f"""FinBERT ajustat găsește {v('models.finbert_ft.rec_bearish', '.1f')} % dintre tweet-urile negative, cu o precizie de {v('models.finbert_ft.prec_bearish', '.1f')} %; TF-IDF găsește {v('models.tfidf.rec_bearish', '.1f')} %, cu {v('models.tfidf.prec_bearish', '.1f')} %, iar transformerul mic {v('models.tiny.rec_bearish', '.1f')} %, cu {v('models.tiny.prec_bearish', '.1f')} %.
 
 @practice raportați recall-ul și precizia pe clase: o medie poate ascunde un model care ratează știrile importante."""))
-    P.block(T("Are the differences real? Paired bootstrap of the test tweets", "Sînt diferențele reale? Bootstrap pereche pe tweet-urile de test"), text=T(
+    P.block(T("Paired bootstrap test of the differences on the test tweets", "Testul bootstrap pereche al diferențelor pe tweet-urile de test"), text=T(
         f"""Resampling the test tweets 1,000 times, with the same draw for both models, gives these differences in macro-F1 (percentage points, 95 % interval): fine-tuned FinBERT minus TF-IDF {v('boot.ft_tfidf.mean', '+.1f')} [{v('boot.ft_tfidf.lo', '+.1f')}; {v('boot.ft_tfidf.hi', '+.1f')}]; small transformer minus TF-IDF {v('boot.tiny_tfidf.mean', '+.1f')} [{v('boot.tiny_tfidf.lo', '+.1f')}; {v('boot.tiny_tfidf.hi', '+.1f')}]; frozen FinBERT minus TF-IDF {v('boot.probe_tfidf.mean', '+.1f')} [{v('boot.probe_tfidf.lo', '+.1f')}; {v('boot.probe_tfidf.hi', '+.1f')}].
 
 @practice an interval that excludes zero is the minimum evidence before replacing a production model.""",

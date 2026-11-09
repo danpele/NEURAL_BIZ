@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L11.js?v=20261108s">
+<link rel="preload" as="script" href="L11.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_en.js?v=20261108s", "common.js?v=20261109m"], "L11.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261109m", "L11_text_en.js?v=20261109m", "common.js?v=20261109m"], "L11.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -53,12 +53,12 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the models of the lecture when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. The explanations come from SHAP (SHapley Additive exPlanations), LIME (local interpretable model-agnostic explanations), partial dependence and ICE (individual conditional expectation) curves and IG (integrated gradients), computed for a multilayer perceptron (MLP), an XGBoost (extreme gradient boosting) ensemble and a logistic regression.</p>
-<p class="toc"><a href="#s-shap">Shapley values and SHAP</a> · <a href="#s-lime">LIME, counterfactuals and global effects</a> · <a href="#s-grad">Gradient methods for neural networks</a> · <a href="#s-stab">Do explanations agree, are they faithful, are they stable?</a></p>
+<p class="toc"><a href="#s-shap">Shapley values and SHAP</a> · <a href="#s-lime">LIME, counterfactuals and global effects</a> · <a href="#s-grad">Gradient methods for neural networks</a> · <a href="#s-stab">Agreement, faithfulness and stability of explanations</a></p>
 <h2 class="sec" id="s-shap">Shapley values and SHAP</h2>
 <section class="blk" id="waterfall">
-  <h3>Why was this applicant rejected? A SHAP waterfall</h3>
+  <h3>Local explanation of a rejected applicant: SHAP waterfall</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L11_shap_waterfall_en.jpg" alt="Slide 15: Why was this applicant rejected? A SHAP waterfall" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L11_shap_waterfall_en.jpg" alt="Slide 15: Local explanation of a rejected applicant: SHAP waterfall" loading="lazy"></a>
       <figcaption>Slide 15</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="wf-r">Applicant, ranked by the probability of default (PD) of the network (1 = lowest): <b id="wf-r-v"></b></label><input type="range" id="wf-r" min="1" max="400" step="1" value="346"></div><div class="ctl"><label for="wf-m">Model and SHAP method</label><select id="wf-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option><option value="lr">Logistic regression (linear SHAP)</option></select></div><div class="ctl"><label for="wf-k">Features shown separately: <b id="wf-k-v"></b></label><input type="range" id="wf-k" min="3" max="12" step="1" value="8"></div><button class="btn play" id="wf-play" type="button"></button></div><div class="charts one"><div class="chart" id="wf-chart"></div></div><ul class="out" id="wf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_shap_waterfall" target="_blank" rel="noopener">NN_L11_shap_waterfall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_shap_waterfall/NN_L11_shap_waterfall.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -94,7 +94,7 @@
   </div>
   <div class="ask"><span class="ask-tag">Question for the room</span> Integrated gradients promise that the attributions add up to f(x) − f(x′). Why does the sum miss with 2 steps and not with 64?</div>
   <details><summary>Answer</summary><p>IG is an integral of the gradient along the straight path from the baseline x′ (the mean legitimate transaction of day 1) to the fraud x, computed with a midpoint Riemann sum of m steps. With few steps the sum is a poor approximation: over the 211 frauds of day 2 the median relative error is 7.5% with 2 steps, 3.7% with 4 and 0.18% with 64; it falls roughly as 1/m², as for the midpoint rule. The ranking of the features is stable much earlier than the sum.</p></details>
-</section><h2 class="sec" id="s-stab">Do explanations agree, are they faithful, are they stable?</h2>
+</section><h2 class="sec" id="s-stab">Agreement, faithfulness and stability of explanations</h2>
 <section class="blk" id="deletion">
   <h3>Faithfulness of explanations: deletion test</h3>
   <div class="pair">
@@ -106,9 +106,9 @@
   <details><summary>Answer</summary><p>Integrated gradients, Kernel SHAP and LIME take the mean fraud score from 85.4% to about 61% after three features (IG 61.3%, SHAP 61.1%, LIME 61.2%); saliency (the absolute gradient) only to 71.9%, and a random order to 83.9%. The AOPC (area over the perturbation curve, mean drop over k = 1–12) is 56.2, 58.4 and 56.1 points for IG, SHAP and LIME, 48.0 for saliency and 3.9 for the random order. Move the fraud slider: for single frauds the curves can cross.</p></details>
 </section>
 <section class="blk" id="seeds">
-  <h3>The Rashomon effect: same accuracy, different explanations</h3>
+  <h3>The Rashomon effect: equally accurate models with different explanations</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L11_seed_stability_en.jpg" alt="Slide 33: The Rashomon effect: same accuracy, different explanations" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L11_seed_stability_en.jpg" alt="Slide 33: The Rashomon effect: equally accurate models with different explanations" loading="lazy"></a>
       <figcaption>Slide 33</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ss-m">Model</label><select id="ss-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option></select></div><div class="ctl"><label for="ss-s">Training seeds compared: <b id="ss-s-v"></b></label><input type="range" id="ss-s" min="2" max="10" step="1" value="10"></div><div class="ctl"><label for="ss-a">Applicant (right panel): <b id="ss-a-v"></b></label><input type="range" id="ss-a" min="1" max="200" step="1" value="1"></div><button class="btn play" id="ss-play" type="button"></button></div><div class="charts "><div class="chart" id="ss-rank"></div><div class="chart" id="ss-loc"></div></div><ul class="out" id="ss-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_seed_stability" target="_blank" rel="noopener">NN_L11_seed_stability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_seed_stability/NN_L11_seed_stability.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

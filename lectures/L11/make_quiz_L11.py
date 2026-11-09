@@ -276,11 +276,11 @@ q(2, ("AI Act", "Under the EU AI Act, how is creditworthiness scoring of natural
        ["Ca practică interzisă", "Ca risc minim, fără obligații", "Ca risc ridicat (anexa III), cu obligații de transparență și documentare", "În afara domeniului de aplicare al regulamentului"],
        "Anexa III include evaluarea bonității persoanelor fizice printre sistemele cu risc ridicat; articolul 86 dă persoanelor afectate dreptul la o explicație.",
        "Evaluarea creditului nu este nici interzisă, nici exceptată; regulamentul o plasează în categoria cu risc ridicat."))
-q(0, ("Explanation is not causation", "A SHAP analysis shows that the job category ``Other'' raises the predicted risk. What can the bank conclude?",
+q(0, ("Explanation and causation", "A SHAP analysis shows that the job category ``Other'' raises the predicted risk. What can the bank conclude?",
        ["That the model uses this category to raise the score, not that the job causes default", "That changing job would lower the applicant's true risk", "That the variable is protected by law", "That the model is unfair"],
        "Attributions describe how the model uses its inputs; causal claims need a causal design. Fairness needs a separate analysis of protected attributes and proxies.",
        "SHAP values are statements about the model, not about the world, and they do not by themselves establish unfairness."),
-  ("Explicația nu este cauzalitate", "O analiză SHAP arată că ocupația „Other” crește riscul prognozat. Ce poate concluziona banca?",
+  ("Explicație și cauzalitate", "O analiză SHAP arată că ocupația „Other” crește riscul prognozat. Ce poate concluziona banca?",
        ["Că modelul folosește această categorie pentru a crește scorul, nu că ocupația cauzează neplata", "Că schimbarea locului de muncă ar reduce riscul real al solicitantului", "Că variabila este protejată prin lege", "Că modelul este inechitabil"],
        "Atribuirile descriu cum își folosește modelul intrările; afirmațiile cauzale cer un design cauzal. Echitatea cere o analiză separată a variabilelor protejate și a substitutelor lor.",
        "Valorile SHAP sînt afirmații despre model, nu despre lume, și nu dovedesc singure inechitatea."))

@@ -75,7 +75,7 @@ Pentru tweet-ul negativ de test prezentat, FinBERT preantrenat dă doar 7,3 % pr
 @chart attention_example
 Atenția FinBERT preantrenat, mediată pe cele 12 capete, straturile 6 și 12; rîndurile sînt întrebările, coloanele cheile.
 
-## De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori {h=65e67c89}
+## De la un strat la altul, atenția se concentrează pe tokenii separatori {h=8edc0e60}
 
 Pe 500 de tweet-uri de test, entropia rîndurilor de atenție împărțită la $\log n$ este 0,76 în stratul 1 și scade la 0,36 în stratul 8 (1 ar însemna atenție uniformă). Pînă la 59,3 % din toată atenția (stratul 6) merge spre separatorul [SEP], o operație nulă pe care un cap o folosește cînd nu are nimic de adăugat (Clark et al., 2019).
 
@@ -165,7 +165,7 @@ FinBERT ajustat găsește 82,9 % dintre tweet-urile negative, cu o precizie de 7
 
 @practice raportați recall-ul și precizia pe clase: o medie poate ascunde un model care ratează știrile importante.
 
-## Sînt diferențele reale? Bootstrap pereche pe tweet-urile de test {h=0c75a42b}
+## Testul bootstrap pereche al diferențelor pe tweet-urile de test {h=2f1ba335}
 
 Reeșantionînd tweet-urile de test de 1 000 de ori, cu aceeași extragere pentru ambele modele, obținem aceste diferențe de macro-F1 (puncte procentuale, intervalul de 95 %): FinBERT ajustat minus TF-IDF +9,3 [+7,3; +11,3]; transformerul mic minus TF-IDF −6,6 [−8,3; −4,9]; FinBERT înghețat minus TF-IDF −0,2 [−2,5; +2,0].
 

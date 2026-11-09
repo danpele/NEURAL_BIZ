@@ -218,11 +218,11 @@ q(1, ("Ridge ARX", "What is the ridge ARX benchmark of the load case?",
    ["O rețea recurentă fără porți", "Un model liniar al celor 24 de ore din d+1 pe ultimele 168 de ore și pe calendar, cu o penalizare ridge aleasă pe anul de validare", "Prognoza naivă sezonieră", "Un model GARCH pentru consum"],
    "Folosește exact setul de informații al rețelelor, deci comparația izolează valoarea neliniarității și a memoriei.",
    "Ridge ARX este liniar și nerecurent; penalizarea ({load.ridge_alpha}) a fost aleasă pe 2023, nu pe anii de test."))
-q(2, ("Measured memory", "What did the gradient sensitivity at a lag of 168 hours show for the trained load models?",
+q(2, ("Sensitivity to past inputs", "What did the gradient sensitivity at a lag of 168 hours show for the trained load models?",
       ["All three models ignore the last week", "Only the RNN uses the last week", "RNN {grad.rnn.lag168_rel|.3f}, LSTM {grad.lstm.lag168_rel|.3f}, GRU {grad.gru.lag168_rel|.3f}, relative to the maximum of the last day", "The sensitivity cannot be computed for an LSTM"],
       "S(k) = mean |∂ŷ_12/∂x_(T+1−k)| measures how much the forecast reacts to an input k hours back; autograd computes it for any architecture.",
       "The values on the slide compare the three trained networks directly; gradients with respect to inputs exist for every differentiable model."),
-  ("Memoria măsurată", "Ce a arătat sensibilitatea gradientului la decalajul de 168 de ore pentru modelele de consum antrenate?",
+  ("Sensibilitatea la intrările trecute", "Ce a arătat sensibilitatea gradientului la decalajul de 168 de ore pentru modelele de consum antrenate?",
    ["Toate trei modelele ignoră ultima săptămînă", "Doar RNN folosește ultima săptămînă", "RNN {grad.rnn.lag168_rel|.3f}, LSTM {grad.lstm.lag168_rel|.3f}, GRU {grad.gru.lag168_rel|.3f}, raportat la maximul ultimei zile", "Sensibilitatea nu poate fi calculată pentru un LSTM"],
    "S(k) = media |∂ŷ_12/∂x_(T+1−k)| măsoară cît reacționează prognoza la o intrare de acum k ore; diferențierea automată o calculează pentru orice arhitectură.",
    "Valorile de pe slide compară direct cele trei rețele antrenate; gradienții în raport cu intrările există pentru orice model derivabil."))

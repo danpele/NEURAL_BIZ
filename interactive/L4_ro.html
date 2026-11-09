@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L4.js?v=20261108s">
+<link rel="preload" as="script" href="L4.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261108s", "L4_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L4.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261109m", "L4_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L4.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -66,9 +66,9 @@
   <details><summary>Răspuns</summary><p>Nouă ponderi și un termen liber, oricare ar fi mărimea imaginii (un strat dens de la 4.096 de pixeli la 4.096 de ieșiri ar avea nevoie de circa 16,8 milioane de ponderi). Cu bordare cu zero, ieșirea păstrează 64 × 64 de pixeli; fără ea, (64 − 3)/1 + 1 = 62; cu pasul 2, (64 + 2 − 3)/2 + 1 = 32 (partea întreagă). Filtrul Sobel vertical calculează o diferență stînga-minus-dreapta: valori mari, pozitive sau negative, acolo unde luminozitatea se schimbă de la stînga la dreapta, ca pe marginile autostrăzii, și zero pe cîmpurile uniforme. Treceți la imaginea cu rîul sau cu zona rezidențială: același filtru găsește alte muchii.</p></details>
 </section>
 <section class="blk" id="receptive-field">
-  <h3>Adîncimea și agregarea lărgesc ce poate vedea o unitate</h3>
+  <h3>Adîncimea, agregarea și cîmpul receptiv</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L4_receptive_field_ro.jpg" alt="Slide-ul 13: Adîncimea și agregarea lărgesc ce poate vedea o unitate" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L4_receptive_field_ro.jpg" alt="Slide-ul 13: Adîncimea, agregarea și cîmpul receptiv" loading="lazy"></a>
       <figcaption>Slide-ul 13</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="rf-l">Numărul de straturi convoluționale: <b id="rf-l-v"></b></label><input type="range" id="rf-l" min="1" max="12" step="1" value="6"></div><div class="ctl"><label for="rf-k">Mărimea nucleului</label><select id="rf-k"><option value="3" selected>3 × 3</option><option value="5">5 × 5</option><option value="7">7 × 7</option></select></div><div class="ctl ctl-tg" id="rf-p"><span class="lbl">Agregare</span><div class="tgs"><label class="tg"><input type="checkbox" name="rf-p" value="pool"> Agregare 2 × 2 la două straturi</label></div></div><button class="btn play" id="rf-play" type="button"></button></div><div class="charts "><div class="chart" id="rf-chart"></div><div class="chart" id="rf-tile"></div></div><ul class="out" id="rf-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_receptive_field" target="_blank" rel="noopener">NN_L4_receptive_field</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_receptive_field/NN_L4_receptive_field.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -106,9 +106,9 @@
   <details><summary>Răspuns</summary><p>Este problema degradării: după 12 epoci, rețeaua simplă are încă o pierdere la antrenare de 0,557 și o acuratețe pe test de 80,0%, în timp ce rețeaua reziduală ajunge la 0,291 și 87,8%. Rețeaua simplă mai adîncă nu se supraajustează (și acuratețea ei la antrenare este mică); este greu de optimizat. Conexiunile de ocolire permit fiecărui bloc să învețe o corecție a identității și lasă gradientul să se propage înapoi neschimbat. CNN mică arată cealaltă problemă: fără augmentare, acuratețea la antrenare ajunge la 96,1%, față de 87,2% pe validare; cu augmentare, diferența scade la 0,9 puncte.</p></details>
 </section>
 <section class="blk" id="transfer">
-  <h3>Ajustarea fină cîștigă, iar transferul contează cel mai mult cînd etichetele sînt puține</h3>
+  <h3>Ajustarea fină este cea mai precisă, iar transferul contează cel mai mult cînd etichetele sînt puține</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L4_transfer_curves_ro.jpg" alt="Slide-ul 33: Ajustarea fină cîștigă, iar transferul contează cel mai mult cînd etichetele sînt puține" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L4_transfer_curves_ro.jpg" alt="Slide-ul 33: Ajustarea fină este cea mai precisă, iar transferul contează cel mai mult cînd etichetele sînt puține" loading="lazy"></a>
       <figcaption>Slide-ul 33</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="tl-n">Imagini etichetate pe clasă: <b id="tl-n-v"></b></label><input type="range" id="tl-n" min="0" max="5" step="1" value="0"></div><div class="ctl ctl-tg" id="tl-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="tl-m" value="scratch" checked> CNN de la zero</label><label class="tg"><input type="checkbox" name="tl-m" value="probe" checked> ResNet-18 înghețat + regresie logistică</label><label class="tg"><input type="checkbox" name="tl-m" value="finetune" checked> ResNet-18 ajustat fin</label></div></div><button class="btn play" id="tl-play" type="button"></button></div><div class="charts "><div class="chart" id="tl-hist"></div><div class="chart" id="tl-budget"></div></div><ul class="out" id="tl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_transfer_curves" target="_blank" rel="noopener">NN_L4_transfer_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_transfer_curves/NN_L4_transfer_curves.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

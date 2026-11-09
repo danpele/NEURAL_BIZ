@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L11.js?v=20261108s">
+<link rel="preload" as="script" href="L11.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L11.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261109m", "L11_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L11.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -53,12 +53,12 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din modelele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Explicațiile provin din SHAP (explicații aditive Shapley), LIME (explicații locale interpretabile, independente de model), din curbele de dependență parțială și ICE (așteptarea condiționată individuală) și din IG (gradienți integrați), calculate pentru un perceptron multistrat (MLP), un ansamblu XGBoost (extreme gradient boosting, arbori amplificați prin gradient) și o regresie logistică.</p>
-<p class="toc"><a href="#s-shap">Valorile Shapley și SHAP</a> · <a href="#s-lime">LIME, explicații contrafactuale și efecte globale</a> · <a href="#s-grad">Metode bazate pe gradient pentru rețele neuronale</a> · <a href="#s-stab">Concordă explicațiile, sînt fidele, sînt stabile?</a></p>
+<p class="toc"><a href="#s-shap">Valorile Shapley și SHAP</a> · <a href="#s-lime">LIME, explicații contrafactuale și efecte globale</a> · <a href="#s-grad">Metode bazate pe gradient pentru rețele neuronale</a> · <a href="#s-stab">Concordanța, fidelitatea și stabilitatea explicațiilor</a></p>
 <h2 class="sec" id="s-shap">Valorile Shapley și SHAP</h2>
 <section class="blk" id="waterfall">
-  <h3>De ce a fost respins acest solicitant? Diagrama cascadă SHAP</h3>
+  <h3>Explicația locală pentru un solicitant respins: diagrama cascadă SHAP</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L11_shap_waterfall_ro.jpg" alt="Slide-ul 15: De ce a fost respins acest solicitant? Diagrama cascadă SHAP" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=15" target="_blank" rel="noopener"><img src="slides/L11_shap_waterfall_ro.jpg" alt="Slide-ul 15: Explicația locală pentru un solicitant respins: diagrama cascadă SHAP" loading="lazy"></a>
       <figcaption>Slide-ul 15</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="wf-r">Solicitantul, ordonat după probabilitatea de nerambursare (PD) a rețelei (1 = cea mai mică): <b id="wf-r-v"></b></label><input type="range" id="wf-r" min="1" max="400" step="1" value="346"></div><div class="ctl"><label for="wf-m">Modelul și metoda SHAP</label><select id="wf-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option><option value="lr">Regresie logistică (SHAP liniar)</option></select></div><div class="ctl"><label for="wf-k">Variabile afișate separat: <b id="wf-k-v"></b></label><input type="range" id="wf-k" min="3" max="12" step="1" value="8"></div><button class="btn play" id="wf-play" type="button"></button></div><div class="charts one"><div class="chart" id="wf-chart"></div></div><ul class="out" id="wf-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_shap_waterfall" target="_blank" rel="noopener">NN_L11_shap_waterfall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_shap_waterfall/NN_L11_shap_waterfall.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -94,7 +94,7 @@
   </div>
   <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Gradienții integrați promit că atribuirile se adună la f(x) − f(x′). De ce suma nu se potrivește cu 2 pași și se potrivește cu 64?</div>
   <details><summary>Răspuns</summary><p>IG este o integrală a gradientului pe drumul drept de la referința x′ (tranzacția legitimă medie din ziua 1) la frauda x, calculată cu o sumă Riemann cu punctul de mijloc, cu m pași. Cu puțini pași, suma aproximează slab integrala: pe cele 211 fraude din ziua 2, eroarea relativă mediană este 7,5% cu 2 pași, 3,7% cu 4 și 0,18% cu 64; scade aproximativ ca 1/m², ca pentru regula punctului de mijloc. Ordinea variabilelor se stabilizează mult înaintea sumei.</p></details>
-</section><h2 class="sec" id="s-stab">Concordă explicațiile, sînt fidele, sînt stabile?</h2>
+</section><h2 class="sec" id="s-stab">Concordanța, fidelitatea și stabilitatea explicațiilor</h2>
 <section class="blk" id="deletion">
   <h3>Fidelitatea explicațiilor: testul eliminării variabilelor</h3>
   <div class="pair">
@@ -106,9 +106,9 @@
   <details><summary>Răspuns</summary><p>Gradienții integrați, Kernel SHAP și LIME duc scorul mediu de fraudă de la 85,4% la aproximativ 61% după trei variabile (IG 61,3%, SHAP 61,1%, LIME 61,2%); saliența (valoarea absolută a gradientului) doar la 71,9%, iar o ordine aleatoare la 83,9%. AOPC (aria de deasupra curbei de perturbare, scăderea medie pentru k = 1–12) este 56,2, 58,4 și 56,1 puncte pentru IG, SHAP și LIME, 48,0 pentru saliență și 3,9 pentru ordinea aleatoare. Mutați cursorul fraudei: pentru fraude individuale, curbele se pot intersecta.</p></details>
 </section>
 <section class="blk" id="seeds">
-  <h3>Efectul Rashomon: aceeași acuratețe, explicații diferite</h3>
+  <h3>Efectul Rashomon: modele la fel de precise, cu explicații diferite</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L11_seed_stability_ro.jpg" alt="Slide-ul 33: Efectul Rashomon: aceeași acuratețe, explicații diferite" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L11_seed_stability_ro.jpg" alt="Slide-ul 33: Efectul Rashomon: modele la fel de precise, cu explicații diferite" loading="lazy"></a>
       <figcaption>Slide-ul 33</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ss-m">Modelul</label><select id="ss-m"><option value="mlp" selected>MLP (Kernel SHAP)</option><option value="xgb">XGBoost (TreeSHAP)</option></select></div><div class="ctl"><label for="ss-s">Valori inițiale de antrenare comparate: <b id="ss-s-v"></b></label><input type="range" id="ss-s" min="2" max="10" step="1" value="10"></div><div class="ctl"><label for="ss-a">Solicitantul (panoul din dreapta): <b id="ss-a-v"></b></label><input type="range" id="ss-a" min="1" max="200" step="1" value="1"></div><button class="btn play" id="ss-play" type="button"></button></div><div class="charts "><div class="chart" id="ss-rank"></div><div class="chart" id="ss-loc"></div></div><ul class="out" id="ss-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_seed_stability" target="_blank" rel="noopener">NN_L11_seed_stability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_seed_stability/NN_L11_seed_stability.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

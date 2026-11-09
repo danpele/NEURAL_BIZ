@@ -310,7 +310,7 @@ def build(lang, H=None):
                      "Liniile de credit cu restanțe (DELINQ) și rapoartele negative (DEROG): valorile mari cresc riscul, așa cum se așteaptă în teoria creditului.")],
                tryit=NB + " \\S2", height="0.56\\textheight", cite=OWN)
 
-    D.figframe(t("Why was this applicant rejected? A SHAP waterfall", "De ce a fost respins acest solicitant? Diagrama cascadă SHAP"),
+    D.figframe(t("Local explanation of a rejected applicant: SHAP waterfall", "Explicația locală pentru un solicitant respins: diagrama cascadă SHAP"),
                t("from the average log-odds $\\phi_0$ to this applicant's score, one feature at a time.",
                  "de la log-șansele medii $\\phi_0$ la scorul acestui solicitant, variabilă cu variabilă."),
                None, "shap_waterfall", bullets=[
@@ -478,7 +478,7 @@ def build(lang, H=None):
                tryit=NB + " \\S5", height="0.52\\textheight", cite=OWN)
 
     # ================================================================== 5. evaluation and stability
-    D.section(t("Do explanations agree, are they faithful, are they stable?", "Sînt explicațiile concordante, fidele și stabile?"))
+    D.section(t("Agreement, faithfulness and stability of explanations", "Concordanța, fidelitatea și stabilitatea explicațiilor"))
     D.figframe(t("Agreement between methods: high but not perfect", "Concordanța metodelor: ridicată, dar nu perfectă"),
                t("Spearman correlation of the global importances (mean $|$attribution$|$) of seven methods on the same frauds.",
                  "corelația Spearman a importanțelor globale (media $|$atribuirii$|$) pentru șapte metode, pe aceleași fraude."),
@@ -502,7 +502,7 @@ def build(lang, H=None):
                      "saliență @{del.aopc_sal|.1f}, ordine aleatoare @{del.aopc_rand|.1f}.")],
                tryit=NB + " \\S6", height="0.44\\textheight", cite="(Samek et al., 2017)")
 
-    D.figframe(t("Local robustness: small input change, small explanation change?", "Robustețea locală: o mică schimbare a intrării, o mică schimbare a explicației?"),
+    D.figframe(t("Local robustness of explanations to small input changes", "Robustețea locală a explicațiilor la mici modificări ale intrării"),
                t("relative change of the attribution vector per unit of a small perturbation (Lipschitz-type ratio).",
                  "variația relativă a vectorului de atribuiri pe unitatea unei perturbări mici (raport de tip Lipschitz)."),
                "\\[ \\hat L(\\vx)=\\frac{\\|\\mathbf a(\\vx+\\boldsymbol\\varepsilon)-\\mathbf a(\\vx)\\|/\\|\\mathbf a(\\vx)\\|}{\\|\\boldsymbol\\varepsilon\\|},\\quad \\boldsymbol\\varepsilon\\sim\\mathcal N(\\mathbf 0,0.05^{2}\\mathbf I) \\]",
@@ -513,7 +513,7 @@ def build(lang, H=None):
                      "în interiorul unei regiuni liniare a unei rețele ReLU gradientul nu se schimbă.")],
                tryit=NB + " \\S6", height="0.42\\textheight", cite="(Alvarez-Melis \\& Jaakkola, 2018)")
 
-    D.figframe(t("The Rashomon effect: same accuracy, different explanations", "Efectul Rashomon: aceeași acuratețe, explicații diferite"),
+    D.figframe(t("The Rashomon effect: equally accurate models with different explanations", "Efectul Rashomon: modele la fel de precise, cu explicații diferite"),
                t("rank of each feature by mean $|$SHAP$|$ for 10 retrained networks and 10 boosted ensembles (different seeds only).",
                  "rangul fiecărei variabile după media $|$SHAP$|$ pentru 10 rețele și 10 ansambluri de arbori reantrenate (doar valorile inițiale diferă)."),
                None,
@@ -620,7 +620,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies (ASE); Romanian Academy, Institute for Economic Forecasting (IPE))",
                                "(Academia de Studii Economice din București (ASE); Academia Română, Institutul de Prognoză Economică (IPE))"))
 
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{C.\\ Molnar, Interpretable Machine Learning}, free online: ", "\\textbf{C.\\ Molnar, Interpretable Machine Learning}, gratuit online: ") +
         "\\href{https://christophm.github.io/interpretable-ml-book/}{christophm.github.io/interpretable-ml-book}.",
         t("\\textbf{SHAP library} and examples: ", "\\textbf{Biblioteca SHAP} și exemple: ") + "\\href{https://shap.readthedocs.io}{shap.readthedocs.io}.",

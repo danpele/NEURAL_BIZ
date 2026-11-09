@@ -87,7 +87,7 @@ The words with the largest difference between their positive and negative coeffi
 
 # Dense representations: word embeddings
 
-## Similar contexts, similar vectors
+## The distributional hypothesis
 
 A word embedding is a row $\mathbf e_w$ of a matrix $\mathbf E$ of size $V\times d$; here the vocabulary has {w2v.V|,} words and $d={w2v.dim}$. Similarity is the cosine of two vectors. In our own vectors, cos(inflation, prices) = {cos.inflation_prices|.2f} while cos(inflation, climate) = {cos.inflation_climate|.2f}.
 
@@ -209,7 +209,7 @@ Cuvintele cu cea mai mare diferență între coeficienții pozitiv și negativ, 
 
 # Reprezentări dense: vectorii de cuvinte
 
-## Contexte asemănătoare, vectori asemănători
+## Ipoteza distribuțională
 
 Vectorul unui cuvînt este un rînd $\mathbf e_w$ al unei matrice $\mathbf E$ de dimensiune $V\times d$; aici vocabularul are {w2v.V|,} de cuvinte, iar $d={w2v.dim}$. Asemănarea este cosinusul dintre doi vectori. În vectorii noștri, cos(inflation, prices) = {cos.inflation_prices|.2f}, în timp ce cos(inflation, climate) = {cos.inflation_climate|.2f}.
 

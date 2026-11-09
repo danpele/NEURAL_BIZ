@@ -39,8 +39,8 @@
    "src": "Quantlets/L1/NN_L1_activations/activations.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_activations",
    "q": "NN_L1_activations",
-   "en": "Activation functions: smooth, cheap, and with a usable gradient",
-   "ro": "Funcțiile de activare: netede, ieftine și cu un gradient utilizabil"
+   "en": "Activation functions and their properties",
+   "ro": "Funcțiile de activare și proprietățile lor"
   },
   {
    "src": "Quantlets/L1/NN_L1_uat_california/uat_california.png",
@@ -88,8 +88,8 @@
    "src": "Quantlets/L1/NN_L1_cost_threshold/cost_threshold.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_cost_threshold",
    "q": "NN_L1_cost_threshold",
-   "en": "A missed default costs five times a rejected good applicant: cut at 1/6, not 1/2",
-   "ro": "O neplată ratată costă de cinci ori cît un client bun respins: pragul este 1/6, nu 1/2"
+   "en": "Cost-sensitive cut-off of 1/6 when a missed default costs five times a rejected good applicant",
+   "ro": "Pragul de 1/6, sensibil la costuri, cînd o neplată ratată costă de cinci ori cît un client bun respins"
   }
  ],
  "l2": [
@@ -146,8 +146,8 @@
    "src": "Quantlets/L2/NN_L2_fraud_optimizers/fraud_optimizers.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_fraud_optimizers",
    "q": "NN_L2_fraud_optimizers",
-   "en": "On card fraud, the optimiser decides how fast the model becomes useful",
-   "ro": "La fraudele cu carduri, optimizatorul decide cît de repede devine modelul util"
+   "en": "On card fraud, the optimiser determines the speed of learning",
+   "ro": "La fraudele cu carduri, optimizatorul determină viteza învățării"
   },
   {
    "src": "Quantlets/L2/NN_L2_var_backtest/var_backtest.png",
@@ -232,8 +232,8 @@
    "src": "Quantlets/L3/NN_L3_fraud_pr/fraud_pr.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_fraud_pr",
    "q": "NN_L3_fraud_pr",
-   "en": "Against logistic regression and gradient boosting, the regularised MLP holds its own",
-   "ro": "Față de regresia logistică și gradient boosting, MLP regularizat se descurcă bine"
+   "en": "The regularised MLP compared with logistic regression and gradient boosting",
+   "ro": "MLP regularizat comparat cu regresia logistică și cu gradient boosting"
   },
   {
    "src": "Quantlets/L3/NN_L3_fraud_cost/fraud_cost.png",
@@ -262,8 +262,8 @@
    "src": "Quantlets/L4/NN_L4_receptive_field/receptive_field.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_receptive_field",
    "q": "NN_L4_receptive_field",
-   "en": "Depth and pooling widen what a unit can see",
-   "ro": "Adîncimea și agregarea lărgesc ce poate vedea o unitate"
+   "en": "Depth, pooling and the receptive field",
+   "ro": "Adîncimea, agregarea și cîmpul receptiv"
   },
   {
    "src": "Quantlets/L4/NN_L4_fmnist_curves/fmnist_curves.png",
@@ -318,8 +318,8 @@
    "src": "Quantlets/L4/NN_L4_transfer_curves/transfer_curves.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_transfer_curves",
    "q": "NN_L4_transfer_curves",
-   "en": "Fine-tuning wins, and transfer matters most when labels are few",
-   "ro": "Ajustarea fină cîștigă, iar transferul contează cel mai mult cînd etichetele sînt puține"
+   "en": "Fine-tuning is the most accurate, and transfer matters most when labels are few",
+   "ro": "Ajustarea fină este cea mai precisă, iar transferul contează cel mai mult cînd etichetele sînt puține"
   },
   {
    "src": "Quantlets/L4/NN_L4_eurosat_confusion/eurosat_confusion.png",
@@ -332,8 +332,8 @@
    "src": "Quantlets/L4/NN_L4_gradcam/gradcam.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_gradcam",
    "q": "NN_L4_gradcam",
-   "en": "Grad-CAM: where in the tile does the decision come from?",
-   "ro": "Grad-CAM: din ce parte a imaginii vine decizia?"
+   "en": "Grad-CAM: image regions behind the classification",
+   "ro": "Grad-CAM: regiunile imaginii care determină clasificarea"
   }
  ],
  "l5": [
@@ -355,8 +355,8 @@
    "src": "Quantlets/L5/NN_L5_grad_lag/grad_lag.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_grad_lag",
    "q": "NN_L5_grad_lag",
-   "en": "Measured memory: the networks look at yesterday and at last week",
-   "ro": "Memoria măsurată: rețelele privesc la ziua de ieri și la săptămîna trecută"
+   "en": "Input sensitivity by lag: the networks rely on the previous day and the previous week",
+   "ro": "Sensibilitatea la intrări pe decalaje: rețelele se bazează pe ziua și pe săptămîna precedentă"
   },
   {
    "src": "Quantlets/L5/NN_L5_lstm_gates/lstm_gates.png",
@@ -448,8 +448,8 @@
    "src": "Quantlets/L6/NN_L6_sentiment_models/sentiment_models.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_sentiment_models",
    "q": "NN_L6_sentiment_models",
-   "en": "On short financial sentences, TF-IDF is hard to beat",
-   "ro": "Pe frazele financiare scurte, TF-IDF este greu de depășit"
+   "en": "On short financial sentences, TF-IDF with logistic regression has the highest macro-F1",
+   "ro": "Pe frazele financiare scurte, TF-IDF cu regresie logistică are cel mai mare macro-F1"
   },
   {
    "src": "Quantlets/L6/NN_L6_agreement/agreement.png",
@@ -469,8 +469,8 @@
    "src": "Quantlets/L6/NN_L6_topic_f1/topic_f1.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_topic_f1",
    "q": "NN_L6_topic_f1",
-   "en": "Twenty topics: easy for earnings and the Fed, hard for general news",
-   "ro": "Douăzeci de teme: ușor pentru rezultate și Fed, greu pentru știrile generale"
+   "en": "Topic classification: F1 is high for earnings and the Fed, low for general news",
+   "ro": "Clasificarea pe teme: F1 este mare pentru rezultate și Fed, mic pentru știrile generale"
   }
  ],
  "l7": [
@@ -492,8 +492,8 @@
    "src": "Quantlets/L7/NN_L7_attention_entropy/attention_entropy.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_attention_entropy",
    "q": "NN_L7_attention_entropy",
-   "en": "Across layers, attention sharpens and parks on separator tokens",
-   "ro": "De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori"
+   "en": "Across layers, attention becomes concentrated on separator tokens",
+   "ro": "De la un strat la altul, atenția se concentrează pe tokenii separatori"
   },
   {
    "src": "Quantlets/L7/NN_L7_positional_encoding/positional_encoding.png",
@@ -564,8 +564,8 @@
    "src": "Quantlets/L8/NN_L8_vae_samples/vae_samples.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_vae_samples",
    "q": "NN_L8_vae_samples",
-   "en": "Reconstructions are faithful but soft; samples are plausible but blurry",
-   "ro": "Reconstrucțiile sînt fidele, dar estompate; eșantioanele sînt plauzibile, dar neclare"
+   "en": "Quality of VAE reconstructions and generated samples",
+   "ro": "Calitatea reconstrucțiilor VAE și a eșantioanelor generate"
   },
   {
    "src": "Quantlets/L8/NN_L8_vae_elbo/vae_elbo.png",
@@ -822,8 +822,8 @@
    "src": "Quantlets/L11/NN_L11_shap_waterfall/shap_waterfall.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_shap_waterfall",
    "q": "NN_L11_shap_waterfall",
-   "en": "Why was this applicant rejected? A SHAP waterfall",
-   "ro": "De ce a fost respins acest solicitant? Diagrama cascadă SHAP"
+   "en": "Local explanation of a rejected applicant: SHAP waterfall",
+   "ro": "Explicația locală pentru un solicitant respins: diagrama cascadă SHAP"
   },
   {
    "src": "Quantlets/L11/NN_L11_shap_dependence/shap_dependence.png",
@@ -885,15 +885,15 @@
    "src": "Quantlets/L11/NN_L11_local_robustness/local_robustness.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_local_robustness",
    "q": "NN_L11_local_robustness",
-   "en": "Local robustness: small input change, small explanation change?",
-   "ro": "Robustețea locală: o mică schimbare a intrării, o mică schimbare a explicației?"
+   "en": "Local robustness of explanations to small input changes",
+   "ro": "Robustețea locală a explicațiilor la mici modificări ale intrării"
   },
   {
    "src": "Quantlets/L11/NN_L11_seed_stability/seed_stability.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_seed_stability",
    "q": "NN_L11_seed_stability",
-   "en": "The Rashomon effect: same accuracy, different explanations",
-   "ro": "Efectul Rashomon: aceeași acuratețe, explicații diferite"
+   "en": "The Rashomon effect: equally accurate models with different explanations",
+   "ro": "Efectul Rashomon: modele la fel de precise, cu explicații diferite"
   },
   {
    "src": "Quantlets/L11/NN_L11_time_shift/time_shift.png",
@@ -922,8 +922,8 @@
    "src": "Quantlets/L12/NN_L12_perplexity_size/perplexity_size.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_perplexity_size",
    "q": "NN_L12_perplexity_size",
-   "en": "Older speeches look easier: a warning about training cut-offs",
-   "ro": "Discursurile mai vechi par mai ușoare: un avertisment despre limita datelor de antrenare"
+   "en": "Training-data cut-off and the apparent ease of older speeches",
+   "ro": "Limita datelor de antrenare și ușurința aparentă a discursurilor mai vechi"
   },
   {
    "src": "Quantlets/L12/NN_L12_prompt_results/prompt_results.png",
@@ -936,8 +936,8 @@
    "src": "Quantlets/L12/NN_L12_fewshot_curve/fewshot_curve.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_fewshot_curve",
    "q": "NN_L12_fewshot_curve",
-   "en": "A few examples help the small model; more examples do not",
-   "ro": "Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută"
+   "en": "Effect of the number of examples in the prompt",
+   "ro": "Efectul numărului de exemple din prompt"
   },
   {
    "src": "Quantlets/L12/NN_L12_prompt_sensitivity/prompt_sensitivity.png",
@@ -950,8 +950,8 @@
    "src": "Quantlets/L12/NN_L12_calibration/calibration.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_calibration",
    "q": "NN_L12_calibration",
-   "en": "Are the label probabilities calibrated? Reliability on real data",
-   "ro": "Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale"
+   "en": "Calibration of the label probabilities on real data",
+   "ro": "Calibrarea probabilităților etichetelor pe date reale"
   },
   {
    "src": "Quantlets/L12/NN_L12_agreement/agreement.png",
@@ -1108,22 +1108,22 @@
    "src": "Quantlets/L14/NN_L14_text_search/text_search.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_text_search",
    "q": "NN_L14_text_search",
-   "en": "Searching images with words: the same embeddings, used the other way",
-   "ro": "Căutarea imaginilor cu ajutorul cuvintelor: aceleași embedding-uri, folosite invers"
+   "en": "Text-to-image search with the same embeddings",
+   "ro": "Căutarea imaginilor după text cu aceleași embedding-uri"
   },
   {
    "src": "Quantlets/L14/NN_L14_fewshot_eurosat/fewshot_eurosat.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_fewshot_eurosat",
    "q": "NN_L14_fewshot_eurosat",
-   "en": "Pre-trained features win with few labels; a trained CNN wins with many",
-   "ro": "Trăsăturile preantrenate cîștigă cu puține etichete; o CNN antrenată cîștigă cu multe"
+   "en": "Pre-trained features and a CNN trained from scratch, by number of labels",
+   "ro": "Trăsăturile preantrenate și o CNN antrenată de la zero, după numărul de etichete"
   },
   {
    "src": "Quantlets/L14/NN_L14_chart_regime/chart_regime.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_chart_regime",
    "q": "NN_L14_chart_regime",
-   "en": "From the picture or from the numbers? Detecting market stress",
-   "ro": "Din imagine sau din cifre? Detectarea crizelor de piață"
+   "en": "Detecting market stress from charts and from numbers",
+   "ro": "Detectarea crizelor de piață din grafice și din cifre"
   }
  ]
 };

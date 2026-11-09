@@ -320,11 +320,11 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Cho et al., 2014)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Measured memory: the networks look at yesterday and at last week}
+\begin{frame}{Input sensitivity by lag: the networks rely on the previous day and the previous week}
 \small
 \intuition{sensitivity of the output of the trained load networks to each of the 168 input hours, averaged over 200 test days.}
 \vspace{-1mm}\[ S(k)=\frac1n\sum_{i=1}^{n}\Big|\frac{\partial\hat y_{i,12}}{\partial x_{i,\,T+1-k}}\Big| \]\vspace{-2mm}
-\begin{center}\includegraphics[width=\textwidth,height=0.324\textheight,keepaspectratio]{charts/en/grad_lag.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.263\textheight,keepaspectratio]{charts/en/grad_lag.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: energy-charts.info (Fraunhofer ISE), from exchange and ENTSO-E data. Data: 200 test days of 2024; models with seed 20261108; forecast for noon (hour 12, universal time).}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -421,7 +421,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{\S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Benchmarks first: naive, HAR and GARCH}
+\begin{frame}{Benchmark models: naive, HAR and GARCH}
 \footnotesize
 \intuition{a network must beat models that econometrics has refined for decades.}
 \begin{columns}[T,onlytextwidth]
@@ -450,7 +450,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Corsi, 2009; Bollerslev, 1986)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Is one forecast really better? The Diebold--Mariano test}
+\begin{frame}{The Diebold--Mariano test of equal predictive accuracy}
 \footnotesize
 \intuition{compare the losses of two forecasts day by day and test whether their mean difference is zero.}
 \begin{columns}[T,onlytextwidth]
@@ -834,7 +834,7 @@ GRU (mean forecast) & 0.624 & 0.521 & 5 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

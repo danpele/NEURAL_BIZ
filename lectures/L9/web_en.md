@@ -109,7 +109,7 @@ $$ \mathbf m_v^{(l)}=\bigoplus_{u\in\mathcal N(v)}\phi^{(l)}\big(\mathbf h_u^{(l
 
 starting from $\mathbf h_v^{(0)}=\mathbf x_v$, where $\mathcal N(v)$ are the neighbours, $\phi$ the message function, $\bigoplus$ a permutation-invariant aggregator (sum, mean, max), $\psi$ the update and $\mathbf e_{uv}$ optional edge features. The weights are shared by all nodes, so the model size does not grow with the graph.
 
-## The aggregator decides what a GNN can tell apart {h=89c1abc7}
+## The aggregator and the expressive power of a GNN {h=8b8ffd33}
 
 Mean and max forget how many neighbours sent a message: the neighbourhoods $\{a,a\}$ and $\{a\}$ have the same mean and the same maximum, but different sums. The graph isomorphism network (GIN) uses $\mathbf h_v^{(l+1)}=\mathrm{MLP}\big((1+\varepsilon)\mathbf h_v^{(l)}+\sum_{u}\mathbf h_u^{(l)}\big)$ and is as discriminative as the Weisfeiler–Leman (WL) test. In fraud, ``one payment from a mixer'' and ``ten payments from mixers'' should not look the same; but sums over hubs need normalisation, which is why the GCN uses @eq:ahat.
 
@@ -199,13 +199,13 @@ The PR-AUC is 0.782 for the random forest, 0.763 for the forest with GCN embeddi
 @chart pr_curves
 Precision-recall curves on the test steps (scores averaged over the seeds); the dotted line is the base rate.
 
-## Is the gap real? A bootstrap of the test transactions {h=b757512e}
+## Bootstrap test of the gap on the test transactions {h=7187dca8}
 
 Resampling the test transactions 1,000 times, with the same draw for both models, gives a PR-AUC difference of 0.285 between the random forest and the GCN, with a 95 % interval of [0.259; 0.313], and a difference of −0.008 between the forest with GCN embeddings and the plain forest, interval [−0.015; −0.002]. An interval that excludes zero supports a real difference on this test period.
 
 @practice report the interval, not only the winner: a fraud committee decides on ranges, not on the third decimal.
 
-## Why the forest is hard to beat here: its features already pass messages {h=2c04a5c6}
+## Why the forest performs well here: its features already pass messages {h=ea47d18b}
 
 72 of the 165 features are aggregates over the one-hop neighbours (maxima, minima, standard deviations, correlations): one fixed GNN layer computed by Elliptic before release. A logistic regression on the local features alone reaches an F1 of 0.329, against 0.343 with the aggregates. Trees also fit rule-like fraud patterns well. GNNs earn their keep on raw graphs without engineered aggregates, on multi-hop patterns and in inductive scoring; combining both, the forest with GCN representations changes the F1 by −3.0 points.
 
@@ -251,7 +251,7 @@ On Elliptic the edges help a network, but a forest on pre-aggregated features le
 
 Graph models in finance fail in specific ways; knowing them is part of the model.
 
-## Four pitfalls of graph models in finance {h=990bb83e}
+## Common errors in applying graph models in finance {h=84f4fd34}
 
 Leakage through edges: a test node must not receive messages from the future; in Elliptic 100.0 % of the edges stay inside one time step, so the temporal split is clean. Few labels: only 22.9 % of the nodes are labelled, and labels from past investigations favour the cases already found. Drift: criminals adapt, and temporal GNNs such as EvolveGCN let the weights evolve with time. Explainability: a suspicious-activity report needs a reason a regulator can read; GNNExplainer finds the subgraph and features behind one prediction.
 

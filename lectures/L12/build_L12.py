@@ -241,7 +241,7 @@ def build(lang, H=None):
               cite="(Kaplan et al., 2020; Hoffmann et al., 2022)", tryit=NB + " \\S1")
     pp = N["ppl"]
     lower_old = all(pp[s]["old"] < pp[s]["new"] for s in pp)
-    D.figframe(t("Older speeches look easier: a warning about training cut-offs", "Discursurile mai vechi par mai ușoare: un avertisment despre limita datelor de antrenare"),
+    D.figframe(t("Training-data cut-off and the apparent ease of older speeches", "Limita datelor de antrenare și ușurința aparentă a discursurilor mai vechi"),
                t("text the model may have seen in pre-training scores a lower perplexity than text written after it.",
                  "textul pe care modelul l-ar fi putut vedea la preantrenare are o perplexitate mai mică decît textul scris după aceea."),
                None, "perplexity_size",
@@ -318,7 +318,7 @@ def build(lang, H=None):
             "small", cite="(Qwen Team, 2024; Xiao et al., 2023)")
 
     # ------------------------------------------------------------------ 3. prompt engineering, measured
-    D.section(t("Prompt engineering, measured on labelled data", "Formularea instrucțiunilor, evaluată pe date etichetate"))
+    D.section(t("Evaluation of prompt engineering on labelled data", "Evaluarea formulării instrucțiunilor pe date etichetate"))
     D.frame(t("Structure of a prompt", "Structura unui prompt"), cols(it(
         (t("\\textbf{System}", "\\textbf{Sistem}"), t("role and rules: ``You are a careful financial analyst.''", "rolul și regulile: „You are a careful financial analyst.”")),
         (t("\\textbf{Instruction}", "\\textbf{Instrucțiune}"), t("task, label set, output format: ``Answer with one word: positive, negative or neutral.''",
@@ -393,7 +393,7 @@ def build(lang, H=None):
                  t("Int. = 95\\,\\% bootstrap interval of the macro-F1.", "Int. = intervalul bootstrap de 95\\,\\% al macro-F1.")),
             "small", cite=t("(own computation)", "(calcul propriu)"), tryit=NB + " \\S3")
     fs = N["fewshot"]
-    D.figframe(t("A few examples help the small model; more examples do not", "Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută"),
+    D.figframe(t("Effect of the number of examples in the prompt", "Efectul numărului de exemple din prompt"),
                t("in-context learning: the examples change the output without changing a single weight.",
                  "învățarea în context: exemplele schimbă răspunsul fără să modifice nicio pondere."),
                "\\[ \\hat c=\\argmax_c\\,p_{\\btheta}\\big(c\\mid (x_1,c_1),\\dots,(x_k,c_k),x\\big) \\]", "fewshot_curve",
@@ -436,7 +436,7 @@ def build(lang, H=None):
          t("audit the label against the data, not the explanation against your intuition", "verificați eticheta pe date, nu explicația pe intuiție")),
         sep="4pt"), "small", cite=t("(own computation)", "(calcul propriu)"))
     cal = N["calib"]
-    D.figframe(t("Are the label probabilities calibrated? Reliability on real data", "Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale"),
+    D.figframe(t("Calibration of the label probabilities on real data", "Calibrarea probabilităților etichetelor pe date reale"),
                t("a probability of 0.9 should be right nine times in ten; points below the diagonal mean over-confidence.",
                  "o probabilitate de 0,9 trebuie să fie corectă de nouă ori din zece; punctele sub diagonală înseamnă încredere excesivă."),
                "\\[ \\mathrm{ECE}=\\sum_{b=1}^{B}\\frac{|S_b|}{n}\\,\\big|\\mathrm{acc}(S_b)-\\mathrm{conf}(S_b)\\big| \\]", "calibration",
@@ -539,7 +539,7 @@ def build(lang, H=None):
                job=t("a confident wrong name is the costly failure: require sources in every answer and check them.",
                      "un nume greșit spus cu siguranță este eșecul costisitor: cereți surse în fiecare răspuns și verificați-le."),
                height="0.46\\textheight", tryit=NB + " \\S8")
-    D.frame(t("Designing a RAG system for a bank: the choices that matter", "Proiectarea unui sistem RAG pentru o bancă: deciziile care contează"), it(
+    D.frame(t("Design choices for a RAG system in a bank", "Deciziile de proiectare ale unui sistem RAG pentru o bancă"), it(
         (t("\\textbf{Chunking}", "\\textbf{Fragmentarea}"), t("200 words with 50 overlap here; tables and footnotes need their own rules",
                                                             "aici 200 de cuvinte cu suprapunere de 50; tabelele și notele de subsol au nevoie de reguli proprii")),
         (t("\\textbf{Metadata}", "\\textbf{Metadatele}"), t("speaker, date and title travel with each chunk; the answer cites them",
@@ -554,7 +554,7 @@ def build(lang, H=None):
     # ------------------------------------------------------------------ 5. LLM-VaR
     lv = N["llmvar"]
     D.section(t("Language models as risk models: LLM-VaR", "Modelele de limbaj ca modele de risc: LLM-VaR"))
-    D.concept(t("LLM-VaR: the return history in the prompt, a quantile in the answer", "LLM-VaR: istoricul randamentelor în prompt, o cuantilă în răspuns"),
+    D.concept(t("LLM-VaR: a quantile forecast from the return history in the prompt", "LLM-VaR: prognoza cuantilei din istoricul randamentelor inclus în prompt"),
               t("no estimation and no fine-tuning: the model reads 250 returns and writes the Value-at-Risk (VaR).",
                 "fără estimare și fără ajustare fină: modelul citește 250 de randamente și scrie valoarea expusă la risc (VaR)."),
               "\\[ \\widehat{\\mathrm{VaR}}^{\\alpha}_{t+1}=\\mathrm{LLM}\\big(\\mathrm{prompt}(r_{t-249},\\dots,r_t;\\alpha)\\big) \\]"
@@ -662,7 +662,7 @@ def build(lang, H=None):
                             "Rezultatele sînt preluate din rezumatele lucrărilor; cifrele de pe celelalte slide-uri provin din datele noastre.")),
         "footnotesize", cite=t("(Bucharest University of Economic Studies, ASE; Romanian Academy, Institute for Economic Forecasting, IPE)",
                                "(Academia de Studii Economice din București, ASE; Academia Română, Institutul de Prognoză Economică, IPE)"))
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Hugging Face} course on LLMs: ", "\\textbf{Hugging Face}, curs despre LLM: ") + "\\href{https://huggingface.co/learn/llm-course}{huggingface.co/learn/llm-course}.",
         t("\\textbf{Qwen2.5} models and report: ", "\\textbf{Qwen2.5}, modele și raport: ") + "\\href{https://huggingface.co/Qwen}{huggingface.co/Qwen}.",
         t("\\textbf{Prompting guide}: ", "\\textbf{Ghid de formulare a prompturilor}: ") + "\\href{https://www.promptingguide.ai}{promptingguide.ai}.", sep="4pt"),

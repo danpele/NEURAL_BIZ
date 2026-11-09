@@ -52,7 +52,7 @@ where $\sigma_{\max}$ is the largest singular value and $\gamma\le1$ the largest
 
 The LSTM keeps a separate cell state $\mathbf c_t=\mathbf f_t\odot\mathbf c_{t-1}+\mathbf i_t\odot\tilde{\mathbf c}_t$, where the forget gate $\mathbf f_t$, the input gate $\mathbf i_t$ and the output gate $\mathbf o_t$ are logistic functions of $[\mathbf h_{t-1};\mathbf x_t]$, and $\mathbf h_t=\mathbf o_t\odot\tanh(\mathbf c_t)$. Along the cell state the Jacobian is $\mathrm{diag}(\mathbf f_t)$: when the forget gate stays near one, gradients travel far back. The GRU does the same with two gates and no separate cell, $\mathbf h_t=(1-\mathbf z_t)\odot\mathbf h_{t-1}+\mathbf z_t\odot\tilde{\mathbf h}_t$, with three quarters of the parameters of an LSTM.
 
-## Measured memory
+## Sensitivity to past inputs
 
 We measure how far back the trained load networks look: the average absolute gradient of their noon output with respect to each of the 168 input hours. The networks read the week as seven daily profiles, one step per day, which keeps the gradient path short. Relative to the maximum of the last day, the sensitivity at a lag of one week is 0.261 for the RNN, 0.131 for the LSTM and 0.140 for the GRU.
 
@@ -116,7 +116,7 @@ Fourteen winter test days: observed load, seasonal naive and LSTM forecasts.
 @chart load_errors
 MAPE by model and MAE by hour of the day.
 
-## How much history does the network need?
+## Length of the input window
 
 With the same protocol, the LSTM test MAPE is 6.77% with 24 hours of input, 7.17% with 72 hours, 5.91% with 168 hours and 5.93% with 336 hours.
 

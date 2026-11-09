@@ -495,7 +495,7 @@ window.NN_DATA.quizzes['l1'] = {
   {
    "correct": 2,
    "en": {
-    "title": "Is the gain real?",
+    "title": "Significance of the gain",
     "text": "On the HMEQ test set the AUC gain of the MLP over logistic regression is 0.023, with a 95 % paired bootstrap interval [0.008; 0.037]. What do you conclude?",
     "options": [
      "The gain is noise, because it is small",
@@ -507,7 +507,7 @@ window.NN_DATA.quizzes['l1'] = {
     "incorrectExplanation": "A small gain can still be systematic; the paired bootstrap measures how much it could vary with another test sample, and here it stays above zero."
    },
    "ro": {
-    "title": "Este cîștigul real?",
+    "title": "Semnificația cîștigului",
     "text": "Pe setul de test HMEQ, cîștigul de AUC al MLP față de regresia logistică este 0,023, cu intervalul bootstrap pe perechi de 95 % [0,008; 0,037]. Ce concluzionați?",
     "options": [
      "Cîștigul este zgomot, pentru că este mic",
@@ -873,7 +873,7 @@ window.NN_DATA.quizzes['l1'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Where deep learning pays",
+    "title": "Where deep learning adds value",
     "text": "In which situation is a deep network most likely to beat a well-tuned logistic scorecard or boosting?",
     "options": [
      "1,000 applicants with 20 engineered variables",
@@ -885,7 +885,7 @@ window.NN_DATA.quizzes['l1'] = {
     "incorrectExplanation": "Small tabular data and strict explainability favour simple models; the advantage of deep learning grows with raw, high-dimensional, plentiful inputs."
    },
    "ro": {
-    "title": "Unde merită deep learning",
+    "title": "Unde aduce valoare deep learning",
     "text": "În ce situație este cel mai probabil ca o rețea adîncă să depășească un scorecard logistic sau un boosting bine ajustate?",
     "options": [
      "1 000 de solicitanți cu 20 de variabile construite",

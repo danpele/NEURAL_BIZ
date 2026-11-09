@@ -161,7 +161,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1. the problem and the data
     D.section(t("The forecasting problem and the data", "Problema de prognoză și datele"))
-    D.frame(t("Two business decisions that need a forecast tomorrow morning", "Două decizii de afaceri care au nevoie de o prognoză mîine dimineață"), it(
+    D.frame(t("Two business decisions based on day-ahead forecasts", "Două decizii de afaceri bazate pe prognoze pentru ziua următoare"), it(
         (t("\\textbf{Energy: bidding on the day-ahead market}", "\\textbf{Energie: ofertarea pe piața pentru ziua următoare}"),
          t("a supplier, a hydro producer or a battery operator bids for the 24 hours of tomorrow before 12:00 Central European Time (CET) today",
            "un furnizor, un producător hidro sau operatorul unei baterii trimite oferte pentru cele 24 de ore de mîine înainte de ora 12:00, ora Europei Centrale (CET), de azi"),
@@ -232,7 +232,7 @@ def build(lang, H=None):
               t("load of day $d-1$ is not complete at noon; using it would leak the future into the forecast.",
                 "consumul zilei $d-1$ nu este complet la prînz; folosirea lui ar introduce viitorul în prognoză."),
               tryit=NB + " \\S1")
-    D.concept(t("Error measures and the benchmark every model must beat", "Măsurile erorii și reperul pe care orice model trebuie să-l depășească"),
+    D.concept(t("Error measures and the benchmark model", "Măsurile erorii și modelul de referință"),
               t("report errors in EUR/MWh and relative to the naive forecast, never as a percentage of a price that can be zero.",
                 "erorile se raportează în EUR/MWh și relativ la prognoza naivă, niciodată ca procent dintr-un preț care poate fi zero."),
               "\\[ \\mathrm{MAE}=\\frac{1}{24|\\mathcal T|}\\sum_{d\\in\\mathcal T}\\sum_{h}|y_{d,h}-\\hat y_{d,h}|,\\quad "
@@ -453,7 +453,7 @@ def build(lang, H=None):
               t("a covariate known in advance (a weather or load forecast) is worth more than one known only in the past.",
                 "o covariabilă cunoscută dinainte (prognoza meteo sau a consumului) valorează mai mult decît una cunoscută doar în trecut."),
               cite="(Ansari et al., 2025)", tryit=NB + " \\S5")
-    D.concept(t("Is the difference real? The Diebold--Mariano test on daily losses", "Este diferența reală? Testul Diebold--Mariano pe pierderile zilnice"),
+    D.concept(t("The Diebold--Mariano test on daily losses", "Testul Diebold--Mariano pe pierderile zilnice"),
               t("a lower average error can be luck; test whether the daily loss differential has mean zero.",
                 "o eroare medie mai mică poate fi noroc; testăm dacă diferența zilnică a pierderilor are media zero."),
               "\\[ \\Delta_d=\\lVert\\mathbf e^{A}_d\\rVert_1-\\lVert\\mathbf e^{B}_d\\rVert_1,\\qquad \\mathrm{DM}=\\frac{\\bar\\Delta}{\\hat\\sigma_\\Delta/\\sqrt{|\\mathcal T|}}\\ \\overset{a}{\\sim}\\ \\mathcal N(0,1) \\]" +
@@ -655,7 +655,7 @@ def build(lang, H=None):
                             "Rezultatele sînt preluate din rezumatele lucrărilor; cifrele de pe celelalte slide-uri provin din datele noastre.")),
         "footnotesize", cite=t("(Bucharest University of Economic Studies, ASE; Romanian Academy, Institute for Economic Forecasting, IPE)",
                                "(Academia de Studii Economice din București, ASE; Academia Română, Institutul de Prognoză Economică, IPE)"))
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Chronos} code and models: ", "\\textbf{Chronos}, cod și modele: ") + "\\href{https://github.com/amazon-science/chronos-forecasting}{github.com/amazon-science/chronos-forecasting}.",
         t("\\textbf{TimesFM}: ", "\\textbf{TimesFM}: ") + "\\href{https://github.com/google-research/timesfm}{github.com/google-research/timesfm}.",
         t("\\textbf{epftoolbox}, the open benchmark of Lago et al.\\ (2021): ", "\\textbf{epftoolbox}, reperul deschis al lui Lago et al.\\ (2021): ") +

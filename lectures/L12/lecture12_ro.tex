@@ -214,10 +214,10 @@ VaR & valoarea expusă la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kaplan et al., 2020; Hoffmann et al., 2022)}\hfill\tryit{notebook \S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Discursurile mai vechi par mai ușoare: un avertisment despre limita datelor de antrenare}
+\begin{frame}{Limita datelor de antrenare și ușurința aparentă a discursurilor mai vechi}
 \small
 \intuition{textul pe care modelul l-ar fi putut vedea la preantrenare are o perplexitate mai mică decît textul scris după aceea.}
-\begin{center}\includegraphics[width=\textwidth,height=0.196\textheight,keepaspectratio]{charts/ro/perplexity_size.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.279\textheight,keepaspectratio]{charts/ro/perplexity_size.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Banca Centrală Europeană, setul de discursuri. Date: 40 + 40 de discursuri, primii 1.024 de tokeni din fiecare.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -332,7 +332,7 @@ Frecvența termenului--frecvența inversă în documente (TF-IDF) + regresie log
 \end{frame}
 
 
-\section{Formularea instrucțiunilor, evaluată pe date etichetate}
+\section{Evaluarea formulării instrucțiunilor pe date etichetate}
 
 \begin{frame}{Structura unui prompt}
 \small
@@ -461,7 +461,7 @@ embedding 1,5B + logistică & 91{,}3 & \cellcolor{Forest!47}87{,}5 & [84{,}5; 90
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută}
+\begin{frame}{Efectul numărului de exemple din prompt}
 \small
 \intuition{învățarea în context: exemplele schimbă răspunsul fără să modifice nicio pondere.}
 \vspace{-1mm}\[ \hat c=\argmax_c\,p_{\btheta}\big(c\mid (x_1,c_1),\dots,(x_k,c_k),x\big) \]\vspace{-2mm}
@@ -545,7 +545,7 @@ embedding 1,5B + logistică & 91{,}3 & \cellcolor{Forest!47}87{,}5 & [84{,}5; 90
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale}
+\begin{frame}{Calibrarea probabilităților etichetelor pe date reale}
 \small
 \intuition{o probabilitate de 0,9 trebuie să fie corectă de nouă ori din zece; punctele sub diagonală înseamnă încredere excesivă.}
 \vspace{-1mm}\[ \mathrm{ECE}=\sum_{b=1}^{B}\frac{|S_b|}{n}\,\big|\mathrm{acc}(S_b)-\mathrm{conf}(S_b)\big| \]\vspace{-2mm}
@@ -722,7 +722,7 @@ neutru & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white}
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_rag\_qa}{Quantlets/L12/NN_L12_rag_qa}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Proiectarea unui sistem RAG pentru o bancă: deciziile care contează}
+\begin{frame}{Deciziile de proiectare ale unui sistem RAG pentru o bancă}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Fragmentarea}
@@ -751,7 +751,7 @@ neutru & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white}
 
 \section{Modelele de limbaj ca modele de risc: LLM-VaR}
 
-\begin{frame}{LLM-VaR: istoricul randamentelor în prompt, o cuantilă în răspuns}
+\begin{frame}{LLM-VaR: prognoza cuantilei din istoricul randamentelor inclus în prompt}
 \footnotesize
 \intuition{fără estimare și fără ajustare fină: modelul citește 250 de randamente și scrie valoarea expusă la risc (VaR).}
 \begin{columns}[T,onlytextwidth]
@@ -926,7 +926,7 @@ Protecția datelor & documente ale clienților în prompturi & modele locale; ob
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Academia de Studii Economice din București, ASE; Academia Română, Institutul de Prognoză Economică, IPE)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Vreți să aflați mai mult?}
+\begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

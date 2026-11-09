@@ -47,7 +47,7 @@ The words with the largest difference between their positive and negative coeffi
 
 # Dense representations: word embeddings
 
-## Similar contexts, similar vectors
+## The distributional hypothesis
 
 A word embedding is a row $\mathbf e_w$ of a matrix $\mathbf E$ of size $V\times d$; here the vocabulary has 8,539 words and $d=100$. Similarity is the cosine of two vectors. In our own vectors, cos(inflation, prices) = 0.49 while cos(inflation, climate) = 0.16.
 

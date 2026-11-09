@@ -267,7 +267,7 @@ Euro area AAA yield curve, European Central Bank (ECB) & 60 tables rendered as i
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L14\_zeroshot\_confusion}{Quantlets/L14/NN_L14_zeroshot_confusion}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Searching images with words: the same embeddings, used the other way}
+\begin{frame}{Text-to-image search with the same embeddings}
 \small
 \intuition{rank all test images by their similarity to a sentence; a bank can find flooded fields or new buildings without labels.}
 \vspace{-1mm}\[ \mathrm{P@}k(c)=\frac{1}{k}\sum_{j\in\mathrm{top}_k(\mathbf w_c)}\mathbb 1\{y_j=c\},\quad \mathrm{top}_k(\mathbf w_c)=\text{the $k$ images with the largest}\ \mathbf u(I_j)^{\top}\mathbf w_c \]\vspace{-2mm}
@@ -309,7 +309,7 @@ Euro area AAA yield curve, European Central Bank (ECB) & 60 tables rendered as i
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Pre-trained features win with few labels; a trained CNN wins with many}
+\begin{frame}{Pre-trained features and a CNN trained from scratch, by number of labels}
 \small
 \intuition{one labelled image per class already beats zero-shot; from about 64 per class a small network trained from scratch catches up.}
 \begin{center}\includegraphics[width=\textwidth,height=0.331\textheight,keepaspectratio]{charts/en/fewshot_eurosat.pdf}\end{center}\vspace{-3mm}
@@ -408,7 +408,7 @@ Qwen2-VL-2B (chart questions) & 2.21 billion & 262 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Jheng, Pele, Tak \& Găman, 2026)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{From the picture or from the numbers? Detecting market stress}
+\begin{frame}{Detecting market stress from charts and from numbers}
 \small
 \intuition{left: a calm and a stress window as the models see them; right: receiver operating characteristic (ROC) curves on the test years.}
 \begin{center}\includegraphics[width=\textwidth,height=0.469\textheight,keepaspectratio]{charts/en/chart_regime.pdf}\end{center}\vspace{-3mm}
@@ -805,7 +805,7 @@ Contrastive image--text loss & $-\log\frac{e^{s_{ii}}}{\sum_j e^{s_{ij}}}$ & 14 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies, ASE; Romanian Academy, Institute for Economic Forecasting, IPE)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

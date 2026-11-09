@@ -120,7 +120,7 @@ With only two latent dimensions and no labels, shoes, bags and garments fall int
 @chart vae_latent
 Latent means of the 10,000 test images, VAE with $k=2$, coloured by class.
 
-## Reconstructions are faithful but soft; samples are plausible but blurry {h=1a6d8d02}
+## Quality of VAE reconstructions and generated samples {h=3089b3cb}
 
 The first row shows real test images, the second their reconstructions through a 16-dimensional code, the third new images decoded from random codes. The blur comes from the Gaussian posterior and the pixel-wise loss: the decoder averages over the plausible details.
 
@@ -187,7 +187,7 @@ The autocorrelation of absolute real returns is 0.28 at lag 1 and still 0.27 at 
 @chart gan_acf
 Autocorrelation of absolute returns, lags 1 to 20, real returns and GAN samples.
 
-## Mode collapse and the Wasserstein fix {h=1fe6586a}
+## Mode collapse and the Wasserstein GAN {h=58a8357a}
 
 A generator can win by producing only a few convincing samples, for example only calm days and never a crash: mode collapse. The Wasserstein GAN (WGAN) replaces the Jensen–Shannon divergence by the Wasserstein distance $W_1(p_{data},p_G)=\sup_{\|f\|_L\le1}\mathbb E_{p_{data}}[f]-\mathbb E_{p_G}[f]$, computed by a 1-Lipschitz critic, which gives useful gradients even when the two distributions do not overlap.
 

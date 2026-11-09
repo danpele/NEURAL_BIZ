@@ -299,7 +299,7 @@ bias $b$ &  &  & \ensuremath{-}1.99 \\
 
 \section{The perceptron}
 
-\begin{frame}{From a logical neuron to a learning machine}
+\begin{frame}{From the McCulloch--Pitts neuron to the perceptron}
 \footnotesize
 \intuition{McCulloch and Pitts wrote the neuron as a threshold unit; Rosenblatt made its weights learn from examples.}
 \begin{columns}[T,onlytextwidth]
@@ -423,7 +423,7 @@ bias $b$ &  &  & \ensuremath{-}1.99 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~6)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Activation functions: smooth, cheap, and with a usable gradient}
+\begin{frame}{Activation functions and their properties}
 \small
 \vspace{-1mm}\[ \sigma(z)=\tfrac{1}{1+e^{-z}},\ \ \tanh(z)=\tfrac{e^z-e^{-z}}{e^z+e^{-z}},\ \ \mathrm{ReLU}(z)=\max(0,z),\ \ \mathrm{GELU}(z)=z\,\Phi(z) \]\vspace{-2mm}
 \begin{center}\includegraphics[width=\textwidth,height=0.316\textheight,keepaspectratio]{charts/en/activations.pdf}\end{center}\vspace{-3mm}
@@ -552,7 +552,7 @@ quantile $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 
 \section{Case study: credit scoring with real loans}
 
-\begin{frame}{The protocol: same split, same inputs, three models}
+\begin{frame}{Experimental protocol: a common split and common inputs for three models}
 \small
 \intuition{a fair comparison changes only the model; data, split and metric stay fixed before anything is trained.}
 \begin{columns}[T,onlytextwidth]
@@ -689,10 +689,10 @@ quantile $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Nadeau \& Bengio, 2003)}\hfill\tryit{notebook \S6}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A missed default costs five times a rejected good applicant: cut at 1/6, not 1/2}
+\begin{frame}{Cost-sensitive cut-off of 1/6 when a missed default costs five times a rejected good applicant}
 \small
 \vspace{-1mm}\[ \text{reject if}\ \ c_{\mathrm{FN}}\,p\ \ge\ c_{\mathrm{FP}}(1-p)\iff p\ \ge\ \frac{c_{\mathrm{FP}}}{c_{\mathrm{FP}}+c_{\mathrm{FN}}}=\frac16 \]\vspace{-2mm}
-\begin{center}\includegraphics[width=\textwidth,height=0.396\textheight,keepaspectratio]{charts/en/cost_threshold.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.306\textheight,keepaspectratio]{charts/en/cost_threshold.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: UCI Machine Learning Repository, Statlog German credit. Data: 1,000 applicants, out-of-fold predictions.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -706,7 +706,7 @@ quantile $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L1\_cost\_threshold}{Quantlets/L1/NN_L1_cost_threshold}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A minimal MLP in PyTorch: about fifteen lines}
+\begin{frame}{A minimal MLP implementation in PyTorch}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.55\textwidth}
@@ -834,7 +834,7 @@ p = torch.sigmoid(model(x\_test))~~ \# predicted PD\par}
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

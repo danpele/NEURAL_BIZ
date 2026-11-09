@@ -470,10 +470,10 @@ Target in the inputs & `days past due' used to predict default & keep only infor
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L3\_reg\_ablation}{Quantlets/L3/NN_L3_reg_ablation}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Against logistic regression and gradient boosting, the regularised MLP holds its own}
+\begin{frame}{The regularised MLP compared with logistic regression and gradient boosting}
 \small
 \intuition{test hours (last 20\,\%); the MLP averages 5 seeds with early stopping, decay and dropout.}
-\begin{center}\includegraphics[width=\textwidth,height=0.310\textheight,keepaspectratio]{charts/en/fraud_pr.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.401\textheight,keepaspectratio]{charts/en/fraud_pr.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597). Data: time-ordered test set: 5,785 transactions, 75 frauds, population-weighted.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -594,7 +594,7 @@ Smaller model & fewer parameters & width, depth & logistic beats MLP on German c
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

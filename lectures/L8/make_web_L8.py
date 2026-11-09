@@ -237,7 +237,7 @@ Latent means of the 10,000 test images, VAE with $k=2$, coloured by class.""",
 
 @chart vae_latent
 Mediile latente ale celor 10 000 de imagini de test, VAE cu $k=2$, colorate după clasă."""))
-    P.block(T("Reconstructions are faithful but soft; samples are plausible but blurry", "Reconstrucțiile sînt fidele, dar estompate; eșantioanele sînt plauzibile, dar neclare"), text=T(
+    P.block(T("Quality of VAE reconstructions and generated samples", "Calitatea reconstrucțiilor VAE și a eșantioanelor generate"), text=T(
         """The first row shows real test images, the second their reconstructions through a 16-dimensional code, the third new images decoded from random codes. The blur comes from the Gaussian posterior and the pixel-wise loss: the decoder averages over the plausible details.
 
 @chart vae_samples
@@ -318,7 +318,7 @@ Autocorrelation of absolute returns, lags 1 to 20, real returns and GAN samples.
 
 @chart gan_acf
 Autocorelația randamentelor în valoare absolută, decalajele 1–20, randamente reale și eșantioane GAN."""))
-    P.block(T("Mode collapse and the Wasserstein fix", "Colapsul modurilor și soluția Wasserstein"), text=T(
+    P.block(T("Mode collapse and the Wasserstein GAN", "Colapsul modurilor și GAN-ul Wasserstein"), text=T(
         """A generator can win by producing only a few convincing samples, for example only calm days and never a crash: mode collapse. The Wasserstein GAN (WGAN) replaces the Jensen–Shannon divergence by the Wasserstein distance $W_1(p_{data},p_G)=\\sup_{\\|f\\|_L\\le1}\\mathbb E_{p_{data}}[f]-\\mathbb E_{p_G}[f]$, computed by a 1-Lipschitz critic, which gives useful gradients even when the two distributions do not overlap.
 
 @practice a stress-test generator that has collapsed onto calm days is worse than no generator.""",

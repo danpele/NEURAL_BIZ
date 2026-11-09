@@ -229,7 +229,7 @@ EuroSAT & imagini satelitare Sentinel-2 din Europa, 10 clase de utilizare a tere
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, secț.~10.2)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Adîncimea și agregarea lărgesc ce poate vedea o unitate}
+\begin{frame}{Adîncimea, agregarea și cîmpul receptiv}
 \small
 \intuition{cîmpul receptiv este zona din intrare care poate influența o unitate.}
 \vspace{-1mm}\[ r_l=r_{l-1}+(k_l-1)\prod_{i<l}s_i,\qquad r_0=1 \]\vspace{-2mm}
@@ -366,7 +366,7 @@ EuroSAT & imagini satelitare Sentinel-2 din Europa, 10 clase de utilizare a tere
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L4\_fmnist\_compare}{Quantlets/L4/NN_L4_fmnist_compare}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Este cîștigul real? Testul McNemar pe aceleași imagini de test}
+\begin{frame}{Testul McNemar pentru cîștigul de acuratețe pe aceleași imagini de test}
 \footnotesize
 \intuition{două clasificatoare evaluate pe aceleași imagini diferă doar prin imaginile pe care exact unul dintre ele le clasifică bine.}
 \begin{columns}[T,onlytextwidth]
@@ -589,7 +589,7 @@ Transformer vizual & 2021 & fragmente de imagine tratate ca unități lexicale, 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Yosinski et al., 2014)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Protocolul: aceeași împărțire, același test, trei strategii}
+\begin{frame}{Protocolul experimental pentru cele trei strategii de transfer}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -624,7 +624,7 @@ Transformer vizual & 2021 & fragmente de imagine tratate ca unități lexicale, 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{\S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ajustarea fină cîștigă, iar transferul contează cel mai mult cînd etichetele sînt puține}
+\begin{frame}{Ajustarea fină este cea mai precisă, iar transferul contează cel mai mult cînd etichetele sînt puține}
 \small
 \intuition{stînga: învățarea cu toate etichetele; dreapta: acuratețea pe test cînd sînt disponibile doar $n$ imagini etichetate pe clasă.}
 \begin{center}\includegraphics[width=\textwidth,height=0.333\textheight,keepaspectratio]{charts/ro/transfer_curves.pdf}\end{center}\vspace{-3mm}
@@ -637,7 +637,7 @@ Transformer vizual & 2021 & fragmente de imagine tratate ca unități lexicale, 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L4\_transfer\_curves}{Quantlets/L4/NN_L4_transfer_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Bugetul de etichete: cît economisește transferul învățării}
+\begin{frame}{Bugetul de etichete și economia obținută prin transferul învățării}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\textwidth}
@@ -686,7 +686,7 @@ Imagini/clasă & De la zero & Înghețat & Ajustat fin \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L4\_eurosat\_confusion}{Quantlets/L4/NN_L4_eurosat_confusion}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Grad-CAM: din ce parte a imaginii vine decizia?}
+\begin{frame}{Grad-CAM: regiunile imaginii care determină clasificarea}
 \footnotesize
 \intuition{ponderăm fiecare hartă de trăsături după cît reacționează scorul clasei la ea, adunăm și păstrăm partea pozitivă.}
 \begin{columns}[T,onlytextwidth]

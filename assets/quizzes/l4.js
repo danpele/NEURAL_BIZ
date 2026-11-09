@@ -630,7 +630,7 @@ window.NN_DATA.quizzes['l4'] = {
         {
             "correct": 3,
             "en": {
-                "title": "Shares, not tiles",
+                "title": "Accuracy of aggregate shares",
                 "text": "An insurer needs the share of crops in a region. On the test tiles the true share was 20.37% and the predicted 20.54%. What explains why shares can be accurate even with errors?",
                 "options": [
                     "The model never makes errors on crops",
@@ -642,7 +642,7 @@ window.NN_DATA.quizzes['l4'] = {
                 "incorrectExplanation": "The model does make errors and the shares are measured on the test tiles; what matters for the share is the balance of errors into and out of the class."
             },
             "ro": {
-                "title": "Ponderi, nu imagini",
+                "title": "Acuratețea ponderilor agregate",
                 "text": "Un asigurător are nevoie de ponderea culturilor într-o regiune. Pe imaginile de test, ponderea reală a fost 20,37%, iar cea prezisă 20,54%. Ce explică de ce ponderile pot fi exacte chiar cu erori?",
                 "options": [
                     "Modelul nu greșește niciodată la culturi",

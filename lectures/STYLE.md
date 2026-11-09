@@ -49,7 +49,7 @@ check the ones that can be checked; the others are checked by reading the contac
 14. **Build quality.** 0 LaTeX errors and no overfull box > 1 pt in both languages; never `\hfuzz`, `\vfuzz`,
     `\hbadness`. At most 60 main frames and 5 quiz frames.
 15. **Structure of a deck.** Title → learning objectives → Abbreviations → sections (outline frame at each) →
-    wrap-up → "Research from our group" → "Want to learn more?" → References → appendix.
+    wrap-up → "Research from our group" → "Further reading and resources" → References → appendix.
 16. **References** are verified on Crossref/DOI or arXiv pages; every reference cited on a slide is in the References
     frames and in the site bibliography (`assets/course-data.js`).
 

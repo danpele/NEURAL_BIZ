@@ -387,7 +387,7 @@ window.NN_DATA.quizzes['l14'] = {
   {
    "correct": 0,
    "en": {
-    "title": "Pictures or numbers",
+    "title": "Charts or numerical data",
     "text": "On the test years the AUC was 0.933 for logistic regression on numbers, 0.907 for CLIP zero-shot and 0.758 for Qwen2-VL zero-shot. What is the lesson?",
     "options": [
      "When the numbers behind a chart exist, they are the better input; images help when numbers are missing",
@@ -399,7 +399,7 @@ window.NN_DATA.quizzes['l14'] = {
     "incorrectExplanation": "All four scores are on the same windows and labels, so the AUCs are comparable; the numbers came first here."
    },
    "ro": {
-    "title": "Imagini sau cifre",
+    "title": "Grafice sau date numerice",
     "text": "Pe anii de test, AUC a fost 0,933 pentru regresia logistică pe cifre, 0,907 pentru CLIP zero-shot și 0,758 pentru Qwen2-VL zero-shot. Care este lecția?",
     "options": [
      "Cînd cifrele din spatele unui grafic există, ele sînt intrarea mai bună; imaginile ajută cînd cifrele lipsesc",
@@ -549,7 +549,7 @@ window.NN_DATA.quizzes['l14'] = {
   {
    "correct": 1,
    "en": {
-    "title": "Benchmark first",
+    "title": "The benchmark principle",
     "text": "Which principle held in every lecture of the course?",
     "options": [
      "Deep networks always beat linear models",
@@ -561,7 +561,7 @@ window.NN_DATA.quizzes['l14'] = {
     "incorrectExplanation": "Networks often do not beat good benchmarks, metrics depend on the problem, and the test set is used once."
    },
    "ro": {
-    "title": "Întîi reperul",
+    "title": "Principiul modelului de referință",
     "text": "Ce principiu a fost valabil în fiecare curs?",
     "options": [
      "Rețelele profunde bat întotdeauna modelele liniare",

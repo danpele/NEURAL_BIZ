@@ -227,7 +227,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, sec.~10.2)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Depth and pooling widen what a unit can see}
+\begin{frame}{Depth, pooling and the receptive field}
 \small
 \intuition{the receptive field is the patch of the input that can influence one unit.}
 \vspace{-1mm}\[ r_l=r_{l-1}+(k_l-1)\prod_{i<l}s_i,\qquad r_0=1 \]\vspace{-2mm}
@@ -364,7 +364,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L4\_fmnist\_compare}{Quantlets/L4/NN_L4_fmnist_compare}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Is the gain real? McNemar's test on the same test images}
+\begin{frame}{McNemar's test of the accuracy gain on the same test images}
 \footnotesize
 \intuition{two classifiers scored on the same images differ only through the images on which exactly one of them is right.}
 \begin{columns}[T,onlytextwidth]
@@ -587,7 +587,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Yosinski et al., 2014)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Protocol: same split, same test, three strategies}
+\begin{frame}{Experimental protocol for the three transfer strategies}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -622,7 +622,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{\S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Fine-tuning wins, and transfer matters most when labels are few}
+\begin{frame}{Fine-tuning is the most accurate, and transfer matters most when labels are few}
 \small
 \intuition{left: learning with all labels; right: test accuracy when only $n$ labelled tiles per class are available.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/transfer_curves.pdf}\end{center}\vspace{-3mm}
@@ -635,7 +635,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L4\_transfer\_curves}{Quantlets/L4/NN_L4_transfer_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The label budget: what transfer learning saves}
+\begin{frame}{The label budget and the savings from transfer learning}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\textwidth}
@@ -684,7 +684,7 @@ Tiles/class & Scratch & Frozen & Fine-tuned \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L4\_eurosat\_confusion}{Quantlets/L4/NN_L4_eurosat_confusion}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Grad-CAM: where in the tile does the decision come from?}
+\begin{frame}{Grad-CAM: image regions behind the classification}
 \footnotesize
 \intuition{weight each feature map by how much the class score reacts to it, sum, and keep the positive part.}
 \begin{columns}[T,onlytextwidth]
@@ -916,7 +916,7 @@ Tiles/class & Scratch & Frozen & Fine-tuned \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

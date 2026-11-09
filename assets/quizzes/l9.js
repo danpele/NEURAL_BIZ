@@ -846,7 +846,7 @@ window.NN_DATA.quizzes['l9'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Shallow by design",
+    "title": "Number of layers in a GNN",
     "text": "A practitioner wants a GNN to see 10 hops of money flow. What is the recommended design?",
     "options": [
      "Stack 10 plain GCN layers",
@@ -858,7 +858,7 @@ window.NN_DATA.quizzes['l9'] = {
     "incorrectExplanation": "Ten averaging layers would blur all nodes together; shallow models with residual links are the standard remedy."
    },
    "ro": {
-    "title": "Puțin adînci prin construcție",
+    "title": "Numărul de straturi într-o rețea GNN",
     "text": "Un practician vrea ca o rețea GNN să vadă 10 salturi ale fluxului de bani. Care este arhitectura recomandată?",
     "options": [
      "10 straturi GCN simple",

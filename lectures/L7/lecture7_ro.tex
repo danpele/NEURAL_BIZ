@@ -289,9 +289,9 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcule proprii; media pe cele 12 capete)}\hfill\qlink{NN\_L7\_attention\_example}{Quantlets/L7/NN_L7_attention_example}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori}
+\begin{frame}{De la un strat la altul, atenția se concentrează pe tokenii separatori}
 \small
-\begin{center}\includegraphics[width=\textwidth,height=0.456\textheight,keepaspectratio]{charts/ro/attention_entropy.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.520\textheight,keepaspectratio]{charts/ro/attention_entropy.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Seturile Twitter financial news (Hugging Face, zeroshot). Date: 500 de tweet-uri de test; FinBERT preantrenat.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -601,7 +601,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcule proprii)}\hfill\tryit{notebook, secțiunea 5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Sînt diferențele reale? Bootstrap pereche pe tweet-urile de test}
+\begin{frame}{Testul bootstrap pereche al diferențelor pe tweet-urile de test}
 \footnotesize
 \intuition{Reeșantionînd tweet-urile de test, cu aceeași extragere pentru ambele modele, vedem cît s-ar putea mișca întîmplător o diferență de macro-F1.}
 \begin{columns}[T,onlytextwidth]

@@ -531,10 +531,10 @@ $a:b::c:\,?$ & răspuns \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{\S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Pe frazele financiare scurte, TF-IDF este greu de depășit}
+\begin{frame}{Pe frazele financiare scurte, TF-IDF cu regresie logistică are cel mai mare macro-F1}
 \small
 \intuition{macro-F1 pe test pentru șapte reprezentări și clasificatoare, PhraseBank și tweet-uri financiare (bare: media, mustăți: abaterea standard).}
-\begin{center}\includegraphics[width=\textwidth,height=0.470\textheight,keepaspectratio]{charts/ro/sentiment_models.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.409\textheight,keepaspectratio]{charts/ro/sentiment_models.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Financial PhraseBank (Malo et al., 2014); Twitter financial news (Hugging Face, zeroshot). Date: PhraseBank: 5 împărțiri aleatoare 70/15/15; tweet-uri: setul de validare publicat, folosit ca test, 3 semințe.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -672,10 +672,10 @@ pozitiv & 50 & 263 & -- \\
 
 \section{Studiu de caz: temele tweet-urilor financiare}
 
-\begin{frame}{Douăzeci de teme: ușor pentru rezultate și Fed, greu pentru știrile generale}
+\begin{frame}{Clasificarea pe teme: F1 este mare pentru rezultate și Fed, mic pentru știrile generale}
 \small
 \intuition{F1 pe fiecare temă, pentru cele 4\,117 de tweet-uri de test (setul de validare publicat).}
-\begin{center}\includegraphics[width=\textwidth,height=0.525\textheight,keepaspectratio]{charts/ro/topic_f1.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.464\textheight,keepaspectratio]{charts/ro/topic_f1.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Seturile Twitter financial news (Hugging Face, zeroshot). Date: 4.117 de tweet-uri de test (setul de validare publicat). 20 de teme.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -687,7 +687,7 @@ pozitiv & 50 & 263 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L6\_topic\_f1}{Quantlets/L6/NN_L6_topic_f1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Modele de text la lucru în finanțe}
+\begin{frame}{Aplicații ale modelelor de text în finanțe}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

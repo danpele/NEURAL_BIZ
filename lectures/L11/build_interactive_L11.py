@@ -34,9 +34,9 @@ BLOCKS = [('waterfall', 'shap_waterfall', 'shap', 'wf'),
 
 SECTIONS = {
  'en': dict(shap='Shapley values and SHAP', lime='LIME, counterfactuals and global effects', grad='Gradient methods for neural networks',
-            stab='Do explanations agree, are they faithful, are they stable?'),
+            stab='Agreement, faithfulness and stability of explanations'),
  'ro': dict(shap='Valorile Shapley și SHAP', lime='LIME, explicații contrafactuale și efecte globale',
-            grad='Metode bazate pe gradient pentru rețele neuronale', stab='Concordă explicațiile, sînt fidele, sînt stabile?'),
+            grad='Metode bazate pe gradient pentru rețele neuronale', stab='Concordanța, fidelitatea și stabilitatea explicațiilor'),
 }
 
 L = {

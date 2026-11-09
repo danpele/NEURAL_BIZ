@@ -167,7 +167,7 @@ Cu 60 de epoci fixe și 5 inițializări, PR-AUC pe test este 0,796 fără regul
 @chart reg_ablation
 PR-AUC pe test pentru șase variante de regularizare, cîte 5 inițializări.
 
-## Față de regresia logistică și gradient boosting, MLP regularizat se descurcă bine {h=a5232cc3}
+## MLP regularizat comparat cu regresia logistică și cu gradient boosting {h=5e270723}
 
 Pe ultimele 20 % din cele două zile, PR-AUC este 0,789 pentru regresia logistică, 0,840 pentru MLP regularizat (ansamblu de 5 inițializări) și 0,814 pentru XGBoost; la o precizie de 80 %, ele detectează 74,7 %, 80,0 % și 80,0 % dintre cele 75 de fraude din test.
 

@@ -345,7 +345,7 @@ def build(lang, H=None):
                job=t("compare training budgets in gradient steps or seconds, not in epochs.",
                      "comparați bugetele de antrenare în pași de gradient sau în secunde, nu în epoci."),
                tryit=NB + " \\S4", cite=OWN, height="0.56\\textheight")
-    D.frame(t("Momentum averages past gradients and rolls through narrow valleys", "Metoda momentului mediază gradienții trecuți și traversează văile înguste"),
+    D.frame(t("Momentum: a running average of past gradients", "Metoda momentului: media mobilă a gradienților trecuți"),
             "\\intuition{" + t("zig-zag components cancel in the average, the consistent downhill component accumulates.",
                                "componentele în zigzag se anulează în medie, iar componenta constantă spre vale se acumulează.") + "}\n" +
             "\\[ \\mathbf v_{t+1}=\\beta\\,\\mathbf v_t+\\mathbf g_t,\\qquad \\btheta_{t+1}=\\btheta_t-\\eta\\,\\mathbf v_{t+1};\\qquad "
@@ -415,7 +415,7 @@ def build(lang, H=None):
                job=t("the mean gain is not significant with 5 seeds, but the risk of a bad run is much lower with Adam.",
                      "cîștigul mediu nu este semnificativ cu 5 inițializări, dar riscul unei rulări proaste este mult mai mic cu Adam."),
                tryit=NB + " \\S5", cite=OWN, height="0.54\\textheight")
-    D.frame(t("Learning-rate schedules: large steps early, small steps late", "Programele ratei de învățare: pași mari la început, pași mici la final"),
+    D.frame(t("Learning-rate schedules: step, cosine and one-cycle", "Programele ratei de învățare: în trepte, cosinus și one-cycle"),
             "\\intuition{" + t("explore with a large step, then reduce it so that the noise of SGD settles into a minimum.",
                                "explorăm cu un pas mare, apoi îl reducem, ca zgomotul SGD să se așeze într-un minim.") + "}\n" +
             "\\[ \\text{step: }\\eta_t=\\eta_0\\gamma^{\\lfloor t/s\\rfloor};\\qquad \\text{cosine: }\\eta_t=\\tfrac{\\eta_0}{2}\\Big(1+\\cos\\frac{\\pi t}{T}\\Big) \\]\n"
@@ -443,7 +443,7 @@ def build(lang, H=None):
                job=t("the schedule is a cheap gain: same model, same budget, lower error.",
                      "programul ratei este un cîștig ieftin: același model, același buget, eroare mai mică."),
                tryit=NB + " \\S6", cite=OWN, height="0.54\\textheight")
-    D.figframe(t("On card fraud, the optimiser decides how fast the model becomes useful", "La fraudele cu carduri, optimizatorul decide cît de repede devine modelul util"),
+    D.figframe(t("On card fraud, the optimiser determines the speed of learning", "La fraudele cu carduri, optimizatorul determină viteza învățării"),
                t("MLP 64-64 trained on the first 60\\,\\% of the two days, scored on the next 20\\,\\%.",
                  "MLP 64-64 antrenat pe primele 60\\,\\% din cele două zile, evaluat pe următoarele 20\\,\\%."),
                None, "fraud_optimizers",
@@ -517,8 +517,8 @@ def build(lang, H=None):
             D.bottom(t("a regulator looks at the breach count first; a risk manager should also compare pinball losses.",
                        "o autoritate de supraveghere se uită întîi la numărul de depășiri; un manager de risc ar trebui să compare și pierderile pinball."), NB + " \\S8"),
             cite="(Kupiec, 1995)")
-    D.frame(t("Where training runs: a laptop GPU is ten times faster than its main processor on a large MLP",
-              "Unde rulează antrenarea: procesorul grafic al unui laptop este de zece ori mai rapid decît procesorul central pe un MLP mare"),
+    D.frame(t("Training hardware: a laptop GPU is ten times faster than its main processor on a large MLP",
+              "Echipamentul de calcul: procesorul grafic al unui laptop este de zece ori mai rapid decît procesorul central pe un MLP mare"),
             "\\intuition{" + t("training is matrix multiplication; a graphics processing unit (GPU) runs thousands of them in parallel.",
                                "antrenarea înseamnă înmulțiri de matrice; un procesor grafic (GPU) le execută în paralel, cu miile.") + "}\n" +
             it(t("Measured on this course's laptop (@{timing.machine}): one Adam step of an MLP 2048-2048 (@{timing.params|,d} parameters) on a batch of 2,048 real "
@@ -591,7 +591,7 @@ def build(lang, H=None):
           "antrenat prin gradient, cu aceste modele preantrenate."), sep="5pt") +
         note(t("Findings as stated in the papers; numbers on the other slides come from our own computations.",
                "Rezultatele sînt cele declarate în lucrări; cifrele de pe celelalte slide-uri provin din calculele noastre.")))
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapters 7--8: gradient descent and backpropagation: ",
           "\\textbf{Bishop \\& Bishop (2024)}, capitolele 7--8: coborîrea pe gradient și propagarea înapoi: ") + "\\href{https://www.bishopbook.com}{bishopbook.com}.",
         t("\\textbf{Dive into Deep Learning}, chapter 12 (optimisation algorithms): ", "\\textbf{Dive into Deep Learning}, capitolul 12 (algoritmi de optimizare): ") +

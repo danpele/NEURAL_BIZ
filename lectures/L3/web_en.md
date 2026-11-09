@@ -167,7 +167,7 @@ With 60 fixed epochs and 5 seeds, the test PR-AUC is 0.796 with no regularisatio
 @chart reg_ablation
 Test PR-AUC of six regularisation settings, 5 seeds each.
 
-## Against logistic regression and gradient boosting, the regularised MLP holds its own {h=68c744e5}
+## The regularised MLP compared with logistic regression and gradient boosting {h=7f165a8c}
 
 On the last 20 % of the two days, PR-AUC is 0.789 for logistic regression, 0.840 for the regularised MLP (5-seed ensemble) and 0.814 for XGBoost; at 80 % precision they catch 74.7 %, 80.0 % and 80.0 % of the 75 test frauds.
 

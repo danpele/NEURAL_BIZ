@@ -57,7 +57,7 @@ Monthly mean of the daily max–min spread of day-ahead prices in Romania and Ge
 
 An MDP formalises a sequential decision; the Bellman equation breaks it into one-step problems that dynamic programming solves exactly when the model is known.
 
-## A Markov decision process has five ingredients {h=c087e2cd}
+## The five elements of a Markov decision process {h=9ca75897}
 
 An MDP is $\mathcal M=(\mathcal S,\mathcal A,P,R,\gamma)$: states, actions, transition law $P(s'\mid s,a)$, expected reward $R(s,a)$ and discount factor $\gamma\in[0,1]$. The agent maximises the expected return
 
@@ -71,7 +71,7 @@ The Markov property requires the state to contain everything relevant: for the b
 
 The state value $V^{\pi}(s)=\mathbb E_\pi[G_t\mid s_t=s]$ is the expected future reward from a state; the action value $Q^{\pi}(s,a)$ is the same after a given first action, and the advantage $A^{\pi}(s,a)=Q^{\pi}(s,a)-V^{\pi}(s)$ compares an action with the policy's average. Value-based methods (Q-learning, DQN) estimate $Q^*$ and act greedily; policy-based methods (REINFORCE, PPO) parameterise the policy directly and use $V$ only as a baseline. For the battery, $V_h(s)$ is the number of euros still to be earned today from hour $h$ with $s$ MWh stored.
 
-## The Bellman equation turns a long problem into one-step problems {h=67655d51}
+## The Bellman equation: recursive decomposition of the value function {h=44664c8b}
 
 The best value now is the best immediate reward plus the discounted best value of the next state:
 

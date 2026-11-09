@@ -28,9 +28,9 @@ BLOCKS = [('next-token', 'next_token', 'lm', 'nt'),
           ('llm-var', 'llm_var', 'var', 'lv')]
 
 SECTIONS = {
- 'en': dict(lm='How a language model writes: the next token', prompt='Prompt engineering, measured',
+ 'en': dict(lm='Next-token prediction in a language model', prompt='Evaluation of prompt engineering',
             rag='Retrieval-augmented generation (RAG)', var='A language model as a risk estimator (LLM-VaR)'),
- 'ro': dict(lm='Cum scrie un model de limbaj: următorul token', prompt='Formularea instrucțiunilor (prompt engineering), măsurată',
+ 'ro': dict(lm='Prezicerea următorului token într-un model de limbaj', prompt='Evaluarea formulării instrucțiunilor (prompt engineering)',
             rag='Generarea augmentată prin regăsire (RAG)', var='Un model de limbaj ca estimator al riscului (LLM-VaR)'),
 }
 

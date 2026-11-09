@@ -378,7 +378,7 @@ def build(lang, H=None):
 
     # ================================================================== 3. perceptron
     D.section(t("The perceptron", "Perceptronul"))
-    D.concept(t("From a logical neuron to a learning machine", "De la neuronul logic la mașina care învață"),
+    D.concept(t("From the McCulloch--Pitts neuron to the perceptron", "De la neuronul McCulloch--Pitts la perceptron"),
               t("McCulloch and Pitts wrote the neuron as a threshold unit; Rosenblatt made its weights learn from examples.",
                 "McCulloch și Pitts au scris neuronul ca unitate cu prag; Rosenblatt a făcut ca ponderile lui să învețe din exemple."),
               "\\[ \\hat y=\\operatorname{step}(\\vw^\\top\\vx+b)=\\begin{cases}+1&\\vw^\\top\\vx+b>0\\\\-1&\\text{" +
@@ -469,7 +469,7 @@ def build(lang, H=None):
             D.bottom(t("width and depth are design choices; Section 5 chooses them on the validation set.",
                        "lățimea și adîncimea sînt alegeri de proiectare; secțiunea 5 le alege pe setul de validare."), NB + " \\S4"),
             cite="(Bishop \\& Bishop, 2024, ch.~6)")
-    D.figframe(t("Activation functions: smooth, cheap, and with a usable gradient", "Funcțiile de activare: netede, ieftine și cu un gradient utilizabil"),
+    D.figframe(t("Activation functions and their properties", "Funcțiile de activare și proprietățile lor"),
                None,
                "\\[ \\sigma(z)=\\tfrac{1}{1+e^{-z}},\\ \\ \\tanh(z)=\\tfrac{e^z-e^{-z}}{e^z+e^{-z}},\\ \\ \\mathrm{ReLU}(z)=\\max(0,z),\\ \\ "
                "\\mathrm{GELU}(z)=z\\,\\Phi(z) \\]",
@@ -565,7 +565,7 @@ def build(lang, H=None):
                tryit=NB + " \\S4", cite=OWN, height="0.58\\textheight")
     # ================================================================== 5. case study
     D.section(t("Case study: credit scoring with real loans", "Studiu de caz: scoringul de credit pe credite reale"))
-    D.frame(t("The protocol: same split, same inputs, three models", "Protocolul: aceeași împărțire, aceleași intrări, trei modele"),
+    D.frame(t("Experimental protocol: a common split and common inputs for three models", "Protocolul experimental: aceeași împărțire și aceleași intrări pentru trei modele"),
             "\\intuition{" + t("a fair comparison changes only the model; data, split and metric stay fixed before anything is trained.",
                                "o comparație corectă schimbă doar modelul; datele, împărțirea și metrica sînt fixate înainte de orice antrenare.") + "}\n" +
             cols(it(t("Logistic regression: maximum likelihood, no penalty on HMEQ; a mild ridge penalty ($C=1$) on German credit.",
@@ -660,8 +660,8 @@ def build(lang, H=None):
             D.bottom(t("a model change in a bank needs evidence that survives this correction.",
                        "schimbarea unui model într-o bancă are nevoie de dovezi care rezistă acestei corecții."), NB + " \\S6"),
             cite="(Nadeau \\& Bengio, 2003)")
-    D.figframe(t("A missed default costs five times a rejected good applicant: cut at 1/6, not 1/2",
-                 "O neplată ratată costă de cinci ori cît un client bun respins: pragul este 1/6, nu 1/2"),
+    D.figframe(t("Cost-sensitive cut-off of 1/6 when a missed default costs five times a rejected good applicant",
+                 "Pragul de 1/6, sensibil la costuri, cînd o neplată ratată costă de cinci ori cît un client bun respins"),
                None,
                "\\[ \\text{" + t("reject if", "respingem dacă") + "}\\ \\ c_{\\mathrm{FN}}\\,p\\ \\ge\\ c_{\\mathrm{FP}}(1-p)\\iff p\\ \\ge\\ "
                "\\frac{c_{\\mathrm{FP}}}{c_{\\mathrm{FP}}+c_{\\mathrm{FN}}}=\\frac16 \\]",
@@ -673,7 +673,7 @@ def build(lang, H=None):
                job=t("here the choice of cut-off matters more than the choice of model.",
                      "aici alegerea pragului contează mai mult decît alegerea modelului."),
                tryit=NB + " \\S6", cite=OWN, height="0.56\\textheight")
-    D.frame(t("A minimal MLP in PyTorch: about fifteen lines", "Un MLP minimal în PyTorch: circa cincisprezece rînduri"),
+    D.frame(t("A minimal MLP implementation in PyTorch", "Implementarea minimală a unui MLP în PyTorch"),
             cols(code("import torch, torch.nn as nn",
                       "model = nn.Sequential(",
                       "    nn.Linear(d, 64), nn.ReLU(),",
@@ -765,7 +765,7 @@ def build(lang, H=None):
           "pe S\\&P 500 --- cursul 14."), sep="2pt") +
         note(t("Findings as stated in the papers; numbers on the other slides come from our own computations.",
                "Rezultatele sînt cele declarate în lucrări; cifrele de pe celelalte slide-uri provin din calculele noastre.")), size="footnotesize")
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapters 4--6: linear models, classification, deep networks: ",
           "\\textbf{Bishop \\& Bishop (2024)}, capitolele 4--6: modele liniare, clasificare, rețele adînci: ") +
         "\\href{https://www.bishopbook.com}{bishopbook.com}.",

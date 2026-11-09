@@ -217,7 +217,7 @@ starting from $\\mathbf h_v^{(0)}=\\mathbf x_v$, where $\\mathcal N(v)$ are the 
 $$ \\mathbf m_v^{(l)}=\\bigoplus_{u\\in\\mathcal N(v)}\\phi^{(l)}\\big(\\mathbf h_u^{(l)},\\mathbf h_v^{(l)},\\mathbf e_{uv}\\big),\\qquad \\mathbf h_v^{(l+1)}=\\psi^{(l)}\\big(\\mathbf h_v^{(l)},\\mathbf m_v^{(l)}\\big), $$ {#eq:mpnn}
 
 pornind de la $\\mathbf h_v^{(0)}=\\mathbf x_v$, unde $\\mathcal N(v)$ sînt vecinii, $\\phi$ funcția mesajului, $\\bigoplus$ un agregator care nu depinde de ordine (sumă, medie, maxim), $\\psi$ actualizarea, iar $\\mathbf e_{uv}$ variabile opționale ale muchiilor. Ponderile sînt comune tuturor nodurilor, deci dimensiunea modelului nu crește odată cu graful."""))
-    P.block(T("The aggregator decides what a GNN can tell apart", "Agregatorul decide ce poate deosebi o rețea GNN"), text=T(
+    P.block(T("The aggregator and the expressive power of a GNN", "Agregatorul și puterea de discriminare a unei rețele GNN"), text=T(
         """Mean and max forget how many neighbours sent a message: the neighbourhoods $\\{a,a\\}$ and $\\{a\\}$ have the same mean and the same maximum, but different sums. The graph isomorphism network (GIN) uses $\\mathbf h_v^{(l+1)}=\\mathrm{MLP}\\big((1+\\varepsilon)\\mathbf h_v^{(l)}+\\sum_{u}\\mathbf h_u^{(l)}\\big)$ and is as discriminative as the Weisfeiler–Leman (WL) test. In fraud, ``one payment from a mixer'' and ``ten payments from mixers'' should not look the same; but sums over hubs need normalisation, which is why the GCN uses @eq:ahat.
 
 @practice choose the aggregator for the question: counts matter (sum), proportions matter (mean), one red flag matters (max).""",
@@ -322,14 +322,14 @@ Precision-recall curves on the test steps (scores averaged over the seeds); the 
 
 @chart pr_curves
 Curbele precizie-recall pe pașii de test (scoruri mediate pe semințe); linia punctată este rata de bază."""))
-    P.block(T("Is the gap real? A bootstrap of the test transactions", "Este diferența reală? Un bootstrap al tranzacțiilor de test"), text=T(
+    P.block(T("Bootstrap test of the gap on the test transactions", "Testul bootstrap al diferenței pe tranzacțiile de test"), text=T(
         f"""Resampling the test transactions 1,000 times, with the same draw for both models, gives a PR-AUC difference of {v('boot.rf_minus_gcn_ap', '.3f')} between the random forest and the GCN, with a 95 % interval of [{v('boot.lo', '.3f')}; {v('boot.hi', '.3f')}], and a difference of {v('boot.rfemb_minus_rf_ap', '.3f')} between the forest with GCN embeddings and the plain forest, interval [{v('boot.lo2', '.3f')}; {v('boot.hi2', '.3f')}]. An interval that excludes zero supports a real difference on this test period.
 
 @practice report the interval, not only the winner: a fraud committee decides on ranges, not on the third decimal.""",
         f"""Reeșantionînd tranzacțiile de test de 1 000 de ori, cu aceeași extragere pentru ambele modele, diferența de PR-AUC dintre pădurea aleatoare și GCN este {v('boot.rf_minus_gcn_ap', '.3f')}, cu intervalul de 95 % [{v('boot.lo', '.3f')}; {v('boot.hi', '.3f')}], iar diferența dintre pădurea cu reprezentări GCN și pădurea simplă este {v('boot.rfemb_minus_rf_ap', '.3f')}, cu intervalul [{v('boot.lo2', '.3f')}; {v('boot.hi2', '.3f')}]. Un interval care nu conține zero susține o diferență reală pe această perioadă de test.
 
 @practice raportați intervalul, nu doar cîștigătorul: un comitet antifraudă decide pe intervale, nu pe a treia zecimală."""))
-    P.block(T("Why the forest is hard to beat here: its features already pass messages", "De ce pădurea este greu de bătut aici: variabilele ei transmit deja mesaje"), text=T(
+    P.block(T("Why the forest performs well here: its features already pass messages", "De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje"), text=T(
         f"""{v('data.n_agg')} of the {v('data.n_features')} features are aggregates over the one-hop neighbours (maxima, minima, standard deviations, correlations): one fixed GNN layer computed by Elliptic before release. A logistic regression on the local features alone reaches an F1 of {v('models.lr_local.f1', '.3f')}, against {v('models.lr_all.f1', '.3f')} with the aggregates. Trees also fit rule-like fraud patterns well. GNNs earn their keep on raw graphs without engineered aggregates, on multi-hop patterns and in inductive scoring; combining both, the forest with GCN representations changes the F1 by {v('rfemb_vs_rf_f1_pts', '+.1f')} points.
 
 @practice before training a GNN, check whether the data provider has already aggregated the neighbourhood for you.""",
@@ -386,7 +386,7 @@ Importanța primelor 10 variabile ale pădurii aleatoare, fără și cu reprezen
     # 6
     P.add(T("# GNNs in production\n\nGraph models in finance fail in specific ways; knowing them is part of the model.",
             "# Rețelele GNN în producție\n\nModelele pe graf din finanțe greșesc în moduri specifice; cunoașterea lor face parte din model."))
-    P.block(T("Four pitfalls of graph models in finance", "Patru capcane ale modelelor pe graf în finanțe"), text=T(
+    P.block(T("Common errors in applying graph models in finance", "Erori frecvente în aplicarea modelelor pe graf în finanțe"), text=T(
         f"""Leakage through edges: a test node must not receive messages from the future; in Elliptic {v('data.pct_same_step', '.1f')} % of the edges stay inside one time step, so the temporal split is clean. Few labels: only {v('data.pct_labelled', '.1f')} % of the nodes are labelled, and labels from past investigations favour the cases already found. Drift: criminals adapt, and temporal GNNs such as EvolveGCN let the weights evolve with time. Explainability: a suspicious-activity report needs a reason a regulator can read; GNNExplainer finds the subgraph and features behind one prediction.
 
 @practice test a graph model the way it will run: on later periods, with the labels available at that time.""",

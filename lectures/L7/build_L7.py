@@ -244,7 +244,7 @@ def build(lang, H=None):
           "\\textbf{Stratul 6}: tokenul [CLS] pune @{example.cls_top_pct|.1f}\\,\\% din atenție pe ``@{example.cls_top_token}''; în stratul 12, cea mai mare parte a ponderii merge spre tokenii separatori")],
         height="0.56\\textheight", tryit=NB + "4", cite=t("(own computation; mean over the 12 heads)", "(calcule proprii; media pe cele 12 capete)"))
 
-    D.chart(t("Across layers, attention sharpens and parks on separator tokens", "De la un strat la altul, atenția se concentrează și se oprește pe tokenii separatori"), "attention_entropy", [
+    D.chart(t("Across layers, attention becomes concentrated on separator tokens", "De la un strat la altul, atenția se concentrează pe tokenii separatori"), "attention_entropy", [
         t("\\textbf{Entropy} of the attention rows, divided by $\\log n$: @{attn.ent_l1|.2f} in layer 1, lowest @{attn.ent_min|.2f} in layer @{attn.ent_min_layer} (1 = uniform).",
           "\\textbf{Entropia} rîndurilor de atenție, împărțită la $\\log n$: @{attn.ent_l1|.2f} în stratul 1, minimul @{attn.ent_min|.2f} în stratul @{attn.ent_min_layer} (1 = uniformă)"),
         t("\\textbf{[SEP] as a sink}: up to @{attn.sep_max_pct|.1f}\\,\\% of all attention (layer @{attn.sep_max_layer}) goes to the separator: a ``no-op'' a head uses when it has nothing to add.",
@@ -414,7 +414,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(own computation)", "(calcule proprii)"))
 
     B = N["boot"]
-    D.concept(t("Are the differences real? Paired bootstrap of the test tweets", "Sînt diferențele reale? Bootstrap pereche pe tweet-urile de test"),
+    D.concept(t("Paired bootstrap test of the differences on the test tweets", "Testul bootstrap pereche al diferențelor pe tweet-urile de test"),
               t("Resampling the test tweets, with the same draw for both models, shows how much a gap in macro-F1 could move by chance.",
                 "Reeșantionînd tweet-urile de test, cu aceeași extragere pentru ambele modele, vedem cît s-ar putea mișca întîmplător o diferență de macro-F1."),
               "\\[ \\Delta^{*b}=F_1^{A}(\\mathcal T^{*b})-F_1^{B}(\\mathcal T^{*b}),\\quad b=1,\\dots,1000 \\]\\[ \\text{CI}_{95\\%}=[q_{0.025},q_{0.975}] \\]"
@@ -551,7 +551,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
-    D.frame(t("Want to learn more?", "Lecturi și resurse suplimentare"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Vaswani et al.\\ (2017)}, ``Attention is all you need'': the original transformer.", "\\textbf{Vaswani et al.\\ (2017)}, ``Attention is all you need'': transformerul original"),
         t("\\textbf{Bishop \\& Bishop (2024)}, chapter 12: transformers, from attention to large language models.", "\\textbf{Bishop \\& Bishop (2024)}, capitolul 12: transformerele, de la atenție la modelele mari de limbaj"),
         t("\\textbf{The Illustrated Transformer} (J.\\ Alammar): ", "\\textbf{The Illustrated Transformer} (J.\\ Alammar): ") + "\\href{https://jalammar.github.io/illustrated-transformer/}{jalammar.github.io}.", sep="4pt"),

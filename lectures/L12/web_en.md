@@ -58,7 +58,7 @@ Top next tokens of Qwen2.5-1.5B-Instruct at three temperatures.
 
 The loss falls as a power of model size and data, $\mathcal L(P,D)=E+A/P^{\alpha}+B/D^{\beta}$ (Kaplan et al., 2020; Hoffmann et al., 2022). On our three model sizes the slope of log loss on log parameters is −0.100: three points describe our sample, they are not a law.
 
-## Older speeches look easier {h=24982f25}
+## Training-data cut-off {h=3719104b}
 
 @chart perplexity_size
 Perplexity on ECB speeches of 2022–2023 and from July 2025.
@@ -85,7 +85,7 @@ People choose the better of two answers; a reward model $r_\phi$ is fitted with 
 
 Qwen2.5-Instruct with 0.49, 1.54 and 3.09 billion parameters (Qwen Team, 2024), the bge-small embedding model for retrieval, and a term frequency–inverse document frequency (TF-IDF) representation with logistic regression as the classical benchmark.
 
-# Prompt engineering, measured on labelled data
+# Evaluation of prompt engineering on labelled data
 
 A prompt is a model. It is chosen on validation data and scored once on a held-out test set, with the same statistics as any classifier.
 
@@ -120,7 +120,7 @@ On PhraseBank the 3B model reaches 92.2 % macro-F1 zero-shot, above the TF-IDF c
 
 Macro-F1 averages the three per-class F1 scores, so the small negative class counts as much as the neutral one. The 95 % intervals come from 1,000 bootstrap resamples of the test set: for zero-shot 3B on PhraseBank the interval is [89.8; 94.4] %, for TF-IDF [83.8; 90.0] %.
 
-## Examples in the prompt {h=6d4d5994}
+## Examples in the prompt {h=2ff98acb}
 
 @chart fewshot_curve
 Macro-F1 against the number of examples in the prompt, three seeds.
@@ -138,7 +138,7 @@ Five instructions with the same meaning give a range of 3.6 points on PhraseBank
 
 Letting the model write two sentences of reasoning before the label (Wei et al., 2022) gives 88.4 % macro-F1 on PhraseBank and 65.1 % on Twitter, below the direct zero-shot answer, at about 389 ms per sentence instead of 48.5 ms. Chain-of-thought helps multi-step reasoning, not one-word labels on short sentences.
 
-## Calibration {h=40bb0f21}
+## Calibration {h=aad9db85}
 
 @chart calibration
 Reliability diagram of the predicted label probabilities.
@@ -169,7 +169,7 @@ Averaging the last hidden states of Qwen2.5-1.5B and fitting a logistic regressi
 
 # Retrieval-augmented generation on ECB speeches
 
-## Retrieve, then answer {h=4abd3e12}
+## Retrieval followed by generation {h=4abd3e12}
 
 $$ p(y\mid q)\approx\sum_{z\in\mathrm{top}_k(q)}p_\eta(z\mid q)\,p_{\boldsymbol\theta}(y\mid q,z) $$
 
@@ -195,13 +195,13 @@ On 160 speeches given after the model's training data, a forced answer without d
 
 @practice a confident wrong name is the costly failure: require sources in every answer and check them.
 
-## Designing a RAG system for a bank {h=60b1e731}
+## Designing a RAG system for a bank {h=956f9d44}
 
 Chunk size, metadata that travel with each chunk, a hybrid retriever (recall@3 of 73.1 % on the question set), permission to abstain and a fixed evaluation set rerun after every change are the choices that matter.
 
 # Language models as risk models: LLM-VaR
 
-## LLM-VaR {h=8fcef666}
+## LLM-VaR {h=80eeef3c}
 
 In the LLM-VaR framework (Pele et al., 2026) a general-purpose model reads the last 250 daily returns in a prompt and writes the Value-at-Risk, with no estimation and no fine-tuning. We test the idea with an open 3B model on the S&P 500, from 2 January 2025 to 30 October 2026 (459 days), against historical simulation (HS) and a GARCH(1,1) model with Student-t errors, with the Kupiec test of coverage.
 

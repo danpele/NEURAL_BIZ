@@ -212,7 +212,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kaplan et al., 2020; Hoffmann et al., 2022)}\hfill\tryit{notebook \S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Older speeches look easier: a warning about training cut-offs}
+\begin{frame}{Training-data cut-off and the apparent ease of older speeches}
 \small
 \intuition{text the model may have seen in pre-training scores a lower perplexity than text written after it.}
 \begin{center}\includegraphics[width=\textwidth,height=0.309\textheight,keepaspectratio]{charts/en/perplexity_size.pdf}\end{center}\vspace{-3mm}
@@ -327,7 +327,7 @@ Term frequency--inverse document frequency (TF-IDF) + logistic regression & -- &
 \end{frame}
 
 
-\section{Prompt engineering, measured on labelled data}
+\section{Evaluation of prompt engineering on labelled data}
 
 \begin{frame}{Structure of a prompt}
 \small
@@ -456,7 +456,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A few examples help the small model; more examples do not}
+\begin{frame}{Effect of the number of examples in the prompt}
 \small
 \intuition{in-context learning: the examples change the output without changing a single weight.}
 \vspace{-1mm}\[ \hat c=\argmax_c\,p_{\btheta}\big(c\mid (x_1,c_1),\dots,(x_k,c_k),x\big) \]\vspace{-2mm}
@@ -540,7 +540,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Are the label probabilities calibrated? Reliability on real data}
+\begin{frame}{Calibration of the label probabilities on real data}
 \small
 \intuition{a probability of 0.9 should be right nine times in ten; points below the diagonal mean over-confidence.}
 \vspace{-1mm}\[ \mathrm{ECE}=\sum_{b=1}^{B}\frac{|S_b|}{n}\,\big|\mathrm{acc}(S_b)-\mathrm{conf}(S_b)\big| \]\vspace{-2mm}
@@ -717,7 +717,7 @@ neutral & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_rag\_qa}{Quantlets/L12/NN_L12_rag_qa}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Designing a RAG system for a bank: the choices that matter}
+\begin{frame}{Design choices for a RAG system in a bank}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Chunking}
@@ -746,7 +746,7 @@ neutral & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white
 
 \section{Language models as risk models: LLM-VaR}
 
-\begin{frame}{LLM-VaR: the return history in the prompt, a quantile in the answer}
+\begin{frame}{LLM-VaR: a quantile forecast from the return history in the prompt}
 \footnotesize
 \intuition{no estimation and no fine-tuning: the model reads 250 returns and writes the Value-at-Risk (VaR).}
 \begin{columns}[T,onlytextwidth]
@@ -921,7 +921,7 @@ Data protection & client documents in prompts & local models; duties of the Euro
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies, ASE; Romanian Academy, Institute for Economic Forecasting, IPE)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

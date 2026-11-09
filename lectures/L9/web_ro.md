@@ -109,7 +109,7 @@ $$ \mathbf m_v^{(l)}=\bigoplus_{u\in\mathcal N(v)}\phi^{(l)}\big(\mathbf h_u^{(l
 
 pornind de la $\mathbf h_v^{(0)}=\mathbf x_v$, unde $\mathcal N(v)$ sînt vecinii, $\phi$ funcția mesajului, $\bigoplus$ un agregator care nu depinde de ordine (sumă, medie, maxim), $\psi$ actualizarea, iar $\mathbf e_{uv}$ variabile opționale ale muchiilor. Ponderile sînt comune tuturor nodurilor, deci dimensiunea modelului nu crește odată cu graful.
 
-## Agregatorul decide ce poate deosebi o rețea GNN {h=6a7094c4}
+## Agregatorul și puterea de discriminare a unei rețele GNN {h=fa4ea588}
 
 Media și maximul uită cîți vecini au trimis mesaje: vecinătățile $\{a,a\}$ și $\{a\}$ au aceeași medie și același maxim, dar sume diferite. Rețeaua de izomorfism pe graf (GIN) folosește $\mathbf h_v^{(l+1)}=\mathrm{MLP}\big((1+\varepsilon)\mathbf h_v^{(l)}+\sum_{u}\mathbf h_u^{(l)}\big)$ și deosebește la fel de bine ca testul Weisfeiler–Leman (WL). În fraudă, „o plată de la un serviciu de amestecare” și „zece astfel de plăți” nu trebuie să arate la fel; dar sumele pe nodurile centrale cer normalizare, de aceea GCN folosește @eq:ahat.
 
@@ -199,13 +199,13 @@ PR-AUC este 0,782 pentru pădurea aleatoare, 0,763 pentru pădurea cu reprezent�
 @chart pr_curves
 Curbele precizie-recall pe pașii de test (scoruri mediate pe semințe); linia punctată este rata de bază.
 
-## Este diferența reală? Un bootstrap al tranzacțiilor de test {h=ea14241b}
+## Testul bootstrap al diferenței pe tranzacțiile de test {h=e5e699f8}
 
 Reeșantionînd tranzacțiile de test de 1 000 de ori, cu aceeași extragere pentru ambele modele, diferența de PR-AUC dintre pădurea aleatoare și GCN este 0,285, cu intervalul de 95 % [0,259; 0,313], iar diferența dintre pădurea cu reprezentări GCN și pădurea simplă este −0,008, cu intervalul [−0,015; −0,002]. Un interval care nu conține zero susține o diferență reală pe această perioadă de test.
 
 @practice raportați intervalul, nu doar cîștigătorul: un comitet antifraudă decide pe intervale, nu pe a treia zecimală.
 
-## De ce pădurea este greu de bătut aici: variabilele ei transmit deja mesaje {h=7cdd37b4}
+## De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje {h=d05f19ab}
 
 72 dintre cele 165 de variabile sînt agregate pe vecinii de la un salt (maxime, minime, abateri standard, corelații): un strat GNN fix, calculat de Elliptic înainte de publicarea datelor. O regresie logistică numai pe variabilele locale atinge F1 0,329, față de 0,343 cu agregatele. În plus, arborii prind bine tiparele de fraudă de tip regulă. Rețelele GNN își justifică costul pe grafuri brute, fără agregate construite manual, pe tipare pe mai multe salturi și la scorurile inductive; combinînd cele două, pădurea cu reprezentări GCN schimbă F1 cu −3,0 puncte.
 
@@ -251,7 +251,7 @@ Pe Elliptic muchiile ajută o rețea, dar o pădure pe variabile deja agregate c
 
 Modelele pe graf din finanțe greșesc în moduri specifice; cunoașterea lor face parte din model.
 
-## Patru capcane ale modelelor pe graf în finanțe {h=76b0cccd}
+## Erori frecvente în aplicarea modelelor pe graf în finanțe {h=4f6c04cd}
 
 Scurgeri de informație prin muchii: un nod de test nu trebuie să primească mesaje din viitor; în Elliptic, 100,0 % dintre muchii rămîn în același pas de timp, deci împărțirea în timp este curată. Puține etichete: doar 22,9 % dintre noduri sînt etichetate, iar etichetele din investigațiile trecute favorizează cazurile deja găsite. Schimbarea în timp: infractorii se adaptează, iar rețelele GNN temporale precum EvolveGCN lasă ponderile să evolueze. Explicabilitatea: un raport de activitate suspectă are nevoie de o justificare pe care un supraveghetor o poate citi; GNNExplainer găsește subgraful și variabilele din spatele unei predicții.
 

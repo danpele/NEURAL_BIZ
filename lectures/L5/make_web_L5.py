@@ -92,7 +92,7 @@ where $\sigma_{\max}$ is the largest singular value and $\gamma\le1$ the largest
 
 The LSTM keeps a separate cell state $\mathbf c_t=\mathbf f_t\odot\mathbf c_{t-1}+\mathbf i_t\odot\tilde{\mathbf c}_t$, where the forget gate $\mathbf f_t$, the input gate $\mathbf i_t$ and the output gate $\mathbf o_t$ are logistic functions of $[\mathbf h_{t-1};\mathbf x_t]$, and $\mathbf h_t=\mathbf o_t\odot\tanh(\mathbf c_t)$. Along the cell state the Jacobian is $\mathrm{diag}(\mathbf f_t)$: when the forget gate stays near one, gradients travel far back. The GRU does the same with two gates and no separate cell, $\mathbf h_t=(1-\mathbf z_t)\odot\mathbf h_{t-1}+\mathbf z_t\odot\tilde{\mathbf h}_t$, with three quarters of the parameters of an LSTM.
 
-## Measured memory
+## Sensitivity to past inputs
 
 We measure how far back the trained load networks look: the average absolute gradient of their noon output with respect to each of the 168 input hours. The networks read the week as seven daily profiles, one step per day, which keeps the gradient path short. Relative to the maximum of the last day, the sensitivity at a lag of one week is {grad.rnn.lag168_rel|.3f} for the RNN, {grad.lstm.lag168_rel|.3f} for the LSTM and {grad.gru.lag168_rel|.3f} for the GRU.
 
@@ -156,7 +156,7 @@ Fourteen winter test days: observed load, seasonal naive and LSTM forecasts.
 @chart load_errors
 MAPE by model and MAE by hour of the day.
 
-## How much history does the network need?
+## Length of the input window
 
 With the same protocol, the LSTM test MAPE is {load.window.24|.2f}% with 24 hours of input, {load.window.72|.2f}% with 72 hours, {load.window.168|.2f}% with 168 hours and {load.window.336|.2f}% with 336 hours.
 
@@ -228,7 +228,7 @@ unde $\sigma_{\max}$ este cea mai mare valoare singulară, iar $\gamma\le1$ pant
 
 LSTM păstrează o stare separată a celulei, $\mathbf c_t=\mathbf f_t\odot\mathbf c_{t-1}+\mathbf i_t\odot\tilde{\mathbf c}_t$, unde poarta de uitare $\mathbf f_t$, poarta de intrare $\mathbf i_t$ și poarta de ieșire $\mathbf o_t$ sînt funcții logistice de $[\mathbf h_{t-1};\mathbf x_t]$, iar $\mathbf h_t=\mathbf o_t\odot\tanh(\mathbf c_t)$. De-a lungul stării celulei, jacobianul este $\mathrm{diag}(\mathbf f_t)$: cînd poarta de uitare rămîne aproape de unu, gradienții ajung departe în trecut. GRU face același lucru cu două porți și fără o stare separată, $\mathbf h_t=(1-\mathbf z_t)\odot\mathbf h_{t-1}+\mathbf z_t\odot\tilde{\mathbf h}_t$, cu trei sferturi din parametrii unui LSTM.
 
-## Memoria măsurată
+## Sensibilitatea la intrările trecute
 
 Măsurăm cît de departe privesc rețelele de consum antrenate: media valorii absolute a gradientului ieșirii lor pentru ora 12 în raport cu fiecare dintre cele 168 de ore de intrare. Rețelele citesc săptămîna ca pe șapte profiluri zilnice, cîte un pas pe zi, ceea ce menține scurt drumul gradientului. Raportată la maximul ultimei zile, sensibilitatea la un decalaj de o săptămînă este {grad.rnn.lag168_rel|.3f} pentru RNN, {grad.lstm.lag168_rel|.3f} pentru LSTM și {grad.gru.lag168_rel|.3f} pentru GRU.
 
@@ -292,7 +292,7 @@ Paisprezece zile de test din iarnă: consumul observat, prognoza naivă sezonier
 @chart load_errors
 MAPE pe modele și MAE pe orele zilei.
 
-## Cît istoric îi trebuie rețelei?
+## Lungimea ferestrei de intrare
 
 Cu același protocol, MAPE pe test a LSTM este {load.window.24|.2f}% cu 24 de ore de intrare, {load.window.72|.2f}% cu 72 de ore, {load.window.168|.2f}% cu 168 de ore și {load.window.336|.2f}% cu 336 de ore.
 

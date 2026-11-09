@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L13.js?v=20261108s">
+<link rel="preload" as="script" href="L13.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261108s", "L13_text_en.js?v=20261108s", "common.js?v=20261109m"], "L13.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261109m", "L13_text_en.js?v=20261109m", "common.js?v=20261109m"], "L13.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -53,7 +53,7 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the forecasts of the lecture when you move a control. The forecasts are those of the test year, 1 November 2025 to 31 October 2026 (360 days with all 24 hours and every model available): naive rule, LEAR (Lasso-estimated autoregressive model), DNN (deep neural network with 24 outputs), N-BEATS (neural basis expansion analysis) and the foundation models Chronos-2, Chronos-Bolt and TimesFM (Time-series Foundation Model), used zero-shot, i.e. without any training on our data. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart.</p>
-<p class="toc"><a href="#s-epf">Day-ahead price forecasts for Romania</a> · <a href="#s-eval">Is one forecast really better?</a> · <a href="#s-fm">Foundation models: context and quantiles</a> · <a href="#s-risk">Value-at-Risk with a foundation model</a></p>
+<p class="toc"><a href="#s-epf">Day-ahead price forecasts for Romania</a> · <a href="#s-eval">Testing differences in forecast accuracy</a> · <a href="#s-fm">Foundation models: context and quantiles</a> · <a href="#s-risk">Value-at-Risk with a foundation model</a></p>
 <h2 class="sec" id="s-epf">Day-ahead price forecasts for Romania</h2>
 <section class="blk" id="forecast-week">
   <h3>Forecasts for one week of the test year</h3>
@@ -74,7 +74,7 @@
   </div>
   <div class="ask"><span class="ask-tag">Question for the room</span> At which hours of the day are the forecasts worst, and why?</div>
   <details><summary>Answer</summary><p>In the evening: for LEAR the worst hour is 19:00 (35.78 EUR/MWh) and the best 01:00 (10.75 EUR/MWh); Chronos-2 has the same worst hour (34.05) and best hour (8.57 EUR/MWh). The evening peak is when solar output has gone and prices jump; the night is calm and predictable. Choose spring or summer to see the second bump of errors around midday, when solar output pushes prices down and sometimes below zero.</p></details>
-</section><h2 class="sec" id="s-eval">Is one forecast really better?</h2>
+</section><h2 class="sec" id="s-eval">Testing differences in forecast accuracy</h2>
 <section class="blk" id="dm-test">
   <h3>Pairwise Diebold–Mariano tests for all models</h3>
   <div class="pair">

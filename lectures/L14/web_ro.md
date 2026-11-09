@@ -77,7 +77,7 @@ Matricea de confuzie a celui mai bun model zero-shot, procente pe rînd.
 
 Zonele industriale și rezidențiale sînt recunoscute în peste nouă cazuri din zece (93,6 % și 92,3 %), dar culturile permanente doar în 18,6 % din cazuri, iar 399 dintre cele 600 de imagini cu mare sau lac au fost clasificate drept autostradă. Clasele care arată la fel au nevoie de exemple.
 
-## Căutarea imaginilor cu ajutorul cuvintelor {h=e9aaebb6}
+## Căutarea imaginilor după text {h=2f93b7dc}
 
 @chart text_search
 Precizia celor 100 de imagini cele mai apropiate de promptul fiecărei clase.
@@ -88,7 +88,7 @@ Aceleași embedding-uri, folosite invers, transformă o propoziție într-o cău
 
 Dacă păstrăm CLIP fix și antrenăm doar o regresie logistică pe embedding-urile imaginilor, depășim deja zero-shot cu o singură imagine etichetată pe clasă (59,0 %) și ajungem la 95,5 % cu toate cele 21 600 de imagini de antrenare.
 
-## Trăsăturile preantrenate cîștigă cu puține etichete {h=b5596ef3}
+## Trăsăturile preantrenate și numărul de etichete {h=405d4735}
 
 @chart fewshot_eurosat
 Acuratețea pe test în funcție de numărul de imagini etichetate pe clasă: clasificator pe CLIP, CNN de la zero, zero-shot.
@@ -111,7 +111,7 @@ Peticele imaginii sînt proiectate în spațiul embedding-urilor de cuvinte al u
 
 După Jheng, Pele, Tak și Găman (2026), fiecare fereastră de 120 de zile de tranzacționare a S&P 500 este desenată ca imagine cu două panouri (prețul și scăderea de la maxim) și etichetată „criză” cînd volatilitatea pe 20 de zile de la sfîrșitul ei depășește percentila 90 glisantă din ultimii trei ani. Modelele se antrenează pe ferestrele de pînă în 2018 și se testează pe 394 de ferestre din 2019, unde ponderea crizelor este 8,4 %.
 
-## Din imagine sau din cifre? {h=fbca1781}
+## Detectarea crizelor din grafice și din cifre {h=f8a784b3}
 
 @chart chart_regime
 O fereastră calmă și una de criză și curbele ROC ale celor patru detectoare pe anii de test.

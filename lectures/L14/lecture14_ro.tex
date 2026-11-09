@@ -269,11 +269,11 @@ Curba randamentelor AAA din zona euro, Banca Centrală Europeană (BCE) & 60 de 
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L14\_zeroshot\_confusion}{Quantlets/L14/NN_L14_zeroshot_confusion}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Căutarea imaginilor cu ajutorul cuvintelor: aceleași embedding-uri, folosite invers}
+\begin{frame}{Căutarea imaginilor după text cu aceleași embedding-uri}
 \small
 \intuition{ordonăm toate imaginile de test după similaritatea cu o propoziție; o bancă poate găsi terenuri inundate sau clădiri noi fără etichete.}
 \vspace{-1mm}\[ \mathrm{P@}k(c)=\frac{1}{k}\sum_{j\in\mathrm{top}_k(\mathbf w_c)}\mathbb 1\{y_j=c\},\quad \mathrm{top}_k(\mathbf w_c)=\text{cele $k$ imagini cu cel mai mare}\ \mathbf u(I_j)^{\top}\mathbf w_c \]\vspace{-2mm}
-\begin{center}\includegraphics[width=\textwidth,height=0.210\textheight,keepaspectratio]{charts/ro/text_search.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.292\textheight,keepaspectratio]{charts/ro/text_search.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: EuroSAT, imagini Sentinel-2 (Helber et al., 2019). Date: 5400 de imagini de test; modelul CLIP ViT-B/16, 5 șabloane.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -311,7 +311,7 @@ Curba randamentelor AAA din zona euro, Banca Centrală Europeană (BCE) & 60 de 
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Trăsăturile preantrenate cîștigă cu puține etichete; o CNN antrenată cîștigă cu multe}
+\begin{frame}{Trăsăturile preantrenate și o CNN antrenată de la zero, după numărul de etichete}
 \small
 \intuition{o imagine etichetată pe clasă depășește deja zero-shot; de la circa 64 pe clasă, o rețea mică antrenată de la zero o ajunge din urmă.}
 \begin{center}\includegraphics[width=\textwidth,height=0.206\textheight,keepaspectratio]{charts/ro/fewshot_eurosat.pdf}\end{center}\vspace{-3mm}
@@ -410,7 +410,7 @@ Qwen2-VL-2B (întrebări despre grafice) & 2{,}21 mld. & 262 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Jheng, Pele, Tak \& Găman, 2026)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Din imagine sau din cifre? Detectarea crizelor de piață}
+\begin{frame}{Detectarea crizelor de piață din grafice și din cifre}
 \small
 \intuition{stînga: o fereastră calmă și una de criză, așa cum le văd modelele; dreapta: curbele caracteristicii de operare a receptorului (ROC) pe anii de test.}
 \begin{center}\includegraphics[width=\textwidth,height=0.434\textheight,keepaspectratio]{charts/ro/chart_regime.pdf}\end{center}\vspace{-3mm}
@@ -807,7 +807,7 @@ Pierderea contrastivă imagine--text & $-\log\frac{e^{s_{ii}}}{\sum_j e^{s_{ij}}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Academia de Studii Economice din București, ASE; Academia Română, Institutul de Prognoză Economică, IPE)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Vreți să aflați mai mult?}
+\begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

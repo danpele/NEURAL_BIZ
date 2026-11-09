@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L12.js?v=20261108s">
+<link rel="preload" as="script" href="L12.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261108s", "L12_text_en.js?v=20261108s", "common.js?v=20261109m"], "L12.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261109m", "L12_text_en.js?v=20261109m", "common.js?v=20261109m"], "L12.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -53,8 +53,8 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the outputs of the open models run for the lecture (Qwen2.5 with 0.5, 1.5 and 3 billion parameters) when you move a control. Nothing is invented: every probability, label and Value-at-Risk (VaR) estimate below was produced by the models on real data. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart.</p>
-<p class="toc"><a href="#s-lm">How a language model writes: the next token</a> · <a href="#s-prompt">Prompt engineering, measured</a> · <a href="#s-rag">Retrieval-augmented generation (RAG)</a> · <a href="#s-var">A language model as a risk estimator (LLM-VaR)</a></p>
-<h2 class="sec" id="s-lm">How a language model writes: the next token</h2>
+<p class="toc"><a href="#s-lm">Next-token prediction in a language model</a> · <a href="#s-prompt">Evaluation of prompt engineering</a> · <a href="#s-rag">Retrieval-augmented generation (RAG)</a> · <a href="#s-var">A language model as a risk estimator (LLM-VaR)</a></p>
+<h2 class="sec" id="s-lm">Next-token prediction in a language model</h2>
 <section class="blk" id="next-token">
   <h3>Next-token probabilities of a real model on a real sentence</h3>
   <div class="pair">
@@ -64,11 +64,11 @@
   </div>
   <div class="ask"><span class="ask-tag">Question for the room</span> The sentence of an ECB (European Central Bank) speech of 30 October 2026 starts “The inflation impact is limited:”. At temperature 1, the model gives 10.1% to “the”. What happens to this probability at temperature 0.5 and at temperature 2?</div>
   <details><summary>Answer</summary><p>Dividing the logits by T sharpens the distribution when T < 1 and flattens it when T > 1. Over the whole vocabulary of 151,665 tokens the lecture measures 49.9% for “the” at T = 0.5 and only 0.4% at T = 2; the entropy rises from 1.74 to 6.20 and 10.29 nats. The chart renormalises over the k most likely tokens, as top-k sampling does: with k = 1 the model always writes “the” (greedy decoding). The word actually spoken, “prices”, is not among the eight most likely tokens. For classification and extraction use T = 0; high temperatures are for brainstorming.</p></details>
-</section><h2 class="sec" id="s-prompt">Prompt engineering, measured</h2>
+</section><h2 class="sec" id="s-prompt">Evaluation of prompt engineering</h2>
 <section class="blk" id="few-shot">
-  <h3>A few examples help the small model; more examples do not</h3>
+  <h3>Effect of the number of examples in the prompt</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L12_fewshot_curve_en.jpg" alt="Slide 24: A few examples help the small model; more examples do not" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L12_fewshot_curve_en.jpg" alt="Slide 24: Effect of the number of examples in the prompt" loading="lazy"></a>
       <figcaption>Slide 24</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fs-m">Model</label><select id="fs-m"><option value="1.5B">Qwen2.5-1.5B</option><option value="3B" selected>Qwen2.5-3B</option></select></div><div class="ctl"><label for="fs-k">Examples in the prompt, k: <b id="fs-k-v"></b></label><input type="range" id="fs-k" min="0" max="4" step="1" value="2"></div><div class="ctl ctl-tg" id="fs-s"><span class="lbl">Set of examples (random draw)</span><div class="tgs"><label class="tg"><input type="radio" name="fs-s" value="0" checked> 1</label><label class="tg"><input type="radio" name="fs-s" value="1"> 2</label><label class="tg"><input type="radio" name="fs-s" value="2"> 3</label></div></div><button class="btn play" id="fs-play" type="button"></button></div><div class="charts "><div class="chart" id="fs-curve"></div><div class="chart" id="fs-conf"></div></div><ul class="out" id="fs-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_fewshot_curve" target="_blank" rel="noopener">NN_L12_fewshot_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_fewshot_curve/NN_L12_fewshot_curve.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>A lot for the smaller model: on Financial PhraseBank, Qwen2.5-1.5B ranges from 72.8% to 87.0% (14.2 points) across the five wordings, Qwen2.5-3B only from 88.5% to 92.2% (3.6 points). On finance tweets both are fragile: 34.3–47.6% for 1.5B and 65.5–78.4% for 3B. The confusion matrix shows where the errors go; a reported LLM score is a score for one prompt, so test several wordings and report the range.</p></details>
 </section>
 <section class="blk" id="calibration">
-  <h3>Are the label probabilities calibrated? Reliability on real data</h3>
+  <h3>Calibration of the label probabilities on real data</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L12_calibration_en.jpg" alt="Slide 28: Are the label probabilities calibrated? Reliability on real data" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L12_calibration_en.jpg" alt="Slide 28: Calibration of the label probabilities on real data" loading="lazy"></a>
       <figcaption>Slide 28</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cb-d">Data set</label><select id="cb-d"><option value="pb" selected>Financial PhraseBank (company news)</option><option value="tw">Finance tweets</option></select></div><div class="ctl"><label for="cb-m">Model</label><select id="cb-m"><option value="tfidf">TF-IDF + logistic regression</option><option value="zs_0.5B">Zero-shot, Qwen2.5-0.5B</option><option value="zs_1.5B">Zero-shot, Qwen2.5-1.5B</option><option value="zs_3B" selected>Zero-shot, Qwen2.5-3B</option><option value="fs_1.5B">Few-shot (k = 4), Qwen2.5-1.5B</option><option value="fs_3B">Few-shot (k = 4), Qwen2.5-3B</option><option value="cot_3B">Chain-of-thought, Qwen2.5-3B</option><option value="probe">Qwen2.5-1.5B embedding + logistic regression</option></select></div><div class="ctl"><label for="cb-t">Answer only if the probability of the chosen label is at least: <b id="cb-t-v"></b></label><input type="range" id="cb-t" min="0.33" max="0.99" step="0.01" value="0.33"></div><button class="btn play" id="cb-play" type="button"></button></div><div class="charts "><div class="chart" id="cb-rel"></div><div class="chart" id="cb-cov"></div></div><ul class="out" id="cb-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_calibration" target="_blank" rel="noopener">NN_L12_calibration</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_calibration/NN_L12_calibration.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

@@ -292,7 +292,7 @@ def build(lang, H=None):
                 "ponderile $\\phi,\\psi$ sînt comune tuturor nodurilor: dimensiunea modelului nu crește odată cu graful."),
               tryit=NB + "3", cite="(Gilmer et al., 2017; Bishop \\& Bishop, 2024, sec.\\ 13.2)", wl="0.56", wr="0.41")
 
-    D.concept(t("The aggregator decides what a GNN can tell apart", "Agregatorul decide ce poate deosebi o rețea GNN"),
+    D.concept(t("The aggregator and the expressive power of a GNN", "Agregatorul și puterea de discriminare a unei rețele GNN"),
               t("Mean and max forget how many neighbours sent a message; the sum keeps it, which makes it as powerful as the Weisfeiler--Leman test.",
                 "Media și maximul uită cîți vecini au trimis mesaje; suma păstrează această informație și devine la fel de puternică precum testul Weisfeiler--Leman."),
               "\\[ \\mathbf h_v^{(l+1)}=\\text{MLP}^{(l)}\\Big((1+\\varepsilon)\\,\\mathbf h_v^{(l)}+\\sum_{u\\in\\mathcal N(v)}\\mathbf h_u^{(l)}\\Big) \\]"
@@ -457,7 +457,7 @@ def build(lang, H=None):
           "\\textbf{PR-AUC}: pădurea @{models.rf.ap|.3f}, pădurea + GCN @{models.rf_emb.ap|.3f}, GCN @{models.gcn.ap|.3f}, logistic @{models.lr_all.ap|.3f}; un scor aleator ar da @{data.pct_test_illicit|.2f}\\,\\% (linia punctată)")],
         height="0.58\\textheight", tryit=NB + "2", cite="$\\text{PR-AUC}=\\sum_k (R_k-R_{k-1})P_k$")
 
-    D.concept(t("Is the gap real? A bootstrap of the test transactions", "Este diferența reală? Un bootstrap al tranzacțiilor de test"),
+    D.concept(t("Bootstrap test of the gap on the test transactions", "Testul bootstrap al diferenței pe tranzacțiile de test"),
               t("One test set gives one number; resampling the test nodes shows how much that number could move.",
                 "Un singur set de test dă un singur număr; reeșantionarea nodurilor de test arată cît s-ar putea mișca acest număr."),
               "\\[ \\Delta^{*b}=\\text{PR-AUC}_A\\big(\\mathcal T^{*b}\\big)-\\text{PR-AUC}_B\\big(\\mathcal T^{*b}\\big),\\quad b=1,\\dots,B \\]"
@@ -473,7 +473,7 @@ def build(lang, H=None):
                 "raportați intervalul, nu doar cîștigătorul: un comitet antifraudă decide pe intervale, nu pe a treia zecimală."),
               tryit=NB + "2", cite="(Efron \\& Tibshirani, 1993)")
 
-    D.frame(t("Why the forest is hard to beat here: its features already pass messages", "De ce pădurea este greu de bătut aici: variabilele ei transmit deja mesaje"), cols(
+    D.frame(t("Why the forest performs well here: its features already pass messages", "De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje"), cols(
         it((t("\\textbf{Hand-made message passing}", "\\textbf{Transmitere de mesaje construită manual}"),
             t("@{data.n_agg} of the @{data.n_features} features are aggregates over the one-hop neighbours (max, min, sd, correlation)",
               "@{data.n_agg} dintre cele @{data.n_features} de variabile sînt agregate pe vecinii de la un salt (maxim, minim, abatere standard, corelație)"),
@@ -529,7 +529,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 6 practice
     D.section(t("GNNs in production", "Rețelele GNN în producție"))
-    D.frame(t("Four pitfalls of graph models in finance", "Patru capcane ale modelelor pe graf în finanțe"), cols(
+    D.frame(t("Common errors in applying graph models in finance", "Erori frecvente în aplicarea modelelor pe graf în finanțe"), cols(
         it((t("\\textbf{Leakage through edges}", "\\textbf{Scurgeri de informație prin muchii}"),
             t("a test node must not receive messages from the future", "un nod de test nu trebuie să primească mesaje din viitor"),
             t("in Elliptic @{data.pct_same_step|.1f}\\,\\% of the edges stay inside one time step, so the temporal split is clean",
@@ -591,7 +591,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
-    D.frame(t("Want to learn more?", "Lecturi și resurse suplimentare"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapter 13: graph neural networks, from message passing to graph attention.",
           "\\textbf{Bishop \\& Bishop (2024)}, capitolul 13: rețele neuronale pe grafuri, de la transmiterea mesajelor la atenția pe graf"),
         t("\\textbf{Hamilton (2020)}, \\textit{Graph Representation Learning}, free draft: ", "\\textbf{Hamilton (2020)}, \\textit{Graph Representation Learning}, versiune gratuită: ") +

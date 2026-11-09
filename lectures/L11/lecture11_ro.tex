@@ -295,7 +295,7 @@ XGBoost, 10 & 0{,}959 & 0{,}889 & 0{,}058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L11\_shap\_beeswarm}{Quantlets/L11/NN_L11_shap_beeswarm}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De ce a fost respins acest solicitant? Diagrama cascadă SHAP}
+\begin{frame}{Explicația locală pentru un solicitant respins: diagrama cascadă SHAP}
 \small
 \intuition{de la log-șansele medii $\phi_0$ la scorul acestui solicitant, variabilă cu variabilă.}
 \begin{center}\includegraphics[width=\textwidth,height=0.426\textheight,keepaspectratio]{charts/ro/shap_waterfall.pdf}\end{center}\vspace{-3mm}
@@ -558,7 +558,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 \end{frame}
 
 
-\section{Sînt explicațiile concordante, fidele și stabile?}
+\section{Concordanța, fidelitatea și stabilitatea explicațiilor}
 
 \begin{frame}{Concordanța metodelor: ridicată, dar nu perfectă}
 \small
@@ -589,7 +589,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Samek et al., 2017)}\hfill\qlink{NN\_L11\_deletion\_curve}{Quantlets/L11/NN_L11_deletion_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Robustețea locală: o mică schimbare a intrării, o mică schimbare a explicației?}
+\begin{frame}{Robustețea locală a explicațiilor la mici modificări ale intrării}
 \small
 \intuition{variația relativă a vectorului de atribuiri pe unitatea unei perturbări mici (raport de tip Lipschitz).}
 \vspace{-1mm}\[ \hat L(\vx)=\frac{\|\mathbf a(\vx+\boldsymbol\varepsilon)-\mathbf a(\vx)\|/\|\mathbf a(\vx)\|}{\|\boldsymbol\varepsilon\|},\quad \boldsymbol\varepsilon\sim\mathcal N(\mathbf 0,0.05^{2}\mathbf I) \]\vspace{-2mm}
@@ -605,7 +605,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Alvarez-Melis \& Jaakkola, 2018)}\hfill\qlink{NN\_L11\_local\_robustness}{Quantlets/L11/NN_L11_local_robustness}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Efectul Rashomon: aceeași acuratețe, explicații diferite}
+\begin{frame}{Efectul Rashomon: modele la fel de precise, cu explicații diferite}
 \small
 \intuition{rangul fiecărei variabile după media $|$SHAP$|$ pentru 10 rețele și 10 ansambluri de arbori reantrenate (doar valorile inițiale diferă).}
 \begin{center}\includegraphics[width=\textwidth,height=0.374\textheight,keepaspectratio]{charts/ro/seed_stability.pdf}\end{center}\vspace{-3mm}
@@ -779,7 +779,7 @@ Timpul (ziua 1 $\to$ ziua 2) & Spearman, divergența JS & 0{,}98; 0{,}003 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Academia de Studii Economice din București (ASE); Academia Română, Institutul de Prognoză Economică (IPE))}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Vreți să aflați mai mult?}
+\begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}

@@ -52,7 +52,7 @@ unde $\sigma_{\max}$ este cea mai mare valoare singulară, iar $\gamma\le1$ pant
 
 LSTM păstrează o stare separată a celulei, $\mathbf c_t=\mathbf f_t\odot\mathbf c_{t-1}+\mathbf i_t\odot\tilde{\mathbf c}_t$, unde poarta de uitare $\mathbf f_t$, poarta de intrare $\mathbf i_t$ și poarta de ieșire $\mathbf o_t$ sînt funcții logistice de $[\mathbf h_{t-1};\mathbf x_t]$, iar $\mathbf h_t=\mathbf o_t\odot\tanh(\mathbf c_t)$. De-a lungul stării celulei, jacobianul este $\mathrm{diag}(\mathbf f_t)$: cînd poarta de uitare rămîne aproape de unu, gradienții ajung departe în trecut. GRU face același lucru cu două porți și fără o stare separată, $\mathbf h_t=(1-\mathbf z_t)\odot\mathbf h_{t-1}+\mathbf z_t\odot\tilde{\mathbf h}_t$, cu trei sferturi din parametrii unui LSTM.
 
-## Memoria măsurată
+## Sensibilitatea la intrările trecute
 
 Măsurăm cît de departe privesc rețelele de consum antrenate: media valorii absolute a gradientului ieșirii lor pentru ora 12 în raport cu fiecare dintre cele 168 de ore de intrare. Rețelele citesc săptămîna ca pe șapte profiluri zilnice, cîte un pas pe zi, ceea ce menține scurt drumul gradientului. Raportată la maximul ultimei zile, sensibilitatea la un decalaj de o săptămînă este 0,261 pentru RNN, 0,131 pentru LSTM și 0,140 pentru GRU.
 
@@ -116,7 +116,7 @@ Paisprezece zile de test din iarnă: consumul observat, prognoza naivă sezonier
 @chart load_errors
 MAPE pe modele și MAE pe orele zilei.
 
-## Cît istoric îi trebuie rețelei?
+## Lungimea ferestrei de intrare
 
 Cu același protocol, MAPE pe test a LSTM este 6,77% cu 24 de ore de intrare, 7,17% cu 72 de ore, 5,91% cu 168 de ore și 5,93% cu 336 de ore.
 

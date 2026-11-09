@@ -102,7 +102,7 @@ After 5 epochs of Adam the validation MSE is 0.294 with batches of 16, 0.367 wit
 @chart batch_size
 Validation MSE by epoch (left) and by gradient step (right) for three batch sizes.
 
-## Momentum averages past gradients and rolls through narrow valleys {h=00c13710}
+## Momentum: a running average of past gradients {h=1a684614}
 
 Momentum keeps a velocity $\mathbf v_{t+1}=\beta\mathbf v_t+\mathbf g_t$ and steps along it. Zig-zag components cancel, the consistent direction accumulates, and on a quadratic the best momentum improves the contraction from $(\kappa-1)/(\kappa+1)$ to $(\sqrt\kappa-1)/(\sqrt\kappa+1)$ (Polyak, 1964).
 
@@ -132,7 +132,7 @@ The test MSE over 5 seeds is 0.314 (standard deviation 0.091) for SGD, 0.272 (0.
 @chart optimizer_seeds
 Test MSE of five seeds per optimiser; bars are means; dashed: linear regression.
 
-## Learning-rate schedules: large steps early, small steps late {h=ea59f5c4}
+## Learning-rate schedules: step, cosine and one-cycle {h=38749e7a}
 
 Step decay multiplies the rate by $\gamma$ every $s$ steps, cosine annealing follows $\eta_t=\tfrac{\eta_0}{2}(1+\cos\pi t/T)$ (Loshchilov and Hutter, 2017), and the one-cycle schedule warms up linearly and then decays (Smith and Topin, 2019). Warm-up protects the first steps, when the optimiser's statistics are still unreliable.
 
@@ -143,7 +143,7 @@ With SGD and momentum at a peak rate of 0.01, the final validation MSE is 0.279 
 @chart schedules
 Learning-rate schedules (left) and validation MSE (right), mean of 3 seeds.
 
-## On card fraud, the optimiser decides how fast the model becomes useful {h=8e80933d}
+## On card fraud, the optimiser determines the speed of learning {h=3667f468}
 
 With only 360 frauds in the first 60 % of the two days, the area under the precision-recall curve (PR-AUC) on the validation hours after one epoch is 0.004 for plain SGD, 0.488 with momentum and 0.592 with Adam; on the test hours the three reach 0.786, 0.823 and 0.803, against 0.789 for logistic regression.
 
@@ -173,7 +173,7 @@ S&P 500 daily log returns in the test period with the 99 % VaR of the quantile M
 
 Under a correct VaR the violations are Bernoulli with probability $\tau$; the Kupiec likelihood-ratio statistic gives $p=$ 0.840 for the MLP, 0.003 for historical simulation and 0.000 for EWMA. The pinball losses, the proper score for quantiles, are 0.0420, 0.0577 and 0.0473.
 
-## Where training runs: a laptop GPU is ten times faster than its main processor on a large MLP {h=913ce372}
+## Training hardware: a laptop GPU is ten times faster than its main processor on a large MLP {h=42dbadcb}
 
 On this course's laptop one Adam step of an MLP 2048-2048 takes 333.6 ms on the central processing unit (CPU) and 32.5 ms on its GPU through Metal Performance Shaders (MPS), 10.3 times faster. The small tabular nets of Lectures 1 to 3 are faster on one CPU thread: copying tiny batches costs more than it saves.
 

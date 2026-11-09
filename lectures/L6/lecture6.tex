@@ -529,10 +529,10 @@ $a:b::c:\,?$ & answer \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{\S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{On short financial sentences, TF-IDF is hard to beat}
+\begin{frame}{On short financial sentences, TF-IDF with logistic regression has the highest macro-F1}
 \small
 \intuition{test macro-F1 of seven representations and classifiers, PhraseBank and finance tweets (bars: mean, whiskers: standard deviation).}
-\begin{center}\includegraphics[width=\textwidth,height=0.470\textheight,keepaspectratio]{charts/en/sentiment_models.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.409\textheight,keepaspectratio]{charts/en/sentiment_models.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Financial PhraseBank (Malo et al., 2014); Twitter financial news (Hugging Face, zeroshot). Data: PhraseBank: 5 random 70/15/15 splits; tweets: published validation split as test, 3 seeds.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -670,7 +670,7 @@ positive & 50 & 263 & -- \\
 
 \section{Case study: topics of finance tweets}
 
-\begin{frame}{Twenty topics: easy for earnings and the Fed, hard for general news}
+\begin{frame}{Topic classification: F1 is high for earnings and the Fed, low for general news}
 \small
 \intuition{per-topic F1 on the 4\,117 test tweets (published validation split).}
 \begin{center}\includegraphics[width=\textwidth,height=0.550\textheight,keepaspectratio]{charts/en/topic_f1.pdf}\end{center}\vspace{-3mm}
@@ -685,7 +685,7 @@ positive & 50 & 263 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L6\_topic\_f1}{Quantlets/L6/NN_L6_topic_f1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Text models at work in finance}
+\begin{frame}{Applications of text models in finance}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -841,7 +841,7 @@ positive & 50 & 263 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

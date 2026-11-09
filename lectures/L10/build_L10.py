@@ -239,7 +239,7 @@ def build(lang, H=None):
 
     # ================================================================== 2. MDP and Bellman
     D.section(t("Markov decision processes and the Bellman equation", "Procese decizionale Markov și ecuația Bellman"))
-    D.concept(t("A Markov decision process has five ingredients", "Un proces decizional Markov are cinci ingrediente"),
+    D.concept(t("The five elements of a Markov decision process", "Cele cinci elemente ale unui proces decizional Markov"),
               t("the future depends on the past only through the current state and action.",
                 "viitorul depinde de trecut doar prin starea și acțiunea curente."),
               "\\[ \\mathcal{M}=(\\mathcal{S},\\mathcal{A},P,R,\\gamma) \\]"
@@ -281,7 +281,7 @@ def build(lang, H=None):
                 "$V$ evaluează un activ (o baterie încărcată, o poziție deschisă); $Q$ compară decizii."),
               cite="(Sutton \\& Barto, 2018, ch.\\ 3--4)", wl="0.52", wr="0.45")
 
-    D.concept(t("The Bellman equation turns a long problem into one-step problems", "Ecuația Bellman transformă o problemă lungă în probleme de un pas"),
+    D.concept(t("The Bellman equation: recursive decomposition of the value function", "Ecuația Bellman: descompunerea recursivă a funcției de valoare"),
               t("the best value now = best immediate reward + discounted best value of where you land.",
                 "valoarea optimă acum = cea mai bună recompensă imediată + valoarea optimă actualizată a stării în care ajungeți."),
               "\\[ V^{*}(s)=\\max_{a}\\Big\\{R(s,a)+\\gamma\\sum_{s'}P(s'\\mid s,a)\\,V^{*}(s')\\Big\\} \\]"
@@ -783,7 +783,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies (ASE); Romanian Academy, Institute for Economic Forecasting (IPE))",
                                "(Academia de Studii Economice din București (ASE); Academia Română, Institutul de Prognoză Economică (IPE))"))
 
-    D.frame(t("Want to learn more?", "Vreți să aflați mai mult?"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Sutton \\& Barto (2018)}, the reference text, free online: ", "\\textbf{Sutton \\& Barto (2018)}, manualul de referință, gratuit online: ") +
         "\\href{http://incompleteideas.net/book/the-book-2nd.html}{incompleteideas.net/book}.",
         t("\\textbf{Spinning Up in Deep RL} (OpenAI), clear derivations of policy gradients and PPO: ",

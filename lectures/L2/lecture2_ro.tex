@@ -293,7 +293,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L2\_batch\_size}{Quantlets/L2/NN_L2_batch_size}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Metoda momentului mediază gradienții trecuți și traversează văile înguste}
+\begin{frame}{Metoda momentului: media mobilă a gradienților trecuți}
 \small
 \intuition{componentele în zigzag se anulează în medie, iar componenta constantă spre vale se acumulează.}
 \[ \mathbf v_{t+1}=\beta\,\mathbf v_t+\mathbf g_t,\qquad \btheta_{t+1}=\btheta_t-\eta\,\mathbf v_{t+1};\qquad \text{Nesterov:}\ \mathbf g_t=\nabla\loss(\btheta_t-\eta\beta\mathbf v_t) \]
@@ -383,7 +383,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L2\_optimizer\_seeds}{Quantlets/L2/NN_L2_optimizer_seeds}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Programele ratei de învățare: pași mari la început, pași mici la final}
+\begin{frame}{Programele ratei de învățare: în trepte, cosinus și one-cycle}
 \small
 \intuition{explorăm cu un pas mare, apoi îl reducem, ca zgomotul SGD să se așeze într-un minim.}
 \[ \text{trepte: }\eta_t=\eta_0\gamma^{\lfloor t/s\rfloor};\qquad \text{cosinus: }\eta_t=\tfrac{\eta_0}{2}\Big(1+\cos\frac{\pi t}{T}\Big) \]
@@ -418,7 +418,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L2\_schedules}{Quantlets/L2/NN_L2_schedules}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{La fraudele cu carduri, optimizatorul decide cît de repede devine modelul util}
+\begin{frame}{La fraudele cu carduri, optimizatorul determină viteza învățării}
 \small
 \intuition{MLP 64-64 antrenat pe primele 60\,\% din cele două zile, evaluat pe următoarele 20\,\%.}
 \begin{center}\includegraphics[width=\textwidth,height=0.414\textheight,keepaspectratio]{charts/ro/fraud_optimizers.pdf}\end{center}\vspace{-3mm}
@@ -517,7 +517,7 @@ EWMA, $\lambda=0{,}94$ & 41 & 2{,}39 & 24{,}08 & 0{,}000 & 0{,}0473 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kupiec, 1995)}\hfill\tryit{notebook \S8}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Unde rulează antrenarea: procesorul grafic al unui laptop este de zece ori mai rapid decît procesorul central pe un MLP mare}
+\begin{frame}{Echipamentul de calcul: procesorul grafic al unui laptop este de zece ori mai rapid decît procesorul central pe un MLP mare}
 \small
 \intuition{antrenarea înseamnă înmulțiri de matrice; un procesor grafic (GPU) le execută în paralel, cu miile.}
 \begin{itemize}\setlength{\itemsep}{4pt}
@@ -622,7 +622,7 @@ EWMA, $\lambda=0{,}94$ & 41 & 2{,}39 & 24{,}08 & 0{,}000 & 0{,}0473 \\
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Vreți să aflați mai mult?}
+\begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

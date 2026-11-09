@@ -819,7 +819,7 @@ window.NN_DATA.quizzes['l11'] = {
   {
    "correct": 0,
    "en": {
-    "title": "Explanation is not causation",
+    "title": "Explanation and causation",
     "text": "A SHAP analysis shows that the job category ``Other'' raises the predicted risk. What can the bank conclude?",
     "options": [
      "That the model uses this category to raise the score, not that the job causes default",
@@ -831,7 +831,7 @@ window.NN_DATA.quizzes['l11'] = {
     "incorrectExplanation": "SHAP values are statements about the model, not about the world, and they do not by themselves establish unfairness."
    },
    "ro": {
-    "title": "Explicația nu este cauzalitate",
+    "title": "Explicație și cauzalitate",
     "text": "O analiză SHAP arată că ocupația „Other” crește riscul prognozat. Ce poate concluziona banca?",
     "options": [
      "Că modelul folosește această categorie pentru a crește scorul, nu că ocupația cauzează neplata",

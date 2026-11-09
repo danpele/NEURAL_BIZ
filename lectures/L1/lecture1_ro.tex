@@ -301,7 +301,7 @@ celelalte 8 intrări &  &  & \ensuremath{+}0{,}31 \\
 
 \section{Perceptronul}
 
-\begin{frame}{De la neuronul logic la mașina care învață}
+\begin{frame}{De la neuronul McCulloch--Pitts la perceptron}
 \footnotesize
 \intuition{McCulloch și Pitts au scris neuronul ca unitate cu prag; Rosenblatt a făcut ca ponderile lui să învețe din exemple.}
 \begin{columns}[T,onlytextwidth]
@@ -425,7 +425,7 @@ celelalte 8 intrări &  &  & \ensuremath{+}0{,}31 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~6)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Funcțiile de activare: netede, ieftine și cu un gradient utilizabil}
+\begin{frame}{Funcțiile de activare și proprietățile lor}
 \small
 \vspace{-1mm}\[ \sigma(z)=\tfrac{1}{1+e^{-z}},\ \ \tanh(z)=\tfrac{e^z-e^{-z}}{e^z+e^{-z}},\ \ \mathrm{ReLU}(z)=\max(0,z),\ \ \mathrm{GELU}(z)=z\,\Phi(z) \]\vspace{-2mm}
 \begin{center}\includegraphics[width=\textwidth,height=0.309\textheight,keepaspectratio]{charts/ro/activations.pdf}\end{center}\vspace{-3mm}
@@ -554,7 +554,7 @@ cuantila $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 
 \section{Studiu de caz: scoringul de credit pe credite reale}
 
-\begin{frame}{Protocolul: aceeași împărțire, aceleași intrări, trei modele}
+\begin{frame}{Protocolul experimental: aceeași împărțire și aceleași intrări pentru trei modele}
 \small
 \intuition{o comparație corectă schimbă doar modelul; datele, împărțirea și metrica sînt fixate înainte de orice antrenare.}
 \begin{columns}[T,onlytextwidth]
@@ -691,7 +691,7 @@ cuantila $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Nadeau \& Bengio, 2003)}\hfill\tryit{notebook \S6}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O neplată ratată costă de cinci ori cît un client bun respins: pragul este 1/6, nu 1/2}
+\begin{frame}{Pragul de 1/6, sensibil la costuri, cînd o neplată ratată costă de cinci ori cît un client bun respins}
 \small
 \vspace{-1mm}\[ \text{respingem dacă}\ \ c_{\mathrm{FN}}\,p\ \ge\ c_{\mathrm{FP}}(1-p)\iff p\ \ge\ \frac{c_{\mathrm{FP}}}{c_{\mathrm{FP}}+c_{\mathrm{FN}}}=\frac16 \]\vspace{-2mm}
 \begin{center}\includegraphics[width=\textwidth,height=0.299\textheight,keepaspectratio]{charts/ro/cost_threshold.pdf}\end{center}\vspace{-3mm}
@@ -708,7 +708,7 @@ cuantila $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L1\_cost\_threshold}{Quantlets/L1/NN_L1_cost_threshold}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Un MLP minimal în PyTorch: circa cincisprezece rînduri}
+\begin{frame}{Implementarea minimală a unui MLP în PyTorch}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.55\textwidth}
@@ -836,7 +836,7 @@ p = torch.sigmoid(model(x\_test))~~ \# predicted PD\par}
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Vreți să aflați mai mult?}
+\begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

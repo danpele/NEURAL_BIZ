@@ -291,7 +291,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1.419 & \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L2\_batch\_size}{Quantlets/L2/NN_L2_batch_size}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Momentum averages past gradients and rolls through narrow valleys}
+\begin{frame}{Momentum: a running average of past gradients}
 \small
 \intuition{zig-zag components cancel in the average, the consistent downhill component accumulates.}
 \[ \mathbf v_{t+1}=\beta\,\mathbf v_t+\mathbf g_t,\qquad \btheta_{t+1}=\btheta_t-\eta\,\mathbf v_{t+1};\qquad \text{Nesterov:}\ \mathbf g_t=\nabla\loss(\btheta_t-\eta\beta\mathbf v_t) \]
@@ -381,7 +381,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1.419 & \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L2\_optimizer\_seeds}{Quantlets/L2/NN_L2_optimizer_seeds}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Learning-rate schedules: large steps early, small steps late}
+\begin{frame}{Learning-rate schedules: step, cosine and one-cycle}
 \small
 \intuition{explore with a large step, then reduce it so that the noise of SGD settles into a minimum.}
 \[ \text{step: }\eta_t=\eta_0\gamma^{\lfloor t/s\rfloor};\qquad \text{cosine: }\eta_t=\tfrac{\eta_0}{2}\Big(1+\cos\frac{\pi t}{T}\Big) \]
@@ -416,7 +416,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1.419 & \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L2\_schedules}{Quantlets/L2/NN_L2_schedules}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{On card fraud, the optimiser decides how fast the model becomes useful}
+\begin{frame}{On card fraud, the optimiser determines the speed of learning}
 \small
 \intuition{MLP 64-64 trained on the first 60\,\% of the two days, scored on the next 20\,\%.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/fraud_optimizers.pdf}\end{center}\vspace{-3mm}
@@ -515,7 +515,7 @@ EWMA, $\lambda=0.94$ & 41 & 2.39 & 24.08 & 0.000 & 0.0473 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kupiec, 1995)}\hfill\tryit{notebook \S8}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Where training runs: a laptop GPU is ten times faster than its main processor on a large MLP}
+\begin{frame}{Training hardware: a laptop GPU is ten times faster than its main processor on a large MLP}
 \small
 \intuition{training is matrix multiplication; a graphics processing unit (GPU) runs thousands of them in parallel.}
 \begin{itemize}\setlength{\itemsep}{4pt}
@@ -620,7 +620,7 @@ EWMA, $\lambda=0.94$ & 41 & 2.39 & 24.08 & 0.000 & 0.0473 \\
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Want to learn more?}
+\begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.52\textwidth}

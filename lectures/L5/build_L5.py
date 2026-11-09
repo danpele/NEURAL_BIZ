@@ -262,7 +262,7 @@ def build(lang, H=None):
                 "numărul mai mic de parametri face GRU puțin mai rapidă la antrenare și mai puțin pretențioasă la date."),
               cite=t("(Cho et al., 2014)", "(Cho et al., 2014)"), wl="0.6", wr="0.37")
 
-    D.figframe(t("Measured memory: the networks look at yesterday and at last week", "Memoria măsurată: rețelele privesc la ziua de ieri și la săptămîna trecută"),
+    D.figframe(t("Input sensitivity by lag: the networks rely on the previous day and the previous week", "Sensibilitatea la intrări pe decalaje: rețelele se bazează pe ziua și pe săptămîna precedentă"),
                t("sensitivity of the output of the trained load networks to each of the 168 input hours, averaged over 200 test days.",
                  "sensibilitatea ieșirii rețelelor de consum antrenate la fiecare dintre cele 168 de ore de intrare, mediată pe 200 de zile de test."),
                "\\[ S(k)=\\frac1n\\sum_{i=1}^{n}\\Big|\\frac{\\partial\\hat y_{i,12}}{\\partial x_{i,\\,T+1-k}}\\Big| \\]",
@@ -314,7 +314,7 @@ def build(lang, H=None):
                 "o amestecare aleatoare a zilelor înainte de împărțire pune anul 2020 în setul de antrenare și face orice model să pară bun pe 2020."),
               cite=OWN, tryit=NB + "2")
 
-    D.concept(t("Benchmarks first: naive, HAR and GARCH", "Întîi modelele de referință: naiv, HAR și GARCH"),
+    D.concept(t("Benchmark models: naive, HAR and GARCH", "Modelele de referință: naiv, HAR și GARCH"),
               t("a network must beat models that econometrics has refined for decades.",
                 "o rețea trebuie să depășească modele pe care econometria le-a rafinat de decenii."),
               "\\[\\begin{aligned} \\text{HAR: } y_{t+1}&=\\beta_0+\\beta_d y_t+\\beta_w\\bar y_{t-4:t}+\\beta_m\\bar y_{t-21:t}\\\\"
@@ -329,7 +329,7 @@ def build(lang, H=None):
                 "HAR este un model liniar cu trei medii; dacă un LSTM nu îl poate depăși, LSTM-ul nu merită întreținut."),
               cite=t("(Corsi, 2009; Bollerslev, 1986)", "(Corsi, 2009; Bollerslev, 1986)"))
 
-    D.concept(t("Is one forecast really better? The Diebold--Mariano test", "Este o prognoză într-adevăr mai bună? Testul Diebold--Mariano"),
+    D.concept(t("The Diebold--Mariano test of equal predictive accuracy", "Testul Diebold--Mariano pentru acuratețe predictivă egală"),
               t("compare the losses of two forecasts day by day and test whether their mean difference is zero.",
                 "comparăm zi de zi pierderile a două prognoze și testăm dacă diferența lor medie este zero."),
               "\\[ d_t=L(e_{1,t})-L(e_{2,t}),\\qquad \\mathrm{DM}=\\frac{\\bar d}{\\sqrt{\\hat\\sigma^2_{\\mathrm{NW}}/n}}\\;\\overset{H_0}{\\sim}\\;\\mathcal N(0,1) \\]"
@@ -524,7 +524,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
-    D.frame(t("Want to learn more?", "Lecturi și resurse suplimentare"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, ch.~12: sequence models, from RNNs to transformers.",
           "\\textbf{Bishop \\& Bishop (2024)}, cap.~12: modele de secvențe, de la RNN la transformere."),
         t("\\textbf{Pascanu, Mikolov \\& Bengio (2013)}: the clearest analysis of vanishing and exploding gradients.",

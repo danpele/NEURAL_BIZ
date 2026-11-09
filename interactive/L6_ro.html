@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L6.js?v=20261108s">
+<link rel="preload" as="script" href="L6.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261108s", "L6_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L6.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261109m", "L6_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L6.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -106,9 +106,9 @@
   <details><summary>Răspuns</summary><p>Nu. Pe frazele asupra cărora toți adnotatorii au fost de acord are dreptate în 88,4% din cazuri, pe cele cu acord de doar 50% în 58,1% din cazuri, abia peste răspunsul „neutră” dat mereu (56,0%). Matricea de confuzie arată unde merg erorile: frazele pozitive și negative sînt împinse mai ales spre neutru (263 de fraze pozitive și 107 negative în cele cinci seturi de test). Celelalte modele, inclusiv embedding bag, au același profil: zgomotul din etichete limitează acuratețea, deci verificați acordul propriilor adnotatori înainte de a cumpăra un model mai mare.</p></details>
 </section><h2 class="sec" id="s-case">Studiu de caz: temele tweet-urilor financiare</h2>
 <section class="blk" id="topics">
-  <h3>Douăzeci de teme: ușor pentru rezultate și Fed, greu pentru știrile generale</h3>
+  <h3>Clasificarea pe teme: F1 este mare pentru rezultate și Fed, mic pentru știrile generale</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L6/lecture6_ro.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L6_topic_f1_ro.jpg" alt="Slide-ul 34: Douăzeci de teme: ușor pentru rezultate și Fed, greu pentru știrile generale" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L6/lecture6_ro.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L6_topic_f1_ro.jpg" alt="Slide-ul 34: Clasificarea pe teme: F1 este mare pentru rezultate și Fed, mic pentru știrile generale" loading="lazy"></a>
       <figcaption>Slide-ul 34</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="tp-t">Tema</label><select id="tp-t"><option value="0">Actualizări ale analiștilor</option><option value="1">Fed și băncile centrale</option><option value="2">Știri despre companii și produse</option><option value="3">Titluri de stat și obligațiuni corporative</option><option value="4">Dividende</option><option value="5">Rezultate financiare</option><option value="6">Energie și petrol</option><option value="7">Sectorul financiar</option><option value="8">Valute</option><option value="9">Știri generale și opinii</option><option value="10" selected>Aur, metale și materiale</option><option value="11">Oferte publice inițiale</option><option value="12">Juridic și reglementare</option><option value="13">Fuziuni, achiziții și investiții</option><option value="14">Macroeconomie</option><option value="15">Piețe</option><option value="16">Politică</option><option value="17">Schimbări de personal</option><option value="18">Comentarii despre acțiuni</option><option value="19">Mișcări ale acțiunilor</option></select></div><div class="ctl ctl-tg" id="tp-m"><span class="lbl">Modelul</span><div class="tgs"><label class="tg"><input type="radio" name="tp-m" value="lr" checked> TF-IDF + logistic</label><label class="tg"><input type="radio" name="tp-m" value="eb"> Embedding bag (start word2vec)</label></div></div></div><div class="charts "><div class="chart" id="tp-row"></div><div class="chart" id="tp-f1"></div></div><ul class="out" id="tp-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_topic_f1" target="_blank" rel="noopener">NN_L6_topic_f1</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L6/NN_L6_topic_f1/NN_L6_topic_f1.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

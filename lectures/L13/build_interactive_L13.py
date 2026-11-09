@@ -32,9 +32,9 @@ BLOCKS = [('forecast-week', 'forecast_week', 'epf', 'fw'),
           ('var-backtest', 'var_sp500', 'risk', 'va')]
 
 SECTIONS = {
- 'en': dict(epf='Day-ahead price forecasts for Romania', eval='Is one forecast really better?',
+ 'en': dict(epf='Day-ahead price forecasts for Romania', eval='Testing differences in forecast accuracy',
             fm='Foundation models: context and quantiles', risk='Value-at-Risk with a foundation model'),
- 'ro': dict(epf='Prognoza prețurilor pentru ziua următoare în România', eval='Este o prognoză cu adevărat mai bună?',
+ 'ro': dict(epf='Prognoza prețurilor pentru ziua următoare în România', eval='Testarea diferențelor de acuratețe a prognozelor',
             fm='Modele fundație: contextul și cuantilele', risk='Valoarea expusă la risc cu un model fundație'),
 }
 

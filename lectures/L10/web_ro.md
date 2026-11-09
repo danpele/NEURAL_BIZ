@@ -57,7 +57,7 @@ Media lunară a diferenței zilnice maxim–minim a prețurilor pentru ziua urm�
 
 Un MDP formalizează o decizie secvențială; ecuația Bellman o descompune în probleme de un pas, pe care programarea dinamică le rezolvă exact atunci cînd modelul este cunoscut.
 
-## Un proces decizional Markov are cinci ingrediente {h=aea0d4be}
+## Cele cinci elemente ale unui proces decizional Markov {h=1a5ab08c}
 
 Un MDP este $\mathcal M=(\mathcal S,\mathcal A,P,R,\gamma)$: stări, acțiuni, legea de tranziție $P(s'\mid s,a)$, recompensa așteptată $R(s,a)$ și factorul de actualizare $\gamma\in[0,1]$. Agentul maximizează cîștigul cumulat așteptat
 
@@ -71,7 +71,7 @@ Proprietatea Markov cere ca starea să conțină tot ce contează: pentru bateri
 
 Valoarea stării $V^{\pi}(s)=\mathbb E_\pi[G_t\mid s_t=s]$ este recompensa viitoare așteptată dintr-o stare; valoarea acțiunii $Q^{\pi}(s,a)$ este același lucru după o primă acțiune dată, iar avantajul $A^{\pi}(s,a)=Q^{\pi}(s,a)-V^{\pi}(s)$ compară o acțiune cu media politicii. Metodele bazate pe valoare (Q-learning, DQN) estimează $Q^*$ și acționează lacom; metodele bazate pe politică (REINFORCE, PPO) parametrizează direct politica și folosesc $V$ doar ca reper. Pentru baterie, $V_h(s)$ este numărul de euro care mai pot fi cîștigați azi de la ora $h$, cu $s$ MWh stocați.
 
-## Ecuația Bellman transformă o problemă lungă în probleme de un pas {h=56b254bd}
+## Ecuația Bellman: descompunerea recursivă a funcției de valoare {h=93e1ff90}
 
 Valoarea optimă de acum este cea mai bună recompensă imediată plus valoarea optimă actualizată a stării următoare:
 

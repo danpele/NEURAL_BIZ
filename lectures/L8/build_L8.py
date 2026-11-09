@@ -302,7 +302,7 @@ def build(lang, H=None):
           "\\textbf{Măsurat}: un clasificator cu 15 vecini pe cele două medii latente atinge o acuratețe de @{vae.knn_acc_2d|.1f}\\,\\% (5 partiții, imaginile de test)")],
         height="0.58\\textheight", tryit=NB + "2")
 
-    D.chart(t("Reconstructions are faithful but soft; samples are plausible but blurry", "Reconstrucțiile sînt fidele, dar estompate; eșantioanele sînt plauzibile, dar neclare"), "vae_samples", [
+    D.chart(t("Quality of VAE reconstructions and generated samples", "Calitatea reconstrucțiilor VAE și a eșantioanelor generate"), "vae_samples", [
         t("\\textbf{Rows}: real test images; their reconstructions through a 16-dimensional code; new images decoded from random codes $\\mathbf z\\sim\\mathcal N(0,I)$.",
           "\\textbf{Rîndurile}: imagini reale de test; reconstrucția lor printr-un cod cu 16 dimensiuni; imagini noi decodate din coduri aleatoare $\\mathbf z\\sim\\mathcal N(0,I)$"),
         t("\\textbf{Blur} comes from the Gaussian posterior and the pixel-wise loss: the decoder averages over plausible details.",
@@ -409,7 +409,7 @@ def build(lang, H=None):
           "\\textbf{Eșantioanele GAN} sînt extrageri independente (@{gan.acf1_gan|.2f} la decalajul 1): distribuția marginală corectă, dinamica greșită; modelele de secvențe (TimeGAN, Quant GANs) generează traiectorii întregi")],
         height="0.48\\textheight", tryit=NB + "3", cite="(Cont, 2001; Yoon et al., 2019; Wiese et al., 2020)")
 
-    D.concept(t("Mode collapse and the Wasserstein fix", "Colapsul modurilor și soluția Wasserstein"),
+    D.concept(t("Mode collapse and the Wasserstein GAN", "Colapsul modurilor și GAN-ul Wasserstein"),
               t("A generator can win by producing a few convincing samples; the Wasserstein distance gives useful gradients even when the supports do not overlap.",
                 "Un generator poate cîștiga producînd cîteva eșantioane convingătoare; distanța Wasserstein dă gradienți utili chiar cînd suporturile nu se suprapun."),
               "\\[ W_1(p_{data},p_G)=\\sup_{\\|f\\|_{L}\\le1}\\ \\E_{p_{data}}[f(\\mathbf x)]-\\E_{p_G}[f(\\mathbf x)] \\]"
@@ -548,7 +548,7 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
-    D.frame(t("Want to learn more?", "Lecturi și resurse suplimentare"), cols(it(
+    D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapters 16--20: latent variables, GANs, flows, autoencoders, diffusion.",
           "\\textbf{Bishop \\& Bishop (2024)}, capitolele 16--20: variabile latente, GAN, fluxuri, autoencodere, difuzie"),
         t("\\textbf{Lilian Weng's notes} on diffusion models: ", "\\textbf{Notele lui Lilian Weng} despre modelele de difuzie: ") +

@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109m">
+<link rel="stylesheet" href="interactive.css?v=20261109m">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L12.js?v=20261108s">
+<link rel="preload" as="script" href="L12.js?v=20261109m">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261108s", "L12_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L12.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261109m", "L12_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L12.js?v=20261109m");
 </script>
 </head>
 <body>
@@ -53,8 +53,8 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din ieșirile modelelor deschise rulate pentru curs (Qwen2.5 cu 0,5, 1,5 și 3 miliarde de parametri) cînd modificați un control. Nimic nu este inventat: fiecare probabilitate, etichetă și estimare a valorii expuse la risc (VaR) de mai jos a fost produsă de modele pe date reale. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
-<p class="toc"><a href="#s-lm">Cum scrie un model de limbaj: următorul token</a> · <a href="#s-prompt">Formularea instrucțiunilor (prompt engineering), măsurată</a> · <a href="#s-rag">Generarea augmentată prin regăsire (RAG)</a> · <a href="#s-var">Un model de limbaj ca estimator al riscului (LLM-VaR)</a></p>
-<h2 class="sec" id="s-lm">Cum scrie un model de limbaj: următorul token</h2>
+<p class="toc"><a href="#s-lm">Prezicerea următorului token într-un model de limbaj</a> · <a href="#s-prompt">Evaluarea formulării instrucțiunilor (prompt engineering)</a> · <a href="#s-rag">Generarea augmentată prin regăsire (RAG)</a> · <a href="#s-var">Un model de limbaj ca estimator al riscului (LLM-VaR)</a></p>
+<h2 class="sec" id="s-lm">Prezicerea următorului token într-un model de limbaj</h2>
 <section class="blk" id="next-token">
   <h3>Probabilitățile următorului token: un model real, o frază reală</h3>
   <div class="pair">
@@ -64,11 +64,11 @@
   </div>
   <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Fraza unui discurs al BCE (Banca Centrală Europeană) din 30 octombrie 2026 începe cu „The inflation impact is limited:”. La temperatura 1, modelul dă 10,1% cuvîntului „the”. Ce se întîmplă cu această probabilitate la temperatura 0,5 și la temperatura 2?</div>
   <details><summary>Răspuns</summary><p>Împărțirea logiților la T ascute distribuția cînd T < 1 și o aplatizează cînd T > 1. Pe întregul vocabular de 151.665 de tokeni, cursul măsoară 49,9% pentru „the” la T = 0,5 și doar 0,4% la T = 2; entropia crește de la 1,74 la 6,20 și 10,29 nats. Figura renormalizează pe cei mai probabili k tokeni, ca eșantionarea top-k: cu k = 1 modelul scrie mereu „the” (decodare lacomă). Cuvîntul rostit efectiv, „prices”, nu este printre cei opt tokeni cei mai probabili. Pentru clasificare și extragere folosiți T = 0; temperaturile mari sînt pentru generarea de idei.</p></details>
-</section><h2 class="sec" id="s-prompt">Formularea instrucțiunilor (prompt engineering), măsurată</h2>
+</section><h2 class="sec" id="s-prompt">Evaluarea formulării instrucțiunilor (prompt engineering)</h2>
 <section class="blk" id="few-shot">
-  <h3>Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută</h3>
+  <h3>Efectul numărului de exemple din prompt</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L12_fewshot_curve_ro.jpg" alt="Slide-ul 24: Cîteva exemple ajută modelul mic; mai multe exemple nu mai ajută" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=24" target="_blank" rel="noopener"><img src="slides/L12_fewshot_curve_ro.jpg" alt="Slide-ul 24: Efectul numărului de exemple din prompt" loading="lazy"></a>
       <figcaption>Slide-ul 24</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fs-m">Modelul</label><select id="fs-m"><option value="1.5B">Qwen2.5-1.5B</option><option value="3B" selected>Qwen2.5-3B</option></select></div><div class="ctl"><label for="fs-k">Numărul de exemple în prompt, k: <b id="fs-k-v"></b></label><input type="range" id="fs-k" min="0" max="4" step="1" value="2"></div><div class="ctl ctl-tg" id="fs-s"><span class="lbl">Setul de exemple (extragerea aleatoare)</span><div class="tgs"><label class="tg"><input type="radio" name="fs-s" value="0" checked> 1</label><label class="tg"><input type="radio" name="fs-s" value="1"> 2</label><label class="tg"><input type="radio" name="fs-s" value="2"> 3</label></div></div><button class="btn play" id="fs-play" type="button"></button></div><div class="charts "><div class="chart" id="fs-curve"></div><div class="chart" id="fs-conf"></div></div><ul class="out" id="fs-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_fewshot_curve" target="_blank" rel="noopener">NN_L12_fewshot_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_fewshot_curve/NN_L12_fewshot_curve.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Răspuns</summary><p>Mult pentru modelul mic: pe Financial PhraseBank, Qwen2.5-1.5B variază între 72,8% și 87,0% (14,2 puncte) de la o formulare la alta, Qwen2.5-3B doar între 88,5% și 92,2% (3,6 puncte). Pe tweet-urile financiare ambele sînt fragile: 34,3–47,6% pentru 1,5B și 65,5–78,4% pentru 3B. Matricea de confuzie arată unde merg erorile; un scor raportat pentru un LLM este scorul unui singur prompt, deci testați mai multe formulări și raportați intervalul.</p></details>
 </section>
 <section class="blk" id="calibration">
-  <h3>Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale</h3>
+  <h3>Calibrarea probabilităților etichetelor pe date reale</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L12_calibration_ro.jpg" alt="Slide-ul 28: Sînt calibrate probabilitățile etichetelor? Fiabilitatea pe date reale" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L12_calibration_ro.jpg" alt="Slide-ul 28: Calibrarea probabilităților etichetelor pe date reale" loading="lazy"></a>
       <figcaption>Slide-ul 28</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cb-d">Setul de date</label><select id="cb-d"><option value="pb" selected>Financial PhraseBank (știri despre companii)</option><option value="tw">Tweet-uri financiare</option></select></div><div class="ctl"><label for="cb-m">Modelul</label><select id="cb-m"><option value="tfidf">TF-IDF + regresie logistică</option><option value="zs_0.5B">Zero-shot, Qwen2.5-0.5B</option><option value="zs_1.5B">Zero-shot, Qwen2.5-1.5B</option><option value="zs_3B" selected>Zero-shot, Qwen2.5-3B</option><option value="fs_1.5B">Few-shot (k = 4), Qwen2.5-1.5B</option><option value="fs_3B">Few-shot (k = 4), Qwen2.5-3B</option><option value="cot_3B">Raționament pas cu pas (chain-of-thought), Qwen2.5-3B</option><option value="probe">Embedding Qwen2.5-1.5B + regresie logistică</option></select></div><div class="ctl"><label for="cb-t">Răspundem doar dacă probabilitatea etichetei alese este cel puțin: <b id="cb-t-v"></b></label><input type="range" id="cb-t" min="0.33" max="0.99" step="0.01" value="0.33"></div><button class="btn play" id="cb-play" type="button"></button></div><div class="charts "><div class="chart" id="cb-rel"></div><div class="chart" id="cb-cov"></div></div><ul class="out" id="cb-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_calibration" target="_blank" rel="noopener">NN_L12_calibration</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_calibration/NN_L12_calibration.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
