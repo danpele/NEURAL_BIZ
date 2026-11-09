@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L6.js?v=20261109m">
+<link rel="preload" as="script" href="L6.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261109m", "L6_text_en.js?v=20261109m", "common.js?v=20261109m"], "L6.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261109n", "L6_text_en.js?v=20261109n", "common.js?v=20261109n"], "L6.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-text">Text as data</a> · <a href="#s-sparse">Sparse representations: bag of words</a> · <a href="#s-dense">Dense representations: word embeddings</a> · <a href="#s-clf">Sentence classifiers</a> · <a href="#s-case">Case study: topics of finance tweets</a></p>
 <h2 class="sec" id="s-text">Text as data</h2>
 <section class="blk" id="zipf">
-  <h3>Few words are frequent, most are rare: Zipf's law</h3>
+  <h3>Word frequencies and Zipf's law</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L6/lecture6.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L6_zipf_en.jpg" alt="Slide 7: Few words are frequent, most are rare: Zipf's law" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L6/lecture6.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L6_zipf_en.jpg" alt="Slide 7: Word frequencies and Zipf's law" loading="lazy"></a>
       <figcaption>Slide 7</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="zf-m">Minimum count to enter the vocabulary: <b id="zf-m-v"></b></label><input type="range" id="zf-m" min="1" max="100" step="1" value="5"></div><div class="ctl ctl-tg" id="zf-s"><span class="lbl">Axis scale</span><div class="tgs"><label class="tg"><input type="radio" name="zf-s" value="log" checked> log–log</label><label class="tg"><input type="radio" name="zf-s" value="lin"> linear</label></div></div><div class="ctl ctl-tg" id="zf-f"><span class="lbl">Line</span><div class="tgs"><label class="tg"><input type="checkbox" name="zf-f" value="fit" checked> fitted power law</label></div></div></div><div class="charts "><div class="chart" id="zf-chart"></div><div class="chart" id="zf-cov"></div></div><ul class="out" id="zf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_zipf" target="_blank" rel="noopener">NN_L6_zipf</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L6/NN_L6_zipf/NN_L6_zipf.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

@@ -54,7 +54,7 @@ This lecture writes the convolutional layer as a formula, trains three models on
 - **Use** transfer learning when labelled images are expensive, and measure what it saves.
 - **Explain** a prediction with a class activation map and turn image predictions into business numbers.
 
-# Images as data: why convolutions
+# Images as data and the motivation for convolutions
 
 An image is a matrix of numbers, and the first question is how a model should look at it.
 
@@ -71,7 +71,7 @@ Two training images of each of the ten product types.
 
 A dense layer computes $\mathbf h=\sigma(\mathbf W\,\mathrm{vec}(\mathbf X)+\mathbf b)$ with one weight per pixel and unit. For a 224 × 224 colour image and 1,000 hidden units, that is about 150 million weights in the first layer alone. A CNN rests on three ideas: local connectivity (a unit sees a small patch), weight sharing (the same filter at every position) and equivariance (shifting the input shifts the feature map). On our data the MLP has {fmnist.mlp.params|,} parameters and the CNN {fmnist.cnn.params|,}, {fmnist.params_ratio|.2f} times fewer.
 
-# The convolutional layer, formula by formula
+# The convolutional layer
 
 ## Convolution: the same small filter slides over the image
 
@@ -103,7 +103,7 @@ Receptive field as a function of depth, with and without pooling (own computatio
 
 Because the kernel is shared, its gradient sums the contributions of every position, $\partial\mathcal L/\partial K_{o,c}(u,v)=\sum_{i,j}\delta_o(i,j)X_c(is+u-p,js+v-p)$, and the gradient with respect to the input is again a convolution. Every network of the lecture uses batch normalisation (BN) after each convolution: each channel is standardised over the batch and the positions, then rescaled by two learned numbers. At prediction time the running averages replace the batch statistics, which is why `model.eval()` must be called before predicting.
 
-# Case study: product photos, from softmax to CNN
+# Case study: classification of product photos with softmax regression and a CNN
 
 ## Experimental protocol for the three models
 
@@ -112,14 +112,14 @@ The benchmark is a softmax (multinomial logistic) regression with {fmnist.softma
 @chart fmnist_curves
 Training (dashed) and validation (solid) cross-entropy, and validation accuracy, by epoch (seed {seed}).
 
-## Higher accuracy with fewer parameters
+## Accuracy and number of parameters of the three models
 
 The CNN reaches a test accuracy of {fmnist.cnn.acc_mean|.2f}% (standard deviation over seeds {fmnist.cnn.acc_sd|.2f}), against {fmnist.mlp.acc_mean|.2f}% for the MLP and {fmnist.softmax.acc_mean|.2f}% for the softmax regression. It removes {fmnist.cnn_err_cut_pct|.1f}% of the MLP's errors with {fmnist.params_ratio|.2f} times fewer parameters. McNemar's test on the same {fmnist.n_test|,} test images (seed {seed}) counts {fmnist.mcnemar.cnn_only} images right only for the CNN and {fmnist.mcnemar.mlp_only} right only for the MLP, a statistic of {fmnist.mcnemar.chi2|.1f}, far above the 5% critical value of 3.84.
 
 @chart fmnist_compare
 Test accuracy (mean and standard deviation over three seeds) and number of parameters.
 
-## The errors are the products that people also confuse
+## Confusion matrix: errors between products of similar shape
 
 The weakest class is {fmnist.worst_class} (recall {fmnist.worst_recall|.1f}%), and the largest single confusion is {fmnist.top_conf.true} taken for {fmnist.top_conf.pred} ({fmnist.top_conf.n} images).
 
@@ -128,7 +128,7 @@ Confusion matrix of the CNN on the test images (counts of 10 or more shown).
 
 @practice route only the low-confidence photos of the weak classes to a person: the cost of errors falls where it is highest.
 
-## What the network learns
+## Learned filters and feature maps
 
 The first-layer filters are small edge and contrast detectors, found by gradient descent without being asked for. Deeper layers combine them: the feature maps of block 1 keep the outline of the boot, those of block 3 are small (7 × 7) but mark where the informative parts are.
 
@@ -181,7 +181,7 @@ Confusion matrix of the fine-tuned ResNet-18 on the test tiles.
 @chart gradcam
 Six test tiles and their Grad-CAM maps, with the predicted class and its probability.
 
-## From tiles to a decision
+## Land-use shares from satellite tiles
 
 A portfolio question is about shares, not single tiles. On the test tiles, crops (annual and permanent) make {landuse.crop_true|.2f}% of the tiles and the model predicts {landuse.crop_pred|.2f}%; the largest error of any class share is {landuse.max_abs_share_err_pp|.2f} percentage points. Before using the model in a new region or season, label a small sample there and measure again.
 
@@ -212,7 +212,7 @@ Cursul scrie stratul convoluțional ca formulă, antrenează trei modele pe {fmn
 - **Să folosiți** transferul învățării atunci cînd imaginile etichetate sînt scumpe și să măsurați cît economisește.
 - **Să explicați** o predicție cu o hartă de activare a clasei și să transformați predicțiile pe imagini în cifre utile în afaceri.
 
-# Imaginile ca date: de ce convoluții
+# Imaginile ca date și motivarea convoluțiilor
 
 O imagine este o matrice de numere, iar prima întrebare este cum ar trebui s-o privească un model.
 
@@ -229,7 +229,7 @@ Două imagini de antrenare pentru fiecare dintre cele zece tipuri de produse.
 
 Un strat dens calculează $\mathbf h=\sigma(\mathbf W\,\mathrm{vec}(\mathbf X)+\mathbf b)$, cu o pondere pentru fiecare pixel și fiecare unitate. Pentru o imagine color de 224 × 224 și 1 000 de unități ascunse, rezultă aproximativ 150 de milioane de ponderi numai în primul strat. O CNN se sprijină pe trei idei: conectivitatea locală (o unitate vede o zonă mică), partajarea ponderilor (același filtru în toate pozițiile) și echivarianța (o deplasare a intrării deplasează harta de trăsături). Pe datele noastre, MLP are {fmnist.mlp.params|,} de parametri, iar CNN {fmnist.cnn.params|,}, de {fmnist.params_ratio|.2f} ori mai puțini.
 
-# Stratul convoluțional, formulă cu formulă
+# Stratul convoluțional
 
 ## Convoluția: același filtru mic glisează peste imagine
 
@@ -261,7 +261,7 @@ Cîmpul receptiv în funcție de adîncime, cu și fără agregare (calcul propr
 
 Pentru că nucleul este partajat, gradientul lui adună contribuțiile tuturor pozițiilor, $\partial\mathcal L/\partial K_{o,c}(u,v)=\sum_{i,j}\delta_o(i,j)X_c(is+u-p,js+v-p)$, iar gradientul în raport cu intrarea este tot o convoluție. Toate rețelele din curs folosesc normalizarea pe loturi (BN) după fiecare convoluție: fiecare canal este standardizat pe lot și pe poziții, apoi rescalat cu doi parametri învățați. La predicție, mediile mobile înlocuiesc statisticile lotului; de aceea trebuie apelat `model.eval()` înainte de predicție.
 
-# Studiu de caz: fotografii de produse, de la softmax la CNN
+# Studiu de caz: clasificarea fotografiilor de produse cu regresie softmax și CNN
 
 ## Protocolul experimental pentru cele trei modele
 
@@ -270,14 +270,14 @@ Modelul de referință este o regresie softmax (logistică multinomială) cu {fm
 @chart fmnist_curves
 Entropia încrucișată la antrenare (punctat) și la validare (linie continuă) și acuratețea de validare, pe epoci (sămînța {seed}).
 
-## Acuratețe mai mare cu mai puțini parametri
+## Acuratețea și numărul de parametri ai celor trei modele
 
 CNN atinge o acuratețe pe test de {fmnist.cnn.acc_mean|.2f}% (abaterea standard pe semințe {fmnist.cnn.acc_sd|.2f}), față de {fmnist.mlp.acc_mean|.2f}% pentru MLP și {fmnist.softmax.acc_mean|.2f}% pentru regresia softmax. Elimină {fmnist.cnn_err_cut_pct|.1f}% din erorile MLP, cu de {fmnist.params_ratio|.2f} ori mai puțini parametri. Testul McNemar pe aceleași {fmnist.n_test|,} de imagini de test (sămînța {seed}) numără {fmnist.mcnemar.cnn_only} de imagini corecte doar pentru CNN și {fmnist.mcnemar.mlp_only} de imagini corecte doar pentru MLP, o statistică de {fmnist.mcnemar.chi2|.1f}, mult peste valoarea critică de 3,84 la pragul de 5%.
 
 @chart fmnist_compare
 Acuratețea pe test (media și abaterea standard pe trei semințe) și numărul de parametri.
 
-## Erorile sînt la produsele pe care le confundă și oamenii
+## Matricea de confuzie: erori între produse cu forme asemănătoare
 
 Clasa cea mai slabă este {fmnist.worst_class_ro} (sensibilitate {fmnist.worst_recall|.1f}%), iar cea mai mare confuzie este {fmnist.top_conf.true_ro} clasificat drept {fmnist.top_conf.pred_ro} ({fmnist.top_conf.n} de imagini).
 
@@ -286,7 +286,7 @@ Matricea de confuzie a CNN pe imaginile de test (sînt afișate frecvențele de 
 
 @practice trimiteți la verificare umană doar fotografiile cu încredere scăzută din clasele slabe: costul erorilor scade acolo unde este cel mai mare.
 
-## Ce învață rețeaua
+## Filtrele învățate și hărțile de trăsături
 
 Filtrele din primul strat sînt mici detectori de muchii și contraste, găsiți de coborîrea pe gradient fără să fi fost ceruți. Straturile mai adînci le combină: hărțile de trăsături din blocul 1 păstrează conturul ghetei, iar cele din blocul 3 sînt mici (7 × 7), dar marchează locul părților informative.
 
@@ -339,7 +339,7 @@ Matricea de confuzie a ResNet-18 ajustat fin pe imaginile de test.
 @chart gradcam
 Șase imagini de test și hărțile lor Grad-CAM, cu clasa prezisă și probabilitatea ei.
 
-## De la imagini la decizie
+## Ponderile utilizării terenului din imagini satelitare
 
 O întrebare de portofoliu privește ponderi, nu imagini individuale. Pe imaginile de test, culturile (anuale și permanente) reprezintă {landuse.crop_true|.2f}% din imagini, iar modelul prezice {landuse.crop_pred|.2f}%; cea mai mare eroare a ponderii vreunei clase este de {landuse.max_abs_share_err_pp|.2f} puncte procentuale. Înainte de a folosi modelul într-o regiune sau un anotimp nou, etichetați acolo un mic eșantion și măsurați din nou.
 

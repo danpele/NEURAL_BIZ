@@ -15,7 +15,7 @@ Cursul construiește cele trei straturi GNN clasice, rețeaua convoluțională p
 - **Antrenați-le** pe graful Elliptic, în ordine cronologică, alături de modele de referință puternice fără graf.
 - **Judecați** rezultatele cu precizia, recall-ul, aria de sub curba precizie-recall (PR-AUC), bugetele de alerte, schimbarea în timp și stabilitatea explicațiilor.
 
-# De ce grafuri pentru infracțiunile financiare
+# Grafurile în detectarea infracțiunilor financiare
 
 Graful Elliptic arată cum arată o rețea de tranzacții și de ce vecinii poartă informație.
 
@@ -45,7 +45,7 @@ Tranzacțiile etichetate pe pași de timp, licite și ilicite; linia punctată �
 
 @practice un model este judecat pe lunile de după datele de antrenare, exact cum va fi folosit.
 
-## Cele mai multe tranzacții ating una sau două altele; puține sînt noduri centrale {h=ec55127b}
+## Distribuția gradelor în graful tranzacțiilor {h=4810d1f3}
 
 Graful este rar: gradul mediu este 2,30, mediana 2, iar 34,5 % dintre noduri au un singur vecin. Coada este grea: cel mai mare nod central are 473 de vecini. O rețea GNN nu trebuie să lase astfel de noduri să le acopere pe celelalte; de aici normalizarea după grad din secțiunea următoare.
 
@@ -69,7 +69,7 @@ Grafurile de fraudă sînt rare, cu cozi grele, etichetate în valuri și homofi
 
 Matricea de adiacență, matricea gradelor și laplacianul transformă graful în algebră liniară.
 
-## Matricea de adiacență transformă graful în algebră liniară {h=b5a73aa4}
+## Matricea de adiacență ca reprezentare algebrică a grafului {h=8735d3ca}
 
 $A_{uv}=1$ dacă $(u,v)$ este muchie și 0 altfel; $D=\operatorname{diag}(\sum_vA_{uv})$ este matricea gradelor. Adăugînd bucle și normalizînd simetric, obținem
 
@@ -77,7 +77,7 @@ $$ \tilde A=A+I,\qquad \hat A=\tilde D^{-1/2}\tilde A\,\tilde D^{-1/2}, $$ {#eq:
 
 cu elementele $1/\sqrt{\tilde d_u\tilde d_v}$. Matricea $A$ are circa $4\cdot10^{10}$ celule, dar numai 234 355 de muchii, deci bibliotecile precum PyTorch Geometric (PyG) păstrează o listă de muchii. Fără normalizare, un nod central de grad 473 ar aduna 473 de mesaje, iar scala ar exploda.
 
-## Un model pe graf nu trebuie să depindă de numerotarea nodurilor {h=3542d65d}
+## Invarianța și echivarianța la permutări ale modelelor pe graf {h=db7f6244}
 
 Pentru orice matrice de permutare $P$, un model la nivel de nod trebuie să satisfacă $f(P\mathbf X,PAP^\top)=Pf(\mathbf X,A)$ (echivarianță), iar unul la nivel de graf $g(P\mathbf X,PAP^\top)=g(\mathbf X,A)$ (invarianță). Un perceptron multistrat (MLP) pe rîndurile lui $A$ s-ar schimba odată cu numerotarea; o rețea neuronală convoluțională (CNN) presupune o grilă cu un număr fix de vecini ordonați, pe cînd o tranzacție are între unul și cîteva sute de vecini, fără ordine.
 
@@ -87,7 +87,7 @@ Pentru orice matrice de permutare $P$, un model la nivel de nod trebuie să sati
 
 Laplacianul $L=D-A$ măsoară cît diferă un semnal de la un nod la vecinii lui: $\mathbf x^\top L\mathbf x=\sum_{(u,v)\in\mathcal E}(x_u-x_v)^2$. Vectorii lui proprii $U$ definesc o transformată Fourier pe graf, $\hat{\mathbf x}=U^\top\mathbf x$, iar un filtru spectral este $U g_\theta(\Lambda)U^\top\mathbf x$. Calculul este costisitor, dar un polinom de gradul întîi în $L$ duce direct la adiacența normalizată din @eq:ahat (derivarea, în Anexa A a slide-urilor). Pe grafurile de fraudă cu homofilie semnalul este neted, deci media pe vecini elimină zgomot, nu informație.
 
-## Nod, muchie sau graf: trei sarcini de predicție {h=2f78cb08}
+## Trei sarcini de predicție: la nivel de nod, de muchie și de graf {h=1eaa6640}
 
 Aceleași straturi răspund la trei întrebări; se schimbă doar ieșirea. Nod: este această tranzacție ilicită (acest curs)? Muchie: este această plată un transfer printr-un cont intermediar? Graf: este acest grup de conturi o rețea de spălare, este această rețea interbancară fragilă? O sumă pe reprezentările nodurilor face ca ieșirea la nivel de graf să nu depindă de numerotare.
 
@@ -101,7 +101,7 @@ O rețea GNN lucrează cu adiacența normalizată și trebuie să fie echivarian
 
 Fiecare strat GNN colectează mesajele vecinilor, le agregă și actualizează nodul.
 
-## Un strat GNN: colectează mesajele, le agregă, actualizează {h=34408675}
+## Un strat GNN: funcțiile de mesaj, de agregare și de actualizare {h=48a87ab7}
 
 O rețea neuronală cu transmitere de mesaje (MPNN) calculează, pentru fiecare nod $v$ și strat $l$,
 
@@ -122,7 +122,7 @@ O rețea cu $L$ straturi vede vecinătatea de $L$ salturi. Pentru 2 000 de tranz
 @chart receptive_field
 Numărul de noduri aflate la cel mult $k$ salturi de o tranzacție de test, mediana și percentila 90.
 
-## Prea multe straturi fac toate nodurile să semene: suprasmoothing-ul (over-smoothing) {h=465422ea}
+## Netezirea excesivă (over-smoothing) în rețelele pe graf cu multe straturi {h=bd536f36}
 
 Medierea repetată, ponderată după grad, aduce toate reprezentările spre un vector comun. Pe Elliptic, PR-AUC de test este 0,504 cu un strat GCN, 0,458 cu două și 0,371 cu șase; adîncimea cea mai bună este 1. Pe același interval, similaritatea cosinus medie a reprezentărilor crește de la 0,57 la 0,96.
 
@@ -139,7 +139,7 @@ Transmiterea mesajelor = mesaj, agregare, actualizare; adîncimea = numărul de 
 
 Trei alegeri ale mesajului, agregării și actualizării, de la ponderi fixe după grad la atenție învățată.
 
-## GCN: media vecinilor ponderată cu gradele, apoi o regresie {h=e5bdaccd}
+## GCN: media vecinilor ponderată cu gradele, urmată de o transformare liniară {h=13774190}
 
 Un strat GCN este
 
@@ -153,7 +153,7 @@ o regresie liniară pe media normalizată a nodului și a vecinilor lui, urmată
 
 GraphSAGE folosește ponderi separate pentru nod și pentru media unui eșantion $\mathcal S(v)$ de vecini: $\mathbf h_v^{(l+1)}=\mathrm{ReLU}\big(W_1\mathbf h_v^{(l)}+W_2\,\mathrm{mean}_{u\in\mathcal S(v)}\mathbf h_u^{(l)}\big)$. Ponderile nu depind de graf, deci tranzacțiile de mîine primesc un scor fără reantrenare (învățare inductivă), iar eșantionarea limitează costul pe nod. Pe Elliptic, F1 pe clasa ilicită este 0,564 (abatere standard 0,022), iar PR-AUC 0,582.
 
-## GAT: rețeaua decide care vecin contează {h=df1b7e0b}
+## GAT: ponderi de atenție învățate pentru vecini {h=b801a2ae}
 
 Un strat cu atenție pe graf ponderează fiecare vecin cu un scor învățat,
 
@@ -179,7 +179,7 @@ Opt modele pe același test în timp, judecate cum le-ar judeca o echipă de inv
 
 Modelele sînt: o regresie logistică pe cele 93 de variabile locale și pe toate cele 165; o pădure aleatoare cu 100 de arbori și 50 de variabile la fiecare împărțire, ca în Weber et al. (2019); un MLP cu aceleași straturi ca GCN, dar fără mesaje, care izolează valoarea muchiilor; GCN, GraphSAGE și GAT; și o pădure aleatoare pe variabile plus cele 100 de ieșiri ascunse ale GCN. Precizia, recall-ul și F1 pe clasa ilicită se măsoară la pragul 0,5 pe pașii 35–49, împreună cu PR-AUC, care nu depinde de prag; fiecare rețea și pădure este rulată cu 3 semințe.
 
-## Pe Elliptic pădurea conduce; straturile pe graf adaugă mai ales putere de ordonare unei rețele {h=4973e2a7}
+## Rezultatele pe Elliptic: pădurea aleatoare și contribuția straturilor pe graf {h=0e083595}
 
 F1 pe clasa ilicită este 0,808 pentru pădurea aleatoare, 0,778 pentru pădurea cu reprezentări GCN, 0,447 pentru GCN, 0,498 pentru MLP și 0,343 pentru regresia logistică. Cu aceleași straturi, muchiile schimbă PR-AUC al rețelei cu +8,1 puncte (GCN față de MLP), deși F1 la pragul 0,5 este mai mic decît al MLP; GraphSAGE, care separă nodul de vecini, este cea mai bună rețea pe graf, cu F1 0,564.
 
@@ -192,7 +192,7 @@ Precizia este ponderea alertelor care sînt ilicite; recall-ul este ponderea tra
 
 @practice modelul potrivit depinde de costul unei erori: un caz de spălare ratat sau o oră pierdută de un analist.
 
-## Curbele precizie-recall: ordonarea din spatele lui F1 {h=67fb4ee0}
+## Curbele precizie-recall ale modelelor {h=12c0d227}
 
 PR-AUC este 0,782 pentru pădurea aleatoare, 0,763 pentru pădurea cu reprezentări GCN, 0,442 pentru GCN și 0,311 pentru regresia logistică; un scor aleator ar da 6,50 %, ponderea tranzacțiilor ilicite printre cele etichetate de test.
 
@@ -205,7 +205,7 @@ Reeșantionînd tranzacțiile de test de 1 000 de ori, cu aceeași extragere pen
 
 @practice raportați intervalul, nu doar cîștigătorul: un comitet antifraudă decide pe intervale, nu pe a treia zecimală.
 
-## De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje {h=d05f19ab}
+## Agregatele de vecinătate din variabile și performanța pădurii aleatoare {h=8a6793e1}
 
 72 dintre cele 165 de variabile sînt agregate pe vecinii de la un salt (maxime, minime, abateri standard, corelații): un strat GNN fix, calculat de Elliptic înainte de publicarea datelor. O regresie logistică numai pe variabilele locale atinge F1 0,329, față de 0,343 cu agregatele. În plus, arborii prind bine tiparele de fraudă de tip regulă. Rețelele GNN își justifică costul pe grafuri brute, fără agregate construite manual, pe tipare pe mai multe salturi și la scorurile inductive; combinînd cele două, pădurea cu reprezentări GCN schimbă F1 cu −3,0 puncte.
 
@@ -220,7 +220,7 @@ F1 pe clasa ilicită pe fiecare pas de timp de test, pentru patru modele.
 
 @practice monitorizați F1 pe fiecare perioadă și reantrenați pe etichete recente; un model AML static îmbătrînește în cîteva săptămîni.
 
-## Ce obține o echipă de investigații din 1 000 de alerte {h=a652720b}
+## Tranzacțiile ilicite identificate între primele 1 000 de alerte {h=70842627}
 
 Dacă echipa verifică primele 1 000 de scoruri din perioada de test, găsește 72,9 % dintre toate tranzacțiile ilicite cu pădurea aleatoare, 44,8 % cu GCN și 72,9 % cu pădurea plus reprezentările GCN; rata de reușită a acestor alerte este 78,9 % pentru pădure și 48,5 % pentru GCN, din 1 083 de tranzacții ilicite de test.
 
@@ -229,14 +229,14 @@ Ponderea tranzacțiilor ilicite de test găsite printre scorurile cele mai mari,
 
 @practice dimensionați echipa după această curbă: bugetul de alerte, nu F1, este constrîngerea unui departament de conformitate.
 
-## Rețeaua GCN învață un spațiu în care tranzacțiile ilicite se adună {h=6f40e90d}
+## Tranzacțiile ilicite se grupează în spațiul de reprezentare al GCN {h=3ae9d657}
 
 Proiecția stratului ascuns al rețelei GCN, cu 100 de dimensiuni, pe primele două componente principale (analiza componentelor principale, PCA), care explică 79,2 % din varianță, arată tranzacțiile ilicite de test adunîndu-se într-o regiune proprie. Acești vectori sînt intrările modelului pădure plus GCN și pot alimenta orice alt model de risc.
 
 @chart gcn_embeddings
 Reprezentările ascunse GCN ale tranzacțiilor de test, primele două componente principale.
 
-## Adăugarea variabilelor de graf reordonează explicațiile {h=2b1ed0f7}
+## Efectul variabilelor de graf asupra explicațiilor {h=586d7145}
 
 Primele 10 variabile ale pădurii aleatoare au 58,2 % din importanța bazată pe impuritate; după adăugarea reprezentărilor GCN, aceleași variabile păstrează 7,4 %, iar reprezentările iau 73,9 %. Pe 3 reantrenări, corelația Spearman medie a importanțelor este 0,973 pentru pădure și 0,896 pentru pădurea cu reprezentări GCN. O parte din schimbare vine din simpla adăugare de intrări, iar o parte din reantrenare: ambele trebuie luate în calcul înainte de a interpreta o schimbare de model ca o schimbare de explicație.
 

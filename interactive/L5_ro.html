@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L5.js?v=20261108s">
+<link rel="preload" as="script" href="L5.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L5.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261109n", "L5_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L5.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,8 +53,8 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului și din prognozele salvate în curs cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Alegeți o perioadă, o piață sau o zi și comparați rețelele recurente cu modelele de referință, pe aceleași zile.</p>
-<p class="toc"><a href="#s-fin">Serii de timp financiare: ce se poate prognoza</a> · <a href="#s-load">Consumul de energie electrică din România, pentru ziua următoare</a></p>
-<h2 class="sec" id="s-fin">Serii de timp financiare: ce se poate prognoza</h2>
+<p class="toc"><a href="#s-fin">Predictibilitatea seriilor de timp financiare</a> · <a href="#s-load">Consumul de energie electrică din România, pentru ziua următoare</a></p>
+<h2 class="sec" id="s-fin">Predictibilitatea seriilor de timp financiare</h2>
 <section class="blk" id="acf">
   <h3>Autocorelația randamentelor și a randamentelor absolute</h3>
   <div class="pair">
@@ -76,9 +76,9 @@
   <details><summary>Răspuns</summary><p>Pe tot setul de test, MSE este 0,966 pentru prognoza naivă, 0,786 pentru GARCH, 0,706 pentru HAR și 0,625 pentru LSTM (media a 5 semințe; GRU 0,624, RNN 0,643). Cîștigul este cel mai mare în criza din 2020 (20 februarie - 30 aprilie: LSTM 0,521, HAR 1,014, GARCH 1,032): rețeaua reacționează mai repede la saltul volatilității. În 2022, ordinea este aceeași, dar diferențele sînt mai mici (0,585 față de 0,623). Mutați fereastra: ferestrele scurte dau clasamente zgomotoase; de aceea cursul folosește testul Diebold–Mariano pe toată perioada de test (LSTM contra HAR: statistica −5,52).</p></details>
 </section>
 <section class="blk" id="returns">
-  <h3>În afara eșantionului, prognozele randamentelor nu explică aproape nimic</h3>
+  <h3>Prognozele randamentelor explică foarte puțin din varianța în afara eșantionului</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L5_returns_r2_ro.jpg" alt="Slide-ul 29: În afara eșantionului, prognozele randamentelor nu explică aproape nimic" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L5_returns_r2_ro.jpg" alt="Slide-ul 29: Prognozele randamentelor explică foarte puțin din varianța în afara eșantionului" loading="lazy"></a>
       <figcaption>Slide-ul 29</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="rt-m">Piața</label><select id="rt-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl"><label for="rt-s">LSTM</label><select id="rt-s"><option value="ens" selected>media celor 5 semințe</option><option value="0">sămînța 1</option><option value="1">sămînța 2</option><option value="2">sămînța 3</option><option value="3">sămînța 4</option><option value="4">sămînța 5</option></select></div><div class="ctl ctl-tg" id="rt-k"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="rt-k" value="mean" checked> Media de antrenare</label><label class="tg"><input type="checkbox" name="rt-k" value="ar" checked> AR(1)</label><label class="tg"><input type="checkbox" name="rt-k" value="lstm" checked> LSTM</label></div></div></div><div class="charts one"><div class="chart" id="rt-chart"></div></div><ul class="out" id="rt-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_returns_r2" target="_blank" rel="noopener">NN_L5_returns_r2</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_returns_r2/NN_L5_returns_r2.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

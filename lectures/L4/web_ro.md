@@ -16,7 +16,7 @@ Cursul scrie stratul convoluțional ca formulă, antrenează trei modele pe 50 
 - **Să folosiți** transferul învățării atunci cînd imaginile etichetate sînt scumpe și să măsurați cît economisește.
 - **Să explicați** o predicție cu o hartă de activare a clasei și să transformați predicțiile pe imagini în cifre utile în afaceri.
 
-# Imaginile ca date: de ce convoluții
+# Imaginile ca date și motivarea convoluțiilor
 
 O imagine este o matrice de numere, iar prima întrebare este cum ar trebui s-o privească un model.
 
@@ -33,7 +33,7 @@ Două imagini de antrenare pentru fiecare dintre cele zece tipuri de produse.
 
 Un strat dens calculează $\mathbf h=\sigma(\mathbf W\,\mathrm{vec}(\mathbf X)+\mathbf b)$, cu o pondere pentru fiecare pixel și fiecare unitate. Pentru o imagine color de 224 × 224 și 1 000 de unități ascunse, rezultă aproximativ 150 de milioane de ponderi numai în primul strat. O CNN se sprijină pe trei idei: conectivitatea locală (o unitate vede o zonă mică), partajarea ponderilor (același filtru în toate pozițiile) și echivarianța (o deplasare a intrării deplasează harta de trăsături). Pe datele noastre, MLP are 235 146 de parametri, iar CNN 140 778, de 1,67 ori mai puțini.
 
-# Stratul convoluțional, formulă cu formulă
+# Stratul convoluțional
 
 ## Convoluția: același filtru mic glisează peste imagine
 
@@ -65,7 +65,7 @@ Cîmpul receptiv în funcție de adîncime, cu și fără agregare (calcul propr
 
 Pentru că nucleul este partajat, gradientul lui adună contribuțiile tuturor pozițiilor, $\partial\mathcal L/\partial K_{o,c}(u,v)=\sum_{i,j}\delta_o(i,j)X_c(is+u-p,js+v-p)$, iar gradientul în raport cu intrarea este tot o convoluție. Toate rețelele din curs folosesc normalizarea pe loturi (BN) după fiecare convoluție: fiecare canal este standardizat pe lot și pe poziții, apoi rescalat cu doi parametri învățați. La predicție, mediile mobile înlocuiesc statisticile lotului; de aceea trebuie apelat `model.eval()` înainte de predicție.
 
-# Studiu de caz: fotografii de produse, de la softmax la CNN
+# Studiu de caz: clasificarea fotografiilor de produse cu regresie softmax și CNN
 
 ## Protocolul experimental pentru cele trei modele
 
@@ -74,14 +74,14 @@ Modelul de referință este o regresie softmax (logistică multinomială) cu 7 
 @chart fmnist_curves
 Entropia încrucișată la antrenare (punctat) și la validare (linie continuă) și acuratețea de validare, pe epoci (sămînța 20261108).
 
-## Acuratețe mai mare cu mai puțini parametri
+## Acuratețea și numărul de parametri ai celor trei modele
 
 CNN atinge o acuratețe pe test de 93,08% (abaterea standard pe semințe 0,20), față de 89,00% pentru MLP și 84,50% pentru regresia softmax. Elimină 37,1% din erorile MLP, cu de 1,67 ori mai puțini parametri. Testul McNemar pe aceleași 10 000 de imagini de test (sămînța 20261108) numără 614 de imagini corecte doar pentru CNN și 226 de imagini corecte doar pentru MLP, o statistică de 178,3, mult peste valoarea critică de 3,84 la pragul de 5%.
 
 @chart fmnist_compare
 Acuratețea pe test (media și abaterea standard pe trei semințe) și numărul de parametri.
 
-## Erorile sînt la produsele pe care le confundă și oamenii
+## Matricea de confuzie: erori între produse cu forme asemănătoare
 
 Clasa cea mai slabă este Cămașă (sensibilitate 75,1%), iar cea mai mare confuzie este Cămașă clasificat drept Tricou (102 de imagini).
 
@@ -90,7 +90,7 @@ Matricea de confuzie a CNN pe imaginile de test (sînt afișate frecvențele de 
 
 @practice trimiteți la verificare umană doar fotografiile cu încredere scăzută din clasele slabe: costul erorilor scade acolo unde este cel mai mare.
 
-## Ce învață rețeaua
+## Filtrele învățate și hărțile de trăsături
 
 Filtrele din primul strat sînt mici detectori de muchii și contraste, găsiți de coborîrea pe gradient fără să fi fost ceruți. Straturile mai adînci le combină: hărțile de trăsături din blocul 1 păstrează conturul ghetei, iar cele din blocul 3 sînt mici (7 × 7), dar marchează locul părților informative.
 
@@ -143,7 +143,7 @@ Matricea de confuzie a ResNet-18 ajustat fin pe imaginile de test.
 @chart gradcam
 Șase imagini de test și hărțile lor Grad-CAM, cu clasa prezisă și probabilitatea ei.
 
-## De la imagini la decizie
+## Ponderile utilizării terenului din imagini satelitare
 
 O întrebare de portofoliu privește ponderi, nu imagini individuale. Pe imaginile de test, culturile (anuale și permanente) reprezintă 20,37% din imagini, iar modelul prezice 20,54%; cea mai mare eroare a ponderii vreunei clase este de 0,20 puncte procentuale. Înainte de a folosi modelul într-o regiune sau un anotimp nou, etichetați acolo un mic eșantion și măsurați din nou.
 

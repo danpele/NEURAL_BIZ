@@ -269,7 +269,7 @@ window.NN_DATA.quizzes['l12'] = {
     "options": [
      "Etapa de preantrenare",
      "Datele de preferințe umane",
-     "Modelul de recompensă separat și bucla de învățare prin recompensă",
+     "Modelul de recompensă separat și bucla de reinforcement learning",
      "Modelul SFT folosit ca referință"
     ],
     "correctExplanation": "DPO optimizează politica direct pe perechile de preferințe, cu o pierdere logistică, folosind modelul SFT ca referință; nu se estimează un model de recompensă.",
@@ -711,7 +711,7 @@ window.NN_DATA.quizzes['l12'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Where RAG fails",
+    "title": "Limitations of RAG",
     "text": "RAG answered correctly in 81.2 % of cases and the oracle (the right speech given) in 98.8 %. Where is the remaining gap?",
     "options": [
      "In the language model's reading ability",
@@ -723,7 +723,7 @@ window.NN_DATA.quizzes['l12'] = {
     "incorrectExplanation": "The oracle shows that reading is not the bottleneck; improving retrieval closes most of the gap."
    },
    "ro": {
-    "title": "Unde greșește RAG",
+    "title": "Limitele RAG",
     "text": "RAG a răspuns corect în 81,2 % din cazuri, iar oracolul (cu discursul corect furnizat) în 98,8 %. Unde este diferența rămasă?",
     "options": [
      "În capacitatea de citire a modelului de limbaj",

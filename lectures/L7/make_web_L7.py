@@ -103,8 +103,8 @@ def page(lang):
         "- **Citiți** cu atenție hărțile de atenție și decideți cînd preantrenarea, ajustarea fină sau un model simplu sînt alegerea potrivită.\n"))
 
     # 1
-    P.add(T("# Why attention\n\nText arrives fast and carries information that prices react to; recurrent networks read it slowly and forget.",
-            "# De ce atenția\n\nTextul sosește repede și conține informație la care prețurile reacționează; rețelele recurente îl citesc încet și uită."))
+    P.add(T("# Motivation for the attention mechanism\n\nText arrives fast and carries information that prices react to; recurrent networks read it slowly and forget.",
+            "# Motivația mecanismului de atenție\n\nTextul sosește repede și conține informație la care prețurile reacționează; rețelele recurente îl citesc încet și uită."))
     P.block(T("Financial news as input for models", "Știrile financiare ca date de intrare pentru modele"), text=T(
         f"""A sentiment model maps a text $x_{{1:n}}$ to a fixed-size representation $\\mathbf h$ and then to the probabilities of three classes, $\\hat{{\\mathbf p}}=\\operatorname{{softmax}}(W_o\\mathbf h+\\mathbf b_o)$; the whole lecture is about how to compute $\\mathbf h$. Our data are finance tweets labelled bearish, bullish or neutral: {v('data.n_train_pub', ',')} for training and {v('data.n_test', ',')} for the test, of which {v('data.pct_bearish_test', '.1f')} % bearish, {v('data.pct_bullish_test', '.1f')} % bullish and {v('data.pct_neutral_test', '.1f')} % neutral. Media pessimism predicts next-day returns and trading volume (Tetlock, 2007), so such a model is a measurement instrument.
 
@@ -115,7 +115,7 @@ def page(lang):
     P.block(T("Limits of recurrent networks for long texts", "Limitele rețelelor recurente pentru textele lungi"), text=T(
         """A recurrent network updates one state vector token by token, $\\mathbf h_t=\\phi(W_h\\mathbf h_{t-1}+W_x\\mathbf x_t+\\mathbf b)$, so the gradient between words 1 and $n$ is a product of $n-1$ Jacobians that shrinks or explodes with the distance. The path between words $i$ and $j$ has $|i-j|$ steps, and the $n$ steps cannot run in parallel. The long short-term memory (LSTM) of Lecture 5 eases the first problem but keeps the second. In “profit fell, but guidance was raised”, the verdict depends on a word far from the subject.""",
         """O rețea recurentă actualizează un singur vector de stare, token cu token, $\\mathbf h_t=\\phi(W_h\\mathbf h_{t-1}+W_x\\mathbf x_t+\\mathbf b)$, deci gradientul dintre cuvintele 1 și $n$ este un produs de $n-1$ matrice jacobiene, care scade sau explodează odată cu distanța. Drumul dintre cuvintele $i$ și $j$ are $|i-j|$ pași, iar cei $n$ pași nu pot rula în paralel. Rețeaua cu memorie pe termen lung și scurt (LSTM) din cursul 5 atenuează prima problemă, dar o păstrează pe a doua. În „profitul a scăzut, dar prognoza a fost majorată”, verdictul depinde de un cuvînt aflat departe de subiect."""))
-    P.block(T("Tweets are short; central-bank speeches are far beyond a 512-token window", "Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni"), text=T(
+    P.block(T("Length of tweets and central-bank speeches in tokens", "Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni"), text=T(
         f"""In WordPiece tokens, the median tweet has {v('len.tw_median')} tokens, the median Financial PhraseBank sentence {v('len.pb_median')} and the median speech of the European Central Bank (ECB) {v('len.sp_median', ',')}. Of the {v('len.n_speeches')} speeches, {v('len.sp_pct_over512', '.1f')} % exceed the 512-token window of BERT; only {v('len.tw_pct_over64', '.2f')} % of the tweets exceed 64 tokens.
 
 @chart context_lengths
@@ -149,13 +149,13 @@ $$ \\mathbf y_i=\\sum_{j=1}^n a_{ij}\\mathbf v_j,\\qquad a_{ij}=\\frac{\\exp(\\m
 Un dicționar întoarce valoarea singurei chei potrivite; atenția întoarce un amestec al tuturor valorilor, ponderat după cît de bine se potrivesc cheile. Amestecul este derivabil, deci proiecțiile se învață, iar oricare două cuvinte sînt la un singur pas.
 
 @practice fiecare cuvînt de ieșire este un amestec care ține cont de context: „prognoza” poate împrumuta sens de la „majorată”, aflat zece cuvinte mai departe."""))
-    P.block(T("In matrix form: one multiplication attends all words at once", "În formă matriceală: o singură înmulțire calculează atenția pentru toate cuvintele"), text=T(
+    P.block(T("Attention in matrix form for all words at once", "Atenția în formă matriceală, pentru toate cuvintele simultan"), text=T(
         f"""Stacking the tokens in $X\\in\\mathbb R^{{n\\times d}}$ gives $\\operatorname{{Attention}}(Q,K,V)=\\operatorname{{softmax}}(QK^\\top/\\sqrt{{d_k}}+\\mathbf M)V$, with a mask $\\mathbf M$ equal to $-\\infty$ for padding or, in a decoder, for future tokens. The cost per layer is $O(n^2d)$ operations and $O(n^2)$ memory: attention over a median ECB speech costs about {v('len.cost_ratio', ',')} times that over a median tweet. In exchange there is no loop over positions, and graphics processors multiply the whole sentence at once.""",
         f"""Așezînd tokenii în $X\\in\\mathbb R^{{n\\times d}}$ obținem $\\operatorname{{Attention}}(Q,K,V)=\\operatorname{{softmax}}(QK^\\top/\\sqrt{{d_k}}+\\mathbf M)V$, cu o mască $\\mathbf M$ egală cu $-\\infty$ pentru completare sau, într-un decodor, pentru tokenii viitori. Costul pe strat este $O(n^2d)$ operații și memorie $O(n^2)$: atenția pe un discurs median al BCE costă de circa {v('len.cost_ratio', ',')} de ori mai mult decît pe un tweet median. În schimb nu există nicio buclă pe poziții, iar procesoarele grafice înmulțesc toată propoziția deodată."""))
-    P.block(T("Why divide by √d_k: keep the softmax out of saturation", "De ce împărțim la √d_k: ferim softmax-ul de saturație"), frame=T("Why divide by", "De ce împărțim la"), text=T(
+    P.block(T("Scaling by √d_k and saturation of the softmax", "Scalarea cu √d_k și saturația softmax-ului"), frame=T("Scaling by", "Scalarea cu"), text=T(
         """If the entries of $\\mathbf q$ and $\\mathbf k$ are independent with mean 0 and variance 1, then $\\operatorname{Var}(\\mathbf q^\\top\\mathbf k)=d_k$. With $d_k=64$, as in each head of BERT, raw scores have a standard deviation of 8, so one word takes almost all the weight and the softmax Jacobian $\\operatorname{diag}(\\mathbf a)-\\mathbf a\\mathbf a^\\top$ is close to zero: the queries and keys stop learning. Dividing by $\\sqrt{d_k}$ restores unit variance for every $d_k$.""",
         """Dacă elementele lui $\\mathbf q$ și $\\mathbf k$ sînt independente, cu media 0 și varianța 1, atunci $\\operatorname{Var}(\\mathbf q^\\top\\mathbf k)=d_k$. Cu $d_k=64$, ca în fiecare cap BERT, scorurile brute au abaterea standard 8, deci un singur cuvînt ia aproape toată ponderea, iar jacobianul softmax-ului $\\operatorname{diag}(\\mathbf a)-\\mathbf a\\mathbf a^\\top$ este aproape zero: întrebările și cheile nu mai învață. Împărțirea la $\\sqrt{d_k}$ readuce varianța la unu, pentru orice $d_k$."""))
-    P.block(T("Several heads look for several relations at once", "Mai multe capete caută simultan mai multe relații"), text=T(
+    P.block(T("Multi-head attention: several relations at once", "Atenția cu mai multe capete: mai multe relații simultan"), text=T(
         f"""Multi-head attention runs $h$ attentions with projections of size $d/h$ and concatenates them: $\\operatorname{{MHA}}(X)=[\\mathbf H_1\\|\\cdots\\|\\mathbf H_h]W_O$, with $4d^2$ parameters, the same as one large head. BERT-base has {v('attn.layers')} layers of {v('attn.heads')} heads with $d$ = {v('attn.d_model')} and {v('attn.d_head')} dimensions per head; our small transformer has 2 layers of 4 heads with $d=64$.""",
         f"""Atenția cu mai multe capete rulează $h$ atenții cu proiecții de dimensiune $d/h$ și le concatenează: $\\operatorname{{MHA}}(X)=[\\mathbf H_1\\|\\cdots\\|\\mathbf H_h]W_O$, cu $4d^2$ parametri, ca la un singur cap mare. BERT-base are {v('attn.layers')} straturi cu cîte {v('attn.heads')} capete, $d$ = {v('attn.d_model')} și {v('attn.d_head')} de dimensiuni pe cap; transformerul nostru mic are 2 straturi cu cîte 4 capete și $d=64$."""))
     P.block(T("What FinBERT attends to in a real bearish tweet", "La ce este atent FinBERT într-un tweet negativ real"), text=T(
@@ -216,7 +216,7 @@ unde rețeaua directă aplicată fiecărei poziții (FFN) este $W_2\\,\\mathrm{{
         """Bidirectional Encoder Representations from Transformers (BERT) se preantrenează prin modelarea limbajului cu cuvinte mascate (MLM): 15 % dintre tokeni sînt ascunși și preziși din ambele părți. Generative Pre-trained Transformer (GPT) prezice tokenul următor cu o mască cauzală, $M_{ij}=-\\infty$ pentru $j>i$, iar modelele mari de limbaj (LLM) de azi urmează această schemă. Codificatoarele se potrivesc clasificării și extragerii de informații, decodoarele generării; transformerul original le avea pe amîndouă, pentru traducere.
 
 @practice pentru etichetarea textelor folosiți un codificator; pentru redactarea rapoartelor, un decodor (cursul 12)."""))
-    P.block(T("Text becomes numbers through subword tokens", "Textul devine numere prin tokeni de subcuvinte"), text=T(
+    P.block(T("Subword tokenisation of text", "Tokenizarea textului în subcuvinte"), text=T(
         f"""A WordPiece tokenizer splits rare words into frequent pieces, so a fixed vocabulary, {v('tok.vocab', ',')} pieces for FinBERT, covers any word, including tickers and new company names. The text becomes [CLS], the pieces and [SEP], and each token gets its embedding plus a position and a segment vector. Our tweets have a median of {v('len.tw_median')} tokens, a 99th percentile of {v('len.tw_p99')} and a maximum of {v('len.tw_max')}; we cut at 64 tokens. In small models the embedding table dominates: our small transformer has {v('models.tiny.params', ',')} parameters, only {v('models.tiny.params_noemb', ',')} outside the table.""",
         f"""Un tokenizator WordPiece împarte cuvintele rare în bucăți frecvente, astfel încît un vocabular fix, de {v('tok.vocab', ',')} de bucăți pentru FinBERT, acoperă orice cuvînt, inclusiv simbolurile bursiere și numele noi de firme. Textul devine [CLS], bucățile și [SEP], iar fiecare token primește reprezentarea lui, plus un vector de poziție și unul de segment. Tweet-urile noastre au o mediană de {v('len.tw_median')} de tokeni, percentila 99 de {v('len.tw_p99')} și un maxim de {v('len.tw_max')}; tăiem la 64 de tokeni. În modelele mici domină tabelul reprezentărilor: transformerul nostru mic are {v('models.tiny.params', ',')} de parametri, doar {v('models.tiny.params_noemb', ',')} în afara tabelului."""))
     P.block(T("Attention, recurrence and convolution compared", "Atenția, recurența și convoluția comparate"), text=T(
@@ -288,7 +288,7 @@ Test macro-F1 by number of training tweets (seed 1).""",
 
 @chart data_scaling
 Macro-F1 de test după numărul de tweet-uri de antrenare (sămînța 1)."""))
-    P.block(T("Fine-tuning fixes what the zero-shot model gets wrong", "Ajustarea fină corectează ce greșește modelul fără antrenare"), text=T(
+    P.block(T("Zero-shot errors corrected by fine-tuning", "Erorile modelului fără antrenare corectate prin ajustare fină"), text=T(
         f"""FinBERT was trained on sentences from news, not on tweets. Without training on tweets it finds {v('cm_zs.bear_ok')} of the {v('data.n_bearish_test')} bearish test tweets; after fine-tuning it finds {v('cm.bear_ok')}. The remaining errors are mostly confusions with the neutral class: {v('cm.bear_as_neutral')} bearish and {v('cm.bull_as_neutral')} bullish tweets read as neutral, and only {v('cm.bear_as_bull')} bearish tweets read as bullish.
 
 @chart confusion
@@ -297,14 +297,14 @@ Confusion matrices of FinBERT on the test tweets, zero-shot and fine-tuned (seed
 
 @chart confusion
 Matricele de confuzie ale FinBERT pe tweet-urile de test, fără antrenare și ajustat (sămînța 1)."""))
-    P.block(T("Fine-tuning: start from pretrained weights, take small steps", "Ajustarea fină: pornim de la ponderile preantrenate și facem pași mici"), text=T(
+    P.block(T("Fine-tuning: pretrained initial weights and small learning rates", "Ajustarea fină: ponderi inițiale preantrenate și rate de învățare mici"), text=T(
         f"""Fine-tuning starts from $\\boldsymbol\\theta_0=\\boldsymbol\\theta_{{\\text{{FinBERT}}}}$ and moves all {v('models.finbert_ft.params_m', '.1f')} million weights with a small learning rate, $2\\cdot10^{{-5}}$ decaying linearly over 3 epochs; the epoch with the best validation macro-F1 is kept. It gains {v('gain_ft_vs_zs', '+.1f')} points over the zero-shot model and {v('gain_ft_vs_tfidf', '+.1f')} over TF-IDF, at a cost of about {v('models.finbert_ft.min_per_seed', '.1f')} minutes per seed on the graphics processor of a laptop. Too large a learning rate erases what pretraining learnt (catastrophic forgetting).
 
 @practice fine-tuning a pretrained encoder is today's default for any labelled text task with a few thousand examples.""",
         f"""Ajustarea fină pornește de la $\\boldsymbol\\theta_0=\\boldsymbol\\theta_{{\\text{{FinBERT}}}}$ și mișcă toate cele {v('models.finbert_ft.params_m', '.1f')} milioane de ponderi cu o rată de învățare mică, $2\\cdot10^{{-5}}$, care scade liniar pe 3 epoci; se păstrează epoca cu cel mai bun macro-F1 pe validare. Cîștigă {v('gain_ft_vs_zs', '+.1f')} puncte față de modelul fără antrenare și {v('gain_ft_vs_tfidf', '+.1f')} față de TF-IDF, cu un cost de circa {v('models.finbert_ft.min_per_seed', '.1f')} minute pe sămînță, pe procesorul grafic al unui laptop. O rată de învățare prea mare șterge ce a învățat preantrenarea (uitare catastrofală).
 
 @practice ajustarea fină a unui codificator preantrenat este azi alegerea implicită pentru orice sarcină pe text etichetat, cu cîteva mii de exemple."""))
-    P.block(T("Does word order matter for tweets?", "Contează ordinea cuvintelor în tweet-uri?"), text=T(
+    P.block(T("Role of word order in tweet classification", "Rolul ordinii cuvintelor în clasificarea tweet-urilor"), text=T(
         f"""The same small transformer reaches {v('models.tiny.macro_f1', '.1f')} % macro-F1 with positions and {v('models.tiny_nopos.macro_f1', '.1f')} % without them, a difference of {v('gain_pos', '+.1f')} points with a bootstrap interval of [{v('boot.tiny_nopos.lo', '+.1f')}; {v('boot.tiny_nopos.hi', '+.1f')}]; the mean of embeddings without any attention reaches {v('models.embbag.macro_f1', '.1f')} %. Short, formulaic tweets are mostly bags of signal words; order matters for negation, contrast, long documents and numbers attached to the right entity.
 
 @practice test the simple version of your model first: on short texts much of the transformer's power is unused.""",
@@ -317,7 +317,7 @@ Matricele de confuzie ale FinBERT pe tweet-urile de test, fără antrenare și a
     # 5
     P.add(T("# Transformers in practice\n\nFrom scores to signals, long documents, and transformers beyond text.",
             "# Transformerele în practică\n\nDe la scoruri la semnale, documente lungi și transformere dincolo de text."))
-    P.block(T("From sentiment scores to a business signal", "De la scorurile de sentiment la un semnal de afaceri"), text=T(
+    P.block(T("Sentiment scores as a business signal", "Scorurile de sentiment ca semnal de afaceri"), text=T(
         """A production pipeline streams news and posts through the tokenizer and a fine-tuned encoder, then aggregates the class probabilities by firm and day, for example the share of bearish minus bullish messages weighted by reach. Such signals serve risk monitoring of a credit portfolio, early warning for issuers or an overlay on Value-at-Risk (VaR). The pitfalls are look-ahead (use only texts time-stamped before the decision), domain shift (a model of news sentences misreads tweets), label noise, sarcasm and drift in market vocabulary.
 
 @practice a sentiment score is an input to a model, not a trading decision: backtest it before use.""",
@@ -331,7 +331,7 @@ Matricele de confuzie ale FinBERT pe tweet-urile de test, fără antrenare și a
         f"""Cele {v('len.n_speeches')} de discursuri ale BCE, din {v('len.sp_first')} pînă în {v('len.sp_last')}, au o mediană de {v('len.sp_median', ',')} de tokeni și ajung pînă la {v('len.sp_max', ',')}. Variantele sînt împărțirea în ferestre de 512 tokeni cu agregarea scorurilor pe bucăți, modelele ierarhice cu atenție pe vectori de propoziții și modelele cu context lung, cu atenție rară sau eficientă ca memorie.
 
 @practice pentru o echipă de politică monetară, împărțirea în bucăți plus un codificator bine testat bate de obicei un model cu context lung netestat."""))
-    P.block(T("Transformers beyond text", "Transformerele dincolo de text"), text=T(
+    P.block(T("Transformers for data other than text", "Transformerele pentru alte date decît textul"), text=T(
         """Patches of a time series become tokens in pretrained forecasting models (Lecture 13); columns or past payments become tokens for tabular and transaction data; attention restricted to the edges of a graph is the graph attention network (Lecture 9); image patches become tokens in vision-language models that read charts and reports (Lecture 14).
 
 @practice whatever the data, the question is the same: what are the tokens, and which pairs may attend to each other?""",

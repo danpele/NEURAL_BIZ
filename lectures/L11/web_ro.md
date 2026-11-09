@@ -16,7 +16,7 @@ Fiecare metodă este calculată pe date reale. Studiul de caz pentru credit folo
 - **Să testați** dacă explicațiile sînt concordante, fidele și stabile la schimbarea valorii inițiale, a eșantionului și a perioadei.
 - **Să formulați** o explicație contrafactuală pe care un solicitant respins o poate pune în practică.
 
-# De ce explicăm o rețea neuronală?
+# Motivele explicării rețelelor neuronale
 
 Explicațiile sînt cerute de lege și de buna gestiune a riscului, dar o explicație este ea însăși un model al modelului. Secțiunea prezintă regulile, o clasificare a metodelor și studiul de caz pentru credit, care străbate tot cursul.
 
@@ -64,7 +64,7 @@ Ponderile sînt proporția ordinilor în care $j$ sosește imediat după membrii
 
 @practice eficiența este ceea ce îi trebuie analistului de credit: părțile se adună exact la scor.
 
-## De la Shapley la SHAP: valoarea unei coaliții {h=806729a3}
+## SHAP: valoarea unei coaliții de variabile {h=198e32fa}
 
 SHAP (Lundberg & Lee, 2017) definește valoarea unei coaliții ca ieșirea așteptată a modelului atunci cînd variabilele lipsă sînt extrase dintr-un eșantion de referință $\mathcal B$ de 100 de solicitanți din setul de antrenare:
 
@@ -139,7 +139,7 @@ Ca să comparăm cele două metode pe aceeași scară, înmulțim fiecare pantă
 @chart lime_vs_shap
 Contribuția Kernel SHAP și panta LIME × valoarea standardizată pentru cele mai importante opt variabile SHAP ale aceluiași solicitant (LIME cu 5 000 de eșantioane).
 
-## LIME depinde de propriile setări {h=07ddd7fd}
+## Sensibilitatea LIME la propriile setări {h=3fc89cb2}
 
 Am repetat LIME de 30 de ori, cu valori inițiale diferite. Cu 500 de eșantioane, variabila de top a fost aceeași în 73 % din rulări, iar suprapunerea Jaccard a primelor cinci variabile a fost 0,72; cu 5 000 de eșantioane, în 100 % din rulări, cu suprapunerea 1,00. Coeficientul de variație al celor mai mari cinci pante scade de la 10 % la 2 %. Lățimea nucleului contează la fel de mult: panta variabilei de top se mută între $-2{,}042$ și $-0{,}001$ cînd $\sigma$ variază de la 0,5 la 10.
 
@@ -148,7 +148,7 @@ Stînga: pantele LIME ale cinci variabile în 30 de rulări, cu 500 și cu 5 000
 
 @practice fixați și raportați valoarea inițială, mărimea eșantionului și lățimea nucleului pentru orice explicație LIME care ajunge la un client sau la un auditor.
 
-## Explicații contrafactuale: ce ar trebui să se schimbe? {h=5265f198}
+## Explicații contrafactuale: modificările minime care schimbă decizia {h=baff68cd}
 
 Un contrafactual (Wachter, Mittelstadt & Russell, 2017) caută cel mai apropiat solicitant pe care modelul l-ar accepta, schimbînd doar variabilele asupra cărora solicitantul poate acționa:
 
@@ -175,7 +175,7 @@ Dependența parțială (portocaliu, media pe 1 000 de grupuri de test) și curbe
 
 O rețea își dă gradienții gratuit: o singură trecere înapoi dă sensibilitatea ieșirii la fiecare intrare. Secțiunea explică un model de fraudă cu ajutorul gradienților.
 
-## Studiul de caz pentru fraudă: o rețea antrenată pe ziua 1, explicată pe ziua 2 {h=25d701a4}
+## Studiul de caz pentru fraudă: o rețea antrenată pe ziua 1 și explicată pe ziua 2 {h=2e64b762}
 
 Datele despre carduri acoperă două zile din septembrie 2013. Variabilele V1–V28 sînt componente ale analizei componentelor principale (PCA) publicate de proprietarul datelor, la care se adaugă suma tranzacției; fraudele reprezintă 0,15 % din tranzacțiile zilei a doua, după ce ponderile de eșantionare refac datele complete. Antrenăm un MLP pe ziua 1, cu oprire timpurie după PR-AUC ponderat de validare, și îl testăm pe ziua 2: PR-AUC 0,815, față de 0,742 pentru regresia logistică.
 
@@ -183,7 +183,7 @@ Cele mai simple explicații sînt saliența $|\partial f/\partial x_j|$ (Simonya
 
 @practice un analist de fraudă primește lista ordonată a intrărilor care au declanșat alerta, în milisecunde pe tranzacție.
 
-## Gradienții integrați: atribuiri care se adună {h=3fbc0ed7}
+## Gradienții integrați și completitudinea atribuirilor {h=f9ab1c1e}
 
 Gradienții integrați (Sundararajan, Taly & Yan, 2017) integrează gradientul pe drumul drept de la referință la intrare:
 
@@ -215,7 +215,7 @@ Atribuirile cu semn ale salienței, ale produsului gradient × intrare, ale grad
 
 Trei teste ar trebui să însoțească orice explicație: concordanța între metode, fidelitatea față de model și stabilitatea atunci cînd nu se schimbă nimic important.
 
-## Concordanța metodelor: ridicată, dar nu perfectă {h=79cd5faa}
+## Concordanța metodelor de explicare {h=f309dfe9}
 
 Pe aceleași 211 fraude comparăm importanțele globale date de șapte metode. Corelația Spearman este 0,85 între IG și SHAP, 0,83 între saliență și SHAP, 0,82 între LIME și SHAP și doar 0,58 între importanța prin permutare și SHAP; toate metodele pun V12 pe primul loc. Dezacordul este informativ: importanța prin permutare (Breiman, 2001) măsoară cît de mult are nevoie modelul de o variabilă ca să rămînă precis, iar atribuirile măsoară cît o folosește pentru fraude.
 

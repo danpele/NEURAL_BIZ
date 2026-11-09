@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L5.js?v=20261108s">
+<link rel="preload" as="script" href="L5.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_en.js?v=20261108s", "common.js?v=20261109m"], "L5.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261109n", "L5_text_en.js?v=20261109n", "common.js?v=20261109n"], "L5.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,8 +53,8 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the course data and the saved forecasts of the lecture when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. Choose a period, a market or a day and compare the recurrent networks with their benchmarks on the same days.</p>
-<p class="toc"><a href="#s-fin">Financial time series: what is predictable</a> · <a href="#s-load">Day-ahead electricity load in Romania</a></p>
-<h2 class="sec" id="s-fin">Financial time series: what is predictable</h2>
+<p class="toc"><a href="#s-fin">Predictability of financial time series</a> · <a href="#s-load">Day-ahead electricity load in Romania</a></p>
+<h2 class="sec" id="s-fin">Predictability of financial time series</h2>
 <section class="blk" id="acf">
   <h3>Autocorrelation of returns and of absolute returns</h3>
   <div class="pair">
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>Over the whole test the MSE is 0.966 for the naive forecast, 0.786 for GARCH, 0.706 for HAR and 0.625 for the LSTM (mean of 5 seeds; GRU 0.624, RNN 0.643). The gain is largest in the 2020 crash (20 February to 30 April: LSTM 0.521, HAR 1.014, GARCH 1.032): the network reacts faster to the jump in range volatility. In 2022 the ranking is the same but the gaps are smaller (0.585 against 0.623). Move the window: short windows give noisy rankings, which is why the lecture uses the Diebold–Mariano test on the whole test period (LSTM vs HAR: statistic −5.52).</p></details>
 </section>
 <section class="blk" id="returns">
-  <h3>Out of sample, return forecasts explain almost nothing</h3>
+  <h3>Return forecasts explain almost none of the out-of-sample variance</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L5_returns_r2_en.jpg" alt="Slide 29: Out of sample, return forecasts explain almost nothing" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L5_returns_r2_en.jpg" alt="Slide 29: Return forecasts explain almost none of the out-of-sample variance" loading="lazy"></a>
       <figcaption>Slide 29</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="rt-m">Market</label><select id="rt-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl"><label for="rt-s">LSTM</label><select id="rt-s"><option value="ens" selected>mean of the 5 seeds</option><option value="0">seed 1</option><option value="1">seed 2</option><option value="2">seed 3</option><option value="3">seed 4</option><option value="4">seed 5</option></select></div><div class="ctl ctl-tg" id="rt-k"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="rt-k" value="mean" checked> Training mean</label><label class="tg"><input type="checkbox" name="rt-k" value="ar" checked> AR(1)</label><label class="tg"><input type="checkbox" name="rt-k" value="lstm" checked> LSTM</label></div></div></div><div class="charts one"><div class="chart" id="rt-chart"></div></div><ul class="out" id="rt-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_returns_r2" target="_blank" rel="noopener">NN_L5_returns_r2</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_returns_r2/NN_L5_returns_r2.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

@@ -128,7 +128,7 @@ Over the {data.n_test|,} test days the MSE is {vol.naive.mse|.3f} for the naive 
 @chart vol_mse
 Test MSE of the log variance by model; dots are single seeds.
 
-# Case study B: can a network forecast returns?
+# Case study B: forecasting returns with neural networks
 
 From the last 22 returns, the LSTM forecasts tomorrow's return. Against the zero forecast, the out-of-sample $R^2$ on the test years is {ret.SP500.r2_lstm_mean|.3f}% for the S&P 500 (seeds from {ret.SP500.r2_lstm_min|.3f}% to {ret.SP500.r2_lstm_max|.3f}%) and {ret.TLV.r2_lstm_mean|.3f}% for Banca Transilvania; an AR(1) model gives {ret.SP500.r2_ar|.3f}% and {ret.TLV.r2_ar|.3f}%. The LSTM gets the sign right on {ret.SP500.hit_lstm|.1f}% of S&P 500 test days, while {ret.SP500.up_share|.1f}% of the days were up. In a liquid market the predictable part of returns is tiny against the noise: R² values of about one or two percent do not survive trading costs, and the LSTM's sign accuracy stays below the always-up forecast.
 
@@ -264,7 +264,7 @@ Pe cele {data.n_test|,} de zile de test, MSE este {vol.naive.mse|.3f} pentru pro
 @chart vol_mse
 MSE pe test a log-varianței, pe modele; punctele sînt semințe individuale.
 
-# Studiul de caz B: poate o rețea prognoza randamentele?
+# Studiul de caz B: prognoza randamentelor cu rețele neuronale
 
 Din ultimele 22 de randamente, LSTM prognozează randamentul de mîine. Față de prognoza zero, $R^2$ în afara eșantionului, pe anii de test, este {ret.SP500.r2_lstm_mean|.3f}% pentru S&P 500 (semințele între {ret.SP500.r2_lstm_min|.3f}% și {ret.SP500.r2_lstm_max|.3f}%) și {ret.TLV.r2_lstm_mean|.3f}% pentru Banca Transilvania; un model AR(1) dă {ret.SP500.r2_ar|.3f}% și {ret.TLV.r2_ar|.3f}%. LSTM ghicește semnul în {ret.SP500.hit_lstm|.1f}% din zilele de test ale S&P 500, în timp ce {ret.SP500.up_share|.1f}% din zile au fost de creștere. Pe o piață lichidă, partea previzibilă a randamentelor este infimă față de zgomot: valori ale R² de unul sau două procente nu rezistă costurilor de tranzacționare, iar acuratețea semnului pentru LSTM rămîne sub cea a prognozei „mereu în sus”.
 

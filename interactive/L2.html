@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L2.js?v=20261108s">
+<link rel="preload" as="script" href="L2.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_en.js?v=20261108s", "common.js?v=20261109m"], "L2.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261109n", "L2_text_en.js?v=20261109n", "common.js?v=20261109n"], "L2.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>η = 0.1 gives the lowest validation MSE, 0.281 (the linear regression reaches 0.500). One step higher, η = 0.3, two of the three seeds diverge, and at η = 1 all three do. Too small a rate is slow rather than wrong: at η = 0.0001 the MSE is still 1.005 to 1.142 after 30 epochs. The best rate sits just below the edge of divergence, which is why learning-rate range tests sweep η on a log scale.</p></details>
 </section><h2 class="sec" id="s-opt">Optimisers and mini-batches</h2>
 <section class="blk" id="optimizers">
-  <h3>On California housing, all tuned optimisers end close; adaptive ones get there more reliably</h3>
+  <h3>On California housing, tuned optimisers reach similar errors and adaptive methods converge more reliably</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L2_optimizers_en.jpg" alt="Slide 22: On California housing, all tuned optimisers end close; adaptive ones get there more reliably" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L2_optimizers_en.jpg" alt="Slide 22: On California housing, tuned optimisers reach similar errors and adaptive methods converge more reliably" loading="lazy"></a>
       <figcaption>Slide 22</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="op-o">Optimiser</label><select id="op-o"><option value="sgd">SGD</option><option value="momentum">SGD + momentum</option><option value="rmsprop">RMSProp</option><option value="adam" selected>Adam</option><option value="adamw">AdamW</option></select></div><div class="ctl"><label for="op-l">Learning rate (tuning grid of the lecture): <b id="op-l-v"></b></label><input type="range" id="op-l" min="0" max="2" step="1" value="2"></div><div class="ctl ctl-tg" id="op-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="op-s" value="seeds" checked> Each seed</label><label class="tg"><input type="checkbox" name="op-s" value="best"> Other optimisers at their best rate</label></div></div><button class="btn play" id="op-play" type="button"></button></div><div class="charts one"><div class="chart" id="op-chart"></div></div><ul class="out" id="op-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_optimizers" target="_blank" rel="noopener">NN_L2_optimizers</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_optimizers/NN_L2_optimizers.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

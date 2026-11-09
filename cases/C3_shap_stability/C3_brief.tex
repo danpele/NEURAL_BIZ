@@ -16,7 +16,7 @@ Echipa de știința datelor propune adăugarea unor variabile învățate din gr
 \textbf{dacă adăugăm graful și reantrenăm modelul pe date noi, rămîn aceleași motivele afișate analiștilor?} Și \textbf{cum le monitorizăm} după fiecare actualizare, astfel încît o schimbare a explicației să fie observată înainte de a crea confuzie în analiza unui caz?}
 \end{scenario}
 
-\section{\T{What the paper did}{Lucrarea de referință}}
+\section{\T{The reference paper}{Lucrarea de referință}}
 \textbf{\T{Question.}{Întrebarea de cercetare.}} \T{When a fraud model moves from random to forward-time validation, do the SHAP contributions of the original transaction fields change more if the model also uses features learnt from a payment graph, and is the difference due to the graph or simply to adding more columns (Sections 1 and 3.1)?}%
 {Atunci cînd un model de fraudă trece de la validarea aleatoare la validarea înainte în timp, se schimbă mai mult contribuțiile SHAP ale variabilelor originale ale tranzacțiilor dacă modelul folosește și variabile învățate dintr-un graf al plăților, iar diferența se datorează grafului sau numai adăugării de coloane noi (secțiunile 1 și 3.1)?}
 
@@ -44,7 +44,7 @@ Metoda TreeSHAP intervențională explică aceleași 5.000 de plăți din eșant
 {\footnotesize\color{FooterGray}\T{Related work of our group: the multi-level XAI (explainable artificial intelligence) framework on IEEE-CIS that combines SHAP with node and edge ablation (Diaconu \& Pele, 2026, \emph{Proceedings of the International Conference on Business Excellence} (PICBE) 20(1), 118--132, \href{https://doi.org/10.2478/picbe-2026-0015}{doi:10.2478/picbe-2026-0015}; Case~1). The Elliptic data used below come from Weber et al.\ (2019), \href{https://arxiv.org/abs/1908.02591}{arXiv:1908.02591}.}%
 {Alte lucrări ale grupului nostru: cadrul XAI (\emph{explainable artificial intelligence}, inteligență artificială explicabilă) pe mai multe niveluri pentru datele IEEE-CIS, care combină SHAP cu eliminarea de noduri și muchii (Diaconu și Pele, 2026, \emph{Proceedings of the International Conference on Business Excellence} (PICBE) 20(1), 118--132, \href{https://doi.org/10.2478/picbe-2026-0015}{doi:10.2478/picbe-2026-0015}; studiul de caz~1). Datele Elliptic folosite mai jos provin din Weber et al.\ (2019), \href{https://arxiv.org/abs/1908.02591}{arXiv:1908.02591}.}}
 
-\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\section{\T{The method}{Metoda}}
 \begin{intuition}
 \T{SHAP shares the score of a transaction among its inputs. Add 64 new columns and they take part of the credit: the old fields get smaller contributions and, measured in raw units, they also move less --- they look ``more stable'' only because they are smaller.
 A fair test therefore compares the graph model with a control that adds the same number of columns with the same covariance but no graph information, and refits everything several times, because a single fit hides how much explanations vary from one training run to the next.}%
@@ -74,7 +74,7 @@ Fiecare diferență pereche este mediată pe cele $S$ reestimări, cu intervalul
 {Comparați explicațiile unui model nou cu un control care are același număr de coloane adăugate; raportați stabilitatea pe scala pe care o citesc utilizatorii (unități brute ale scorului pentru monitorizarea scorurilor, unități relative pentru variabilele cu contribuții mici, motivele afișate pentru analiști) și reestimați întotdeauna de mai multe ori înainte de a considera reală o diferență.}
 \end{decision}
 
-\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\section{\T{Replication on the course data}{Replicarea pe datele cursului}}
 \T{Notebook \texttt{C3\_notebook\_EN.ipynb}: the Elliptic Bitcoin transaction graph (Weber et al., 2019), \NnTx\ transactions, \NnEdges\ payment flows, 49 time steps of about two weeks, 165 features; \NnLab\ transactions are labelled (\NnIllicit\ illicit, \NnLicit\ licit).
 Forward-time split: training on steps 1--34 (\NnTrain\ labelled transactions, \NillTrain\,\% illicit), test on steps 35--49 (\NnTest, \NillTest\,\% illicit); the random split holds out the same number of transactions, stratified by class.
 In each of \NnSeeds\ refits, the seed changes the random split, the GraphSAGE initialisation and the Gaussian draws; SHAP explains \NnExpl\ held-out transactions per scheme (the same \NnExpl\ later transactions in every forward-time fit).
@@ -157,7 +157,7 @@ Before the dark-market shutdown all three models find most illicit transactions 
 (iii) În împărțirea aleatoare, mesajele GraphSAGE folosesc variabilele (nu etichetele) tranzacțiilor din eșantionul de evaluare; graful pentru validarea înainte în timp este construit numai din pașii 1--34. (iv) Comparația descrie un singur prag (pasul 34) și un singur set de date; închiderea pieței de pe darknet după pasul 43 este o schimbare puternică, specifică acestei perioade.}
 
 \newpage
-\section*{\T{Case 3 at a glance}{Studiul de caz 3 pe scurt}}
+\section*{\T{Summary of case 3}{Studiul de caz 3 pe scurt}}
 \glance{\T{If we add graph features and retrain, do the reasons shown to investigators stay the same?}{Dacă adăugăm variabile din graf și reantrenăm, rămîn aceleași motivele afișate analiștilor?}}%
 {\T{Elliptic Bitcoin graph: \NnLab\ labelled transactions, 49 time steps; train steps 1--34, test 35--49.}{Graful Bitcoin Elliptic: \NnLab\ de tranzacții etichetate, 49 de pași de timp; antrenare 1--34, test 35--49.}}%
 {\T{XGBoost on features, + GraphSAGE embedding, + Gaussian control; SHAP; JS, Wasserstein, top-$k$; \NnSeeds\ refits.}{XGBoost pe variabile, + reprezentare GraphSAGE, + control gaussian; SHAP; JS, Wasserstein, primele $k$; \NnSeeds\ reestimări.}}%

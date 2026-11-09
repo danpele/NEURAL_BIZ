@@ -16,7 +16,7 @@ Every method is computed on real data. The credit case uses the home-equity loan
 - **Test** whether explanations agree, are faithful and stay stable across seeds, samples and time.
 - **Write** a counterfactual explanation that a rejected applicant can act on.
 
-# Why explain a neural network?
+# Reasons for explaining neural networks
 
 Explanations are required by law and by good risk management, but an explanation is itself a model of the model. This section sets out the rules, a taxonomy of methods and the credit case that runs through the lecture.
 
@@ -64,7 +64,7 @@ The weights are the share of orderings in which $j$ arrives right after the memb
 
 @practice efficiency is what a credit officer needs: the parts add up exactly to the score.
 
-## From Shapley to SHAP: the value of a coalition {h=977b6a7b}
+## SHAP: the value of a coalition of features {h=7d6fc27f}
 
 SHAP (Lundberg & Lee, 2017) defines the value of a coalition as the expected model output when the missing features are drawn from a background sample $\mathcal B$ of 100 training applicants:
 
@@ -139,7 +139,7 @@ To compare the two on one scale we multiply each LIME slope by the standardised 
 @chart lime_vs_shap
 Kernel SHAP contribution and LIME slope × standardised value for the eight largest SHAP features of the same applicant (LIME with 5,000 samples).
 
-## LIME depends on its own settings {h=694a8187}
+## Sensitivity of LIME to its settings {h=42e424e9}
 
 We repeated LIME 30 times with different seeds. With 500 samples the top feature was the same in 73 % of the runs and the Jaccard overlap of the top-5 sets was 0.72; with 5,000 samples, in 100 % of the runs, overlap 1.00. The coefficient of variation of the five largest slopes falls from 10 % to 2 %. The kernel width matters as much: the slope of the top feature moves between $-2.042$ and $-0.001$ as $\sigma$ goes from 0.5 to 10.
 
@@ -148,7 +148,7 @@ Left: LIME slopes of five features over 30 runs with 500 and with 5,000 samples.
 
 @practice fix and report the seed, sample size and kernel width of every LIME explanation that reaches a customer or an auditor.
 
-## Counterfactual explanations: what would have to change? {h=edc04f9f}
+## Counterfactual explanations: minimal changes that reverse the decision {h=02180eed}
 
 A counterfactual (Wachter, Mittelstadt & Russell, 2017) looks for the closest applicant whom the model would accept, changing only features the applicant can act on:
 
@@ -175,7 +175,7 @@ Partial dependence (orange, mean over 1,000 test block groups) and ICE curves (6
 
 A network gives its gradients for free: one backward pass yields the sensitivity of the output to every input. This section explains a fraud model with gradients.
 
-## The fraud case: a network trained on day 1, explained on day 2 {h=bfd4801c}
+## Fraud case study: a network trained on day 1 and explained on day 2 {h=79803053}
 
 The credit-card data cover two days of September 2013. The variables V1–V28 are principal component analysis (PCA) components released by the data owner, plus the transaction amount; frauds are 0.15 % of the transactions of day 2 once the sampling weights restore the full data. We train an MLP on day 1, with early stopping on the weighted validation PR-AUC, and test it on day 2: PR-AUC 0.815 against 0.742 for the logistic regression.
 
@@ -183,7 +183,7 @@ The simplest explanations are the saliency $|\partial f/\partial x_j|$ (Simonyan
 
 @practice a fraud analyst gets a ranked list of the inputs that drove the alert, in milliseconds per transaction.
 
-## Integrated gradients: attributions that add up {h=5a5395df}
+## Integrated gradients and the completeness of attributions {h=36245f36}
 
 Integrated gradients (Sundararajan, Taly & Yan, 2017) integrate the gradient along the straight path from the baseline to the input:
 
@@ -215,7 +215,7 @@ Signed attributions of saliency, gradient × input, integrated gradients and Ker
 
 Three tests should accompany every explanation: agreement between methods, faithfulness to the model and stability when nothing important changes.
 
-## Agreement between methods: high but not perfect {h=ea5e720b}
+## Agreement between explanation methods {h=2b4759c3}
 
 On the same 211 frauds we compare the global importances of seven methods. The Spearman correlation is 0.85 between IG and SHAP, 0.83 between saliency and SHAP, 0.82 between LIME and SHAP, and only 0.58 between permutation importance and SHAP; all methods put V12 first. The disagreement is informative: permutation importance (Breiman, 2001) measures how much the model needs a feature to stay accurate, attributions measure how much it uses the feature for the frauds.
 

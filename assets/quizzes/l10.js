@@ -21,8 +21,8 @@ window.NN_DATA.quizzes['l10'] = {
     "incorrectExplanation": "Forecasting and classification have labels and no feedback from the decision to the next state; the battery decision is sequential."
    },
    "ro": {
-    "title": "Supervizată sau prin întărire",
-    "text": "Ce problemă economică cere învățarea prin întărire, nu o prognoză urmată de o regulă fixă?",
+    "title": "Învățare supervizată sau reinforcement learning",
+    "text": "Ce problemă economică cere reinforcement learning, nu o prognoză urmată de o regulă fixă?",
     "options": [
      "Prognoza prețului energiei de mîine",
      "Decizia, oră de oră, privind încărcarea unei baterii, deoarece acțiunea de azi schimbă nivelul de încărcare de mîine",

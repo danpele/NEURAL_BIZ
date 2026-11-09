@@ -711,7 +711,7 @@ window.NN_DATA.quizzes['l2'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Why the MLP reacts",
+    "title": "Response of the quantile MLP to volatility",
     "text": "Why does the quantile MLP avoid the clusters of violations seen with 250-day historical simulation?",
     "options": [
      "It uses future data",
@@ -723,7 +723,7 @@ window.NN_DATA.quizzes['l2'] = {
     "incorrectExplanation": "The MLP was trained only up to 2016 and validated on 2017-2019; its advantage comes from conditioning on recent volatility, not from extra information."
    },
    "ro": {
-    "title": "De ce reacționează MLP",
+    "title": "Reacția MLP cuantilic la volatilitate",
     "text": "De ce evită MLP cuantilic grupările de depășiri ale simulării istorice pe 250 de zile?",
     "options": [
      "Folosește date din viitor",

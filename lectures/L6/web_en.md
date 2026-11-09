@@ -17,11 +17,11 @@ All representations are built on real financial text: 4,838 sentences of the Fin
 
 # Text as data
 
-## From a sentence to tokens
+## Tokenisation of a sentence
 
 A real sentence of the PhraseBank, labelled positive by the annotators: "Finnish Aktia Group 's operating profit rose to EUR 17.5 mn in the first quarter of 2010 from EUR 8.2 mn in the first quarter of 2009 .". Our tokeniser keeps lower-case words and numbers, turns every number into the token `<num>` and removes links and @-mentions; the sentence becomes 27 tokens. Every choice matters: removing English stop words would delete "up", "down" and "not", which carry sentiment.
 
-## Few words are frequent, most are rare
+## Word frequencies and Zipf's law
 
 The ECB speeches from 8 January 2022 to 30 October 2026 contain 1,289,896 tokens and 20,130 distinct words. Frequency falls as a power of rank (Zipf's law), with an estimated slope of −1.498; the ten most frequent words make 25.0% of all tokens, and 32.5% of the distinct words occur only once.
 
@@ -95,7 +95,7 @@ TF-IDF with logistic regression is right on 88.4% of the sentences on which all 
 @chart agreement
 Test accuracy by the share of annotators who agreed on the label.
 
-## Few labels: where pre-trained vectors help
+## Pre-trained vectors with few labels
 
 With only 169 labelled sentences, TF-IDF reaches 51.0%, the mean word2vec vector 48.0% and the embedding bag 47.2% from a random start and 51.0% from word2vec; with all 3,385 sentences the numbers are 72.8%, 56.7%, 71.9% and 70.9%. Most errors move a negative or positive sentence to neutral: the recall is 65.9% for negative sentences and 69.5% for positive ones.
 

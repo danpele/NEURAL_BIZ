@@ -22,8 +22,8 @@ BLOCKS = [('acf', 'acf_abs', 'fin', 'ac'),
           ('load-errors', 'load_errors', 'load', 'le')]
 
 SECTIONS = {
- 'en': dict(fin='Financial time series: what is predictable', load='Day-ahead electricity load in Romania'),
- 'ro': dict(fin='Serii de timp financiare: ce se poate prognoza', load='Consumul de energie electrică din România, pentru ziua următoare'),
+ 'en': dict(fin='Predictability of financial time series', load='Day-ahead electricity load in Romania'),
+ 'ro': dict(fin='Predictibilitatea seriilor de timp financiare', load='Consumul de energie electrică din România, pentru ziua următoare'),
 }
 
 L = {

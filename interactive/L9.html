@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L9.js?v=20261108s">
+<link rel="preload" as="script" href="L9.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261108s", "L9_text_en.js?v=20261108s", "common.js?v=20261109m"], "L9.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261109n", "L9_text_en.js?v=20261109n", "common.js?v=20261109n"], "L9.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,8 +53,8 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">Graph neural networks (GNN) learn from the neighbours of each node. The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the Elliptic Bitcoin graph and from the scores of the lecture's models when you move a control: the graph convolutional network (GCN), graph sample and aggregate (GraphSAGE), the graph attention network (GAT), the multilayer perceptron (MLP), logistic regression and random forest, tested for anti-money laundering (AML). The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart.</p>
-<p class="toc"><a href="#s-why">Why graphs for financial crime</a> · <a href="#s-mp">Message passing</a> · <a href="#s-case">Case study: illicit Bitcoin transactions</a></p>
-<h2 class="sec" id="s-why">Why graphs for financial crime</h2>
+<p class="toc"><a href="#s-why">Graphs in the detection of financial crime</a> · <a href="#s-mp">Message passing</a> · <a href="#s-case">Case study: illicit Bitcoin transactions</a></p>
+<h2 class="sec" id="s-why">Graphs in the detection of financial crime</h2>
 <section class="blk" id="homophily">
   <h3>Homophily of illicit transactions</h3>
   <div class="pair">
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>1,259 transactions (exact count in the full graph): 3 after one round, 27 after two, 283 after three and 3,081 after six. The lecture sample of 2,000 test transactions has a median of 2, 11, 87 and 325 nodes after 1–4 rounds. With the known labels as signal, the degree-weighted share of illicit labels at the centre falls from 1.00 (k = 0) to 0.68 (k = 4) and 0.56 (k = 6): the further the messages travel, the more the centre resembles the average of a large neighbourhood.</p></details>
 </section>
 <section class="blk" id="over-smoothing">
-  <h3>Too many layers make all nodes look alike: over-smoothing</h3>
+  <h3>Over-smoothing in deep graph networks</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L9_oversmoothing_en.jpg" alt="Slide 19: Too many layers make all nodes look alike: over-smoothing" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=19" target="_blank" rel="noopener"><img src="slides/L9_oversmoothing_en.jpg" alt="Slide 19: Over-smoothing in deep graph networks" loading="lazy"></a>
       <figcaption>Slide 19</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="os-L">Number of GCN layers: <b id="os-L-v"></b></label><input type="range" id="os-L" min="1" max="6" step="1" value="1"></div><div class="ctl ctl-tg" id="os-s"><span class="lbl">Run</span><div class="tgs"><label class="tg"><input type="radio" name="os-s" value="mean" checked> Mean of 2 seeds</label><label class="tg"><input type="radio" name="os-s" value="1"> Seed 1</label><label class="tg"><input type="radio" name="os-s" value="2"> Seed 2</label></div></div><button class="btn play" id="os-play" type="button"></button></div><div class="charts "><div class="chart" id="os-perf"></div><div class="chart" id="os-cos"></div></div><ul class="out" id="os-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_oversmoothing" target="_blank" rel="noopener">NN_L9_oversmoothing</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_oversmoothing/NN_L9_oversmoothing.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>Each layer averages a node with its neighbours, so the representations become alike. Averaged over 2 seeds, the trained GCN has a PR-AUC of 0.504 with one layer, 0.458 with two and 0.371 with six, while the mean cosine similarity of its representations rises from 0.57 to 0.96. The right panel repeats only the averaging, with no trained weights: the cosine similarity of the 165 propagated features rises from 0.29 (raw features) to 0.56 after 3 rounds and 0.69 after 10. Seed 1 and seed 2 differ, which is why the lecture reports means.</p></details>
 </section><h2 class="sec" id="s-case">Case study: illicit Bitcoin transactions</h2>
 <section class="blk" id="pr-curves">
-  <h3>Precision-recall curves: the ranking behind the F1</h3>
+  <h3>Precision-recall curves of the models</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L9_pr_curves_en.jpg" alt="Slide 29: Precision-recall curves: the ranking behind the F1" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=29" target="_blank" rel="noopener"><img src="slides/L9_pr_curves_en.jpg" alt="Slide 29: Precision-recall curves of the models" loading="lazy"></a>
       <figcaption>Slide 29</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="pr-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="pr-m" value="lr_local"> Logistic regression, local features</label><label class="tg"><input type="checkbox" name="pr-m" value="lr_all" checked> Logistic regression, all features</label><label class="tg"><input type="checkbox" name="pr-m" value="rf" checked> Random forest</label><label class="tg"><input type="checkbox" name="pr-m" value="mlp"> MLP (no graph)</label><label class="tg"><input type="checkbox" name="pr-m" value="gcn" checked> GCN</label><label class="tg"><input type="checkbox" name="pr-m" value="sage" checked> GraphSAGE</label><label class="tg"><input type="checkbox" name="pr-m" value="gat"> GAT</label><label class="tg"><input type="checkbox" name="pr-m" value="rf_emb"> Random forest + GCN representations</label></div></div><div class="ctl"><label for="pr-t">Alert threshold on the score: <b id="pr-t-v"></b></label><input type="range" id="pr-t" min="0.01" max="0.99" step="0.01" value="0.5"></div><button class="btn play" id="pr-play" type="button"></button></div><div class="charts one"><div class="chart" id="pr-chart"></div></div><ul class="out" id="pr-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_pr_curves" target="_blank" rel="noopener">NN_L9_pr_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_pr_curves/NN_L9_pr_curves.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -106,9 +106,9 @@
   <details><summary>Answer</summary><p>No. From step 43 the mean F1 of the forest is 0.048 at threshold 0.5 and 0.015 at threshold 0.2; the GCN goes from 0.473 to 0.000 at 0.5. Lowering the threshold adds false alarms but does not find the new kind of illicit flows, which no model trained on steps 1–34 had seen. Only the logistic regression keeps a little recall (mean F1 0.151 after step 43 at threshold 0.2), at the price of many false alerts. Drift is fixed by retraining on recent labels, not by moving a threshold.</p></details>
 </section>
 <section class="blk" id="alert-budget">
-  <h3>What an investigation team gets from 1,000 alerts</h3>
+  <h3>Illicit transactions found among the top 1,000 alerts</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L9_alert_budget_en.jpg" alt="Slide 33: What an investigation team gets from 1,000 alerts" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=33" target="_blank" rel="noopener"><img src="slides/L9_alert_budget_en.jpg" alt="Slide 33: Illicit transactions found among the top 1,000 alerts" loading="lazy"></a>
       <figcaption>Slide 33</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ab-k">Alerts reviewed (highest scores first): <b id="ab-k-v"></b></label><input type="range" id="ab-k" min="25" max="3000" step="25" value="1000"></div><div class="ctl"><label for="ab-m">Model for the alerts by step</label><select id="ab-m"><option value="lr_local">Logistic regression, local features</option><option value="lr_all">Logistic regression, all features</option><option value="rf" selected>Random forest</option><option value="mlp">MLP (no graph)</option><option value="gcn">GCN</option><option value="sage">GraphSAGE</option><option value="gat">GAT</option><option value="rf_emb">Random forest + GCN representations</option></select></div><button class="btn play" id="ab-play" type="button"></button></div><div class="charts "><div class="chart" id="ab-curve"></div><div class="chart" id="ab-step"></div></div><ul class="out" id="ab-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_alert_budget" target="_blank" rel="noopener">NN_L9_alert_budget</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_alert_budget/NN_L9_alert_budget.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

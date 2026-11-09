@@ -27,8 +27,8 @@ BLOCKS = [('one-neuron', 'boundary_hmeq', 'neuron', 'nb'),
           ('cost-threshold', 'cost_threshold', 'eval', 'ct')]
 
 SECTIONS = {
- 'en': dict(neuron='From one neuron to a multilayer perceptron', eval='From scores to credit decisions'),
- 'ro': dict(neuron='De la un neuron la perceptronul multistrat', eval='De la scoruri la decizii de creditare'),
+ 'en': dict(neuron='The single neuron and the multilayer perceptron', eval='Credit decisions based on model scores'),
+ 'ro': dict(neuron='Neuronul individual și perceptronul multistrat', eval='Decizii de creditare pe baza scorurilor modelului'),
 }
 
 L = {

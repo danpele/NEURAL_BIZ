@@ -208,7 +208,7 @@ def build(lang, H=None):
                tryit=NB + " \\S2", cite="(Belkin et al., 2019; Nakkiran et al., 2021)", height="0.60\\textheight")
     # ================================================================== 2. penalties
     D.section(t("Penalties on the weights", "Penalizarea ponderilor"))
-    D.frame(t("Weight decay = an L2 penalty = a Gaussian prior on the weights", "Penalizarea ponderilor = penalizare L2 = o distribuție a priori gaussiană pe ponderi"),
+    D.frame(t("Weight decay as an L2 penalty and as a Gaussian prior on the weights", "Penalizarea ponderilor ca penalizare L2 și ca distribuție a priori gaussiană a ponderilor"),
             "\\intuition{" + t("large weights make the function steep and sensitive to noise; shrinking them makes it smoother.",
                                "ponderile mari fac funcția abruptă și sensibilă la zgomot; micșorarea lor o face mai netedă.") + "}\n" +
             "\\[ \\tilde\\loss(\\vw)=\\loss(\\vw)+\\frac\\lambda2\\|\\vw\\|_2^2\\ \\Rightarrow\\ \\vw_{t+1}=(1-\\eta\\lambda)\\,\\vw_t-\\eta\\nabla\\loss(\\vw_t);\\qquad "
@@ -236,7 +236,7 @@ def build(lang, H=None):
             D.bottom(t("use L1 when a short list of inputs is needed for the model documentation.",
                        "folosiți L1 cînd documentația modelului cere o listă scurtă de intrări."), NB + " \\S3"),
             cite="(Tibshirani, 1996)")
-    D.figframe(t("L1 piles the first-layer weights at zero, L2 only shrinks them", "L1 adună ponderile primului strat în zero, L2 doar le micșorează"),
+    D.figframe(t("First-layer weights under L1 and L2 penalties", "Ponderile primului strat cu penalizare L1 și cu penalizare L2"),
                t("MLP with 64 hidden units on German credit, full-batch Adam, penalty on the first layer only.",
                  "MLP cu 64 de neuroni ascunși pe German credit, Adam pe tot setul, penalizare doar pe primul strat."),
                None, "l1_l2_weights",
@@ -289,7 +289,7 @@ def build(lang, H=None):
             D.bottom(t("save the best checkpoint, not the last one.", "salvați cea mai bună stare a modelului, nu ultima."), NB + " \\S5"),
             cite="(Prechelt, 1998; Bishop \\& Bishop, 2024, ch.~9)")
     D.figframe(t("On card fraud, validation loss bottoms out early while training loss keeps falling",
-                 "La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade"),
+                 "La fraudele cu carduri, pierderea pe validare atinge minimul devreme, în timp ce pierderea pe antrenare continuă să scadă"),
                t("MLP 256-256, time-ordered split; dashed: best validation epoch; grey: the patience window.",
                  "MLP 256-256, împărțire cronologică; punctat: epoca cea mai bună pe validare; gri: fereastra de răbdare."),
                None, "early_stopping",
@@ -419,7 +419,7 @@ def build(lang, H=None):
                  "Date subeșantionate: fiecare plată legitimă contează cu ponderea @{fraud.legit_weight|.2f} în $FP$, deci precizia este cea a populației complete.")) +
             D.bottom(t("report precision at the recall the investigation team can handle.", "raportați precizia la sensibilitatea pe care o poate gestiona echipa de investigații."), NB + " \\S9"),
             cite="(Saito \\& Rehmsmeier, 2015)")
-    D.figframe(t("On the test hours, early stopping is the regulariser that clearly helps", "Pe orele de test, oprirea timpurie este regularizatorul care ajută clar"),
+    D.figframe(t("On the test hours, early stopping is the regulariser with the clearest gain", "Pe orele de test, oprirea timpurie este regularizatorul cu cel mai clar cîștig"),
                t("MLP 256-256, time-ordered split, 5 seeds per configuration; precision weighted to the population.",
                  "MLP 256-256, împărțire cronologică, 5 inițializări pe configurație; precizia ponderată la populație."),
                None, "reg_ablation",
@@ -456,7 +456,7 @@ def build(lang, H=None):
             D.bottom(t("never report probabilities from a resampled model to the business without the prior correction.",
                        "nu raportați niciodată probabilități dintr-un model reeșantionat fără corecția pentru distribuția a priori."), NB + " \\S10"),
             cite="(Dal Pozzolo et al., 2015)")
-    D.figframe(t("The right number of alerts saves most of the fraud losses", "Numărul potrivit de alerte salvează cea mai mare parte din pierderi"),
+    D.figframe(t("Number of alerts and the share of fraud losses avoided", "Numărul de alerte și ponderea pierderilor din fraudă evitate"),
                t("a missed fraud costs its amount; each alert costs a review of @{cost.review|.0f} euro (EUR), a constant chosen a priori.",
                  "o fraudă ratată costă suma ei; fiecare alertă costă o verificare de @{cost.review|.0f} euro (EUR), o constantă aleasă a priori."),
                None, "fraud_cost",
@@ -574,7 +574,7 @@ def build(lang, H=None):
             it(t("Both shrink directions of small curvature $h_k$ most; stopping after $t$ steps is a penalty of strength about $1/(\\eta t)$.",
                  "Ambele micșorează cel mai mult direcțiile cu curbură $h_k$ mică; oprirea după $t$ pași este o penalizare de intensitate aproximativ $1/(\\eta t)$.")),
             cite="(Bishop \\& Bishop, 2024, ch.~9)")
-    D.frame(t("Appendix: weight decay and L2 coincide for SGD, not for Adam", "Anexă: penalizarea ponderilor și L2 coincid pentru SGD, nu pentru Adam"),
+    D.frame(t("Appendix: weight decay and the L2 penalty under SGD and under Adam", "Anexă: penalizarea ponderilor și penalizarea L2 pentru SGD și pentru Adam"),
             "\\[ \\text{SGD:}\\ \\vw-\\eta\\nabla\\big(\\loss+\\tfrac\\lambda2\\|\\vw\\|^2\\big)=(1-\\eta\\lambda)\\vw-\\eta\\nabla\\loss \\]\n"
             "\\[ \\text{Adam+L2:}\\ \\ \\vw-\\eta\\,\\frac{\\hat m(\\nabla\\loss+\\lambda\\vw)}{\\sqrt{\\hat v}+\\epsilon}\\qquad\\text{vs.}\\qquad "
             "\\text{AdamW:}\\ \\ (1-\\eta\\lambda)\\vw-\\eta\\,\\frac{\\hat m(\\nabla\\loss)}{\\sqrt{\\hat v}+\\epsilon} \\]\n" +

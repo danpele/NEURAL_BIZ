@@ -15,7 +15,7 @@ This lecture writes attention and the transformer block with every symbol define
 - **Compare** a transformer from scratch, FinBERT and a TF-IDF benchmark on real finance tweets, with bootstrap intervals.
 - **Read** attention maps with care and decide when pretraining, fine-tuning or a simple model is the right choice.
 
-# Why attention
+# Motivation for the attention mechanism
 
 Text arrives fast and carries information that prices react to; recurrent networks read it slowly and forget.
 
@@ -29,7 +29,7 @@ A sentiment model maps a text $x_{1:n}$ to a fixed-size representation $\mathbf 
 
 A recurrent network updates one state vector token by token, $\mathbf h_t=\phi(W_h\mathbf h_{t-1}+W_x\mathbf x_t+\mathbf b)$, so the gradient between words 1 and $n$ is a product of $n-1$ Jacobians that shrinks or explodes with the distance. The path between words $i$ and $j$ has $|i-j|$ steps, and the $n$ steps cannot run in parallel. The long short-term memory (LSTM) of Lecture 5 eases the first problem but keeps the second. In “profit fell, but guidance was raised”, the verdict depends on a word far from the subject.
 
-## Tweets are short; central-bank speeches are far beyond a 512-token window {h=d199fb83}
+## Length of tweets and central-bank speeches in tokens {h=7e1c5352}
 
 In WordPiece tokens, the median tweet has 25 tokens, the median Financial PhraseBank sentence 28 and the median speech of the European Central Bank (ECB) 3,338. Of the 400 speeches, 98.8 % exceed the 512-token window of BERT; only 0.19 % of the tweets exceed 64 tokens.
 
@@ -56,15 +56,15 @@ A dictionary returns the value of the one matching key; attention returns a blen
 
 @practice each output word is a context-aware mixture: “guidance” can borrow meaning from “raised” ten words later.
 
-## In matrix form: one multiplication attends all words at once {h=8bab3a8a}
+## Attention in matrix form for all words at once {h=0587975c}
 
 Stacking the tokens in $X\in\mathbb R^{n\times d}$ gives $\operatorname{Attention}(Q,K,V)=\operatorname{softmax}(QK^\top/\sqrt{d_k}+\mathbf M)V$, with a mask $\mathbf M$ equal to $-\infty$ for padding or, in a decoder, for future tokens. The cost per layer is $O(n^2d)$ operations and $O(n^2)$ memory: attention over a median ECB speech costs about 17,828 times that over a median tweet. In exchange there is no loop over positions, and graphics processors multiply the whole sentence at once.
 
-## Why divide by √d_k: keep the softmax out of saturation {h=263d18a1}
+## Scaling by √d_k and saturation of the softmax {h=7f915272}
 
 If the entries of $\mathbf q$ and $\mathbf k$ are independent with mean 0 and variance 1, then $\operatorname{Var}(\mathbf q^\top\mathbf k)=d_k$. With $d_k=64$, as in each head of BERT, raw scores have a standard deviation of 8, so one word takes almost all the weight and the softmax Jacobian $\operatorname{diag}(\mathbf a)-\mathbf a\mathbf a^\top$ is close to zero: the queries and keys stop learning. Dividing by $\sqrt{d_k}$ restores unit variance for every $d_k$.
 
-## Several heads look for several relations at once {h=356f5c71}
+## Multi-head attention: several relations at once {h=1120f47a}
 
 Multi-head attention runs $h$ attentions with projections of size $d/h$ and concatenates them: $\operatorname{MHA}(X)=[\mathbf H_1\|\cdots\|\mathbf H_h]W_O$, with $4d^2$ parameters, the same as one large head. BERT-base has 12 layers of 12 heads with $d$ = 768 and 64 dimensions per head; our small transformer has 2 layers of 4 heads with $d=64$.
 
@@ -117,7 +117,7 @@ Bidirectional Encoder Representations from Transformers (BERT) is pretrained by 
 
 @practice for labelling texts use an encoder; for writing reports use a decoder (Lecture 12).
 
-## Text becomes numbers through subword tokens {h=99fa6bcb}
+## Subword tokenisation of text {h=f88f97c1}
 
 A WordPiece tokenizer splits rare words into frequent pieces, so a fixed vocabulary, 30,522 pieces for FinBERT, covers any word, including tickers and new company names. The text becomes [CLS], the pieces and [SEP], and each token gets its embedding plus a position and a segment vector. Our tweets have a median of 25 tokens, a 99th percentile of 57 and a maximum of 82; we cut at 64 tokens. In small models the embedding table dominates: our small transformer has 2,020,547 parameters, only 67,139 outside the table.
 
@@ -178,20 +178,20 @@ With only 429 training tweets, frozen FinBERT with a logistic regression reaches
 @chart data_scaling
 Test macro-F1 by number of training tweets (seed 1).
 
-## Fine-tuning fixes what the zero-shot model gets wrong {h=fe2ff3bf}
+## Zero-shot errors corrected by fine-tuning {h=e03ab72a}
 
 FinBERT was trained on sentences from news, not on tweets. Without training on tweets it finds 264 of the 347 bearish test tweets; after fine-tuning it finds 288. The remaining errors are mostly confusions with the neutral class: 47 bearish and 73 bullish tweets read as neutral, and only 12 bearish tweets read as bullish.
 
 @chart confusion
 Confusion matrices of FinBERT on the test tweets, zero-shot and fine-tuned (seed 1).
 
-## Fine-tuning: start from pretrained weights, take small steps {h=afcdee5f}
+## Fine-tuning: pretrained initial weights and small learning rates {h=4a3b8ec4}
 
 Fine-tuning starts from $\boldsymbol\theta_0=\boldsymbol\theta_{\text{FinBERT}}$ and moves all 109.5 million weights with a small learning rate, $2\cdot10^{-5}$ decaying linearly over 3 epochs; the epoch with the best validation macro-F1 is kept. It gains +17.9 points over the zero-shot model and +9.3 over TF-IDF, at a cost of about 5.2 minutes per seed on the graphics processor of a laptop. Too large a learning rate erases what pretraining learnt (catastrophic forgetting).
 
 @practice fine-tuning a pretrained encoder is today's default for any labelled text task with a few thousand examples.
 
-## Does word order matter for tweets? {h=fc87aae8}
+## Role of word order in tweet classification {h=48b2a723}
 
 The same small transformer reaches 68.8 % macro-F1 with positions and 67.9 % without them, a difference of +0.9 points with a bootstrap interval of [+0.1; +1.7]; the mean of embeddings without any attention reaches 66.6 %. Short, formulaic tweets are mostly bags of signal words; order matters for negation, contrast, long documents and numbers attached to the right entity.
 
@@ -205,7 +205,7 @@ Pretraining decides: fine-tuned FinBERT leads, TF-IDF is a strong benchmark, and
 
 From scores to signals, long documents, and transformers beyond text.
 
-## From sentiment scores to a business signal {h=456b9390}
+## Sentiment scores as a business signal {h=64c89452}
 
 A production pipeline streams news and posts through the tokenizer and a fine-tuned encoder, then aggregates the class probabilities by firm and day, for example the share of bearish minus bullish messages weighted by reach. Such signals serve risk monitoring of a credit portfolio, early warning for issuers or an overlay on Value-at-Risk (VaR). The pitfalls are look-ahead (use only texts time-stamped before the decision), domain shift (a model of news sentences misreads tweets), label noise, sarcasm and drift in market vocabulary.
 
@@ -217,7 +217,7 @@ Our 400 ECB speeches, from 8 Jan 2022 to 30 Oct 2026, have a median of 3,338 tok
 
 @practice for a monetary-policy desk, chunking plus a well-tested encoder usually beats an untested long-context model.
 
-## Transformers beyond text {h=5b01b40e}
+## Transformers for data other than text {h=c8907a44}
 
 Patches of a time series become tokens in pretrained forecasting models (Lecture 13); columns or past payments become tokens for tabular and transaction data; attention restricted to the edges of a graph is the graph attention network (Lecture 9); image patches become tokens in vision-language models that read charts and reports (Lecture 14).
 

@@ -57,11 +57,11 @@ All representations are built on real financial text: {data.pb_n|,} sentences of
 
 # Text as data
 
-## From a sentence to tokens
+## Tokenisation of a sentence
 
 A real sentence of the PhraseBank, labelled {example.label} by the annotators: "{example.sentence}". Our tokeniser keeps lower-case words and numbers, turns every number into the token `<num>` and removes links and @-mentions; the sentence becomes {example.n_tokens} tokens. Every choice matters: removing English stop words would delete "up", "down" and "not", which carry sentiment.
 
-## Few words are frequent, most are rare
+## Word frequencies and Zipf's law
 
 The ECB speeches from {data.sp_first|date} to {data.sp_last|date} contain {corpus.n_tokens|,} tokens and {corpus.n_types|,} distinct words. Frequency falls as a power of rank (Zipf's law), with an estimated slope of {corpus.zipf_slope|.3f}; the ten most frequent words make {corpus.top10_share_pct|.1f}% of all tokens, and {corpus.hapax_pct|.1f}% of the distinct words occur only once.
 
@@ -135,7 +135,7 @@ TF-IDF with logistic regression is right on {agree.tfidf_lr.100|.1f}% of the sen
 @chart agreement
 Test accuracy by the share of annotators who agreed on the label.
 
-## Few labels: where pre-trained vectors help
+## Pre-trained vectors with few labels
 
 With only {curve.n_small} labelled sentences, TF-IDF reaches {curve.tfidf_lr.p5|.1f}%, the mean word2vec vector {curve.w2v_lr.p5|.1f}% and the embedding bag {curve.embbag.p5|.1f}% from a random start and {curve.embbag_w2v.p5|.1f}% from word2vec; with all {curve.n_full|,} sentences the numbers are {curve.tfidf_lr.p100|.1f}%, {curve.w2v_lr.p100|.1f}%, {curve.embbag.p100|.1f}% and {curve.embbag_w2v.p100|.1f}%. Most errors move a negative or positive sentence to neutral: the recall is {cm.neg_recall|.1f}% for negative sentences and {cm.pos_recall|.1f}% for positive ones.
 
@@ -179,11 +179,11 @@ Toate reprezentările sînt construite pe texte financiare reale: {data.pb_n|,} 
 
 # Textul ca date
 
-## De la o frază la unități lexicale
+## Împărțirea unei fraze în unități lexicale
 
 O frază reală din PhraseBank, în engleză, despre creșterea profitului operațional al unei companii finlandeze, etichetată {example.label} de adnotatori. Tokenizatorul nostru păstrează cuvintele cu litere mici și numerele, transformă fiecare număr în unitatea `<num>` și elimină legăturile și mențiunile cu @; fraza devine {example.n_tokens} de unități lexicale. Fiecare alegere contează: eliminarea cuvintelor de legătură din engleză ar șterge „up”, „down” și „not”, care poartă sentiment.
 
-## Puține cuvinte sînt frecvente, cele mai multe sînt rare
+## Frecvențele cuvintelor și legea lui Zipf
 
 Discursurile BCE din perioada {data.sp_first|date} – {data.sp_last|date} conțin {corpus.n_tokens|,} de unități lexicale și {corpus.n_types|,} de cuvinte distincte. Frecvența scade ca o putere a rangului (legea lui Zipf), cu o pantă estimată de {corpus.zipf_slope|.3f}; cele mai frecvente zece cuvinte reprezintă {corpus.top10_share_pct|.1f}% din total, iar {corpus.hapax_pct|.1f}% dintre cuvintele distincte apar o singură dată.
 
@@ -257,7 +257,7 @@ TF-IDF cu regresie logistică clasifică bine {agree.tfidf_lr.100|.1f}% din fraz
 @chart agreement
 Acuratețea pe test în funcție de ponderea adnotatorilor care au fost de acord asupra etichetei.
 
-## Puține etichete: unde ajută vectorii preantrenați
+## Vectorii preantrenați atunci cînd etichetele sînt puține
 
 Cu doar {curve.n_small} de fraze etichetate, TF-IDF atinge {curve.tfidf_lr.p5|.1f}%, media vectorilor word2vec {curve.w2v_lr.p5|.1f}%, iar embedding bag {curve.embbag.p5|.1f}% cu start aleator și {curve.embbag_w2v.p5|.1f}% cu start word2vec; cu toate cele {curve.n_full|,} de fraze, valorile sînt {curve.tfidf_lr.p100|.1f}%, {curve.w2v_lr.p100|.1f}%, {curve.embbag.p100|.1f}% și {curve.embbag_w2v.p100|.1f}%. Cele mai multe erori mută o frază negativă sau pozitivă în clasa neutră: sensibilitatea este {cm.neg_recall|.1f}% pentru frazele negative și {cm.pos_recall|.1f}% pentru cele pozitive.
 

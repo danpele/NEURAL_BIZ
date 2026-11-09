@@ -170,7 +170,7 @@ def build(lang, H=None):
         sep="1pt"), "footnotesize")
 
     # ================================================================== 1. why explain
-    D.section(t("Why explain a neural network?", "De ce explicăm o rețea neuronală?"))
+    D.section(t("Reasons for explaining neural networks", "Motivele explicării rețelelor neuronale"))
     D.frame(t("Regulators require explanations of automated decisions", "Reglementările cer explicarea deciziilor automate"), cols(it(
         t("\\textbf{European Union (EU) Artificial Intelligence (AI) Act} (Regulation 2024/1689): creditworthiness scoring of natural persons is high-risk (Annex III); "
           "transparency to deployers (art.\\ 13) and a right to an explanation of individual decisions (art.\\ 86).",
@@ -249,7 +249,7 @@ def build(lang, H=None):
                 "eficiența este ceea ce îi trebuie analistului de credit: părțile se adună exact la scor."),
               cite="(Shapley, 1953)", wl="0.53", wr="0.44")
 
-    D.concept(t("From Shapley to SHAP: the value of a coalition", "De la Shapley la SHAP: valoarea unei coaliții"),
+    D.concept(t("SHAP: the value of a coalition of features", "SHAP: valoarea unei coaliții de variabile"),
               t("SHAP sets $v(S)$ = expected model output when the features outside $S$ are drawn from a background sample.",
                 "SHAP definește $v(S)$ = ieșirea așteptată a modelului cînd variabilele din afara lui $S$ sînt extrase dintr-un eșantion de referință."),
               "\\[ v(S)=\\E_{\\vx_{\\bar S}\\sim\\mathcal{B}}\\big[f(\\vx_S,\\vx_{\\bar S})\\big] \\]"
@@ -361,7 +361,7 @@ def build(lang, H=None):
                      "Corelația Spearman a contribuțiilor absolute: @{lime.rho_shap|.2f}; un indicator binar este departe de aproximarea sa liniară locală.")],
                tryit=NB + " \\S3", height="0.50\\textheight", cite=OWN)
 
-    D.figframe(t("LIME depends on its own settings", "LIME depinde de propriile setări"),
+    D.figframe(t("Sensitivity of LIME to its settings", "Sensibilitatea LIME la propriile setări"),
                t("left: 30 runs with different random seeds; right: the five slopes as the kernel width changes.",
                  "stînga: 30 de rulări cu valori inițiale diferite; dreapta: cele cinci pante cînd se schimbă lățimea nucleului."),
                None, "lime_instability", bullets=[
@@ -374,7 +374,7 @@ def build(lang, H=None):
                tryit=NB + " \\S3", height="0.50\\textheight", cite=OWN)
 
     rows = [[tt(cf[f"f{k}"]), f"@{{cf.b{k}|,.1f}}", f"@{{cf.a{k}|,.1f}}"] for k in range(cf["n_changed"])]
-    D.concept(t("Counterfactual explanations: what would have to change?", "Explicații contrafactuale: ce ar trebui să se schimbe?"),
+    D.concept(t("Counterfactual explanations: minimal changes that reverse the decision", "Explicații contrafactuale: modificările minime care schimbă decizia"),
               t("find the closest applicant, in actionable features only, whom the model would accept.",
                 "se caută cel mai apropiat solicitant, schimbînd doar variabile acționabile, pe care modelul l-ar accepta."),
               "\\[ \\vx'=\\argmin_{\\vx'}\\ \\lambda\\,\\big(f(\\vx')-t\\big)_+^{2}+\\sum_{j\\in\\mathcal{A}}\\frac{|x'_j-x_j|}{\\mathrm{MAD}_j} \\]" +
@@ -404,7 +404,7 @@ def build(lang, H=None):
 
     # ================================================================== 4. gradients
     D.section(t("Gradient methods for neural networks", "Metode bazate pe gradient pentru rețele neuronale"))
-    D.concept(t("The fraud case: a network trained on day 1, explained on day 2", "Studiul de caz pentru fraudă: o rețea antrenată pe ziua 1, explicată pe ziua 2"),
+    D.concept(t("Fraud case study: a network trained on day 1 and explained on day 2", "Studiul de caz pentru fraudă: o rețea antrenată pe ziua 1 și explicată pe ziua 2"),
               t("gradients are free for a network: one backward pass gives the sensitivity of the fraud score to every input.",
                 "pentru o rețea gradienții sînt gratuiți: o singură trecere înapoi dă sensibilitatea scorului de fraudă la fiecare intrare."),
               "\\[ \\mathrm{saliency}_j(\\vx)=\\Big|\\frac{\\partial f(\\vx)}{\\partial x_j}\\Big|,\\qquad \\mathrm{G\\!\\times\\!I}_j(\\vx)=(x_j-x'_j)\\,\\frac{\\partial f(\\vx)}{\\partial x_j} \\]" +
@@ -422,7 +422,7 @@ def build(lang, H=None):
                 "un analist de fraudă primește lista ordonată a intrărilor care au declanșat alerta, în milisecunde pe tranzacție."),
               tryit=NB + " \\S5", cite="(Simonyan, Vedaldi \\& Zisserman, 2014; Dal Pozzolo et al., 2015)", wl="0.55", wr="0.42")
 
-    D.concept(t("Integrated gradients: attributions that add up", "Gradienții integrați: atribuiri care se adună"),
+    D.concept(t("Integrated gradients and the completeness of attributions", "Gradienții integrați și completitudinea atribuirilor"),
               t("integrate the gradient along the straight path from a baseline to the input; the attributions sum to $f(\\vx)-f(\\vx')$.",
                 "se integrează gradientul pe drumul drept de la referință la intrare; atribuirile se adună la $f(\\vx)-f(\\vx')$."),
               "\\[ \\mathrm{IG}_j(\\vx)=(x_j-x'_j)\\int_0^1\\frac{\\partial f\\big(\\vx'+\\alpha(\\vx-\\vx')\\big)}{\\partial x_j}\\,d\\alpha \\]"
@@ -479,7 +479,7 @@ def build(lang, H=None):
 
     # ================================================================== 5. evaluation and stability
     D.section(t("Agreement, faithfulness and stability of explanations", "Concordanța, fidelitatea și stabilitatea explicațiilor"))
-    D.figframe(t("Agreement between methods: high but not perfect", "Concordanța metodelor: ridicată, dar nu perfectă"),
+    D.figframe(t("Agreement between explanation methods", "Concordanța metodelor de explicare"),
                t("Spearman correlation of the global importances (mean $|$attribution$|$) of seven methods on the same frauds.",
                  "corelația Spearman a importanțelor globale (media $|$atribuirii$|$) pentru șapte metode, pe aceleași fraude."),
                None, "method_agreement", bullets=[
@@ -635,7 +635,7 @@ def build(lang, H=None):
     reference_frames(D, REFS, per_frame=8)
     D.mark_main_end()
     D.parts.append("\\section*{" + t("Appendix", "Anexă") + "}\n")
-    D.frame(t("Appendix A: why the Shapley kernel recovers Shapley values", "Anexa A: de ce nucleul Shapley dă valorile Shapley"), it(
+    D.frame(t("Appendix A: recovery of Shapley values by the Shapley kernel", "Anexa A: obținerea valorilor Shapley prin nucleul Shapley"), it(
         t("Restrict $g(\\vz)=\\phi_0+\\sum_j\\phi_jz_j$ to satisfy $g(\\mathbf 0)=v(\\emptyset)$ and $g(\\mathbf 1)=v(\\{1..d\\})$ (infinite weight on the empty and full coalitions).",
           "Se impune ca $g(\\vz)=\\phi_0+\\sum_j\\phi_jz_j$ să satisfacă $g(\\mathbf 0)=v(\\emptyset)$ și $g(\\mathbf 1)=v(\\{1..d\\})$ (pondere infinită pe coaliția vidă și pe cea completă)."),
         t("The weighted least-squares normal equations with $\\pi(\\vz)\\propto(d-1)/[\\binom{d}{|\\vz|}|\\vz|(d-|\\vz|)]$ have the unique solution $\\phi_j$ = Shapley value (Lundberg \\& Lee, 2017, Theorem 2).",
@@ -645,7 +645,7 @@ def build(lang, H=None):
         t("For a linear $f$ and independent features, $v(S)=\\beta_0+\\sum_{j\\in S}\\beta_jx_j+\\sum_{j\\notin S}\\beta_j\\E x_j$, so $\\phi_j=\\beta_j(x_j-\\E x_j)$.",
           "Pentru $f$ liniar și variabile independente, $v(S)=\\beta_0+\\sum_{j\\in S}\\beta_jx_j+\\sum_{j\\notin S}\\beta_j\\E x_j$, deci $\\phi_j=\\beta_j(x_j-\\E x_j)$."), sep="3pt"),
         "small", cite="(Lundberg \\& Lee, 2017)")
-    D.frame(t("Appendix B: integrated gradients as a path method", "Anexa B: gradienții integrați ca metodă pe drum"), it(
+    D.frame(t("Appendix B: integrated gradients as a path method", "Anexa B: gradienții integrați ca metodă de integrare pe traiectorie"), it(
         t("For a path $\\gamma(\\alpha)$ from $\\vx'$ to $\\vx$: $f(\\vx)-f(\\vx')=\\int_0^1\\nabla f(\\gamma(\\alpha))^{\\top}\\gamma'(\\alpha)\\,d\\alpha=\\sum_j\\int_0^1\\partial_jf(\\gamma)\\,\\gamma_j'\\,d\\alpha$.",
           "Pentru un drum $\\gamma(\\alpha)$ de la $\\vx'$ la $\\vx$: $f(\\vx)-f(\\vx')=\\int_0^1\\nabla f(\\gamma(\\alpha))^{\\top}\\gamma'(\\alpha)\\,d\\alpha=\\sum_j\\int_0^1\\partial_jf(\\gamma)\\,\\gamma_j'\\,d\\alpha$."),
         t("The straight line $\\gamma(\\alpha)=\\vx'+\\alpha(\\vx-\\vx')$ gives $\\gamma_j'=x_j-x'_j$: each term is $\\mathrm{IG}_j$, hence completeness.",

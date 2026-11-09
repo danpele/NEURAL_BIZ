@@ -1,5 +1,5 @@
 TITLE = ("Case 4 - A battery on the day-ahead market: quantile networks and reinforcement learning",
-         "Studiul de caz 4 - O baterie pe piața pentru ziua următoare: rețele neuronale cuantilice și învățare prin recompensă")
+         "Studiul de caz 4 - O baterie pe piața pentru ziua următoare: rețele neuronale cuantilice și reinforcement learning")
 
 CELLS = [
 ("md",
@@ -160,7 +160,7 @@ def fig_fan(lang):
 cu.save_both(fig_fan, "f2_forecast_fan")
 '''),
 
-("md", "## 3. Forecast, then optimise: the paper's rules on our forecasts", "## 3. Întîi prognoza, apoi optimizarea: regulile din lucrare aplicate prognozelor noastre"),
+("md", "## 3. Trading rules of the paper applied to our forecasts", "## 3. Regulile de tranzacționare din lucrare aplicate prognozelor noastre"),
 ("code", r'''
 pairs = [(a, b) for a in range(24) for b in range(a + 1, 24)]
 A_, B_ = np.array(pairs).T
@@ -213,7 +213,7 @@ print("MLP, market orders: %s" % [round(v.sum()) for v in mlp_mkt.values()])
 print("MLP, quantile bids alpha=0.8: %s, both bids cleared %%: %s" % ([round(v[0].sum()) for v in mlp_qb.values()], [round(v[1], 1) for v in mlp_qb.values()]))
 '''),
 
-("md", "## 4. A reinforcement-learning trader (Lecture 10)", "## 4. Un agent de tranzacționare cu învățare prin recompensă (cursul 10)"),
+("md", "## 4. A reinforcement-learning trader (Lecture 10)", "## 4. Un agent de tranzacționare cu reinforcement learning (cursul 10)"),
 ("code", r"""
 NB = 8                                                   # signal: octile of each hour in the day's forecast ranking (0 = three cheapest hours)
 def bins(M):
@@ -427,7 +427,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Give the agent a richer state: add the forecast 10 %-90 % width of hour h (in two bins). Does the agent learn to avoid uncertain hours?
 2. Allow two cycles per day (night to noon, noon to evening). How much more does the battery earn in 2025-2026, when solar middays are cheap?
 3. Replace the tabular agent by a deep Q-network (Lecture 10) that sees the full 24-hour forecast. Is the gain worth the extra complexity, over five seeds?""",

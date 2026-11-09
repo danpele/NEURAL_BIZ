@@ -2,8 +2,8 @@
 \input{numbers_\lang}
 \renewcommand{\emqacase}{\T{Research case 6 (Lecture 13)}{Studiul de caz 6 (cursul 13)}}
 \begin{document}
-\emqatitle{\T{Case 6: Can foundation models manage risk?}%
-                {Studiul de caz 6: Pot modelele fundație gestiona riscul?}}%
+\emqatitle{\T{Case 6: Zero-shot Value-at-Risk and Expected Shortfall from foundation models with conformal calibration}%
+                {Studiul de caz 6: Valoarea la risc și pierderea așteptată din modele fundație zero-shot, cu calibrare conformală}}%
           {\T{Based on}{Studiu bazat pe lucrarea} Jheng, Tak, Găman, Mazurencu-Marinescu-Pele \& Pele (2026), \emph{Can foundation models manage risk? Zero-shot VaR and ES forecasting with conformal calibration in CEE markets},
            ECECSR 60(2), 267--290, \href{https://doi.org/10.24818/18423264/60.2.26.14}{doi:10.24818/18423264/60.2.26.14}}
 
@@ -18,7 +18,7 @@ Un furnizor oferă un \emph{model fundație pentru serii de timp}, preantrenat, 
 O limită prea mică produce depășiri, majorări ale cerinței de capital și întrebări din partea autorității de supraveghere; o limită prea mare imobilizează capital și blochează tranzacțiile.}
 \end{scenario}
 
-\section{\T{What the paper did}{Lucrarea de referință}}
+\section{\T{The reference paper}{Lucrarea de referință}}
 \textbf{\T{Question.}{Întrebarea de cercetare.}} \T{Can modern time series foundation models (TSFMs) produce regulatory-grade VaR and ES forecasts for Central and Eastern European (CEE) markets in a zero-shot setting, and can conformal calibration bridge any remaining gap to full Basel compliance (p.~268)?}%
 {Pot modelele fundație moderne pentru serii de timp (TSFM, \emph{time series foundation models}) să producă, fără antrenare suplimentară (\emph{zero-shot}), prognoze VaR și ES de calitatea cerută de reglementări pentru piețele din Europa Centrală și de Est (ECE)? Poate calibrarea conformală să acopere diferența rămasă pînă la conformitatea deplină cu standardele Basel (p.~268)?}
 
@@ -44,7 +44,7 @@ Chronos-2 și TimesFM 2.5 furnizează nouă decile; o distribuție Student ajust
 {\footnotesize\color{FooterGray}\T{Related work of our group for Lecture 13: language models as zero-shot risk models (Pele et al., 2026, \emph{Expert Systems with Applications} 295, 128676, \href{https://doi.org/10.1016/j.eswa.2025.128676}{doi:10.1016/j.eswa.2025.128676}; Case~5).}%
 {Altă lucrare a grupului nostru relevantă pentru cursul 13: modelele lingvistice mari ca modele de risc zero-shot (Pele et al., 2026, \emph{Expert Systems with Applications} 295, 128676, \href{https://doi.org/10.1016/j.eswa.2025.128676}{doi:10.1016/j.eswa.2025.128676}; studiul de caz~5).}}
 
-\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\section{\T{The method}{Metoda}}
 \begin{intuition}
 \T{A foundation model has read millions of series from energy, retail, traffic and weather; it ``knows'' what usually follows a calm or a turbulent stretch, and returns a whole set of quantiles for tomorrow.
 It has not seen Romanian shares, so its quantiles may be slightly too narrow or too wide. Conformal calibration is a thermostat: it looks at how often the model's VaR was breached in the last 250 days and moves today's VaR by exactly the amount that would have produced the right breach rate.}%
@@ -72,7 +72,7 @@ Testul Diebold--Mariano: $DM=\bar d/\sqrt{\hat V(\bar d)}$, unde $d_t$ este dife
 {Judecați un model de risc după testarea retrospectivă, nu după mărimea sa: numărați depășirile pe 250 de zile, testați gruparea lor și severitatea cozii și păstrați un strat de calibrare care poate fi verificat pas cu pas.}
 \end{decision}
 
-\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\section{\T{Replication on the course data}{Replicarea pe datele cursului}}
 \T{Notebook \texttt{C6\_notebook\_EN.ipynb}: daily closing prices, adjusted for dividends and splits, of \NnStocks\ shares of the Bucharest Stock Exchange (BVB) from 2015, downloaded from EODHD (EOD Historical Data): Banca Transilvania (TLV), BRD - Groupe Société Générale (BRD), OMV Petrom (SNP), Romgaz (SNG), Nuclearelectrica (SNN), Transgaz (TGN), Electrica (EL) and Transelectrica (TEL); only days with traded volume are kept.
 Out-of-sample period \NoosStart\ -- \NoosEnd: \NnOOS\ share-days per model and level, \NnBlocks\ blocks of 250 days for the traffic light. The returns are fat-tailed (kurtosis \NkurtMin--\NkurtMax) and thinly traded on some days (\NzeroMin--\NzeroMax\,\% of trading days with an unchanged price; Table~\ref{tab:desc}).
 Classroom implementation: eight Romanian shares instead of ten CEE indices and exchange rates; Chronos-2 and TimesFM 2.5 (both with decile outputs) without Moirai 2.0; an AR(1) model instead of ARIMA and no conformal LSTM; the degrees of freedom of the Student-t fit are searched on a grid from 2.1 to 60 (the paper uses the Nelder--Mead algorithm). The foundation-model forecasts take about four minutes on a laptop with an Apple GPU and are cached.}%
@@ -155,7 +155,7 @@ Modelul fără calibrare își obține semaforul perfect cu o limită mai mare c
 (iv) ES al modelelor conformale este deplasat cu corecția VaR, una dintre mai multe alegeri posibile. (v) Poziția de 10 milioane RON este o constantă aleasă pentru ilustrare; calculul ignoră costurile de lichiditate ale vînzării unui pachet mare dintr-o acțiune cu tranzacționare redusă.}
 
 \newpage
-\section*{\T{Case 6 at a glance}{Studiul de caz 6 pe scurt}}
+\section*{\T{Summary of case 6}{Studiul de caz 6 pe scurt}}
 \glance{\T{Can a pretrained foundation model set a daily VaR limit for Romanian shares?}{Poate un model fundație preantrenat să stabilească o limită zilnică VaR pentru acțiuni românești?}}%
 {\T{8 BVB shares, daily returns; out of sample 2018--2026, \NnOOS\ share-days.}{8 acțiuni BVB, randamente zilnice; evaluare 2018--2026, \NnOOS\ de observații.}}%
 {\T{Chronos-2, TimesFM 2.5 zero-shot + Student-t fit; rolling conformal wrapper; HS, GJR-GARCH, AR(1)-conformal.}{Chronos-2, TimesFM 2.5 zero-shot + ajustare Student; calibrare conformală glisantă; SI, GJR-GARCH, AR(1) conformal.}}%

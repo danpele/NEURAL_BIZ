@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L13.js?v=20261109m">
+<link rel="preload" as="script" href="L13.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261109m", "L13_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L13.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261109n", "L13_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L13.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -86,9 +86,9 @@
   <details><summary>Răspuns</summary><p>Da. Testul Diebold–Mariano (DM) compară sumele zilnice ale erorilor absolute ale celor două modele pe cele 360 de zile; cursul raportează o valoare p sub 0,0001 pentru „Chronos-2 este mai precis decît LEAR”. Pentru DNN față de LEAR, valoarea p este 0,76 (nicio dovadă că DNN este mai bun), pentru N-BEATS față de DNN 0,36. O MAE mai mică pe un an de test nu ajunge: curba din dreapta trebuie să crească constant, nu din cauza cîtorva zile.</p></details>
 </section><h2 class="sec" id="s-fm">Modele fundație: contextul și cuantilele</h2>
 <section class="blk" id="context-length">
-  <h3>Un context mai lung ajută modelul fundație, pînă la un punct</h3>
+  <h3>Efectul lungimii contextului asupra modelului fundație</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L13_context_length_ro.jpg" alt="Slide-ul 28: Un context mai lung ajută modelul fundație, pînă la un punct" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L13/lecture13_ro.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L13_context_length_ro.jpg" alt="Slide-ul 28: Efectul lungimii contextului asupra modelului fundație" loading="lazy"></a>
       <figcaption>Slide-ul 28</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Lungimea contextului Chronos-2: <b id="cl-c-v"></b></label><input type="range" id="cl-c" min="0" max="3" step="1" value="2"></div><div class="ctl"><label for="cl-w">Media mobilă a MAE zilnice (zile): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="1" max="60" step="1" value="30"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-bar"></div><div class="chart" id="cl-roll"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_context_length" target="_blank" rel="noopener">NN_L13_context_length</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_context_length/NN_L13_context_length.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

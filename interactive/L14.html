@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L14.js?v=20261109m">
+<link rel="preload" as="script" href="L14.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261109m", "L14_text_en.js?v=20261109m", "common.js?v=20261109m"], "L14.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261109n", "L14_text_en.js?v=20261109n", "common.js?v=20261109n"], "L14.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>Each class becomes a sentence ("a centered satellite photo of forest."); the image is assigned to the class whose sentence embedding has the largest cosine similarity with the image embedding. The cosines are close to each other (between about 0.2 and 0.3), so the softmax multiplies them by a scale, 100 in CLIP. The scale does not change the predicted class, only how confident the probabilities look: at scale 1 every class gets about 10%, at 200 the top class takes almost everything. On all 5,400 test images the best set-up, ViT-B/16 with 5 templates, is right 56.4% of the time; 5 of the 8 images on the slide are correct.</p></details>
 </section>
 <section class="blk" id="confusion">
-  <h3>Where zero-shot fails: similar-looking land uses</h3>
+  <h3>Zero-shot errors on visually similar land uses</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_confusion_en.jpg" alt="Slide 16: Where zero-shot fails: similar-looking land uses" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L14/lecture14.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_confusion_en.jpg" alt="Slide 16: Zero-shot errors on visually similar land uses" loading="lazy"></a>
       <figcaption>Slide 16</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Model</label><select id="cm-m"><option value="B32">CLIP ViT-B/32</option><option value="B16" selected>CLIP ViT-B/16</option></select></div><div class="ctl"><label for="cm-t">Prompt (text template)</label><select id="cm-t"><option value="name">Folder name ("AnnualCrop")</option><option value="photo">"a photo of {class}."</option><option value="sat">"a satellite photo of {class}."</option><option value="ens" selected>Average of 5 satellite templates</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Cells show</span><div class="tgs"><label class="tg"><input type="radio" name="cm-n" value="row" checked> Row percentages</label><label class="tg"><input type="radio" name="cm-n" value="n"> Number of images</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_confusion" target="_blank" rel="noopener">NN_L14_zeroshot_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_zeroshot_confusion/NN_L14_zeroshot_confusion.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

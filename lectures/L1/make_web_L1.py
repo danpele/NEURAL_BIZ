@@ -203,7 +203,7 @@ PAGE = dict(
                       "Rosenblatt (1958) a făcut ca ponderile lui să învețe din exemple etichetate. Minsky și Papert (1969) au demonstrat că un singur strat "
                       "nu poate reprezenta XOR, iar domeniul și-a revenit abia cînd propagarea înapoi a erorii a permis antrenarea mai multor straturi "
                       "(Rumelhart, Hinton și Williams, 1986).")),
-              B(frame="The perceptron learns only from its mistakes",
+              B(frame="The perceptron updates its weights only on misclassified examples",
                 text=("If example $i$ is misclassified, $y_i(\\mathbf w^\\top\\mathbf x_i+b)\\le0$ with $y_i\\in\\{-1,+1\\}$, the weights move towards it: "
                       "$\\mathbf w\\leftarrow\\mathbf w+\\eta y_i\\mathbf x_i$. This is one step of stochastic gradient descent (SGD) on the perceptron "
                       "criterion. Correct examples give no gradient and the output is a class, not a probability, which a lender cannot price.",

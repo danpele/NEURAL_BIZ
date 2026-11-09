@@ -79,7 +79,7 @@ Housing & California housing, 20\,640 block groups of the 1990 census & MLP regr
 \end{frame}
 
 
-\section{Why explain a neural network?}
+\section{Reasons for explaining neural networks}
 
 \begin{frame}{Regulators require explanations of automated decisions}
 \footnotesize
@@ -198,7 +198,7 @@ XGBoost, 10 & 0.959 & 0.889 & 0.058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Shapley, 1953)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{From Shapley to SHAP: the value of a coalition}
+\begin{frame}{SHAP: the value of a coalition of features}
 \footnotesize
 \intuition{SHAP sets $v(S)$ = expected model output when the features outside $S$ are drawn from a background sample.}
 \begin{columns}[T,onlytextwidth]
@@ -372,7 +372,7 @@ XGBoost, 10 & 0.959 & 0.889 & 0.058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L11\_lime\_vs\_shap}{Quantlets/L11/NN_L11_lime_vs_shap}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{LIME depends on its own settings}
+\begin{frame}{Sensitivity of LIME to its settings}
 \small
 \intuition{left: 30 runs with different random seeds; right: the five slopes as the kernel width changes.}
 \begin{center}\includegraphics[width=\textwidth,height=0.321\textheight,keepaspectratio]{charts/en/lime_instability.pdf}\end{center}\vspace{-3mm}
@@ -389,7 +389,7 @@ XGBoost, 10 & 0.959 & 0.889 & 0.058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L11\_lime\_instability}{Quantlets/L11/NN_L11_lime_instability}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Counterfactual explanations: what would have to change?}
+\begin{frame}{Counterfactual explanations: minimal changes that reverse the decision}
 \footnotesize
 \intuition{find the closest applicant, in actionable features only, whom the model would accept.}
 \begin{columns}[T,onlytextwidth]
@@ -440,7 +440,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 
 \section{Gradient methods for neural networks}
 
-\begin{frame}{The fraud case: a network trained on day 1, explained on day 2}
+\begin{frame}{Fraud case study: a network trained on day 1 and explained on day 2}
 \footnotesize
 \intuition{gradients are free for a network: one backward pass gives the sensitivity of the fraud score to every input.}
 \begin{columns}[T,onlytextwidth]
@@ -469,7 +469,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Simonyan, Vedaldi \& Zisserman, 2014; Dal Pozzolo et al., 2015)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Integrated gradients: attributions that add up}
+\begin{frame}{Integrated gradients and the completeness of attributions}
 \footnotesize
 \intuition{integrate the gradient along the straight path from a baseline to the input; the attributions sum to $f(\vx)-f(\vx')$.}
 \begin{columns}[T,onlytextwidth]
@@ -557,7 +557,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 
 \section{Agreement, faithfulness and stability of explanations}
 
-\begin{frame}{Agreement between methods: high but not perfect}
+\begin{frame}{Agreement between explanation methods}
 \small
 \intuition{Spearman correlation of the global importances (mean $|$attribution$|$) of seven methods on the same frauds.}
 \begin{center}\includegraphics[width=\textwidth,height=0.370\textheight,keepaspectratio]{charts/en/method_agreement.pdf}\end{center}\vspace{-3mm}
@@ -844,7 +844,7 @@ Time (day 1 $\to$ day 2) & Spearman, JS divergence & 0.98; 0.003 \\
 
 \section*{Appendix}
 
-\begin{frame}{Appendix A: why the Shapley kernel recovers Shapley values}
+\begin{frame}{Appendix A: recovery of Shapley values by the Shapley kernel}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item Restrict $g(\vz)=\phi_0+\sum_j\phi_jz_j$ to satisfy $g(\mathbf 0)=v(\emptyset)$ and $g(\mathbf 1)=v(\{1..d\})$ (infinite weight on the empty and full coalitions).

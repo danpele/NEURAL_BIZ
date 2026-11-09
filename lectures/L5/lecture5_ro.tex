@@ -61,7 +61,7 @@ VaR & valoarea expusă la risc (value-at-risk)\\\end{tabular}}\end{column}
 
 % END-ABBR
 
-\begin{frame}{Numai date reale: trei secvențe}
+\begin{frame}{Datele: trei secvențe reale}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.25\textwidth}p{0.29\textwidth}p{0.22\textwidth}p{0.17\textwidth}@{}}\toprule
@@ -236,7 +236,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 
 \section{Celule cu porți: LSTM și GRU}
 
-\begin{frame}{Celula LSTM, poartă cu poartă}
+\begin{frame}{Celula LSTM și porțile ei}
 \footnotesize
 \intuition{o stare separată a celulei, $\mathbf c_t$, se actualizează aditiv; trei porți decid ce se uită, ce se scrie și ce se arată.}
 \begin{columns}[T,onlytextwidth]
@@ -552,9 +552,9 @@ GRU (prognoza medie) & 0{,}624 & 0{,}521 & 5 \\
 \end{frame}
 
 
-\section{Studiul de caz B: poate o rețea prognoza randamentele?}
+\section{Studiul de caz B: prognoza randamentelor cu rețele neuronale}
 
-\begin{frame}{În afara eșantionului, prognozele randamentelor nu explică aproape nimic}
+\begin{frame}{Prognozele randamentelor explică foarte puțin din varianța în afara eșantionului}
 \small
 \intuition{randamentele de a doua zi ale S\&P 500 și ale Banca Transilvania (TLV), din ultimele 22 de randamente.}
 \vspace{-1mm}\[ R^2_{\mathrm{OOS}}=1-\frac{\sum_{t\in\mathrm{test}}(r_{t+1}-\hat r_{t+1})^2}{\sum_{t\in\mathrm{test}}r_{t+1}^2} \]\vspace{-2mm}
@@ -687,7 +687,7 @@ GRU (prognoza medie) & 0{,}624 & 0{,}521 & 5 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L5\_load\_window}{Quantlets/L5/NN_L5_load_window}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Cît valorează o prognoză mai bună a consumului}
+\begin{frame}{Valoarea economică a unei prognoze mai precise a consumului}
 \footnotesize
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Semnificația}

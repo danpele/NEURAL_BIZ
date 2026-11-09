@@ -133,7 +133,7 @@ XGBoost & extreme gradient boosting (arbori de decizie cu amplificare pe gradien
 
 \section{Penalizarea ponderilor}
 
-\begin{frame}{Penalizarea ponderilor = penalizare L2 = o distribuție a priori gaussiană pe ponderi}
+\begin{frame}{Penalizarea ponderilor ca penalizare L2 și ca distribuție a priori gaussiană a ponderilor}
 \small
 \intuition{ponderile mari fac funcția abruptă și sensibilă la zgomot; micșorarea lor o face mai netedă.}
 \[ \tilde\loss(\vw)=\loss(\vw)+\frac\lambda2\|\vw\|_2^2\ \Rightarrow\ \vw_{t+1}=(1-\eta\lambda)\,\vw_t-\eta\nabla\loss(\vw_t);\qquad \vw\sim\mathcal N(\mathbf 0,\lambda^{-1}\mathbf I)\Rightarrow\hat\vw_{\mathrm{MAP}}=\argmin\tilde\loss \]
@@ -175,7 +175,7 @@ XGBoost & extreme gradient boosting (arbori de decizie cu amplificare pe gradien
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Tibshirani, 1996)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{L1 adună ponderile primului strat în zero, L2 doar le micșorează}
+\begin{frame}{Ponderile primului strat cu penalizare L1 și cu penalizare L2}
 \small
 \intuition{MLP cu 64 de neuroni ascunși pe German credit, Adam pe tot setul, penalizare doar pe primul strat.}
 \begin{center}\includegraphics[width=\textwidth,height=0.356\textheight,keepaspectratio]{charts/ro/l1_l2_weights.pdf}\end{center}\vspace{-3mm}
@@ -253,7 +253,7 @@ XGBoost & extreme gradient boosting (arbori de decizie cu amplificare pe gradien
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Prechelt, 1998; Bishop \& Bishop, 2024, ch.~9)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade}
+\begin{frame}{La fraudele cu carduri, pierderea pe validare atinge minimul devreme, în timp ce pierderea pe antrenare continuă să scadă}
 \small
 \intuition{MLP 256-256, împărțire cronologică; punctat: epoca cea mai bună pe validare; gri: fereastra de răbdare.}
 \begin{center}\includegraphics[width=\textwidth,height=0.310\textheight,keepaspectratio]{charts/ro/early_stopping.pdf}\end{center}\vspace{-3mm}
@@ -459,7 +459,7 @@ Ignorarea timpului & împărțire aleatoare a unei serii de timp sau a plățilo
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Saito \& Rehmsmeier, 2015)}\hfill\tryit{notebook \S9}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Pe orele de test, oprirea timpurie este regularizatorul care ajută clar}
+\begin{frame}{Pe orele de test, oprirea timpurie este regularizatorul cu cel mai clar cîștig}
 \small
 \intuition{MLP 256-256, împărțire cronologică, 5 inițializări pe configurație; precizia ponderată la populație.}
 \begin{center}\includegraphics[width=\textwidth,height=0.379\textheight,keepaspectratio]{charts/ro/reg_ablation.pdf}\end{center}\vspace{-3mm}
@@ -509,7 +509,7 @@ Ignorarea timpului & împărțire aleatoare a unei serii de timp sau a plățilo
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Dal Pozzolo et al., 2015)}\hfill\tryit{notebook \S10}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Numărul potrivit de alerte salvează cea mai mare parte din pierderi}
+\begin{frame}{Numărul de alerte și ponderea pierderilor din fraudă evitate}
 \small
 \intuition{o fraudă ratată costă suma ei; fiecare alertă costă o verificare de 5 euro (EUR), o constantă aleasă a priori.}
 \begin{center}\includegraphics[width=\textwidth,height=0.398\textheight,keepaspectratio]{charts/ro/fraud_cost.pdf}\end{center}\vspace{-3mm}
@@ -758,7 +758,7 @@ Model mai mic & mai puțini parametri & lățime, adîncime & regresia logistic�
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~9)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Anexă: penalizarea ponderilor și L2 coincid pentru SGD, nu pentru Adam}
+\begin{frame}{Anexă: penalizarea ponderilor și penalizarea L2 pentru SGD și pentru Adam}
 \small
 \[ \text{SGD:}\ \vw-\eta\nabla\big(\loss+\tfrac\lambda2\|\vw\|^2\big)=(1-\eta\lambda)\vw-\eta\nabla\loss \]
 \[ \text{Adam+L2:}\ \ \vw-\eta\,\frac{\hat m(\nabla\loss+\lambda\vw)}{\sqrt{\hat v}+\epsilon}\qquad\text{vs.}\qquad \text{AdamW:}\ \ (1-\eta\lambda)\vw-\eta\,\frac{\hat m(\nabla\loss)}{\sqrt{\hat v}+\epsilon} \]

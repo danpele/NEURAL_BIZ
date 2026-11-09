@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L12.js?v=20261109m">
+<link rel="preload" as="script" href="L12.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261109m", "L12_text_en.js?v=20261109m", "common.js?v=20261109m"], "L12.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261109n", "L12_text_en.js?v=20261109n", "common.js?v=20261109n"], "L12.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>No. Zero-shot, Qwen2.5-3B reaches a macro-F1 of 92.2%; with k = 1, 2, 4 and 8 examples the mean over three random draws of examples is 89.5%, 90.4%, 92.1% and 91.3%, and with k = 1 the draws range from 87.5% to 91.1%. The smaller 1.5B model gains a little at k = 1 (85.1% → 87.3%) and loses at k = 8 (84.1%). Which examples you draw matters about as much as how many. Macro-F1 averages the F1 score (harmonic mean of precision and recall) of the three classes, so the rare negative class counts as much as the neutral one.</p></details>
 </section>
 <section class="blk" id="prompt-sensitivity">
-  <h3>Rewording the instruction moves the score: prompt sensitivity</h3>
+  <h3>Prompt sensitivity: effect of rewording the instruction</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L12_prompt_sensitivity_en.jpg" alt="Slide 25: Rewording the instruction moves the score: prompt sensitivity" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L12_prompt_sensitivity_en.jpg" alt="Slide 25: Prompt sensitivity: effect of rewording the instruction" loading="lazy"></a>
       <figcaption>Slide 25</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ps-d">Data set</label><select id="ps-d"><option value="pb" selected>Financial PhraseBank (company news)</option><option value="tw">Finance tweets</option></select></div><div class="ctl"><label for="ps-m">Model (zero-shot)</label><select id="ps-m"><option value="1.5B" selected>Qwen2.5-1.5B</option><option value="3B">Qwen2.5-3B</option></select></div><div class="ctl ctl-tg" id="ps-i"><span class="lbl">Wording of the instruction</span><div class="tgs"><label class="tg"><input type="radio" name="ps-i" value="0" checked> 1</label><label class="tg"><input type="radio" name="ps-i" value="1"> 2</label><label class="tg"><input type="radio" name="ps-i" value="2"> 3</label><label class="tg"><input type="radio" name="ps-i" value="3"> 4</label><label class="tg"><input type="radio" name="ps-i" value="4"> 5</label></div></div><button class="btn play" id="ps-play" type="button"></button></div><div class="charts "><div class="chart" id="ps-bars"></div><div class="chart" id="ps-conf"></div></div><ul class="out" id="ps-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_prompt_sensitivity" target="_blank" rel="noopener">NN_L12_prompt_sensitivity</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_prompt_sensitivity/NN_L12_prompt_sensitivity.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>Yes: move the threshold and watch coverage fall while accuracy on the answered sentences rises. This works only if the probabilities are calibrated, that is, if “90% sure” is right about 90% of the time. The lecture measures the expected calibration error (ECE) on Financial PhraseBank: 4.7% for zero-shot 3B, 3.6% for few-shot 3B and 5.4% for TF-IDF (term frequency–inverse document frequency) with logistic regression. Compare the 0.5B model: its reliability curve is far from the diagonal, and a threshold buys much less.</p></details>
 </section><h2 class="sec" id="s-rag">Retrieval-augmented generation (RAG)</h2>
 <section class="blk" id="rag-recall">
-  <h3>Finding the right speech from its title</h3>
+  <h3>Retrieval of the correct speech from its title</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=36" target="_blank" rel="noopener"><img src="slides/L12_rag_recall_en.jpg" alt="Slide 36: Finding the right speech from its title" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12.pdf#page=36" target="_blank" rel="noopener"><img src="slides/L12_rag_recall_en.jpg" alt="Slide 36: Retrieval of the correct speech from its title" loading="lazy"></a>
       <figcaption>Slide 36</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="rg-r"><span class="lbl">Retriever</span><div class="tgs"><label class="tg"><input type="checkbox" name="rg-r" value="tfidf" checked> TF-IDF</label><label class="tg"><input type="checkbox" name="rg-r" value="bm25" checked> BM25</label><label class="tg"><input type="checkbox" name="rg-r" value="dense" checked> Dense embeddings (bge-small)</label><label class="tg"><input type="checkbox" name="rg-r" value="hybrid" checked> Hybrid (BM25 + dense)</label></div></div><div class="ctl"><label for="rg-k">k: speeches returned by the retriever: <b id="rg-k-v"></b></label><input type="range" id="rg-k" min="1" max="20" step="1" value="5"></div><div class="ctl"><label for="rg-y">Year of the speeches</label><select id="rg-y"><option value="all" selected>All years (2022–2026)</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option></select></div><button class="btn play" id="rg-play" type="button"></button></div><div class="charts one"><div class="chart" id="rg-chart"></div></div><ul class="out" id="rg-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_rag_recall" target="_blank" rel="noopener">NN_L12_rag_recall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_rag_recall/NN_L12_rag_recall.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

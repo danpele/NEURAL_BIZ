@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L1.js?v=20261109m">
+<link rel="preload" as="script" href="L1.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L1_data.js?v=20261109m", "L1_text_en.js?v=20261109m", "common.js?v=20261109m"], "L1.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L1_data.js?v=20261109n", "L1_text_en.js?v=20261109n", "common.js?v=20261109n"], "L1.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,12 +53,12 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser from the course data when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. No formula is needed to play: move the weights, the number of hidden units or the cut-off and watch what changes.</p>
-<p class="toc"><a href="#s-neuron">From one neuron to a multilayer perceptron</a> · <a href="#s-eval">From scores to credit decisions</a></p>
-<h2 class="sec" id="s-neuron">From one neuron to a multilayer perceptron</h2>
+<p class="toc"><a href="#s-neuron">The single neuron and the multilayer perceptron</a> · <a href="#s-eval">Credit decisions based on model scores</a></p>
+<h2 class="sec" id="s-neuron">The single neuron and the multilayer perceptron</h2>
 <section class="blk" id="one-neuron">
-  <h3>An MLP bends the decision boundary, but two inputs carry little extra signal</h3>
+  <h3>Nonlinear decision boundary of an MLP with two inputs</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L1_boundary_hmeq_en.jpg" alt="Slide 31: An MLP bends the decision boundary, but two inputs carry little extra signal" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L1/lecture1.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L1_boundary_hmeq_en.jpg" alt="Slide 31: Nonlinear decision boundary of an MLP with two inputs" loading="lazy"></a>
       <figcaption>Slide 31</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="nb-m">Model</label><select id="nb-m"><option value="n" selected>One neuron, your weights</option><option value="mlp">Trained MLP 64-64</option></select></div><div class="ctl"><label for="nb-w1">Weight on debt-to-income, w₁: <b id="nb-w1-v"></b></label><input type="range" id="nb-w1" min="-3" max="3" step="0.05" value="0.6"></div><div class="ctl"><label for="nb-w2">Weight on age of the oldest credit line, w₂: <b id="nb-w2-v"></b></label><input type="range" id="nb-w2" min="-3" max="3" step="0.05" value="-0.5"></div><div class="ctl"><label for="nb-b">Bias, b: <b id="nb-b-v"></b></label><input type="range" id="nb-b" min="-5" max="1" step="0.05" value="-2.45"></div><div class="ctl"><label for="nb-t">Cut-off: flag the loan if probability ≥: <b id="nb-t-v"></b></label><input type="range" id="nb-t" min="0.05" max="0.6" step="0.01" value="0.2"></div><div class="ctl"><button class="btn" id="nb-fit" type="button">Fitted weights (logistic regression)</button></div></div><div class="charts one"><div class="chart" id="nb-chart"></div></div><ul class="out" id="nb-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_boundary_hmeq" target="_blank" rel="noopener">NN_L1_boundary_hmeq</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_boundary_hmeq/NN_L1_boundary_hmeq.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -84,7 +84,7 @@
   </div>
   <div class="ask"><span class="ask-tag">Question for the room</span> On HMEQ, how many hidden units does a one-layer MLP need before it beats logistic regression on test AUC?</div>
   <details><summary>Answer</summary><p>One hidden unit (AUC 0.901) is a logistic regression with an extra squashing step and does worse than the logistic model (0.920); from 4 to 8 units the MLP passes it (0.923, 0.931) and the gain flattens above 32 units (0.946 to 0.953 at 256). Gradient boosting (XGBoost, 0.961) stays ahead on this small tabular dataset, with far fewer tuning choices. The readout gives the number of parameters: 7,681 at H = 256, against 29 for the logistic regression.</p></details>
-</section><h2 class="sec" id="s-eval">From scores to credit decisions</h2>
+</section><h2 class="sec" id="s-eval">Credit decisions based on model scores</h2>
 <section class="blk" id="roc-threshold">
   <h3>At a 10 % false-alarm rate, the MLP catches more defaults than the logistic score</h3>
   <div class="pair">

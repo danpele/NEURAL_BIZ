@@ -93,7 +93,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weron, 2014; Lago et al., 2021)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Real data only: Romanian power prices and load, the S\&P 500 and Bitcoin}
+\begin{frame}{The data: Romanian power prices and load, the S\&P 500 and Bitcoin}
 \small
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.34\textwidth}p{0.12\textwidth}p{0.3\textwidth}p{0.17\textwidth}@{}}\toprule
@@ -355,7 +355,7 @@ S\&P 500, Bitcoin (BTC/USD) & daily & Yahoo Finance & Value-at-Risk \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Oreshkin et al., 2020)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Transformers for time series: patches become tokens}
+\begin{frame}{Transformers for time series: patches as tokens}
 \footnotesize
 \intuition{cut the series into short patches, embed each patch like a word and let attention compare them.}
 \begin{columns}[T,onlytextwidth]
@@ -514,7 +514,7 @@ the naive benchmark & \cellcolor{Crimson!55}27.74 & 44.57 & \cellcolor{Crimson!5
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_forecast\_week}{Quantlets/L13/NN_L13_forecast_week}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Longer context helps the foundation model, up to a point}
+\begin{frame}{Effect of context length on the foundation model}
 \small
 \intuition{the model sees only the context: one week shows the daily shape, three months also the level.}
 \begin{center}\includegraphics[width=\textwidth,height=0.431\textheight,keepaspectratio]{charts/en/context_length.pdf}\end{center}\vspace{-3mm}
@@ -682,7 +682,7 @@ the naive benchmark & \cellcolor{Crimson!55}27.74 & 44.57 & \cellcolor{Crimson!5
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_coverage}{Quantlets/L13/NN_L13_coverage}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Load is easier than price: foundation models forecast it within a few percent}
+\begin{frame}{Load forecasts of foundation models: errors of a few percent}
 \small
 \intuition{load is smooth and seasonal, the shapes a pre-trained model knows best.}
 \vspace{-1mm}\[ \mathrm{MAPE}=\frac{100}{24|\mathcal T|}\sum_{d,h}\Big|\frac{\ell_{d,h}-\hat\ell_{d,h}}{\ell_{d,h}}\Big| \]\vspace{-2mm}
@@ -955,7 +955,7 @@ Bitcoin & HS (250 days) & 33 & \cellcolor{Forest!55}0.123 & 0.458 & 126 & \cellc
 
 \section*{Appendix}
 
-\begin{frame}{Appendix A: why the conformal band covers}
+\begin{frame}{Appendix A: the coverage guarantee of the conformal band}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item Let $s_1,\dots,s_n,s_{n+1}$ be exchangeable conformity scores

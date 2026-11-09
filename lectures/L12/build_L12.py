@@ -38,7 +38,7 @@ ABBR = {
     "LR": ("likelihood ratio", "raportul de verosimilitate"),
     "MRR": ("mean reciprocal rank", "rangul reciproc mediu"),
     "RAG": ("retrieval-augmented generation", "generare augmentată prin regăsire (retrieval-augmented generation)"),
-    "RLHF": ("reinforcement learning from human feedback", "învățare prin recompensă din feedback uman"),
+    "RLHF": ("reinforcement learning from human feedback", "reinforcement learning from human feedback"),
     "SFT": ("supervised fine-tuning", "ajustare fină supervizată"),
     "TF-IDF": ("term frequency--inverse document frequency", "frecvența termenului--frecvența inversă în documente"),
     "VaR": ("Value-at-Risk", "valoarea expusă la risc (Value-at-Risk)"),
@@ -152,7 +152,7 @@ def build(lang, H=None):
     abbreviation_frames(D, ABBR)
 
     # ------------------------------------------------------------------ 1. language models
-    D.section(t("From next-token prediction to large language models", "De la prezicerea următorului token la modelele lingvistice mari"))
+    D.section(t("Next-token prediction and large language models", "Prezicerea următorului token și modelele lingvistice mari"))
     D.frame(t("Text data in financial institutions", "Datele de tip text în instituțiile financiare"), it(
         (t("\\textbf{Markets}", "\\textbf{Piețe}"), t("news and social media move prices within minutes; sentiment is a signal",
                                                      "știrile și rețelele sociale mișcă prețurile în cîteva minute; sentimentul este un semnal")),
@@ -181,7 +181,7 @@ def build(lang, H=None):
                 "o perplexitate mai mică pe documentele proprii înseamnă că modelul „vorbește” limbajul domeniului."),
               cite="(Bishop \\& Bishop, 2024, ch.\\ 12)", tryit=NB + " \\S1", wl="0.62", wr="0.35")
     tk = N["tok"]
-    D.concept(t("Tokens are sub-words: byte-pair encoding", "Tokenii sînt fragmente de cuvinte: codificarea byte-pair"),
+    D.concept(t("Subword tokens and byte-pair encoding", "Tokenii ca fragmente de cuvinte: codificarea byte-pair"),
               t("frequent words are one token, rare words and numbers are split; the model never sees letters, only token indices.",
                 "cuvintele frecvente sînt un singur token, iar cele rare și numerele se împart; modelul nu vede litere, doar indici de tokeni."),
               "\\[ (a,b)^{*}=\\argmax_{(a,b)}\\ \\mathrm{count}(a\\,b)\\ \\Rightarrow\\ \\text{" + t("merge", "unește") + "}\\ a\\,b\\to ab \\]" +
@@ -225,7 +225,7 @@ def build(lang, H=None):
                t("at low temperature almost all mass sits on one continuation; at high temperature unlikely tokens become plausible.",
                  "la temperatură mică aproape toată masa de probabilitate stă pe o continuare; la temperatură mare, tokenii improbabili devin plauzibili."),
                None, "next_token", height="0.62\\textheight", tryit=NB + " \\S2")
-    D.concept(t("Scaling: bigger models predict text better, on a power law", "Scalarea: modelele mai mari prezic mai bine textul, după o lege de putere"),
+    D.concept(t("Scaling laws: prediction loss as a power law of model size", "Legile de scalare: pierderea ca funcție putere de dimensiunea modelului"),
               t("the loss falls as a power of the number of parameters and of training tokens.", "pierderea scade ca o putere a numărului de parametri și de tokeni de antrenare."),
               "\\[ \\loss(P,D)=E+\\frac{A}{P^{\\alpha}}+\\frac{B}{D^{\\beta}} \\]"
               "\\[ \\text{" + t("own estimate", "estimare proprie") + ":}\\ \\log\\loss=a+b\\log P,\\quad \\hat b=@{ppl_slope|.3f} \\]" +
@@ -257,7 +257,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 2. pre-training, instruction tuning, alignment
     D.section(t("Pre-training, instruction tuning and alignment", "Preantrenare, ajustare pe instrucțiuni și aliniere"))
-    D.frame(t("Three training stages turn a text predictor into an assistant", "Trei etape de antrenare transformă un predictor de text într-un asistent"),
+    D.frame(t("Three training stages of a language-model assistant", "Cele trei etape de antrenare ale unui asistent bazat pe un model de limbaj"),
             pipeline_tikz([(t("\\textbf{Pre-training}\\\\trillions of tokens\\\\next-token loss", "\\textbf{Preantrenare}\\\\trilioane de tokeni\\\\pierderea next-token"), "MainBlue"),
                            (t("\\textbf{Supervised fine-tuning}\\\\(prompt, answer) pairs", "\\textbf{Ajustare fină supervizată}\\\\perechi (prompt, răspuns)"), "Ser2"),
                            (t("\\textbf{Preferences}\\\\answer A better than B", "\\textbf{Preferințe}\\\\răspunsul A mai bun decît B"), "Ser3"),
@@ -266,7 +266,7 @@ def build(lang, H=None):
                  "\\textbf{Transformerul generativ preantrenat (GPT)}: doar etapa 1 dă un model care continuă textul, nu unul care răspunde."),
                t("\\textbf{Supervised fine-tuning (SFT)} teaches the format; \\textbf{reinforcement learning from human feedback (RLHF)} or "
                  "\\textbf{direct preference optimisation (DPO)} teaches which answers people prefer.",
-                 "\\textbf{Ajustarea fină supervizată (SFT)} învață formatul; \\textbf{învățarea prin recompensă din feedback uman (RLHF)} sau "
+                 "\\textbf{Ajustarea fină supervizată (SFT)} învață formatul; \\textbf{reinforcement learning from human feedback (RLHF)} sau "
                  "\\textbf{optimizarea directă a preferințelor (DPO)} învață ce răspunsuri preferă oamenii."),
                t("\\textbf{Qwen2.5-Instruct} (Qwen Team, 2024): 18 trillion pre-training tokens, then SFT and preference optimisation.",
                  "\\textbf{Qwen2.5-Instruct} (Qwen Team, 2024): 18 trilioane de tokeni la preantrenare, apoi SFT și optimizarea preferințelor."), sep="3pt"),
@@ -285,7 +285,7 @@ def build(lang, H=None):
               t("a bank adapts an open model to its own documents with LoRA on one graphics card, keeping data in-house.",
                 "o bancă își adaptează un model deschis la propriile documente cu LoRA, pe o singură placă grafică, fără ca datele să iasă din instituție."),
               cite="(Hu et al., 2022)")
-    D.concept(t("Alignment: from pairwise preferences to a reward, or directly to the policy", "Alinierea: din preferințe, prin recompensă sau direct"),
+    D.concept(t("Alignment: reward models and direct preference optimisation", "Alinierea: modele de recompensă și optimizarea directă a preferințelor"),
               t("people say which of two answers is better; the model is pushed towards preferred answers without drifting too far.",
                 "oamenii aleg răspunsul mai bun dintr-o pereche; modelul este împins spre răspunsurile preferate."),
               "\\[ \\Pr(y_w\\succ y_l\\mid x)=\\sigma\\big(r_\\phi(x,y_w)-r_\\phi(x,y_l)\\big) \\]"
@@ -334,7 +334,7 @@ def build(lang, H=None):
            (t("\\textbf{Rule of this lecture}", "\\textbf{Regula acestui curs}"),
             t("every prompt is a model: it is scored on a held-out test set", "fiecare prompt este un model: se evaluează pe un set de test separat")), sep="3pt"), "0.5", "0.47"),
             "small", cite="(Brown et al., 2020; Wei et al., 2022)")
-    D.concept(t("A prompt becomes a classifier through the probabilities of the label words", "Un prompt devine clasificator prin probabilitățile cuvintelor-etichetă"),
+    D.concept(t("A prompt as a classifier: probabilities of the label words", "Promptul ca clasificator: probabilitățile cuvintelor-etichetă"),
               t("read the probability of each label at the answer position: no text generation, no parsing, and a calibrated-looking score.",
                 "citim probabilitatea fiecărei etichete în poziția răspunsului: fără generare de text, fără interpretarea lui și cu un scor de tip probabilitate."),
               "\\[ \\hat p(c\\mid x)=\\frac{\\sum_{v\\in\\mathcal V_c}p_{\\btheta}(v\\mid \\mathrm{prompt}(x))}{\\sum_{c'}\\sum_{v\\in\\mathcal V_{c'}}p_{\\btheta}(v\\mid \\mathrm{prompt}(x))} \\]\\[ \\hat c=\\argmax_c\\hat p(c\\mid x) \\]" +
@@ -402,7 +402,7 @@ def build(lang, H=None):
                           "1,5B: @{fewshot.15B.0.mean|.1f}\\,\\% fără exemple, @{fewshot.15B.8.mean|.1f}\\,\\% cu 24; "
                           "3B: @{fewshot.3B.0.mean|.1f}\\,\\% și @{fewshot.3B.8.mean|.1f}\\,\\%; cu 12 exemple, rulările mută 3B între @{fewshot.3B.4.min|.1f} și @{fewshot.3B.4.max|.1f}\\,\\%.")],
                height="0.5\\textheight", tryit=NB + " \\S4")
-    D.figframe(t("Rewording the instruction moves the score: prompt sensitivity", "Reformularea instrucțiunii schimbă scorul: sensibilitatea la prompt"),
+    D.figframe(t("Prompt sensitivity: effect of rewording the instruction", "Sensibilitatea la prompt: efectul reformulării instrucțiunii"),
                t("five instructions with the same meaning, the same model and data: the spread is a source of model risk.",
                  "cinci instrucțiuni cu același sens, același model și aceleași date: diferențele sînt o sursă de risc de model."),
                None, "prompt_sensitivity",
@@ -414,7 +414,7 @@ def build(lang, H=None):
                      "alegeți promptul pe un set de validare și fixați-l, ca pe orice hiperparametru; niciodată pe setul de test."),
                height="0.5\\textheight", tryit=NB + " \\S4")
     cot = N["cot"]
-    D.concept(t("Chain-of-thought: let the model write its reasoning before the answer", "Chain-of-thought: modelul își scrie raționamentul înainte de răspuns"),
+    D.concept(t("Chain-of-thought: written reasoning before the answer", "Chain-of-thought: raționamentul scris înaintea răspunsului"),
               t("generated reasoning tokens become extra context for the final label.", "tokenii de raționament generați devin context suplimentar pentru eticheta finală."),
               "\\[ p(c\\mid x)=\\sum_{r}p(r\\mid x)\\,p(c\\mid x,r)\\ \\approx\\ p(c\\mid x,\\hat r) \\]" +
               "\\where{" + t("$r$ = reasoning text, $\\hat r$ = the greedy one (at most two sentences, on average @{cot.pb.mean_words|.1f} words); the label is parsed from ``Label: \\ldots''; "
@@ -428,7 +428,7 @@ def build(lang, H=None):
               t("chain-of-thought helps on multi-step reasoning; for one-word labels on short text, test before paying for it.",
                 "chain-of-thought ajută la raționamente în mai mulți pași; pentru etichete de un cuvînt pe texte scurte, testați înainte să plătiți pentru el."),
               cite="(Wei et al., 2022)", tryit=NB + " \\S5")
-    D.frame(t("What the model wrote: one chain-of-thought answer", "Ce a scris modelul: un răspuns chain-of-thought"), it(
+    D.frame(t("An example of a chain-of-thought answer", "Un exemplu de răspuns chain-of-thought"), it(
         (t("\\textbf{Input} (PhraseBank test set)", "\\textbf{Intrare} (setul de test PhraseBank)"), "``" + esc(cot["pb"]["example_text"]) + "''"),
         (t("\\textbf{Output} of Qwen2.5-3B-Instruct, temperature 0", "\\textbf{Ieșirea} modelului Qwen2.5-3B-Instruct, temperatura 0"), "``" + esc(cot["pb"]["example_out"]) + "''"),
         (t("\\textbf{How to read it}", "\\textbf{Cum se citește}"),
@@ -459,7 +459,7 @@ def build(lang, H=None):
     labs = [t("positive", "pozitiv"), t("negative", "negativ"), t("neutral", "neutru")]
     hi = max(max(r) for r in cm)
     from nn_build import seq
-    D.frame(t("Where the best prompt errs: the confusion matrix", "Unde greșește cel mai bun prompt: matricea de confuzie"),
+    D.frame(t("Confusion matrix of the best prompt", "Matricea de confuzie a celui mai bun prompt"),
             cols(table("@{}lrrr@{}", [t("True \\textbackslash{} predicted", "Real \\textbackslash{} prezis")] + labs,
                        [[labs[i]] + [seq(cm[i][j], hi, shown=str(cm[i][j])) for j in range(3)] for i in range(3)]),
                  it(t("\\textbf{Model}: " + MN[N["confusion"]["model"]] + ", PhraseBank test set.", "\\textbf{Modelul}: " + MN[N["confusion"]["model"]] + ", setul de test PhraseBank."),
@@ -479,7 +479,7 @@ def build(lang, H=None):
                job=t("with labels, train a small model; without labels, prompt an LLM; for millions of documents, the cost decides.",
                      "dacă aveți etichete, antrenați un model mic; fără etichete, folosiți un prompt; pentru milioane de documente, costul decide."),
                height="0.5\\textheight", tryit=NB + " \\S6")
-    D.concept(t("LLM embeddings plus a small classifier: the cheapest form of fine-tuning", "Embedding LLM plus un clasificator mic: cea mai ieftină formă de ajustare fină"),
+    D.concept(t("LLM embeddings with a small classifier as a low-cost alternative to fine-tuning", "Embedding-uri LLM cu un clasificator mic, ca alternativă ieftină la ajustarea fină"),
               t("freeze the language model, average its last hidden states, and fit a logistic regression on top.",
                 "fixăm modelul de limbaj, facem media ultimelor stări ascunse și estimăm deasupra o regresie logistică."),
               "\\[ \\mathbf e(x)=\\frac{1}{|x|}\\sum_{t=1}^{|x|}\\mathbf h^{(L)}_t,\\qquad \\hat p(c\\mid x)=\\softmax\\big(\\mathbf W\\mathbf e(x)+\\mathbf b\\big)_c \\]" +
@@ -496,7 +496,7 @@ def build(lang, H=None):
     # ------------------------------------------------------------------ 4. RAG
     rg = N["rag"]
     D.section(t("Retrieval-augmented generation on ECB speeches", "Generare augmentată prin regăsire pe discursurile BCE"))
-    D.frame(t("RAG: retrieve the right documents, then let the model answer from them", "RAG: regăsim documentele potrivite, apoi modelul răspunde pe baza lor"),
+    D.frame(t("RAG: document retrieval followed by answer generation", "RAG: regăsirea documentelor, urmată de generarea răspunsului"),
             pipeline_tikz([(t("\\textbf{Question}", "\\textbf{Întrebare}"), "MainBlue"),
                            (t("\\textbf{Retriever}\\\\BM25 + dense\\\\top-$k$ chunks", "\\textbf{Regăsire}\\\\BM25 + dense\\\\primele $k$ fragmente"), "Ser3"),
                            (t("\\textbf{Prompt}\\\\documents + question", "\\textbf{Prompt}\\\\documente + întrebare"), "Ser2"),
@@ -519,7 +519,7 @@ def build(lang, H=None):
               t("the answer cannot be better than what is retrieved: evaluate the retriever on its own first.",
                 "răspunsul nu poate fi mai bun decît ce s-a regăsit: evaluați întîi separat modulul de regăsire."),
               cite="(Robertson \\& Zaragoza, 2009; Xiao et al., 2023)", tryit=NB + " \\S7", wl="0.64", wr="0.33")
-    D.figframe(t("Finding the right speech from its title", "Găsirea discursului corect după titlu"),
+    D.figframe(t("Retrieval of the correct speech from its title", "Regăsirea discursului corect după titlu"),
                t("recall@k = share of the @{rag.n_speeches} titles whose speech is among the top $k$ results.",
                  "recall@k = ponderea celor @{rag.n_speeches} de titluri pentru care discursul se află printre primele $k$ rezultate."),
                None, "rag_recall",

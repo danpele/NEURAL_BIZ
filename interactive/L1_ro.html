@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L1.js?v=20261109m">
+<link rel="preload" as="script" href="L1.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L1_data.js?v=20261109m", "L1_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L1.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L1_data.js?v=20261109n", "L1_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L1.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,12 +53,12 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Nu este nevoie de formule: modificați ponderile, numărul de neuroni ascunși sau pragul și urmăriți ce se schimbă.</p>
-<p class="toc"><a href="#s-neuron">De la un neuron la perceptronul multistrat</a> · <a href="#s-eval">De la scoruri la decizii de creditare</a></p>
-<h2 class="sec" id="s-neuron">De la un neuron la perceptronul multistrat</h2>
+<p class="toc"><a href="#s-neuron">Neuronul individual și perceptronul multistrat</a> · <a href="#s-eval">Decizii de creditare pe baza scorurilor modelului</a></p>
+<h2 class="sec" id="s-neuron">Neuronul individual și perceptronul multistrat</h2>
 <section class="blk" id="one-neuron">
-  <h3>Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus</h3>
+  <h3>Frontiera de decizie neliniară a unui MLP cu două intrări</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L1_boundary_hmeq_ro.jpg" alt="Slide-ul 31: Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L1/lecture1_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L1_boundary_hmeq_ro.jpg" alt="Slide-ul 31: Frontiera de decizie neliniară a unui MLP cu două intrări" loading="lazy"></a>
       <figcaption>Slide-ul 31</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="nb-m">Modelul</label><select id="nb-m"><option value="n" selected>Un neuron, ponderile dvs.</option><option value="mlp">MLP 64-64 antrenat</option></select></div><div class="ctl"><label for="nb-w1">Ponderea pentru datorii/venit, w₁: <b id="nb-w1-v"></b></label><input type="range" id="nb-w1" min="-3" max="3" step="0.05" value="0.6"></div><div class="ctl"><label for="nb-w2">Ponderea pentru vechimea celei mai vechi linii de credit, w₂: <b id="nb-w2-v"></b></label><input type="range" id="nb-w2" min="-3" max="3" step="0.05" value="-0.5"></div><div class="ctl"><label for="nb-b">Termenul liber (bias), b: <b id="nb-b-v"></b></label><input type="range" id="nb-b" min="-5" max="1" step="0.05" value="-2.45"></div><div class="ctl"><label for="nb-t">Pragul: semnalăm creditul dacă probabilitatea ≥: <b id="nb-t-v"></b></label><input type="range" id="nb-t" min="0.05" max="0.6" step="0.01" value="0.2"></div><div class="ctl"><button class="btn" id="nb-fit" type="button">Ponderile estimate (regresia logistică)</button></div></div><div class="charts one"><div class="chart" id="nb-chart"></div></div><ul class="out" id="nb-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_boundary_hmeq" target="_blank" rel="noopener">NN_L1_boundary_hmeq</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L1/NN_L1_boundary_hmeq/NN_L1_boundary_hmeq.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -84,7 +84,7 @@
   </div>
   <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Pe HMEQ, de cîți neuroni ascunși are nevoie un MLP cu un strat ascuns ca să depășească regresia logistică la AUC pe test?</div>
   <details><summary>Răspuns</summary><p>Un singur neuron ascuns (AUC 0,901) este o regresie logistică cu o comprimare în plus și este mai slab decît modelul logistic (0,920); între 4 și 8 neuroni, MLP îl depășește (0,923, 0,931), iar cîștigul se aplatizează peste 32 de neuroni (de la 0,946 la 0,953 pentru 256). Gradient boosting (XGBoost, 0,961) rămîne înainte pe acest set tabular mic, cu mult mai puține alegeri de reglaj. Sinteza dă numărul de parametri: 7.681 pentru H = 256, față de 29 pentru regresia logistică.</p></details>
-</section><h2 class="sec" id="s-eval">De la scoruri la decizii de creditare</h2>
+</section><h2 class="sec" id="s-eval">Decizii de creditare pe baza scorurilor modelului</h2>
 <section class="blk" id="roc-threshold">
   <h3>La 10 % alarme false, MLP detectează mai multe neplăți decît scorul logistic</h3>
   <div class="pair">

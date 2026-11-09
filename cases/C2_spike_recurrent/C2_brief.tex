@@ -16,7 +16,7 @@ The data team proposes a recurrent neural network that ``reads'' the last two we
 Echipa de analiză propune o rețea neuronală recurentă care „citește” ultimele două săptămîni ale pieței, oră cu oră, asemenea unui comerciant cu experiență. Managerul trebuie să decidă \textbf{dacă rețeaua aduce un cîștig față de arborii de decizie construiți secvențial, deja folosiți în cercetare}, și \textbf{dacă alertele ei pot fi explicate} consiliului de administrație înainte de a se acționa pe baza lor.}
 \end{scenario}
 
-\section{\T{What the paper did}{Lucrarea de referință}}
+\section{\T{The reference paper}{Lucrarea de referință}}
 \textbf{\T{Question.}{Întrebarea de cercetare.}} \T{Can explainable artificial intelligence (XAI) identify the drivers of price spikes in the Romanian day-ahead market; is the residual load forecast a primary predictor; and can an operational early-warning system be built from interpretable balance indicators (p.~4821)?}%
 {Poate inteligența artificială explicabilă (XAI, \emph{explainable artificial intelligence}) să identifice factorii vîrfurilor de preț de pe piața pentru ziua următoare din România? Este prognoza consumului rezidual una dintre principalele variabile explicative? Se poate construi un sistem operațional de avertizare timpurie pe baza unor indicatori de echilibru ușor de interpretat (p.~4821)?}
 
@@ -42,7 +42,7 @@ un scor de avertizare timpurie care combină praguri ale unor indicatori, ponder
 {\footnotesize\color{FooterGray}\T{Related work of our group: Andrei, Pele \& Cramer (2026), \emph{Multi-horizon explainability in energy price forecasting}, PICBE 20(1), 104--117, \href{https://doi.org/10.2478/picbe-2026-0014}{doi:10.2478/picbe-2026-0014}: on Romanian hourly data 2018--2024, short-term features (6--24 hours) carry 41\,\% of the horizon-attributed SHAP contribution and price momentum becomes 4.25 times more important in high-price regimes (abstract) --- the question of \emph{how far back} the market's memory reaches, which our recurrent network answers with integrated gradients.}%
 {O lucrare înrudită a grupului nostru: Andrei, Pele și Cramer (2026), \emph{Multi-horizon explainability in energy price forecasting}, PICBE 20(1), 104--117, \href{https://doi.org/10.2478/picbe-2026-0014}{doi:10.2478/picbe-2026-0014}: pe datele orare din România, 2018--2024, variabilele pe termen scurt (6--24 de ore) concentrează 41\,\% din contribuția SHAP atribuită orizonturilor, iar inerția prețului devine de 4,25 ori mai importantă în regimurile de preț ridicat (rezumat) --- adică întrebarea \emph{cît de departe} în trecut ajunge memoria pieței, la care rețeaua noastră recurentă răspunde cu gradienții integrați.}}
 
-\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\section{\T{The method}{Metoda}}
 \begin{intuition}
 \T{Spikes happen when the system is tight, and tightness builds over days: an expensive evening yesterday, a week of weak wind, low hydro.
 Gradient-boosted trees see the past only through features someone chose (``price 24 hours ago'', ``price one week ago''). A recurrent network reads the raw hourly history in order and keeps a memory of what it has seen, so it can discover such patterns itself.
@@ -92,7 +92,7 @@ Dacă reacția costă $C$ pe MWh, iar un vîrf neacoperit costă $L$ pe MWh, rea
 {Comparați rețeaua cu arborii din lucrare și cu o regulă naivă, pe aceleași ore și pe mai multe inițializări aleatoare, înainte de a plăti pentru complexitate; cereți pentru fiecare alertă o explicație în timp; stabiliți pragul de reacție din propriile costuri ($C/L$).}
 \end{decision}
 
-\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\section{\T{Replication on the course data}{Replicarea pe datele cursului}}
 \T{Notebook \texttt{C2\_notebook\_EN.ipynb}: hourly Romanian day-ahead prices, load and generation by source (energy-charts.info), on a grid of CET delivery days. Training 2023--2024 (\NnTrainDays\ days), validation January--June 2025, test July 2025 -- October 2026 (\NnTestDays\ days, \NnTest\ hours scored by every model).
 Spike threshold \Nthr\ EUR/MWh (P90 of training; paper: 149.99). Spike share: \NspikeTrain\,\% in training, \NspikeVal\,\% in validation, \NspikeTest\,\% in the test period.
 Classroom implementation: our data contain no day-ahead forecasts of load, solar and wind, so all models use the realised values of day $d-2$, the last metered day at gate closure; no weather or fuel prices; about 20 features instead of 70; a longer sample with a different market regime. The LSTM and GRU networks (48 units, 14-day window) are the course's addition to the paper.}%
@@ -181,7 +181,7 @@ Reacționînd la acest prag cu 1 MW de consum flexibil, s-ar fi economisit în p
 (v) Calculul cost--pierdere presupune că, de fiecare dată, consumul flexibil poate fi mutat și ignoră efectul acestei mutări asupra prețului.}
 
 \newpage
-\section*{\T{Case 2 at a glance}{Studiul de caz 2 pe scurt}}
+\section*{\T{Summary of case 2}{Studiul de caz 2 pe scurt}}
 \glance{\T{Will tomorrow have price spikes, why, and is a recurrent network worth it?}{Vor exista mîine vîrfuri de preț, de ce și merită o rețea recurentă?}}%
 {\T{Hourly RO prices, load and generation, 2023--Oct 2026; spike = price above P90 of training.}{Prețuri orare RO, consum și producție, 2023--oct.\ 2026; vîrf = preț peste percentila 90 din antrenare.}}%
 {\T{XGBoost + SHAP (paper); LSTM and GRU on 14 days of hourly history; integrated gradients; cost--loss rule.}{XGBoost + SHAP (lucrarea); LSTM și GRU pe 14 zile de istoric orar; gradienți integrați; regula cost--pierdere.}}%

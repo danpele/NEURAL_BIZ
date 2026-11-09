@@ -16,7 +16,7 @@ The decisions are: \textbf{which model} to deploy (a simple logistic regression,
 Deciziile sînt: \textbf{ce model} se folosește (o regresie logistică simplă, arbori de decizie construiți secvențial sau o rețea neuronală), \textbf{cum este explicat} și \textbf{cînd se emite o alertă}.}
 \end{scenario}
 
-\section{\T{What the paper did}{Lucrarea de referință}}
+\section{\T{The reference paper}{Lucrarea de referință}}
 \textbf{\T{Question.}{Întrebarea de cercetare.}} \T{How do tabular models and graph models differ, not only in accuracy but in what they can explain about fraud, and how can feature-level and network-level explanations be combined into one framework (p.~119, 121)?}%
 {Cum diferă modelele tabelare de modelele pe grafuri, nu doar prin acuratețe, ci și prin ceea ce pot explica despre fraudă, și cum pot fi combinate explicațiile la nivelul variabilelor cu cele la nivelul rețelei într-un singur cadru (p.~119, 121)?}
 
@@ -44,7 +44,7 @@ Performanța este raportată prin ROC-AUC, precizie, sensibilitate și scorul F1
 {Concluzia: detectarea explicabilă a fraudei trebuie să combine mai multe tipuri de modele, modelele de tip \emph{boosting} pentru riscul la nivelul variabilelor și modelele pe grafuri pentru structura relațională a fraudei (p.~131).}
 \end{itemize}
 
-\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\section{\T{The method}{Metoda}}
 \begin{intuition}
 \T{A fraud model ranks payments by risk; an explanation tells the analyst which characteristics of a payment pushed it up the list.
 If two very different models, trees and a neural network, point to the same characteristics, the explanation is about the \emph{data}, not about one model's quirks.
@@ -83,7 +83,7 @@ Importanța globală este media lui $|\phi_j|$; concordanța dintre două modele
 {Ordonați plățile cu ajutorul modelului, explicați primele cazuri din listă cu SHAP, verificați că un al doilea model indică aceleași variabile și stabiliți regula de alertă pe baza propriului cost de verificare și a sumei expuse riscului, nu pe baza unei probabilități fixe de 0,5.}
 \end{decision}
 
-\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\section{\T{Replication on the course data}{Replicarea pe datele cursului}}
 \T{Notebook \texttt{C1\_notebook\_EN.ipynb}: the credit-card fraud data of the course (Worldline and the Machine Learning Group of ULB, Université Libre de Bruxelles; European cardholders, two days of September 2013): all \NnFraud\ frauds and a 10\,\% sample of the legitimate payments, \NnRows\ rows.
 The 29 inputs are the 28 principal components V1--V28 released by the data owner and $\log(1+\text{amount})$. The rows are split \emph{in time order}: training (first 60\,\%, \NnTrainFraud\ frauds), validation (next 20\,\%, \NnValFraud\ frauds, used for early stopping), test (last \NhoursTest\ hours, \NnTestFraud\ frauds among about \NpopTest\ payments, fraud rate \NrateTest\,\%).
 Every model is trained with five seeds (0--4). The graph layer of the paper needs entity keys (devices, addresses, e-mail domains) that these data do not contain; Case~3 applies graph models to a transaction graph.}%
@@ -186,7 +186,7 @@ Cel mai bun prag fix, găsit ulterior pe datele de test (\NbestFixedThr), ar da 
 (iii) În lipsa cheilor entităților, nivelul de graf din lucrare (GraphSAGE, eliminarea muchiilor și a vecinilor) este înlocuit cu eliminarea variabilelor. (iv) Regula de cost folosește suma tranzacției drept pierdere și un cost fix al verificării; rambursările, recuperările și pierderea clienților nu sînt modelate.}
 
 \newpage
-\section*{\T{Case 1 at a glance}{Studiul de caz 1 pe scurt}}
+\section*{\T{Summary of case 1}{Studiul de caz 1 pe scurt}}
 \glance{\T{Which fraud model, which explanation, and when to raise an alert?}{Ce model antifraudă, ce explicație și cînd se emite o alertă?}}%
 {\T{ULB card payments, September 2013; \NnFraud\ frauds; time-ordered split.}{Plăți cu carduri ULB, septembrie 2013; \NnFraud\ de fraude; împărțire cronologică.}}%
 {\T{Logistic regression, XGBoost, MLP (5 seeds); SHAP; ablation; cost rule.}{Regresie logistică, XGBoost, MLP (5 rulări); SHAP; eliminarea variabilelor; regula de cost.}}%

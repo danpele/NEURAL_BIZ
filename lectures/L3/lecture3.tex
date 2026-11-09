@@ -131,7 +131,7 @@ XGBoost & extreme gradient boosting\\\end{tabular}}\end{column}
 
 \section{Penalties on the weights}
 
-\begin{frame}{Weight decay = an L2 penalty = a Gaussian prior on the weights}
+\begin{frame}{Weight decay as an L2 penalty and as a Gaussian prior on the weights}
 \small
 \intuition{large weights make the function steep and sensitive to noise; shrinking them makes it smoother.}
 \[ \tilde\loss(\vw)=\loss(\vw)+\frac\lambda2\|\vw\|_2^2\ \Rightarrow\ \vw_{t+1}=(1-\eta\lambda)\,\vw_t-\eta\nabla\loss(\vw_t);\qquad \vw\sim\mathcal N(\mathbf 0,\lambda^{-1}\mathbf I)\Rightarrow\hat\vw_{\mathrm{MAP}}=\argmin\tilde\loss \]
@@ -173,7 +173,7 @@ XGBoost & extreme gradient boosting\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Tibshirani, 1996)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{L1 piles the first-layer weights at zero, L2 only shrinks them}
+\begin{frame}{First-layer weights under L1 and L2 penalties}
 \small
 \intuition{MLP with 64 hidden units on German credit, full-batch Adam, penalty on the first layer only.}
 \begin{center}\includegraphics[width=\textwidth,height=0.397\textheight,keepaspectratio]{charts/en/l1_l2_weights.pdf}\end{center}\vspace{-3mm}
@@ -457,7 +457,7 @@ Target in the inputs & `days past due' used to predict default & keep only infor
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Saito \& Rehmsmeier, 2015)}\hfill\tryit{notebook \S9}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{On the test hours, early stopping is the regulariser that clearly helps}
+\begin{frame}{On the test hours, early stopping is the regulariser with the clearest gain}
 \small
 \intuition{MLP 256-256, time-ordered split, 5 seeds per configuration; precision weighted to the population.}
 \begin{center}\includegraphics[width=\textwidth,height=0.388\textheight,keepaspectratio]{charts/en/reg_ablation.pdf}\end{center}\vspace{-3mm}
@@ -507,7 +507,7 @@ Target in the inputs & `days past due' used to predict default & keep only infor
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Dal Pozzolo et al., 2015)}\hfill\tryit{notebook \S10}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The right number of alerts saves most of the fraud losses}
+\begin{frame}{Number of alerts and the share of fraud losses avoided}
 \small
 \intuition{a missed fraud costs its amount; each alert costs a review of 5 euro (EUR), a constant chosen a priori.}
 \begin{center}\includegraphics[width=\textwidth,height=0.401\textheight,keepaspectratio]{charts/en/fraud_cost.pdf}\end{center}\vspace{-3mm}
@@ -756,7 +756,7 @@ Smaller model & fewer parameters & width, depth & logistic beats MLP on German c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~9)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Appendix: weight decay and L2 coincide for SGD, not for Adam}
+\begin{frame}{Appendix: weight decay and the L2 penalty under SGD and under Adam}
 \small
 \[ \text{SGD:}\ \vw-\eta\nabla\big(\loss+\tfrac\lambda2\|\vw\|^2\big)=(1-\eta\lambda)\vw-\eta\nabla\loss \]
 \[ \text{Adam+L2:}\ \ \vw-\eta\,\frac{\hat m(\nabla\loss+\lambda\vw)}{\sqrt{\hat v}+\epsilon}\qquad\text{vs.}\qquad \text{AdamW:}\ \ (1-\eta\lambda)\vw-\eta\,\frac{\hat m(\nabla\loss)}{\sqrt{\hat v}+\epsilon} \]

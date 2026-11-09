@@ -15,7 +15,7 @@ This lecture builds the three classic GNN layers, the graph convolutional networ
 - **Train** them on the Elliptic graph in time order, against strong non-graph benchmarks.
 - **Judge** the results with precision, recall, the area under the precision-recall curve (PR-AUC), alert budgets, drift and the stability of explanations.
 
-# Why graphs for financial crime
+# Graphs in the detection of financial crime
 
 The Elliptic graph shows what a transaction network looks like and why the neighbours carry information.
 
@@ -45,7 +45,7 @@ Labelled transactions per time step, licit and illicit; the dashed line ends the
 
 @practice a model is judged on the months after its training data, exactly as it will be used.
 
-## Most transactions touch one or two others; a few are hubs {h=338ac264}
+## Degree distribution of the transaction graph {h=dc2c73ab}
 
 The graph is sparse: the mean degree is 2.30, the median 2, and 34.5 % of the nodes have a single neighbour. The tail is heavy: the largest hub has 473 neighbours. A GNN must not let such hubs drown everyone else, hence the degree normalisation of the next section.
 
@@ -69,7 +69,7 @@ Fraud graphs are sparse, heavy-tailed, labelled in waves and homophilous: neighb
 
 Adjacency, degree and the Laplacian turn a graph into linear algebra.
 
-## The adjacency matrix turns a graph into linear algebra {h=3c0647d4}
+## The adjacency matrix as an algebraic representation of the graph {h=f4dea651}
 
 $A_{uv}=1$ if $(u,v)$ is an edge and 0 otherwise; $D=\operatorname{diag}(\sum_vA_{uv})$ is the degree matrix. Adding self-loops and normalising symmetrically gives
 
@@ -77,7 +77,7 @@ $$ \tilde A=A+I,\qquad \hat A=\tilde D^{-1/2}\tilde A\,\tilde D^{-1/2}, $$ {#eq:
 
 whose entries are $1/\sqrt{\tilde d_u\tilde d_v}$. The matrix $A$ has about $4\cdot10^{10}$ cells but only 234,355 edges, so libraries such as PyTorch Geometric (PyG) store an edge list. Without normalisation, a hub of degree 473 would add 473 messages and explode the scale.
 
-## A graph model must not depend on how we number the nodes {h=c83c5a3d}
+## Permutation invariance and equivariance of graph models {h=5d1c7a8d}
 
 For every permutation matrix $P$, a node-level model must satisfy $f(P\mathbf X,PAP^\top)=Pf(\mathbf X,A)$ (equivariance) and a graph-level model $g(P\mathbf X,PAP^\top)=g(\mathbf X,A)$ (invariance). A multilayer perceptron (MLP) on the rows of $A$ would change with the numbering; a convolutional neural network (CNN) assumes a grid with a fixed number of ordered neighbours, while a transaction has between 1 and hundreds of neighbours in no order.
 
@@ -87,7 +87,7 @@ For every permutation matrix $P$, a node-level model must satisfy $f(P\mathbf X,
 
 The Laplacian $L=D-A$ measures how much a node signal differs between neighbours: $\mathbf x^\top L\mathbf x=\sum_{(u,v)\in\mathcal E}(x_u-x_v)^2$. Its eigenvectors $U$ define a graph Fourier transform, $\hat{\mathbf x}=U^\top\mathbf x$, and a spectral filter is $U g_\theta(\Lambda)U^\top\mathbf x$. That is costly, but a first-order polynomial in $L$ leads directly to the normalised adjacency of @eq:ahat (derivation in Appendix A of the slides). On homophilous fraud graphs the signal is smooth, so averaging over neighbours removes noise, not information.
 
-## Node, edge or graph: three prediction tasks {h=a6d0b28c}
+## Three prediction tasks: node, edge and graph level {h=0ea8b071}
 
 The same layers serve three questions; only the read-out changes. Node: is this transaction illicit (this lecture)? Edge: is this payment a transfer through a mule account? Graph: is this cluster of accounts a laundering ring, is this interbank network fragile? A sum over node representations makes a graph-level output independent of the numbering.
 
@@ -101,7 +101,7 @@ A GNN works with the normalised adjacency and must be permutation-equivariant; t
 
 Every GNN layer collects messages from the neighbours, aggregates them and updates the node.
 
-## A GNN layer: collect messages, aggregate, update {h=629e677e}
+## A GNN layer: message, aggregation and update functions {h=ceba5a26}
 
 A message-passing neural network (MPNN) computes, for each node $v$ and layer $l$,
 
@@ -122,7 +122,7 @@ An $L$-layer network sees the $L$-hop neighbourhood. For 2,000 test transactions
 @chart receptive_field
 Number of nodes within $k$ hops of a test transaction, median and 90th percentile.
 
-## Too many layers make all nodes look alike: over-smoothing {h=d496dee6}
+## Over-smoothing in deep graph networks {h=bd2b3232}
 
 Repeated degree-weighted averaging drives all representations towards a common vector. On Elliptic the test PR-AUC is 0.504 with one GCN layer, 0.458 with two and 0.371 with six; the best depth is 1. Over the same range the mean cosine similarity of node representations rises from 0.57 to 0.96.
 
@@ -139,7 +139,7 @@ Message passing = message, aggregation, update; depth = hops, and too much depth
 
 Three choices of message, aggregation and update, from fixed degree weights to learned attention.
 
-## GCN: average the neighbours with degree weights, then regress {h=bd1cdec8}
+## GCN: degree-weighted average of the neighbours followed by a linear map {h=89071f64}
 
 A GCN layer is
 
@@ -153,7 +153,7 @@ a linear regression on the normalised average of a node and its neighbours, foll
 
 GraphSAGE uses separate weights for the node and for the mean of a sample $\mathcal S(v)$ of its neighbours: $\mathbf h_v^{(l+1)}=\mathrm{ReLU}\big(W_1\mathbf h_v^{(l)}+W_2\,\mathrm{mean}_{u\in\mathcal S(v)}\mathbf h_u^{(l)}\big)$. The weights do not depend on the graph, so tomorrow's transactions get a score without retraining (inductive learning), and sampling bounds the cost per node. On Elliptic its illicit-class F1 is 0.564 (standard deviation 0.022) and its PR-AUC 0.582.
 
-## GAT: let the network decide which neighbour matters {h=4dbc9a59}
+## GAT: learned attention weights over the neighbours {h=798a3aad}
 
 A graph attention layer weights each neighbour by a learned score,
 
@@ -179,7 +179,7 @@ Eight models on the same temporal test, judged like an investigation team would 
 
 The models are a logistic regression on the 93 local features and on all 165 features; a random forest with 100 trees and 50 features per split, as in Weber et al. (2019); an MLP with the same layers as the GCN but no messages, which isolates the value of the edges; GCN, GraphSAGE and GAT; and a random forest on the features plus the 100 hidden GCN outputs. Precision, recall and F1 of the illicit class are measured at threshold 0.5 on steps 35–49, together with the threshold-free PR-AUC; each network and forest is run with 3 seeds.
 
-## On Elliptic the forest leads; graph layers mainly add ranking power to a network {h=0705d44e}
+## Results on Elliptic: the random forest and the contribution of graph layers {h=aa19aa42}
 
 The illicit-class F1 is 0.808 for the random forest, 0.778 for the forest with GCN embeddings, 0.447 for the GCN, 0.498 for the MLP and 0.343 for the logistic regression. With the same layers, the edges change the PR-AUC of the network by +8.1 points (GCN against MLP), while its F1 at the 0.5 threshold is lower than the MLP's; GraphSAGE, which keeps the node apart from its neighbours, is the best graph network, with F1 0.564.
 
@@ -192,7 +192,7 @@ Precision is the share of alerts that are illicit; recall is the share of illici
 
 @practice the right model depends on what an error costs: a missed laundering case or an analyst's wasted hour.
 
-## Precision-recall curves: the ranking behind the F1 {h=91bc601e}
+## Precision-recall curves of the models {h=b3cb7157}
 
 The PR-AUC is 0.782 for the random forest, 0.763 for the forest with GCN embeddings, 0.442 for the GCN and 0.311 for the logistic regression; a random score would give 6.50 %, the share of illicit among the labelled test transactions.
 
@@ -205,7 +205,7 @@ Resampling the test transactions 1,000 times, with the same draw for both models
 
 @practice report the interval, not only the winner: a fraud committee decides on ranges, not on the third decimal.
 
-## Why the forest performs well here: its features already pass messages {h=ea47d18b}
+## Neighbourhood aggregates in the features and the performance of the random forest {h=dd9e08a4}
 
 72 of the 165 features are aggregates over the one-hop neighbours (maxima, minima, standard deviations, correlations): one fixed GNN layer computed by Elliptic before release. A logistic regression on the local features alone reaches an F1 of 0.329, against 0.343 with the aggregates. Trees also fit rule-like fraud patterns well. GNNs earn their keep on raw graphs without engineered aggregates, on multi-hop patterns and in inductive scoring; combining both, the forest with GCN representations changes the F1 by −3.0 points.
 
@@ -220,7 +220,7 @@ Illicit-class F1 per test time step for four models.
 
 @practice monitor F1 per period and retrain on recent labels; a static AML model ages within weeks.
 
-## What an investigation team gets from 1,000 alerts {h=78923679}
+## Illicit transactions found among the top 1,000 alerts {h=5e8fedaf}
 
 If the team reviews the 1,000 highest scores of the test period, it finds 72.9 % of all illicit transactions with the random forest, 44.8 % with the GCN and 72.9 % with the forest plus GCN representations; the hit rate of those alerts is 78.9 % for the forest and 48.5 % for the GCN, out of 1,083 illicit test transactions.
 
@@ -229,14 +229,14 @@ Share of the illicit test transactions found among the highest scores, by number
 
 @practice size the team from this curve: the alert budget, not the F1, is the constraint in a compliance department.
 
-## The GCN learns a space where illicit transactions gather {h=2f150581}
+## Illicit transactions cluster in the GCN embedding space {h=bb31300e}
 
 Projecting the 100-dimensional hidden layer of the GCN on its first two principal components (principal component analysis, PCA), which explain 79.2 % of the variance, shows the illicit test transactions gathering in a region of their own. These vectors are the inputs of the forest-plus-GCN model and can feed any other risk model.
 
 @chart gcn_embeddings
 Hidden GCN representations of test transactions, first two principal components.
 
-## Adding graph features reshuffles the explanations {h=04306e50}
+## Effect of graph features on the explanations {h=df0a0c48}
 
 The 10 most important features of the random forest carry 58.2 % of its impurity importance; once the GCN representations are added, the same features keep 7.4 % and the representations take 73.9 %. Across 3 refits, the mean Spearman correlation of the importances is 0.973 for the forest and 0.896 for the forest with GCN representations. Part of the change comes from adding inputs at all, and part from retraining: both must be accounted for before reading a change of model as a change of explanation.
 

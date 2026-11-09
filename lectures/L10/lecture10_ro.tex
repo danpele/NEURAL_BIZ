@@ -3,7 +3,7 @@
 \input{../common/nn_preamble}
 \usepackage[romanian]{babel}
 \nnromanian
-\nnlecture{10}{Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor}
+\nnlecture{10}{Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor}
 \begin{document}
 {\setbeamertemplate{headline}{}\setbeamertemplate{footline}{}
 \begin{frame}\titlepage\end{frame}}
@@ -16,7 +16,7 @@
   \item Să rezolvați exact un MDP de mici dimensiuni cu ecuația Bellman și programarea dinamică (DP) și să interpretați funcția de valoare.
   \item Să antrenați agenți bazați pe valoare (Q-learning tabelar, o rețea Q profundă (DQN)) și un agent cu gradient de politică (optimizarea proximală a politicii (PPO)) pe prețuri reale, cu mai multe valori inițiale și un reper corect.
   \item Să acoperiți riscul unei opțiuni cu o politică neuronală care minimizează pierderea așteptată în coada distribuției (ES) și să o comparați cu delta Black-Scholes.
-  \item Să judecați cînd învățarea prin întărire (RL) aduce valoare într-o afacere și cînd ajunge o regulă simplă.
+  \item Să judecați cînd reinforcement learning (RL) aduce valoare într-o afacere și cînd ajunge o regulă simplă.
 \end{itemize}
 \end{frame}
 
@@ -50,7 +50,7 @@ MW & megawatt\\
 MWh & megawatt-oră\\
 PPO & optimizarea proximală a politicii (proximal policy optimisation)\\
 ReLU & unitate liniară rectificată\\
-RL & învățare prin întărire (reinforcement learning)\\
+RL & reinforcement learning\\
 RO & România (zonă de ofertare)\\
 SSRN & Social Science Research Network\\
 TD & diferență temporală\\
@@ -89,7 +89,7 @@ Acoperirea opțiunii & Traiectorii S\&P 500 de 21 de zile, VIX ca volatilitate i
 
 \section{Decizii secvențiale în afaceri}
 
-\begin{frame}{Învățarea prin întărire și învățarea supervizată}
+\begin{frame}{Reinforcement learning și învățarea supervizată}
 \footnotesize
 \intuition{învățarea supervizată prognozează o etichetă; RL alege acțiuni cu efecte întîrziate, care depind de deciziile anterioare.}
 \begin{columns}[T,onlytextwidth]
@@ -100,7 +100,7 @@ Acoperirea opțiunii & Traiectorii S\&P 500 de 21 de zile, VIX ca volatilitate i
       \item Date $(\vx_i, y_i)$, pierderea $\loss(\hat y_i, y_i)$ cunoscută pentru fiecare exemplu
       \item Prognoza nu schimbă exemplul următor
     \end{itemize}
-  \item \textbf{Prin întărire}
+  \item \textbf{Reinforcement learning}
     \begin{itemize}\setlength{\itemsep}{0pt}
       \item Agentul vede o stare $s_t$, acționează $a_t$, primește o recompensă $r_{t+1}$
       \item Acțiunea schimbă starea următoare (o baterie plină nu se mai încarcă)
@@ -141,7 +141,7 @@ Acoperirea opțiunii & Traiectorii S\&P 500 de 21 de zile, VIX ca volatilitate i
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Sutton \& Barto, 2018, ch.\ 3)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Trei aplicații economice ale învățării prin întărire}
+\begin{frame}{Trei aplicații economice ale reinforcement learning}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.14\textwidth}p{0.27\textwidth}p{0.2\textwidth}p{0.33\textwidth}@{}}\toprule
@@ -160,7 +160,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Bateriile cîștigă diferența zilnică de preț, iar aceasta a crescut}
+\begin{frame}{Venitul bateriilor din diferența zilnică de preț și creșterea acestei diferențe}
 \small
 \intuition{o baterie cumpără în orele cele mai ieftine și vinde în cele mai scumpe; venitul ei crește cu diferența zilnică dintre maxim și minim.}
 \begin{center}\includegraphics[width=\textwidth,height=0.266\textheight,keepaspectratio]{charts/ro/spread_monthly.pdf}\end{center}\vspace{-3mm}
@@ -357,7 +357,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L10\_dp\_value}{Quantlets/L10/NN_L10_dp_value}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Previziune perfectă: cît ar fi putut cîștiga o baterie de 2 MWh}
+\begin{frame}{Venitul unei baterii de 2 MWh în condiții de previziune perfectă}
 \small
 \intuition{venitul DP este o limită superioară; el urmează diferențele de preț, nu nivelul prețului.}
 \begin{center}\includegraphics[width=\textwidth,height=0.350\textheight,keepaspectratio]{charts/ro/dp_revenue_year.pdf}\end{center}\vspace{-3mm}
@@ -433,7 +433,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ce a învățat Q-learning tabelar}
+\begin{frame}{Politica învățată prin Q-learning tabelar}
 \small
 \intuition{cu 1 MWh stocat, agentul încarcă în orele care au fost ieftine ieri și vinde seara.}
 \begin{center}\includegraphics[width=\textwidth,height=0.460\textheight,keepaspectratio]{charts/ro/q_policy.pdf}\end{center}\vspace{-3mm}
@@ -449,7 +449,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L10\_q\_policy}{Quantlets/L10/NN_L10_q_policy}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De la tabel la rețea: rețeaua Q profundă}
+\begin{frame}{Rețeaua Q profundă: aproximarea tabelului Q printr-o rețea neuronală}
 \footnotesize
 \intuition{tabelul este înlocuit de o rețea $Q_{\btheta}(s,a)$, ajustată prin regresie pe ținta TD.}
 \begin{columns}[T,onlytextwidth]
@@ -490,7 +490,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L10\_battery\_learning}{Quantlets/L10/NN_L10_battery_learning}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Anii de test: cît din venitul cu previziune perfectă se obține}
+\begin{frame}{Ponderea venitului cu previziune perfectă obținută în anii de test}
 \small
 \intuition{venitul cumulat de la 1 ianuarie 2025 la 24 octombrie 2026; distanța față de linia de sus este valoarea informației perfecte.}
 \begin{center}\includegraphics[width=\textwidth,height=0.387\textheight,keepaspectratio]{charts/ro/battery_test_cum.pdf}\end{center}\vspace{-3mm}
@@ -682,7 +682,7 @@ PPO (media a 5 valori inițiale) & 15{,}1 & 17{,}0 & 0{,}83 & \ensuremath{-}23{,
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Politis \& Romano, 1994; calcul propriu)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Cînd iese agentul din piață?}
+\begin{frame}{Perioadele în care agentul este în afara pieței}
 \small
 \intuition{expunerea agentului PPO (ponderea valorilor inițiale și a zilelor investite) comparată cu regula mediei mobile.}
 \begin{center}\includegraphics[width=\textwidth,height=0.340\textheight,keepaspectratio]{charts/ro/trading_exposure.pdf}\end{center}\vspace{-3mm}
@@ -699,7 +699,7 @@ PPO (media a 5 valori inițiale) & 15{,}1 & 17{,}0 & 0{,}83 & \ensuremath{-}23{,
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L10\_trading\_exposure}{Quantlets/L10/NN_L10_trading_exposure}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De ce induc în eroare testele retrospective ale agenților de tranzacționare}
+\begin{frame}{Limitele testelor retrospective pentru agenții de tranzacționare}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Raport semnal-zgomot redus}: randamentele zilnice ale acțiunilor sînt aproape imprevizibile
@@ -818,7 +818,7 @@ Acoperire neuronală (media a 5 valori inițiale) & 0{,}27 & 0{,}69 & 1{,}15 & 1
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{notebook \S6}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ce a învățat rețeaua: un raport de acoperire mai plat, atent la costuri}
+\begin{frame}{Raportul de acoperire învățat: mai plat și ajustat pentru costuri}
 \small
 \intuition{raportul de acoperire în funcție de raportul $S_t/K$, cu 10 zile înainte de scadență și VIX la 20.}
 \begin{center}\includegraphics[width=\textwidth,height=0.500\textheight,keepaspectratio]{charts/ro/hedge_delta.pdf}\end{center}\vspace{-3mm}
@@ -833,7 +833,7 @@ Acoperire neuronală (media a 5 valori inițiale) & 0{,}27 & 0{,}69 & 1{,}15 & 1
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L10\_hedge\_delta}{Quantlets/L10/NN_L10_hedge_delta}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Costurile de tranzacționare: unde ajută acoperirea învățată}
+\begin{frame}{Costurile de tranzacționare și avantajul acoperirii învățate}
 \small
 \intuition{ES$_{95}$ al pierderii din acoperire pentru costuri de la 0 la 50 pb; o rețea antrenată pentru fiecare nivel de cost.}
 \begin{center}\includegraphics[width=\textwidth,height=0.381\textheight,keepaspectratio]{charts/ro/hedge_costs.pdf}\end{center}\vspace{-3mm}
@@ -849,7 +849,7 @@ Acoperire neuronală (media a 5 valori inițiale) & 0{,}27 & 0{,}69 & 1{,}15 & 1
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L10\_hedge\_costs}{Quantlets/L10/NN_L10_hedge_costs}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Învățarea prin întărire în producție: riscul de model}
+\begin{frame}{Reinforcement learning în producție: riscul de model}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -971,7 +971,7 @@ Acoperire neuronală (media a 5 valori inițiale) & 0{,}27 & 0{,}69 & 1{,}15 & 1
       \item Dispecerizarea are nevoie de distribuția comună, nu doar de prețuri punctuale (Andrei, Cepoi, Dumitrescu, Lessmann, Chiriac (Luchian), Pele \& Petukhina, 2026, Social Science Research Network (SSRN) 6872381).
     \end{itemize}
   \item \textbf{Patru generații de modele de preț}: o evaluare comparativă de la modelele statistice la învățarea automată, deep learning și modelele transformer pentru prețurile energiei (Andrei, Velev, Toma, Pele \& Lessmann, 2024, arXiv 2411.03372) --- prognozele de care are nevoie un agent de dispecerizare.
-  \item \textbf{Inteligența artificială (AI) în finanțele energiei}: o analiză sistematică a literaturii despre modul în care învățarea automată și învățarea prin întărire schimbă deciziile de tranzacționare, de risc și de stocare pe piețele de energie (Anagnoste et al., 2025, Energy Strategy Reviews).
+  \item \textbf{Inteligența artificială (AI) în finanțele energiei}: o analiză sistematică a literaturii despre modul în care învățarea automată și reinforcement learning schimbă deciziile de tranzacționare, de risc și de stocare pe piețele de energie (Anagnoste et al., 2025, Energy Strategy Reviews).
 \end{itemize}\par\vspace{1mm}{\scriptsize \begin{itemize}
   \item Rezultatele sînt cele din lucrări; cifrele de pe celelalte slide-uri provin din datele noastre.
 \end{itemize}}
@@ -1035,7 +1035,7 @@ Acoperire neuronală (media a 5 valori inițiale) & 0{,}27 & 0{,}69 & 1{,}15 & 1
 
 \section*{Anexă}
 
-\begin{frame}{Anexa A: de ce converge Q-learning}
+\begin{frame}{Anexa A: convergența Q-learning}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item Operatorul de optimalitate Bellman $(\mathcal{T}Q)(s,a)=R(s,a)+\gamma\E_{s'}\max_{a'}Q(s',a')$ este o $\gamma$-contracție în norma sup: $\|\mathcal{T}Q_1-\mathcal{T}Q_2\|_\infty\le\gamma\|Q_1-Q_2\|_\infty$.

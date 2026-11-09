@@ -9,7 +9,7 @@ window.NN_DATA.quizzes['l9'] = {
   {
    "correct": 0,
    "en": {
-    "title": "Why a graph",
+    "title": "Graph representation of transactions",
     "text": "Why can a single transaction look ordinary while still being part of money laundering?",
     "options": [
      "Because laundering shows in the chain of payments around it, not in the row of the transaction",
@@ -21,7 +21,7 @@ window.NN_DATA.quizzes['l9'] = {
     "incorrectExplanation": "The features of one transaction may be normal; what betrays laundering is how it connects to other transactions, so the graph matters."
    },
    "ro": {
-    "title": "De ce un graf",
+    "title": "Reprezentarea tranzacțiilor ca graf",
     "text": "De ce poate o singură tranzacție să pară obișnuită, deși face parte dintr-o operațiune de spălare a banilor?",
     "options": [
      "Pentru că spălarea se vede în lanțul de plăți din jurul ei, nu în rîndul tranzacției",
@@ -264,7 +264,7 @@ window.NN_DATA.quizzes['l9'] = {
     "incorrectExplanation": "Deeper is not better for GNNs: the mean cosine similarity rose to 0.96 and PR-AUC fell to 0.371."
    },
    "ro": {
-    "title": "Over-smoothing",
+    "title": "Netezirea excesivă",
     "text": "Ce s-a întîmplat cînd rețeaua GCN a trecut de la 2 la 6 straturi?",
     "options": [
      "PR-AUC a crescut, pentru că fiecare nod a văzut mai mult din graf",
@@ -441,7 +441,7 @@ window.NN_DATA.quizzes['l9'] = {
   {
    "correct": 0,
    "en": {
-    "title": "Why the forest is strong",
+    "title": "Performance of the random forest",
     "text": "Why is a random forest without the graph hard to beat on Elliptic?",
     "options": [
      "72 of its 165 features are already aggregates over the neighbours",
@@ -453,7 +453,7 @@ window.NN_DATA.quizzes['l9'] = {
     "incorrectExplanation": "The forest never sees the edges directly, but 72 features summarise each node's neighbourhood: the graph information is already in the table."
    },
    "ro": {
-    "title": "De ce pădurea este puternică",
+    "title": "Performanța pădurii aleatoare",
     "text": "De ce este greu de bătut pe Elliptic o pădure aleatoare fără graf?",
     "options": [
      "72 dintre cele 165 de variabile ale ei sînt deja agregate pe vecini",

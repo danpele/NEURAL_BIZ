@@ -35,7 +35,7 @@ OUT = os.path.join(ROOT, 'interactive')
 DATA = os.path.join(ROOT, 'data', 'clean')
 QLROOT = os.path.join(ROOT, 'Quantlets')
 PLOTLY = 'https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js'
-V = '20261109m'
+V = '20261109n'
 GH = 'https://github.com/danpele/NEURAL_BIZ'
 COLAB = 'https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main'
 

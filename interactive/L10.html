@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L10.js?v=20261108s">
+<link rel="preload" as="script" href="L10.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261108s", "L10_text_en.js?v=20261108s", "common.js?v=20261109m"], "L10.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261109n", "L10_text_en.js?v=20261109n", "common.js?v=20261109n"], "L10.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>At 12:00, V<sub>12</sub>(0) = 1,541 EUR and V<sub>12</sub>(2) = 1,760 EUR, so each stored MWh is worth 109.38 EUR: the shadow price of energy in the battery, about what it costs to buy it at midday. At 18:00 each MWh is worth about 880 EUR, because the two dearest hours (19:00 and 20:00) are still ahead. At 23:00 (switch to the value of one more stored MWh) the first MWh is worth 211 EUR (it can still be sold in the last hour) and the second nothing, since only 1 MWh can be moved per hour. The Bellman equation builds these values backwards from V<sub>24</sub>(s) = 0, and the optimal action at each (h, s) is the one that attains the maximum.</p></details>
 </section><h2 class="sec" id="s-val">Value-based learning: Q-learning and the deep Q-network (DQN)</h2>
 <section class="blk" id="q-policy">
-  <h3>What tabular Q-learning learned</h3>
+  <h3>The policy learned by tabular Q-learning</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L10/lecture10.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L10_q_policy_en.jpg" alt="Slide 22: What tabular Q-learning learned" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L10/lecture10.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L10_q_policy_en.jpg" alt="Slide 22: The policy learned by tabular Q-learning" loading="lazy"></a>
       <figcaption>Slide 22</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="qp-s"><span class="lbl">Stored energy</span><div class="tgs"><label class="tg"><input type="radio" name="qp-s" value="0"> 0 MWh</label><label class="tg"><input type="radio" name="qp-s" value="1" checked> 1 MWh</label><label class="tg"><input type="radio" name="qp-s" value="2"> 2 MWh</label></div></div><div class="ctl"><label for="qp-h">Hour (CET): <b id="qp-h-v"></b></label><input type="range" id="qp-h" min="0" max="23" step="1" value="13"></div><div class="ctl"><label for="qp-b">Rank of the hour in yesterday's prices</label><select id="qp-b"><option value="0" selected>yesterday's 6 cheapest hours</option><option value="1">2nd quartile</option><option value="2">3rd quartile</option><option value="3">yesterday's 6 dearest hours</option></select></div><button class="btn play" id="qp-play" type="button"></button></div><div class="charts one"><div class="chart" id="qp-map"></div><div class="chart" id="qp-bar"></div></div><ul class="out" id="qp-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_q_policy" target="_blank" rel="noopener">NN_L10_q_policy</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_q_policy/NN_L10_q_policy.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>It charges: Q(charge) = 175.0 EUR, Q(idle) = 167.2 EUR, Q(discharge) = 139.6 EUR, the values of the rest of the day after each action, learned from 1,746 training days (2019–2023). The margin over idling is small, about 8 EUR. With 1 MWh stored, the row of yesterday's cheapest hours charges in 7 hours and discharges in 8, mostly from 18:00 on: the hour of the day dominates, as in the lecture. With 0 MWh the agent can only charge or wait, with 2 MWh only discharge or wait (action masking). The table has 24 × 4 × 3 = 288 states and can be printed and audited.</p></details>
 </section>
 <section class="blk" id="battery-test">
-  <h3>Test years: how much of the perfect-foresight revenue is captured</h3>
+  <h3>Share of the perfect-foresight revenue captured in the test years</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L10/lecture10.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L10_battery_test_cum_en.jpg" alt="Slide 25: Test years: how much of the perfect-foresight revenue is captured" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L10/lecture10.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L10_battery_test_cum_en.jpg" alt="Slide 25: Share of the perfect-foresight revenue captured in the test years" loading="lazy"></a>
       <figcaption>Slide 25</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bt-k"><span class="lbl">Strategies</span><div class="tgs"><label class="tg"><input type="checkbox" name="bt-k" value="pf" checked> perfect foresight</label><label class="tg"><input type="checkbox" name="bt-k" value="dqn" checked> double DQN</label><label class="tg"><input type="checkbox" name="bt-k" value="q" checked> tabular Q-learning</label><label class="tg"><input type="checkbox" name="bt-k" value="nv" checked> yesterday's optimal plan</label></div></div><div class="ctl"><label for="bt-seed">Learning agents</label><select id="bt-seed"><option value="avg" selected>Mean of the 5 seeds</option><option value="0">Seed 1 (20261108)</option><option value="1">Seed 2 (20261109)</option><option value="2">Seed 3 (20261110)</option><option value="3">Seed 4 (20261111)</option><option value="4">Seed 5 (20261112)</option></select></div><div class="ctl"><label for="bt-v">Scale</label><select id="bt-v"><option value="cum" selected>cumulative revenue (thousand EUR)</option><option value="cap">% of the perfect-foresight revenue</option></select></div><div class="ctl"><label for="bt-m">Start of the window: <b id="bt-m-v"></b></label><input type="range" id="bt-m" min="0" max="21" step="1" value="0"></div><button class="btn play" id="bt-play" type="button"></button></div><div class="charts one"><div class="chart" id="bt-chart"></div></div><ul class="out" id="bt-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_battery_test_cum" target="_blank" rel="noopener">NN_L10_battery_test_cum</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_battery_test_cum/NN_L10_battery_test_cum.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

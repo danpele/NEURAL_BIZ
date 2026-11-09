@@ -70,7 +70,7 @@ The backward signal is a product of Jacobians $\mathbf W^\top\operatorname{diag}
 @chart vanishing
 Gradient norm per layer at initialisation, 10 hidden layers, mean of 5 seeds.
 
-## Initialise so that the variance of the signal stays constant across layers {h=d2459517}
+## Initialisation that keeps the variance of the signal constant across layers {h=8ccb11f3}
 
 If $\operatorname{Var}(z^{(l)})=n_{l-1}\operatorname{Var}(W)\,\mathbb E[(h^{(l-1)})^2]$ is to stay constant, Xavier initialisation sets $\operatorname{Var}(W)=2/(n_{l-1}+n_l)$ for tanh and sigmoid, and He initialisation $\operatorname{Var}(W)=2/n_{l-1}$ for ReLU. Weights drawn from $N(0,0.01^2)$ give a first-layer gradient of only $6.9\times10^{-13}$: the network does not learn.
 
@@ -110,7 +110,7 @@ Momentum keeps a velocity $\mathbf v_{t+1}=\beta\mathbf v_t+\mathbf g_t$ and ste
 
 AdaGrad divides each weight's step by the root of the sum of its squared gradients, which only grows; root mean square propagation (RMSProp) replaces the sum by an exponential average, $s_t=\rho s_{t-1}+(1-\rho)g_t^2$, so the step adapts to the current region.
 
-## Adam = momentum + RMSProp + a bias correction {h=e57e6fff}
+## Adam: momentum, RMSProp and a bias correction {h=0a8f3884}
 
 Adam keeps exponential averages of the gradient and of its square, corrects them for starting at zero and steps by their ratio:
 
@@ -118,7 +118,7 @@ $$ \hat m_t=\frac{m_t}{1-\beta_1^t},\quad \hat v_t=\frac{v_t}{1-\beta_2^t},\quad
 
 With the defaults $\beta_1=0.9$, $\beta_2=0.999$, the step @eq:adam is roughly bounded by $\eta$ per weight. Adam with decoupled weight decay (AdamW) shrinks the weights directly instead of adding the penalty to the gradient (Loshchilov and Hutter, 2019).
 
-## On California housing, all tuned optimisers end close; adaptive ones get there more reliably {h=aa9b8aa0}
+## On California housing, tuned optimisers reach similar errors and adaptive methods converge more reliably {h=0085f4ab}
 
 Each optimiser gets the best of three learning rates on validation, then 5 new seeds. After 10 epochs the validation MSE is 0.342 for SGD, 0.310 with momentum, 0.313 for RMSProp, 0.305 for Adam and 0.304 for AdamW; linear regression stays at 0.500.
 
@@ -162,7 +162,7 @@ The same network, trained with another loss, becomes a risk model: with the pinb
 
 The VaR is minus the conditional $\tau$-quantile of the next-day return, and the pinball loss $\rho_\tau(u)=u(\tau-\mathbb 1\{u<0\})$ is minimised by that quantile (Koenker and Bassett, 1978). Our MLP 32-32 uses the last return, its absolute value, the 5-day mean and the 5-, 22- and 66-day volatility; it is trained from 8 April 2005 to 2016, stopped on 2017-2019 and averaged over 5 seeds. The benchmarks are 250-day historical simulation and an exponentially weighted moving average (EWMA) volatility with a normal quantile.
 
-## Through the 2020 pandemic and after, the quantile MLP is breached about as often as it should be {h=47019288}
+## Breaches of the quantile-MLP VaR during and after the 2020 pandemic are close to the nominal rate {h=38a100c0}
 
 Over 1,716 test days, from 3 January 2020 to 30 October 2026, a correct 99 % VaR should be breached about 17.2 times. The quantile MLP is breached 18 times, historical simulation 31 and EWMA 41; the MLP's VaR widens within days when volatility jumps, as in March 2020.
 

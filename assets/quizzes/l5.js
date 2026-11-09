@@ -723,7 +723,7 @@ window.NN_DATA.quizzes['l5'] = {
                 "incorrectExplanation": "The test set is fixed; seeds and the DM test address two different sources of uncertainty, and neither replaces the other."
             },
             "ro": {
-                "title": "Semințele",
+                "title": "Inițializările aleatoare",
                 "text": "De ce au fost antrenate rețelele de volatilitate cu cinci semințe, iar prognozele lor mediate?",
                 "options": [
                     "Pentru a mări setul de test",

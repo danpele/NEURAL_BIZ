@@ -19,7 +19,7 @@ Directorul de risc întreabă: \textbf{poate un model să citească graficul ase
 Iar, înainte de a cumpăra un astfel de instrument: \textbf{cîte alerte pe lună ar trebui verificate și cîte dintre zilele proaste ar fi semnalate?}}
 \end{scenario}
 
-\section{\T{What the paper did}{Lucrarea de referință}}
+\section{\T{The reference paper}{Lucrarea de referință}}
 \textbf{\T{Question.}{Întrebarea de cercetare.}} \T{Can market regime classification be reframed as a visual recognition task, so that a vision-language model (VLM) detects financial anomalies from charts of market indicators and explains its decision in words (p.~192)? The framework is called FINDER-LLM (FINancial Anomaly DEtection and Recognition using Large Language Models).}%
 {Poate clasificarea regimurilor de piață să fie reformulată ca o problemă de recunoaștere vizuală, astfel încît un model vizual-lingvistic (VLM, \emph{vision-language model}) să detecteze anomaliile financiare din graficele indicatorilor de piață și să își explice în cuvinte decizia (p.~192)? Cadrul propus se numește FINDER-LLM (\emph{FINancial Anomaly DEtection and Recognition using Large Language Models}).}
 
@@ -41,7 +41,7 @@ O zi este zi de prăbușire atunci cînd randamentul logaritmic viitor scade sub
 {La $\alpha=5\,\%$, întrebarea zero-shot identifică 4 dintre cele 20 de zile de prăbușire, cu 26 de alarme false (acuratețe 0,83); autorii conchid că detectarea bazată pe modele lingvistice mari oferă semnale zilnice de risc interpretabile, cu o acuratețe predictivă moderată, superioare indicatorilor tehnici clasici (p.~199--200).}
 \end{itemize}
 
-\section{\T{The method, step by step}{Metoda, pas cu pas}}
+\section{\T{The method}{Metoda}}
 \begin{intuition}
 \T{A chart compresses fifteen indicators and six months of history into one picture that a trained eye reads in seconds: falling price at the lower Bollinger band, negative momentum, volatility rising, a deepening drawdown.
 A vision-language model has seen millions of images and texts; it turns the chart into a vector (an embedding) or into an answer in words.
@@ -71,7 +71,7 @@ Scorul zero-shot este $s_t=\mathbf u_t^\top\bar{\mathbf v}_1-\mathbf u_t^\top\ba
 {Tratați modelul ca pe un nivel de alertă, nu ca pe un decident: stabiliți pragul pe o perioadă de validare, puneți la dispoziția analistului graficul și justificarea și comparați alertele cu o simplă regulă de volatilitate înainte de a plăti pentru ceva mai complex.}
 \end{decision}
 
-\section{\T{Replicate it yourself}{Replicare pe datele cursului}}
+\section{\T{Replication on the course data}{Replicarea pe datele cursului}}
 \T{Notebook \texttt{C7\_notebook\_EN.ipynb}: daily S\&P 500 prices and volume (Yahoo Finance), \NnDays\ trading days with a complete chart and label: training July 2006 -- December 2019 (\NnTrain\ days), validation January 2020 -- June 2024 (\NnVal), test \NtestStart\ -- \NtestEnd\ (\NnTest\ days, \NcrashTest\ crash days at $\alpha=5\,\%$, \NcrashTestOne\ at $\alpha=1\,\%$).
 Classroom implementation: open models that run on a laptop (CLIP ViT-B/16, vision transformer with 16-pixel patches, and Qwen2-VL-2B-Instruct) instead of GPT-4.1, the chart image only (no indicator table, news or price context), next-day horizon $h=1$, and a test period extended by sixteen months. All charts are drawn from the real prices; the models see them exactly as in Figure~\ref{fig:f1}.}%
 {Notebook-ul \texttt{C7\_notebook\_RO.ipynb} folosește prețurile zilnice și volumul indicelui S\&P 500 (Yahoo Finance), \NnDays\ zile de tranzacționare cu grafic și etichetă complete: antrenare iulie 2006 -- decembrie 2019 (\NnTrain\ de zile), validare ianuarie 2020 -- iunie 2024 (\NnVal\ de zile), test \NtestStart\ -- \NtestEnd\ (\NnTest\ de zile, dintre care \NcrashTest\ de zile de prăbușire la $\alpha=5\,\%$ și \NcrashTestOne\ la $\alpha=1\,\%$).
@@ -166,7 +166,7 @@ Pentru departamentul de risc, volumul de verificare este gestionabil; un model v
 (iv) Scorurile zero-shot depind de formularea descrierilor și a întrebării; raportăm o singură formulare, fixată înainte de test.}
 
 \newpage
-\section*{\T{Case 7 at a glance}{Studiul de caz 7 pe scurt}}
+\section*{\T{Summary of case 7}{Studiul de caz 7 pe scurt}}
 \glance{\T{Can a model read a market chart, flag the evening before a sharp fall and say why?}{Poate un model să citească graficul pieței, să semnaleze seara dinaintea unei scăderi puternice și să explice de ce?}}%
 {\T{S\&P 500, 2006--2026; five-panel charts of 15 indicators; crash = next-day return below the rolling 5\,\% quantile.}{S\&P 500, 2006--2026; grafice cu cinci panouri pentru 15 indicatori; prăbușire = randament sub cuantila glisantă de 5\,\%.}}%
 {\T{CLIP zero-shot and probe, Qwen2-VL-2B; volatility rule, logistic, boosting, LSTM; threshold set on validation.}{CLIP zero-shot și sondă, Qwen2-VL-2B; regula volatilității, logistică, boosting, LSTM; prag ales pe validare.}}%

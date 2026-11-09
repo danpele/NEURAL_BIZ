@@ -49,7 +49,7 @@ VLM & vision--language model\\\end{tabular}}\end{column}
 
 % END-ABBR
 
-\begin{frame}{Real data only: three image collections}
+\begin{frame}{The data: three real image collections}
 \footnotesize
 
 \par\vspace{0.5mm}{\scriptsize \begin{itemize}\setlength{\itemsep}{0pt}
@@ -70,7 +70,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \end{frame}
 
 
-\section{Images as data: why convolutions}
+\section{Images as data and the motivation for convolutions}
 
 \begin{frame}{A product photo is a matrix of numbers}
 \small
@@ -121,7 +121,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \end{frame}
 
 
-\section{The convolutional layer, formula by formula}
+\section{The convolutional layer}
 
 \begin{frame}{Convolution: the same small filter slides over the image}
 \footnotesize
@@ -298,7 +298,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \end{frame}
 
 
-\section{Case study: product photos, from softmax to CNN}
+\section{Case study: classification of product photos with softmax regression and a CNN}
 
 \begin{frame}{Experimental protocol for the three models}
 \footnotesize
@@ -351,7 +351,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L4\_fmnist\_curves}{Quantlets/L4/NN_L4_fmnist_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Higher accuracy with fewer parameters}
+\begin{frame}{Accuracy and number of parameters of the three models}
 \small
 \intuition{weight sharing buys accuracy and saves parameters at the same time.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/fmnist_compare.pdf}\end{center}\vspace{-3mm}
@@ -395,7 +395,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \par\vfill\noindent{\scriptsize\color{FooterGray}(McNemar, 1947)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The errors are the products that people also confuse}
+\begin{frame}{Confusion matrix: errors between products of similar shape}
 \small
 \intuition{most mistakes are between upper-body garments of similar shape.}
 \begin{center}\includegraphics[width=\textwidth,height=0.432\textheight,keepaspectratio]{charts/en/fmnist_confusion.pdf}\end{center}\vspace{-3mm}
@@ -424,7 +424,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation; Zeiler \& Fergus, 2014)}\hfill\qlink{NN\_L4\_fmnist\_filters}{Quantlets/L4/NN_L4_fmnist_filters}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Feature maps: from edges to a coarse map of parts}
+\begin{frame}{Feature maps at increasing depth}
 \small
 \intuition{early maps keep the outline of the boot; deep maps are small but say where the informative parts are.}
 \begin{center}\includegraphics[width=\textwidth,height=0.360\textheight,keepaspectratio]{charts/en/fmnist_featuremaps.pdf}\end{center}\vspace{-3mm}
@@ -485,7 +485,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(He et al., 2016)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Augmentation narrows the gap; residuals make depth trainable}
+\begin{frame}{Effects of data augmentation and residual connections}
 \small
 \intuition{left: the same CNN on Canadian Institute for Advanced Research (CIFAR-10) photos; right: 32-layer networks that differ only by the shortcut.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/cifar_curves.pdf}\end{center}\vspace{-3mm}
@@ -553,7 +553,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Helber et al., 2019)}\hfill\qlink{NN\_L4\_eurosat\_samples}{Quantlets/L4/NN_L4_eurosat_samples}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Transfer learning: reuse features learned on a million photos}
+\begin{frame}{Transfer learning: features learned on a million photos}
 \footnotesize
 \intuition{the early layers of a network trained on ImageNet detect edges and textures that are useful for any image.}
 \begin{columns}[T,onlytextwidth]
@@ -707,7 +707,7 @@ Tiles/class & Scratch & Frozen & Fine-tuned \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Selvaraju et al., 2017; own computation)}\hfill\qlink{NN\_L4\_gradcam}{Quantlets/L4/NN_L4_gradcam}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{From tiles to a decision: land-use shares}
+\begin{frame}{Land-use shares estimated from satellite tiles}
 \footnotesize
 \intuition{a portfolio question is about shares and totals, so errors that cancel matter less than errors that do not.}
 \begin{columns}[T,onlytextwidth]
@@ -732,7 +732,7 @@ Tiles/class & Scratch & Frozen & Fine-tuned \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{When transfer learning helps, and when it can mislead}
+\begin{frame}{Benefits and risks of transfer learning}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -763,7 +763,7 @@ Tiles/class & Scratch & Frozen & Fine-tuned \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Yosinski et al., 2014; Helber et al., 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Convolutions beyond photos: sequences and charts}
+\begin{frame}{Convolutions for sequences and charts}
 \footnotesize
 \intuition{a one-dimensional convolution slides over time, the same way a two-dimensional one slides over space.}
 \begin{columns}[T,onlytextwidth]

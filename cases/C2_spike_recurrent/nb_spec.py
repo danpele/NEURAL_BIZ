@@ -168,7 +168,7 @@ W_star = gridW[np.argmax([f1_score(y[mva], W[mva] >= c) for c in gridW])]
 print("indicator F1 (training):", {k: round(v, 3) for k, v in f1w.items()}); print("alert threshold W* (validation): %.3f (paper: 0.477)" % W_star)
 '''),
 
-("md", "## 3. The recurrent network: 14 days of hourly history in, 24 spike probabilities out",
+("md", "## 3. The recurrent network: 14 days of hourly history as input and 24 spike probabilities as output",
        "## 3. Rețeaua recurentă: 14 zile de istoric orar la intrare, 24 de probabilități de vîrf la ieșire"),
 ("code", r'''
 import torch.nn as nn
@@ -320,8 +320,8 @@ def fig_pr(lang):
 cu.save_both(fig_pr, "f2_pr_curves")
 '''),
 
-("md", "## 4. Which hours of the past drive the network's alert? Integrated gradients over time",
-       "## 4. Ce ore din trecut declanșează alerta rețelei? Gradienți integrați în timp"),
+("md", "## 4. Integrated gradients over time: past hours that drive the network's alert",
+       "## 4. Gradienți integrați în timp: orele din trecut care determină alerta rețelei"),
 ("code", r'''
 # Integrated gradients (Sundararajan et al., 2017): IG_j = (x_j - x'_j) * mean over alpha in (0,1] of dF/dx_j at x' + alpha (x - x'),
 # with baseline x' = 0 (the training mean of every standardised channel) and F = sum of the 24 output logits (tomorrow's overall spike score).
@@ -369,7 +369,7 @@ def fig_ig(lang):
 cu.save_both(fig_ig, "f3_time_attribution", headline=True)
 '''),
 
-("md", "## 5. From a probability to a decision", "## 5. De la o probabilitate la o decizie"),
+("md", "## 5. Decision rule based on the predicted probability", "## 5. Regula de decizie bazată pe probabilitatea prognozată"),
 ("code", r'''
 # Cost-loss rule: acting (shifting 1 MWh of flexible load out of the hour) costs C; a spike we did not act on costs L.
 # Act when the probability exceeds C / L. C = 30 EUR/MWh (stated assumption); L = mean spike price minus mean non-spike price in TRAINING.
@@ -446,7 +446,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Shorten the input window from 14 to 3 days (`LB = 3`). Does the PR-AUC of the LSTM change? What does that say about long memory in spike risk?
 2. Remove the price channel from the network's input. How much of the performance is left, and which channel takes over in the attributions?
 3. Re-estimate on the paper's window only (March-September 2024). Do you get the paper's ranking of drivers (previous price, residual load)?

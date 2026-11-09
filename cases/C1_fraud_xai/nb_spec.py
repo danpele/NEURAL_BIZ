@@ -191,8 +191,8 @@ cu.write_table(tab, "models", [("Model", "Model"), ("ROC-AUC", "ROC-AUC"), ("PR-
 cu.show_table(res, best={"AUC": "max", "PRAUC": "max"}, digits=3)
 '''),
 
-("md", "## 3. Global explanations: do the trees and the network use the same variables?",
-       "## 3. Explicații globale: folosesc arborii și rețeaua aceleași variabile?"),
+("md", "## 3. Global explanations: variables used by the trees and by the network",
+       "## 3. Explicații globale: variabilele folosite de arbori și de rețea"),
 ("code", r'''
 from scipy.stats import spearmanr
 # XGBoost: exact TreeSHAP on all test rows (log-odds scale)
@@ -233,7 +233,7 @@ def fig_shap(lang):
 cu.save_both(fig_shap, "f3_shap_global", headline=True)
 '''),
 
-("md", "## 4. A local explanation: why was this transaction flagged?", "## 4. O explicație locală: de ce a fost semnalată această tranzacție?"),
+("md", "## 4. Local explanation of a flagged transaction", "## 4. Explicația locală a unei tranzacții semnalate"),
 ("code", r'''
 pt = PM["XGBoost"]
 cand = np.where(ite & (y == 1))[0]
@@ -255,7 +255,7 @@ def fig_local(lang):
 cu.save_both(fig_local, "f4_local")
 '''),
 
-("md", "## 5. Ablation: how much performance do the top variables carry?", "## 5. Eliminarea variabilelor: cîtă performanță poartă variabilele principale?"),
+("md", "## 5. Ablation: contribution of the top variables to performance", "## 5. Eliminarea variabilelor: contribuția variabilelor principale la performanță"),
 ("code", r'''
 # analogue of the paper's edge-type ablation (Delta_r = AUC(G) - AUC(G without relation r)): remove the k most important variables
 # (by XGBoost mean |SHAP|), refit XGBoost on the remaining ones, and compare with removing k random variables. Three seeds each.
@@ -296,8 +296,8 @@ def fig_abl(lang):
 cu.save_both(fig_abl, "f5_ablation")
 '''),
 
-("md", "## 6. From a probability to an alert: the cost of a review versus the amount at risk",
-       "## 6. De la o probabilitate la o alertă: costul unei verificări față de suma expusă riscului"),
+("md", "## 6. Alert threshold: the cost of a review and the amount at risk",
+       "## 6. Pragul de alertă: costul unei verificări și suma expusă riscului"),
 ("code", r'''
 C_REV = 5.0      # cost of reviewing one alert, EUR (assumption chosen a priori; change it)
 amt = d.Amount.values
@@ -405,7 +405,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Replace the time-ordered split by the paper's random 70/30 split. How much do ROC-AUC and PR-AUC change, and why is the time-ordered result the one to report to a risk committee?
 2. Change the review cost from 5 to 25 EUR. How many alerts disappear, and which frauds are no longer reviewed?
 3. Remove `log_amount` from the features. Does the ranking of the V variables change? What does this say about explanations of correlated inputs?""",

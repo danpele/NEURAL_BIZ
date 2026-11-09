@@ -43,7 +43,7 @@ MLP & perceptron multistrat\\
 OCR & recunoașterea optică a caracterelor\\
 RAG & generare augmentată prin regăsire\\
 RGB & roșu, verde, albastru (canalele de culoare)\\
-RL & învățare prin recompensă\\
+RL & reinforcement learning\\
 ROC & caracteristica de operare a receptorului\\
 SHAP & explicații aditive Shapley\\
 VAE & autoencoder variațional\\
@@ -57,7 +57,7 @@ XAI & inteligență artificială explicabilă\\\end{tabular}}\end{column}
 % END-ABBR
 
 
-\section{De ce modele multimodale}
+\section{Datele multimodale în afaceri}
 
 \begin{frame}{Imagini, documente și grafice ca date economice}
 \small
@@ -105,7 +105,7 @@ XAI & inteligență artificială explicabilă\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Helber et al., 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Numai date reale: imagini satelitare, grafice de piață, tabele ale curbei randamentelor}
+\begin{frame}{Datele: imagini satelitare, grafice de piață, tabele ale curbei randamentelor}
 \small
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.3\textwidth}p{0.3\textwidth}p{0.33\textwidth}@{}}\toprule
@@ -200,7 +200,7 @@ Curba randamentelor AAA din zona euro, Banca Centrală Europeană (BCE) & 60 de 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Radford et al., 2021; Oord et al., 2018)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Clasificarea zero-shot: numele claselor devin clasificatorul}
+\begin{frame}{Clasificarea zero-shot cu numele claselor ca prompturi textuale}
 \footnotesize
 \intuition{se calculează embedding-ul unei propoziții pentru fiecare clasă și al imaginii, apoi se alege propoziția cea mai apropiată.}
 \begin{columns}[T,onlytextwidth]
@@ -253,7 +253,7 @@ Curba randamentelor AAA din zona euro, Banca Centrală Europeană (BCE) & 60 de 
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L14\_zeroshot\_examples}{Quantlets/L14/NN_L14_zeroshot_examples}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Unde greșește zero-shot: utilizări ale terenului care arată la fel}
+\begin{frame}{Erorile zero-shot la utilizări ale terenului asemănătoare vizual}
 \small
 \intuition{rîndurile: clasa reală; coloanele: clasa prezisă; fiecare rînd însumează 100\,\%.}
 \begin{center}\includegraphics[width=\textwidth,height=0.524\textheight,keepaspectratio]{charts/ro/zeroshot_confusion.pdf}\end{center}\vspace{-3mm}
@@ -351,7 +351,7 @@ Qwen2-VL-2B (întrebări despre grafice) & 2{,}21 mld. & 262 & -- \\
 
 \section{Modele vizual-lingvistice: citirea graficelor și a tabelelor}
 
-\begin{frame}{Un VLM conectează un codificator de imagini la un model de limbaj}
+\begin{frame}{Un VLM: un codificator de imagini conectat la un model de limbaj}
 \footnotesize
 \intuition{peticele imaginii sînt proiectate în spațiul embedding-urilor de cuvinte al unui model lingvistic mare (LLM), care le citește ca tokeni suplimentari.}
 \begin{columns}[T,onlytextwidth]
@@ -452,7 +452,7 @@ Qwen2-VL zero-shot & \cellcolor{Forest!11}0{,}758 & \cellcolor{Crimson!9}0{,}302
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu, după Jheng, Pele, Tak \& Găman, 2026)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ce poate citi un VLM de 2 miliarde de parametri: tendințe și celule de tabel}
+\begin{frame}{Citirea tendințelor și a celulelor de tabel cu un VLM de 2 miliarde de parametri}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Întrebarea despre tendință}, pe 394 de grafice de test: „prețul a încheiat mai sus sau mai jos?”
@@ -473,7 +473,7 @@ Qwen2-VL zero-shot & \cellcolor{Forest!11}0{,}758 & \cellcolor{Crimson!9}0{,}302
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu; Wang et al., 2024)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Fluxul documentelor într-o bancă: unde se potrivește un VLM}
+\begin{frame}{Rolul unui VLM în fluxul documentelor unei bănci}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{1. Preluarea}
@@ -540,7 +540,7 @@ Secvențe & rețele cu memorie pe termen scurt și lung (LSTM), rețele cu expan
 Text & embedding, transformere, LLM, generare augmentată prin regăsire (RAG) & 6, 7, 12: sentiment, bănci centrale \\
 Generare & autoencoder variațional (VAE), rețea generativă adversarială (GAN), difuzie & 8: date sintetice, anomalii \\
 Grafuri & rețea neuronală pe grafuri (GNN) & 9: rețele de tranzacții \\
-Decizii & învățare prin recompensă (RL) & 10: tranzacționare, acoperirea riscului, baterii \\
+Decizii & reinforcement learning (RL) & 10: tranzacționare, acoperirea riscului, baterii \\
 Încredere & inteligență artificială explicabilă (XAI): explicații aditive Shapley (SHAP), gradienți & 11: auditul modelelor de credit \\
 \bottomrule\end{tabular}}
 \end{frame}
@@ -571,7 +571,7 @@ Decizii & învățare prin recompensă (RL) & 10: tranzacționare, acoperirea ri
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Cinci reguli de evaluare valabile în fiecare curs}
+\begin{frame}{Cinci reguli de evaluare aplicate pe parcursul cursului}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Fără scurgeri de informație}: scalările, prompturile și pragurile se aleg pe datele de antrenare sau de validare
@@ -643,7 +643,7 @@ Pierderea contrastivă imagine--text & $-\log\frac{e^{s_{ii}}}{\sum_j e^{s_{ij}}
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Utilizarea responsabilă: aceleași reguli pentru fiecare model din curs}
+\begin{frame}{Utilizarea responsabilă a modelelor din curs}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Reglementare}
@@ -665,7 +665,7 @@ Pierderea contrastivă imagine--text & $-\log\frac{e^{s_{ii}}}{\sum_j e^{s_{ij}}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Cum arată un proiect bun pentru acest curs}
+\begin{frame}{Cerințele unui proiect bun pentru acest curs}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}

@@ -36,7 +36,7 @@ window.NN_DATA.quizzes['l7'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Why scale",
+    "title": "Scaling of the attention scores",
     "text": "With unit-variance entries, what is the variance of the dot product $\\mathbf q^\\top\\mathbf k$ of two $d_k$-dimensional vectors?",
     "options": [
      "1",
@@ -48,7 +48,7 @@ window.NN_DATA.quizzes['l7'] = {
     "incorrectExplanation": "Each product $q_lk_l$ has variance 1 and there are $d_k$ of them; without scaling the softmax saturates for large $d_k$."
    },
    "ro": {
-    "title": "De ce scalăm",
+    "title": "Scalarea scorurilor de atenție",
     "text": "Cu elemente de varianță unu, care este varianța produsului scalar $\\mathbf q^\\top\\mathbf k$ a doi vectori cu $d_k$ dimensiuni?",
     "options": [
      "1",
@@ -279,7 +279,7 @@ window.NN_DATA.quizzes['l7'] = {
   {
    "correct": 0,
    "en": {
-    "title": "Where the parameters are",
+    "title": "Parameters of a transformer block",
     "text": "In a transformer block with model width $d$ and feed-forward width $4d$, where are most of the parameters?",
     "options": [
      "In the feed-forward network, about $8d^2$ of $12d^2$",
@@ -291,7 +291,7 @@ window.NN_DATA.quizzes['l7'] = {
     "incorrectExplanation": "Softmax and sinusoidal positions have no parameters and layer norm only $2d$ per norm; the two feed-forward matrices dominate."
    },
    "ro": {
-    "title": "Unde sînt parametrii",
+    "title": "Parametrii unui bloc transformer",
     "text": "Într-un bloc transformer cu lățimea $d$ și rețeaua directă de lățime $4d$, unde se află cei mai mulți parametri?",
     "options": [
      "În rețeaua directă, circa $8d^2$ din $12d^2$",
@@ -819,7 +819,7 @@ window.NN_DATA.quizzes['l7'] = {
   {
    "correct": 0,
    "en": {
-    "title": "From score to signal",
+    "title": "Sentiment score as a signal",
     "text": "A desk aggregates tweet sentiment by firm and day. Which rule prevents look-ahead bias?",
     "options": [
      "Use only texts time-stamped before the decision time",
@@ -831,7 +831,7 @@ window.NN_DATA.quizzes['l7'] = {
     "incorrectExplanation": "Any input known only after the decision, including later tweets or same-day closing prices, inflates backtests."
    },
    "ro": {
-    "title": "De la scor la semnal",
+    "title": "Scorul de sentiment ca semnal",
     "text": "O mesă de tranzacționare agregă sentimentul tweet-urilor pe firmă și zi. Ce regulă previne folosirea informației din viitor?",
     "options": [
      "Folosirea numai a textelor cu marcaj de timp anterior momentului deciziei",

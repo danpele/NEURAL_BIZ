@@ -1,5 +1,5 @@
-TITLE = ("Case 6 - Can foundation models manage risk? Zero-shot VaR and ES with conformal calibration",
-         "Studiul de caz 6 - Pot modelele fundație gestiona riscul? VaR și ES zero-shot cu calibrare conformală")
+TITLE = ("Case 6 - Zero-shot VaR and ES from foundation models with conformal calibration",
+         "Studiul de caz 6 - VaR și ES din modele fundație zero-shot, cu calibrare conformală")
 
 CELLS = [
 ("md",
@@ -410,7 +410,7 @@ cu.save_both(fig_shift, "f4_conformal_shift")
 print({n: round(float(SH[n].mean()), 3) for n in SH})
 '''),
 
-("md", "## 6. From a backtest to a risk limit", "## 6. De la testarea retrospectivă la o limită de risc"),
+("md", "## 6. Risk limits based on the backtest", "## 6. Limitele de risc stabilite pe baza testării retrospective"),
 ("code", r'''
 POS = 10_000_000                                                   # 10 million RON in each share (a constant chosen for illustration)
 lim = {m: np.mean([(POS * (1 - np.exp(EV[s][(m, 0.01, "VaR")] / 100))).mean() for s in STOCKS]) for m in MODELS}
@@ -472,7 +472,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Replace the Student-t quantile matching by Chronos-2's native 1 % and 2.5 % quantiles (`quantile_levels=[0.01, 0.025]`). Are the raw violations closer to the nominal level?
 2. Shorten the conformal window from 250 to 125 days and lengthen it to 500 days (the paper's robustness check). How do the Green-zone rate and the average VaR change?
 3. Add the BET index of the Bucharest Stock Exchange or the EUR/RON exchange rate (download them yourself and document the source). Are the conclusions of the paper for Romania reproduced?""",

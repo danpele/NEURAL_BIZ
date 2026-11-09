@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L7.js?v=20261109m">
+<link rel="preload" as="script" href="L7.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261109m", "L7_text_en.js?v=20261109m", "common.js?v=20261109m"], "L7.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261109n", "L7_text_en.js?v=20261109n", "common.js?v=20261109n"], "L7.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,12 +53,12 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser when you move a control. The attention maps are those of the pretrained FinBERT (BERT, Bidirectional Encoder Representations from Transformers, further trained on financial text) on real test tweets; the model results are those of the case study of the lecture (2,388 test tweets, three classes: bearish, bullish, neutral). The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart.</p>
-<p class="toc"><a href="#s-why">Why attention</a> · <a href="#s-mech">The attention mechanism</a> · <a href="#s-arch">The transformer architecture</a> · <a href="#s-case">Case study: sentiment of finance tweets</a></p>
-<h2 class="sec" id="s-why">Why attention</h2>
+<p class="toc"><a href="#s-why">Motivation for the attention mechanism</a> · <a href="#s-mech">The attention mechanism</a> · <a href="#s-arch">The transformer architecture</a> · <a href="#s-case">Case study: sentiment of finance tweets</a></p>
+<h2 class="sec" id="s-why">Motivation for the attention mechanism</h2>
 <section class="blk" id="context-lengths">
-  <h3>Tweets are short; central-bank speeches are far beyond a 512-token window</h3>
+  <h3>Length of tweets and central-bank speeches in tokens</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L7_context_lengths_en.jpg" alt="Slide 7: Tweets are short; central-bank speeches are far beyond a 512-token window" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L7_context_lengths_en.jpg" alt="Slide 7: Length of tweets and central-bank speeches in tokens" loading="lazy"></a>
       <figcaption>Slide 7</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Corpus</label><select id="cl-c"><option value="tweets">Finance tweets</option><option value="phrasebank">Financial PhraseBank</option><option value="speeches" selected>ECB speeches</option></select></div><div class="ctl"><label for="cl-w">Context window (tokens, 2^k): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="5" max="15" step="1" value="9"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-hist"></div><div class="chart" id="cl-cdf"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_context_lengths" target="_blank" rel="noopener">NN_L7_context_lengths</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_context_lengths/NN_L7_context_lengths.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

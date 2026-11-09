@@ -55,7 +55,7 @@ Supraînvățarea apare ca o pierdere de antrenare care scade și una de validar
 
 Penalizarea ponderilor și penalizarea L1 limitează mărimea ponderilor; ele corespund unor distribuții a priori gaussiene și Laplace.
 
-## Penalizarea ponderilor = penalizare L2 = o distribuție a priori gaussiană pe ponderi {h=53d8db1c}
+## Penalizarea ponderilor ca penalizare L2 și ca distribuție a priori gaussiană a ponderilor {h=63eb0c67}
 
 Adăugarea lui $\frac\lambda2\|\mathbf w\|^2$ la pierdere transformă fiecare pas de coborîre stohastică pe gradient (SGD) în $\mathbf w\leftarrow(1-\eta\lambda)\mathbf w-\eta\nabla\mathcal L$, iar minimul penalizat este estimarea maximum a posteriori (MAP) cu o distribuție a priori gaussiană. Cu Adam cele două diferă; Adam cu penalizarea ponderilor decuplată (AdamW) reface micșorarea uniformă.
 
@@ -63,7 +63,7 @@ Adăugarea lui $\frac\lambda2\|\mathbf w\|^2$ la pierdere transformă fiecare pa
 
 Penalizarea L1 $\lambda\|\mathbf w\|_1$ are un colț în zero; pasul ei proximal (de prag moale) $w\leftarrow\operatorname{sign}(u)\max(|u|-\eta\lambda,0)$ aduce ponderile mici exact la zero, ca în lasso-ul lui Tibshirani (1996).
 
-## L1 adună ponderile primului strat în zero, L2 doar le micșorează {h=6e00efee}
+## Ponderile primului strat cu penalizare L1 și cu penalizare L2 {h=4a324c9d}
 
 Pe German credit, 67,2 % dintre cele 3 072 de ponderi ale primului strat ajung sub 0,01 în valoare absolută cu L1, față de 26,3 % cu L2; AUC pe test este 0,768, respectiv 0,761.
 
@@ -93,7 +93,7 @@ AUC pe pliul de test pentru un MLP 256-256 pe German credit, în funcție de pen
 
 Oprirea timpurie păstrează ponderile epocii cu cea mai mică pierdere de validare și se oprește după $P$ epoci fără îmbunătățire. Lîngă un minim pătratic, $t$ pași de mărime $\eta$ acționează ca o penalizare L2 de intensitate aproximativ $1/(\eta t)$ (Prechelt, 1998; Bishop și Bishop, 2024).
 
-## La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade {h=02497fbf}
+## La fraudele cu carduri, pierderea pe validare atinge minimul devreme, în timp ce pierderea pe antrenare continuă să scadă {h=f3d5e22b}
 
 Pe împărțirea cronologică a datelor despre fraude, pierderea de validare a unui MLP 256-256 este minimă la epoca 4 (0,0159); cu o răbdare de 20 de epoci, antrenarea se oprește la epoca 24, iar după 120 de epoci pierderea de validare ar fi 0,0593.
 
@@ -160,7 +160,7 @@ Rata orară a fraudei în cele două zile, cu începutul validării și al test�
 
 Precizia este $TP/(TP+FP)$, sensibilitatea $TP/(TP+FN)$, iar PR-AUC face media preciziei pe nivelurile de sensibilitate; un scor aleator are PR-AUC egal cu rata fraudei (Saito și Rehmsmeier, 2015). Fiecare plată legitimă contează cu ponderea 10 în $FP$, deci precizia este cea a populației complete.
 
-## Pe orele de test, oprirea timpurie este regularizatorul care ajută clar {h=a41da61c}
+## Pe orele de test, oprirea timpurie este regularizatorul cu cel mai clar cîștig {h=edcb9924}
 
 Cu 60 de epoci fixe și 5 inițializări, PR-AUC pe test este 0,796 fără regularizare, 0,842 cu oprire timpurie, 0,787 cu penalizare, 0,798 cu dropout, 0,798 cu normalizare pe loturi și 0,841 cu toate.
 
@@ -178,7 +178,7 @@ Curbele precizie-sensibilitate pe orele de test, ponderate la populație.
 
 Un model antrenat pe date în care plățile legitime au fost păstrate cu rata $\beta$ supraestimează șansa de fraudă de $1/\beta$ ori; probabilitatea corectată este $p=\beta p_s/(\beta p_s-p_s+1)$ (Dal Pozzolo et al., 2015). Ponderile claselor și reeșantionarea mută pragul efectiv, dar aproape nu schimbă ordonarea.
 
-## Numărul potrivit de alerte salvează cea mai mare parte din pierderi {h=241f6d82}
+## Numărul de alerte și ponderea pierderilor din fraudă evitate {h=4715daa9}
 
 Dacă o fraudă ratată își pierde suma și fiecare alertă costă o verificare de 5 euro (EUR), pierderile din perioada de test scad de la 7 729 EUR fără alerte la 3 093 EUR pentru regresia logistică, 2 694 EUR pentru MLP și 2 695 EUR pentru XGBoost, la numărul optim de alerte.
 

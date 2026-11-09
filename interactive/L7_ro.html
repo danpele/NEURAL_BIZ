@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L7.js?v=20261109m">
+<link rel="preload" as="script" href="L7.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261109m", "L7_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L7.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261109n", "L7_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L7.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,12 +53,12 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser cînd modificați un control. Hărțile de atenție sînt cele ale modelului preantrenat FinBERT (BERT, Bidirectional Encoder Representations from Transformers, antrenat suplimentar pe texte financiare) pe tweet-uri reale de test; rezultatele modelelor sînt cele din studiul de caz al cursului (2.388 de tweet-uri de test, trei clase: pesimist, optimist, neutru). Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
-<p class="toc"><a href="#s-why">De ce atenția</a> · <a href="#s-mech">Mecanismul atenției</a> · <a href="#s-arch">Arhitectura transformer</a> · <a href="#s-case">Studiu de caz: sentimentul tweet-urilor financiare</a></p>
-<h2 class="sec" id="s-why">De ce atenția</h2>
+<p class="toc"><a href="#s-why">Motivația mecanismului de atenție</a> · <a href="#s-mech">Mecanismul atenției</a> · <a href="#s-arch">Arhitectura transformer</a> · <a href="#s-case">Studiu de caz: sentimentul tweet-urilor financiare</a></p>
+<h2 class="sec" id="s-why">Motivația mecanismului de atenție</h2>
 <section class="blk" id="context-lengths">
-  <h3>Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni</h3>
+  <h3>Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L7_context_lengths_ro.jpg" alt="Slide-ul 7: Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L7_context_lengths_ro.jpg" alt="Slide-ul 7: Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni" loading="lazy"></a>
       <figcaption>Slide-ul 7</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Corpusul</label><select id="cl-c"><option value="tweets">Tweet-uri financiare</option><option value="phrasebank">Financial PhraseBank</option><option value="speeches" selected>Discursuri BCE</option></select></div><div class="ctl"><label for="cl-w">Fereastra de context (tokeni, 2^k): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="5" max="15" step="1" value="9"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-hist"></div><div class="chart" id="cl-cdf"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_context_lengths" target="_blank" rel="noopener">NN_L7_context_lengths</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_context_lengths/NN_L7_context_lengths.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

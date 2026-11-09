@@ -90,7 +90,7 @@ window.NN_DATA.quizzes['l4'] = {
         {
             "correct": 3,
             "en": {
-                "title": "Why fewer parameters",
+                "title": "Parameter savings of a CNN",
                 "text": "On Fashion-MNIST our CNN has 140,778 parameters and the MLP 235,146. What is the main reason the CNN needs fewer?",
                 "options": [
                     "It uses ReLU instead of sigmoid",
@@ -102,7 +102,7 @@ window.NN_DATA.quizzes['l4'] = {
                 "incorrectExplanation": "The activation function and the number of epochs do not change the parameter count, and the CNN is in fact deeper; the saving comes from reusing the same kernel over the whole image."
             },
             "ro": {
-                "title": "De ce mai puțini parametri",
+                "title": "Economia de parametri a unei CNN",
                 "text": "Pe Fashion-MNIST, CNN-ul nostru are 140.778 de parametri, iar MLP 235.146. Care este motivul principal pentru care CNN are nevoie de mai puțini?",
                 "options": [
                     "Folosește ReLU în loc de sigmoidă",
@@ -831,7 +831,7 @@ window.NN_DATA.quizzes['l4'] = {
                 "incorrectExplanation": "The test set was fixed; McNemar works on one pair of models; averaging over seeds does not raise the accuracy, it measures its stability."
             },
             "ro": {
-                "title": "Semințe și zgomot",
+                "title": "Inițializări și zgomot",
                 "text": "De ce raportează cursul acuratețea CNN ca medie pe trei semințe?",
                 "options": [
                     "Inițializările aleatoare și ordinea loturilor diferite dau rețele diferite; dispersia măsoară zgomotul antrenării",

@@ -82,7 +82,7 @@ Locuințe & Locuințele din California, 20\,640 de grupuri de locuințe din rece
 \end{frame}
 
 
-\section{De ce explicăm o rețea neuronală?}
+\section{Motivele explicării rețelelor neuronale}
 
 \begin{frame}{Reglementările cer explicarea deciziilor automate}
 \footnotesize
@@ -201,7 +201,7 @@ XGBoost, 10 & 0{,}959 & 0{,}889 & 0{,}058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Shapley, 1953)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De la Shapley la SHAP: valoarea unei coaliții}
+\begin{frame}{SHAP: valoarea unei coaliții de variabile}
 \footnotesize
 \intuition{SHAP definește $v(S)$ = ieșirea așteptată a modelului cînd variabilele din afara lui $S$ sînt extrase dintr-un eșantion de referință.}
 \begin{columns}[T,onlytextwidth]
@@ -375,7 +375,7 @@ XGBoost, 10 & 0{,}959 & 0{,}889 & 0{,}058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L11\_lime\_vs\_shap}{Quantlets/L11/NN_L11_lime_vs_shap}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{LIME depinde de propriile setări}
+\begin{frame}{Sensibilitatea LIME la propriile setări}
 \small
 \intuition{stînga: 30 de rulări cu valori inițiale diferite; dreapta: cele cinci pante cînd se schimbă lățimea nucleului.}
 \begin{center}\includegraphics[width=\textwidth,height=0.310\textheight,keepaspectratio]{charts/ro/lime_instability.pdf}\end{center}\vspace{-3mm}
@@ -392,7 +392,7 @@ XGBoost, 10 & 0{,}959 & 0{,}889 & 0{,}058 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L11\_lime\_instability}{Quantlets/L11/NN_L11_lime_instability}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Explicații contrafactuale: ce ar trebui să se schimbe?}
+\begin{frame}{Explicații contrafactuale: modificările minime care schimbă decizia}
 \footnotesize
 \intuition{se caută cel mai apropiat solicitant, schimbînd doar variabile acționabile, pe care modelul l-ar accepta.}
 \begin{columns}[T,onlytextwidth]
@@ -443,7 +443,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 
 \section{Metode bazate pe gradient pentru rețele neuronale}
 
-\begin{frame}{Studiul de caz pentru fraudă: o rețea antrenată pe ziua 1, explicată pe ziua 2}
+\begin{frame}{Studiul de caz pentru fraudă: o rețea antrenată pe ziua 1 și explicată pe ziua 2}
 \footnotesize
 \intuition{pentru o rețea gradienții sînt gratuiți: o singură trecere înapoi dă sensibilitatea scorului de fraudă la fiecare intrare.}
 \begin{columns}[T,onlytextwidth]
@@ -472,7 +472,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Simonyan, Vedaldi \& Zisserman, 2014; Dal Pozzolo et al., 2015)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Gradienții integrați: atribuiri care se adună}
+\begin{frame}{Gradienții integrați și completitudinea atribuirilor}
 \footnotesize
 \intuition{se integrează gradientul pe drumul drept de la referință la intrare; atribuirile se adună la $f(\vx)-f(\vx')$.}
 \begin{columns}[T,onlytextwidth]
@@ -560,7 +560,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 
 \section{Concordanța, fidelitatea și stabilitatea explicațiilor}
 
-\begin{frame}{Concordanța metodelor: ridicată, dar nu perfectă}
+\begin{frame}{Concordanța metodelor de explicare}
 \small
 \intuition{corelația Spearman a importanțelor globale (media $|$atribuirii$|$) pentru șapte metode, pe aceleași fraude.}
 \begin{center}\includegraphics[width=\textwidth,height=0.348\textheight,keepaspectratio]{charts/ro/method_agreement.pdf}\end{center}\vspace{-3mm}
@@ -847,7 +847,7 @@ Timpul (ziua 1 $\to$ ziua 2) & Spearman, divergența JS & 0{,}98; 0{,}003 \\
 
 \section*{Anexă}
 
-\begin{frame}{Anexa A: de ce nucleul Shapley dă valorile Shapley}
+\begin{frame}{Anexa A: obținerea valorilor Shapley prin nucleul Shapley}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item Se impune ca $g(\vz)=\phi_0+\sum_j\phi_jz_j$ să satisfacă $g(\mathbf 0)=v(\emptyset)$ și $g(\mathbf 1)=v(\{1..d\})$ (pondere infinită pe coaliția vidă și pe cea completă).
@@ -861,7 +861,7 @@ Timpul (ziua 1 $\to$ ziua 2) & Spearman, divergența JS & 0{,}98; 0{,}003 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Lundberg \& Lee, 2017)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Anexa B: gradienții integrați ca metodă pe drum}
+\begin{frame}{Anexa B: gradienții integrați ca metodă de integrare pe traiectorie}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item Pentru un drum $\gamma(\alpha)$ de la $\vx'$ la $\vx$: $f(\vx)-f(\vx')=\int_0^1\nabla f(\gamma(\alpha))^{\top}\gamma'(\alpha)\,d\alpha=\sum_j\int_0^1\partial_jf(\gamma)\,\gamma_j'\,d\alpha$.

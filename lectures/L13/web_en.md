@@ -24,7 +24,7 @@ A forecast is only as good as the information it is allowed to use. This section
 
 On the day-ahead market, the price of every hour of tomorrow is set by one auction coupled across Europe and run in Romania by the Romanian electricity and gas market operator (OPCOM). Bids close at 12:00 Central European Time (CET) on the day before delivery. An error of 1 EUR/MWh on 100 MW over 24 hours costs 2,400 euro per day, so even small improvements matter. In finance, the Value-at-Risk is the quantile of tomorrow's return that should be breached on 1 % of days; under the Basel rules the number of breaches in a year moves the capital charge.
 
-## Real data only {h=e29baacd}
+## The data {h=f9c42706}
 
 Prices for Romania (RO), Germany–Luxembourg (DE-LU) and Hungary (HU) and the Romanian load come from energy-charts.info, the data portal of the Fraunhofer Institute for Solar Energy Systems (ISE), which republishes exchange data and the data of the European Network of Transmission System Operators for Electricity (ENTSO-E). The price file runs from 1 January 2015 to 31 October 2026 with 103,595 hourly prices. Daily closes of the S&P 500 and of Bitcoin come from Yahoo Finance. Missing hours stay missing: the two clock-change days of every year enter only if all 24 hours exist.
 
@@ -113,7 +113,7 @@ $$ \mathbf r_\ell=\mathbf r_{\ell-1}-\hat{\mathbf r}_\ell,\qquad \hat{\mathbf y}
 
 Our N-BEATS reads the last 168 hours of prices only, has 6 blocks and 1,739,904 parameters, and was trained once before the test year: test MAE 23.23 EUR/MWh (three seeds from 23.69 to 24.12).
 
-## Transformers for time series: patches become tokens {h=87461984}
+## Transformers for time series: patches as tokens {h=cbf29538}
 
 The patch time-series transformer (PatchTST) cuts the series into patches of, say, 16 hours, embeds each patch like a word and applies attention across patches. A context of 2,048 hours becomes 128 tokens, so the attention cost falls 256 times. The foundation models below are built on this idea.
 
@@ -168,7 +168,7 @@ Actual prices and three forecasts, 19–25 October 2026.
 
 In the week of 19 October 2026 to 25 October 2026 the MAE was 43.34 for LEAR, 32.33 for the DNN and 25.41 EUR/MWh for Chronos-2. All models follow the daily shape and smooth the evening spikes.
 
-## Longer context helps, up to a point {h=f05aad03}
+## Effect of context length {h=20270264}
 
 @chart context_length
 Chronos-2 MAE as a function of the context length.
@@ -218,7 +218,7 @@ Empirical coverage of 50, 80 and 90 % intervals.
 
 For the 90 % band: raw 88.3 %, conformal 89.4 %, LEAR with empirical errors 85.0 %.
 
-## Load is easier than price {h=406b5a1a}
+## Load forecasts of foundation models {h=379d6789}
 
 @chart load_mape
 Mean absolute percentage error of hourly Romanian load forecasts.

@@ -50,7 +50,7 @@ VaR & valoarea expusă la risc (value-at-risk)\\\end{tabular}}\end{column}
 
 % END-ABBR
 
-\begin{frame}{Numai date reale: trei colecții de texte}
+\begin{frame}{Datele: trei colecții reale de texte}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.23\textwidth}p{0.33\textwidth}p{0.17\textwidth}p{0.18\textwidth}@{}}\toprule
@@ -69,7 +69,7 @@ Discursurile Băncii Centrale Europene (BCE) & textele integrale ale membrilor C
 
 \section{Textul ca date}
 
-\begin{frame}{De la o frază la unități lexicale}
+\begin{frame}{Împărțirea unei fraze în unități lexicale}
 \footnotesize
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{O frază reală din PhraseBank}
@@ -95,7 +95,7 @@ Discursurile Băncii Centrale Europene (BCE) & textele integrale ale membrilor C
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Malo et al., 2014)}\hfill\tryit{\S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Puține cuvinte sînt frecvente, cele mai multe sînt rare: legea lui Zipf}
+\begin{frame}{Frecvențele cuvintelor și legea lui Zipf}
 \small
 \intuition{în 400 de discursuri ale Băncii Centrale Europene, frecvența scade ca o putere a rangului.}
 \vspace{-1mm}\[ f(r)\approx C\,r^{-a}\quad\Longleftrightarrow\quad\ln f(r)=\ln C-a\ln r \]\vspace{-2mm}
@@ -141,7 +141,7 @@ Discursurile Băncii Centrale Europene (BCE) & textele integrale ale membrilor C
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Salton \& Buckley, 1988)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{TF-IDF: reducem ponderea cuvintelor care apar peste tot}
+\begin{frame}{TF-IDF: ponderi mai mici pentru cuvintele care apar în toate documentele}
 \footnotesize
 \intuition{un cuvînt este informativ dacă este frecvent în acest document și rar în celelalte.}
 \begin{columns}[T,onlytextwidth]
@@ -424,7 +424,7 @@ $a:b::c:\,?$ & răspuns \\ \midrule
 
 \section{Clasificatoare de fraze: reprezentări rare și dense}
 
-\begin{frame}{O rețea embedding bag: media vectorilor de cuvinte, apoi un softmax}
+\begin{frame}{O rețea embedding bag: media vectorilor de cuvinte și un strat softmax}
 \footnotesize
 \intuition{cel mai simplu clasificator neuronal de text învață împreună vectorii de cuvinte și clasificatorul.}
 \begin{columns}[T,onlytextwidth]
@@ -478,7 +478,7 @@ $a:b::c:\,?$ & răspuns \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De la vectorii cuvintelor la vectorul frazei}
+\begin{frame}{Vectorul frazei construit din vectorii cuvintelor}
 \footnotesize
 \intuition{media vectorilor de cuvinte este cea mai simplă reprezentare a unei fraze și pierde exact ce contează pentru sentiment.}
 \begin{columns}[T,onlytextwidth]
@@ -567,7 +567,7 @@ embedding bag, start word2vec & 69{,}93\,$\pm$\,2{,}16 & 74{,}99 & 72{,}76\,$\pm
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Cît de mare trebuie să fie vectorul de cuvinte?}
+\begin{frame}{Alegerea dimensiunii vectorului de cuvinte}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.35\textwidth}
@@ -622,7 +622,7 @@ Dimensiunea $d$ & Macro-F1 (\%) \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L6\_agreement}{Quantlets/L6/NN_L6_agreement}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Cu puține etichete, startul word2vec ajută rețeaua; TF-IDF rămîne competitiv}
+\begin{frame}{Curbele de învățare cu puține etichete: inițializarea word2vec și TF-IDF}
 \small
 \intuition{stînga: macro-F1 pe test în funcție de numărul de fraze etichetate; dreapta: dimensiunea vectorilor din embedding bag.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/ro/learning_curve.pdf}\end{center}\vspace{-3mm}
@@ -637,7 +637,7 @@ Dimensiunea $d$ & Macro-F1 (\%) \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L6\_learning\_curve}{Quantlets/L6/NN_L6_learning_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Unde sînt erorile: știrile negative citite ca neutre}
+\begin{frame}{Principalul tip de eroare: știri negative clasificate ca neutre}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\textwidth}

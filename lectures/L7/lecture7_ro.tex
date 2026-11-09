@@ -57,7 +57,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 % END-ABBR
 
 
-\section{De ce atenția}
+\section{Motivația mecanismului de atenție}
 
 \begin{frame}{Știrile financiare ca date de intrare pentru modele}
 \footnotesize
@@ -125,9 +125,9 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bahdanau, Cho \& Bengio, 2015; Bishop \& Bishop, 2024, sec.\ 12.1)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni}
+\begin{frame}{Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni}
 \small
-\begin{center}\includegraphics[width=\textwidth,height=0.314\textheight,keepaspectratio]{charts/ro/context_lengths.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.375\textheight,keepaspectratio]{charts/ro/context_lengths.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Twitter financial news (zeroshot); Malo et al. (2014); discursurile Băncii Centrale Europene; tokenizatorul modelului ProsusAI. Date: tweet-uri financiare; Financial PhraseBank; discursurile Băncii Centrale Europene 8 ianuarie 2022 - 30 octombrie 2026.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -176,7 +176,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Vaswani et al., 2017; Bishop \& Bishop, 2024, sec.\ 12.1)}\hfill\tryit{notebook, secțiunea 2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{În formă matriceală: o singură înmulțire calculează atenția pentru toate cuvintele}
+\begin{frame}{Atenția în formă matriceală, pentru toate cuvintele simultan}
 \footnotesize
 \intuition{Așezînd întrebările, cheile și valorile în matrice, atenția devine două produse de matrice și un softmax pe rînduri.}
 \begin{columns}[T,onlytextwidth]
@@ -208,7 +208,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Vaswani et al., 2017)}\hfill\tryit{notebook, secțiunea 2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De ce împărțim la $\sqrt{d_k}$: ferim softmax-ul de saturație}
+\begin{frame}{Scalarea cu $\sqrt{d_k}$ și saturația softmax-ului}
 \footnotesize
 \intuition{Produsele scalare ale unor vectori aleatori lungi cresc odată cu lungimea lor; fără scalare, softmax-ul devine one-hot și gradientul dispare.}
 \begin{columns}[T,onlytextwidth]
@@ -238,7 +238,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Vaswani et al., 2017)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Mai multe capete caută simultan mai multe relații}
+\begin{frame}{Atenția cu mai multe capete: mai multe relații simultan}
 \footnotesize
 \intuition{Un cap mediază un singur tip de relație; mai multe capete, cu proiecții mai mici, surprind în paralel sintaxa, negația și entitățile.}
 \begin{columns}[T,onlytextwidth]
@@ -419,7 +419,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Devlin et al., 2019; Radford et al., 2018)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Textul devine numere prin tokeni de subcuvinte}
+\begin{frame}{Tokenizarea textului în subcuvinte}
 \footnotesize
 \intuition{Un vocabular fix de bucăți de cuvinte acoperă orice cuvînt, inclusiv simbolurile bursiere și numele noi de firme, împărțind cuvintele rare în bucăți frecvente.}
 \begin{columns}[T,onlytextwidth]
@@ -655,7 +655,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcule proprii, sămînța 1)}\hfill\qlink{NN\_L7\_data\_scaling}{Quantlets/L7/NN_L7_data_scaling}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ajustarea fină corectează ce greșește modelul fără antrenare}
+\begin{frame}{Erorile modelului fără antrenare corectate prin ajustare fină}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.479\textheight,keepaspectratio]{charts/ro/confusion.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Seturile Twitter financial news (Hugging Face, zeroshot). Date: estimări proprii; 2.388 tweet-uri de test (setul de validare publicat).}
@@ -674,7 +674,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcule proprii, modelul ajustat cu sămînța 1)}\hfill\qlink{NN\_L7\_confusion}{Quantlets/L7/NN_L7_confusion}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ajustarea fină: pornim de la ponderile preantrenate și facem pași mici}
+\begin{frame}{Ajustarea fină: ponderi inițiale preantrenate și rate de învățare mici}
 \footnotesize
 \intuition{Toate ponderile se mișcă, dar puțin: cunoștințele de limbă rămîn, stratul de decizie se adaptează la tweet-uri.}
 \begin{columns}[T,onlytextwidth]
@@ -709,7 +709,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Devlin et al., 2019; Araci, 2019)}\hfill\tryit{notebook, secțiunea 5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Contează ordinea cuvintelor în tweet-uri?}
+\begin{frame}{Rolul ordinii cuvintelor în clasificarea tweet-urilor}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -746,7 +746,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 
 \section{Transformerele în practică}
 
-\begin{frame}{De la scorurile de sentiment la un semnal de afaceri}
+\begin{frame}{Scorurile de sentiment ca semnal de afaceri}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -808,7 +808,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Vaswani et al., 2017)}\hfill\tryit{notebook, secțiunea 1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Transformerele dincolo de text}
+\begin{frame}{Transformerele pentru alte date decît textul}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -843,7 +843,7 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 
 \section{Concluzii}
 
-\begin{frame}{Ce reținem}
+\begin{frame}{Idei principale}
 \small
 \begin{itemize}\setlength{\itemsep}{6pt}
   \item \textbf{Atenția} = softmax al scorurilor întrebare-cheie scalate, înmulțit cu valorile

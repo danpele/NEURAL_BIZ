@@ -36,7 +36,7 @@ window.NN_DATA.quizzes['l14'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Why ViTs need pre-training",
+    "title": "Pre-training of vision transformers",
     "text": "Why does a vision transformer need much more training data than a CNN of similar size?",
     "options": [
      "It has no attention",
@@ -48,7 +48,7 @@ window.NN_DATA.quizzes['l14'] = {
     "incorrectExplanation": "A ViT is built on attention and handles colour and full-size images; what it lacks is the inductive bias of convolutions."
    },
    "ro": {
-    "title": "De ce are nevoie ViT de preantrenare",
+    "title": "Preantrenarea transformerelor pentru imagini",
     "text": "De ce are nevoie un transformer pentru imagini de mult mai multe date de antrenare decît o CNN de dimensiune similară?",
     "options": [
      "Nu are atenție",

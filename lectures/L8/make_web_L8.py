@@ -112,8 +112,8 @@ def page(lang):
         "- **Judecați** datele sintetice după cozi, gruparea volatilității, testele retrospective ale valorii la risc (VaR) și regimurile pe care le reproduc.\n"))
 
     # ------------------------------------------------------------------ 1
-    P.add(T("# Why generative models\n\nA generative model learns the whole distribution of the data, not only the boundary between classes.",
-            "# De ce modele generative\n\nUn model generativ învață întreaga distribuție a datelor, nu doar granița dintre clase."))
+    P.add(T("# Principles of generative modelling\n\nA generative model learns the whole distribution of the data, not only the boundary between classes.",
+            "# Principiile modelării generative\n\nUn model generativ învață întreaga distribuție a datelor, nu doar granița dintre clase."))
     P.block(T("A generative model learns how the data themselves arise", "Un model generativ învață cum apar datele"), text=T(
         f"""A discriminative model estimates $p(y\\mid\\mathbf x)$, the probability of a label given the inputs. A generative model estimates $p(\\mathbf x)$, or the joint $p(\\mathbf x,y)=p(\\mathbf x\\mid y)p(y)$, and is usually fitted by maximum likelihood,
 
@@ -155,7 +155,7 @@ Verosimilitatea, calitatea eșantioanelor și viteza rareori vin împreună; flu
     # ------------------------------------------------------------------ 2 AE
     P.add(T("# Autoencoders: anomaly detection for card fraud\n\nAn autoencoder trained on normal transactions flags those it cannot rebuild.",
             "# Autoencodere: detectarea anomaliilor la fraude cu carduri\n\nUn autoencoder antrenat pe tranzacții normale le semnalează pe cele pe care nu le poate reconstrui."))
-    P.block(T("An autoencoder squeezes the data through a bottleneck and rebuilds them", "Un autoencoder comprimă datele printr-un strat îngust și le reconstruiește"), text=T(
+    P.block(T("An autoencoder compresses the data through a bottleneck and reconstructs them", "Un autoencoder comprimă datele printr-un strat îngust și le reconstruiește"), text=T(
         f"""An encoder $f_\\phi$ maps the input to a code $\\mathbf z\\in\\mathbb R^k$ and a decoder $g_\\psi$ maps it back; both are small multilayer perceptrons (MLP) with rectified linear units (ReLU). Training minimises the reconstruction error, and the same error is the anomaly score:
 
 $$ \\min_{{\\phi,\\psi}}\\frac1n\\sum_{{i=1}}^n\\big\\|\\mathbf x_i-g_\\psi(f_\\phi(\\mathbf x_i))\\big\\|^2,\\qquad s(\\mathbf x)=\\tfrac1d\\|\\mathbf x-\\hat{{\\mathbf x}}\\|^2. $$ {{#eq:ae}}
@@ -169,7 +169,7 @@ Cu $f$ și $g$ liniare, optimul generează același subspațiu ca PCA cu $k$ com
     P.block(T("The fraud experiment: two days of card payments, split in time", "Experimentul de fraudă: două zile de plăți cu cardul, împărțite în timp"), text=T(
         f"""The data are the credit-card transactions of European cardholders released by the ULB Machine Learning Group and Worldline (Dal Pozzolo et al., 2015). Our file keeps all {v('fraud.n_fraud')} frauds and 10 % of the legitimate transactions, {v('fraud.n_rows', ',')} rows, with weights that restore the full data. The first 60 % of the time span is the training part (legitimate transactions only, {v('fraud.n_train_legit', ',')} rows), the next 20 % the validation part for early stopping, and the last 20 % the test part: {v('fraud.n_full_test', ',')} transactions of the full data with {v('fraud.n_test_fraud')} frauds ({v('fraud.test_fraud_rate_pct', '.3f')} %). The metrics are the area under the precision-recall curve (PR-AUC) and the area under the receiver operating characteristic curve (ROC-AUC), weighted to the full data.""",
         f"""Datele sînt tranzacțiile cu carduri ale unor deținători europeni, publicate de ULB Machine Learning Group și Worldline (Dal Pozzolo et al., 2015). Fișierul nostru păstrează toate cele {v('fraud.n_fraud')} de fraude și 10 % dintre tranzacțiile legitime, {v('fraud.n_rows', ',')} de rînduri, cu ponderi care refac datele complete. Primele 60 % din interval sînt partea de antrenare (numai tranzacții legitime, {v('fraud.n_train_legit', ',')} de rînduri), următoarele 20 % partea de validare pentru oprirea timpurie, iar ultimele 20 % partea de test: {v('fraud.n_full_test', ',')} de tranzacții din datele complete, cu {v('fraud.n_test_fraud')} de fraude ({v('fraud.test_fraud_rate_pct', '.3f')} %). Măsurile sînt aria de sub curba precizie-recall (PR-AUC) și aria de sub curba caracteristicii de operare a receptorului (ROC-AUC), ponderate la datele complete."""))
-    P.block(T("Frauds are hard to rebuild: their reconstruction error is far larger", "Fraudele sînt greu de reconstruit: eroarea lor de reconstrucție este mult mai mare"), text=T(
+    P.block(T("Reconstruction error of fraudulent and legitimate payments", "Eroarea de reconstrucție a plăților frauduloase și a celor legitime"), text=T(
         f"""On the test part the median reconstruction error of a fraud is {v('ae.median_ratio', '.1f')} times that of a legitimate transaction. The two distributions still overlap: many frauds look normal to a model that only knows normal behaviour.
 
 @chart ae_error_dist
@@ -178,8 +178,8 @@ Reconstruction error of the autoencoder on the test part, legitimate transaction
 
 @chart ae_error_dist
 Eroarea de reconstrucție a autoencoderului pe partea de test, tranzacții legitime (ponderate) și fraude."""))
-    P.block(T("Without labels the autoencoder finds frauds; with labels a simple classifier finds many more",
-              "Fără etichete, autoencoderul găsește fraude; cu etichete, un clasificator simplu găsește mult mai multe"), text=T(
+    P.block(T("Autoencoder without labels compared with a supervised classifier",
+              "Autoencoderul fără etichete comparat cu un clasificator supervizat"), text=T(
         f"""The PR-AUC on the test part is {v('ae.ap', '.1f')} % for the autoencoder (standard deviation {v('ae.ap_sd', '.1f')} over 3 seeds), {v('ae.ap_pca', '.1f')} % for PCA and {v('ae.ap_logit', '.1f')} % for a logistic regression that uses the labels; a random score would give {v('ae.base_ap', '.3f')} %. The ROC-AUC is high for all three ({v('ae.auc', '.1f')}, {v('ae.auc_pca', '.1f')} and {v('ae.auc_logit', '.1f')} %): with one fraud in several hundred transactions it hides the differences that the PR-AUC shows.
 
 @chart ae_pr
@@ -201,7 +201,7 @@ Test PR-AUC of the autoencoder by bottleneck size, with PCA as benchmark.
 PR-AUC de test al autoencoderului după dimensiunea stratului îngust, cu PCA ca model de referință.
 
 @practice alegeți $k$ pe o perioadă de validare, niciodată pe fraudele despre care veți raporta."""))
-    P.block(T("What a fraud team gets from the top 0.1 % of scores", "Ce obține echipa antifraudă din primele 0,1 % scoruri"), text=T(
+    P.block(T("Frauds found among the top 0.1 % of scores", "Fraudele identificate în primele 0,1 % dintre scoruri"), text=T(
         f"""If the team reviews the 0.1 % highest scores of the test part, {v('ae.n_alerts_top01')} alerts, it finds {v('ae.top01_frauds_ae')} frauds with the autoencoder ({v('ae.top01_recall_ae', '.1f')} % of all test frauds), {v('ae.top01_frauds_pca')} with PCA and {v('ae.top01_frauds_logit')} with the logistic regression ({v('ae.top01_recall_logit', '.1f')} %). Labels are worth a lot: supervised learning wins whenever confirmed frauds exist. The autoencoder is the detector of the unknown, a complement and not a replacement.
 
 @practice run both: the classifier for known fraud patterns, the autoencoder to surface new ones for investigators to label.""",
@@ -228,7 +228,7 @@ Primul termen răsplătește reconstrucțiile bune; al doilea, divergența Kullb
     P.block(T("The reparameterisation trick", "Trucul reparametrizării"), text=T(
         f"""Sampling $\\mathbf z$ is not differentiable, but $\\mathbf z=\\boldsymbol\\mu_\\phi(\\mathbf x)+\\boldsymbol\\sigma_\\phi(\\mathbf x)\\odot\\boldsymbol\\varepsilon$ with $\\boldsymbol\\varepsilon\\sim\\mathcal N(0,I)$ is: the randomness sits in $\\boldsymbol\\varepsilon$, which does not depend on the parameters. Our VAE is trained on Fashion-MNIST, {v('vae.n_train', ',')} training and {v('vae.n_test', ',')} test grey images of 28 × 28 pixels showing 10 kinds of clothing, with a Bernoulli decoder; the network 784–400–200–$k$ has {v('vae.params_16', ',')} parameters for $k=16$ and is trained for {v('vae.epochs')} epochs.""",
         f"""Extragerea lui $\\mathbf z$ nu este derivabilă, dar $\\mathbf z=\\boldsymbol\\mu_\\phi(\\mathbf x)+\\boldsymbol\\sigma_\\phi(\\mathbf x)\\odot\\boldsymbol\\varepsilon$, cu $\\boldsymbol\\varepsilon\\sim\\mathcal N(0,I)$, este: hazardul stă în $\\boldsymbol\\varepsilon$, care nu depinde de parametri. VAE-ul nostru este antrenat pe Fashion-MNIST, {v('vae.n_train', ',')} de imagini de antrenare și {v('vae.n_test', ',')} de test, gri, de 28 × 28 de pixeli, cu 10 tipuri de îmbrăcăminte, și are un decodor Bernoulli; rețeaua 784–400–200–$k$ are {v('vae.params_16', ',')} de parametri pentru $k=16$ și este antrenată {v('vae.epochs')} de epoci."""))
-    P.block(T("A two-dimensional latent space already sorts the products", "Un spațiu latent cu două dimensiuni sortează deja produsele"), text=T(
+    P.block(T("A two-dimensional latent space separates the product types", "Un spațiu latent cu două dimensiuni separă tipurile de produse"), text=T(
         f"""With only two latent dimensions and no labels, shoes, bags and garments fall into separate regions. A 15-nearest-neighbour classifier on the two latent means reaches {v('vae.knn_acc_2d', '.1f')} % accuracy (5-fold, test images): the VAE has learnt an organisation of the products without being told what they are.
 
 @chart vae_latent
@@ -246,7 +246,7 @@ Real, reconstructed and generated images, VAE with $k=16$.""",
 
 @chart vae_samples
 Imagini reale, reconstruite și generate, VAE cu $k=16$."""))
-    P.block(T("Training trades reconstruction against the KL penalty", "Antrenarea negociază între reconstrucție și penalizarea KL"), text=T(
+    P.block(T("Trade-off between reconstruction and the KL penalty during training", "Compromisul dintre reconstrucție și penalizarea KL în timpul antrenării"), text=T(
         f"""On the test images, after the last epoch, the reconstruction term is {v('vae.beta.b1.rec', '.1f')} nats per image and the KL term {v('vae.beta.b1.kl', '.1f')} nats, so the ELBO is {v('vae.elbo_16', '.1f')} nats. The KL rises while the error falls: the encoder spends more information on each image as it learns.
 
 @chart vae_elbo
@@ -292,7 +292,7 @@ Discriminator and generator losses during training, seed 1.""",
 
 @chart gan_losses
 Pierderile discriminatorului și generatorului în timpul antrenării, sămînța 1."""))
-    P.block(T("The GAN learns fat tails that the Gaussian misses", "GAN-ul învață cozile groase pe care distribuția normală nu le vede"), text=T(
+    P.block(T("The GAN reproduces the fat tails missed by the Gaussian model", "GAN-ul reproduce cozile groase pe care modelul gaussian nu le surprinde"), text=T(
         f"""The excess kurtosis of the real returns is {v('gan.kurt_real', '.2f')}; the GAN samples reach {v('gan.kurt_gan', '.2f')} (standard deviation {v('gan.kurt_gan_sd', '.2f')} over 3 seeds), against 0 for the Gaussian. The Kolmogorov–Smirnov distance to the real returns is {v('gan.ks_gan', '.3f')} for the GAN and {v('gan.ks_norm', '.3f')} for the fitted Gaussian.
 
 @chart gan_density
@@ -362,7 +362,7 @@ a simplified, reweighted ELBO. Generation starts from pure noise and applies $\\
 $$ \\mathcal L(\\theta)=\\mathbb E_{{t,\\mathbf x_0,\\boldsymbol\\varepsilon}}\\big\\|\\boldsymbol\\varepsilon-\\boldsymbol\\varepsilon_\\theta(\\sqrt{{\\bar\\alpha_t}}\\mathbf x_0+\\sqrt{{1-\\bar\\alpha_t}}\\boldsymbol\\varepsilon,t)\\big\\|^2, $$ {{#eq:ddpm}}
 
 un ELBO simplificat și reponderat. Generarea pornește de la zgomot pur și aplică $\\mathbf x_{{t-1}}=\\big(\\mathbf x_t-\\beta_t\\boldsymbol\\varepsilon_\\theta/\\sqrt{{1-\\bar\\alpha_t}}\\big)/\\sqrt{{\\alpha_t}}+\\sqrt{{\\beta_t}}\\mathbf u$ pînă la $t=0$. Rețeaua noastră este un MLP cu trei straturi ascunse de 256 de unități și o reprezentare sinusoidală a lui $t$, cu {v('yc.params', ',')} de parametri, antrenată {v('yc.steps', ',')} de pași pe cele {v('yc.n_days', ',')} de curbe zilnice ale Băncii Centrale Europene, din {v('yc.first')} pînă în {v('yc.last')}."""))
-    P.block(T("Diffusion reproduces the two regimes of euro rates; a Gaussian cannot", "Difuzia reproduce cele două regimuri ale dobînzilor euro; distribuția normală nu poate"), text=T(
+    P.block(T("The two regimes of euro rates in diffusion and Gaussian samples", "Cele două regimuri ale dobînzilor euro în eșantioanele generate prin difuzie și de modelul gaussian"), text=T(
         f"""The real 10-year yield ranges from {v('yc.y10_min', '.2f')} % to {v('yc.y10_max', '.2f')} % and is negative on {v('yc.pct_neg10_real', '.1f')} % of the days: there is a low-rate and a normal-rate regime. The Wasserstein distance between the generated and the real 10-year yield is {v('yc.ddpm.w_y10', '.3f')} percentage points for the diffusion model, {v('yc.vae.w_y10', '.3f')} for a two-factor VAE and {v('yc.gauss.w_y10', '.3f')} for a multivariate Gaussian.
 
 @chart yc_density
@@ -371,7 +371,7 @@ Density of the 10-year yield, real curves and 5,000 curves from each generator."
 
 @chart yc_density
 Densitatea randamentului la 10 ani, curbele reale și cîte 5 000 de curbe din fiecare generator."""))
-    P.block(T("Level and slope move together in a curved way that diffusion keeps", "Nivelul și panta se mișcă împreună, într-un mod curb, pe care difuzia îl păstrează"), text=T(
+    P.block(T("Diffusion preserves the nonlinear co-movement of level and slope", "Difuzia păstrează dependența neliniară dintre nivel și pantă"), text=T(
         f"""A curve is inverted when the 10-year yield is below the 3-month yield. This happened on {v('yc.pct_inverted_real', '.1f')} % of the real days; {v('yc.ddpm.pct_inverted', '.1f')} % of the diffusion samples and {v('yc.gauss.pct_inverted', '.1f')} % of the Gaussian samples are inverted. The Wasserstein distance of the slope is {v('yc.ddpm.w_slope', '.3f')} for the diffusion model, {v('yc.vae.w_slope', '.3f')} for the VAE and {v('yc.gauss.w_slope', '.3f')} for the Gaussian.
 
 @chart yc_scatter
@@ -395,7 +395,7 @@ Mediile latente ale VAE-ului cu doi factori, în timp."""))
     # ------------------------------------------------------------------ 6 practice
     P.add(T("# Generative models in practice\n\nSynthetic data are useful only after they pass the same checks as real data.",
             "# Modelele generative în practică\n\nDatele sintetice sînt utile numai după ce trec aceleași verificări ca datele reale."))
-    P.block(T("How to judge synthetic financial data", "Cum judecăm datele financiare sintetice"), text=T(
+    P.block(T("Evaluation criteria for synthetic financial data", "Criterii de evaluare a datelor financiare sintetice"), text=T(
         """Four questions. Fidelity: do the marginals, the tails and the dependence across assets and over time match? Diversity: are extreme days and regimes present in the right proportions, with no mode collapse? Utility: does a model trained on synthetic data and tested on real data (TSTR) work? Privacy: is any sample too close to a real record? On our data the GAN gets the tails right and the clustering wrong; the diffusion model gets the regimes and the inversions right, the Gaussian does not.
 
 @practice never use synthetic data for a decision before it passes the same backtests as the model it feeds.""",

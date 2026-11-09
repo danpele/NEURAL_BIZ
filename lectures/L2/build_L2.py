@@ -292,7 +292,7 @@ def build(lang, H=None):
                job=t("deep nets need ReLU-type activations, a scaled initialisation and, later, normalisation (Lecture 3).",
                      "rețelele adînci au nevoie de activări ReLU, de o inițializare scalată și de normalizare (cursul 3)."),
                tryit=NB + " \\S3", cite=OWN, height="0.46\\textheight")
-    D.frame(t("Initialise so that the variance of the signal stays constant across layers", "Inițializarea păstrează constantă varianța semnalului între straturi"),
+    D.frame(t("Initialisation that keeps the variance of the signal constant across layers", "Inițializarea păstrează constantă varianța semnalului între straturi"),
             "\\intuition{" + t("too small and the signal vanishes, too large and it explodes; the right scale depends on the fan-in and on the activation.",
                                "prea mică și semnalul dispare, prea mare și explodează; scara depinde de numărul de intrări și de activare.") + "}\n" +
             "\\[ \\Var(z_j^{(l)})=n_{l-1}\\Var(W)\\,\\E\\big[(h^{(l-1)})^2\\big]\\ \\Rightarrow\\ "
@@ -374,7 +374,7 @@ def build(lang, H=None):
                  "Rescalarea pe fiecare pondere compensează parțial condiționarea proastă: direcțiile plate sau rar actualizate primesc pași mai mari.")) +
             D.bottom(t("adaptive methods are less sensitive to the learning rate, which makes them a safe first choice.",
                        "metodele adaptive sînt mai puțin sensibile la rata de învățare, ceea ce le face o primă alegere sigură."), NB + " \\S5"))
-    D.frame(t("Adam = momentum + RMSProp + a bias correction", "Adam = moment + RMSProp + o corecție a deplasării"),
+    D.frame(t("Adam: momentum, RMSProp and a bias correction", "Adam: moment, RMSProp și corecția deplasării"),
             "\\intuition{" + t("keep moving averages of the gradient and of its square, correct them for starting at zero, and step by their ratio.",
                                "păstrăm medii mobile ale gradientului și ale pătratului lui, le corectăm pentru pornirea de la zero și facem un pas egal cu raportul lor.") + "}\n" +
             "\\[ m_t=\\beta_1m_{t-1}+(1-\\beta_1)g_t,\\quad v_t=\\beta_2v_{t-1}+(1-\\beta_2)g_t^2,\\quad "
@@ -390,8 +390,8 @@ def build(lang, H=None):
             D.bottom(t("start with AdamW and $\\eta=10^{-3}$; move to tuned SGD with momentum only if it pays out of sample.",
                        "porniți de la AdamW cu $\\eta=10^{-3}$; treceți la SGD cu moment, ajustat, doar dacă cîștigați în afara eșantionului."), NB + " \\S5"),
             cite="(Kingma \\& Ba, 2015)")
-    D.figframe(t("On California housing, all tuned optimisers end close; adaptive ones get there more reliably",
-                 "Pe datele California, toți optimizatorii ajustați ajung aproape; cei adaptivi ajung mai sigur"),
+    D.figframe(t("On California housing, tuned optimisers reach similar errors and adaptive methods converge more reliably",
+                 "Pe datele California, optimizatorii ajustați ating erori apropiate, iar metodele adaptive converg mai sigur"),
                t("best of three learning rates per optimiser (on validation), mean of 5 new seeds.",
                  "cea mai bună dintre trei rate de învățare (pe validare), media a 5 inițializări noi."),
                None, "optimizers",
@@ -488,8 +488,8 @@ def build(lang, H=None):
             D.bottom(t("the same network with another loss gives another risk measure: the loss defines what is learned.",
                        "aceeași rețea cu altă pierdere dă altă măsură de risc: pierderea definește ce se învață."), NB + " \\S8"),
             cite="(Koenker \\& Bassett, 1978)")
-    D.figframe(t("Through the 2020 pandemic and after, the quantile MLP is breached about as often as it should be",
-                 "În pandemia din 2020 și după, VaR-ul MLP cuantilic este depășit aproximativ cît ar trebui"),
+    D.figframe(t("Breaches of the quantile-MLP VaR during and after the 2020 pandemic are close to the nominal rate",
+                 "Depășirile VaR-ului MLP cuantilic în pandemia din 2020 și după aceasta sînt apropiate de rata nominală"),
                t("test period only; red dots are days when the S\\&P 500 lost more than the MLP's 99\\,\\% VaR.",
                  "doar perioada de test; punctele roșii sînt zilele în care S\\&P 500 a pierdut mai mult decît VaR-ul de 99\\,\\% al MLP."),
                None, "var_backtest",

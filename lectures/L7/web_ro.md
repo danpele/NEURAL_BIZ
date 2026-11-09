@@ -15,7 +15,7 @@ Cursul scrie atenția și blocul transformer cu toate simbolurile definite și l
 - **Comparați** un transformer de la zero, FinBERT și un model de referință TF-IDF pe tweet-uri financiare reale, cu intervale bootstrap.
 - **Citiți** cu atenție hărțile de atenție și decideți cînd preantrenarea, ajustarea fină sau un model simplu sînt alegerea potrivită.
 
-# De ce atenția
+# Motivația mecanismului de atenție
 
 Textul sosește repede și conține informație la care prețurile reacționează; rețelele recurente îl citesc încet și uită.
 
@@ -29,7 +29,7 @@ Un model de sentiment duce un text $x_{1:n}$ într-o reprezentare de dimensiune 
 
 O rețea recurentă actualizează un singur vector de stare, token cu token, $\mathbf h_t=\phi(W_h\mathbf h_{t-1}+W_x\mathbf x_t+\mathbf b)$, deci gradientul dintre cuvintele 1 și $n$ este un produs de $n-1$ matrice jacobiene, care scade sau explodează odată cu distanța. Drumul dintre cuvintele $i$ și $j$ are $|i-j|$ pași, iar cei $n$ pași nu pot rula în paralel. Rețeaua cu memorie pe termen lung și scurt (LSTM) din cursul 5 atenuează prima problemă, dar o păstrează pe a doua. În „profitul a scăzut, dar prognoza a fost majorată”, verdictul depinde de un cuvînt aflat departe de subiect.
 
-## Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni {h=07be54df}
+## Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni {h=25d49168}
 
 În tokeni WordPiece, tweet-ul median are 25 de tokeni, propoziția mediană din Financial PhraseBank 28, iar discursul median al Băncii Centrale Europene (BCE) 3 338. Dintre cele 400 de discursuri, 98,8 % depășesc fereastra de 512 tokeni a modelului BERT; doar 0,19 % dintre tweet-uri depășesc 64 de tokeni.
 
@@ -56,15 +56,15 @@ Un dicționar întoarce valoarea singurei chei potrivite; atenția întoarce un 
 
 @practice fiecare cuvînt de ieșire este un amestec care ține cont de context: „prognoza” poate împrumuta sens de la „majorată”, aflat zece cuvinte mai departe.
 
-## În formă matriceală: o singură înmulțire calculează atenția pentru toate cuvintele {h=217786af}
+## Atenția în formă matriceală, pentru toate cuvintele simultan {h=d0e1b6e8}
 
 Așezînd tokenii în $X\in\mathbb R^{n\times d}$ obținem $\operatorname{Attention}(Q,K,V)=\operatorname{softmax}(QK^\top/\sqrt{d_k}+\mathbf M)V$, cu o mască $\mathbf M$ egală cu $-\infty$ pentru completare sau, într-un decodor, pentru tokenii viitori. Costul pe strat este $O(n^2d)$ operații și memorie $O(n^2)$: atenția pe un discurs median al BCE costă de circa 17 828 de ori mai mult decît pe un tweet median. În schimb nu există nicio buclă pe poziții, iar procesoarele grafice înmulțesc toată propoziția deodată.
 
-## De ce împărțim la √d_k: ferim softmax-ul de saturație {h=1a0a5f58}
+## Scalarea cu √d_k și saturația softmax-ului {h=8e711075}
 
 Dacă elementele lui $\mathbf q$ și $\mathbf k$ sînt independente, cu media 0 și varianța 1, atunci $\operatorname{Var}(\mathbf q^\top\mathbf k)=d_k$. Cu $d_k=64$, ca în fiecare cap BERT, scorurile brute au abaterea standard 8, deci un singur cuvînt ia aproape toată ponderea, iar jacobianul softmax-ului $\operatorname{diag}(\mathbf a)-\mathbf a\mathbf a^\top$ este aproape zero: întrebările și cheile nu mai învață. Împărțirea la $\sqrt{d_k}$ readuce varianța la unu, pentru orice $d_k$.
 
-## Mai multe capete caută simultan mai multe relații {h=aa354a71}
+## Atenția cu mai multe capete: mai multe relații simultan {h=f318ff74}
 
 Atenția cu mai multe capete rulează $h$ atenții cu proiecții de dimensiune $d/h$ și le concatenează: $\operatorname{MHA}(X)=[\mathbf H_1\|\cdots\|\mathbf H_h]W_O$, cu $4d^2$ parametri, ca la un singur cap mare. BERT-base are 12 straturi cu cîte 12 capete, $d$ = 768 și 64 de dimensiuni pe cap; transformerul nostru mic are 2 straturi cu cîte 4 capete și $d=64$.
 
@@ -117,7 +117,7 @@ Bidirectional Encoder Representations from Transformers (BERT) se preantrenează
 
 @practice pentru etichetarea textelor folosiți un codificator; pentru redactarea rapoartelor, un decodor (cursul 12).
 
-## Textul devine numere prin tokeni de subcuvinte {h=cdbd61af}
+## Tokenizarea textului în subcuvinte {h=87486fc5}
 
 Un tokenizator WordPiece împarte cuvintele rare în bucăți frecvente, astfel încît un vocabular fix, de 30 522 de bucăți pentru FinBERT, acoperă orice cuvînt, inclusiv simbolurile bursiere și numele noi de firme. Textul devine [CLS], bucățile și [SEP], iar fiecare token primește reprezentarea lui, plus un vector de poziție și unul de segment. Tweet-urile noastre au o mediană de 25 de tokeni, percentila 99 de 57 și un maxim de 82; tăiem la 64 de tokeni. În modelele mici domină tabelul reprezentărilor: transformerul nostru mic are 2 020 547 de parametri, doar 67 139 în afara tabelului.
 
@@ -178,20 +178,20 @@ Cu doar 429 de tweet-uri de antrenare, FinBERT înghețat cu o regresie logistic
 @chart data_scaling
 Macro-F1 de test după numărul de tweet-uri de antrenare (sămînța 1).
 
-## Ajustarea fină corectează ce greșește modelul fără antrenare {h=5b88197f}
+## Erorile modelului fără antrenare corectate prin ajustare fină {h=e62e7327}
 
 FinBERT a fost antrenat pe propoziții din știri, nu pe tweet-uri. Fără antrenare pe tweet-uri găsește 264 dintre cele 347 de tweet-uri negative de test; după ajustare găsește 288. Erorile rămase sînt mai ales confuzii cu clasa neutră: 47 tweet-uri negative și 73 pozitive citite ca neutre și doar 12 negative citite ca pozitive.
 
 @chart confusion
 Matricele de confuzie ale FinBERT pe tweet-urile de test, fără antrenare și ajustat (sămînța 1).
 
-## Ajustarea fină: pornim de la ponderile preantrenate și facem pași mici {h=0ce521af}
+## Ajustarea fină: ponderi inițiale preantrenate și rate de învățare mici {h=476b24c3}
 
 Ajustarea fină pornește de la $\boldsymbol\theta_0=\boldsymbol\theta_{\text{FinBERT}}$ și mișcă toate cele 109,5 milioane de ponderi cu o rată de învățare mică, $2\cdot10^{-5}$, care scade liniar pe 3 epoci; se păstrează epoca cu cel mai bun macro-F1 pe validare. Cîștigă +17,9 puncte față de modelul fără antrenare și +9,3 față de TF-IDF, cu un cost de circa 5,2 minute pe sămînță, pe procesorul grafic al unui laptop. O rată de învățare prea mare șterge ce a învățat preantrenarea (uitare catastrofală).
 
 @practice ajustarea fină a unui codificator preantrenat este azi alegerea implicită pentru orice sarcină pe text etichetat, cu cîteva mii de exemple.
 
-## Contează ordinea cuvintelor în tweet-uri? {h=0e9bea4e}
+## Rolul ordinii cuvintelor în clasificarea tweet-urilor {h=0395db40}
 
 Același transformer mic atinge 68,8 % macro-F1 cu poziții și 67,9 % fără ele, o diferență de +0,9 puncte, cu intervalul bootstrap [+0,1; +1,7]; media reprezentărilor, fără nicio atenție, atinge 66,6 %. Tweet-urile scurte și formulaice sînt mai ales colecții de cuvinte-semnal; ordinea contează pentru negație, contrast, documente lungi și cifre legate de entitatea corectă.
 
@@ -205,7 +205,7 @@ Preantrenarea decide: FinBERT ajustat conduce, TF-IDF este un model de referinț
 
 De la scoruri la semnale, documente lungi și transformere dincolo de text.
 
-## De la scorurile de sentiment la un semnal de afaceri {h=c339af19}
+## Scorurile de sentiment ca semnal de afaceri {h=a4fb0c17}
 
 Un flux de producție trece știrile și postările prin tokenizator și printr-un codificator ajustat, apoi agregă probabilitățile claselor pe firmă și zi, de exemplu ponderea mesajelor negative minus a celor pozitive, ponderată cu audiența. Astfel de semnale servesc monitorizării riscului unui portofoliu de credite, avertizării timpurii pentru emitenți sau ajustării valorii la risc (VaR). Capcanele sînt informația din viitor (folosiți doar texte cu marcaj de timp anterior deciziei), schimbarea domeniului (un model pentru propoziții din știri citește greșit tweet-urile), zgomotul din etichete, sarcasmul și deriva vocabularului pieței.
 
@@ -217,7 +217,7 @@ Cele 400 de discursuri ale BCE, din 8 ianuarie 2022 pînă în 30 octombrie 2026
 
 @practice pentru o echipă de politică monetară, împărțirea în bucăți plus un codificator bine testat bate de obicei un model cu context lung netestat.
 
-## Transformerele dincolo de text {h=b830b8ab}
+## Transformerele pentru alte date decît textul {h=def48f13}
 
 Fragmentele unei serii de timp devin tokeni în modelele de prognoză preantrenate (cursul 13); coloanele sau plățile anterioare devin tokeni pentru datele tabelare și tranzacții; atenția restrînsă la muchiile unui graf este rețeaua cu atenție pe graf (cursul 9); fragmentele de imagine devin tokeni în modelele viziune-limbaj care citesc grafice și rapoarte (cursul 14).
 

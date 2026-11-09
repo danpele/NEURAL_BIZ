@@ -16,7 +16,7 @@ This lecture writes the convolutional layer as a formula, trains three models on
 - **Use** transfer learning when labelled images are expensive, and measure what it saves.
 - **Explain** a prediction with a class activation map and turn image predictions into business numbers.
 
-# Images as data: why convolutions
+# Images as data and the motivation for convolutions
 
 An image is a matrix of numbers, and the first question is how a model should look at it.
 
@@ -33,7 +33,7 @@ Two training images of each of the ten product types.
 
 A dense layer computes $\mathbf h=\sigma(\mathbf W\,\mathrm{vec}(\mathbf X)+\mathbf b)$ with one weight per pixel and unit. For a 224 × 224 colour image and 1,000 hidden units, that is about 150 million weights in the first layer alone. A CNN rests on three ideas: local connectivity (a unit sees a small patch), weight sharing (the same filter at every position) and equivariance (shifting the input shifts the feature map). On our data the MLP has 235,146 parameters and the CNN 140,778, 1.67 times fewer.
 
-# The convolutional layer, formula by formula
+# The convolutional layer
 
 ## Convolution: the same small filter slides over the image
 
@@ -65,7 +65,7 @@ Receptive field as a function of depth, with and without pooling (own computatio
 
 Because the kernel is shared, its gradient sums the contributions of every position, $\partial\mathcal L/\partial K_{o,c}(u,v)=\sum_{i,j}\delta_o(i,j)X_c(is+u-p,js+v-p)$, and the gradient with respect to the input is again a convolution. Every network of the lecture uses batch normalisation (BN) after each convolution: each channel is standardised over the batch and the positions, then rescaled by two learned numbers. At prediction time the running averages replace the batch statistics, which is why `model.eval()` must be called before predicting.
 
-# Case study: product photos, from softmax to CNN
+# Case study: classification of product photos with softmax regression and a CNN
 
 ## Experimental protocol for the three models
 
@@ -74,14 +74,14 @@ The benchmark is a softmax (multinomial logistic) regression with 7,850 paramete
 @chart fmnist_curves
 Training (dashed) and validation (solid) cross-entropy, and validation accuracy, by epoch (seed 20261108).
 
-## Higher accuracy with fewer parameters
+## Accuracy and number of parameters of the three models
 
 The CNN reaches a test accuracy of 93.08% (standard deviation over seeds 0.20), against 89.00% for the MLP and 84.50% for the softmax regression. It removes 37.1% of the MLP's errors with 1.67 times fewer parameters. McNemar's test on the same 10,000 test images (seed 20261108) counts 614 images right only for the CNN and 226 right only for the MLP, a statistic of 178.3, far above the 5% critical value of 3.84.
 
 @chart fmnist_compare
 Test accuracy (mean and standard deviation over three seeds) and number of parameters.
 
-## The errors are the products that people also confuse
+## Confusion matrix: errors between products of similar shape
 
 The weakest class is Shirt (recall 75.1%), and the largest single confusion is Shirt taken for T-shirt/top (102 images).
 
@@ -90,7 +90,7 @@ Confusion matrix of the CNN on the test images (counts of 10 or more shown).
 
 @practice route only the low-confidence photos of the weak classes to a person: the cost of errors falls where it is highest.
 
-## What the network learns
+## Learned filters and feature maps
 
 The first-layer filters are small edge and contrast detectors, found by gradient descent without being asked for. Deeper layers combine them: the feature maps of block 1 keep the outline of the boot, those of block 3 are small (7 × 7) but mark where the informative parts are.
 
@@ -143,7 +143,7 @@ Confusion matrix of the fine-tuned ResNet-18 on the test tiles.
 @chart gradcam
 Six test tiles and their Grad-CAM maps, with the predicted class and its probability.
 
-## From tiles to a decision
+## Land-use shares from satellite tiles
 
 A portfolio question is about shares, not single tiles. On the test tiles, crops (annual and permanent) make 20.37% of the tiles and the model predicts 20.54%; the largest error of any class share is 0.20 percentage points. Before using the model in a new region or season, label a small sample there and measure again.
 

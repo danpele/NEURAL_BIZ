@@ -23,7 +23,7 @@ OUT = os.path.join(ROOT, 'web', 'cases')
 REPO = 'https://github.com/danpele/NEURAL_BIZ'
 COLAB = 'https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/'
 MATHJAX = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js'
-VER = '20261108a'
+VER = '20261109n'
 
 # ------------------------------------------------------------------ the cases
 LECT = {1: ('Deep learning for business: from linear models to the multilayer perceptron', 'Deep learning pentru afaceri: de la modelele liniare la perceptronul multistrat'),
@@ -35,7 +35,7 @@ LECT = {1: ('Deep learning for business: from linear models to the multilayer pe
         7: ('Attention and transformers', 'Atenția și arhitectura transformer'),
         8: ('Generative models', 'Modele generative'),
         9: ('Graph neural networks', 'Rețele neuronale pe grafuri'),
-        10: ('Reinforcement learning', 'Învățarea prin recompensă'),
+        10: ('Reinforcement learning', 'Reinforcement learning'),
         11: ('Explainability (XAI)', 'Explicabilitate (XAI)'),
         12: ('Large language models in finance', 'Modele lingvistice mari în finanțe'),
         13: ('Deep learning for energy and financial time series', 'Deep learning pentru serii de timp din energie și finanțe'),
@@ -83,7 +83,7 @@ CASE = {
 L = {
     'en': dict(course='Neural Networks and Deep Learning', back='Course site', site='../../index.html#cases', case='Case study',
                lecture='Lecture', brief='Case brief (PDF)', nb='Notebook', colab='Open in Colab', toc='Contents',
-               question='The business question', intuition='Intuition first', decision='In practice', figure='Figure', table='Table',
+               question='The business question', intuition='Intuition behind the method', decision='In practice', figure='Figure', table='Table',
                src='Source', glance=['Question', 'Data', 'Method', 'Result', 'Decision'], author='Prof. dr. Daniel Traian PELE',
                inst=['Bucharest University of Economic Studies, Department of Statistics and Econometrics',
                      'Romanian Academy, Institute for Economic Forecasting'],

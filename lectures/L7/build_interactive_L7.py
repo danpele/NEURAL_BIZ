@@ -31,9 +31,9 @@ BLOCKS = [('context-lengths', 'context_lengths', 'why', 'cl'),
           ('data-scaling', 'data_scaling', 'case', 'ds')]
 
 SECTIONS = {
- 'en': dict(why='Why attention', mech='The attention mechanism', arch='The transformer architecture',
+ 'en': dict(why='Motivation for the attention mechanism', mech='The attention mechanism', arch='The transformer architecture',
             case='Case study: sentiment of finance tweets'),
- 'ro': dict(why='De ce atenția', mech='Mecanismul atenției', arch='Arhitectura transformer',
+ 'ro': dict(why='Motivația mecanismului de atenție', mech='Mecanismul atenției', arch='Arhitectura transformer',
             case='Studiu de caz: sentimentul tweet-urilor financiare'),
 }
 

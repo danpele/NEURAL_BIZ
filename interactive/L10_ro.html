@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor</title>
-<meta name="description" content="Rețele neuronale și deep learning: Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor">
+<title>Cursul 10 · Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 10 · Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor">
 <link rel="icon" href="../assets/logos/ase_logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L10.js?v=20261108s">
+<link rel="preload" as="script" href="L10.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,14 +34,14 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261108s", "L10_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L10.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261109n", "L10_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L10.js?v=20261109n");
 </script>
 </head>
 <body>
 <header>
   <div class="header-inner">
     <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
-    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor</p></div>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 10 · Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor</p></div>
     <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
   </div>
 </header>
@@ -52,7 +52,7 @@
   <li class="lang-switcher"><a href="L10.html" class="lang-btn">EN</a><a href="L10_ro.html" class="lang-btn active">RO</a></li>
 </ul></nav>
 <main class="imain">
-<p class="lead">Învățarea prin întărire (RL, reinforcement learning) pe trei probleme reale: o baterie de 2 MWh (megawatt-oră) care tranzacționează pe piața pentru ziua următoare, o poziție în indicele S&P 500 care este fie în afara pieței, fie investită, și acoperirea zilnică a unei opțiuni call pe o lună. În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului (data/clean) și din deciziile agenților antrenați cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
+<p class="lead">Reinforcement learning (RL) pe trei probleme reale: o baterie de 2 MWh (megawatt-oră) care tranzacționează pe piața pentru ziua următoare, o poziție în indicele S&P 500 care este fie în afara pieței, fie investită, și acoperirea zilnică a unei opțiuni call pe o lună. În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser din datele cursului (data/clean) și din deciziile agenților antrenați cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii.</p>
 <p class="toc"><a href="#s-bat">Bateria ca proces decizional Markov (MDP): programarea dinamică (DP)</a> · <a href="#s-val">Învățarea bazată pe valoare: Q-learning și rețeaua Q profundă (DQN)</a> · <a href="#s-pol">Gradienți de politică: optimizarea proximală a politicii (PPO) în tranzacționare</a> · <a href="#s-hed">Acoperirea neuronală a unei opțiuni call vîndute</a></p>
 <h2 class="sec" id="s-bat">Bateria ca proces decizional Markov (MDP): programarea dinamică (DP)</h2>
 <section class="blk" id="dp-day">
@@ -76,9 +76,9 @@
   <details><summary>Răspuns</summary><p>La ora 12:00, V<sub>12</sub>(0) = 1.541 EUR și V<sub>12</sub>(2) = 1.760 EUR, deci fiecare MWh stocat valorează 109,38 EUR: prețul-umbră al energiei din baterie, aproximativ cît costă cumpărarea ei la amiază. La ora 18:00, fiecare MWh valorează circa 880 EUR, pentru că cele mai scumpe două ore (19:00 și 20:00) urmează. La ora 23:00 (alegeți valoarea unui MWh stocat în plus), primul MWh valorează 211 EUR (mai poate fi vîndut în ultima oră), iar al doilea nimic, deoarece se poate muta doar 1 MWh pe oră. Ecuația Bellman construiește aceste valori înapoi, pornind de la V<sub>24</sub>(s) = 0, iar acțiunea optimă în fiecare (h, s) este cea care atinge maximul.</p></details>
 </section><h2 class="sec" id="s-val">Învățarea bazată pe valoare: Q-learning și rețeaua Q profundă (DQN)</h2>
 <section class="blk" id="q-policy">
-  <h3>Ce a învățat Q-learning tabelar</h3>
+  <h3>Politica învățată prin Q-learning tabelar</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L10_q_policy_ro.jpg" alt="Slide-ul 22: Ce a învățat Q-learning tabelar" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=22" target="_blank" rel="noopener"><img src="slides/L10_q_policy_ro.jpg" alt="Slide-ul 22: Politica învățată prin Q-learning tabelar" loading="lazy"></a>
       <figcaption>Slide-ul 22</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="qp-s"><span class="lbl">Energia stocată</span><div class="tgs"><label class="tg"><input type="radio" name="qp-s" value="0"> 0 MWh</label><label class="tg"><input type="radio" name="qp-s" value="1" checked> 1 MWh</label><label class="tg"><input type="radio" name="qp-s" value="2"> 2 MWh</label></div></div><div class="ctl"><label for="qp-h">Ora (CET): <b id="qp-h-v"></b></label><input type="range" id="qp-h" min="0" max="23" step="1" value="13"></div><div class="ctl"><label for="qp-b">Rangul orei în prețurile de ieri</label><select id="qp-b"><option value="0" selected>cele mai ieftine 6 ore ieri</option><option value="1">quartila a 2-a</option><option value="2">quartila a 3-a</option><option value="3">cele mai scumpe 6 ore ieri</option></select></div><button class="btn play" id="qp-play" type="button"></button></div><div class="charts one"><div class="chart" id="qp-map"></div><div class="chart" id="qp-bar"></div></div><ul class="out" id="qp-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_q_policy" target="_blank" rel="noopener">NN_L10_q_policy</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_q_policy/NN_L10_q_policy.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Răspuns</summary><p>Încarcă: Q(încărcare) = 175,0 EUR, Q(inactiv) = 167,2 EUR, Q(descărcare) = 139,6 EUR, valorile restului zilei după fiecare acțiune, învățate din 1.746 de zile de antrenare (2019–2023). Avantajul față de așteptare este mic, circa 8 EUR. Cu 1 MWh stocat, rîndul orelor celor mai ieftine de ieri încarcă în 7 ore și descarcă în 8, mai ales de la ora 18:00 încolo: ora zilei domină, ca în curs. Cu 0 MWh agentul poate doar să încarce sau să aștepte, cu 2 MWh doar să descarce sau să aștepte (mascarea acțiunilor). Tabelul are 24 × 4 × 3 = 288 de stări și poate fi tipărit și auditat.</p></details>
 </section>
 <section class="blk" id="battery-test">
-  <h3>Anii de test: cît din venitul cu previziune perfectă se obține</h3>
+  <h3>Ponderea venitului cu previziune perfectă obținută în anii de test</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L10_battery_test_cum_ro.jpg" alt="Slide-ul 25: Anii de test: cît din venitul cu previziune perfectă se obține" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L10_battery_test_cum_ro.jpg" alt="Slide-ul 25: Ponderea venitului cu previziune perfectă obținută în anii de test" loading="lazy"></a>
       <figcaption>Slide-ul 25</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bt-k"><span class="lbl">Strategii</span><div class="tgs"><label class="tg"><input type="checkbox" name="bt-k" value="pf" checked> previziune perfectă</label><label class="tg"><input type="checkbox" name="bt-k" value="dqn" checked> DQN dublu</label><label class="tg"><input type="checkbox" name="bt-k" value="q" checked> Q-learning tabelar</label><label class="tg"><input type="checkbox" name="bt-k" value="nv" checked> planul optim de ieri</label></div></div><div class="ctl"><label for="bt-seed">Agenții care învață</label><select id="bt-seed"><option value="avg" selected>Media celor 5 valori inițiale</option><option value="0">Valoarea inițială 1 (20261108)</option><option value="1">Valoarea inițială 2 (20261109)</option><option value="2">Valoarea inițială 3 (20261110)</option><option value="3">Valoarea inițială 4 (20261111)</option><option value="4">Valoarea inițială 5 (20261112)</option></select></div><div class="ctl"><label for="bt-v">Scala</label><select id="bt-v"><option value="cum" selected>venit cumulat (mii EUR)</option><option value="cap">% din venitul cu previziune perfectă</option></select></div><div class="ctl"><label for="bt-m">Începutul ferestrei: <b id="bt-m-v"></b></label><input type="range" id="bt-m" min="0" max="21" step="1" value="0"></div><button class="btn play" id="bt-play" type="button"></button></div><div class="charts one"><div class="chart" id="bt-chart"></div></div><ul class="out" id="bt-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_battery_test_cum" target="_blank" rel="noopener">NN_L10_battery_test_cum</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_battery_test_cum/NN_L10_battery_test_cum.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

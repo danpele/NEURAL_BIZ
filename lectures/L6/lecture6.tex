@@ -48,7 +48,7 @@ VaR & value-at-risk\\\end{tabular}}\end{column}
 
 % END-ABBR
 
-\begin{frame}{Real data only: three text collections}
+\begin{frame}{The data: three real text collections}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.23\textwidth}p{0.33\textwidth}p{0.17\textwidth}p{0.18\textwidth}@{}}\toprule
@@ -67,7 +67,7 @@ European Central Bank (ECB) speeches & full texts of the Executive Board and Sup
 
 \section{Text as data}
 
-\begin{frame}{From a sentence to tokens}
+\begin{frame}{Tokenisation of a sentence}
 \footnotesize
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{A real PhraseBank sentence}
@@ -93,7 +93,7 @@ European Central Bank (ECB) speeches & full texts of the Executive Board and Sup
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Malo et al., 2014)}\hfill\tryit{\S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Few words are frequent, most are rare: Zipf's law}
+\begin{frame}{Word frequencies and Zipf's law}
 \small
 \intuition{in 400 speeches of the European Central Bank, frequency falls as a power of rank.}
 \vspace{-1mm}\[ f(r)\approx C\,r^{-a}\quad\Longleftrightarrow\quad\ln f(r)=\ln C-a\ln r \]\vspace{-2mm}
@@ -139,7 +139,7 @@ European Central Bank (ECB) speeches & full texts of the Executive Board and Sup
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Salton \& Buckley, 1988)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{TF-IDF: down-weight words that appear everywhere}
+\begin{frame}{TF-IDF: lower weights for words that appear in every document}
 \footnotesize
 \intuition{a word is informative if it is frequent in this document and rare in the others.}
 \begin{columns}[T,onlytextwidth]
@@ -422,7 +422,7 @@ $a:b::c:\,?$ & answer \\ \midrule
 
 \section{Sentence classifiers: sparse versus dense}
 
-\begin{frame}{An embedding-bag network: average the word vectors, then a softmax}
+\begin{frame}{An embedding-bag network: averaged word vectors followed by a softmax layer}
 \footnotesize
 \intuition{the simplest neural text classifier learns the embeddings and the classifier together.}
 \begin{columns}[T,onlytextwidth]
@@ -476,7 +476,7 @@ $a:b::c:\,?$ & answer \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{From word vectors to a sentence vector}
+\begin{frame}{Sentence vectors built from word vectors}
 \footnotesize
 \intuition{averaging word vectors is the simplest sentence representation, and it loses what matters for sentiment.}
 \begin{columns}[T,onlytextwidth]
@@ -565,7 +565,7 @@ embedding bag, word2vec start & 69.93\,$\pm$\,2.16 & 74.99 & 72.76\,$\pm$\,0.39 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{How large should the embedding be?}
+\begin{frame}{Choice of the embedding dimension}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.35\textwidth}
@@ -620,7 +620,7 @@ Dimension $d$ & Macro-F1 (\%) \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L6\_agreement}{Quantlets/L6/NN_L6_agreement}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{With few labels, a word2vec start helps the network; TF-IDF stays competitive}
+\begin{frame}{Learning curves with few labels: word2vec initialisation and TF-IDF}
 \small
 \intuition{left: test macro-F1 against the number of labelled sentences; right: embedding size of the embedding bag.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/learning_curve.pdf}\end{center}\vspace{-3mm}
@@ -635,7 +635,7 @@ Dimension $d$ & Macro-F1 (\%) \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L6\_learning\_curve}{Quantlets/L6/NN_L6_learning_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Where the errors are: negative news read as neutral}
+\begin{frame}{Main error type: negative news classified as neutral}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.47\textwidth}

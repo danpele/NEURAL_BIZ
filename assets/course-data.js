@@ -54,7 +54,7 @@
         7: { en: "Attention and transformers", ro: "Atenția și transformerele" },
         8: { en: "Generative models: autoencoders, VAE, GAN, diffusion", ro: "Modele generative: autoencodere, VAE, GAN, difuzie" },
         9: { en: "Graph neural networks", ro: "Rețele neuronale pe grafuri" },
-        10: { en: "Reinforcement learning: trading, hedging and battery dispatch", ro: "Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor" },
+        10: { en: "Reinforcement learning: trading, hedging and battery dispatch", ro: "Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor" },
         11: { en: "Explainable AI: SHAP, LIME, gradient methods and the stability of explanations", ro: "Inteligența artificială explicabilă: SHAP, LIME, metode bazate pe gradient și stabilitatea explicațiilor" },
         12: { en: "Large language models (LLM) in finance and prompt engineering", ro: "Modele lingvistice mari (LLM) în finanțe și formularea instrucțiunilor (prompt engineering)" },
         13: { en: "Deep learning for energy and financial time series; time-series foundation models", ro: "Deep learning pentru serii de timp din energie și finanțe; modele fundație pentru serii de timp" },
@@ -103,7 +103,7 @@
                 study: { lecture: 'Lecture', extra: 'Extra case study', paper: 'Paper', page: 'Read the case study', brief: 'Brief (PDF)', colab: 'Open in Colab', notebook: 'Notebook', related: 'Related lectures', noPaper: 'Descriptive analysis on real data; not built on a single paper.' },
                 episodesTitle: '',
                 episodesIntro: '',
-                further: 'Go deeper: talks and references',
+                further: 'Talks and further references',
                 videos: 'Videos: the intuition behind the mathematics (in English)',
                 quantinar: 'Further reading on Quantinar',
                 casesTitle: 'Case Studies',
@@ -182,7 +182,7 @@
                 study: { lecture: 'Cursul', extra: 'Studiu de caz suplimentar', paper: 'Lucrarea', page: 'Citiți studiul de caz', brief: 'Studiul de caz (PDF)', colab: 'Deschide în Colab', notebook: 'Notebook', related: 'Cursurile asociate', noPaper: 'Analiză descriptivă pe date reale; nu se bazează pe o anumită lucrare.' },
                 episodesTitle: '',
                 episodesIntro: '',
-                further: 'Aprofundare: prezentări și referințe',
+                further: 'Prezentări și referințe suplimentare',
                 videos: 'Video: intuiția din spatele matematicii (în engleză)',
                 quantinar: 'Lecturi suplimentare pe Quantinar',
                 casesTitle: 'Studii de caz',
@@ -265,7 +265,7 @@
                 'Antrenarea corectă a rețelelor: coborîrea stohastică pe gradient (SGD, stochastic gradient descent), metoda momentului, Adam, programarea ratei de învățare, regularizarea și o schemă de validare fără scurgere de informație',
                 'Construirea rețelelor convoluționale (CNN, convolutional neural networks) și recurente (RNN, LSTM, GRU) și folosirea transferului învățării pentru imagini și pentru serii de timp financiare și din energie',
                 'Reprezentarea textului prin vectori de cuvinte (embeddings) și prin arhitecturi transformer, ajustarea fină a modelelor lingvistice și formularea instrucțiunilor (prompturi) pentru analiza sentimentului financiar și a documentelor',
-                'Aplicarea modelelor generative, a rețelelor neuronale pe grafuri (GNN, graph neural networks) și a învățării prin recompensă la detectarea anomaliilor, la rețelele de tranzacții și la deciziile de tranzacționare sau de operare a bateriilor',
+                'Aplicarea modelelor generative, a rețelelor neuronale pe grafuri (GNN, graph neural networks) și a reinforcement learning la detectarea anomaliilor, la rețelele de tranzacții și la deciziile de tranzacționare sau de operare a bateriilor',
                 'Explicarea și auditarea unui model cu SHAP (SHapley Additive exPlanations), LIME (Local Interpretable Model-agnostic Explanations) și metode bazate pe gradient, cu verificarea stabilității explicațiilor',
                 'Evaluarea prognozelor obținute cu deep learning și cu modele fundație în raport cu modele de referință simple, în afara eșantionului de estimare, și prezentarea rezultatului ca decizie de afaceri'
             ]
@@ -449,7 +449,7 @@
                 title: TITLES[12],
                 topics: {
                     en: ["Language models: next-token objective, tokens, perplexity and temperature, measured on speeches of the ECB (European Central Bank)", "From pre-training to assistants: supervised fine-tuning, RLHF (reinforcement learning from human feedback), DPO (direct preference optimisation) and LoRA (low-rank adaptation)", "Prompt engineering measured on Financial PhraseBank and finance tweets: zero-shot, few-shot, chain-of-thought, prompt sensitivity, calibration and cost", "RAG (retrieval-augmented generation) on ECB speeches: BM25, dense and hybrid retrieval; hallucination without documents", "LLM-VaR: a language model as a Value-at-Risk estimator, backtested against GARCH and historical simulation"],
-                    ro: ["Modele de limbaj: obiectivul următorului token, tokeni, perplexitate și temperatură, măsurate pe discursurile BCE (Banca Centrală Europeană)", "De la preantrenare la asistenți: ajustarea fină supervizată, RLHF (învățare prin recompensă din feedback uman), DPO (optimizarea directă a preferințelor) și LoRA (adaptare de rang mic)", "Formularea instrucțiunilor evaluată pe Financial PhraseBank și pe tweet-uri financiare: zero-shot, few-shot, chain-of-thought, sensibilitatea la prompt, calibrare și cost", "RAG (generare augmentată prin regăsire) pe discursurile BCE: regăsire BM25, densă și hibridă; halucinațiile fără documente", "LLM-VaR: un model de limbaj ca estimator al valorii expuse la risc, testat retrospectiv față de GARCH și simularea istorică"]
+                    ro: ["Modele de limbaj: obiectivul următorului token, tokeni, perplexitate și temperatură, măsurate pe discursurile BCE (Banca Centrală Europeană)", "De la preantrenare la asistenți: ajustarea fină supervizată, RLHF (reinforcement learning from human feedback), DPO (optimizarea directă a preferințelor) și LoRA (adaptare de rang mic)", "Formularea instrucțiunilor evaluată pe Financial PhraseBank și pe tweet-uri financiare: zero-shot, few-shot, chain-of-thought, sensibilitatea la prompt, calibrare și cost", "RAG (generare augmentată prin regăsire) pe discursurile BCE: regăsire BM25, densă și hibridă; halucinațiile fără documente", "LLM-VaR: un model de limbaj ca estimator al valorii expuse la risc, testat retrospectiv față de GARCH și simularea istorică"]
                 },
                 further: [
                     { en: "Hugging Face LLM course", ro: "Hugging Face LLM course", url: "https://huggingface.co/learn/llm-course" },
@@ -520,7 +520,7 @@
                   ro: "Pe graful tranzacțiilor Bitcoin Elliptic, modelul XGBoost este reestimat de opt ori numai cu variabilele tranzacțiilor, cu reprezentări GraphSAGE (graph sample and aggregate) și cu un control gaussian de aceeași dimensiune și covarianță; explicațiile SHAP sînt comparate între validarea aleatoare și validarea înainte în timp, ca în lucrare. Modelul cu graf se modifică mai puțin în unități SHAP brute, dar mai mult raportat la contribuția obișnuită a fiecărei variabile (variația Wasserstein pe scala proprie +0,067, pozitivă în toate cele 8 reestimări); blocul de graf preia 55,8 % din masa SHAP, iar motivul principal arătat anchetatorului se schimbă cu 33,6 puncte procentuale mai des decît cu controlul gaussian. După închiderea pieței ilegale de la pasul de timp 43, sensibilitatea scade drastic pentru toate modelele." } },
             { num: 4, folder: 'C4_battery_arbitrage', lectures: ['l10', 'l13'],
               paper: { cite: "Andrei, A.-V., Cepoi, C. O., Dumitrescu, B. A., Lessmann, S., Chiriac (Luchian), A.-C., Pele, D. T. &amp; Petukhina, A. (2026). Joint probabilistic forecasting for battery arbitrage in day-ahead power markets. SSRN (Social Science Research Network) Working Paper 6872381.", url: "https://doi.org/10.2139/ssrn.6872381", link: "doi:10.2139/ssrn.6872381" },
-              title: { en: "A battery on the day-ahead market: quantile networks and reinforcement learning", ro: "O baterie pe piața pentru ziua următoare: rețele neuronale cuantilice și învățare prin recompensă" },
+              title: { en: "A battery on the day-ahead market: quantile networks and reinforcement learning", ro: "O baterie pe piața pentru ziua următoare: rețele neuronale cuantilice și reinforcement learning" },
               summary: {
                   en: "A 1 MW battery trades one charge–discharge cycle a day on the Romanian day-ahead market. A quantile multilayer perceptron forecasts the 24 hourly price distributions; trading on its median earns 82,878 EUR in January 2025 – October 2026, 87.2 % of perfect foresight and more than the naive forecast (78,176) and the fixed hours (71,205); a tabular Q-learning agent earns about as much as the fixed hours, so forecast-then-optimise wins here. As in the paper, arbitrage alone does not recover the investment: at 500,000 EUR per MW the net present value is −81,278 EUR, and the break-even capital cost is about 419 thousand EUR.",
                   ro: "O baterie de 1 MW face un ciclu de încărcare–descărcare pe zi pe piața pentru ziua următoare din România. Un perceptron multistrat cuantilic prognozează distribuția prețurilor pentru cele 24 de ore; tranzacționarea pe baza medianei aduce 82.878 EUR în ianuarie 2025 – octombrie 2026, adică 87,2 % din rezultatul cu previziune perfectă și mai mult decît prognoza naivă (78.176) și orele fixe (71.205); un agent Q-learning tabelar cîștigă aproximativ cît orele fixe, deci aici cîștigă abordarea „întîi prognoza, apoi optimizarea”. Ca în lucrare, arbitrajul singur nu recuperează investiția: la 500.000 EUR pe MW, valoarea actualizată netă este −81.278 EUR, iar costul de capital la care investiția devine rentabilă este de aproximativ 419 mii EUR." } },
@@ -532,7 +532,7 @@
                   ro: "Lucrarea cere unui model mare de limbaj (LLM) să continue, fără antrenare (zero-shot), o fereastră de randamente zilnice scrise ca text și obține valoarea la risc (VaR) și pierderea așteptată în coada distribuției (ES) pentru o zi din continuările generate. Aici metoda este replicată cu modelele deschise Qwen2.5 (1,5 și 3 miliarde de parametri), rulate pe un laptop, pe indicele S&amp;P 500 în 505 zile de test (noiembrie 2024 – noiembrie 2026), comparativ cu simularea istorică (HS), HS filtrată și GARCH(1,1) cu erori Student-t. La 1 %, modelele de limbaj înregistrează 11–16 depășiri (5,05 așteptate), iar modelele de referință 8–11; cel mai bun model de limbaj are o pierdere FZ0 de 1,334, față de 1,158 pentru HS filtrată (mai mic este mai bine). Dacă modelul este întrebat în format de conversație, în loc de simpla continuare a seriei, depășirile cresc la 64. Un model de risc se judecă după backtest și după capitalul pe care îl implică." } },
             { num: 6, folder: 'C6_foundation_risk', lectures: ['l13'],
               paper: { cite: "Jheng, S.-L., Tak, R., Găman, Ș., Mazurencu-Marinescu-Pele, M. &amp; Pele, D. T. (2026). Can foundation models manage risk? Zero-shot VaR and ES forecasting with conformal calibration in CEE markets. <em>Economic Computation and Economic Cybernetics Studies and Research</em>, 60(2), 267–290.", url: "https://doi.org/10.24818/18423264/60.2.26.14", link: "doi:10.24818/18423264/60.2.26.14" },
-              title: { en: "Can foundation models manage risk?", ro: "Pot modelele fundație gestiona riscul?" },
+              title: { en: "Zero-shot Value-at-Risk and Expected Shortfall from foundation models with conformal calibration", ro: "Valoarea la risc și pierderea așteptată din modele fundație zero-shot, cu calibrare conformală" },
               summary: {
                   en: "Eight shares of the Bucharest Stock Exchange (BVB), 2018–2026: one-day 1 % and 2.5 % value at risk (VaR) and expected shortfall (ES) from zero-shot Chronos-2 and TimesFM 2.5, with and without the paper’s rolling conformal calibration, against historical simulation and GJR-GARCH (Glosten–Jagannathan–Runkle). Raw Chronos-2 is too conservative on single BVB shares (0.48 % violations at 1 %); the conformal shift brings it to 1.33 %, as close to nominal as GJR-GARCH (1.37 %), with the fewest Christoffersen rejections and the expected shortfall closest to correct (Acerbi–Székely Z2 = 0.10; paper 0.23). GJR-GARCH keeps the lowest tick and FZ0 losses. Calibration releases about 87 thousand RON of daily limit per 10 million RON position.",
                   ro: "Opt acțiuni de la Bursa de Valori București (BVB), 2018–2026: valoarea la risc (VaR) la 1 % și 2,5 % și pierderea așteptată în coada distribuției (ES) pentru o zi, din modelele Chronos-2 și TimesFM 2.5 folosite fără antrenare (zero-shot), cu și fără calibrarea conformală glisantă din lucrare, comparate cu simularea istorică și cu GJR-GARCH (Glosten–Jagannathan–Runkle). Chronos-2 nemodificat este prea conservator pentru acțiunile individuale de la BVB (0,48 % depășiri la 1 %); ajustarea conformală îl aduce la 1,33 %, la fel de aproape de nivelul nominal ca GJR-GARCH (1,37 %), cu cele mai puține respingeri ale testului Christoffersen și cu ES cel mai apropiat de valoarea corectă (Acerbi–Székely Z2 = 0,10; în lucrare 0,23). GJR-GARCH păstrează cele mai mici pierderi tick și FZ0. Calibrarea eliberează aproximativ 87 de mii RON din limita zilnică pentru o poziție de 10 milioane RON." } },
@@ -589,7 +589,7 @@
                 ro: [
                     { h: 'Proiectul', p: [
                         'Ca echipă de analiza datelor a unei bănci, a unui asigurător, a unui fond sau a unei companii din energie, răspundeți la o întrebare de afaceri cu un model de deep learning estimat pe date reale și arătați dacă rețeaua își justifică costul față de un model de referință simplu.',
-                        'Teme: scoringul de credit sau frauda (cursurile 1–3), imagini sau documente (4, 14), prognoză (5, 13), text și modele lingvistice (6, 7, 12), grafuri de tranzacții (9), decizii cu învățare prin recompensă (10) sau o întrebare proprie.',
+                        'Teme: scoringul de credit sau frauda (cursurile 1–3), imagini sau documente (4, 14), prognoză (5, 13), text și modele lingvistice (6, 7, 12), grafuri de tranzacții (9), decizii cu reinforcement learning (10) sau o întrebare proprie.',
                         ['Numărul de membri', 'TODO: numărul de studenți dintr-o echipă']] },
                     { h: 'Etape', p: [
                         '1. Reproduceți o cifră a cursului din <code>data/clean</code>.',
@@ -985,8 +985,8 @@
             ["RAG", "Retrieval-augmented generation", "Generare augmentată prin regăsire (retrieval-augmented generation)"],
             ["ReLU", "Rectified linear unit", "Unitate liniară rectificată"],
             ["RGB", "Red, green, blue (colour channels)", "Roșu, verde, albastru (canalele de culoare)"],
-            ["RL", "Reinforcement learning", "Învățare prin întărire (reinforcement learning)"],
-            ["RLHF", "Reinforcement learning from human feedback", "Învățare prin recompensă din feedback uman"],
+            ["RL", "Reinforcement learning", "Reinforcement learning"],
+            ["RLHF", "Reinforcement learning from human feedback", "Reinforcement learning from human feedback"],
             ["RMSE", "Root mean squared error", "Rădăcina erorii pătratice medii"],
             ["RMSProp", "Root mean square propagation", "Propagarea cu medie pătratică (root mean square propagation)"],
             ["RNN", "Recurrent neural network", "Rețea neuronală recurentă"],

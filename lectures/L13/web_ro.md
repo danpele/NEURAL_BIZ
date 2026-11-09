@@ -24,7 +24,7 @@ O prognoză nu poate fi mai bună decît informația pe care are voie să o folo
 
 Pe piața pentru ziua următoare, prețul fiecărei ore de mîine este stabilit de o singură licitație, cuplată la nivel european și organizată în România de operatorul pieței de energie electrică și gaze naturale (OPCOM). Ofertele se închid la ora 12:00, ora Europei Centrale (CET), în ziua dinaintea livrării. O eroare de 1 EUR/MWh pe 100 MW timp de 24 de ore costă 2 400 de euro pe zi, așa că și îmbunătățirile mici contează. În finanțe, valoarea expusă la risc este cuantila randamentului de mîine care ar trebui depășită în 1 % din zile; după regulile Basel, numărul depășirilor dintr-un an modifică cerința de capital.
 
-## Numai date reale {h=15ce4a81}
+## Datele {h=f33b7f7f}
 
 Prețurile pentru România (RO), Germania–Luxemburg (DE-LU) și Ungaria (HU) și consumul României provin de pe energy-charts.info, portalul de date al Institutului Fraunhofer pentru Sisteme de Energie Solară (ISE), care republică datele burselor și ale Rețelei europene a operatorilor de transport și de sistem pentru energie electrică (ENTSO-E). Fișierul de prețuri acoperă perioada 1 ianuarie 2015 -- 31 octombrie 2026, cu 103 595 de prețuri orare. Prețurile zilnice ale S&P 500 și ale Bitcoin provin de la Yahoo Finance. Orele lipsă rămîn lipsă: cele două zile pe an cu schimbarea orei intră în analiză doar dacă există toate cele 24 de ore.
 
@@ -113,7 +113,7 @@ $$ \mathbf r_\ell=\mathbf r_{\ell-1}-\hat{\mathbf r}_\ell,\qquad \hat{\mathbf y}
 
 Modelul nostru N-BEATS citește doar ultimele 168 de ore de prețuri, are 6 blocuri și 1 739 904 parametri și a fost antrenat o singură dată, înainte de anul de test: MAE pe test 23,23 EUR/MWh (trei rulări, între 23,69 și 24,12).
 
-## Arhitecturi transformer pentru serii de timp: peticele devin tokeni {h=afead399}
+## Arhitecturi transformer pentru serii de timp: peticele ca tokeni {h=d3f0cb89}
 
 Arhitectura transformer pe petice (PatchTST) taie seria în petice de, de exemplu, 16 ore, reprezintă fiecare petic ca pe un cuvînt și aplică mecanismul de atenție între petice. Un context de 2 048 de ore devine 128 de tokeni, iar costul atenției scade de 256 de ori. Modelele fundație de mai jos se bazează pe această idee.
 
@@ -168,7 +168,7 @@ Prețurile realizate și trei prognoze, 19–25 octombrie 2026.
 
 În săptămîna 19 octombrie 2026 -- 25 octombrie 2026, MAE a fost de 43,34 pentru LEAR, 32,33 pentru DNN și 25,41 EUR/MWh pentru Chronos-2. Toate modelele urmăresc forma zilnică și netezesc vîrfurile de seară.
 
-## Un context mai lung ajută, pînă la un punct {h=6a96a329}
+## Efectul lungimii contextului {h=5b57acac}
 
 @chart context_length
 MAE Chronos-2 în funcție de lungimea contextului.
@@ -218,7 +218,7 @@ Acoperirea empirică a intervalelor de 50, 80 și 90 %.
 
 Pentru banda de 90 %: brut 88,3 %, conformal 89,4 %, LEAR cu erori empirice 85,0 %.
 
-## Consumul este mai ușor de prognozat decît prețul {h=65f4bb45}
+## Prognozele de consum ale modelelor fundație {h=4f32c066}
 
 @chart load_mape
 Eroarea procentuală absolută medie a prognozelor consumului orar al României.

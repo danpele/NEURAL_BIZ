@@ -13,7 +13,7 @@
   ],
   "ro": [
    "Modele de limbaj: obiectivul următorului token, tokeni, perplexitate și temperatură, măsurate pe discursurile BCE (Banca Centrală Europeană)",
-   "De la preantrenare la asistenți: ajustarea fină supervizată, RLHF (învățare prin recompensă din feedback uman), DPO (optimizarea directă a preferințelor) și LoRA (adaptare de rang mic)",
+   "De la preantrenare la asistenți: ajustarea fină supervizată, RLHF (reinforcement learning from human feedback), DPO (optimizarea directă a preferințelor) și LoRA (adaptare de rang mic)",
    "Formularea instrucțiunilor evaluată pe Financial PhraseBank și pe tweet-uri financiare: zero-shot, few-shot, chain-of-thought, sensibilitatea la prompt, calibrare și cost",
    "RAG (generare augmentată prin regăsire) pe discursurile BCE: regăsire BM25, densă și hibridă; halucinațiile fără documente",
    "LLM-VaR: un model de limbaj ca estimator al valorii expuse la risc, testat retrospectiv față de GARCH și simularea istorică"

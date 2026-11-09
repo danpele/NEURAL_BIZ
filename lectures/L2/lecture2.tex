@@ -217,7 +217,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1.419 & \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L2\_vanishing}{Quantlets/L2/NN_L2_vanishing}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Initialise so that the variance of the signal stays constant across layers}
+\begin{frame}{Initialisation that keeps the variance of the signal constant across layers}
 \small
 \intuition{too small and the signal vanishes, too large and it explodes; the right scale depends on the fan-in and on the activation.}
 \[ \Var(z_j^{(l)})=n_{l-1}\Var(W)\,\E\big[(h^{(l-1)})^2\big]\ \Rightarrow\ \underbrace{\Var(W)=\frac{2}{n_{l-1}+n_l}}_{\text{Xavier (tanh, sigmoid)}},\qquad \underbrace{\Var(W)=\frac{2}{n_{l-1}}}_{\text{He (ReLU)}} \]
@@ -328,7 +328,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1.419 & \
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Adam = momentum + RMSProp + a bias correction}
+\begin{frame}{Adam: momentum, RMSProp and a bias correction}
 \small
 \intuition{keep moving averages of the gradient and of its square, correct them for starting at zero, and step by their ratio.}
 \[ m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\quad v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2,\quad \hat m_t=\frac{m_t}{1-\beta_1^t},\ \hat v_t=\frac{v_t}{1-\beta_2^t},\quad \theta_{t+1}=\theta_t-\eta\,\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon} \]
@@ -349,7 +349,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1.419 & \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kingma \& Ba, 2015)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{On California housing, all tuned optimisers end close; adaptive ones get there more reliably}
+\begin{frame}{On California housing, tuned optimisers reach similar errors and adaptive methods converge more reliably}
 \small
 \intuition{best of three learning rates per optimiser (on validation), mean of 5 new seeds.}
 \begin{center}\includegraphics[width=\textwidth,height=0.376\textheight,keepaspectratio]{charts/en/optimizers.pdf}\end{center}\vspace{-3mm}
@@ -478,7 +478,7 @@ AdamW & Adam $+$ decay $(1-\eta\lambda)\theta$ & 2 vectors & whenever weight dec
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Koenker \& Bassett, 1978)}\hfill\tryit{notebook \S8}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Through the 2020 pandemic and after, the quantile MLP is breached about as often as it should be}
+\begin{frame}{Breaches of the quantile-MLP VaR during and after the 2020 pandemic are close to the nominal rate}
 \small
 \intuition{test period only; red dots are days when the S\&P 500 lost more than the MLP's 99\,\% VaR.}
 \begin{center}\includegraphics[width=\textwidth,height=0.380\textheight,keepaspectratio]{charts/en/var_backtest.pdf}\end{center}\vspace{-3mm}

@@ -55,7 +55,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 % END-ABBR
 
 
-\section{From next-token prediction to large language models}
+\section{Next-token prediction and large language models}
 
 \begin{frame}{Text data in financial institutions}
 \small
@@ -103,7 +103,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.\ 12)}\hfill\tryit{notebook \S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Tokens are sub-words: byte-pair encoding}
+\begin{frame}{Subword tokens and byte-pair encoding}
 \footnotesize
 \intuition{frequent words are one token, rare words and numbers are split; the model never sees letters, only token indices.}
 \begin{columns}[T,onlytextwidth]
@@ -182,7 +182,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_next\_token}{Quantlets/L12/NN_L12_next_token}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Scaling: bigger models predict text better, on a power law}
+\begin{frame}{Scaling laws: prediction loss as a power law of model size}
 \footnotesize
 \intuition{the loss falls as a power of the number of parameters and of training tokens.}
 \begin{columns}[T,onlytextwidth]
@@ -235,7 +235,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 
 \section{Pre-training, instruction tuning and alignment}
 
-\begin{frame}{Three training stages turn a text predictor into an assistant}
+\begin{frame}{Three training stages of a language-model assistant}
 \small
 \begin{center}\begin{tikzpicture}\node[draw, rounded corners, fill=MainBlue!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n0) at (0.0,0) {\textbf{Pre-training}\\trillions of tokens\\next-token loss};\node[draw, rounded corners, fill=Ser2!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n1) at (3.05,0) {\textbf{Supervised fine-tuning}\\(prompt, answer) pairs};\node[draw, rounded corners, fill=Ser3!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n2) at (6.1,0) {\textbf{Preferences}\\answer A better than B};\node[draw, rounded corners, fill=Ser7!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n3) at (9.149999999999999,0) {\textbf{Assistant}\\follows instructions};\draw[-{Stealth}, thick] (n0.east) -- (n1.west);\draw[-{Stealth}, thick] (n1.east) -- (n2.west);\draw[-{Stealth}, thick] (n2.east) -- (n3.west);\end{tikzpicture}\end{center}\begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Generative pre-trained transformer (GPT)}: stage 1 alone gives a model that continues text, not one that answers.
@@ -276,7 +276,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Hu et al., 2022)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Alignment: from pairwise preferences to a reward, or directly to the policy}
+\begin{frame}{Alignment: reward models and direct preference optimisation}
 \footnotesize
 \intuition{people say which of two answers is better; the model is pushed towards preferred answers without drifting too far.}
 \begin{columns}[T,onlytextwidth]
@@ -371,7 +371,7 @@ Term frequency--inverse document frequency (TF-IDF) + logistic regression & -- &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Brown et al., 2020; Wei et al., 2022)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A prompt becomes a classifier through the probabilities of the label words}
+\begin{frame}{A prompt as a classifier: probabilities of the label words}
 \footnotesize
 \intuition{read the probability of each label at the answer position: no text generation, no parsing, and a calibrated-looking score.}
 \begin{columns}[T,onlytextwidth]
@@ -473,7 +473,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_fewshot\_curve}{Quantlets/L12/NN_L12_fewshot_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Rewording the instruction moves the score: prompt sensitivity}
+\begin{frame}{Prompt sensitivity: effect of rewording the instruction}
 \small
 \intuition{five instructions with the same meaning, the same model and data: the spread is a source of model risk.}
 \begin{center}\includegraphics[width=\textwidth,height=0.364\textheight,keepaspectratio]{charts/en/prompt_sensitivity.pdf}\end{center}\vspace{-3mm}
@@ -489,7 +489,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_prompt\_sensitivity}{Quantlets/L12/NN_L12_prompt_sensitivity}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Chain-of-thought: let the model write its reasoning before the answer}
+\begin{frame}{Chain-of-thought: written reasoning before the answer}
 \footnotesize
 \intuition{generated reasoning tokens become extra context for the final label.}
 \begin{columns}[T,onlytextwidth]
@@ -520,7 +520,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Wei et al., 2022)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{What the model wrote: one chain-of-thought answer}
+\begin{frame}{An example of a chain-of-thought answer}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Input} (PhraseBank test set)
@@ -573,7 +573,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_agreement}{Quantlets/L12/NN_L12_agreement}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Where the best prompt errs: the confusion matrix}
+\begin{frame}{Confusion matrix of the best prompt}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -623,7 +623,7 @@ neutral & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_cost\_accuracy}{Quantlets/L12/NN_L12_cost_accuracy}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{LLM embeddings plus a small classifier: the cheapest form of fine-tuning}
+\begin{frame}{LLM embeddings with a small classifier as a low-cost alternative to fine-tuning}
 \footnotesize
 \intuition{freeze the language model, average its last hidden states, and fit a logistic regression on top.}
 \begin{columns}[T,onlytextwidth]
@@ -650,7 +650,7 @@ neutral & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white
 
 \section{Retrieval-augmented generation on ECB speeches}
 
-\begin{frame}{RAG: retrieve the right documents, then let the model answer from them}
+\begin{frame}{RAG: document retrieval followed by answer generation}
 \small
 \begin{center}\begin{tikzpicture}\node[draw, rounded corners, fill=MainBlue!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n0) at (0.0,0) {\textbf{Question}};\node[draw, rounded corners, fill=Ser3!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n1) at (3.05,0) {\textbf{Retriever}\\BM25 + dense\\top-$k$ chunks};\node[draw, rounded corners, fill=Ser2!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n2) at (6.1,0) {\textbf{Prompt}\\documents + question};\node[draw, rounded corners, fill=Ser7!12, text width=2.55cm, align=center, minimum height=1.05cm, font=\scriptsize] (n3) at (9.149999999999999,0) {\textbf{LLM answer}\\with sources};\draw[-{Stealth}, thick] (n0.east) -- (n1.west);\draw[-{Stealth}, thick] (n1.east) -- (n2.west);\draw[-{Stealth}, thick] (n2.east) -- (n3.west);\end{tikzpicture}\end{center}\vspace{-2mm}\[ p(y\mid q)\approx\sum_{z\in\mathrm{top}_k(q)}p_\eta(z\mid q)\,p_{\btheta}(y\mid q,z) \]\begin{itemize}\setlength{\itemsep}{2pt}
   \item \textbf{Retrieval-augmented generation (RAG)}: $z$ = retrieved chunk, $p_\eta$ = retriever, $p_{\btheta}$ = generator.
@@ -685,7 +685,7 @@ neutral & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Robertson \& Zaragoza, 2009; Xiao et al., 2023)}\hfill\tryit{notebook \S7}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Finding the right speech from its title}
+\begin{frame}{Retrieval of the correct speech from its title}
 \small
 \intuition{recall@k = share of the 400 titles whose speech is among the top $k$ results.}
 \begin{center}\includegraphics[width=\textwidth,height=0.500\textheight,keepaspectratio]{charts/en/rag_recall.pdf}\end{center}\vspace{-3mm}

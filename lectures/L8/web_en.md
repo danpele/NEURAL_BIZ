@@ -15,7 +15,7 @@ This lecture builds the four main families of deep generative models, the autoen
 - **Use** them for fraud detection, image generation, synthetic returns and yield-curve scenarios, each against a benchmark.
 - **Judge** synthetic data by tails, volatility clustering, Value-at-Risk (VaR) backtests and the regimes they reproduce.
 
-# Why generative models
+# Principles of generative modelling
 
 A generative model learns the whole distribution of the data, not only the boundary between classes.
 
@@ -52,7 +52,7 @@ Generative models learn $p(\mathbf x)$; the families differ in how they handle t
 
 An autoencoder trained on normal transactions flags those it cannot rebuild.
 
-## An autoencoder squeezes the data through a bottleneck and rebuilds them {h=02467e35}
+## An autoencoder compresses the data through a bottleneck and reconstructs them {h=d757e1fd}
 
 An encoder $f_\phi$ maps the input to a code $\mathbf z\in\mathbb R^k$ and a decoder $g_\psi$ maps it back; both are small multilayer perceptrons (MLP) with rectified linear units (ReLU). Training minimises the reconstruction error, and the same error is the anomaly score:
 
@@ -64,14 +64,14 @@ With linear $f$ and $g$ the optimum spans the same subspace as PCA with $k$ comp
 
 The data are the credit-card transactions of European cardholders released by the ULB Machine Learning Group and Worldline (Dal Pozzolo et al., 2015). Our file keeps all 492 frauds and 10 % of the legitimate transactions, 28,924 rows, with weights that restore the full data. The first 60 % of the time span is the training part (legitimate transactions only, 16,994 rows), the next 20 % the validation part for early stopping, and the last 20 % the test part: 57,174 transactions of the full data with 75 frauds (0.131 %). The metrics are the area under the precision-recall curve (PR-AUC) and the area under the receiver operating characteristic curve (ROC-AUC), weighted to the full data.
 
-## Frauds are hard to rebuild: their reconstruction error is far larger {h=dbc29dec}
+## Reconstruction error of fraudulent and legitimate payments {h=d9212dbe}
 
 On the test part the median reconstruction error of a fraud is 12.7 times that of a legitimate transaction. The two distributions still overlap: many frauds look normal to a model that only knows normal behaviour.
 
 @chart ae_error_dist
 Reconstruction error of the autoencoder on the test part, legitimate transactions (weighted) and frauds.
 
-## Without labels the autoencoder finds frauds; with labels a simple classifier finds many more {h=b256c042}
+## Autoencoder without labels compared with a supervised classifier {h=f4eeb7d7}
 
 The PR-AUC on the test part is 14.2 % for the autoencoder (standard deviation 2.9 over 3 seeds), 7.6 % for PCA and 80.4 % for a logistic regression that uses the labels; a random score would give 0.131 %. The ROC-AUC is high for all three (94.4, 95.3 and 98.2 %): with one fraud in several hundred transactions it hides the differences that the PR-AUC shows.
 
@@ -87,7 +87,7 @@ Test PR-AUC of the autoencoder by bottleneck size, with PCA as benchmark.
 
 @practice choose $k$ on a validation period, never on the frauds you will report on.
 
-## What a fraud team gets from the top 0.1 % of scores {h=7f78dddc}
+## Frauds found among the top 0.1 % of scores {h=e6dbd147}
 
 If the team reviews the 0.1 % highest scores of the test part, 57 alerts, it finds 8 frauds with the autoencoder (10.7 % of all test frauds), 0 with PCA and 48 with the logistic regression (64.0 %). Labels are worth a lot: supervised learning wins whenever confirmed frauds exist. The autoencoder is the detector of the unknown, a complement and not a replacement.
 
@@ -113,7 +113,7 @@ The first term rewards good reconstructions; the second, the Kullback–Leibler 
 
 Sampling $\mathbf z$ is not differentiable, but $\mathbf z=\boldsymbol\mu_\phi(\mathbf x)+\boldsymbol\sigma_\phi(\mathbf x)\odot\boldsymbol\varepsilon$ with $\boldsymbol\varepsilon\sim\mathcal N(0,I)$ is: the randomness sits in $\boldsymbol\varepsilon$, which does not depend on the parameters. Our VAE is trained on Fashion-MNIST, 60,000 training and 10,000 test grey images of 28 × 28 pixels showing 10 kinds of clothing, with a Bernoulli decoder; the network 784–400–200–$k$ has 798,816 parameters for $k=16$ and is trained for 20 epochs.
 
-## A two-dimensional latent space already sorts the products {h=a99138c3}
+## A two-dimensional latent space separates the product types {h=17aa882c}
 
 With only two latent dimensions and no labels, shoes, bags and garments fall into separate regions. A 15-nearest-neighbour classifier on the two latent means reaches 71.7 % accuracy (5-fold, test images): the VAE has learnt an organisation of the products without being told what they are.
 
@@ -127,7 +127,7 @@ The first row shows real test images, the second their reconstructions through a
 @chart vae_samples
 Real, reconstructed and generated images, VAE with $k=16$.
 
-## Training trades reconstruction against the KL penalty {h=db7cbb93}
+## Trade-off between reconstruction and the KL penalty during training {h=2bfeb267}
 
 On the test images, after the last epoch, the reconstruction term is 228.6 nats per image and the KL term 12.0 nats, so the ELBO is −240.6 nats. The KL rises while the error falls: the encoder spends more information on each image as it learns.
 
@@ -167,7 +167,7 @@ The discriminator loss hovers around $2\log 2$ and the generator loss around $\l
 @chart gan_losses
 Discriminator and generator losses during training, seed 1.
 
-## The GAN learns fat tails that the Gaussian misses {h=7304e4e1}
+## The GAN reproduces the fat tails missed by the Gaussian model {h=21078345}
 
 The excess kurtosis of the real returns is 11.86; the GAN samples reach 6.65 (standard deviation 0.48 over 3 seeds), against 0 for the Gaussian. The Kolmogorov–Smirnov distance to the real returns is 0.030 for the GAN and 0.115 for the fitted Gaussian.
 
@@ -224,14 +224,14 @@ $$ \mathcal L(\theta)=\mathbb E_{t,\mathbf x_0,\boldsymbol\varepsilon}\big\|\bol
 
 a simplified, reweighted ELBO. Generation starts from pure noise and applies $\mathbf x_{t-1}=\big(\mathbf x_t-\beta_t\boldsymbol\varepsilon_\theta/\sqrt{1-\bar\alpha_t}\big)/\sqrt{\alpha_t}+\sqrt{\beta_t}\mathbf u$ down to $t=0$. Our denoiser is an MLP with three hidden layers of 256 units and a sinusoidal embedding of $t$, 145,675 parameters, trained for 12,000 steps on the 5,664 daily curves of the European Central Bank from 6 Sep 2004 to 30 Oct 2026.
 
-## Diffusion reproduces the two regimes of euro rates; a Gaussian cannot {h=d27ff3c6}
+## The two regimes of euro rates in diffusion and Gaussian samples {h=9b289253}
 
 The real 10-year yield ranges from −0.82 % to 4.78 % and is negative on 13.8 % of the days: there is a low-rate and a normal-rate regime. The Wasserstein distance between the generated and the real 10-year yield is 0.149 percentage points for the diffusion model, 0.191 for a two-factor VAE and 0.325 for a multivariate Gaussian.
 
 @chart yc_density
 Density of the 10-year yield, real curves and 5,000 curves from each generator.
 
-## Level and slope move together in a curved way that diffusion keeps {h=37e6d331}
+## Diffusion preserves the nonlinear co-movement of level and slope {h=09ef6e8d}
 
 A curve is inverted when the 10-year yield is below the 3-month yield. This happened on 8.7 % of the real days; 10.2 % of the diffusion samples and 14.7 % of the Gaussian samples are inverted. The Wasserstein distance of the slope is 0.099 for the diffusion model, 0.242 for the VAE and 0.113 for the Gaussian.
 
@@ -253,7 +253,7 @@ Diffusion learns to undo noise; on euro yield curves it keeps both rate regimes 
 
 Synthetic data are useful only after they pass the same checks as real data.
 
-## How to judge synthetic financial data {h=219c77c1}
+## Evaluation criteria for synthetic financial data {h=99c8b6d2}
 
 Four questions. Fidelity: do the marginals, the tails and the dependence across assets and over time match? Diversity: are extreme days and regimes present in the right proportions, with no mode collapse? Utility: does a model trained on synthetic data and tested on real data (TSTR) work? Privacy: is any sample too close to a real record? On our data the GAN gets the tails right and the clustering wrong; the diffusion model gets the regimes and the inversions right, the Gaussian does not.
 

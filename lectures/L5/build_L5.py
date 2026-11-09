@@ -117,7 +117,7 @@ def build(lang, H=None):
           "Să decideți, cu un test de comparare a prognozelor, cînd merită costul unei rețele recurente."), sep="4pt"))
     abbreviation_frames(D, ABBR)
 
-    D.frame(t("Real data only: three sequences", "Numai date reale: trei secvențe"),
+    D.frame(t("The data: three real sequences", "Datele: trei secvențe reale"),
             table("@{}p{0.25\\textwidth}p{0.29\\textwidth}p{0.22\\textwidth}p{0.17\\textwidth}@{}",
                   [t("Series", "Seria"), t("Source", "Sursa"), t("Period", "Perioada"), t("Task", "Sarcina")],
                   [[t("S\\&P 500 daily open, high, low, close", "S\\&P 500, prețuri zilnice de deschidere, maxim, minim, închidere"), "Yahoo Finance",
@@ -218,7 +218,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 3. LSTM and GRU
     D.section(t("Gated cells: LSTM and GRU", "Celule cu porți: LSTM și GRU"))
-    D.concept(t("The LSTM cell, gate by gate", "Celula LSTM, poartă cu poartă"),
+    D.concept(t("The LSTM cell and its gates", "Celula LSTM și porțile ei"),
               t("a separate cell state $\\mathbf c_t$ is updated additively; three gates decide what to forget, write and show.",
                 "o stare separată a celulei, $\\mathbf c_t$, se actualizează aditiv; trei porți decid ce se uită, ce se scrie și ce se arată."),
               "\\[\\begin{aligned} \\mathbf f_t&=\\sigma(\\mW_f[\\vh_{t-1};\\vx_t]+\\vb_f), & \\mathbf i_t&=\\sigma(\\mW_i[\\vh_{t-1};\\vx_t]+\\vb_i),\\\\"
@@ -382,8 +382,8 @@ def build(lang, H=None):
         "footnotesize", cite=OWN)
 
     # ------------------------------------------------------------------ 6. Case B: returns
-    D.section(t("Case study B: can a network forecast returns?", "Studiul de caz B: poate o rețea prognoza randamentele?"))
-    D.figframe(t("Out of sample, return forecasts explain almost nothing", "În afara eșantionului, prognozele randamentelor nu explică aproape nimic"),
+    D.section(t("Case study B: forecasting returns with neural networks", "Studiul de caz B: prognoza randamentelor cu rețele neuronale"))
+    D.figframe(t("Return forecasts explain almost none of the out-of-sample variance", "Prognozele randamentelor explică foarte puțin din varianța în afara eșantionului"),
                t("next-day returns of the S\\&P 500 and of Banca Transilvania (TLV) from the last 22 returns.",
                  "randamentele de a doua zi ale S\\&P 500 și ale Banca Transilvania (TLV), din ultimele 22 de randamente."),
                "\\[ R^2_{\\mathrm{OOS}}=1-\\frac{\\sum_{t\\in\\mathrm{test}}(r_{t+1}-\\hat r_{t+1})^2}{\\sum_{t\\in\\mathrm{test}}r_{t+1}^2} \\]",
@@ -455,7 +455,7 @@ def build(lang, H=None):
                           "MAPE (\\%): 24 de ore @{load.window.24|.2f}, 72 de ore @{load.window.72|.2f}, 168 de ore @{load.window.168|.2f}, 336 de ore @{load.window.336|.2f}.")],
                height="0.42\\textheight", cite=OWN)
 
-    D.frame(t("What a better load forecast is worth", "Cît valorează o prognoză mai bună a consumului"), it(
+    D.frame(t("Economic value of a more accurate load forecast", "Valoarea economică a unei prognoze mai precise a consumului"), it(
         t(("\\textbf{Significance}", "best network by mean forecast: @{load.best}, MAPE @{load.best_vs_ridge_pct|+.1f}\\,\\% relative to ridge ARX: with @{load.n_train|,d} training days the linear model wins",
            "DM on daily MAE, LSTM vs ridge ARX: @{load.dm_lstm_ridge.stat|.2f}, $p" + P("load.dm_lstm_ridge.p") + "$"),
           ("\\textbf{Semnificația}", "cea mai bună rețea după prognoza medie: @{load.best}, MAPE cu @{load.best_vs_ridge_pct|+.1f}\\,\\% față de ridge ARX: cu @{load.n_train|,d} de zile de antrenare, modelul liniar cîștigă",

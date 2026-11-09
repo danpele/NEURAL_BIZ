@@ -108,7 +108,7 @@ q(2, ("DPO", "What does direct preference optimisation (DPO) remove from the RLH
       "DPO optimises the policy directly on preference pairs with a logistic loss, using the SFT model as reference; no reward model is fitted.",
       "DPO still needs preference data and a reference model; it skips the explicit reward model and the policy-gradient optimisation."),
   ("DPO", "Ce elimină optimizarea directă a preferințelor (DPO) din fluxul RLHF?",
-   ["Etapa de preantrenare", "Datele de preferințe umane", "Modelul de recompensă separat și bucla de învățare prin recompensă", "Modelul SFT folosit ca referință"],
+   ["Etapa de preantrenare", "Datele de preferințe umane", "Modelul de recompensă separat și bucla de reinforcement learning", "Modelul SFT folosit ca referință"],
    "DPO optimizează politica direct pe perechile de preferințe, cu o pierdere logistică, folosind modelul SFT ca referință; nu se estimează un model de recompensă.",
    "DPO are în continuare nevoie de date de preferințe și de un model de referință; renunță la modelul explicit de recompensă și la optimizarea prin gradientul politicii."))
 q(0, ("Label probabilities", "How does the lecture turn a prompt into a classifier without generating text?",
@@ -244,11 +244,11 @@ q(0, ("Hallucination", f"Asked who gave an ECB speech from 2025–2026 without d
    ["Permiterea abținerii transformă erorile sigure în abțineri oneste, dar doar regăsirea aduce răspunsuri corecte", "Modelul știe răspunsurile, dar le ascunde", "Abținerea face modelul mai precis", "Întrebările erau ambigue"],
    f"Cu documentele regăsite, modelul a răspuns corect în {ro(R['qa_rag']['correct'])} % din cazuri: ancorarea în documente, nu instrucțiunile, aduce cunoștințele lipsă.",
    "Discursurile sînt ulterioare datelor de antrenare, deci modelul nu le poate cunoaște; abținerea evită numele greșite, dar nu creează răspunsuri corecte."))
-q(3, ("Where RAG fails", f"RAG answered correctly in {en(R['qa_rag']['correct'])} % of cases and the oracle (the right speech given) in {en(R['qa_oracle']['correct'])} %. Where is the remaining gap?",
+q(3, ("Limitations of RAG", f"RAG answered correctly in {en(R['qa_rag']['correct'])} % of cases and the oracle (the right speech given) in {en(R['qa_oracle']['correct'])} %. Where is the remaining gap?",
       ["In the language model's reading ability", "In the temperature", "In the chat template", "Mostly in retrieval: the right speech was not always among the top 3"],
       f"With the right document the model is almost always correct; recall@3 of the hybrid retriever on these questions was {en(R['qa_r3_hybrid'])} %.",
       "The oracle shows that reading is not the bottleneck; improving retrieval closes most of the gap."),
-  ("Unde greșește RAG", f"RAG a răspuns corect în {ro(R['qa_rag']['correct'])} % din cazuri, iar oracolul (cu discursul corect furnizat) în {ro(R['qa_oracle']['correct'])} %. Unde este diferența rămasă?",
+  ("Limitele RAG", f"RAG a răspuns corect în {ro(R['qa_rag']['correct'])} % din cazuri, iar oracolul (cu discursul corect furnizat) în {ro(R['qa_oracle']['correct'])} %. Unde este diferența rămasă?",
    ["În capacitatea de citire a modelului de limbaj", "În temperatură", "În șablonul de conversație", "Mai ales în regăsire: discursul corect nu a fost întotdeauna printre primele 3"],
    f"Cu documentul corect, modelul are aproape întotdeauna dreptate; recall@3 al metodei hibride pe aceste întrebări a fost {ro(R['qa_r3_hybrid'])} %.",
    "Oracolul arată că citirea nu este blocajul; îmbunătățirea regăsirii închide cea mai mare parte a diferenței."))

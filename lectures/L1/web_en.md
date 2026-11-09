@@ -34,7 +34,7 @@ The course is organised by decision and data type. Credit and payments are tabul
 
 Deep learning is not automatically better. In the large credit-scoring benchmark of Lessmann et al. (2015), logistic regression stays a solid reference and ensembles lead; on typical medium-sized tabular data, tree ensembles still beat deep networks (Grinsztajn, Oyallon and Varoquaux, 2022). Credit decisions must also be explained to the applicant. This lecture therefore reports every network next to a linear and a boosting benchmark.
 
-## Three real credit datasets, used without any simulated record {h=6855fc6c}
+## The data: three real credit datasets {h=57f9bccc}
 
 German credit comes from the University of California, Irvine (UCI) Machine Learning Repository: 1,000 applicants, 20 attributes, amounts in Deutsche Mark (DM) and a default rate of 30.0 %. HMEQ (Baesens, Rösch and Scheule, 2016) has 5,960 loans, a default rate of 19.9 % and many missing values, which we keep. California housing gives median house values in units of 100,000 US dollars (USD).
 
@@ -49,7 +49,7 @@ Default rate by checking-account status (German credit) and by number of delinqu
 
 @practice a model must at least reproduce these group rates on the validation set.
 
-## Learning = minimising the average loss on training data, judged on new data {h=7df41c19}
+## Learning as minimisation of the average training loss, evaluated on new data {h=8c61cae4}
 
 Training minimises the empirical risk $\hat R_n(\boldsymbol\theta)=\frac1n\sum_i\ell(y_i,f(\mathbf x_i;\boldsymbol\theta))$, but the bank pays the risk on future applicants, $R(\boldsymbol\theta)=\mathbb E\,\ell(y,f(\mathbf x;\boldsymbol\theta))$. We therefore split the data in three: training ($\boldsymbol\theta$), validation (model choice and stopping) and test (reported once). For HMEQ the stratified split gives 3,576, 1,192 and 1,192 loans; medians and scaling are fitted on the training part only, so no information leaks from the test set.
 
@@ -104,7 +104,7 @@ Rosenblatt's perceptron learns a linear boundary from its mistakes. It converges
 
 McCulloch and Pitts (1943) wrote the neuron as a threshold unit, $\hat y=\operatorname{step}(\mathbf w^\top\mathbf x+b)$; Rosenblatt (1958) made its weights learn from labelled examples. Minsky and Papert (1969) proved that one layer cannot represent XOR, and the field recovered only when backpropagation trained several layers (Rumelhart, Hinton and Williams, 1986).
 
-## The perceptron learns only from its mistakes {h=4b7f4068}
+## The perceptron updates its weights only on misclassified examples {h=308a3abb}
 
 If example $i$ is misclassified, $y_i(\mathbf w^\top\mathbf x_i+b)\le0$ with $y_i\in\{-1,+1\}$, the weights move towards it: $\mathbf w\leftarrow\mathbf w+\eta y_i\mathbf x_i$. This is one step of stochastic gradient descent (SGD) on the perceptron criterion. Correct examples give no gradient and the output is a class, not a probability, which a lender cannot price.
 
@@ -172,7 +172,7 @@ House values against latitude: bin means and fitted networks with 1, 3 and 50 hi
 
 A ReLU network is piecewise linear, and the number of its linear regions can grow exponentially with depth for a fixed number of units (Montúfar et al., 2014). On tabular credit data, two or three hidden layers are usually enough; depth pays off on images, text and sequences.
 
-## An MLP bends the decision boundary, but two inputs carry little extra signal {h=766f3ff1}
+## Nonlinear decision boundary of an MLP with two inputs {h=a6ee6e8b}
 
 With two HMEQ inputs, debt-to-income and the age of the oldest credit line, the logistic model draws straight probability bands and the MLP curved regions. The area under the receiver operating characteristic (ROC) curve (AUC), the probability that a random defaulter scores above a random good loan, is 0.744 for the logistic model and 0.736 for the MLP: flexibility does not help when the two inputs carry little extra signal.
 

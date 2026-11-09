@@ -30,8 +30,8 @@ BLOCKS = [('convolution', 'conv_edges', 'conv', 'cv'),
           ('transfer', 'transfer_curves', 'arch', 'tl')]
 
 SECTIONS = {
- 'en': dict(conv='The convolutional layer', fm='Product photos: what a CNN learns', arch='Deeper networks and transfer learning'),
- 'ro': dict(conv='Stratul convoluțional', fm='Fotografii de produse: ce învață o CNN', arch='Rețele mai adînci și transferul învățării'),
+ 'en': dict(conv='The convolutional layer', fm='Product photos: features learned by a CNN', arch='Deeper networks and transfer learning'),
+ 'ro': dict(conv='Stratul convoluțional', fm='Fotografii de produse: trăsăturile învățate de o CNN', arch='Rețele mai adînci și transferul învățării'),
 }
 
 L = {

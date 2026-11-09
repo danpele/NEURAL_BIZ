@@ -132,7 +132,7 @@ Rețele & semnalarea spălării banilor într-un graf de plăți & rețele pe gr
 \par\vfill\manager{fiecare rețea din acest curs este raportată alături de un model de referință liniar sau de boosting.}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Trei seturi reale de date de credit, fără nicio înregistrare simulată}
+\begin{frame}{Datele: trei seturi reale de date de credit}
 \small
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.27\textwidth}rrp{0.40\textwidth}@{}}\toprule
@@ -166,7 +166,7 @@ California housing & 20\,640 & (regresie) & grupuri de locuințe, recensămîntu
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L1\_default\_rates}{Quantlets/L1/NN_L1_default_rates}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Învățarea = minimizarea pierderii medii pe datele de antrenare, judecată pe date noi}
+\begin{frame}{Învățarea ca minimizare a pierderii medii pe datele de antrenare, evaluată pe date noi}
 \small
 \intuition{estimăm pe un eșantion și plătim pentru erorile făcute cu următorii solicitanți.}
 \[ \underbrace{\hat R_n(\btheta)=\frac1n\sum_{i=1}^n \ell\big(y_i,f(\vx_i;\btheta)\big)}_{\text{riscul empiric (antrenare)}}\qquad\text{vs.}\qquad \underbrace{R(\btheta)=\E_{(\vx,y)\sim P}\,\ell\big(y,f(\vx;\btheta)\big)}_{\text{riscul pe solicitanți noi}} \]
@@ -328,7 +328,7 @@ celelalte 8 intrări &  &  & \ensuremath{+}0{,}31 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~5)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Perceptronul învață numai din greșelile sale}
+\begin{frame}{Perceptronul își actualizează ponderile numai pe exemplele clasificate greșit}
 \footnotesize
 \intuition{cînd un exemplu este clasificat greșit, ponderile se mută spre el; altfel nu se schimbă nimic.}
 \begin{columns}[T,onlytextwidth]
@@ -535,10 +535,10 @@ cuantila $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~6)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus}
+\begin{frame}{Frontiera de decizie neliniară a unui MLP cu două intrări}
 \small
 \intuition{PD prezisă pentru două variabile HMEQ: benzi drepte pentru modelul logistic, regiuni curbe pentru MLP.}
-\begin{center}\includegraphics[width=\textwidth,height=0.336\textheight,keepaspectratio]{charts/ro/boundary_hmeq.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.427\textheight,keepaspectratio]{charts/ro/boundary_hmeq.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Baesens, Roesch și Scheule (2016), datele HMEQ. Date: 2\,708 de credite de antrenare și 871 de testare cu ambele variabile.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}

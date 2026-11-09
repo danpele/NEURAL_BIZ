@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L13.js?v=20261109m">
+<link rel="preload" as="script" href="L13.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261109m", "L13_text_en.js?v=20261109m", "common.js?v=20261109m"], "L13.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261109n", "L13_text_en.js?v=20261109n", "common.js?v=20261109n"], "L13.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>Yes. The Diebold–Mariano (DM) test compares the daily sums of absolute errors of the two models over the 360 days; the lecture reports a p-value below 0.0001 for "Chronos-2 is more accurate than LEAR". For DNN against LEAR the p-value is 0.76 (no evidence that the DNN is better), for N-BEATS against the DNN 0.36. A lower MAE on one test year is not enough: the curve on the right must rise steadily, not because of a few days.</p></details>
 </section><h2 class="sec" id="s-fm">Foundation models: context and quantiles</h2>
 <section class="blk" id="context-length">
-  <h3>Longer context helps the foundation model, up to a point</h3>
+  <h3>Effect of context length on the foundation model</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L13_context_length_en.jpg" alt="Slide 28: Longer context helps the foundation model, up to a point" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=28" target="_blank" rel="noopener"><img src="slides/L13_context_length_en.jpg" alt="Slide 28: Effect of context length on the foundation model" loading="lazy"></a>
       <figcaption>Slide 28</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cl-c">Context length of Chronos-2: <b id="cl-c-v"></b></label><input type="range" id="cl-c" min="0" max="3" step="1" value="2"></div><div class="ctl"><label for="cl-w">Moving average of the daily MAE (days): <b id="cl-w-v"></b></label><input type="range" id="cl-w" min="1" max="60" step="1" value="30"></div><button class="btn play" id="cl-play" type="button"></button></div><div class="charts "><div class="chart" id="cl-bar"></div><div class="chart" id="cl-roll"></div></div><ul class="out" id="cl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_context_length" target="_blank" rel="noopener">NN_L13_context_length</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_context_length/NN_L13_context_length.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

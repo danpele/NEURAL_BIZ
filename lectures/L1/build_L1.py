@@ -238,7 +238,7 @@ def build(lang, H=None):
                       "Acest curs testează ambele situații pe credite reale, după un protocol fix.")), "0.52", "0.45") +
             D.bottom(t("every network in this course is reported next to a linear or boosting benchmark.",
                        "fiecare rețea din acest curs este raportată alături de un model de referință liniar sau de boosting.")))
-    D.frame(t("Three real credit datasets, used without any simulated record", "Trei seturi reale de date de credit, fără nicio înregistrare simulată"),
+    D.frame(t("The data: three real credit datasets", "Datele: trei seturi reale de date de credit"),
             table("@{}p{0.27\\textwidth}rrp{0.40\\textwidth}@{}",
                   [t("Dataset", "Setul de date"), t("Rows", "Rînduri"), t("Events", "Evenimente"), t("Source", "Sursa")],
                   [["German credit", "@{data.german_n|,d}", "@{data.german_bad|,d} " + t("bad risks", "riscuri proaste"),
@@ -267,8 +267,8 @@ def build(lang, H=None):
                job=t("a model must at least reproduce these group rates on the validation set.",
                      "un model trebuie să reproducă cel puțin aceste rate pe setul de validare."),
                tryit=NB + " \\S1", cite=OWN, height="0.56\\textheight")
-    D.frame(t("Learning = minimising the average loss on training data, judged on new data",
-              "Învățarea = minimizarea pierderii medii pe datele de antrenare, judecată pe date noi"),
+    D.frame(t("Learning as minimisation of the average training loss, evaluated on new data",
+              "Învățarea ca minimizare a pierderii medii pe datele de antrenare, evaluată pe date noi"),
             "\\intuition{" + t("we fit on one sample and pay for the errors on the next applicants.",
                                "estimăm pe un eșantion și plătim pentru erorile făcute cu următorii solicitanți.") + "}\n" +
             "\\[ \\underbrace{\\hat R_n(\\btheta)=\\frac1n\\sum_{i=1}^n \\ell\\big(y_i,f(\\vx_i;\\btheta)\\big)}_{\\text{" +
@@ -396,7 +396,7 @@ def build(lang, H=None):
               t("the perceptron is a linear classifier: its boundary $\\vw^\\top\\vx+b=0$ is a hyperplane.",
                 "perceptronul este un clasificator liniar: frontiera lui $\\vw^\\top\\vx+b=0$ este un hiperplan."),
               cite="(Bishop \\& Bishop, 2024, ch.~5)")
-    D.concept(t("The perceptron learns only from its mistakes", "Perceptronul învață numai din greșelile sale"),
+    D.concept(t("The perceptron updates its weights only on misclassified examples", "Perceptronul își actualizează ponderile numai pe exemplele clasificate greșit"),
               t("when an example is misclassified, the weights move towards it; otherwise nothing changes.",
                 "cînd un exemplu este clasificat greșit, ponderile se mută spre el; altfel nu se schimbă nimic."),
               "\\[ \\text{" + t("if", "dacă") + "}\\ y_i(\\vw^\\top\\vx_i+b)\\le 0:\\qquad \\vw\\leftarrow\\vw+\\eta\\,y_i\\vx_i,\\quad b\\leftarrow b+\\eta\\,y_i \\]\n"
@@ -551,8 +551,8 @@ def build(lang, H=None):
             D.bottom(t("start with 2 hidden layers on tabular data; go deeper only if validation loss keeps falling.",
                        "începeți cu 2 straturi ascunse pe date tabelare; adăugați straturi doar dacă pierderea de validare continuă să scadă.")),
             cite="(Bishop \\& Bishop, 2024, ch.~6)")
-    D.figframe(t("An MLP bends the decision boundary, but two inputs carry little extra signal",
-                 "Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus"),
+    D.figframe(t("Nonlinear decision boundary of an MLP with two inputs",
+                 "Frontiera de decizie neliniară a unui MLP cu două intrări"),
                t("predicted PD for two HMEQ variables: straight bands for the logistic model, curved regions for the MLP.",
                  "PD prezisă pentru două variabile HMEQ: benzi drepte pentru modelul logistic, regiuni curbe pentru MLP."),
                None, "boundary_hmeq",

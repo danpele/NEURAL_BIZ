@@ -105,8 +105,8 @@ def page(lang):
         "- **Judecați** rezultatele cu precizia, recall-ul, aria de sub curba precizie-recall (PR-AUC), bugetele de alerte, schimbarea în timp și stabilitatea explicațiilor.\n"))
 
     # 1
-    P.add(T("# Why graphs for financial crime\n\nThe Elliptic graph shows what a transaction network looks like and why the neighbours carry information.",
-            "# De ce grafuri pentru infracțiunile financiare\n\nGraful Elliptic arată cum arată o rețea de tranzacții și de ce vecinii poartă informație."))
+    P.add(T("# Graphs in the detection of financial crime\n\nThe Elliptic graph shows what a transaction network looks like and why the neighbours carry information.",
+            "# Grafurile în detectarea infracțiunilor financiare\n\nGraful Elliptic arată cum arată o rețea de tranzacții și de ce vecinii poartă informație."))
     P.block(T("Network structure in money-laundering detection", "Structura de rețea în detectarea spălării banilor"), text=T(
         f"""A graph $G=(\\mathcal V,\\mathcal E,\\mathbf X)$ has nodes $\\mathcal V$ (here transactions), edges $\\mathcal E$ (a payment flow from one transaction to the next) and a feature matrix $\\mathbf X\\in\\mathbb R^{{n\\times d}}$; the label $y_v=1$ marks an illicit transaction (scams, ransomware, dark markets). The Elliptic graph has {v('data.n_nodes', ',')} transactions, {v('data.n_edges', ',')} payment flows, {v('data.n_features')} features per transaction and {v('data.n_steps')} time steps. The task is node classification.
 
@@ -144,7 +144,7 @@ Labelled transactions per time step, licit and illicit; the dashed line ends the
 Tranzacțiile etichetate pe pași de timp, licite și ilicite; linia punctată încheie perioada de antrenare.
 
 @practice un model este judecat pe lunile de după datele de antrenare, exact cum va fi folosit."""))
-    P.block(T("Most transactions touch one or two others; a few are hubs", "Cele mai multe tranzacții ating una sau două altele; puține sînt noduri centrale"), text=T(
+    P.block(T("Degree distribution of the transaction graph", "Distribuția gradelor în graful tranzacțiilor"), text=T(
         f"""The graph is sparse: the mean degree is {v('data.mean_degree', '.2f')}, the median {v('data.median_degree')}, and {v('data.pct_deg1', '.1f')} % of the nodes have a single neighbour. The tail is heavy: the largest hub has {v('data.max_degree')} neighbours. A GNN must not let such hubs drown everyone else, hence the degree normalisation of the next section.
 
 @chart degree_dist
@@ -172,7 +172,7 @@ Ponderea tranzacțiilor ilicite printre vecinii etichetați ai tranzacțiilor il
     # 2
     P.add(T("# Graphs as matrices\n\nAdjacency, degree and the Laplacian turn a graph into linear algebra.",
             "# Grafurile ca matrice\n\nMatricea de adiacență, matricea gradelor și laplacianul transformă graful în algebră liniară."))
-    P.block(T("The adjacency matrix turns a graph into linear algebra", "Matricea de adiacență transformă graful în algebră liniară"), text=T(
+    P.block(T("The adjacency matrix as an algebraic representation of the graph", "Matricea de adiacență ca reprezentare algebrică a grafului"), text=T(
         f"""$A_{{uv}}=1$ if $(u,v)$ is an edge and 0 otherwise; $D=\\operatorname{{diag}}(\\sum_vA_{{uv}})$ is the degree matrix. Adding self-loops and normalising symmetrically gives
 
 $$ \\tilde A=A+I,\\qquad \\hat A=\\tilde D^{{-1/2}}\\tilde A\\,\\tilde D^{{-1/2}}, $$ {{#eq:ahat}}
@@ -183,7 +183,7 @@ whose entries are $1/\\sqrt{{\\tilde d_u\\tilde d_v}}$. The matrix $A$ has about
 $$ \\tilde A=A+I,\\qquad \\hat A=\\tilde D^{{-1/2}}\\tilde A\\,\\tilde D^{{-1/2}}, $$ {{#eq:ahat}}
 
 cu elementele $1/\\sqrt{{\\tilde d_u\\tilde d_v}}$. Matricea $A$ are circa $4\\cdot10^{{10}}$ celule, dar numai {v('data.n_edges', ',')} de muchii, deci bibliotecile precum PyTorch Geometric (PyG) păstrează o listă de muchii. Fără normalizare, un nod central de grad {v('data.max_degree')} ar aduna {v('data.max_degree')} de mesaje, iar scala ar exploda."""))
-    P.block(T("A graph model must not depend on how we number the nodes", "Un model pe graf nu trebuie să depindă de numerotarea nodurilor"), text=T(
+    P.block(T("Permutation invariance and equivariance of graph models", "Invarianța și echivarianța la permutări ale modelelor pe graf"), text=T(
         """For every permutation matrix $P$, a node-level model must satisfy $f(P\\mathbf X,PAP^\\top)=Pf(\\mathbf X,A)$ (equivariance) and a graph-level model $g(P\\mathbf X,PAP^\\top)=g(\\mathbf X,A)$ (invariance). A multilayer perceptron (MLP) on the rows of $A$ would change with the numbering; a convolutional neural network (CNN) assumes a grid with a fixed number of ordered neighbours, while a transaction has between 1 and hundreds of neighbours in no order.
 
 @practice ask of any vendor model: does the score change if the input file is sorted differently? It must not.""",
@@ -193,7 +193,7 @@ cu elementele $1/\\sqrt{{\\tilde d_u\\tilde d_v}}$. Matricea $A$ are circa $4\\c
     P.block(T("Smooth signals on a graph: the Laplacian", "Semnale netede pe graf: laplacianul"), text=T(
         """The Laplacian $L=D-A$ measures how much a node signal differs between neighbours: $\\mathbf x^\\top L\\mathbf x=\\sum_{(u,v)\\in\\mathcal E}(x_u-x_v)^2$. Its eigenvectors $U$ define a graph Fourier transform, $\\hat{\\mathbf x}=U^\\top\\mathbf x$, and a spectral filter is $U g_\\theta(\\Lambda)U^\\top\\mathbf x$. That is costly, but a first-order polynomial in $L$ leads directly to the normalised adjacency of @eq:ahat (derivation in Appendix A of the slides). On homophilous fraud graphs the signal is smooth, so averaging over neighbours removes noise, not information.""",
         """Laplacianul $L=D-A$ măsoară cît diferă un semnal de la un nod la vecinii lui: $\\mathbf x^\\top L\\mathbf x=\\sum_{(u,v)\\in\\mathcal E}(x_u-x_v)^2$. Vectorii lui proprii $U$ definesc o transformată Fourier pe graf, $\\hat{\\mathbf x}=U^\\top\\mathbf x$, iar un filtru spectral este $U g_\\theta(\\Lambda)U^\\top\\mathbf x$. Calculul este costisitor, dar un polinom de gradul întîi în $L$ duce direct la adiacența normalizată din @eq:ahat (derivarea, în Anexa A a slide-urilor). Pe grafurile de fraudă cu homofilie semnalul este neted, deci media pe vecini elimină zgomot, nu informație."""))
-    P.block(T("Node, edge or graph: three prediction tasks", "Nod, muchie sau graf: trei sarcini de predicție"), text=T(
+    P.block(T("Three prediction tasks: node, edge and graph level", "Trei sarcini de predicție: la nivel de nod, de muchie și de graf"), text=T(
         """The same layers serve three questions; only the read-out changes. Node: is this transaction illicit (this lecture)? Edge: is this payment a transfer through a mule account? Graph: is this cluster of accounts a laundering ring, is this interbank network fragile? A sum over node representations makes a graph-level output independent of the numbering.
 
 @practice define the unit of decision first (a payment, a client, a ring), then the graph task.""",
@@ -206,7 +206,7 @@ cu elementele $1/\\sqrt{{\\tilde d_u\\tilde d_v}}$. Matricea $A$ are circa $4\\c
     # 3
     P.add(T("# Message passing\n\nEvery GNN layer collects messages from the neighbours, aggregates them and updates the node.",
             "# Transmiterea mesajelor\n\nFiecare strat GNN colectează mesajele vecinilor, le agregă și actualizează nodul."))
-    P.block(T("A GNN layer: collect messages, aggregate, update", "Un strat GNN: colectează mesajele, le agregă, actualizează"), text=T(
+    P.block(T("A GNN layer: message, aggregation and update functions", "Un strat GNN: funcțiile de mesaj, de agregare și de actualizare"), text=T(
         """A message-passing neural network (MPNN) computes, for each node $v$ and layer $l$,
 
 $$ \\mathbf m_v^{(l)}=\\bigoplus_{u\\in\\mathcal N(v)}\\phi^{(l)}\\big(\\mathbf h_u^{(l)},\\mathbf h_v^{(l)},\\mathbf e_{uv}\\big),\\qquad \\mathbf h_v^{(l+1)}=\\psi^{(l)}\\big(\\mathbf h_v^{(l)},\\mathbf m_v^{(l)}\\big), $$ {#eq:mpnn}
@@ -233,7 +233,7 @@ Number of nodes within $k$ hops of a test transaction, median and 90th percentil
 
 @chart receptive_field
 Numărul de noduri aflate la cel mult $k$ salturi de o tranzacție de test, mediana și percentila 90."""))
-    P.block(T("Too many layers make all nodes look alike: over-smoothing", "Prea multe straturi fac toate nodurile să semene: suprasmoothing-ul (over-smoothing)"), text=T(
+    P.block(T("Over-smoothing in deep graph networks", "Netezirea excesivă (over-smoothing) în rețelele pe graf cu multe straturi"), text=T(
         f"""Repeated degree-weighted averaging drives all representations towards a common vector. On Elliptic the test PR-AUC is {v('depth.ap_1', '.3f')} with one GCN layer, {v('depth.ap_2', '.3f')} with two and {v('depth.ap_6', '.3f')} with six; the best depth is {v('depth.best_layers')}. Over the same range the mean cosine similarity of node representations rises from {v('depth.cos_1', '.2f')} to {v('depth.cos_6', '.2f')}.
 
 @chart oversmoothing
@@ -252,7 +252,7 @@ PR-AUC de test și similaritatea cosinus medie a reprezentărilor, după număru
     # 4
     P.add(T("# GCN, GraphSAGE and GAT\n\nThree choices of message, aggregation and update, from fixed degree weights to learned attention.",
             "# GCN, GraphSAGE și GAT\n\nTrei alegeri ale mesajului, agregării și actualizării, de la ponderi fixe după grad la atenție învățată."))
-    P.block(T("GCN: average the neighbours with degree weights, then regress", "GCN: media vecinilor ponderată cu gradele, apoi o regresie"), text=T(
+    P.block(T("GCN: degree-weighted average of the neighbours followed by a linear map", "GCN: media vecinilor ponderată cu gradele, urmată de o transformare liniară"), text=T(
         f"""A GCN layer is
 
 $$ H^{{(l+1)}}=\\mathrm{{ReLU}}\\big(\\hat AH^{{(l)}}W^{{(l)}}\\big), $$ {{#eq:gcn}}
@@ -270,7 +270,7 @@ o regresie liniară pe media normalizată a nodului și a vecinilor lui, urmată
     P.block(T("GraphSAGE: separate node representation and neighbour sampling", "GraphSAGE: reprezentarea separată a nodului și eșantionarea vecinilor"), text=T(
         f"""GraphSAGE uses separate weights for the node and for the mean of a sample $\\mathcal S(v)$ of its neighbours: $\\mathbf h_v^{{(l+1)}}=\\mathrm{{ReLU}}\\big(W_1\\mathbf h_v^{{(l)}}+W_2\\,\\mathrm{{mean}}_{{u\\in\\mathcal S(v)}}\\mathbf h_u^{{(l)}}\\big)$. The weights do not depend on the graph, so tomorrow's transactions get a score without retraining (inductive learning), and sampling bounds the cost per node. On Elliptic its illicit-class F1 is {v('models.sage.f1', '.3f')} (standard deviation {v('models.sage.f1_sd', '.3f')}) and its PR-AUC {v('models.sage.ap', '.3f')}.""",
         f"""GraphSAGE folosește ponderi separate pentru nod și pentru media unui eșantion $\\mathcal S(v)$ de vecini: $\\mathbf h_v^{{(l+1)}}=\\mathrm{{ReLU}}\\big(W_1\\mathbf h_v^{{(l)}}+W_2\\,\\mathrm{{mean}}_{{u\\in\\mathcal S(v)}}\\mathbf h_u^{{(l)}}\\big)$. Ponderile nu depind de graf, deci tranzacțiile de mîine primesc un scor fără reantrenare (învățare inductivă), iar eșantionarea limitează costul pe nod. Pe Elliptic, F1 pe clasa ilicită este {v('models.sage.f1', '.3f')} (abatere standard {v('models.sage.f1_sd', '.3f')}), iar PR-AUC {v('models.sage.ap', '.3f')}."""))
-    P.block(T("GAT: let the network decide which neighbour matters", "GAT: rețeaua decide care vecin contează"), text=T(
+    P.block(T("GAT: learned attention weights over the neighbours", "GAT: ponderi de atenție învățate pentru vecini"), text=T(
         f"""A graph attention layer weights each neighbour by a learned score,
 
 $$ \\alpha_{{vu}}=\\operatorname{{softmax}}_u\\Big(\\mathrm{{LeakyReLU}}\\big(\\mathbf a^\\top[W\\mathbf h_v\\,\\|\\,W\\mathbf h_u]\\big)\\Big), $$ {{#eq:gat}}
@@ -297,7 +297,7 @@ $$ \\alpha_{{vu}}=\\operatorname{{softmax}}_u\\Big(\\mathrm{{LeakyReLU}}\\big(\\
     P.block(T("Eight models evaluated on a chronological test set", "Opt modele evaluate pe un set de test cronologic"), text=T(
         f"""The models are a logistic regression on the {v('data.n_local')} local features and on all {v('data.n_features')} features; a random forest with 100 trees and 50 features per split, as in Weber et al. (2019); an MLP with the same layers as the GCN but no messages, which isolates the value of the edges; GCN, GraphSAGE and GAT; and a random forest on the features plus the 100 hidden GCN outputs. Precision, recall and F1 of the illicit class are measured at threshold 0.5 on steps 35–49, together with the threshold-free PR-AUC; each network and forest is run with {v('models.gcn.n_runs')} seeds.""",
         f"""Modelele sînt: o regresie logistică pe cele {v('data.n_local')} de variabile locale și pe toate cele {v('data.n_features')}; o pădure aleatoare cu 100 de arbori și 50 de variabile la fiecare împărțire, ca în Weber et al. (2019); un MLP cu aceleași straturi ca GCN, dar fără mesaje, care izolează valoarea muchiilor; GCN, GraphSAGE și GAT; și o pădure aleatoare pe variabile plus cele 100 de ieșiri ascunse ale GCN. Precizia, recall-ul și F1 pe clasa ilicită se măsoară la pragul 0,5 pe pașii 35–49, împreună cu PR-AUC, care nu depinde de prag; fiecare rețea și pădure este rulată cu {v('models.gcn.n_runs')} semințe."""))
-    P.block(T("On Elliptic the forest leads; graph layers mainly add ranking power to a network", "Pe Elliptic pădurea conduce; straturile pe graf adaugă mai ales putere de ordonare unei rețele"), text=T(
+    P.block(T("Results on Elliptic: the random forest and the contribution of graph layers", "Rezultatele pe Elliptic: pădurea aleatoare și contribuția straturilor pe graf"), text=T(
         f"""The illicit-class F1 is {v('models.rf.f1', '.3f')} for the random forest, {v('models.rf_emb.f1', '.3f')} for the forest with GCN embeddings, {v('models.gcn.f1', '.3f')} for the GCN, {v('models.mlp.f1', '.3f')} for the MLP and {v('models.lr_all.f1', '.3f')} for the logistic regression. With the same layers, the edges change the PR-AUC of the network by {v('gcn_vs_mlp_ap_pts', '+.1f')} points (GCN against MLP), while its F1 at the 0.5 threshold is lower than the MLP's; GraphSAGE, which keeps the node apart from its neighbours, is the best graph network, with F1 {v('models.sage.f1', '.3f')}.
 
 @chart model_comparison
@@ -313,7 +313,7 @@ F1 pe clasa ilicită și PR-AUC pe pașii de test 35–49, media și abaterea st
         f"""Precizia este ponderea alertelor care sînt ilicite; recall-ul este ponderea tranzacțiilor ilicite găsite. Pădurea aleatoare are precizia {v('models.rf.prec', '.3f')} și recall-ul {v('models.rf.rec', '.3f')}; GCN are precizia {v('models.gcn.prec', '.3f')} și recall-ul {v('models.gcn.rec', '.3f')}; regresia logistică, cu ponderile de clasă 0,3 și 0,7, cumpără un recall de {v('models.lr_all.rec', '.3f')} cu o precizie de doar {v('models.lr_all.prec', '.3f')}.
 
 @practice modelul potrivit depinde de costul unei erori: un caz de spălare ratat sau o oră pierdută de un analist."""))
-    P.block(T("Precision-recall curves: the ranking behind the F1", "Curbele precizie-recall: ordonarea din spatele lui F1"), text=T(
+    P.block(T("Precision-recall curves of the models", "Curbele precizie-recall ale modelelor"), text=T(
         f"""The PR-AUC is {v('models.rf.ap', '.3f')} for the random forest, {v('models.rf_emb.ap', '.3f')} for the forest with GCN embeddings, {v('models.gcn.ap', '.3f')} for the GCN and {v('models.lr_all.ap', '.3f')} for the logistic regression; a random score would give {v('data.pct_test_illicit', '.2f')} %, the share of illicit among the labelled test transactions.
 
 @chart pr_curves
@@ -329,7 +329,7 @@ Curbele precizie-recall pe pașii de test (scoruri mediate pe semințe); linia p
         f"""Reeșantionînd tranzacțiile de test de 1 000 de ori, cu aceeași extragere pentru ambele modele, diferența de PR-AUC dintre pădurea aleatoare și GCN este {v('boot.rf_minus_gcn_ap', '.3f')}, cu intervalul de 95 % [{v('boot.lo', '.3f')}; {v('boot.hi', '.3f')}], iar diferența dintre pădurea cu reprezentări GCN și pădurea simplă este {v('boot.rfemb_minus_rf_ap', '.3f')}, cu intervalul [{v('boot.lo2', '.3f')}; {v('boot.hi2', '.3f')}]. Un interval care nu conține zero susține o diferență reală pe această perioadă de test.
 
 @practice raportați intervalul, nu doar cîștigătorul: un comitet antifraudă decide pe intervale, nu pe a treia zecimală."""))
-    P.block(T("Why the forest performs well here: its features already pass messages", "De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje"), text=T(
+    P.block(T("Neighbourhood aggregates in the features and the performance of the random forest", "Agregatele de vecinătate din variabile și performanța pădurii aleatoare"), text=T(
         f"""{v('data.n_agg')} of the {v('data.n_features')} features are aggregates over the one-hop neighbours (maxima, minima, standard deviations, correlations): one fixed GNN layer computed by Elliptic before release. A logistic regression on the local features alone reaches an F1 of {v('models.lr_local.f1', '.3f')}, against {v('models.lr_all.f1', '.3f')} with the aggregates. Trees also fit rule-like fraud patterns well. GNNs earn their keep on raw graphs without engineered aggregates, on multi-hop patterns and in inductive scoring; combining both, the forest with GCN representations changes the F1 by {v('rfemb_vs_rf_f1_pts', '+.1f')} points.
 
 @practice before training a GNN, check whether the data provider has already aggregated the neighbourhood for you.""",
@@ -349,7 +349,7 @@ Illicit-class F1 per test time step for four models.
 F1 pe clasa ilicită pe fiecare pas de timp de test, pentru patru modele.
 
 @practice monitorizați F1 pe fiecare perioadă și reantrenați pe etichete recente; un model AML static îmbătrînește în cîteva săptămîni."""))
-    P.block(T("What an investigation team gets from 1,000 alerts", "Ce obține o echipă de investigații din 1 000 de alerte"), frame=T("What an investigation team gets from", "Ce obține o echipă de investigații din"), text=T(
+    P.block(T("Illicit transactions found among the top 1,000 alerts", "Tranzacțiile ilicite identificate între primele 1 000 de alerte"), frame=T("Illicit transactions found among", "Tranzacțiile ilicite identificate între"), text=T(
         f"""If the team reviews the {v('alerts.k', ',')} highest scores of the test period, it finds {v('alerts.rf', '.1f')} % of all illicit transactions with the random forest, {v('alerts.gcn', '.1f')} % with the GCN and {v('alerts.rf_emb', '.1f')} % with the forest plus GCN representations; the hit rate of those alerts is {v('alerts.rf_prec', '.1f')} % for the forest and {v('alerts.gcn_prec', '.1f')} % for the GCN, out of {v('alerts.n_test_illicit', ',')} illicit test transactions.
 
 @chart alert_budget
@@ -362,7 +362,7 @@ Share of the illicit test transactions found among the highest scores, by number
 Ponderea tranzacțiilor ilicite de test găsite printre scorurile cele mai mari, după numărul de alerte verificate.
 
 @practice dimensionați echipa după această curbă: bugetul de alerte, nu F1, este constrîngerea unui departament de conformitate."""))
-    P.block(T("The GCN learns a space where illicit transactions gather", "Rețeaua GCN învață un spațiu în care tranzacțiile ilicite se adună"), text=T(
+    P.block(T("Illicit transactions cluster in the GCN embedding space", "Tranzacțiile ilicite se grupează în spațiul de reprezentare al GCN"), text=T(
         f"""Projecting the {v('emb.dim')}-dimensional hidden layer of the GCN on its first two principal components (principal component analysis, PCA), which explain {v('emb.var2_pct', '.1f')} % of the variance, shows the illicit test transactions gathering in a region of their own. These vectors are the inputs of the forest-plus-GCN model and can feed any other risk model.
 
 @chart gcn_embeddings
@@ -371,7 +371,7 @@ Hidden GCN representations of test transactions, first two principal components.
 
 @chart gcn_embeddings
 Reprezentările ascunse GCN ale tranzacțiilor de test, primele două componente principale."""))
-    P.block(T("Adding graph features reshuffles the explanations", "Adăugarea variabilelor de graf reordonează explicațiile"), text=T(
+    P.block(T("Effect of graph features on the explanations", "Efectul variabilelor de graf asupra explicațiilor"), text=T(
         f"""The 10 most important features of the random forest carry {v('stability.top10_share_rf_pct', '.1f')} % of its impurity importance; once the GCN representations are added, the same features keep {v('stability.top10_share_rfemb_pct', '.1f')} % and the representations take {v('stability.emb_share_pct', '.1f')} %. Across {v('stability.n_refits')} refits, the mean Spearman correlation of the importances is {v('stability.rf', '.3f')} for the forest and {v('stability.rf_emb', '.3f')} for the forest with GCN representations. Part of the change comes from adding inputs at all, and part from retraining: both must be accounted for before reading a change of model as a change of explanation.
 
 @chart importance_shift

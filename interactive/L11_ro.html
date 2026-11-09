@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L11.js?v=20261109m">
+<link rel="preload" as="script" href="L11.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261109m", "L11_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L11.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261109n", "L11_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L11.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -66,9 +66,9 @@
   <details><summary>Răspuns</summary><p>Pentru MLP domină lipsa raportului datorie/venit (DEBTINC lipsă, +3,13 log-șanse), urmată de JOB = Other (+1,74); DELINQ = 0 (nicio linie de credit cu restanțe) reduce riscul (−0,71). Barele se adună exact: −3,613 (solicitantul mediu, PD 2,6%) + 4,261 = 0,648 log-șanse, adică o PD de 65,6%. Schimbați modelul: cele trei modele sînt de acord că lipsa DEBTINC este cel mai puternic semnal (în date, 62,0% dintre solicitanții fără DEBTINC nu rambursează, față de 8,6% dintre ceilalți), dar împart diferit restul scorului. Mutați cursorul spre solicitanții cei mai siguri: acolo, majoritatea barelor sînt albastre.</p></details>
 </section><h2 class="sec" id="s-lime">LIME, explicații contrafactuale și efecte globale</h2>
 <section class="blk" id="lime">
-  <h3>LIME depinde de propriile setări</h3>
+  <h3>Sensibilitatea LIME la propriile setări</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=20" target="_blank" rel="noopener"><img src="slides/L11_lime_instability_ro.jpg" alt="Slide-ul 20: LIME depinde de propriile setări" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=20" target="_blank" rel="noopener"><img src="slides/L11_lime_instability_ro.jpg" alt="Slide-ul 20: Sensibilitatea LIME la propriile setări" loading="lazy"></a>
       <figcaption>Slide-ul 20</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="lm-n"><span class="lbl">Eșantioane generate de LIME în jurul solicitantului</span><div class="tgs"><label class="tg"><input type="radio" name="lm-n" value="500" checked> 500</label><label class="tg"><input type="radio" name="lm-n" value="5000"> 5.000</label></div></div><div class="ctl"><label for="lm-r">Rularea aleatoare (valoarea inițială a LIME): <b id="lm-r-v"></b></label><input type="range" id="lm-r" min="1" max="30" step="1" value="1"></div><div class="ctl"><label for="lm-w">Lățimea nucleului σ (panoul din dreapta, 5.000 de eșantioane): <b id="lm-w-v"></b></label><input type="range" id="lm-w" min="0" max="6" step="1" value="4"></div><button class="btn play" id="lm-play" type="button"></button></div><div class="charts "><div class="chart" id="lm-runs"></div><div class="chart" id="lm-kw"></div></div><ul class="out" id="lm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_lime_instability" target="_blank" rel="noopener">NN_L11_lime_instability</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_lime_instability/NN_L11_lime_instability.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

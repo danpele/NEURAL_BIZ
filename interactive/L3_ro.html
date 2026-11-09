@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L3.js?v=20261108s">
+<link rel="preload" as="script" href="L3.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L3_data.js?v=20261108s", "L3_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L3.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L3_data.js?v=20261109n", "L3_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L3.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Răspuns</summary><p>Explodează: MSE mediană pe test este de aproximativ 1.019.219 la p = 400, pentru că ajustarea prin cele mai mici pătrate trebuie să interpoleze fiecare punct de antrenare cu un sistem prost condiționat. Sub prag, cel mai bun este p = 50 (0,781); peste prag, soluția de normă minimă devine din nou mai netedă, iar MSE pe test coboară la 0,932 la p = 8.000: „a doua coborîre”. MSE de antrenare este zero de la p = 400 încolo. Curba clasică în U deplasare–varianță și regimul modern supraparametrizat sînt două jumătăți ale aceleiași curbe.</p></details>
 </section><h2 class="sec" id="s-reg">Oprirea timpurie</h2>
 <section class="blk" id="early-stopping">
-  <h3>La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade</h3>
+  <h3>La fraudele cu carduri, pierderea pe validare atinge minimul devreme, în timp ce pierderea pe antrenare continuă să scadă</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L3_early_stopping_ro.jpg" alt="Slide-ul 17: La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L3_early_stopping_ro.jpg" alt="Slide-ul 17: La fraudele cu carduri, pierderea pe validare atinge minimul devreme, în timp ce pierderea pe antrenare continuă să scadă" loading="lazy"></a>
       <figcaption>Slide-ul 17</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="es-p">Răbdarea (epoci fără îmbunătățire înainte de oprire): <b id="es-p-v"></b></label><input type="range" id="es-p" min="1" max="60" step="1" value="20"></div><button class="btn play" id="es-play" type="button"></button></div><div class="charts "><div class="chart" id="es-loss"></div><div class="chart" id="es-ap"></div></div><ul class="out" id="es-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_early_stopping" target="_blank" rel="noopener">NN_L3_early_stopping</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_early_stopping/NN_L3_early_stopping.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>Foarte diferite: pe 200 de împărțiri aleatoare, AUC variază între 0,702 și 0,842 (media 0,780, abaterea standard 0,024). Cu un set de test de 10% (100 de solicitanți, circa 30 de neplăți), abaterea standard se dublează la 0,047; cu 50% scade la 0,019, dar modelul este antrenat pe mai puțini solicitanți (AUC mediu 0,767). O diferență de 0,01–0,02 AUC între două modele, pe un singur set mic de test, este zgomot; avem nevoie de validare încrucișată repetată sau de un test pe perechi.</p></details>
 </section>
 <section class="blk" id="fraud-cost">
-  <h3>Numărul potrivit de alerte salvează cea mai mare parte din pierderi</h3>
+  <h3>Numărul de alerte și ponderea pierderilor din fraudă evitate</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L3_fraud_cost_ro.jpg" alt="Slide-ul 32: Numărul potrivit de alerte salvează cea mai mare parte din pierderi" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L3/lecture3_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L3_fraud_cost_ro.jpg" alt="Slide-ul 32: Numărul de alerte și ponderea pierderilor din fraudă evitate" loading="lazy"></a>
       <figcaption>Slide-ul 32</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fc-r">Costul verificării unei alerte (EUR): <b id="fc-r-v"></b></label><input type="range" id="fc-r" min="1" max="50" step="1" value="5"></div><div class="ctl"><label for="fc-a">Alerte trimise la verificare (ponderat, scară logaritmică): <b id="fc-a-v"></b></label><input type="range" id="fc-a" min="1" max="3.6" step="0.02" value="1.8"></div><div class="ctl ctl-tg" id="fc-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="fc-m" value="logit" checked> Regresia logistică</label><label class="tg"><input type="checkbox" name="fc-m" value="mlp" checked> MLP regularizat</label><label class="tg"><input type="checkbox" name="fc-m" value="xgb" checked> XGBoost</label></div></div><button class="btn play" id="fc-play" type="button"></button></div><div class="charts one"><div class="chart" id="fc-chart"></div></div><ul class="out" id="fc-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_fraud_cost" target="_blank" rel="noopener">NN_L3_fraud_cost</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_fraud_cost/NN_L3_fraud_cost.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

@@ -110,7 +110,7 @@ def build(lang, H=None):
         sep="4pt"))
     abbreviation_frames(D, ABBR)
 
-    D.frame(t("Real data only: three image collections", "Numai date reale: trei colecții de imagini"),
+    D.frame(t("The data: three real image collections", "Datele: trei colecții reale de imagini"),
             note(t("The Modified National Institute of Standards and Technology (MNIST) digits are replaced in Fashion-MNIST by clothing photos; the Canadian Institute for Advanced Research (CIFAR) released CIFAR-10.",
                    "Cifrele Modified National Institute of Standards and Technology (MNIST) sînt înlocuite în Fashion-MNIST cu fotografii de îmbrăcăminte; Canadian Institute for Advanced Research (CIFAR) a publicat CIFAR-10.")) +
             table("@{}p{0.2\\textwidth}p{0.3\\textwidth}p{0.2\\textwidth}p{0.22\\textwidth}@{}",
@@ -130,7 +130,7 @@ def build(lang, H=None):
             "footnotesize", cite=t("(data/SOURCES.md)", "(data/SOURCES.md)"))
 
     # ------------------------------------------------------------------ 1. Why convolutions
-    D.section(t("Images as data: why convolutions", "Imaginile ca date: de ce convoluții"))
+    D.section(t("Images as data and the motivation for convolutions", "Imaginile ca date și motivarea convoluțiilor"))
     D.figframe(t("A product photo is a matrix of numbers", "O fotografie de produs este o matrice de numere"),
                t("each image is a $28\\times28$ array of grey levels; a model must map it to one of 10 product types.",
                  "fiecare imagine este o matrice de $28\\times28$ niveluri de gri; modelul trebuie să o asocieze unuia dintre cele 10 tipuri de produse."),
@@ -161,7 +161,7 @@ def build(lang, H=None):
               cite=t("(LeCun et al., 1998; Bishop \\& Bishop, 2024, ch.~10)", "(LeCun et al., 1998; Bishop \\& Bishop, 2024, cap.~10)"))
 
     # ------------------------------------------------------------------ 2. The convolutional layer
-    D.section(t("The convolutional layer, formula by formula", "Stratul convoluțional, formulă cu formulă"))
+    D.section(t("The convolutional layer", "Stratul convoluțional"))
     D.concept(t("Convolution: the same small filter slides over the image", "Convoluția: același filtru mic glisează peste imagine"),
               t("each output value is a weighted sum of a $k\\times k$ neighbourhood, with weights shared across positions.",
                 "fiecare ieșire este o sumă ponderată a unei vecinătăți de $k\\times k$, cu aceleași ponderi peste tot."),
@@ -257,7 +257,7 @@ def build(lang, H=None):
               cite=t("(Ioffe \\& Szegedy, 2015)", "(Ioffe \\& Szegedy, 2015)"))
 
     # ------------------------------------------------------------------ 3. Fashion-MNIST case study
-    D.section(t("Case study: product photos, from softmax to CNN", "Studiu de caz: fotografii de produse, de la softmax la CNN"))
+    D.section(t("Case study: classification of product photos with softmax regression and a CNN", "Studiu de caz: clasificarea fotografiilor de produse cu regresie softmax și CNN"))
     D.frame(t("Experimental protocol for the three models", "Protocolul experimental pentru cele trei modele"), cols(it(
         t(("\\textbf{Benchmark}: softmax (multinomial logistic) regression", "$\\hat{\\mathbf p}=\\softmax(\\mW\\mathrm{vec}(\\mathbf X)+\\vb)$, @{fmnist.softmax.params|,d} parameters"),
           ("\\textbf{Reper}: regresia softmax (logistică multinomială)", "$\\hat{\\mathbf p}=\\softmax(\\mW\\mathrm{vec}(\\mathbf X)+\\vb)$, @{fmnist.softmax.params|,d} de parametri")),
@@ -283,7 +283,7 @@ def build(lang, H=None):
                           "Cea mai bună epocă pe validare (sămînța @{seed}): CNN @{fmnist.cnn.best_epoch}, MLP @{fmnist.mlp.best_epoch}, softmax @{fmnist.softmax.best_epoch}, din @{fmnist.epochs}.")],
                height="0.5\\textheight", cite=OWN, tryit=NB + "3")
 
-    D.figframe(t("Higher accuracy with fewer parameters", "Acuratețe mai mare cu mai puțini parametri"),
+    D.figframe(t("Accuracy and number of parameters of the three models", "Acuratețea și numărul de parametri ai celor trei modele"),
                t("weight sharing buys accuracy and saves parameters at the same time.",
                  "partajarea ponderilor aduce acuratețe și economisește parametri în același timp."),
                None, "fmnist_compare",
@@ -309,7 +309,7 @@ def build(lang, H=None):
                 "înainte de a înlocui un model aflat în producție, arătați că avantajul rezistă unui test pe aceleași cazuri, nu doar o medie mai mare."),
               cite=t("(McNemar, 1947)", "(McNemar, 1947)"))
 
-    D.figframe(t("The errors are the products that people also confuse", "Erorile sînt la produsele pe care le confundă și oamenii"),
+    D.figframe(t("Confusion matrix: errors between products of similar shape", "Matricea de confuzie: erori între produse cu forme asemănătoare"),
                t("most mistakes are between upper-body garments of similar shape.",
                  "cele mai multe greșeli apar între articolele pentru partea de sus a corpului, cu forme asemănătoare."),
                None, "fmnist_confusion",
@@ -329,7 +329,7 @@ def build(lang, H=None):
                           "Straturile mai adînci le combină în părți (gulere, tălpi, mînere) (Zeiler \\& Fergus, 2014).")],
                height="0.2\\textheight", cite=t("(own computation; Zeiler \\& Fergus, 2014)", "(calcul propriu; Zeiler \\& Fergus, 2014)"))
 
-    D.figframe(t("Feature maps: from edges to a coarse map of parts", "Hărțile de trăsături: de la muchii la o hartă grosieră a părților"),
+    D.figframe(t("Feature maps at increasing depth", "Hărțile de trăsături la adîncimi crescătoare"),
                t("early maps keep the outline of the boot; deep maps are small but say where the informative parts are.",
                  "hărțile timpurii păstrează conturul ghetei; cele adînci sînt mici, dar arată unde se află părțile informative."),
                None, "fmnist_featuremaps",
@@ -370,7 +370,7 @@ def build(lang, H=None):
                 "blocurile reziduale sînt alegerea implicită în toate modelele moderne de viziune și de limbaj, inclusiv în transformere."),
               cite=t("(He et al., 2016)", "(He et al., 2016)"))
 
-    D.figframe(t("Augmentation narrows the gap; residuals make depth trainable", "Augmentarea reduce decalajul; conexiunile reziduale fac adîncimea antrenabilă"),
+    D.figframe(t("Effects of data augmentation and residual connections", "Efectele augmentării datelor și ale conexiunilor reziduale"),
                t("left: the same CNN on Canadian Institute for Advanced Research (CIFAR-10) photos; right: 32-layer networks that differ only by the shortcut.",
                  "stînga: aceeași CNN pe fotografiile Canadian Institute for Advanced Research (CIFAR-10); dreapta: rețele de 32 de straturi care diferă doar prin scurtătură."),
                None, "cifar_curves",
@@ -409,7 +409,7 @@ def build(lang, H=None):
                      "un creditor agricol verifică dacă un împrumut finanțează culturi; un asigurător cartografiază zonele rezidențiale expuse inundațiilor."),
                height="0.36\\textheight", cite=t("(Helber et al., 2019)", "(Helber et al., 2019)"))
 
-    D.concept(t("Transfer learning: reuse features learned on a million photos", "Transferul învățării: refolosim trăsături învățate pe un milion de fotografii"),
+    D.concept(t("Transfer learning: features learned on a million photos", "Transferul învățării: trăsături învățate pe un milion de fotografii"),
               t("the early layers of a network trained on ImageNet detect edges and textures that are useful for any image.",
                 "primele straturi ale unei rețele antrenate pe ImageNet detectează muchii și texturi utile pentru orice imagine."),
               "\\[ f_{\\btheta}(\\mathbf X)=g_{\\boldsymbol\\psi}\\big(\\phi_{\\boldsymbol\\omega}(\\mathbf X)\\big),\\quad \\boldsymbol\\omega^{(0)}=\\boldsymbol\\omega_{\\mathrm{ImageNet}} \\]"
@@ -487,7 +487,7 @@ def build(lang, H=None):
                 "un auditor poate verifica dacă ``zonă industrială'' este decisă de acoperișuri, nu de un nor sau de un artefact de margine."),
               cite=t("(Selvaraju et al., 2017; own computation)", "(Selvaraju et al., 2017; calcul propriu)"), wl="0.46", wr="0.51")
 
-    D.concept(t("From tiles to a decision: land-use shares", "De la imagini la decizie: ponderile utilizării terenului"),
+    D.concept(t("Land-use shares estimated from satellite tiles", "Ponderile utilizării terenului estimate din imagini satelitare"),
               t("a portfolio question is about shares and totals, so errors that cancel matter less than errors that do not.",
                 "o întrebare de portofoliu privește ponderi și totaluri, deci erorile care se compensează contează mai puțin decît cele care nu se compensează."),
               "\\[ \\hat\\pi_k=\\frac1n\\sum_{i=1}^n\\mathbf 1\\{\\hat y_i=k\\},\\qquad \\E[\\hat\\pi_k]=\\sum_j\\pi_j\\,P(\\hat y=k\\mid y=j) \\]"
@@ -503,7 +503,7 @@ def build(lang, H=None):
                 "pentru un asigurător sau un creditor agricol, rezultatul este ponderea hectarelor pe regiune, cu o marjă de eroare, nu o etichetă pentru fiecare imagine."),
               cite=OWN)
 
-    D.frame(t("When transfer learning helps, and when it can mislead", "Cînd ajută transferul învățării și cînd poate induce în eroare"), cols(it(
+    D.frame(t("Benefits and risks of transfer learning", "Avantajele și riscurile transferului învățării"), cols(it(
         t(("\\textbf{Helps most}", "few labels (right panel of the transfer chart)", "a source domain with similar low-level statistics (edges, textures)",
            "a limited compute budget: frozen features cost one forward pass"),
           ("\\textbf{Ajută cel mai mult}", "cînd sînt puține etichete (panoul din dreapta al graficului de transfer)", "cînd domeniul sursă are statistici de nivel jos similare (muchii, texturi)",
@@ -516,7 +516,7 @@ def build(lang, H=None):
                      "înainte de utilizare, etichetați un mic eșantion din regiunea țintă și măsurați din nou; modelul ajustat fin se actualizează ieftin.")),
         "footnotesize", cite=t("(Yosinski et al., 2014; Helber et al., 2019)", "(Yosinski et al., 2014; Helber et al., 2019)"))
 
-    D.concept(t("Convolutions beyond photos: sequences and charts", "Convoluțiile dincolo de fotografii: secvențe și grafice"),
+    D.concept(t("Convolutions for sequences and charts", "Convoluții pentru secvențe și grafice"),
               t("a one-dimensional convolution slides over time, the same way a two-dimensional one slides over space.",
                 "o convoluție unidimensională glisează în timp, la fel cum una bidimensională glisează în spațiu."),
               "\\[ z_t=b+\\sum_{c}\\sum_{u=0}^{k-1}K_c(u)\\,x_{c,\\,t-u} \\]"

@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L4.js?v=20261109m">
+<link rel="preload" as="script" href="L4.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261109m", "L4_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L4.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261109n", "L4_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L4.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,7 +53,7 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în browser cînd modificați un control. Butonul ▶ modifică parametrul principal pas cu pas. Sub fiecare figură: o sinteză numerică, o întrebare pentru sală și Quantlet-ul cu codul figurii. Primul bloc aplică o convoluție, chiar în browser, pe o imagine reală din satelit; hărțile de caracteristici provin din CNN antrenată în curs; curbele sînt antrenările ei salvate.</p>
-<p class="toc"><a href="#s-conv">Stratul convoluțional</a> · <a href="#s-fm">Fotografii de produse: ce învață o CNN</a> · <a href="#s-arch">Rețele mai adînci și transferul învățării</a></p>
+<p class="toc"><a href="#s-conv">Stratul convoluțional</a> · <a href="#s-fm">Fotografii de produse: trăsăturile învățate de o CNN</a> · <a href="#s-arch">Rețele mai adînci și transferul învățării</a></p>
 <h2 class="sec" id="s-conv">Stratul convoluțional</h2>
 <section class="blk" id="convolution">
   <h3>Filtrele construite de mînă găsesc deja drumurile și marginile parcelelor</h3>
@@ -74,11 +74,11 @@
   </div>
   <div class="ask"><span class="ask-tag">Întrebare pentru sală</span> Cîte convoluții de 3 × 3 trebuie suprapuse pînă cînd un neuron „vede” o imagine EuroSAT întreagă, de 64 × 64 (640 m × 640 m)?</div>
   <details><summary>Răspuns</summary><p>Fără agregare, cîmpul receptiv crește cu 2 pixeli pe strat: 13 pixeli după 6 straturi, 25 după 12, deci ar fi nevoie de aproximativ 32 de straturi. Cu o agregare 2 × 2 după fiecare două convoluții, el crește geometric: 68 de pixeli după 8 convoluții, mai mult decît întreaga imagine. Nucleele mai mari (5 × 5, 7 × 7) îl cresc mai repede, dar costă 25 sau 49 de ponderi pe pereche de canale în loc de 9; suprapunerea nucleelor mici cu agregare este calea mai ieftină de a vedea departe.</p></details>
-</section><h2 class="sec" id="s-fm">Fotografii de produse: ce învață o CNN</h2>
+</section><h2 class="sec" id="s-fm">Fotografii de produse: trăsăturile învățate de o CNN</h2>
 <section class="blk" id="feature-maps">
-  <h3>Hărțile de trăsături: de la muchii la o hartă grosieră a părților</h3>
+  <h3>Hărțile de trăsături la adîncimi crescătoare</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L4_fmnist_featuremaps_ro.jpg" alt="Slide-ul 23: Hărțile de trăsături: de la muchii la o hartă grosieră a părților" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L4_fmnist_featuremaps_ro.jpg" alt="Slide-ul 23: Hărțile de trăsături la adîncimi crescătoare" loading="lazy"></a>
       <figcaption>Slide-ul 23</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fm-i">Imaginea de test</label><select id="fm-i"><option value="0">Tricou</option><option value="1">Pantaloni</option><option value="2">Pulover</option><option value="3">Rochie</option><option value="4">Palton</option><option value="5">Sandală</option><option value="6">Cămașă</option><option value="7">Pantof sport</option><option value="8">Geantă</option><option value="9" selected>Ghete</option></select></div><div class="ctl ctl-tg" id="fm-b"><span class="lbl">Blocul</span><div class="tgs"><label class="tg"><input type="radio" name="fm-b" value="b1" checked> blocul 1 (32 de canale, 14 × 14)</label><label class="tg"><input type="radio" name="fm-b" value="b3"> blocul 3 (128 de canale, 7 × 7)</label></div></div><div class="ctl"><label for="fm-c">Canalul (1 = cel mai activ): <b id="fm-c-v"></b></label><input type="range" id="fm-c" min="0" max="31" step="1" value="0"></div><button class="btn play" id="fm-play" type="button"></button></div><div class="charts "><div class="chart" id="fm-img"></div><div class="chart" id="fm-map"></div></div><ul class="out" id="fm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_featuremaps" target="_blank" rel="noopener">NN_L4_fmnist_featuremaps</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_fmnist_featuremaps/NN_L4_fmnist_featuremaps.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Răspuns</summary><p>CNN dă „Tricou” cu 69,7% pentru această cămașă: este eroarea cea mai frecventă a rețelei, 102 din cele 1.000 de cămăși de test sînt clasificate drept tricouri, iar sensibilitatea clasei este 75,1%. Canalele din blocul 1 (14 × 14) seamănă încă cu imaginea: muchii, guler, fundal. Canalele din blocul 3 (7 × 7) sînt grosiere și răspund la părți ale obiectului; media lor pe hartă este ceea ce citește clasificatorul. Pentru celelalte nouă imagini de test, CNN este aproape sigură (99,8% sau mai mult).</p></details>
 </section>
 <section class="blk" id="confusion">
-  <h3>Erorile sînt la produsele pe care le confundă și oamenii</h3>
+  <h3>Matricea de confuzie: erori între produse cu forme asemănătoare</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=21" target="_blank" rel="noopener"><img src="slides/L4_fmnist_confusion_ro.jpg" alt="Slide-ul 21: Erorile sînt la produsele pe care le confundă și oamenii" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=21" target="_blank" rel="noopener"><img src="slides/L4_fmnist_confusion_ro.jpg" alt="Slide-ul 21: Matricea de confuzie: erori între produse cu forme asemănătoare" loading="lazy"></a>
       <figcaption>Slide-ul 21</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Modelul</label><select id="cm-m"><option value="softmax">Regresie softmax</option><option value="mlp">MLP</option><option value="cnn" selected>CNN</option></select></div><div class="ctl"><label for="cm-c">Clasa reală evidențiată</label><select id="cm-c"><option value="0">Tricou</option><option value="1">Pantaloni</option><option value="2">Pulover</option><option value="3">Rochie</option><option value="4">Palton</option><option value="5">Sandală</option><option value="6" selected>Cămașă</option><option value="7">Pantof sport</option><option value="8">Geantă</option><option value="9">Ghete</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="cm-n" value="pct" checked> Procente pe rînd</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_confusion" target="_blank" rel="noopener">NN_L4_fmnist_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_fmnist_confusion/NN_L4_fmnist_confusion.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>Cămașa este clasa cea mai dificilă pentru toate cele trei modele: sensibilitatea este 56,9% pentru regresia softmax, 68,2% pentru MLP (perceptronul multistrat) și 75,1% pentru CNN; cea mai mare confuzie este mereu cămașă → tricou (138, 124 și 102 imagini). Acuratețea crește de la 84,6% (7.850 de parametri) la 89,0% (235.146) și 92,9% (140.778): CNN are mai puțini parametri decît MLP și face cu 37% mai puține erori, pentru că folosește aceleași ponderi în toate pozițiile. Erorile rămase sînt între clase asemănătoare vizual (cămașă, tricou, pulover, palton).</p></details>
 </section><h2 class="sec" id="s-arch">Rețele mai adînci și transferul învățării</h2>
 <section class="blk" id="residual">
-  <h3>Augmentarea reduce decalajul; conexiunile reziduale fac adîncimea antrenabilă</h3>
+  <h3>Efectele augmentării datelor și ale conexiunilor reziduale</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L4_cifar_curves_ro.jpg" alt="Slide-ul 27: Augmentarea reduce decalajul; conexiunile reziduale fac adîncimea antrenabilă" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4_ro.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L4_cifar_curves_ro.jpg" alt="Slide-ul 27: Efectele augmentării datelor și ale conexiunilor reziduale" loading="lazy"></a>
       <figcaption>Slide-ul 27</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="cf-m"><span class="lbl">Rețele</span><div class="tgs"><label class="tg"><input type="checkbox" name="cf-m" value="cnn"> CNN mică, fără augmentare</label><label class="tg"><input type="checkbox" name="cf-m" value="cnn_aug"> CNN mică, cu augmentare</label><label class="tg"><input type="checkbox" name="cf-m" value="plain32" checked> Rețea simplă, 32 de straturi</label><label class="tg"><input type="checkbox" name="cf-m" value="res32" checked> ResNet, 32 de straturi</label></div></div><div class="ctl ctl-tg" id="cf-y"><span class="lbl">Măsura</span><div class="tgs"><label class="tg"><input type="radio" name="cf-y" value="train_loss" checked> Pierderea la antrenare</label><label class="tg"><input type="radio" name="cf-y" value="train_acc"> Acuratețea la antrenare</label><label class="tg"><input type="radio" name="cf-y" value="valid_acc"> Acuratețea pe validare</label></div></div></div><div class="charts one"><div class="chart" id="cf-chart"></div></div><ul class="out" id="cf-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_cifar_curves" target="_blank" rel="noopener">NN_L4_cifar_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_cifar_curves/NN_L4_cifar_curves.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

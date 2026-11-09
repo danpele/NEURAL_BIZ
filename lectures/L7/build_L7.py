@@ -127,7 +127,7 @@ def build(lang, H=None):
     abbreviation_frames(D, ABBR)
 
     # ------------------------------------------------------------------ 1 why attention
-    D.section(t("Why attention", "De ce atenția"))
+    D.section(t("Motivation for the attention mechanism", "Motivația mecanismului de atenție"))
     D.concept(t("Financial news as input for models", "Știrile financiare ca date de intrare pentru modele"),
               t("Thousands of headlines and posts arrive every hour; a desk needs their tone in seconds, consistently, in the same units.",
                 "Mii de titluri și postări sosesc în fiecare oră; o mesă de tranzacționare are nevoie de tonul lor în cîteva secunde, consecvent, pe aceeași scară."),
@@ -161,7 +161,7 @@ def build(lang, H=None):
                 "în ``profitul a scăzut, dar prognoza a fost majorată'', verdictul depinde de un cuvînt aflat departe de subiect."),
               cite="(Bahdanau, Cho \\& Bengio, 2015; Bishop \\& Bishop, 2024, sec.\\ 12.1)")
 
-    D.chart(t("Tweets are short; central-bank speeches are far beyond a 512-token window", "Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni"),
+    D.chart(t("Length of tweets and central-bank speeches in tokens", "Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni"),
             "context_lengths", [
                 t("\\textbf{Median length in tokens}: tweets @{len.tw_median}, Financial PhraseBank sentences @{len.pb_median}, European Central Bank (ECB) speeches @{len.sp_median|,d}.",
                   "\\textbf{Lungimea mediană în tokeni}: tweet-uri @{len.tw_median}, propoziții Financial PhraseBank @{len.pb_median}, discursuri ale Băncii Centrale Europene (BCE) @{len.sp_median|,d}"),
@@ -191,7 +191,7 @@ def build(lang, H=None):
                 "fiecare cuvînt de ieșire este un amestec care ține cont de context: ``prognoza'' poate împrumuta sens de la ``majorată'', aflat zece cuvinte mai departe."),
               tryit=NB + "2", cite="(Vaswani et al., 2017; Bishop \\& Bishop, 2024, sec.\\ 12.1)")
 
-    D.concept(t("In matrix form: one multiplication attends all words at once", "În formă matriceală: o singură înmulțire calculează atenția pentru toate cuvintele"),
+    D.concept(t("Attention in matrix form for all words at once", "Atenția în formă matriceală, pentru toate cuvintele simultan"),
               t("Stacking queries, keys and values as matrices turns attention into two matrix products and a row-wise softmax.",
                 "Așezînd întrebările, cheile și valorile în matrice, atenția devine două produse de matrice și un softmax pe rînduri."),
               "\\[ \\operatorname{Attention}(Q,K,V)=\\softmax\\Big(\\frac{QK^{\\top}}{\\sqrt{d_k}}+\\mathbf M\\Big)V \\]\\[ Q=XW_Q,\\quad K=XW_K,\\quad V=XW_V \\]"
@@ -208,7 +208,7 @@ def build(lang, H=None):
                 "termenul $n^2$ explică de ce ferestrele de context sînt limitate și rapoartele lungi trebuie tăiate în bucăți."),
               tryit=NB + "2", cite="(Vaswani et al., 2017)")
 
-    D.concept(t("Why divide by $\\sqrt{d_k}$: keep the softmax out of saturation", "De ce împărțim la $\\sqrt{d_k}$: ferim softmax-ul de saturație"),
+    D.concept(t("Scaling by $\\sqrt{d_k}$ and saturation of the softmax", "Scalarea cu $\\sqrt{d_k}$ și saturația softmax-ului"),
               t("Dot products of long random vectors grow with their length; without scaling the softmax becomes one-hot and its gradient vanishes.",
                 "Produsele scalare ale unor vectori aleatori lungi cresc odată cu lungimea lor; fără scalare, softmax-ul devine one-hot și gradientul dispare."),
               "\\[ q_l,k_l\\iid(0,1)\\ \\Rightarrow\\ \\E[\\mathbf q^{\\top}\\mathbf k]=0,\\quad \\Var(\\mathbf q^{\\top}\\mathbf k)=\\sum_{l=1}^{d_k}\\Var(q_lk_l)=d_k \\]"
@@ -223,7 +223,7 @@ def build(lang, H=None):
                 "o constantă de proiectare, nu un parametru de calibrat: datorită ei se pot antrena stive adînci de straturi de atenție."),
               cite="(Vaswani et al., 2017)")
 
-    D.concept(t("Several heads look for several relations at once", "Mai multe capete caută simultan mai multe relații"),
+    D.concept(t("Multi-head attention: several relations at once", "Atenția cu mai multe capete: mai multe relații simultan"),
               t("One head averages one kind of relation; several heads with smaller projections capture syntax, negation and entities in parallel.",
                 "Un cap mediază un singur tip de relație; mai multe capete, cu proiecții mai mici, surprind în paralel sintaxa, negația și entitățile."),
               "\\[ \\operatorname{MHA}(X)=\\big[\\mathbf H_1\\,\\|\\,\\cdots\\,\\|\\,\\mathbf H_h\\big]W_O \\]\\[ \\mathbf H_m=\\operatorname{Attention}(XW_Q^{m},XW_K^{m},XW_V^{m}) \\]"
@@ -311,7 +311,7 @@ def build(lang, H=None):
                 "pentru etichetarea textelor folosiți un codificator; pentru redactarea rapoartelor, un decodor (cursul 12)."),
               cite="(Devlin et al., 2019; Radford et al., 2018)")
 
-    D.concept(t("Text becomes numbers through subword tokens", "Textul devine numere prin tokeni de subcuvinte"),
+    D.concept(t("Subword tokenisation of text", "Tokenizarea textului în subcuvinte"),
               t("A fixed vocabulary of word pieces covers any word, including tickers and new company names, by splitting rare words into frequent pieces.",
                 "Un vocabular fix de bucăți de cuvinte acoperă orice cuvînt, inclusiv simbolurile bursiere și numele noi de firme, împărțind cuvintele rare în bucăți frecvente."),
               "\\[ x_{1:n}=\\big[\\texttt{[CLS]},w_1,\\dots,w_{n-2},\\texttt{[SEP]}\\big],\\qquad \\vx_t=E[x_t]+\\mathbf p_t+\\mathbf s_t \\]"
@@ -439,14 +439,14 @@ def build(lang, H=None):
           "\\textbf{Preantrenarea = date pe care nu le-ați etichetat}: miliarde de cuvinte au format deja vectorii FinBERT; un model de la zero trebuie să învețe deodată limba și sarcina")],
         height="0.52\\textheight", tryit=NB + "6", cite=t("(own computation, seed 1)", "(calcule proprii, sămînța 1)"))
 
-    D.chart(t("Fine-tuning fixes what the zero-shot model gets wrong", "Ajustarea fină corectează ce greșește modelul fără antrenare"), "confusion", [
+    D.chart(t("Zero-shot errors corrected by fine-tuning", "Erorile modelului fără antrenare corectate prin ajustare fină"), "confusion", [
         t("\\textbf{Zero-shot}: FinBERT was trained on news sentences, not tweets; it finds @{cm_zs.bear_ok} of the @{data.n_bearish_test} bearish tweets; after fine-tuning: @{cm.bear_ok}.",
           "\\textbf{Fără antrenare}: FinBERT a fost antrenat pe propoziții din știri, nu pe tweet-uri; găsește @{cm_zs.bear_ok} dintre cele @{data.n_bearish_test} de tweet-uri negative; după ajustare: @{cm.bear_ok}"),
         t("\\textbf{Remaining errors}: @{cm.bear_as_neutral} bearish and @{cm.bull_as_neutral} bullish tweets read as neutral; only @{cm.bear_as_bull} bearish read as bullish.",
           "\\textbf{Erorile rămase}: @{cm.bear_as_neutral} tweet-uri negative și @{cm.bull_as_neutral} pozitive citite ca neutre; doar @{cm.bear_as_bull} negative citite ca pozitive")],
         height="0.52\\textheight", tryit=NB + "5", cite=t("(own computation, fine-tuned model of seed 1)", "(calcule proprii, modelul ajustat cu sămînța 1)"))
 
-    D.concept(t("Fine-tuning: start from pretrained weights, take small steps", "Ajustarea fină: pornim de la ponderile preantrenate și facem pași mici"),
+    D.concept(t("Fine-tuning: pretrained initial weights and small learning rates", "Ajustarea fină: ponderi inițiale preantrenate și rate de învățare mici"),
               t("All weights move, but only a little: the language knowledge stays, the decision layer adapts to tweets.",
                 "Toate ponderile se mișcă, dar puțin: cunoștințele de limbă rămîn, stratul de decizie se adaptează la tweet-uri."),
               "\\[ \\btheta_0=\\btheta_{\\text{FinBERT}},\\qquad \\btheta_{s+1}=\\btheta_s-\\eta_s\\,\\widehat{\\nabla\\loss}(\\btheta_s),\\quad \\eta_s=\\eta_0\\Big(1-\\frac{s}{S}\\Big) \\]"
@@ -462,7 +462,7 @@ def build(lang, H=None):
                 "ajustarea fină a unui codificator preantrenat este azi alegerea implicită pentru orice sarcină pe text etichetat, cu cîteva mii de exemple."),
               tryit=NB + "5", cite="(Devlin et al., 2019; Araci, 2019)")
 
-    D.frame(t("Does word order matter for tweets?", "Contează ordinea cuvintelor în tweet-uri?"), cols(
+    D.frame(t("Role of word order in tweet classification", "Rolul ordinii cuvintelor în clasificarea tweet-urilor"), cols(
         it((t("\\textbf{Ablation}", "\\textbf{Experimentul de eliminare}"),
             t("same small transformer with and without positional encoding, 3 seeds each", "același transformer mic, cu și fără codificarea poziției, cîte 3 semințe"),
             t("macro-F1 @{models.tiny.macro_f1|.1f}\\,\\% with positions, @{models.tiny_nopos.macro_f1|.1f}\\,\\% without: @{gain_pos|+.1f} points",
@@ -480,7 +480,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 5 practice
     D.section(t("Transformers in practice", "Transformerele în practică"))
-    D.frame(t("From sentiment scores to a business signal", "De la scorurile de sentiment la un semnal de afaceri"), cols(
+    D.frame(t("Sentiment scores as a business signal", "Scorurile de sentiment ca semnal de afaceri"), cols(
         it((t("\\textbf{Pipeline}", "\\textbf{Fluxul de lucru}"),
             t("stream of news and posts $\\to$ tokenizer $\\to$ fine-tuned encoder $\\to$ class probabilities", "fluxul de știri și postări $\\to$ tokenizator $\\to$ codificator ajustat $\\to$ probabilitățile claselor"),
             t("aggregate by firm and day: share of bearish minus bullish, weighted by reach", "agregare pe firmă și zi: ponderea mesajelor negative minus pozitive, ponderată cu audiența")),
@@ -509,7 +509,7 @@ def build(lang, H=None):
                    "pentru o echipă de politică monetară, împărțirea în bucăți plus un codificator bine testat bate de obicei un model cu context lung netestat."), NB + "1"),
         "footnotesize", cite="(Vaswani et al., 2017)")
 
-    D.frame(t("Transformers beyond text", "Transformerele dincolo de text"), cols(
+    D.frame(t("Transformers for data other than text", "Transformerele pentru alte date decît textul"), cols(
         it((t("\\textbf{Time series}", "\\textbf{Serii de timp}"),
             t("patches of a series as tokens; pretrained forecasting models (Lecture 13)", "fragmente ale seriei ca tokeni; modele de prognoză preantrenate (cursul 13)")),
            (t("\\textbf{Tables and transactions}", "\\textbf{Tabele și tranzacții}"),
@@ -524,7 +524,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ wrap-up
     D.section(t("Wrap-up", "Concluzii"))
-    D.frame(t("What to remember", "Ce reținem"), it(
+    D.frame(t("Key takeaways", "Idei principale"), it(
         t("\\textbf{Attention} = softmax of scaled query-key scores times values; one step between any two words, $O(n^2)$ cost; $\\sqrt{d_k}$ keeps the softmax trainable.",
           "\\textbf{Atenția} = softmax al scorurilor întrebare-cheie scalate, înmulțit cu valorile; un singur pas între oricare două cuvinte, cost $O(n^2)$; $\\sqrt{d_k}$ păstrează softmax-ul antrenabil"),
         t("\\textbf{Transformer block} = multi-head attention + feed-forward, each with a residual link and layer normalisation; positions are added, because attention ignores order.",

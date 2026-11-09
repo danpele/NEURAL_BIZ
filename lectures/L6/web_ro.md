@@ -17,11 +17,11 @@ Toate reprezentările sînt construite pe texte financiare reale: 4 838 de fraz
 
 # Textul ca date
 
-## De la o frază la unități lexicale
+## Împărțirea unei fraze în unități lexicale
 
 O frază reală din PhraseBank, în engleză, despre creșterea profitului operațional al unei companii finlandeze, etichetată pozitivă de adnotatori. Tokenizatorul nostru păstrează cuvintele cu litere mici și numerele, transformă fiecare număr în unitatea `<num>` și elimină legăturile și mențiunile cu @; fraza devine 27 de unități lexicale. Fiecare alegere contează: eliminarea cuvintelor de legătură din engleză ar șterge „up”, „down” și „not”, care poartă sentiment.
 
-## Puține cuvinte sînt frecvente, cele mai multe sînt rare
+## Frecvențele cuvintelor și legea lui Zipf
 
 Discursurile BCE din perioada 8 ianuarie 2022 – 30 octombrie 2026 conțin 1 289 896 de unități lexicale și 20 130 de cuvinte distincte. Frecvența scade ca o putere a rangului (legea lui Zipf), cu o pantă estimată de −1,498; cele mai frecvente zece cuvinte reprezintă 25,0% din total, iar 32,5% dintre cuvintele distincte apar o singură dată.
 
@@ -95,7 +95,7 @@ TF-IDF cu regresie logistică clasifică bine 88,4% din frazele asupra cărora t
 @chart agreement
 Acuratețea pe test în funcție de ponderea adnotatorilor care au fost de acord asupra etichetei.
 
-## Puține etichete: unde ajută vectorii preantrenați
+## Vectorii preantrenați atunci cînd etichetele sînt puține
 
 Cu doar 169 de fraze etichetate, TF-IDF atinge 51,0%, media vectorilor word2vec 48,0%, iar embedding bag 47,2% cu start aleator și 51,0% cu start word2vec; cu toate cele 3 385 de fraze, valorile sînt 72,8%, 56,7%, 71,9% și 70,9%. Cele mai multe erori mută o frază negativă sau pozitivă în clasa neutră: sensibilitatea este 65,9% pentru frazele negative și 69,5% pentru cele pozitive.
 

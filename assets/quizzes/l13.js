@@ -36,7 +36,7 @@ window.NN_DATA.quizzes['l13'] = {
         {
             "correct": 0,
             "en": {
-                "title": "Why not percentage errors",
+                "title": "Percentage errors and negative prices",
                 "text": "In the test year the Romanian price was negative in 195 hours. Why does the lecture report MAE in EUR/MWh and rMAE instead of MAPE?",
                 "options": [
                     "Percentage errors explode or change sign when the actual price is near zero or negative",
@@ -48,7 +48,7 @@ window.NN_DATA.quizzes['l13'] = {
                 "incorrectExplanation": "The problem is the division by the actual value: near zero or below zero the percentage error is unbounded or has the wrong sign."
             },
             "ro": {
-                "title": "De ce nu erori procentuale",
+                "title": "Erorile procentuale și prețurile negative",
                 "text": "În anul de test, prețul din România a fost negativ în 195 de ore. De ce raportează cursul MAE în EUR/MWh și rMAE, nu MAPE?",
                 "options": [
                     "Erorile procentuale explodează sau își schimbă semnul cînd prețul realizat este aproape de zero sau negativ",

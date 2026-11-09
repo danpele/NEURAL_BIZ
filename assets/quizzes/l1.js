@@ -225,7 +225,7 @@ window.NN_DATA.quizzes['l1'] = {
   {
    "correct": 0,
    "en": {
-    "title": "Why activations",
+    "title": "Role of activation functions",
     "text": "What happens to an MLP if all activation functions are removed?",
     "options": [
      "It collapses to a single linear map, whatever its depth",
@@ -237,7 +237,7 @@ window.NN_DATA.quizzes['l1'] = {
     "incorrectExplanation": "Composing affine maps gives an affine map; only the nonlinear activation between layers lets the network represent curved functions."
    },
    "ro": {
-    "title": "De ce avem nevoie de activări",
+    "title": "Rolul funcțiilor de activare",
     "text": "Ce se întîmplă cu un MLP dacă eliminăm toate funcțiile de activare?",
     "options": [
      "Se reduce la o singură transformare liniară, oricît de adînc ar fi",

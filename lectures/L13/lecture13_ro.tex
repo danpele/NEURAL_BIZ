@@ -95,7 +95,7 @@ VaR & valoarea expusă la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weron, 2014; Lago et al., 2021)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Numai date reale: prețurile și consumul de energie din România, S\&P 500 și Bitcoin}
+\begin{frame}{Datele: prețurile și consumul de energie din România, S\&P 500 și Bitcoin}
 \small
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.34\textwidth}p{0.12\textwidth}p{0.3\textwidth}p{0.17\textwidth}@{}}\toprule
@@ -357,7 +357,7 @@ S\&P 500, Bitcoin (BTC/USD) & zilnică & Yahoo Finance & valoarea expusă la ris
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Oreshkin et al., 2020)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Arhitecturi transformer pentru serii de timp: peticele devin tokeni}
+\begin{frame}{Arhitecturi transformer pentru serii de timp: peticele ca tokeni}
 \footnotesize
 \intuition{seria se taie în petice scurte, fiecare petic este reprezentat ca un cuvînt, iar mecanismul de atenție le compară.}
 \begin{columns}[T,onlytextwidth]
@@ -516,7 +516,7 @@ modelul naiv & \cellcolor{Crimson!55}27{,}74 & 44{,}57 & \cellcolor{Crimson!55}1
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_forecast\_week}{Quantlets/L13/NN_L13_forecast_week}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Un context mai lung ajută modelul fundație, pînă la un punct}
+\begin{frame}{Efectul lungimii contextului asupra modelului fundație}
 \small
 \intuition{modelul vede doar contextul: o săptămînă arată forma zilnică, trei luni arată și nivelul.}
 \begin{center}\includegraphics[width=\textwidth,height=0.426\textheight,keepaspectratio]{charts/ro/context_length.pdf}\end{center}\vspace{-3mm}
@@ -684,11 +684,11 @@ modelul naiv & \cellcolor{Crimson!55}27{,}74 & 44{,}57 & \cellcolor{Crimson!55}1
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_coverage}{Quantlets/L13/NN_L13_coverage}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Consumul este mai ușor de prognozat decît prețul: modelele fundație greșesc cu cîteva procente}
+\begin{frame}{Prognozele de consum ale modelelor fundație: erori de cîteva procente}
 \small
 \intuition{consumul este neted și sezonier, exact formele pe care un model preantrenat le cunoaște cel mai bine.}
 \vspace{-1mm}\[ \mathrm{MAPE}=\frac{100}{24|\mathcal T|}\sum_{d,h}\Big|\frac{\ell_{d,h}-\hat\ell_{d,h}}{\ell_{d,h}}\Big| \]\vspace{-2mm}
-\begin{center}\includegraphics[width=\textwidth,height=0.185\textheight,keepaspectratio]{charts/ro/load_mape.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.268\textheight,keepaspectratio]{charts/ro/load_mape.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: energy-charts.info (Fraunhofer ISE), din datele burselor și ale ENTSO-E. Date: 1 noiembrie 2025 - 31 octombrie 2026, 360 de zile, consumul României.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -957,7 +957,7 @@ Bitcoin & HS (250 de zile) & 33 & \cellcolor{Forest!55}0{,}123 & 0{,}458 & 126 &
 
 \section*{Anexă}
 
-\begin{frame}{Anexa A: de ce acoperă banda conformală}
+\begin{frame}{Anexa A: garanția de acoperire a benzii conformale}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item Fie $s_1,\dots,s_n,s_{n+1}$ scoruri de conformitate interschimbabile

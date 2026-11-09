@@ -130,7 +130,7 @@ Networks & flag money laundering in a payment graph & graph networks & Elliptic 
 \par\vfill\manager{every network in this course is reported next to a linear or boosting benchmark.}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Three real credit datasets, used without any simulated record}
+\begin{frame}{The data: three real credit datasets}
 \small
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.27\textwidth}rrp{0.40\textwidth}@{}}\toprule
@@ -164,7 +164,7 @@ California housing & 20\,640 & (regression) & 1990 census block groups (Pace \& 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L1\_default\_rates}{Quantlets/L1/NN_L1_default_rates}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Learning = minimising the average loss on training data, judged on new data}
+\begin{frame}{Learning as minimisation of the average training loss, evaluated on new data}
 \small
 \intuition{we fit on one sample and pay for the errors on the next applicants.}
 \[ \underbrace{\hat R_n(\btheta)=\frac1n\sum_{i=1}^n \ell\big(y_i,f(\vx_i;\btheta)\big)}_{\text{empirical risk (training)}}\qquad\text{vs.}\qquad \underbrace{R(\btheta)=\E_{(\vx,y)\sim P}\,\ell\big(y,f(\vx;\btheta)\big)}_{\text{risk on new applicants}} \]
@@ -326,7 +326,7 @@ bias $b$ &  &  & \ensuremath{-}1.99 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~5)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The perceptron learns only from its mistakes}
+\begin{frame}{The perceptron updates its weights only on misclassified examples}
 \footnotesize
 \intuition{when an example is misclassified, the weights move towards it; otherwise nothing changes.}
 \begin{columns}[T,onlytextwidth]
@@ -533,7 +533,7 @@ quantile $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.~6)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{An MLP bends the decision boundary, but two inputs carry little extra signal}
+\begin{frame}{Nonlinear decision boundary of an MLP with two inputs}
 \small
 \intuition{predicted PD for two HMEQ variables: straight bands for the logistic model, curved regions for the MLP.}
 \begin{center}\includegraphics[width=\textwidth,height=0.434\textheight,keepaspectratio]{charts/en/boundary_hmeq.pdf}\end{center}\vspace{-3mm}

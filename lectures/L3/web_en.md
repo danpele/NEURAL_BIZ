@@ -55,7 +55,7 @@ Overfitting shows as falling training loss and rising validation loss; the bias-
 
 Weight decay and the L1 penalty constrain the size of the weights; they correspond to Gaussian and Laplace priors.
 
-## Weight decay = an L2 penalty = a Gaussian prior on the weights {h=ad383dc3}
+## Weight decay as an L2 penalty and as a Gaussian prior on the weights {h=2b41e5c4}
 
 Adding $\frac\lambda2\|\mathbf w\|^2$ to the loss turns each stochastic gradient descent (SGD) step into $\mathbf w\leftarrow(1-\eta\lambda)\mathbf w-\eta\nabla\mathcal L$, and the penalised minimum is the maximum a posteriori (MAP) estimate under a Gaussian prior. With Adam the two differ; Adam with decoupled weight decay (AdamW) restores uniform shrinkage.
 
@@ -63,7 +63,7 @@ Adding $\frac\lambda2\|\mathbf w\|^2$ to the loss turns each stochastic gradient
 
 The L1 penalty $\lambda\|\mathbf w\|_1$ has a corner at zero; its proximal (soft-thresholding) step $w\leftarrow\operatorname{sign}(u)\max(|u|-\eta\lambda,0)$ sets small weights exactly to zero, the lasso of Tibshirani (1996).
 
-## L1 piles the first-layer weights at zero, L2 only shrinks them {h=81b41af8}
+## First-layer weights under L1 and L2 penalties {h=a1cfcc11}
 
 On German credit, 67.2 % of the 3,072 first-layer weights end below 0.01 in absolute value with L1, against 26.3 % with L2; the test AUC is 0.768 and 0.761.
 
@@ -160,7 +160,7 @@ Hourly fraud rate over the two days, with the start of validation and test.
 
 Precision is $TP/(TP+FP)$, recall $TP/(TP+FN)$, and the PR-AUC averages precision over recall levels; a random score gets a PR-AUC equal to the fraud rate (Saito and Rehmsmeier, 2015). Every legitimate payment counts with weight 10 in $FP$, so precision is that of the full population.
 
-## On the test hours, early stopping is the regulariser that clearly helps {h=2d7071ff}
+## On the test hours, early stopping is the regulariser with the clearest gain {h=6ef48187}
 
 With 60 fixed epochs and 5 seeds, the test PR-AUC is 0.796 with no regularisation, 0.842 with early stopping, 0.787 with weight decay, 0.798 with dropout, 0.798 with batch norm and 0.841 with all combined.
 
@@ -178,7 +178,7 @@ Precision-recall curves on the test hours, population-weighted.
 
 A model trained on data where legitimate payments were kept with rate $\beta$ overstates the odds of fraud by $1/\beta$; the corrected probability is $p=\beta p_s/(\beta p_s-p_s+1)$ (Dal Pozzolo et al., 2015). Class weights and resampling move the effective cut-off but hardly change the ranking.
 
-## The right number of alerts saves most of the fraud losses {h=6fb63ed5}
+## Number of alerts and the share of fraud losses avoided {h=2b47be78}
 
 If a missed fraud loses its amount and each alert costs a review of 5 euro (EUR), the test-period losses fall from 7,729 EUR with no alerts to 3,093 EUR for logistic regression, 2,694 EUR for the MLP and 2,695 EUR for XGBoost at their best alert counts.
 

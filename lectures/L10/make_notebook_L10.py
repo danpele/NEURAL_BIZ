@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from nn_notebook import Notebook  # noqa: E402
 
 TITLE = ("Reinforcement learning: trading, hedging and battery dispatch",
-         "Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor")
+         "Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor")
 
 LOAD_PRICES = """import torch, torch.nn as nn
 x = pd.read_csv(DATA + 'power_da_prices_hourly_utc.csv', parse_dates=['timestamp_utc']).set_index('timestamp_utc')

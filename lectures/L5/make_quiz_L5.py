@@ -254,7 +254,7 @@ q(2, ("Seeds", "Why were the volatility networks trained with five seeds and the
       ["To increase the size of the test set", "Because PyTorch requires it", "Seeds change initialisation and batch order; the spread measures training noise and the mean forecast is more stable", "To make the DM test unnecessary"],
       "A claim that one network beats another must survive the training noise; the DM test then handles the sampling noise of the test period.",
       "The test set is fixed; seeds and the DM test address two different sources of uncertainty, and neither replaces the other."),
-  ("Semințele", "De ce au fost antrenate rețelele de volatilitate cu cinci semințe, iar prognozele lor mediate?",
+  ("Inițializările aleatoare", "De ce au fost antrenate rețelele de volatilitate cu cinci semințe, iar prognozele lor mediate?",
    ["Pentru a mări setul de test", "Pentru că PyTorch o cere", "Semințele schimbă inițializarea și ordinea loturilor; dispersia măsoară zgomotul antrenării, iar prognoza medie este mai stabilă", "Pentru a face inutil testul DM"],
    "O afirmație că o rețea o depășește pe alta trebuie să reziste zgomotului antrenării; testul DM tratează apoi zgomotul de eșantionare al perioadei de test.",
    "Setul de test este fix; semințele și testul DM tratează două surse diferite de incertitudine, iar niciuna nu o înlocuiește pe cealaltă."))

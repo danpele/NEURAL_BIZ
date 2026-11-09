@@ -128,7 +128,7 @@ def build(lang, H=None):
     abbreviation_frames(D, ABBR)
 
     # ------------------------------------------------------------------ 1 why graphs
-    D.section(t("Why graphs for financial crime", "De ce grafuri pentru infracțiunile financiare"))
+    D.section(t("Graphs in the detection of financial crime", "Grafurile în detectarea infracțiunilor financiare"))
     D.concept(t("Network structure in money-laundering detection", "Structura de rețea în detectarea spălării banilor"),
               t("A single payment can look ordinary; the chain of payments around it often does not.",
                 "O plată izolată poate părea obișnuită; lanțul de plăți din jurul ei, de cele mai multe ori, nu."),
@@ -179,7 +179,7 @@ def build(lang, H=None):
             job=t("a model is judged on the months after its training data, exactly as it will be used.",
                   "un model este judecat pe lunile de după datele de antrenare, exact cum va fi folosit."))
 
-    D.chart(t("Most transactions touch one or two others; a few are hubs", "Cele mai multe tranzacții ating una sau două altele; puține sînt noduri centrale"),
+    D.chart(t("Degree distribution of the transaction graph", "Distribuția gradelor în graful tranzacțiilor"),
             "degree_dist", [
                 t("\\textbf{Sparse graph}: mean degree @{data.mean_degree|.2f}, median @{data.median_degree}; @{data.pct_deg1|.1f}\\,\\% of the nodes have one neighbour only.",
                   "\\textbf{Graf rar}: gradul mediu @{data.mean_degree|.2f}, mediana @{data.median_degree}; @{data.pct_deg1|.1f}\\,\\% dintre noduri au un singur vecin"),
@@ -198,7 +198,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 2 graphs as matrices
     D.section(t("Graphs as matrices", "Grafurile ca matrice"))
-    D.concept(t("The adjacency matrix turns a graph into linear algebra", "Matricea de adiacență transformă graful în algebră liniară"),
+    D.concept(t("The adjacency matrix as an algebraic representation of the graph", "Matricea de adiacență ca reprezentare algebrică a grafului"),
               t("Every operation of a GNN is a product of the feature matrix with a (normalised) adjacency matrix and a weight matrix.",
                 "Orice operație a unei rețele GNN este un produs între matricea variabilelor, o matrice de adiacență (normalizată) și o matrice de ponderi."),
               "\\[ A_{uv}=\\begin{cases}1,&(u,v)\\in\\mathcal E\\\\0,&\\text{" + t("otherwise", "altfel") + "}\\end{cases},\\qquad "
@@ -218,7 +218,7 @@ def build(lang, H=None):
                 "rețeaua de plăți a unei bănci se stochează ca listă de muchii, niciodată ca matrice densă."),
               tryit=NB + "2", cite="(Kipf \\& Welling, 2017)")
 
-    D.concept(t("A graph model must not depend on how we number the nodes", "Un model pe graf nu trebuie să depindă de numerotarea nodurilor"),
+    D.concept(t("Permutation invariance and equivariance of graph models", "Invarianța și echivarianța la permutări ale modelelor pe graf"),
               t("Transaction 17 and transaction 4,203 are names, not positions; relabelling them must not change any prediction.",
                 "Tranzacția 17 și tranzacția 4.203 sînt nume, nu poziții; renumerotarea lor nu trebuie să schimbe nicio predicție."),
               "\\[ f\\big(P\\mathbf X,\\;PAP^{\\top}\\big)=P\\,f(\\mathbf X,A)\\quad\\forall P \\]"
@@ -254,7 +254,7 @@ def build(lang, H=None):
                 "grafurile de fraudă cu homofilie sînt semnale netede: media pe vecini elimină zgomot, nu informație."),
               cite="(Kipf \\& Welling, 2017; Hamilton, 2020, ch.\\ 7)")
 
-    D.concept(t("Node, edge or graph: three prediction tasks", "Nod, muchie sau graf: trei sarcini de predicție"),
+    D.concept(t("Three prediction tasks: node, edge and graph level", "Trei sarcini de predicție: la nivel de nod, de muchie și de graf"),
               t("The same message-passing layers serve three kinds of business questions; only the read-out changes.",
                 "Aceleași straturi de transmitere a mesajelor răspund la trei tipuri de întrebări; se schimbă doar ieșirea."),
               "\\[ \\hat y_v=\\sigma(\\mathbf w^{\\top}\\mathbf h_v),\\quad \\hat y_{uv}=\\sigma(\\mathbf h_u^{\\top}\\mathbf h_v),\\quad "
@@ -277,7 +277,7 @@ def build(lang, H=None):
            "\\draw[-{Stealth}, thick, Ser1] (a) -- node[draw=none, above, font=\\tiny] {$\\mathbf m_{u_1v}$} (v);\n"
            "\\draw[-{Stealth}, thick, Ser1] (b) -- (v);\n\\draw[-{Stealth}, thick, Ser1] (c) -- (v);\n"
            "\\draw[thick, FooterGray] (c) -- (d);\n\\end{tikzpicture}\\end{center}")
-    D.concept(t("A GNN layer: collect messages, aggregate, update", "Un strat GNN: colectează mesajele, le agregă, actualizează"),
+    D.concept(t("A GNN layer: message, aggregation and update functions", "Un strat GNN: funcțiile de mesaj, de agregare și de actualizare"),
               t("Each node sends a message to its neighbours; each node sums what it receives and updates its own state.",
                 "Fiecare nod trimite un mesaj vecinilor; fiecare nod adună ce primește și își actualizează starea."),
               "\\[ \\mathbf m_v^{(l)}=\\bigoplus_{u\\in\\mathcal N(v)}\\phi^{(l)}\\big(\\mathbf h_u^{(l)},\\mathbf h_v^{(l)},\\mathbf e_{uv}\\big) \\]"
@@ -319,7 +319,7 @@ def build(lang, H=None):
         job=t("$L$ layers = $L$ hops of money flow; two hops already cover most of what an investigator would check by hand.",
               "$L$ straturi = $L$ salturi ale fluxului de bani; două salturi acoperă deja mare parte din ce ar verifica manual un investigator."))
 
-    D.chart(t("Too many layers make all nodes look alike: over-smoothing", "Prea multe straturi fac toate nodurile să semene: suprasmoothing-ul (over-smoothing)"), "oversmoothing", [
+    D.chart(t("Over-smoothing in deep graph networks", "Netezirea excesivă (over-smoothing) în rețelele pe graf cu multe straturi"), "oversmoothing", [
         t("\\textbf{Accuracy}: PR-AUC @{depth.ap_1|.3f} with 1 GCN layer, @{depth.ap_2|.3f} with 2, @{depth.ap_6|.3f} with 6; best depth @{depth.best_layers}.",
           "\\textbf{Precizia}: PR-AUC @{depth.ap_1|.3f} cu 1 strat GCN, @{depth.ap_2|.3f} cu 2, @{depth.ap_6|.3f} cu 6; adîncimea cea mai bună: @{depth.best_layers}"),
         t("\\textbf{Similarity}: mean cosine similarity of node representations rises from @{depth.cos_1|.2f} (1 layer) to @{depth.cos_6|.2f} (6 layers); repeated averaging drives them to a common vector.",
@@ -330,7 +330,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 4 three classic layers
     D.section(t("GCN, GraphSAGE and GAT", "GCN, GraphSAGE și GAT"))
-    D.concept(t("GCN: average the neighbours with degree weights, then regress", "GCN: media vecinilor ponderată cu gradele, apoi o regresie"),
+    D.concept(t("GCN: degree-weighted average of the neighbours followed by a linear map", "GCN: media vecinilor ponderată cu gradele, urmată de o transformare liniară"),
               t("A GCN layer is a linear regression on the normalised average of a node and its neighbours, followed by a rectified linear unit (ReLU).",
                 "Un strat GCN este o regresie liniară pe media normalizată a nodului și a vecinilor lui, urmată de o unitate liniară rectificată (ReLU)."),
               "\\[ H^{(l+1)}=\\ReLU\\big(\\hat A\\,H^{(l)}W^{(l)}\\big) \\]\\[ "
@@ -369,7 +369,7 @@ def build(lang, H=None):
                 "sistemele de plăți care dau scoruri în timp real au nevoie de straturi inductive precum GraphSAGE."),
               tryit=NB + "4", cite="(Hamilton, Ying \\& Leskovec, 2017)")
 
-    D.concept(t("GAT: let the network decide which neighbour matters", "GAT: rețeaua decide care vecin contează"),
+    D.concept(t("GAT: learned attention weights over the neighbours", "GAT: ponderi de atenție învățate pentru vecini"),
               t("A graph attention layer weights each neighbour by a learned score: the attention of Lecture 7, restricted to the edges of the graph.",
                 "Un strat GAT ponderează fiecare vecin cu un scor învățat: atenția din cursul 7, restrînsă la muchii."),
               "\\[ \\alpha_{vu}=\\frac{\\exp\\big(\\mathrm{LeakyReLU}(\\mathbf a^{\\top}[W\\mathbf h_v\\,\\|\\,W\\mathbf h_u])\\big)}"
@@ -420,8 +420,8 @@ def build(lang, H=None):
           "\\textbf{Incertitudinea}: @{models.gcn.n_runs} semințe pentru fiecare rețea și pădure; bootstrap pe nodurile de test pentru diferențe")) +
         D.bottom(None, NB + "2"), "footnotesize", cite="(Weber et al., 2019)")
 
-    D.chart(t("On Elliptic the forest leads; graph layers mainly add ranking power to a network",
-              "Pe Elliptic pădurea conduce; straturile pe graf adaugă mai ales putere de ordonare unei rețele"), "model_comparison", [
+    D.chart(t("Results on Elliptic: the random forest and the contribution of graph layers",
+              "Rezultatele pe Elliptic: pădurea aleatoare și contribuția straturilor pe graf"), "model_comparison", [
         t("\\textbf{Illicit F1}: random forest @{models.rf.f1|.3f}, forest + GCN @{models.rf_emb.f1|.3f}, GCN @{models.gcn.f1|.3f}, MLP @{models.mlp.f1|.3f}, logistic @{models.lr_all.f1|.3f}.",
           "\\textbf{F1 pe clasa ilicită}: pădurea @{models.rf.f1|.3f}, pădurea + GCN @{models.rf_emb.f1|.3f}, GCN @{models.gcn.f1|.3f}, MLP @{models.mlp.f1|.3f}, logistic @{models.lr_all.f1|.3f}"),
         t("\\textbf{Value of the edges}: PR-AUC of the GCN minus the MLP, same layers: @{gcn_vs_mlp_ap_pts|+.1f} points.",
@@ -452,7 +452,7 @@ def build(lang, H=None):
                                      "modelul potrivit depinde de costul unei erori: un caz de spălare ratat sau o oră pierdută de un analist."), NB + "2"),
         "footnotesize", cite=t("(own computation; sec.\\ = training time per seed, CPU)", "(calcule proprii; sec.\\ = timpul de antrenare pe sămînță, CPU)"))
 
-    D.chart(t("Precision-recall curves: the ranking behind the F1", "Curbele precizie-recall: ordonarea din spatele lui F1"), "pr_curves", [
+    D.chart(t("Precision-recall curves of the models", "Curbele precizie-recall ale modelelor"), "pr_curves", [
         t("\\textbf{PR-AUC}: random forest @{models.rf.ap|.3f}, forest + GCN @{models.rf_emb.ap|.3f}, GCN @{models.gcn.ap|.3f}, logistic @{models.lr_all.ap|.3f}; a random score would give @{data.pct_test_illicit|.2f}\\,\\% (dotted line).",
           "\\textbf{PR-AUC}: pădurea @{models.rf.ap|.3f}, pădurea + GCN @{models.rf_emb.ap|.3f}, GCN @{models.gcn.ap|.3f}, logistic @{models.lr_all.ap|.3f}; un scor aleator ar da @{data.pct_test_illicit|.2f}\\,\\% (linia punctată)")],
         height="0.58\\textheight", tryit=NB + "2", cite="$\\text{PR-AUC}=\\sum_k (R_k-R_{k-1})P_k$")
@@ -473,7 +473,7 @@ def build(lang, H=None):
                 "raportați intervalul, nu doar cîștigătorul: un comitet antifraudă decide pe intervale, nu pe a treia zecimală."),
               tryit=NB + "2", cite="(Efron \\& Tibshirani, 1993)")
 
-    D.frame(t("Why the forest performs well here: its features already pass messages", "De ce pădurea are rezultate bune aici: variabilele ei transmit deja mesaje"), cols(
+    D.frame(t("Neighbourhood aggregates in the features and the performance of the random forest", "Agregatele de vecinătate din variabile și performanța pădurii aleatoare"), cols(
         it((t("\\textbf{Hand-made message passing}", "\\textbf{Transmitere de mesaje construită manual}"),
             t("@{data.n_agg} of the @{data.n_features} features are aggregates over the one-hop neighbours (max, min, sd, correlation)",
               "@{data.n_agg} dintre cele @{data.n_features} de variabile sînt agregate pe vecinii de la un salt (maxim, minim, abatere standard, corelație)"),
@@ -501,7 +501,7 @@ def build(lang, H=None):
         job=t("monitor F1 per period and retrain on recent labels; a static AML model ages within weeks.",
               "monitorizați F1 pe fiecare perioadă și reantrenați pe etichete recente; un model AML static îmbătrînește în cîteva săptămîni."))
 
-    D.chart(t("What an investigation team gets from 1,000 alerts", "Ce obține o echipă de investigații din 1\\,000 de alerte"), "alert_budget", [
+    D.chart(t("Illicit transactions found among the top 1,000 alerts", "Tranzacțiile ilicite identificate între primele 1\\,000 de alerte"), "alert_budget", [
         t("\\textbf{Top @{alerts.k|,d} scores} of the test period contain @{alerts.rf|.1f}\\,\\% of all illicit transactions for the random forest, @{alerts.gcn|.1f}\\,\\% for the GCN, @{alerts.rf_emb|.1f}\\,\\% for forest + GCN.",
           "\\textbf{Primele @{alerts.k|,d} de scoruri} din perioada de test conțin @{alerts.rf|.1f}\\,\\% dintre toate tranzacțiile ilicite pentru pădure, @{alerts.gcn|.1f}\\,\\% pentru GCN și @{alerts.rf_emb|.1f}\\,\\% pentru pădure + GCN"),
         t("\\textbf{Hit rate} of those alerts: @{alerts.rf_prec|.1f}\\,\\% (forest), @{alerts.gcn_prec|.1f}\\,\\% (GCN), out of @{alerts.n_test_illicit|,d} illicit test transactions.",
@@ -510,7 +510,7 @@ def build(lang, H=None):
         job=t("size the team from this curve: the alert budget, not the F1, is the constraint in a compliance department.",
               "dimensionați echipa după această curbă: bugetul de alerte, nu F1, este constrîngerea unui departament de conformitate."))
 
-    D.chart(t("The GCN learns a space where illicit transactions gather", "Rețeaua GCN învață un spațiu în care tranzacțiile ilicite se adună"), "gcn_embeddings", [
+    D.chart(t("Illicit transactions cluster in the GCN embedding space", "Tranzacțiile ilicite se grupează în spațiul de reprezentare al GCN"), "gcn_embeddings", [
         t("\\textbf{Hidden layer} of the GCN (@{emb.dim} dimensions) projected by principal component analysis (PCA) on its first two components: @{emb.var2_pct|.1f}\\,\\% of the variance.",
           "\\textbf{Stratul ascuns} al rețelei GCN (@{emb.dim} de dimensiuni), proiectat prin analiza componentelor principale (PCA) pe primele două componente: @{emb.var2_pct|.1f}\\,\\% din varianță"),
         t("\\textbf{Reuse}: these vectors are the inputs of the forest + GCN model and can feed any other risk model.",
@@ -518,7 +518,7 @@ def build(lang, H=None):
         height="0.55\\textheight", tryit=NB + "3", cite=t("(own computation; @{emb.n_illicit_shown|,d} illicit and 3,000 licit test nodes)",
                                                          "(calcule proprii; @{emb.n_illicit_shown|,d} de noduri ilicite și 3.000 de noduri licite de test)"))
 
-    D.chart(t("Adding graph features reshuffles the explanations", "Adăugarea variabilelor de graf reordonează explicațiile"), "importance_shift", [
+    D.chart(t("Effect of graph features on the explanations", "Efectul variabilelor de graf asupra explicațiilor"), "importance_shift", [
         t("\\textbf{Importance mass}: the 10 top features of the forest carry @{stability.top10_share_rf_pct|.1f}\\,\\% of the importance; with GCN embeddings they keep @{stability.top10_share_rfemb_pct|.1f}\\,\\%, the embeddings take @{stability.emb_share_pct|.1f}\\,\\%.",
           "\\textbf{Masa importanței}: primele 10 variabile ale pădurii au @{stability.top10_share_rf_pct|.1f}\\,\\% din importanță; cu reprezentările GCN păstrează @{stability.top10_share_rfemb_pct|.1f}\\,\\%, reprezentările iau @{stability.emb_share_pct|.1f}\\,\\%"),
         t("\\textbf{Stability across @{stability.n_refits} refits}: mean Spearman correlation of the importances @{stability.rf|.3f} (forest) and @{stability.rf_emb|.3f} (forest + GCN).",
@@ -566,7 +566,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ wrap-up
     D.section(t("Wrap-up", "Concluzii"))
-    D.frame(t("What to remember", "Ce reținem"), it(
+    D.frame(t("Key takeaways", "Idei principale"), it(
         t("\\textbf{A GNN layer} = message, permutation-invariant aggregation, update; GCN averages with degree weights, GraphSAGE separates self and neighbours, GAT learns the weights.",
           "\\textbf{Un strat GNN} = mesaj, agregare care nu depinde de ordine, actualizare; GCN face media cu ponderi după grad, GraphSAGE separă nodul de vecini, GAT învață ponderile"),
         t("\\textbf{Depth} = hops: two layers reach a median of @{receptive.k2_median} transactions; more layers over-smooth (PR-AUC @{depth.ap_6|.3f} with 6 layers).",

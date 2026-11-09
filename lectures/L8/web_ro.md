@@ -15,7 +15,7 @@ Cursul construiește cele patru familii principale de modele generative profunde
 - **Folosiți-le** pentru detectarea fraudei, generarea de imagini, randamente sintetice și scenarii ale curbei randamentelor, fiecare comparat cu un model de referință.
 - **Judecați** datele sintetice după cozi, gruparea volatilității, testele retrospective ale valorii la risc (VaR) și regimurile pe care le reproduc.
 
-# De ce modele generative
+# Principiile modelării generative
 
 Un model generativ învață întreaga distribuție a datelor, nu doar granița dintre clase.
 
@@ -64,14 +64,14 @@ Cu $f$ și $g$ liniare, optimul generează același subspațiu ca PCA cu $k$ com
 
 Datele sînt tranzacțiile cu carduri ale unor deținători europeni, publicate de ULB Machine Learning Group și Worldline (Dal Pozzolo et al., 2015). Fișierul nostru păstrează toate cele 492 de fraude și 10 % dintre tranzacțiile legitime, 28 924 de rînduri, cu ponderi care refac datele complete. Primele 60 % din interval sînt partea de antrenare (numai tranzacții legitime, 16 994 de rînduri), următoarele 20 % partea de validare pentru oprirea timpurie, iar ultimele 20 % partea de test: 57 174 de tranzacții din datele complete, cu 75 de fraude (0,131 %). Măsurile sînt aria de sub curba precizie-recall (PR-AUC) și aria de sub curba caracteristicii de operare a receptorului (ROC-AUC), ponderate la datele complete.
 
-## Fraudele sînt greu de reconstruit: eroarea lor de reconstrucție este mult mai mare {h=1f4d417d}
+## Eroarea de reconstrucție a plăților frauduloase și a celor legitime {h=dc225b3d}
 
 Pe partea de test, eroarea mediană de reconstrucție a unei fraude este de 12,7 ori mai mare decît a unei tranzacții legitime. Cele două distribuții se suprapun totuși: multe fraude par normale unui model care cunoaște doar comportamentul normal.
 
 @chart ae_error_dist
 Eroarea de reconstrucție a autoencoderului pe partea de test, tranzacții legitime (ponderate) și fraude.
 
-## Fără etichete, autoencoderul găsește fraude; cu etichete, un clasificator simplu găsește mult mai multe {h=c75603c1}
+## Autoencoderul fără etichete comparat cu un clasificator supervizat {h=fbbd4b20}
 
 PR-AUC pe partea de test este 14,2 % pentru autoencoder (abatere standard 2,9 pe 3 semințe), 7,6 % pentru PCA și 80,4 % pentru o regresie logistică ce folosește etichetele; un scor aleator ar da 0,131 %. ROC-AUC este mare pentru toate trei (94,4, 95,3 și 98,2 %): la o fraudă la cîteva sute de tranzacții ascunde diferențele pe care le arată PR-AUC.
 
@@ -87,7 +87,7 @@ PR-AUC de test al autoencoderului după dimensiunea stratului îngust, cu PCA ca
 
 @practice alegeți $k$ pe o perioadă de validare, niciodată pe fraudele despre care veți raporta.
 
-## Ce obține echipa antifraudă din primele 0,1 % scoruri {h=6fd782f2}
+## Fraudele identificate în primele 0,1 % dintre scoruri {h=72f13be9}
 
 Dacă echipa verifică primele 0,1 % scoruri din partea de test, 57 de alerte, găsește 8 fraude cu autoencoderul (10,7 % din toate fraudele de test), 0 cu PCA și 48 cu regresia logistică (64,0 %). Etichetele valorează mult: învățarea supervizată cîștigă ori de cîte ori există fraude confirmate. Autoencoderul este detectorul necunoscutului, un complement, nu un înlocuitor.
 
@@ -113,7 +113,7 @@ Primul termen răsplătește reconstrucțiile bune; al doilea, divergența Kullb
 
 Extragerea lui $\mathbf z$ nu este derivabilă, dar $\mathbf z=\boldsymbol\mu_\phi(\mathbf x)+\boldsymbol\sigma_\phi(\mathbf x)\odot\boldsymbol\varepsilon$, cu $\boldsymbol\varepsilon\sim\mathcal N(0,I)$, este: hazardul stă în $\boldsymbol\varepsilon$, care nu depinde de parametri. VAE-ul nostru este antrenat pe Fashion-MNIST, 60 000 de imagini de antrenare și 10 000 de test, gri, de 28 × 28 de pixeli, cu 10 tipuri de îmbrăcăminte, și are un decodor Bernoulli; rețeaua 784–400–200–$k$ are 798 816 de parametri pentru $k=16$ și este antrenată 20 de epoci.
 
-## Un spațiu latent cu două dimensiuni sortează deja produsele {h=e885012a}
+## Un spațiu latent cu două dimensiuni separă tipurile de produse {h=40568255}
 
 Cu doar două dimensiuni latente și fără etichete, încălțămintea, gențile și hainele ajung în regiuni separate. Un clasificator cu 15 vecini pe cele două medii latente atinge o acuratețe de 71,7 % (5 partiții, imaginile de test): VAE a învățat o organizare a produselor fără să i se spună ce sînt.
 
@@ -127,7 +127,7 @@ Primul rînd arată imagini reale de test, al doilea reconstrucția lor printr-u
 @chart vae_samples
 Imagini reale, reconstruite și generate, VAE cu $k=16$.
 
-## Antrenarea negociază între reconstrucție și penalizarea KL {h=981b0620}
+## Compromisul dintre reconstrucție și penalizarea KL în timpul antrenării {h=4402e008}
 
 Pe imaginile de test, după ultima epocă, termenul de reconstrucție este 228,6 nats pe imagine, iar termenul KL 12,0 nats, deci ELBO este −240,6 nats. KL crește cînd eroarea scade: codificatorul folosește mai multă informație pentru fiecare imagine pe măsură ce învață.
 
@@ -167,7 +167,7 @@ Pierderea discriminatorului oscilează în jurul lui $2\log 2$, iar a generatoru
 @chart gan_losses
 Pierderile discriminatorului și generatorului în timpul antrenării, sămînța 1.
 
-## GAN-ul învață cozile groase pe care distribuția normală nu le vede {h=53d37f51}
+## GAN-ul reproduce cozile groase pe care modelul gaussian nu le surprinde {h=774a5e84}
 
 Excesul de aplatizare al randamentelor reale este 11,86; eșantioanele GAN ajung la 6,65 (abatere standard 0,48 pe 3 semințe), față de 0 pentru normală. Distanța Kolmogorov–Smirnov față de randamentele reale este 0,030 pentru GAN și 0,115 pentru normala estimată.
 
@@ -224,14 +224,14 @@ $$ \mathcal L(\theta)=\mathbb E_{t,\mathbf x_0,\boldsymbol\varepsilon}\big\|\bol
 
 un ELBO simplificat și reponderat. Generarea pornește de la zgomot pur și aplică $\mathbf x_{t-1}=\big(\mathbf x_t-\beta_t\boldsymbol\varepsilon_\theta/\sqrt{1-\bar\alpha_t}\big)/\sqrt{\alpha_t}+\sqrt{\beta_t}\mathbf u$ pînă la $t=0$. Rețeaua noastră este un MLP cu trei straturi ascunse de 256 de unități și o reprezentare sinusoidală a lui $t$, cu 145 675 de parametri, antrenată 12 000 de pași pe cele 5 664 de curbe zilnice ale Băncii Centrale Europene, din 6 septembrie 2004 pînă în 30 octombrie 2026.
 
-## Difuzia reproduce cele două regimuri ale dobînzilor euro; distribuția normală nu poate {h=55a86a12}
+## Cele două regimuri ale dobînzilor euro în eșantioanele generate prin difuzie și de modelul gaussian {h=2cb40660}
 
 Randamentul real la 10 ani variază între −0,82 % și 4,78 % și este negativ în 13,8 % dintre zile: există un regim de dobînzi scăzute și unul de dobînzi normale. Distanța Wasserstein dintre randamentul generat și cel real la 10 ani este 0,149 puncte procentuale pentru modelul de difuzie, 0,191 pentru un VAE cu doi factori și 0,325 pentru o normală multivariată.
 
 @chart yc_density
 Densitatea randamentului la 10 ani, curbele reale și cîte 5 000 de curbe din fiecare generator.
 
-## Nivelul și panta se mișcă împreună, într-un mod curb, pe care difuzia îl păstrează {h=3fd81d4b}
+## Difuzia păstrează dependența neliniară dintre nivel și pantă {h=a5c26dd8}
 
 O curbă este inversată cînd randamentul la 10 ani este sub cel la 3 luni. Acest lucru s-a întîmplat în 8,7 % dintre zilele reale; 10,2 % dintre eșantioanele difuziei și 14,7 % dintre cele normale sînt inversate. Distanța Wasserstein a pantei este 0,099 pentru modelul de difuzie, 0,242 pentru VAE și 0,113 pentru normală.
 
@@ -253,7 +253,7 @@ Difuzia învață să elimine zgomotul; pe curbele euro păstrează ambele regim
 
 Datele sintetice sînt utile numai după ce trec aceleași verificări ca datele reale.
 
-## Cum judecăm datele financiare sintetice {h=18cc4c3f}
+## Criterii de evaluare a datelor financiare sintetice {h=07c393b4}
 
 Patru întrebări. Fidelitatea: se potrivesc distribuțiile marginale, cozile și dependența între active și în timp? Diversitatea: apar zilele extreme și regimurile în proporțiile corecte, fără colaps al modurilor? Utilitatea: funcționează un model antrenat pe date sintetice și testat pe date reale (TSTR)? Confidențialitatea: este vreun eșantion prea aproape de o înregistrare reală? Pe datele noastre, GAN-ul reproduce corect cozile și greșește gruparea volatilității; modelul de difuzie reproduce regimurile și inversările, normala nu.
 

@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L14.js?v=20261109m">
+<link rel="preload" as="script" href="L14.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261109m", "L14_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L14.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L14_data.js?v=20261109n", "L14_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L14.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Răspuns</summary><p>Fiecare clasă devine o propoziție („a centered satellite photo of forest.”); imaginea este atribuită clasei a cărei propoziție are embedding-ul cu cea mai mare similaritate cosinus față de embedding-ul imaginii. Cosinusurile sînt apropiate între ele (între circa 0,2 și 0,3), de aceea funcția softmax le înmulțește cu o scală, 100 în CLIP. Scala nu schimbă clasa prezisă, ci doar cît de sigure par probabilitățile: la scala 1, fiecare clasă primește circa 10%, la 200 clasa de pe primul loc ia aproape tot. Pe toate cele 5.400 de imagini de test, cea mai bună variantă, ViT-B/16 cu 5 șabloane, are dreptate în 56,4% din cazuri; 5 din cele 8 imagini de pe slide sînt corecte.</p></details>
 </section>
 <section class="blk" id="confusion">
-  <h3>Unde greșește zero-shot: utilizări ale terenului care arată la fel</h3>
+  <h3>Erorile zero-shot la utilizări ale terenului asemănătoare vizual</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_confusion_ro.jpg" alt="Slide-ul 16: Unde greșește zero-shot: utilizări ale terenului care arată la fel" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L14/lecture14_ro.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L14_zeroshot_confusion_ro.jpg" alt="Slide-ul 16: Erorile zero-shot la utilizări ale terenului asemănătoare vizual" loading="lazy"></a>
       <figcaption>Slide-ul 16</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Modelul</label><select id="cm-m"><option value="B32">CLIP ViT-B/32</option><option value="B16" selected>CLIP ViT-B/16</option></select></div><div class="ctl"><label for="cm-t">Promptul (șablonul textului)</label><select id="cm-t"><option value="name">Numele dosarului („AnnualCrop”)</option><option value="photo">„a photo of {class}.”</option><option value="sat">„a satellite photo of {class}.”</option><option value="ens" selected>Media a 5 șabloane satelitare</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Celulele arată</span><div class="tgs"><label class="tg"><input type="radio" name="cm-n" value="row" checked> Procente pe rînd</label><label class="tg"><input type="radio" name="cm-n" value="n"> Numărul de imagini</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_confusion" target="_blank" rel="noopener">NN_L14_zeroshot_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L14/NN_L14_zeroshot_confusion/NN_L14_zeroshot_confusion.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

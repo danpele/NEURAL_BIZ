@@ -16,7 +16,7 @@ Pornim de la obiectivul unui model de limbaj, de la tokeni, perplexitate și tem
 - **Să construiți și să evaluați** generarea augmentată prin regăsire pe discursuri reale și să măsurați halucinațiile.
 - **Să testați retrospectiv** un model de limbaj folosit pentru valoarea expusă la risc și să cunoașteți riscurile: scurgerea de date, costul, calibrarea.
 
-# De la prezicerea următorului token la modelele lingvistice mari
+# Prezicerea următorului token și modelele lingvistice mari
 
 Un LLM este antrenat să prezică următorul token. Tot restul, de la răspunsuri la întrebări pînă la redactarea unui raport de risc, înseamnă folosirea repetată a acestei singure probabilități.
 
@@ -30,7 +30,7 @@ $$ p_{\boldsymbol\theta}(x_1,\dots,x_T)=\prod_{t=1}^{T}p_{\boldsymbol\theta}(x_t
 
 Perplexitatea este numărul efectiv de tokeni următori echiprobabili. Pe discursurile BCE publicate după iulie 2025 (primii 1 024 de tokeni din 40 de discursuri), perplexitatea este 14,71 pentru modelul de 0,5B, 10,63 pentru 1,5B și 9,43 pentru 3B.
 
-## Tokenii sînt fragmente de cuvinte {h=1c7c0d8b}
+## Tokenii ca fragmente de cuvinte {h=c5ac6830}
 
 Codificarea byte-pair (BPE) pornește de la octeți și unește repetat perechea vecină cea mai frecventă, pînă cînd vocabularul este complet: Qwen2.5 are 151 665 de tokeni, iar vocabularul WordPiece al FinBERT, o versiune financiară a modelului de reprezentări bidirecționale ale codificatorului transformer (BERT), are 30 522. Pe Financial PhraseBank revin 1,35 tokeni Qwen pe cuvînt.
 
@@ -54,11 +54,11 @@ Cei mai probabili tokeni următori ai Qwen2.5-1.5B-Instruct, la trei temperaturi
 
 @practice pentru clasificare și extragere folosiți temperatura 0; temperaturile mari sînt pentru generarea de idei.
 
-## Scalarea {h=902b0620}
+## Scalarea {h=0414b6bf}
 
 Pierderea scade ca o putere a dimensiunii modelului și a datelor, $\mathcal L(P,D)=E+A/P^{\alpha}+B/D^{\beta}$ (Kaplan et al., 2020; Hoffmann et al., 2022). Pe cele trei dimensiuni ale modelului nostru, panta logaritmului pierderii în raport cu logaritmul numărului de parametri este −0,100: trei puncte descriu eșantionul, nu o lege.
 
-## Limita datelor de antrenare {h=b45df7ae}
+## Limita datelor de antrenare {h=1e9cec3f}
 
 @chart perplexity_size
 Perplexitatea pe discursurile BCE din 2022–2023 și din iulie 2025.
@@ -67,9 +67,9 @@ Pentru modelul de 3B, perplexitatea este 8,90 pe discursurile din 2022–2023 ș
 
 # Preantrenare, ajustare pe instrucțiuni și aliniere
 
-## Trei etape de antrenare {h=e335ad17}
+## Trei etape de antrenare {h=34bf45c8}
 
-Un transformer generativ preantrenat (GPT) este antrenat întîi pe trilioane de tokeni, cu pierderea next-token; ajustarea fină supervizată (SFT) îl învață apoi formatul răspunsurilor, iar învățarea prin recompensă din feedback uman (RLHF) sau optimizarea directă a preferințelor (DPO) îl învață ce răspunsuri preferă oamenii (Ouyang et al., 2022).
+Un transformer generativ preantrenat (GPT) este antrenat întîi pe trilioane de tokeni, cu pierderea next-token; ajustarea fină supervizată (SFT) îl învață apoi formatul răspunsurilor, iar reinforcement learning from human feedback (RLHF) sau optimizarea directă a preferințelor (DPO) îl învață ce răspunsuri preferă oamenii (Ouyang et al., 2022).
 
 ## Ajustarea pe instrucțiuni {h=d3c78a72}
 
@@ -77,7 +77,7 @@ $$ \mathcal L_{\text{SFT}}(\boldsymbol\theta)=-\sum_{(\mathbf x,\mathbf y)}\sum_
 
 Pierderea se calculează doar pe tokenii răspunsului. Adaptarea de rang mic (LoRA) antrenează $\mathbf W=\mathbf W_0+\mathbf B\mathbf A$, cu un rang $r$ mic: un strat de 4096 × 4096 cu $r=8$ are 65 536 de ponderi antrenabile în loc de 16,8 milioane (Hu et al., 2022).
 
-## Alinierea {h=dad65eb1}
+## Alinierea {h=7c854c44}
 
 Oamenii aleg răspunsul mai bun dintr-o pereche; un model de recompensă $r_\phi$ se estimează cu $\Pr(y_w\succ y_l)=\sigma(r_\phi(x,y_w)-r_\phi(x,y_l))$, iar politica maximizează recompensa cu o penalizare Kullback–Leibler care o ține aproape de modelul SFT. DPO optimizează același obiectiv direct din perechile de preferințe (Rafailov et al., 2023). Alinierea stabilește tonul și siguranța; nu adaugă cunoștințe financiare.
 
@@ -89,7 +89,7 @@ Qwen2.5-Instruct cu 0,49, 1,54 și 3,09 miliarde de parametri (Qwen Team, 2024),
 
 Un prompt este un model. Se alege pe date de validare și se evaluează o singură dată pe un set de test separat, cu aceleași statistici ca orice clasificator.
 
-## Un prompt devine clasificator {h=65740da7}
+## Promptul ca clasificator {h=938a90fd}
 
 $$ \hat p(c\mid x)=\frac{\sum_{v\in\mathcal V_c}p_{\boldsymbol\theta}(v\mid\mathrm{prompt}(x))}{\sum_{c'}\sum_{v\in\mathcal V_{c'}}p_{\boldsymbol\theta}(v\mid\mathrm{prompt}(x))},\qquad \hat c=\arg\max_c\hat p(c\mid x) $$
 
@@ -127,14 +127,14 @@ Macro-F1 în funcție de numărul de exemple din prompt, trei rulări.
 
 Învățarea în context schimbă răspunsul fără să modifice nicio pondere. Pentru modelul de 1,5B, macro-F1 trece de la 85,1 % fără exemple la 84,1 % cu 24 de exemple; pentru modelul de 3B, de la 92,2 % la 91,3 %. Pe această sarcină instrucțiunea fără exemple este deja puternică, iar alegerea exemplelor mută scorul cu cîteva puncte.
 
-## Sensibilitatea la prompt {h=27a1723f}
+## Sensibilitatea la prompt {h=19c2d479}
 
 @chart prompt_sensitivity
 Macro-F1 pentru cinci reformulări ale aceleiași instrucțiuni.
 
 Cinci instrucțiuni cu același sens dau o amplitudine de 3,6 puncte pe PhraseBank și de 12,9 puncte pe Twitter pentru modelul de 3B și de 14,2 puncte pe PhraseBank pentru modelul de 1,5B. Formularea promptului este un hiperparametru: alegeți-o pe date de validare și fixați-o.
 
-## Chain-of-thought {h=168e5876}
+## Chain-of-thought {h=4ee719b8}
 
 Dacă îl lăsăm pe model să scrie două propoziții de raționament înainte de etichetă (Wei et al., 2022), obținem 88,4 % macro-F1 pe PhraseBank și 65,1 % pe Twitter, sub răspunsul direct zero-shot, cu circa 389 ms pe propoziție în loc de 48,5 ms. Chain-of-thought ajută la raționamentele în mai mulți pași, nu la etichete de un cuvînt pe propoziții scurte.
 
@@ -152,7 +152,7 @@ Acuratețea în funcție de acordul adnotatorilor.
 
 Modelul zero-shot de 3B are dreptate pentru 93,1 % din propozițiile de test unanime, dar doar pentru 53,7 % din propozițiile asupra cărora jumătate dintre adnotatori nu au fost de acord. Un model nu poate fi mai sigur decît oamenii care au etichetat datele.
 
-## Matricea de confuzie {h=bd4798f3}
+## Matricea de confuzie {h=dbb1d0a9}
 
 Pentru cel mai bun model cu prompt pe PhraseBank, 20 de propoziții neutre au fost citite ca pozitive, iar 13 propoziții pozitive ca neutre, în timp ce pozitivul și negativul s-au confundat rar. Erorile stau la granița cu neutrul.
 
@@ -163,13 +163,13 @@ Macro-F1 în funcție de milisecundele pe propoziție, pe un laptop.
 
 TF-IDF are nevoie de 2,50 ms pe propoziție, zero-shot 3B de 48,5 ms, iar chain-of-thought de circa 389 ms. Cu etichete, un model mic antrenat este greu de depășit; fără etichete, un prompt este un început solid; pentru milioane de documente, costul decide.
 
-## Embedding LLM plus un clasificator mic {h=d429340a}
+## Embedding-uri LLM cu un clasificator mic {h=a4f45b1d}
 
 Media ultimelor stări ascunse ale Qwen2.5-1.5B, cu o regresie logistică deasupra, dă 87,5 % pe PhraseBank și 79,0 % pe Twitter: cea mai ieftină formă de ajustare fină.
 
 # Generare augmentată prin regăsire pe discursurile BCE
 
-## Regăsirea urmată de generare {h=641c2912}
+## Regăsirea urmată de generare {h=2da34ba8}
 
 $$ p(y\mid q)\approx\sum_{z\in\mathrm{top}_k(q)}p_\eta(z\mid q)\,p_{\boldsymbol\theta}(y\mid q,z) $$
 
@@ -179,7 +179,7 @@ Corpusul are 400 de discursuri BCE, tăiate în 8 400 de fragmente de 200 de c
 
 Scorul Best Matching 25 (BM25) ponderează cuvintele comune după raritatea lor și saturează aparițiile repetate; regăsirea densă compară embedding-uri prin similaritatea cosinus; metoda hibridă combină cele două clasamente prin fuziunea rangurilor reciproce. Rangul reciproc mediu (MRR): BM25 0,515, dense 0,567, hibrid 0,622.
 
-## Găsirea discursului corect după titlu {h=3d1eaa1a}
+## Regăsirea discursului corect după titlu {h=cb9858fb}
 
 @chart rag_recall
 Recall@k pentru cele patru metode de regăsire.

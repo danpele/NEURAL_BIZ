@@ -176,7 +176,7 @@ def build(lang, H=None):
          t("do networks trained on our data, or foundation models pre-trained on millions of other series, beat simple benchmarks?",
            "sînt rețelele antrenate pe datele noastre sau modelele fundație preantrenate pe milioane de alte serii mai bune decît reperele simple?")),
         sep="3pt"), "small", cite=t("(Weron, 2014; Lago et al., 2021)", "(Weron, 2014; Lago et al., 2021)"))
-    D.frame(t("Real data only: Romanian power prices and load, the S\\&P 500 and Bitcoin", "Numai date reale: prețurile și consumul de energie din România, S\\&P 500 și Bitcoin"),
+    D.frame(t("The data: Romanian power prices and load, the S\\&P 500 and Bitcoin", "Datele: prețurile și consumul de energie din România, S\\&P 500 și Bitcoin"),
             table("@{}p{0.34\\textwidth}p{0.12\\textwidth}p{0.3\\textwidth}p{0.17\\textwidth}@{}",
                   [t("Series", "Serie"), t("Frequency", "Frecvență"), t("Source", "Sursă"), t("Used for", "Folosită pentru")],
                   [[t("Day-ahead prices: Romania (RO), Germany--Luxembourg (DE-LU), Hungary (HU)", "Prețurile pentru ziua următoare: România (RO), Germania--Luxemburg (DE-LU), Ungaria (HU)"),
@@ -338,7 +338,7 @@ def build(lang, H=None):
               t("a univariate network does not see German prices or load: compare it with LEAR, which does.",
                 "o rețea univariată nu vede prețurile din Germania sau consumul: comparați-o cu LEAR, care le folosește."),
               cite="(Oreshkin et al., 2020)", tryit=NB + " \\S3")
-    D.concept(t("Transformers for time series: patches become tokens", "Arhitecturi transformer pentru serii de timp: peticele devin tokeni"),
+    D.concept(t("Transformers for time series: patches as tokens", "Arhitecturi transformer pentru serii de timp: peticele ca tokeni"),
               t("cut the series into short patches, embed each patch like a word and let attention compare them.",
                 "seria se taie în petice scurte, fiecare petic este reprezentat ca un cuvînt, iar mecanismul de atenție le compară."),
               "\\[ \\mathbf p_j=(y_{(j-1)P+1},\\dots,y_{jP}),\\quad \\mathbf e_j=\\mathbf W_{e}\\mathbf p_j+\\mathbf q_j \\]"
@@ -430,7 +430,7 @@ def build(lang, H=None):
                bullets=[t("Week @{week.start|date} to @{week.end|date}: MAE LEAR @{week.mae.lear|.2f}, DNN @{week.mae.dnn|.2f}, Chronos-2 @{week.mae.chronos2|.2f} EUR/MWh.",
                           "Săptămîna @{week.start|date} -- @{week.end|date}: MAE LEAR @{week.mae.lear|.2f}, DNN @{week.mae.dnn|.2f}, Chronos-2 @{week.mae.chronos2|.2f} EUR/MWh.")],
                height="0.58\\textheight", tryit=NB + " \\S4")
-    D.figframe(t("Longer context helps the foundation model, up to a point", "Un context mai lung ajută modelul fundație, pînă la un punct"),
+    D.figframe(t("Effect of context length on the foundation model", "Efectul lungimii contextului asupra modelului fundație"),
                t("the model sees only the context: one week shows the daily shape, three months also the level.",
                  "modelul vede doar contextul: o săptămînă arată forma zilnică, trei luni arată și nivelul."),
                None, "context_length",
@@ -523,7 +523,7 @@ def build(lang, H=None):
                           "Banda de 90\\,\\%: brut @{cov.chronos2.90.cov|.1f}\\,\\%, conformal @{cov.chronos2_conf.90.cov|.1f}\\,\\%, LEAR + erori empirice @{cov.lear_hs.90.cov|.1f}\\,\\%; "
                           "TimesFM 80\\,\\%: brut @{cov.timesfm.80.cov|.1f}\\,\\%, conformal @{cov.timesfm_conf.80.cov|.1f}\\,\\%.")],
                height="0.52\\textheight", tryit=NB + " \\S7")
-    D.figframe(t("Load is easier than price: foundation models forecast it within a few percent", "Consumul este mai ușor de prognozat decît prețul: modelele fundație greșesc cu cîteva procente"),
+    D.figframe(t("Load forecasts of foundation models: errors of a few percent", "Prognozele de consum ale modelelor fundație: erori de cîteva procente"),
                t("load is smooth and seasonal, the shapes a pre-trained model knows best.",
                  "consumul este neted și sezonier, exact formele pe care un model preantrenat le cunoaște cel mai bine."),
                "\\[ \\mathrm{MAPE}=\\frac{100}{24|\\mathcal T|}\\sum_{d,h}\\Big|\\frac{\\ell_{d,h}-\\hat\\ell_{d,h}}{\\ell_{d,h}}\\Big| \\]", "load_mape",
@@ -670,7 +670,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ appendix
     D.parts.append("\\section*{" + t("Appendix", "Anexă") + "}\n")
-    D.frame(t("Appendix A: why the conformal band covers", "Anexa A: de ce acoperă banda conformală"), it(
+    D.frame(t("Appendix A: the coverage guarantee of the conformal band", "Anexa A: garanția de acoperire a benzii conformale"), it(
         t("Let $s_1,\\dots,s_n,s_{n+1}$ be exchangeable conformity scores; the rank of $s_{n+1}$ among them is uniform on $\\{1,\\dots,n+1\\}$.",
           "Fie $s_1,\\dots,s_n,s_{n+1}$ scoruri de conformitate interschimbabile; rangul lui $s_{n+1}$ printre ele este uniform pe $\\{1,\\dots,n+1\\}$."),
         t("Hence $\\Pr(s_{n+1}\\le s_{(k)})\\ge k/(n+1)$; choosing $k=\\lceil (n+1)(1-\\alpha)\\rceil$ gives $\\Pr(s_{n+1}\\le\\hat Q)\\ge 1-\\alpha$.",

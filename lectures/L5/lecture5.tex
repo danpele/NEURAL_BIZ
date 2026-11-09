@@ -59,7 +59,7 @@ VaR & value-at-risk\\\end{tabular}}\end{column}
 
 % END-ABBR
 
-\begin{frame}{Real data only: three sequences}
+\begin{frame}{The data: three real sequences}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.25\textwidth}p{0.29\textwidth}p{0.22\textwidth}p{0.17\textwidth}@{}}\toprule
@@ -234,7 +234,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 
 \section{Gated cells: LSTM and GRU}
 
-\begin{frame}{The LSTM cell, gate by gate}
+\begin{frame}{The LSTM cell and its gates}
 \footnotesize
 \intuition{a separate cell state $\mathbf c_t$ is updated additively; three gates decide what to forget, write and show.}
 \begin{columns}[T,onlytextwidth]
@@ -550,9 +550,9 @@ GRU (mean forecast) & 0.624 & 0.521 & 5 \\
 \end{frame}
 
 
-\section{Case study B: can a network forecast returns?}
+\section{Case study B: forecasting returns with neural networks}
 
-\begin{frame}{Out of sample, return forecasts explain almost nothing}
+\begin{frame}{Return forecasts explain almost none of the out-of-sample variance}
 \small
 \intuition{next-day returns of the S\&P 500 and of Banca Transilvania (TLV) from the last 22 returns.}
 \vspace{-1mm}\[ R^2_{\mathrm{OOS}}=1-\frac{\sum_{t\in\mathrm{test}}(r_{t+1}-\hat r_{t+1})^2}{\sum_{t\in\mathrm{test}}r_{t+1}^2} \]\vspace{-2mm}
@@ -685,7 +685,7 @@ GRU (mean forecast) & 0.624 & 0.521 & 5 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L5\_load\_window}{Quantlets/L5/NN_L5_load_window}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{What a better load forecast is worth}
+\begin{frame}{Economic value of a more accurate load forecast}
 \footnotesize
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Significance}

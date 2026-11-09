@@ -15,7 +15,7 @@ We classify 5,400 test images of the EuroSAT data set (Sentinel-2 satellite imag
 - **Describe** how a VLM connects an image encoder to a language model, and test what it reads in charts and tables.
 - **Synthesise** the course: choose a model for a business problem, from logistic regression to foundation models, with the right evaluation.
 
-# Why multimodal models
+# Multimodal data in business
 
 ## Images, documents and charts as business data {h=e94960b4}
 
@@ -25,13 +25,13 @@ Satellite images serve agricultural credit, insurance and environmental, social 
 
 A bank financing farms checks that the plots are cropland; an insurer compares images before and after a flood or a drought; an asset manager measures forest cover and industrial sites around its assets. Images are free and frequent (Sentinel-2 revisits every few days), labels are expensive: hence zero-shot and few-shot models.
 
-## Real data only {h=eb0d7783}
+## The data {h=232c314f}
 
 EuroSAT (Helber et al., 2019) contains 27,000 images of 64 × 64 pixels in 10 land-use classes, split 80/20 into 21,600 training and 5,400 test images. The market experiment uses 945 windows of 120 trading days of the S&P 500 (Yahoo Finance), and the table experiment 60 euro area AAA yield curves of the European Central Bank (ECB).
 
 # Vision transformers
 
-## A vision transformer reads patches {h=a2e53b3c}
+## A vision transformer on image patches {h=a2e53b3c}
 
 A vision transformer (ViT) cuts a 224 × 224 image into 14 × 14 = 196 patches of 16 × 16 pixels, embeds each patch linearly, adds a class token and position embeddings, and applies 12 transformer layers with 12 attention heads (Dosovitskiy et al., 2021):
 
@@ -54,7 +54,7 @@ $$ s_{ij}=\frac{\mathbf u_i^{\top}\mathbf v_j}{\tau},\qquad \mathcal L=-\frac{1}
 
 where $\mathbf u_i$ and $\mathbf v_j$ are the normalised image and text embeddings and $\tau$ a learned temperature (Radford et al., 2021). The ViT-B/32 model has 151.3 million parameters and the ViT-B/16 model has 149.6 million.
 
-## Zero-shot classification {h=04f85c95}
+## Zero-shot classification {h=ac8c31b3}
 
 Each class is described by sentences such as "a satellite photo of {class}."; their averaged text embedding $\mathbf w_c$ becomes the weight vector of the class, and the image goes to the class with the largest cosine similarity. The best zero-shot model, CLIP ViT-B/16 with an ensemble of five templates, classifies 56.4 % of the test images correctly, against 10 % by chance.
 
@@ -70,7 +70,7 @@ With the bare folder names, ViT-B/16 reaches 42.4 %; "a satellite photo of" lift
 @chart zeroshot_examples
 Zero-shot predictions on eight random test images.
 
-## Where zero-shot fails {h=f49c7339}
+## Zero-shot errors {h=1bec17a3}
 
 @chart zeroshot_confusion
 Confusion matrix of the best zero-shot model, row percentages.
@@ -101,7 +101,7 @@ The CNN has 289.2 thousand parameters; CLIP ViT-B/32 embeds an image in 4.23 ms 
 
 # Vision-language models: reading charts and tables
 
-## A VLM plugs an image encoder into a language model {h=618572b4}
+## A VLM: an image encoder connected to a language model {h=231e83df}
 
 $$ \mathbf H_v=\mathbf W_p\,f_{\text{ViT}}(I),\qquad p(y_t\mid y_{<t},I,q)=\mathrm{LLM}_{\boldsymbol\theta}\big([\mathbf H_v;\ \mathbf e(q);\ \mathbf e(y_{<t})]\big) $$
 
@@ -122,11 +122,11 @@ The area under the receiver operating characteristic curve (AUC) is 0.933 for lo
 
 Average precision, which matters for a rare event, is 0.578 for the numbers, 0.605 for CLIP zero-shot, 0.449 for the CLIP probe and 0.302 for the VLM. When the numbers exist, a picture adds a lossy step; images earn their place when numbers are missing.
 
-## What a small VLM can read {h=06a15ea7}
+## Reading charts and tables with a small VLM {h=c6e38408}
 
 Asked whether the price ended higher or lower over the window, the VLM is right in 57.1 % of 394 charts at the 0.5 threshold, below the 74.9 % of always answering the majority, yet its AUC is 0.974: the ranking is right and the threshold is biased, so recalibration on validation charts fixes most of the problem. Reading the 10-year yield from 60 rendered tables, it gives the exact value in 25.0 % of cases, with a mean absolute error of 0.192 percentage points.
 
-## A document pipeline in a bank {h=d19b3980}
+## A document pipeline in a bank {h=94b63dc5}
 
 Known templates go to a rule-based parser; optical character recognition and layout analysis handle text and tables; a VLM reads free-form pages and charts; checks on totals, dates and ranges send failures to a person; and an exact-match rate per field is measured on a labelled sample.
 
@@ -140,7 +140,7 @@ Tables (lectures 1–3), images (4, 14), sequences (5, 13), text (6, 7, 12), gen
 
 Start with the decision and the cost of errors, fit the benchmark first, count the labels (few labels: a foundation model zero-shot or with a probe; many labels: a trained network), match the architecture to the data, and prove the result with a test, several seeds, calibration and an explanation.
 
-## Five evaluation rules {h=78b78844}
+## Five evaluation rules {h=35d2d6ad}
 
 No leakage; a benchmark next to every network; seeds and intervals; metrics for rare events; real data and reproducible scripts.
 
@@ -148,7 +148,7 @@ No leakage; a benchmark next to every network; seeds and intervals; metrics for 
 
 The same pattern, pre-train once and use zero-shot or with a small head, worked for text (Lecture 12), time series (Lecture 13) and images (this lecture: 56.4 % zero-shot, 95.5 % with a probe on all labels). The common caveat is that pre-training data may contain the test set.
 
-## Responsible use {h=917ec2d7}
+## Responsible use {h=116ceac7}
 
 The European Union Artificial Intelligence Act lists credit scoring among high-risk uses; a model card documents data, period, metric, benchmark, seeds and known failure cases; models are re-tested on new data; local open models keep client data in-house.
 

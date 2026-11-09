@@ -110,7 +110,7 @@ Metoda momentului păstrează o viteză $\mathbf v_{t+1}=\beta\mathbf v_t+\mathb
 
 AdaGrad împarte pasul fiecărei ponderi la rădăcina sumei pătratelor gradienților ei, care doar crește; propagarea cu medie pătratică (RMSProp) înlocuiește suma cu o medie exponențială, $s_t=\rho s_{t-1}+(1-\rho)g_t^2$, astfel încît pasul se adaptează regiunii curente.
 
-## Adam = moment + RMSProp + o corecție a deplasării {h=e4e5a74e}
+## Adam: moment, RMSProp și corecția deplasării {h=3fd98a2f}
 
 Adam păstrează medii exponențiale ale gradientului și ale pătratului său, le corectează pentru pornirea de la zero și face un pas egal cu raportul lor:
 
@@ -118,7 +118,7 @@ $$ \hat m_t=\frac{m_t}{1-\beta_1^t},\quad \hat v_t=\frac{v_t}{1-\beta_2^t},\quad
 
 Cu valorile implicite $\beta_1=0{,}9$, $\beta_2=0{,}999$, pasul @eq:adam este aproximativ limitat la $\eta$ pentru fiecare pondere. Adam cu penalizarea ponderilor decuplată (AdamW) micșorează direct ponderile, în loc să adauge penalizarea la gradient (Loshchilov și Hutter, 2019).
 
-## Pe datele California, toți optimizatorii ajustați ajung aproape; cei adaptivi ajung mai sigur {h=ca599e37}
+## Pe datele California, optimizatorii ajustați ating erori apropiate, iar metodele adaptive converg mai sigur {h=fe42bdd8}
 
 Fiecare optimizator primește cea mai bună dintre trei rate de învățare pe validare, apoi 5 inițializări noi. După 10 epoci, MSE pe validare este 0,342 pentru SGD, 0,310 cu moment, 0,313 pentru RMSProp, 0,305 pentru Adam și 0,304 pentru AdamW; regresia liniară rămîne la 0,500.
 
@@ -162,7 +162,7 @@ Aceeași rețea, antrenată cu altă pierdere, devine un model de risc: cu pierd
 
 VaR este minus cuantila condiționată $\tau$ a randamentului de a doua zi, iar pierderea pinball $\rho_\tau(u)=u(\tau-\mathbb 1\{u<0\})$ are minimul în această cuantilă (Koenker și Bassett, 1978). MLP 32-32 folosește ultimul randament, valoarea lui absolută, media pe 5 zile și volatilitatea pe 5, 22 și 66 de zile; este antrenat de la 8 aprilie 2005 pînă în 2016, oprit pe baza perioadei 2017--2019 și mediat pe 5 inițializări. Reperele sînt simularea istorică pe 250 de zile și volatilitatea calculată cu o medie mobilă ponderată exponențial (EWMA), cu cuantila normală.
 
-## În pandemia din 2020 și după, VaR-ul MLP cuantilic este depășit aproximativ cît ar trebui {h=aeb5c2c1}
+## Depășirile VaR-ului MLP cuantilic în pandemia din 2020 și după aceasta sînt apropiate de rata nominală {h=733ec512}
 
 Pe 1 716 de zile de test, de la 3 ianuarie 2020 la 30 octombrie 2026, un VaR corect de 99 % ar trebui depășit de circa 17,2 ori. MLP cuantilic este depășit de 18 ori, simularea istorică de 31 ori, iar EWMA de 41 ori; VaR-ul MLP crește în cîteva zile cînd volatilitatea sare, ca în martie 2020.
 

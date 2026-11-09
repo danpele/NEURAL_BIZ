@@ -88,7 +88,7 @@ Over the 1,717 test days the MSE is 0.966 for the naive forecast, 0.786 for GARC
 @chart vol_mse
 Test MSE of the log variance by model; dots are single seeds.
 
-# Case study B: can a network forecast returns?
+# Case study B: forecasting returns with neural networks
 
 From the last 22 returns, the LSTM forecasts tomorrow's return. Against the zero forecast, the out-of-sample $R^2$ on the test years is 0.776% for the S&P 500 (seeds from 0.572% to 0.969%) and 0.213% for Banca Transilvania; an AR(1) model gives 2.366% and 0.201%. The LSTM gets the sign right on 52.1% of S&P 500 test days, while 54.0% of the days were up. In a liquid market the predictable part of returns is tiny against the noise: R² values of about one or two percent do not survive trading costs, and the LSTM's sign accuracy stays below the always-up forecast.
 

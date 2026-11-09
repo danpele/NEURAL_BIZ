@@ -38,7 +38,7 @@ ABBR = {
     "MLP": ("multilayer perceptron", "perceptron multistrat"),
     "PPO": ("proximal policy optimisation", "optimizarea proximală a politicii (proximal policy optimisation)"),
     "ReLU": ("rectified linear unit", "unitate liniară rectificată"),
-    "RL": ("reinforcement learning", "învățare prin întărire (reinforcement learning)"),
+    "RL": ("reinforcement learning", "reinforcement learning"),
     "RO": ("Romania (bidding zone)", "România (zonă de ofertare)"),
     "SSRN": ("Social Science Research Network", "Social Science Research Network"),
     "TD": ("temporal difference", "diferență temporală"),
@@ -110,7 +110,7 @@ def build(lang, H=None):
     V = Numbers(os.path.join(HERE, "L10_numbers.json"), lang)
     N = V.N
     D = Deck(10, "Reinforcement learning: trading, hedging and battery dispatch" if lang == "en" else
-             "Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor", V, lang, heights=H)
+             "Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor", V, lang, heights=H)
     t = D.t
     ro = lang == "ro"
     NB = t("notebook", "notebook")
@@ -131,7 +131,7 @@ def build(lang, H=None):
           "Să acoperiți riscul unei opțiuni cu o politică neuronală care minimizează pierderea așteptată în coada distribuției "
           "(ES) și să o comparați cu delta Black-Scholes."),
         t("Judge when reinforcement learning (RL) adds value in business and when a simple rule is enough.",
-          "Să judecați cînd învățarea prin întărire (RL) aduce valoare într-o afacere și cînd ajunge o regulă simplă."),
+          "Să judecați cînd reinforcement learning (RL) aduce valoare într-o afacere și cînd ajunge o regulă simplă."),
         sep="4pt"))
     abbreviation_frames(D, ABBR, per_frame=34)
 
@@ -166,13 +166,13 @@ def build(lang, H=None):
 
     # ================================================================== 1. sequential decisions
     D.section(t("Sequential decisions in business", "Decizii secvențiale în afaceri"))
-    D.concept(t("Reinforcement learning and supervised learning", "Învățarea prin întărire și învățarea supervizată"),
+    D.concept(t("Reinforcement learning and supervised learning", "Reinforcement learning și învățarea supervizată"),
               t("supervised learning predicts a label; RL chooses actions whose consequences arrive later and depend on what it did before.",
                 "învățarea supervizată prognozează o etichetă; RL alege acțiuni cu efecte întîrziate, care depind de deciziile anterioare."),
               it((t("\\textbf{Supervised}", "\\textbf{Supervizată}"),
                   t("data $(\\vx_i, y_i)$, loss $\\loss(\\hat y_i, y_i)$ known for each example", "date $(\\vx_i, y_i)$, pierderea $\\loss(\\hat y_i, y_i)$ cunoscută pentru fiecare exemplu"),
                   t("the prediction does not change the next example", "prognoza nu schimbă exemplul următor")),
-                 (t("\\textbf{Reinforcement}", "\\textbf{Prin întărire}"),
+                 (t("\\textbf{Reinforcement}", "\\textbf{Reinforcement learning}"),
                   t("the agent sees a state $s_t$, acts $a_t$, receives a reward $r_{t+1}$", "agentul vede o stare $s_t$, acționează $a_t$, primește o recompensă $r_{t+1}$"),
                   t("the action changes the next state (a full battery cannot charge)", "acțiunea schimbă starea următoare (o baterie plină nu se mai încarcă)"),
                   t("no teacher gives the right action: only a delayed, noisy reward", "nimeni nu indică acțiunea corectă: doar o recompensă întîrziată și zgomotoasă")), sep="2pt"),
@@ -205,7 +205,7 @@ def build(lang, H=None):
                        "scrieți starea, acțiunea și recompensa înainte de orice antrenare.")),
             "small", cite="(Sutton \\& Barto, 2018, ch.\\ 3)")
 
-    D.frame(t("Three business applications of reinforcement learning", "Trei aplicații economice ale învățării prin întărire"), table(
+    D.frame(t("Three business applications of reinforcement learning", "Trei aplicații economice ale reinforcement learning"), table(
         "@{}p{0.14\\textwidth}p{0.27\\textwidth}p{0.2\\textwidth}p{0.33\\textwidth}@{}",
         [t("Problem", "Problema"), t("State $s_t$", "Starea $s_t$"), t("Action $a_t$", "Acțiunea $a_t$"), t("Reward $r_{t+1}$", "Recompensa $r_{t+1}$")],
         [[t("Battery", "Baterie"), t("hour, stored energy, yesterday's prices", "ora, energia stocată, prețurile de ieri"),
@@ -225,7 +225,7 @@ def build(lang, H=None):
                    "un agent RL merită folosit doar dacă bate regula deja folosită, după costuri și pe mai multe valori inițiale.")),
         "footnotesize", cite=OWN)
 
-    D.figframe(t("Batteries earn the daily price spread, and the spread has grown", "Bateriile cîștigă diferența zilnică de preț, iar aceasta a crescut"),
+    D.figframe(t("Battery revenue from the daily price spread and the growth of the spread", "Venitul bateriilor din diferența zilnică de preț și creșterea acestei diferențe"),
                t("a battery buys in the cheapest hours and sells in the dearest; its income scales with the daily max-min spread.",
                  "o baterie cumpără în orele cele mai ieftine și vinde în cele mai scumpe; venitul ei crește cu diferența zilnică dintre maxim și minim."),
                None, "spread_monthly", bullets=[
@@ -365,7 +365,7 @@ def build(lang, H=None):
                      "Un $Q$ bine învățat trebuie să reproducă această formă fără să vadă prețurile zilei.")],
                tryit=NB + " \\S2", height="0.50\\textheight", cite=OWN)
 
-    D.figframe(t("Perfect foresight: what a 2 MWh battery could have earned", "Previziune perfectă: cît ar fi putut cîștiga o baterie de 2 MWh"),
+    D.figframe(t("Revenue of a 2 MWh battery under perfect foresight", "Venitul unei baterii de 2 MWh în condiții de previziune perfectă"),
                t("the DP revenue is an upper bound; it follows the spreads, not the price level.",
                  "venitul DP este o limită superioară; el urmează diferențele de preț, nu nivelul prețului."),
                None, "dp_revenue_year", bullets=[
@@ -416,7 +416,7 @@ def build(lang, H=None):
                 "o stare care include prețurile de azi ar da un test retrospectiv perfect, dar inutil."),
               tryit=NB + " \\S3", cite=OWN, wl="0.55", wr="0.42")
 
-    D.figframe(t("What tabular Q-learning learned", "Ce a învățat Q-learning tabelar"),
+    D.figframe(t("The policy learned by tabular Q-learning", "Politica învățată prin Q-learning tabelar"),
                t("with 1 MWh stored, the agent charges in hours that were cheap yesterday and sells in the evening.",
                  "cu 1 MWh stocat, agentul încarcă în orele care au fost ieftine ieri și vinde seara."),
                None, "q_policy", bullets=[
@@ -426,7 +426,7 @@ def build(lang, H=None):
                      "Ora din zi domină; clasamentul de ieri mută momentul încărcării.")],
                tryit=NB + " \\S3", height="0.46\\textheight", cite=OWN)
 
-    D.concept(t("From a table to a network: the deep Q-network", "De la tabel la rețea: rețeaua Q profundă"),
+    D.concept(t("The deep Q-network: a neural approximation of the Q-table", "Rețeaua Q profundă: aproximarea tabelului Q printr-o rețea neuronală"),
               t("replace the table by a network $Q_{\\btheta}(s,a)$ and regress it on the TD target.",
                 "tabelul este înlocuit de o rețea $Q_{\\btheta}(s,a)$, ajustată prin regresie pe ținta TD."),
               "\\[ y=r+\\gamma\\,Q_{\\btheta^{-}}\\big(s',\\argmax_{a'}Q_{\\btheta}(s',a')\\big) \\]"
@@ -457,7 +457,7 @@ def build(lang, H=None):
                      "planul de ieri @{bat.naive_valid_day|,.0f} EUR.")],
                tryit=NB + " \\S4", height="0.50\\textheight", cite=OWN)
 
-    D.figframe(t("Test years: how much of the perfect-foresight revenue is captured", "Anii de test: cît din venitul cu previziune perfectă se obține"),
+    D.figframe(t("Share of the perfect-foresight revenue captured in the test years", "Ponderea venitului cu previziune perfectă obținută în anii de test"),
                t("cumulative revenue from @{split.test_first|date} to @{split.test_last|date}; the gap to the top line is the value of perfect information.",
                  "venitul cumulat de la @{split.test_first|date} la @{split.test_last|date}; distanța față de linia de sus este valoarea informației perfecte."),
                None, "battery_test_cum", bullets=[
@@ -591,7 +591,7 @@ def build(lang, H=None):
                    "un interval care conține zero înseamnă că nu există dovezi că agentul aduce valoare, orice ar sugera graficul retrospectiv."), NB + " \\S5"),
         "small", cite="(Politis \\& Romano, 1994; " + t("own computation", "calcul propriu") + ")")
 
-    D.figframe(t("When is the agent out of the market?", "Cînd iese agentul din piață?"),
+    D.figframe(t("Periods in which the agent is out of the market", "Perioadele în care agentul este în afara pieței"),
                t("exposure of the PPO agent (share of seeds and days invested) against the moving-average rule.",
                  "expunerea agentului PPO (ponderea valorilor inițiale și a zilelor investite) comparată cu regula mediei mobile."),
                None, "trading_exposure", bullets=[
@@ -603,7 +603,7 @@ def build(lang, H=None):
                      "citiți politica, nu doar profitul: un agent care este pur și simplu mereu investit este o strategie cumpără și păstrează cu risc de model suplimentar."),
                tryit=NB + " \\S5", height="0.46\\textheight", cite=OWN)
 
-    D.frame(t("Why RL trading backtests mislead", "De ce induc în eroare testele retrospective ale agenților de tranzacționare"), it(
+    D.frame(t("Limitations of backtests for RL trading agents", "Limitele testelor retrospective pentru agenții de tranzacționare"), it(
         t("\\textbf{Low signal-to-noise}: daily equity returns are close to unpredictable; the agent mostly learns the noise of its training windows.",
           "\\textbf{Raport semnal-zgomot redus}: randamentele zilnice ale acțiunilor sînt aproape imprevizibile; agentul învață mai ales zgomotul ferestrelor de antrenare."),
         t("\\textbf{Non-stationarity}: 2005--2016 contains 2008; 2020--2026 contains a pandemic crash, an inflation shock and a long rally.",
@@ -680,7 +680,7 @@ def build(lang, H=None):
                    "judecați o acoperire după coada pierderii și după volumul tranzacționat, nu după profitul mediu."), NB + " \\S6"),
         "small", cite=OWN)
 
-    D.figframe(t("What the network learned: a flatter, cost-aware hedge ratio", "Ce a învățat rețeaua: un raport de acoperire mai plat, atent la costuri"),
+    D.figframe(t("The learned hedge ratio: flatter and adjusted for costs", "Raportul de acoperire învățat: mai plat și ajustat pentru costuri"),
                t("hedge ratio as a function of moneyness, 10 days before maturity, with the VIX at 20.",
                  "raportul de acoperire în funcție de raportul $S_t/K$, cu 10 zile înainte de scadență și VIX la 20."),
                None, "hedge_delta", bullets=[
@@ -688,7 +688,7 @@ def build(lang, H=None):
                      "La bani: acoperirea neuronală @{hedge.atm_dh|.2f}, față de Black-Scholes @{hedge.atm_bs|.2f}; banda arată dispersia pe cinci valori inițiale.")],
                tryit=NB + " \\S6", height="0.50\\textheight", cite=OWN)
 
-    D.figframe(t("Transaction costs: where the learned hedge helps", "Costurile de tranzacționare: unde ajută acoperirea învățată"),
+    D.figframe(t("Transaction costs and the advantage of the learned hedge", "Costurile de tranzacționare și avantajul acoperirii învățate"),
                t("ES$_{95}$ of the hedging loss for cost levels from 0 to 50 bp; one network trained per cost level.",
                  "ES$_{95}$ al pierderii din acoperire pentru costuri de la 0 la 50 pb; o rețea antrenată pentru fiecare nivel de cost."),
                None, "hedge_costs", bullets=[
@@ -698,7 +698,7 @@ def build(lang, H=None):
                      "valoarea unei acoperiri învățate crește cu fricțiunile: active suport nelichide, diferențe mari între cotații, acoperiri pe energie și mărfuri."),
                tryit=NB + " \\S6", height="0.46\\textheight", cite=OWN)
 
-    D.frame(t("Reinforcement learning in production: model risk", "Învățarea prin întărire în producție: riscul de model"), cols(it(
+    D.frame(t("Reinforcement learning in production: model risk", "Reinforcement learning în producție: riscul de model"), cols(it(
         t("\\textbf{Reward design}: the agent optimises exactly what you write; omit costs, risk or constraints and it will exploit the gap.",
           "\\textbf{Proiectarea recompensei}: agentul optimizează exact ce scrieți; dacă omiteți costurile, riscul sau restricțiile, va exploata lipsa."),
         t("\\textbf{Simulator gap}: a historical replay ignores the agent's own price impact and future regimes.",
@@ -776,7 +776,7 @@ def build(lang, H=None):
           "transformer pentru prețurile energiei (Andrei, Velev, Toma, Pele \\& Lessmann, 2024, arXiv 2411.03372) --- prognozele de care are nevoie un agent de dispecerizare."),
         t("\\textbf{Artificial intelligence (AI) in energy finance}: a systematic literature review of how machine learning and reinforcement learning reshape "
           "trading, risk and storage decisions in energy markets (Anagnoste et al., 2025, Energy Strategy Reviews).",
-          "\\textbf{Inteligența artificială (AI) în finanțele energiei}: o analiză sistematică a literaturii despre modul în care învățarea automată și învățarea prin întărire "
+          "\\textbf{Inteligența artificială (AI) în finanțele energiei}: o analiză sistematică a literaturii despre modul în care învățarea automată și reinforcement learning "
           "schimbă deciziile de tranzacționare, de risc și de stocare pe piețele de energie (Anagnoste et al., 2025, Energy Strategy Reviews)."),
         sep="4pt") + "\\par\\vspace{1mm}{\\scriptsize " + items(t("Findings as stated in the papers; numbers on the other slides come from our own data.",
                                                                   "Rezultatele sînt cele din lucrări; cifrele de pe celelalte slide-uri provin din datele noastre."), nest=False) + "}",
@@ -804,7 +804,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ appendix
     D.parts.append("\\section*{" + t("Appendix", "Anexă") + "}\n")
-    D.frame(t("Appendix A: why Q-learning converges", "Anexa A: de ce converge Q-learning"), it(
+    D.frame(t("Appendix A: convergence of Q-learning", "Anexa A: convergența Q-learning"), it(
         t("Bellman optimality operator $(\\mathcal{T}Q)(s,a)=R(s,a)+\\gamma\\E_{s'}\\max_{a'}Q(s',a')$ is a $\\gamma$-contraction in the sup norm: "
           "$\\|\\mathcal{T}Q_1-\\mathcal{T}Q_2\\|_\\infty\\le\\gamma\\|Q_1-Q_2\\|_\\infty$.",
           "Operatorul de optimalitate Bellman $(\\mathcal{T}Q)(s,a)=R(s,a)+\\gamma\\E_{s'}\\max_{a'}Q(s',a')$ este o $\\gamma$-contracție în norma sup: "

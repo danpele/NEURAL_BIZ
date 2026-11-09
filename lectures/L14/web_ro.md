@@ -15,7 +15,7 @@ Clasificăm 5 400 de imagini de test din setul EuroSAT (imagini satelitare Sen
 - **Să descrieți** cum leagă un VLM un codificator de imagini de un model de limbaj și să testați ce citește din grafice și tabele.
 - **Să sintetizați** cursul: să alegeți modelul pentru o problemă de afaceri, de la regresia logistică la modelele fundație, cu evaluarea potrivită.
 
-# De ce modele multimodale
+# Datele multimodale în afaceri
 
 ## Imagini, documente și grafice ca date economice {h=af98382d}
 
@@ -25,13 +25,13 @@ Imaginile satelitare servesc creditul agricol, asigurările și raportările de 
 
 O bancă ce finanțează ferme verifică dacă parcelele sînt teren arabil; un asigurător compară imagini de dinainte și de după o inundație sau o secetă; un administrator de active măsoară suprafața împădurită și zonele industriale din jurul activelor sale. Imaginile sînt gratuite și frecvente (Sentinel-2 revine la cîteva zile), etichetele sînt scumpe: de aici modelele zero-shot și cele cu puține exemple.
 
-## Numai date reale {h=6bc9c832}
+## Datele {h=4ec41eed}
 
 EuroSAT (Helber et al., 2019) conține 27 000 de imagini de 64 × 64 de pixeli, în 10 clase de utilizare a terenului, împărțite 80/20 în 21 600 de imagini de antrenare și 5 400 de test. Experimentul de piață folosește 945 de ferestre de 120 de zile de tranzacționare ale S&P 500 (Yahoo Finance), iar experimentul cu tabele 60 de curbe ale randamentelor AAA din zona euro, publicate de Banca Centrală Europeană (BCE).
 
 # Transformere pentru imagini
 
-## Un transformer pentru imagini citește petice {h=4457b038}
+## Un transformer pentru imagini aplicat pe petice {h=4457b038}
 
 Un transformer pentru imagini (ViT) taie o imagine de 224 × 224 în 14 × 14 = 196 de petice de 16 × 16 pixeli, proiectează liniar fiecare petic, adaugă un token de clasă și codificări de poziție și aplică 12 straturi transformer cu 12 capete de atenție (Dosovitskiy et al., 2021):
 
@@ -54,7 +54,7 @@ $$ s_{ij}=\frac{\mathbf u_i^{\top}\mathbf v_j}{\tau},\qquad \mathcal L=-\frac{1}
 
 unde $\mathbf u_i$ și $\mathbf v_j$ sînt embedding-urile normalizate ale imaginii și textului, iar $\tau$ este o temperatură învățată (Radford et al., 2021). Modelul ViT-B/32 are 151,3 milioane de parametri, iar modelul ViT-B/16 are 149,6 milioane.
 
-## Clasificarea zero-shot {h=5bf873a2}
+## Clasificarea zero-shot {h=089f9047}
 
 Fiecare clasă este descrisă prin propoziții ca „a satellite photo of {class}.”; embedding-ul lor mediu $\mathbf w_c$ devine vectorul de ponderi al clasei, iar imaginea merge la clasa cu cea mai mare similaritate cosinus. Cel mai bun model zero-shot, CLIP ViT-B/16 cu un ansamblu de cinci șabloane, clasifică corect 56,4 % din imaginile de test, față de 10 % prin hazard.
 
@@ -70,7 +70,7 @@ Cu numele simple ale dosarelor, ViT-B/16 ajunge la 42,4 %; „a satellite photo 
 @chart zeroshot_examples
 Predicțiile zero-shot pentru opt imagini de test alese aleator.
 
-## Unde greșește zero-shot {h=6c2c1151}
+## Erorile zero-shot {h=610e7ed9}
 
 @chart zeroshot_confusion
 Matricea de confuzie a celui mai bun model zero-shot, procente pe rînd.
@@ -101,7 +101,7 @@ CNN are 289,2 mii de parametri; CLIP ViT-B/32 calculează embedding-ul unei imag
 
 # Modele vizual-lingvistice: citirea graficelor și a tabelelor
 
-## Un VLM conectează un codificator de imagini la un model de limbaj {h=1373adcf}
+## Un VLM: un codificator de imagini conectat la un model de limbaj {h=5f333b09}
 
 $$ \mathbf H_v=\mathbf W_p\,f_{\text{ViT}}(I),\qquad p(y_t\mid y_{<t},I,q)=\mathrm{LLM}_{\boldsymbol\theta}\big([\mathbf H_v;\ \mathbf e(q);\ \mathbf e(y_{<t})]\big) $$
 
@@ -122,17 +122,17 @@ Aria de sub curba caracteristică de operare a receptorului (AUC) este 0,933 pen
 
 Precizia medie, care contează pentru un eveniment rar, este 0,578 pentru cifre, 0,605 pentru CLIP zero-shot, 0,449 pentru clasificatorul pe CLIP și 0,302 pentru VLM. Cînd cifrele există, imaginea adaugă un pas cu pierdere de informație; imaginile își au locul cînd cifrele lipsesc.
 
-## Ce poate citi un VLM mic {h=656266ea}
+## Citirea graficelor și a tabelelor cu un VLM mic {h=f7727089}
 
 Întrebat dacă prețul a încheiat fereastra mai sus sau mai jos, modelul VLM are dreptate în 57,1 % din cele 394 de grafice la pragul de 0,5, sub cele 74,9 % ale răspunsului constant cu clasa majoritară, dar AUC este 0,974: ordonarea este corectă, iar pragul este deplasat, deci recalibrarea pe grafice de validare rezolvă cea mai mare parte a problemei. Cînd citește randamentul la 10 ani din 60 de tabele desenate, dă valoarea exactă în 25,0 % din cazuri, cu o eroare absolută medie de 0,192 puncte procentuale.
 
-## Fluxul documentelor într-o bancă {h=5b3ac2e3}
+## Fluxul documentelor într-o bancă {h=c74e7525}
 
 Șabloanele cunoscute merg la un program de citire bazat pe reguli; recunoașterea optică a caracterelor și analiza așezării în pagină tratează textul și tabelele; un VLM citește paginile libere și graficele; verificările de totaluri, date și intervale trimit eșecurile la un om; iar rata de potrivire exactă pe fiecare cîmp se măsoară pe un eșantion etichetat.
 
 # Sinteza cursului
 
-## Metodele cursului după tipul de date {h=5f54e900}
+## Metodele cursului după tipul de date {h=e2df2ebb}
 
 Tabele (cursurile 1–3), imagini (4, 14), secvențe (5, 13), text (6, 7, 12), generare (8), grafuri (9), decizii (10) și încredere (11): fiecare tip de date are arhitectura sa, iar fiecare curs a comparat-o cu un reper, pe date reale.
 
@@ -140,7 +140,7 @@ Tabele (cursurile 1–3), imagini (4, 14), secvențe (5, 13), text (6, 7, 12), g
 
 Porniți de la decizie și de la costul erorilor, estimați întîi reperul, numărați etichetele (puține etichete: un model fundație zero-shot sau cu un clasificator pe embedding; multe etichete: o rețea antrenată), potriviți arhitectura cu datele și demonstrați rezultatul cu un test, mai multe rulări, calibrare și o explicație.
 
-## Cinci reguli de evaluare {h=496d6abf}
+## Cinci reguli de evaluare {h=cbb0e74f}
 
 Fără scurgeri de informație; un reper lîngă fiecare rețea; rulări repetate și intervale; metrici pentru evenimente rare; date reale și programe reproductibile.
 
@@ -148,7 +148,7 @@ Fără scurgeri de informație; un reper lîngă fiecare rețea; rulări repetat
 
 Același tipar, preantrenare o singură dată și utilizare zero-shot sau cu un mic clasificator, a funcționat pentru text (cursul 12), serii de timp (cursul 13) și imagini (acest curs: 56,4 % zero-shot, 95,5 % cu un clasificator pe toate etichetele). Avertismentul comun este că datele de preantrenare pot conține setul de test.
 
-## Utilizarea responsabilă {h=6e77140e}
+## Utilizarea responsabilă {h=9c4e7fab}
 
 Regulamentul Uniunii Europene privind inteligența artificială include scoringul de credit printre utilizările cu risc ridicat; o fișă a modelului documentează datele, perioada, metrica, reperul, rulările și cazurile cunoscute de eșec; modelele se retestează pe date noi; modelele deschise rulate local păstrează datele clienților în instituție.
 

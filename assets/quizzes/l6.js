@@ -603,7 +603,7 @@ window.NN_DATA.quizzes['l6'] = {
         {
             "correct": 2,
             "en": {
-                "title": "Where the errors are",
+                "title": "Classification errors",
                 "text": "In the pooled PhraseBank test sets, most errors of TF-IDF + logistic are of which kind?",
                 "options": [
                     "Negative sentences read as positive",
@@ -615,7 +615,7 @@ window.NN_DATA.quizzes['l6'] = {
                 "incorrectExplanation": "The confusion matrix shows that the model hesitates towards neutral much more often than it flips the sign."
             },
             "ro": {
-                "title": "Unde sînt erorile",
+                "title": "Erorile de clasificare",
                 "text": "În seturile de test PhraseBank reunite, ce tip de erori face cel mai des TF-IDF + logistic?",
                 "options": [
                     "Fraze negative citite ca pozitive",

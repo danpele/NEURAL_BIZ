@@ -51,7 +51,7 @@ XAI & explainable artificial intelligence\\\end{tabular}}\end{column}
 % END-ABBR
 
 
-\section{Why graphs for financial crime}
+\section{Graphs in the detection of financial crime}
 
 \begin{frame}{Network structure in money-laundering detection}
 \footnotesize
@@ -133,7 +133,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L9\_elliptic\_timesteps}{Quantlets/L9/NN_L9_elliptic_timesteps}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Most transactions touch one or two others; a few are hubs}
+\begin{frame}{Degree distribution of the transaction graph}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.519\textheight,keepaspectratio]{charts/en/degree_dist.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each).}
@@ -170,7 +170,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 
 \section{Graphs as matrices}
 
-\begin{frame}{The adjacency matrix turns a graph into linear algebra}
+\begin{frame}{The adjacency matrix as an algebraic representation of the graph}
 \footnotesize
 \intuition{Every operation of a GNN is a product of the feature matrix with a (normalised) adjacency matrix and a weight matrix.}
 \begin{columns}[T,onlytextwidth]
@@ -203,7 +203,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kipf \& Welling, 2017)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A graph model must not depend on how we number the nodes}
+\begin{frame}{Permutation invariance and equivariance of graph models}
 \footnotesize
 \intuition{Transaction 17 and transaction 4,203 are names, not positions; relabelling them must not change any prediction.}
 \begin{columns}[T,onlytextwidth]
@@ -268,7 +268,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kipf \& Welling, 2017; Hamilton, 2020, ch.\ 7)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Node, edge or graph: three prediction tasks}
+\begin{frame}{Three prediction tasks: node, edge and graph level}
 \footnotesize
 \intuition{The same message-passing layers serve three kinds of business questions; only the read-out changes.}
 \begin{columns}[T,onlytextwidth]
@@ -306,7 +306,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 
 \section{Message passing}
 
-\begin{frame}{A GNN layer: collect messages, aggregate, update}
+\begin{frame}{A GNN layer: message, aggregation and update functions}
 \footnotesize
 \intuition{Each node sends a message to its neighbours; each node sums what it receives and updates its own state.}
 \begin{columns}[T,onlytextwidth]
@@ -393,7 +393,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation, 2,000 test nodes)}\hfill\qlink{NN\_L9\_receptive\_field}{Quantlets/L9/NN_L9_receptive_field}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Too many layers make all nodes look alike: over-smoothing}
+\begin{frame}{Over-smoothing in deep graph networks}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.437\textheight,keepaspectratio]{charts/en/oversmoothing.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -415,7 +415,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 
 \section{GCN, GraphSAGE and GAT}
 
-\begin{frame}{GCN: average the neighbours with degree weights, then regress}
+\begin{frame}{GCN: degree-weighted average of the neighbours followed by a linear map}
 \footnotesize
 \intuition{A GCN layer is a linear regression on the normalised average of a node and its neighbours, followed by a rectified linear unit (ReLU).}
 \begin{columns}[T,onlytextwidth]
@@ -482,7 +482,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Hamilton, Ying \& Leskovec, 2017)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{GAT: let the network decide which neighbour matters}
+\begin{frame}{GAT: learned attention weights over the neighbours}
 \footnotesize
 \intuition{A graph attention layer weights each neighbour by a learned score: the attention of Lecture 7, restricted to the edges of the graph.}
 \begin{columns}[T,onlytextwidth]
@@ -575,7 +575,7 @@ Random forest + GCN & all features + the 100 hidden GCN outputs of each node \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{On Elliptic the forest leads; graph layers mainly add ranking power to a network}
+\begin{frame}{Results on Elliptic: the random forest and the contribution of graph layers}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.560\textheight,keepaspectratio]{charts/en/model_comparison.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -626,7 +626,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation; sec.\ = training time per seed, CPU)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Precision-recall curves: the ranking behind the F1}
+\begin{frame}{Precision-recall curves of the models}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.580\textheight,keepaspectratio]{charts/en/pr_curves.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -673,7 +673,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Efron \& Tibshirani, 1993)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Why the forest performs well here: its features already pass messages}
+\begin{frame}{Neighbourhood aggregates in the features and the performance of the random forest}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -734,7 +734,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L9\_f1\_by\_timestep}{Quantlets/L9/NN_L9_f1_by_timestep}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{What an investigation team gets from 1,000 alerts}
+\begin{frame}{Illicit transactions found among the top 1,000 alerts}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.443\textheight,keepaspectratio]{charts/en/alert_budget.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -747,7 +747,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L9\_alert\_budget}{Quantlets/L9/NN_L9_alert_budget}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The GCN learns a space where illicit transactions gather}
+\begin{frame}{Illicit transactions cluster in the GCN embedding space}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.550\textheight,keepaspectratio]{charts/en/gcn_embeddings.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -759,7 +759,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation; 1\,083 illicit and 3,000 licit test nodes)}\hfill\qlink{NN\_L9\_gcn\_embeddings}{Quantlets/L9/NN_L9_gcn_embeddings}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Adding graph features reshuffles the explanations}
+\begin{frame}{Effect of graph features on the explanations}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.407\textheight,keepaspectratio]{charts/en/importance_shift.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -856,7 +856,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 
 \section{Wrap-up}
 
-\begin{frame}{What to remember}
+\begin{frame}{Key takeaways}
 \small
 \begin{itemize}\setlength{\itemsep}{6pt}
   \item \textbf{A GNN layer} = message, permutation-invariant aggregation, update

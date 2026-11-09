@@ -88,7 +88,7 @@ Pe cele 1 717 de zile de test, MSE este 0,966 pentru prognoza naivă, 0,786 pen
 @chart vol_mse
 MSE pe test a log-varianței, pe modele; punctele sînt semințe individuale.
 
-# Studiul de caz B: poate o rețea prognoza randamentele?
+# Studiul de caz B: prognoza randamentelor cu rețele neuronale
 
 Din ultimele 22 de randamente, LSTM prognozează randamentul de mîine. Față de prognoza zero, $R^2$ în afara eșantionului, pe anii de test, este 0,776% pentru S&P 500 (semințele între 0,572% și 0,969%) și 0,213% pentru Banca Transilvania; un model AR(1) dă 2,366% și 0,201%. LSTM ghicește semnul în 52,1% din zilele de test ale S&P 500, în timp ce 54,0% din zile au fost de creștere. Pe o piață lichidă, partea previzibilă a randamentelor este infimă față de zgomot: valori ale R² de unul sau două procente nu rezistă costurilor de tranzacționare, iar acuratețea semnului pentru LSTM rămîne sub cea a prognozei „mereu în sus”.
 

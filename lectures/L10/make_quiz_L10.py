@@ -49,7 +49,7 @@ q(1, ("Supervised or reinforcement", "Which business problem needs reinforcement
        ["Predicting tomorrow's electricity price", "Deciding hour by hour when a battery charges, because today's action changes tomorrow's state of charge", "Classifying a transaction as fraud", "Estimating the default probability of a loan"],
        "RL is needed when actions change future states and options; the stored energy of a battery links today's decision to tomorrow's.",
        "Forecasting and classification have labels and no feedback from the decision to the next state; the battery decision is sequential."),
-  ("Supervizată sau prin întărire", "Ce problemă economică cere învățarea prin întărire, nu o prognoză urmată de o regulă fixă?",
+  ("Învățare supervizată sau reinforcement learning", "Ce problemă economică cere reinforcement learning, nu o prognoză urmată de o regulă fixă?",
        ["Prognoza prețului energiei de mîine", "Decizia, oră de oră, privind încărcarea unei baterii, deoarece acțiunea de azi schimbă nivelul de încărcare de mîine", "Clasificarea unei tranzacții ca fraudă", "Estimarea probabilității de nerambursare a unui credit"],
        "RL este necesară cînd acțiunile schimbă stările și opțiunile viitoare; energia stocată leagă decizia de azi de cea de mîine.",
        "Prognoza și clasificarea au etichete și nicio legătură între decizie și starea următoare; decizia bateriei este secvențială."))

@@ -112,7 +112,7 @@ def build(lang, H=None):
           "Să măsurați sentimentul și temele financiare în știri și tweet-uri și să știți cînd un model liniar este suficient."), sep="4pt"))
     abbreviation_frames(D, ABBR)
 
-    D.frame(t("Real data only: three text collections", "Numai date reale: trei colecții de texte"),
+    D.frame(t("The data: three real text collections", "Datele: trei colecții reale de texte"),
             table("@{}p{0.23\\textwidth}p{0.33\\textwidth}p{0.17\\textwidth}p{0.18\\textwidth}@{}",
                   [t("Corpus", "Corpusul"), t("Content", "Conținut"), t("Size", "Dimensiune"), t("Use here", "Utilizare aici")],
                   [["Financial PhraseBank", t("sentences of financial news on Finnish listed companies, labelled positive / neutral / negative by 5--8 annotators",
@@ -134,7 +134,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1. text as data
     D.section(t("Text as data", "Textul ca date"))
-    D.frame(t("From a sentence to tokens", "De la o frază la unități lexicale"), it(
+    D.frame(t("Tokenisation of a sentence", "Împărțirea unei fraze în unități lexicale"), it(
         t(("\\textbf{A real PhraseBank sentence}", "``" + V.fmt("example.sentence") + "''", t("label given by the annotators: ", "eticheta dată de adnotatori: ") + "\\textbf{" + V.fmt("example.label") + "}"),
           ("\\textbf{O frază reală din PhraseBank}", "``" + V.fmt("example.sentence") + "''", "eticheta dată de adnotatori: \\textbf{" + {"positive": "pozitiv", "neutral": "neutru", "negative": "negativ"}[N["example"]["label"]] + "}")),
         t(("\\textbf{Our tokeniser}", "lower case, words and numbers; every number becomes " + tt("<num>") + "; links and @-mentions removed",
@@ -149,7 +149,7 @@ def build(lang, H=None):
                      "documentați preprocesarea și păstrați-o identică în antrenare și în producție; un alt tokenizator înseamnă un alt model."), tryit=NB + "1"),
         "footnotesize", cite=t("(Malo et al., 2014)", "(Malo et al., 2014)"))
 
-    D.figframe(t("Few words are frequent, most are rare: Zipf's law", "Puține cuvinte sînt frecvente, cele mai multe sînt rare: legea lui Zipf"),
+    D.figframe(t("Word frequencies and Zipf's law", "Frecvențele cuvintelor și legea lui Zipf"),
                t("in @{data.sp_n} " + ("" if not ro else "de ") + "speeches of the European Central Bank, frequency falls as a power of rank.",
                  "în @{data.sp_n} de discursuri ale Băncii Centrale Europene, frecvența scade ca o putere a rangului."),
                "\\[ f(r)\\approx C\\,r^{-a}\\quad\\Longleftrightarrow\\quad\\ln f(r)=\\ln C-a\\ln r \\]",
@@ -174,7 +174,7 @@ def build(lang, H=None):
                 "modelele BoW sînt rapide, ieftine și explicabile cuvînt cu cuvînt: auditorilor le plac."),
               cite=t("(Salton \\& Buckley, 1988)", "(Salton \\& Buckley, 1988)"))
 
-    D.concept(t("TF-IDF: down-weight words that appear everywhere", "TF-IDF: reducem ponderea cuvintelor care apar peste tot"),
+    D.concept(t("TF-IDF: lower weights for words that appear in every document", "TF-IDF: ponderi mai mici pentru cuvintele care apar în toate documentele"),
               t("a word is informative if it is frequent in this document and rare in the others.",
                 "un cuvînt este informativ dacă este frecvent în acest document și rar în celelalte."),
               "\\[ w_{ij}=\\underbrace{(1+\\ln c_{ij})}_{\\text{tf}}\\cdot\\underbrace{\\Big(\\ln\\frac{1+n}{1+n_j}+1\\Big)}_{\\text{idf}},\\qquad \\tilde{\\mathbf x}_i=\\frac{\\mathbf w_i}{\\|\\mathbf w_i\\|_2} \\]"
@@ -323,7 +323,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 4. classifiers
     D.section(t("Sentence classifiers: sparse versus dense", "Clasificatoare de fraze: reprezentări rare și dense"))
-    D.concept(t("An embedding-bag network: average the word vectors, then a softmax", "O rețea embedding bag: media vectorilor de cuvinte, apoi un softmax"),
+    D.concept(t("An embedding-bag network: averaged word vectors followed by a softmax layer", "O rețea embedding bag: media vectorilor de cuvinte și un strat softmax"),
               t("the simplest neural text classifier learns the embeddings and the classifier together.",
                 "cel mai simplu clasificator neuronal de text învață împreună vectorii de cuvinte și clasificatorul."),
               "\\[ \\mathbf z=\\frac{1}{|S|}\\sum_{s\\in S}\\mathbf e_s \\]\\vspace{-2mm}\\[ \\hat{\\mathbf p}=\\softmax(\\mW\\,\\mathrm{dropout}(\\mathbf z)+\\vb) \\]\\vspace{-2mm}\\[ \\loss=-\\frac1n\\sum_i\\omega_{y_i}\\log\\hat p_{i,y_i} \\]"
@@ -351,7 +351,7 @@ def build(lang, H=None):
                 "cu cîteva mii de fraze scurte, flexibilitatea suplimentară a unei rețele aduce varianță, nu acuratețe."),
               cite=OWN)
 
-    D.concept(t("From word vectors to a sentence vector", "De la vectorii cuvintelor la vectorul frazei"),
+    D.concept(t("Sentence vectors built from word vectors", "Vectorul frazei construit din vectorii cuvintelor"),
               t("averaging word vectors is the simplest sentence representation, and it loses what matters for sentiment.",
                 "media vectorilor de cuvinte este cea mai simplă reprezentare a unei fraze și pierde exact ce contează pentru sentiment."),
               "\\[ \\mathbf s_i=\\frac{1}{|S_i|}\\sum_{w\\in S_i}\\mathbf e_w,\\qquad \\mathbf s_i^{\\mathrm{w}}=\\frac{\\sum_{w}a_w\\mathbf e_w}{\\sum_w a_w},\\ \\ a_w=\\frac{\\alpha}{\\alpha+f(w)} \\]"
@@ -404,7 +404,7 @@ def build(lang, H=None):
             "footnotesize", cite=OWN)
 
     rows_d = [[k, "@{dims." + k + "|.1f}"] for k in ["8", "16", "32", "64", "128", "256"]]
-    D.frame(t("How large should the embedding be?", "Cît de mare trebuie să fie vectorul de cuvinte?"), cols(
+    D.frame(t("Choice of the embedding dimension", "Alegerea dimensiunii vectorului de cuvinte"), cols(
         table("@{}rr@{}", [t("Dimension $d$", "Dimensiunea $d$"), t("Macro-F1 (\\%)", "Macro-F1 (\\%)")], rows_d) +
         note(t("Embedding bag, random start, PhraseBank split 1, mean of 3 seeds.", "Embedding bag, start aleator, împărțirea 1 PhraseBank, media pe 3 semințe.")),
         it(t("Parameters of the embedding layer: $V\\times d$; with bigrams $V$ is several thousand, so $d$ drives the model size.",
@@ -427,7 +427,7 @@ def build(lang, H=None):
                      "zgomotul din etichete limitează orice model: înainte de a cumpăra un model mai mare, verificați cît de mult sînt de acord propriii analiști."),
                height="0.42\\textheight", cite=OWN)
 
-    D.figframe(t("With few labels, a word2vec start helps the network; TF-IDF stays competitive", "Cu puține etichete, startul word2vec ajută rețeaua; TF-IDF rămîne competitiv"),
+    D.figframe(t("Learning curves with few labels: word2vec initialisation and TF-IDF", "Curbele de învățare cu puține etichete: inițializarea word2vec și TF-IDF"),
                t("left: test macro-F1 against the number of labelled sentences; right: embedding size of the embedding bag.",
                  "stînga: macro-F1 pe test în funcție de numărul de fraze etichetate; dreapta: dimensiunea vectorilor din embedding bag."),
                None, "learning_curve",
@@ -435,7 +435,7 @@ def build(lang, H=None):
                           "Cu @{curve.n_small} de fraze etichetate: TF-IDF @{curve.tfidf_lr.p5|.1f}, media word2vec @{curve.w2v_lr.p5|.1f}, embedding bag aleator @{curve.embbag.p5|.1f}, start word2vec @{curve.embbag_w2v.p5|.1f}; cu toate cele @{curve.n_full|,d}: @{curve.tfidf_lr.p100|.1f}, @{curve.w2v_lr.p100|.1f}, @{curve.embbag.p100|.1f}, @{curve.embbag_w2v.p100|.1f}.")],
                height="0.42\\textheight", cite=OWN, tryit=NB + "4")
 
-    D.frame(t("Where the errors are: negative news read as neutral", "Unde sînt erorile: știrile negative citite ca neutre"), cols(
+    D.frame(t("Main error type: negative news classified as neutral", "Principalul tip de eroare: știri negative clasificate ca neutre"), cols(
         table("@{}lrrr@{}", [t("True \\textbackslash{} predicted", "Real \\textbackslash{} prezis"), t("neg.", "neg."), t("neu.", "neu."), t("pos.", "poz.")],
               [[t("negative", "negativ"), "--", "@{cm.neg_as_neu}", "@{cm.neg_as_pos}"],
                [t("positive", "pozitiv"), "@{cm.pos_as_neg}", "@{cm.pos_as_neu}", "--"]]) +

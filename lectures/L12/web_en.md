@@ -16,7 +16,7 @@ We start from the language-model objective, tokens, perplexity and temperature, 
 - **Build and evaluate** retrieval-augmented generation over real speeches, and measure hallucination.
 - **Backtest** a language model used for the Value-at-Risk and know the risks: leakage, cost, calibration.
 
-# From next-token prediction to large language models
+# Next-token prediction and large language models
 
 An LLM is trained to predict the next token. Everything else, from answering questions to writing a risk report, is repeated use of that single probability.
 
@@ -30,7 +30,7 @@ $$ p_{\boldsymbol\theta}(x_1,\dots,x_T)=\prod_{t=1}^{T}p_{\boldsymbol\theta}(x_t
 
 Perplexity is the effective number of equally likely next tokens. On ECB speeches published after July 2025 (first 1,024 tokens of 40 speeches) the perplexity is 14.71 for the 0.5B model, 10.63 for 1.5B and 9.43 for 3B.
 
-## Tokens are sub-words {h=0e51e313}
+## Subword tokens {h=de1a3534}
 
 Byte-pair encoding (BPE) starts from bytes and repeatedly merges the most frequent adjacent pair until the vocabulary is full: Qwen2.5 has 151,665 tokens; the WordPiece vocabulary of FinBERT, a financial version of bidirectional encoder representations from transformers (BERT), has 30,522. On the Financial PhraseBank there are 1.35 Qwen tokens per word.
 
@@ -54,7 +54,7 @@ Top next tokens of Qwen2.5-1.5B-Instruct at three temperatures.
 
 @practice for classification and extraction use temperature 0; reserve high temperatures for generating ideas.
 
-## Scaling {h=9a9a0f2c}
+## Scaling {h=fc09257c}
 
 The loss falls as a power of model size and data, $\mathcal L(P,D)=E+A/P^{\alpha}+B/D^{\beta}$ (Kaplan et al., 2020; Hoffmann et al., 2022). On our three model sizes the slope of log loss on log parameters is −0.100: three points describe our sample, they are not a law.
 
@@ -67,7 +67,7 @@ For the 3B model, perplexity is 8.90 on speeches of 2022–2023 and 9.43 on spee
 
 # Pre-training, instruction tuning and alignment
 
-## Three training stages {h=b49c8906}
+## Three training stages {h=76c9c0be}
 
 A generative pre-trained transformer (GPT) is first trained on trillions of tokens with the next-token loss; supervised fine-tuning (SFT) then teaches the format of answers, and reinforcement learning from human feedback (RLHF) or direct preference optimisation (DPO) teaches which answers people prefer (Ouyang et al., 2022).
 
@@ -77,7 +77,7 @@ $$ \mathcal L_{\text{SFT}}(\boldsymbol\theta)=-\sum_{(\mathbf x,\mathbf y)}\sum_
 
 The loss is computed on the answer tokens only. Low-rank adaptation (LoRA) trains $\mathbf W=\mathbf W_0+\mathbf B\mathbf A$ with a small rank $r$: a 4096 × 4096 layer with $r=8$ has 65,536 trainable weights instead of 16.8 million (Hu et al., 2022).
 
-## Alignment {h=9c661e26}
+## Alignment {h=76c86071}
 
 People choose the better of two answers; a reward model $r_\phi$ is fitted with $\Pr(y_w\succ y_l)=\sigma(r_\phi(x,y_w)-r_\phi(x,y_l))$ and the policy maximises the reward with a Kullback–Leibler penalty that keeps it close to the SFT model. DPO optimises the same objective directly from the preference pairs (Rafailov et al., 2023). Alignment sets tone and safety; it does not add financial knowledge.
 
@@ -89,7 +89,7 @@ Qwen2.5-Instruct with 0.49, 1.54 and 3.09 billion parameters (Qwen Team, 2024), 
 
 A prompt is a model. It is chosen on validation data and scored once on a held-out test set, with the same statistics as any classifier.
 
-## A prompt becomes a classifier {h=9089159c}
+## A prompt as a classifier {h=a78713ad}
 
 $$ \hat p(c\mid x)=\frac{\sum_{v\in\mathcal V_c}p_{\boldsymbol\theta}(v\mid\mathrm{prompt}(x))}{\sum_{c'}\sum_{v\in\mathcal V_{c'}}p_{\boldsymbol\theta}(v\mid\mathrm{prompt}(x))},\qquad \hat c=\arg\max_c\hat p(c\mid x) $$
 
@@ -127,14 +127,14 @@ Macro-F1 against the number of examples in the prompt, three seeds.
 
 In-context learning changes the output without changing any weight. For the 1.5B model, macro-F1 moves from 85.1 % with no example to 84.1 % with 24; for the 3B model from 92.2 % to 91.3 %. On this task the zero-shot instruction is already strong, and the choice of examples moves the score by several points.
 
-## Prompt sensitivity {h=0adbf8d2}
+## Prompt sensitivity {h=92b0744b}
 
 @chart prompt_sensitivity
 Macro-F1 under five paraphrases of the same instruction.
 
 Five instructions with the same meaning give a range of 3.6 points on PhraseBank and 12.9 points on Twitter for the 3B model, and 14.2 points on PhraseBank for the 1.5B model. The wording of a prompt is a hyper-parameter: select it on validation data and freeze it.
 
-## Chain-of-thought {h=a816aea2}
+## Chain-of-thought {h=a8a5a234}
 
 Letting the model write two sentences of reasoning before the label (Wei et al., 2022) gives 88.4 % macro-F1 on PhraseBank and 65.1 % on Twitter, below the direct zero-shot answer, at about 389 ms per sentence instead of 48.5 ms. Chain-of-thought helps multi-step reasoning, not one-word labels on short sentences.
 
@@ -152,7 +152,7 @@ Accuracy by annotator agreement.
 
 Zero-shot 3B is right on 93.1 % of the unanimous test sentences but only on 53.7 % of the sentences on which half of the annotators disagreed. A model cannot be more certain than the people who labelled the data.
 
-## The confusion matrix {h=1a90fc12}
+## The confusion matrix {h=f95eba35}
 
 For the best prompted model on PhraseBank, 20 neutral sentences were read as positive and 13 positive sentences as neutral, while positive and negative were rarely swapped. Errors sit on the neutral border.
 
@@ -163,13 +163,13 @@ Macro-F1 against milliseconds per sentence on a laptop.
 
 TF-IDF needs 2.50 ms per sentence, zero-shot 3B 48.5 ms and chain-of-thought about 389 ms. With labels, a small trained model is hard to beat; without labels, a prompt is a strong start; for millions of documents, cost decides.
 
-## LLM embeddings plus a small classifier {h=aaf742d3}
+## LLM embeddings with a small classifier {h=5ee07f3a}
 
 Averaging the last hidden states of Qwen2.5-1.5B and fitting a logistic regression on top gives 87.5 % on PhraseBank and 79.0 % on Twitter: the cheapest form of fine-tuning.
 
 # Retrieval-augmented generation on ECB speeches
 
-## Retrieval followed by generation {h=4abd3e12}
+## Retrieval followed by generation {h=81fa0b52}
 
 $$ p(y\mid q)\approx\sum_{z\in\mathrm{top}_k(q)}p_\eta(z\mid q)\,p_{\boldsymbol\theta}(y\mid q,z) $$
 
@@ -179,7 +179,7 @@ The corpus has 400 ECB speeches cut into 8,400 chunks of 200 words (Lewis et al.
 
 The Best Matching 25 (BM25) score weights shared words by their rarity and saturates repeated counts; dense retrieval compares embeddings by cosine similarity; the hybrid combines both rankings by reciprocal rank fusion. Mean reciprocal rank (MRR): BM25 0.515, dense 0.567, hybrid 0.622.
 
-## Finding the right speech from its title {h=7797376f}
+## Retrieval of the correct speech from its title {h=7ebb218d}
 
 @chart rag_recall
 Recall@k of the four retrievers.

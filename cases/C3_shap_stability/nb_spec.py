@@ -1,5 +1,5 @@
-TITLE = ("Case 3 - Do graph features make fraud explanations more stable?",
-         "Studiul de caz 3 - Fac variabilele din graf explicațiile fraudei mai stabile?")
+TITLE = ("Case 3 - Stability of explanations in graph-based anti-money-laundering models",
+         "Studiul de caz 3 - Stabilitatea explicațiilor în modelele pe graf pentru combaterea spălării banilor")
 
 CELLS = [
 ("md",
@@ -175,8 +175,8 @@ RES = dict(zip(SEEDS, Parallel(n_jobs=4)(delayed(run_seed)(s) for s in SEEDS))) 
 print(f"{len(SEEDS)} refits x 2 validation schemes x 3 models, {time.time() - t0:.0f} s (cached in {CACHE}/)")
 '''),
 
-("md", "## 3. Do the explanations of the original features move more with the graph? (Jensen-Shannon divergence)",
-       "## 3. Se deplasează mai mult explicațiile variabilelor originale cu graful? (divergența Jensen-Shannon)"),
+("md", "## 3. Shift of the explanations of the original features in the graph model (Jensen-Shannon divergence)",
+       "## 3. Deplasarea explicațiilor variabilelor originale în modelul cu graf (divergența Jensen-Shannon)"),
 ("code", r'''
 K = len(FEATS)                                                # shared original features
 def js_pair(a_R, a_T, b_R, b_T):
@@ -262,8 +262,8 @@ def fig_paired(lang):
 cu.save_both(fig_paired, "f2_paired")
 '''),
 
-("md", "## 4. One transaction at a time: does the leading reason stay the same?",
-       "## 4. O tranzacție pe rînd: rămîne același motivul principal?"),
+("md", "## 4. Stability of the leading reason for individual transactions",
+       "## 4. Stabilitatea motivului principal pentru tranzacțiile individuale"),
 ("code", r'''
 def fig_overlap(lang):
     fig, axs = plt.subplots(1, 2, figsize=(6.4, 2.7), sharey=True)
@@ -387,7 +387,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Replace GraphSAGE by a graph convolutional network (GCN, Lecture 9). Does the share of SHAP mass taken by the graph block change?
 2. Use the same paired design with a *wider* Gaussian control (e.g. 256 columns). Does the raw Wasserstein ranking of the graph and tabular models reverse, as in the paper's Section 5.3?
 3. Move the cut-off from step 34 to step 42 and refit. Do the explanations of the original features still move between the two validation schemes?""",

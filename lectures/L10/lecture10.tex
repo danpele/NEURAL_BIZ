@@ -158,7 +158,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Batteries earn the daily price spread, and the spread has grown}
+\begin{frame}{Battery revenue from the daily price spread and the growth of the spread}
 \small
 \intuition{a battery buys in the cheapest hours and sells in the dearest; its income scales with the daily max-min spread.}
 \begin{center}\includegraphics[width=\textwidth,height=0.342\textheight,keepaspectratio]{charts/en/spread_monthly.pdf}\end{center}\vspace{-3mm}
@@ -352,7 +352,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L10\_dp\_value}{Quantlets/L10/NN_L10_dp_value}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Perfect foresight: what a 2 MWh battery could have earned}
+\begin{frame}{Revenue of a 2 MWh battery under perfect foresight}
 \small
 \intuition{the DP revenue is an upper bound; it follows the spreads, not the price level.}
 \begin{center}\includegraphics[width=\textwidth,height=0.357\textheight,keepaspectratio]{charts/en/dp_revenue_year.pdf}\end{center}\vspace{-3mm}
@@ -425,7 +425,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{What tabular Q-learning learned}
+\begin{frame}{The policy learned by tabular Q-learning}
 \small
 \intuition{with 1 MWh stored, the agent charges in hours that were cheap yesterday and sells in the evening.}
 \begin{center}\includegraphics[width=\textwidth,height=0.417\textheight,keepaspectratio]{charts/en/q_policy.pdf}\end{center}\vspace{-3mm}
@@ -441,7 +441,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L10\_q\_policy}{Quantlets/L10/NN_L10_q_policy}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{From a table to a network: the deep Q-network}
+\begin{frame}{The deep Q-network: a neural approximation of the Q-table}
 \footnotesize
 \intuition{replace the table by a network $Q_{\btheta}(s,a)$ and regress it on the TD target.}
 \begin{columns}[T,onlytextwidth]
@@ -482,7 +482,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L10\_battery\_learning}{Quantlets/L10/NN_L10_battery_learning}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Test years: how much of the perfect-foresight revenue is captured}
+\begin{frame}{Share of the perfect-foresight revenue captured in the test years}
 \small
 \intuition{cumulative revenue from 1 Jan 2025 to 24 Oct 2026; the gap to the top line is the value of perfect information.}
 \begin{center}\includegraphics[width=\textwidth,height=0.391\textheight,keepaspectratio]{charts/en/battery_test_cum.pdf}\end{center}\vspace{-3mm}
@@ -674,7 +674,7 @@ PPO (mean of 5 seeds) & 15.1 & 17.0 & 0.83 & \ensuremath{-}23.2 & 82 & 147 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Politis \& Romano, 1994; own computation)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{When is the agent out of the market?}
+\begin{frame}{Periods in which the agent is out of the market}
 \small
 \intuition{exposure of the PPO agent (share of seeds and days invested) against the moving-average rule.}
 \begin{center}\includegraphics[width=\textwidth,height=0.346\textheight,keepaspectratio]{charts/en/trading_exposure.pdf}\end{center}\vspace{-3mm}
@@ -691,7 +691,7 @@ PPO (mean of 5 seeds) & 15.1 & 17.0 & 0.83 & \ensuremath{-}23.2 & 82 & 147 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L10\_trading\_exposure}{Quantlets/L10/NN_L10_trading_exposure}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Why RL trading backtests mislead}
+\begin{frame}{Limitations of backtests for RL trading agents}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Low signal-to-noise}: daily equity returns are close to unpredictable
@@ -810,7 +810,7 @@ Deep hedge (mean of 5 seeds) & 0.27 & 0.69 & 1.15 & 1.32 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{notebook \S6}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{What the network learned: a flatter, cost-aware hedge ratio}
+\begin{frame}{The learned hedge ratio: flatter and adjusted for costs}
 \small
 \intuition{hedge ratio as a function of moneyness, 10 days before maturity, with the VIX at 20.}
 \begin{center}\includegraphics[width=\textwidth,height=0.500\textheight,keepaspectratio]{charts/en/hedge_delta.pdf}\end{center}\vspace{-3mm}
@@ -825,7 +825,7 @@ Deep hedge (mean of 5 seeds) & 0.27 & 0.69 & 1.15 & 1.32 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L10\_hedge\_delta}{Quantlets/L10/NN_L10_hedge_delta}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Transaction costs: where the learned hedge helps}
+\begin{frame}{Transaction costs and the advantage of the learned hedge}
 \small
 \intuition{ES$_{95}$ of the hedging loss for cost levels from 0 to 50 bp; one network trained per cost level.}
 \begin{center}\includegraphics[width=\textwidth,height=0.388\textheight,keepaspectratio]{charts/en/hedge_costs.pdf}\end{center}\vspace{-3mm}
@@ -1027,7 +1027,7 @@ Deep hedge (mean of 5 seeds) & 0.27 & 0.69 & 1.15 & 1.32 \\
 
 \section*{Appendix}
 
-\begin{frame}{Appendix A: why Q-learning converges}
+\begin{frame}{Appendix A: convergence of Q-learning}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item Bellman optimality operator $(\mathcal{T}Q)(s,a)=R(s,a)+\gamma\E_{s'}\max_{a'}Q(s',a')$ is a $\gamma$-contraction in the sup norm: $\|\mathcal{T}Q_1-\mathcal{T}Q_2\|_\infty\le\gamma\|Q_1-Q_2\|_\infty$.

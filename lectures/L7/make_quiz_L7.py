@@ -43,11 +43,11 @@ q(1, ("Attention formula", "Which expression is scaled dot-product attention?",
    ["$\\operatorname{softmax}(QK^\\top)V/d_k$", "$\\operatorname{softmax}(QK^\\top/\\sqrt{d_k})V$", "$\\sigma(QV^\\top)K$", "$QK^\\top V/\\sqrt{n}$"],
    "Scorurile $QK^\\top$ se împart la $\\sqrt{d_k}$, devin ponderi printr-un softmax pe rînduri și se folosesc pentru media valorilor $V$.",
    "Scalarea cu $\\sqrt{d_k}$ se aplică scorurilor înainte de softmax, iar ponderile înmulțesc valorile, nu cheile."))
-q(3, ("Why scale", "With unit-variance entries, what is the variance of the dot product $\\mathbf q^\\top\\mathbf k$ of two $d_k$-dimensional vectors?",
+q(3, ("Scaling of the attention scores", "With unit-variance entries, what is the variance of the dot product $\\mathbf q^\\top\\mathbf k$ of two $d_k$-dimensional vectors?",
       ["1", "$\\sqrt{d_k}$", "$1/d_k$", "$d_k$"],
       "It is the sum of $d_k$ products with variance 1, so the variance is $d_k$; dividing by $\\sqrt{d_k}$ brings it back to 1.",
       "Each product $q_lk_l$ has variance 1 and there are $d_k$ of them; without scaling the softmax saturates for large $d_k$."),
-  ("De ce scalăm", "Cu elemente de varianță unu, care este varianța produsului scalar $\\mathbf q^\\top\\mathbf k$ a doi vectori cu $d_k$ dimensiuni?",
+  ("Scalarea scorurilor de atenție", "Cu elemente de varianță unu, care este varianța produsului scalar $\\mathbf q^\\top\\mathbf k$ a doi vectori cu $d_k$ dimensiuni?",
    ["1", "$\\sqrt{d_k}$", "$1/d_k$", "$d_k$"],
    "Este suma a $d_k$ produse cu varianța 1, deci varianța este $d_k$; împărțirea la $\\sqrt{d_k}$ o readuce la 1.",
    "Fiecare produs $q_lk_l$ are varianța 1 și sînt $d_k$ astfel de produse; fără scalare, softmax-ul se saturează pentru $d_k$ mare."))
@@ -115,11 +115,11 @@ q(3, ("Transformer block", "Which sequence describes a pre-norm transformer bloc
    ["Atenție, apoi softmax pe vocabular", "Convoluție, pooling, strat dens", "Actualizare recurentă, apoi atenție", "$Z=X+\\mathrm{MHA}(\\mathrm{LN}(X))$, apoi $X'=Z+\\mathrm{FFN}(\\mathrm{LN}(Z))$"],
    "Fiecare substrat este normalizat, aplicat și adăugat înapoi printr-o conexiune reziduală; rețeaua directă acționează separat pe fiecare poziție.",
    "Un bloc transformer are două substraturi reziduale, atenția cu mai multe capete și rețeaua directă aplicată fiecărei poziții, fiecare cu normalizare pe strat."))
-q(0, ("Where the parameters are", "In a transformer block with model width $d$ and feed-forward width $4d$, where are most of the parameters?",
+q(0, ("Parameters of a transformer block", "In a transformer block with model width $d$ and feed-forward width $4d$, where are most of the parameters?",
       ["In the feed-forward network, about $8d^2$ of $12d^2$", "In the attention softmax", "In the layer normalisation", "In the positional encoding"],
       "Attention has about $4d^2$ parameters and the feed-forward network about $8d^2$; layer norms and sinusoidal positions add almost nothing.",
       "Softmax and sinusoidal positions have no parameters and layer norm only $2d$ per norm; the two feed-forward matrices dominate."),
-  ("Unde sînt parametrii", "Într-un bloc transformer cu lățimea $d$ și rețeaua directă de lățime $4d$, unde se află cei mai mulți parametri?",
+  ("Parametrii unui bloc transformer", "Într-un bloc transformer cu lățimea $d$ și rețeaua directă de lățime $4d$, unde se află cei mai mulți parametri?",
    ["În rețeaua directă, circa $8d^2$ din $12d^2$", "În softmax-ul atenției", "În normalizarea pe strat", "În codificarea poziției"],
    "Atenția are circa $4d^2$ parametri, iar rețeaua directă circa $8d^2$; normalizările și pozițiile sinusoidale aproape nu adaugă nimic.",
    "Softmax-ul și pozițiile sinusoidale nu au parametri, iar normalizarea pe strat doar $2d$; cele două matrice ale rețelei directe domină."))
@@ -275,11 +275,11 @@ q(3, ("Long documents", "What is a practical way to classify a 3,000-token centr
    ["Tăierea la primii 50 de tokeni", "Creșterea ratei de învățare", "Eliminarea codificării poziției", "Împărțirea în bucăți de cel mult 512 tokeni și agregarea scorurilor pe bucăți"],
    "Împărțirea ține fiecare bucată în fereastră; agregarea (medie, maxim sau atenție pe bucăți) dă un scor la nivel de document.",
    "Tăierea aruncă cea mai mare parte a textului; împărțirea în bucăți sau modelele ierarhice îl folosesc integral, în limita ferestrei."))
-q(0, ("From score to signal", "A desk aggregates tweet sentiment by firm and day. Which rule prevents look-ahead bias?",
+q(0, ("Sentiment score as a signal", "A desk aggregates tweet sentiment by firm and day. Which rule prevents look-ahead bias?",
       ["Use only texts time-stamped before the decision time", "Use the closing price of the same day as a feature", "Average sentiment over the whole sample", "Fine-tune on the test period"],
       "A signal used at time $t$ may contain only information available at $t$; texts published later would leak the future.",
       "Any input known only after the decision, including later tweets or same-day closing prices, inflates backtests."),
-  ("De la scor la semnal", "O mesă de tranzacționare agregă sentimentul tweet-urilor pe firmă și zi. Ce regulă previne folosirea informației din viitor?",
+  ("Scorul de sentiment ca semnal", "O mesă de tranzacționare agregă sentimentul tweet-urilor pe firmă și zi. Ce regulă previne folosirea informației din viitor?",
    ["Folosirea numai a textelor cu marcaj de timp anterior momentului deciziei", "Folosirea prețului de închidere din aceeași zi ca variabilă", "Media sentimentului pe întregul eșantion", "Ajustarea pe perioada de test"],
    "Un semnal folosit la momentul $t$ poate conține doar informația disponibilă la $t$; textele publicate mai tîrziu ar scurge viitorul.",
    "Orice intrare cunoscută abia după decizie, inclusiv tweet-urile ulterioare sau prețul de închidere din aceeași zi, umflă testele retrospective."))

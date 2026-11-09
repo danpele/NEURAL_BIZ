@@ -66,11 +66,11 @@ q(0, ("Parameters of a layer", "How many parameters has a convolutional layer wi
    ["(9·32 + 1)·64 = 18.496", "9·64 = 576", "32·64 = 2.048", "Depinde de dimensiunea imaginii"],
    "(k²·C_in + 1)·C_out = (9·32 + 1)·64 = 18.496, oricare ar fi dimensiunea imaginii.",
    "Fiecare dintre cele 64 de filtre are cîte un nucleu 3 × 3 pentru fiecare dintre cele 32 de canale de intrare, plus un termen liber; numărul nu depinde de dimensiunea imaginii, pentru că ponderile sînt partajate între poziții."))
-q(3, ("Why fewer parameters", "On Fashion-MNIST our CNN has {fmnist.cnn.params|,} parameters and the MLP {fmnist.mlp.params|,}. What is the main reason the CNN needs fewer?",
+q(3, ("Parameter savings of a CNN", "On Fashion-MNIST our CNN has {fmnist.cnn.params|,} parameters and the MLP {fmnist.mlp.params|,}. What is the main reason the CNN needs fewer?",
       ["It uses ReLU instead of sigmoid", "It is trained for fewer epochs", "It has fewer layers than the MLP", "Weight sharing and local connectivity: one small kernel is reused at every position"],
       "A kernel of k²·C_in weights is applied at every position; the MLP needs a separate weight for each pixel and unit.",
       "The activation function and the number of epochs do not change the parameter count, and the CNN is in fact deeper; the saving comes from reusing the same kernel over the whole image."),
-  ("De ce mai puțini parametri", "Pe Fashion-MNIST, CNN-ul nostru are {fmnist.cnn.params|,} de parametri, iar MLP {fmnist.mlp.params|,}. Care este motivul principal pentru care CNN are nevoie de mai puțini?",
+  ("Economia de parametri a unei CNN", "Pe Fashion-MNIST, CNN-ul nostru are {fmnist.cnn.params|,} de parametri, iar MLP {fmnist.mlp.params|,}. Care este motivul principal pentru care CNN are nevoie de mai puțini?",
    ["Folosește ReLU în loc de sigmoidă", "Este antrenată mai puține epoci", "Are mai puține straturi decît MLP", "Partajarea ponderilor și conectivitatea locală: un nucleu mic este refolosit în fiecare poziție"],
    "Un nucleu de k²·C_in ponderi este aplicat în fiecare poziție; MLP are nevoie de o pondere separată pentru fiecare pixel și unitate.",
    "Funcția de activare și numărul de epoci nu schimbă numărul de parametri, iar CNN este de fapt mai adîncă; economia vine din refolosirea aceluiași nucleu pe întreaga imagine."))
@@ -286,7 +286,7 @@ q(0, ("Seeds and noise", "Why does the lecture report the CNN accuracy as a mean
       ["Different random initialisations and batch orders give different networks; the spread measures training noise", "Because the test set changes with the seed", "Because McNemar's test needs three runs", "To make the accuracy higher"],
       "The standard deviation over seeds ({fmnist.cnn.acc_sd|.2f} points for the CNN) shows how much of a difference between models could be training luck.",
       "The test set was fixed; McNemar works on one pair of models; averaging over seeds does not raise the accuracy, it measures its stability."),
-  ("Semințe și zgomot", "De ce raportează cursul acuratețea CNN ca medie pe trei semințe?",
+  ("Inițializări și zgomot", "De ce raportează cursul acuratețea CNN ca medie pe trei semințe?",
    ["Inițializările aleatoare și ordinea loturilor diferite dau rețele diferite; dispersia măsoară zgomotul antrenării", "Pentru că setul de test se schimbă cu sămînța", "Pentru că testul McNemar are nevoie de trei rulări", "Pentru a crește acuratețea"],
    "Abaterea standard pe semințe ({fmnist.cnn.acc_sd|.2f} puncte pentru CNN) arată cît din diferența dintre modele ar putea fi noroc la antrenare.",
    "Setul de test a fost fix; testul McNemar lucrează pe o pereche de modele; media pe semințe nu crește acuratețea, ci îi măsoară stabilitatea."))

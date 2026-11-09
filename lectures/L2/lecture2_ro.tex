@@ -330,7 +330,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Adam = moment + RMSProp + o corecție a deplasării}
+\begin{frame}{Adam: moment, RMSProp și corecția deplasării}
 \small
 \intuition{păstrăm medii mobile ale gradientului și ale pătratului lui, le corectăm pentru pornirea de la zero și facem un pas egal cu raportul lor.}
 \[ m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\quad v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2,\quad \hat m_t=\frac{m_t}{1-\beta_1^t},\ \hat v_t=\frac{v_t}{1-\beta_2^t},\quad \theta_{t+1}=\theta_t-\eta\,\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon} \]
@@ -351,7 +351,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kingma \& Ba, 2015)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Pe datele California, toți optimizatorii ajustați ajung aproape; cei adaptivi ajung mai sigur}
+\begin{frame}{Pe datele California, optimizatorii ajustați ating erori apropiate, iar metodele adaptive converg mai sigur}
 \small
 \intuition{cea mai bună dintre trei rate de învățare (pe validare), media a 5 inițializări noi.}
 \begin{center}\includegraphics[width=\textwidth,height=0.304\textheight,keepaspectratio]{charts/ro/optimizers.pdf}\end{center}\vspace{-3mm}
@@ -480,7 +480,7 @@ AdamW & Adam $+$ micșorare $(1-\eta\lambda)\theta$ & 2 vectori & ori de cîte o
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Koenker \& Bassett, 1978)}\hfill\tryit{notebook \S8}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{În pandemia din 2020 și după, VaR-ul MLP cuantilic este depășit aproximativ cît ar trebui}
+\begin{frame}{Depășirile VaR-ului MLP cuantilic în pandemia din 2020 și după aceasta sînt apropiate de rata nominală}
 \small
 \intuition{doar perioada de test; punctele roșii sînt zilele în care S\&P 500 a pierdut mai mult decît VaR-ul de 99\,\% al MLP.}
 \begin{center}\includegraphics[width=\textwidth,height=0.370\textheight,keepaspectratio]{charts/ro/var_backtest.pdf}\end{center}\vspace{-3mm}

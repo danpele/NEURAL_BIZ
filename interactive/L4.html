@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L4.js?v=20261109m">
+<link rel="preload" as="script" href="L4.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261109m", "L4_text_en.js?v=20261109m", "common.js?v=20261109m"], "L4.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L4_data.js?v=20261109n", "L4_text_en.js?v=20261109n", "common.js?v=20261109n"], "L4.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -53,7 +53,7 @@
 </ul></nav>
 <main class="imain">
 <p class="lead">The slide of the lecture is on the left, the same figure on the right, recomputed in your browser when you move a control. The ▶ button moves the main parameter step by step. Under each figure: a readout, a question for the room and the Quantlet with the code of the chart. The first block runs a convolution live on a real satellite image; the feature maps come from the CNN trained in the lecture; the curves are its saved training runs.</p>
-<p class="toc"><a href="#s-conv">The convolutional layer</a> · <a href="#s-fm">Product photos: what a CNN learns</a> · <a href="#s-arch">Deeper networks and transfer learning</a></p>
+<p class="toc"><a href="#s-conv">The convolutional layer</a> · <a href="#s-fm">Product photos: features learned by a CNN</a> · <a href="#s-arch">Deeper networks and transfer learning</a></p>
 <h2 class="sec" id="s-conv">The convolutional layer</h2>
 <section class="blk" id="convolution">
   <h3>Hand-made filters already find roads and field edges</h3>
@@ -74,11 +74,11 @@
   </div>
   <div class="ask"><span class="ask-tag">Question for the room</span> How many 3 × 3 convolutions must be stacked before one neuron "sees" a whole 64 × 64 EuroSAT tile (640 m × 640 m)?</div>
   <details><summary>Answer</summary><p>Without pooling the receptive field grows by 2 pixels per layer: 13 pixels after 6 layers, 25 after 12, so about 32 layers would be needed. With 2 × 2 pooling after every two convolutions it grows geometrically: 68 pixels after 8 convolutions, more than the whole tile. Larger kernels (5 × 5, 7 × 7) grow it faster but cost 25 or 49 weights per channel pair instead of 9; stacking small kernels with pooling is the cheaper way to see far.</p></details>
-</section><h2 class="sec" id="s-fm">Product photos: what a CNN learns</h2>
+</section><h2 class="sec" id="s-fm">Product photos: features learned by a CNN</h2>
 <section class="blk" id="feature-maps">
-  <h3>Feature maps: from edges to a coarse map of parts</h3>
+  <h3>Feature maps at increasing depth</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L4_fmnist_featuremaps_en.jpg" alt="Slide 23: Feature maps: from edges to a coarse map of parts" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=23" target="_blank" rel="noopener"><img src="slides/L4_fmnist_featuremaps_en.jpg" alt="Slide 23: Feature maps at increasing depth" loading="lazy"></a>
       <figcaption>Slide 23</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fm-i">Test image</label><select id="fm-i"><option value="0">T-shirt/top</option><option value="1">Trouser</option><option value="2">Pullover</option><option value="3">Dress</option><option value="4">Coat</option><option value="5">Sandal</option><option value="6">Shirt</option><option value="7">Sneaker</option><option value="8">Bag</option><option value="9" selected>Ankle boot</option></select></div><div class="ctl ctl-tg" id="fm-b"><span class="lbl">Block</span><div class="tgs"><label class="tg"><input type="radio" name="fm-b" value="b1" checked> block 1 (32 channels, 14 × 14)</label><label class="tg"><input type="radio" name="fm-b" value="b3"> block 3 (128 channels, 7 × 7)</label></div></div><div class="ctl"><label for="fm-c">Channel (1 = most active): <b id="fm-c-v"></b></label><input type="range" id="fm-c" min="0" max="31" step="1" value="0"></div><button class="btn play" id="fm-play" type="button"></button></div><div class="charts "><div class="chart" id="fm-img"></div><div class="chart" id="fm-map"></div></div><ul class="out" id="fm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_featuremaps" target="_blank" rel="noopener">NN_L4_fmnist_featuremaps</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_fmnist_featuremaps/NN_L4_fmnist_featuremaps.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>The CNN gives "T-shirt/top" 69.7% for this shirt: the most frequent error of the network, 102 of the 1,000 test shirts go to T-shirt/top and the recall of the class is 75.1%. Block 1 channels (14 × 14) still look like the image: edges, collars, the background. Block 3 channels (7 × 7) are coarse and respond to parts of the object; their average over the map is what the classifier reads. For the other nine test images the CNN is almost certain (99.8% or more).</p></details>
 </section>
 <section class="blk" id="confusion">
-  <h3>The errors are the products that people also confuse</h3>
+  <h3>Confusion matrix: errors between products of similar shape</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=21" target="_blank" rel="noopener"><img src="slides/L4_fmnist_confusion_en.jpg" alt="Slide 21: The errors are the products that people also confuse" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=21" target="_blank" rel="noopener"><img src="slides/L4_fmnist_confusion_en.jpg" alt="Slide 21: Confusion matrix: errors between products of similar shape" loading="lazy"></a>
       <figcaption>Slide 21</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="cm-m">Model</label><select id="cm-m"><option value="softmax">Softmax regression</option><option value="mlp">MLP</option><option value="cnn" selected>CNN</option></select></div><div class="ctl"><label for="cm-c">True class highlighted</label><select id="cm-c"><option value="0">T-shirt/top</option><option value="1">Trouser</option><option value="2">Pullover</option><option value="3">Dress</option><option value="4">Coat</option><option value="5">Sandal</option><option value="6" selected>Shirt</option><option value="7">Sneaker</option><option value="8">Bag</option><option value="9">Ankle boot</option></select></div><div class="ctl ctl-tg" id="cm-n"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="cm-n" value="pct" checked> Row percentages</label></div></div></div><div class="charts one"><div class="chart" id="cm-chart"></div></div><ul class="out" id="cm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_confusion" target="_blank" rel="noopener">NN_L4_fmnist_confusion</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_fmnist_confusion/NN_L4_fmnist_confusion.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>Shirt is the hardest class for all three models: recall 56.9% for the softmax regression, 68.2% for the MLP (multilayer perceptron) and 75.1% for the CNN; the largest confusion is always shirt → T-shirt/top (138, 124 and 102 images). Accuracy rises from 84.6% (7,850 parameters) to 89.0% (235,146) and 92.9% (140,778): the CNN has fewer parameters than the MLP and makes 37% fewer errors, because it shares weights across positions. The remaining errors are between visually similar classes (shirt, T-shirt, pullover, coat).</p></details>
 </section><h2 class="sec" id="s-arch">Deeper networks and transfer learning</h2>
 <section class="blk" id="residual">
-  <h3>Augmentation narrows the gap; residuals make depth trainable</h3>
+  <h3>Effects of data augmentation and residual connections</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L4_cifar_curves_en.jpg" alt="Slide 27: Augmentation narrows the gap; residuals make depth trainable" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L4/lecture4.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L4_cifar_curves_en.jpg" alt="Slide 27: Effects of data augmentation and residual connections" loading="lazy"></a>
       <figcaption>Slide 27</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="cf-m"><span class="lbl">Networks</span><div class="tgs"><label class="tg"><input type="checkbox" name="cf-m" value="cnn"> Small CNN, no augmentation</label><label class="tg"><input type="checkbox" name="cf-m" value="cnn_aug"> Small CNN, augmentation</label><label class="tg"><input type="checkbox" name="cf-m" value="plain32" checked> Plain network, 32 layers</label><label class="tg"><input type="checkbox" name="cf-m" value="res32" checked> ResNet, 32 layers</label></div></div><div class="ctl ctl-tg" id="cf-y"><span class="lbl">Measure</span><div class="tgs"><label class="tg"><input type="radio" name="cf-y" value="train_loss" checked> Training loss</label><label class="tg"><input type="radio" name="cf-y" value="train_acc"> Training accuracy</label><label class="tg"><input type="radio" name="cf-y" value="valid_acc"> Validation accuracy</label></div></div></div><div class="charts one"><div class="chart" id="cf-chart"></div></div><ul class="out" id="cf-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_cifar_curves" target="_blank" rel="noopener">NN_L4_cifar_curves</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L4/NN_L4_cifar_curves/NN_L4_cifar_curves.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

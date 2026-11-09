@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L8.js?v=20261108s">
+<link rel="preload" as="script" href="L8.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L8_data.js?v=20261108s", "L8_text_en.js?v=20261108s", "common.js?v=20261109m"], "L8.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L8_data.js?v=20261109n", "L8_text_en.js?v=20261109n", "common.js?v=20261109n"], "L8.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-ae">Autoencoders: anomaly detection for card fraud</a> · <a href="#s-vae">Variational autoencoders</a> · <a href="#s-gan">Generative adversarial networks</a> · <a href="#s-diff">Diffusion models</a></p>
 <h2 class="sec" id="s-ae">Autoencoders: anomaly detection for card fraud</h2>
 <section class="blk" id="fraud-alerts">
-  <h3>Frauds are hard to rebuild: their reconstruction error is far larger</h3>
+  <h3>Reconstruction error of fraudulent and legitimate payments</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=11" target="_blank" rel="noopener"><img src="slides/L8_ae_error_dist_en.jpg" alt="Slide 11: Frauds are hard to rebuild: their reconstruction error is far larger" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=11" target="_blank" rel="noopener"><img src="slides/L8_ae_error_dist_en.jpg" alt="Slide 11: Reconstruction error of fraudulent and legitimate payments" loading="lazy"></a>
       <figcaption>Slide 11</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fa-s">Anomaly score</label><select id="fa-s"><option value="ae" selected>Autoencoder (no labels)</option><option value="pca">Principal component analysis, PCA (no labels)</option><option value="logit">Logistic regression (with labels)</option></select></div><div class="ctl"><label for="fa-b">Alert budget: share of transactions checked: <b id="fa-b-v"></b></label><input type="range" id="fa-b" min="0" max="8" step="1" value="2"></div><button class="btn play" id="fa-play" type="button"></button></div><div class="charts "><div class="chart" id="fa-hist"></div><div class="chart" id="fa-pr"></div></div><ul class="out" id="fa-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_ae_error_dist" target="_blank" rel="noopener">NN_L8_ae_error_dist</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_ae_error_dist/NN_L8_ae_error_dist.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -66,9 +66,9 @@
   <details><summary>Answer</summary><p>At 0.1% the autoencoder finds 8 frauds (recall 10.7%), principal component analysis (PCA) finds none and the logistic regression, which has seen labelled frauds, finds 48 (64.0%). At 1% (572 alerts) the three find 56, 50 and 65 frauds: with a wider budget the gap between the scores narrows, but precision falls (9.7% for the autoencoder), because legitimate transactions outnumber frauds by several hundred to one. The autoencoder needs no labels, so it is a detector of the unknown that complements, not replaces, the supervised model.</p></details>
 </section><h2 class="sec" id="s-vae">Variational autoencoders</h2>
 <section class="blk" id="vae-latent">
-  <h3>A two-dimensional latent space already sorts the products</h3>
+  <h3>A two-dimensional latent space separates the product types</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L8_vae_latent_en.jpg" alt="Slide 18: A two-dimensional latent space already sorts the products" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L8_vae_latent_en.jpg" alt="Slide 18: A two-dimensional latent space separates the product types" loading="lazy"></a>
       <figcaption>Slide 18</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="vl-a">Latent coordinate z₁: <b id="vl-a-v"></b></label><input type="range" id="vl-a" min="-2.1" max="2.4" step="0.3" value="0"></div><div class="ctl"><label for="vl-b">Latent coordinate z₂: <b id="vl-b-v"></b></label><input type="range" id="vl-b" min="-3.0" max="2.7" step="0.3" value="0"></div><button class="btn play" id="vl-play" type="button"></button><div class="ctl ctl-tg" id="vl-c"><span class="lbl">Classes shown on the map</span><div class="tgs"><label class="tg"><input type="checkbox" name="vl-c" value="0" checked> T-shirt/top</label><label class="tg"><input type="checkbox" name="vl-c" value="1" checked> Trouser</label><label class="tg"><input type="checkbox" name="vl-c" value="2" checked> Pullover</label><label class="tg"><input type="checkbox" name="vl-c" value="3" checked> Dress</label><label class="tg"><input type="checkbox" name="vl-c" value="4" checked> Coat</label><label class="tg"><input type="checkbox" name="vl-c" value="5" checked> Sandal</label><label class="tg"><input type="checkbox" name="vl-c" value="6" checked> Shirt</label><label class="tg"><input type="checkbox" name="vl-c" value="7" checked> Sneaker</label><label class="tg"><input type="checkbox" name="vl-c" value="8" checked> Bag</label><label class="tg"><input type="checkbox" name="vl-c" value="9" checked> Ankle boot</label></div></div></div><div class="charts "><div class="chart" id="vl-map"></div><div class="chart" id="vl-img"></div></div><ul class="out" id="vl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_vae_latent" target="_blank" rel="noopener">NN_L8_vae_latent</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_vae_latent/NN_L8_vae_latent.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>Footwear occupies the right of the map: around (1.5, 1.5) 94% of the 50 nearest test images are sneakers, around (1.5, −1.5) 98% are ankle boots; around (0, 2.1) the images are trousers and around (0.9, −2.1) bags. Move z₂ from 1.5 to −1.5 at z₁ = 1.5: the drawing turns gradually from a sneaker into a boot. The Kullback–Leibler (KL) term of the evidence lower bound (ELBO) keeps the codes close to a standard normal, so nearby points decode to similar images and every point decodes to something plausible. Near (0, 0) shirts and T-shirts overlap, which is why the drawing there is blurry.</p></details>
 </section><h2 class="sec" id="s-gan">Generative adversarial networks</h2>
 <section class="blk" id="gan-tails">
-  <h3>The GAN learns fat tails that the Gaussian misses</h3>
+  <h3>The GAN reproduces the fat tails missed by the Gaussian model</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L8_gan_density_en.jpg" alt="Slide 26: The GAN learns fat tails that the Gaussian misses" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L8_gan_density_en.jpg" alt="Slide 26: The GAN reproduces the fat tails missed by the Gaussian model" loading="lazy"></a>
       <figcaption>Slide 26</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="gt-q">Tail probability of the VaR (%): <b id="gt-q-v"></b></label><input type="range" id="gt-q" min="0.5" max="5" step="0.5" value="1"></div><div class="ctl"><label for="gt-v">View</label><select id="gt-v"><option value="all" selected>Whole distribution</option><option value="tail">Left tail (large losses)</option></select></div><div class="ctl ctl-tg" id="gt-s"><span class="lbl">Distributions</span><div class="tgs"><label class="tg"><input type="checkbox" name="gt-s" value="tr" checked> Real 2005–2019</label><label class="tg"><input type="checkbox" name="gt-s" value="g" checked> GAN</label><label class="tg"><input type="checkbox" name="gt-s" value="n" checked> Gaussian</label></div></div><button class="btn play" id="gt-play" type="button"></button></div><div class="charts "><div class="chart" id="gt-hist"></div><div class="chart" id="gt-bt"></div></div><ul class="out" id="gt-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_gan_density" target="_blank" rel="noopener">NN_L8_gan_density</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_gan_density/NN_L8_gan_density.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -106,9 +106,9 @@
   <details><summary>Answer</summary><p>From t = 117, where ᾱ_t falls below 0.5 (√ᾱ_t = √(1 − ᾱ_t) ≈ 0.71). At t = 20 the curve is almost intact (ᾱ = 0.977), at t = 60 ᾱ = 0.827, and at the last step, t = 199, ᾱ = 0.132: with the linear schedule of the lecture (β from 0.0001 to 0.02 over 200 steps) about 36% of the signal survives in amplitude. The denoising network learns to undo these steps, predicting the noise ε that was added; generation starts from pure noise and runs them backwards.</p></details>
 </section>
 <section class="blk" id="yc-scenarios">
-  <h3>Diffusion reproduces the two regimes of euro rates; a Gaussian cannot</h3>
+  <h3>The two regimes of euro rates in diffusion and Gaussian samples</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L8_yc_density_en.jpg" alt="Slide 34: Diffusion reproduces the two regimes of euro rates; a Gaussian cannot" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L8/lecture8.pdf#page=34" target="_blank" rel="noopener"><img src="slides/L8_yc_density_en.jpg" alt="Slide 34: The two regimes of euro rates in diffusion and Gaussian samples" loading="lazy"></a>
       <figcaption>Slide 34</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="yc-v">Variable</label><select id="yc-v"><option value="sl" selected>Slope 10 years − 3 months (percentage points)</option><option value="y10">10-year yield (%)</option></select></div><div class="ctl"><label for="yc-x">Threshold (%, or percentage points): <b id="yc-x-v"></b></label><input type="range" id="yc-x" min="-1.5" max="5" step="0.1" value="0"></div><div class="ctl ctl-tg" id="yc-m"><span class="lbl">Series</span><div class="tgs"><label class="tg"><input type="checkbox" name="yc-m" value="real" checked> Real curves</label><label class="tg"><input type="checkbox" name="yc-m" value="ddpm" checked> Diffusion (DDPM)</label><label class="tg"><input type="checkbox" name="yc-m" value="gauss" checked> Multivariate Gaussian</label><label class="tg"><input type="checkbox" name="yc-m" value="vae"> VAE</label></div></div></div><div class="charts "><div class="chart" id="yc-hist"></div><div class="chart" id="yc-sc"></div></div><ul class="out" id="yc-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_yc_density" target="_blank" rel="noopener">NN_L8_yc_density</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L8/NN_L8_yc_density/NN_L8_yc_density.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

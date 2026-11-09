@@ -566,7 +566,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Add a sixth panel with the VIX (CBOE Volatility Index, in `markets_daily.csv`) to the chart and recompute the CLIP probe. Does the test AUC change?
 2. Change the horizon from h = 1 to h = 5 days (eq. 15). Are weekly falls easier to detect from the chart than next-day falls?
 3. Rewrite the zero-shot prompts of CLIP and of Qwen2-VL (Section 3 and 5). How much does the AUC move? The paper notes that scores can shift with the prompt wording (p. 199).""",

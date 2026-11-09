@@ -1,5 +1,5 @@
-TITLE = ("Case 5 - LLM-VaR and LLM-ES: can a language model measure market risk?",
-         "Studiul de caz 5 - LLM-VaR și LLM-ES: poate un model de limbaj să măsoare riscul de piață?")
+TITLE = ("Case 5 - LLM-VaR and LLM-ES: a language model as a market-risk model",
+         "Studiul de caz 5 - LLM-VaR și LLM-ES: un model de limbaj ca model al riscului de piață")
 
 CELLS = [
 ("md",
@@ -378,11 +378,11 @@ cu.save_both(fig_pred, "f3_predictive")
 '''),
 
 ("md",
-"""## 6. From backtest to capital: the Basel traffic light
+"""## 6. Capital implications of the backtest: the Basel traffic light
 
 Market-risk capital under the internal-models approach (Basel Committee on Banking Supervision, 1996) is $(3+k)\\cdot\\overline{\\mathrm{VaR}}_{60}\\cdot\\sqrt{10}$,
 the 60-day mean of the 1 % one-day VaR scaled to ten days, with the plus factor $k$ set by the violations of the last 250 days (green 0-4: $k=0$; yellow 5-9: $k=0.40-0.85$; red 10 or more: $k=1$).""",
-"""## 6. De la testarea retrospectivă la capital: semaforul Basel
+"""## 6. Implicațiile testării retrospective asupra capitalului: semaforul Basel
 
 Capitalul pentru riscul de piață în abordarea bazată pe modele interne (Comitetul de la Basel pentru Supraveghere Bancară, 1996) este $(3+k)\\cdot\\overline{\\mathrm{VaR}}_{60}\\cdot\\sqrt{10}$,
 media pe 60 de zile a VaR de 1 % pentru o zi, scalată la zece zile, cu factorul suplimentar $k$ stabilit de depășirile din ultimele 250 de zile (verde 0-4: $k=0$; galben 5-9: $k=0,40-0,85$; roșu 10 sau mai multe: $k=1$)."""),
@@ -481,7 +481,7 @@ for lang in ("en", "ro"):
 print(open("slide_summary_en.tex", encoding="utf-8").read())
 '''),
 ("md",
-"""## Your turn
+"""## Further exercises
 1. Change the window from 30 to 60 and 90 days (the paper also uses 45, 60, 90, 120 and 150). Does the violation rate move in the direction the paper reports for longer windows?
 2. Set the temperature to 1.0 and to 0.3. How do the width of the sampled distribution and the violation rate change, and why?
 3. Replace the S&P 500 by Bitcoin (`BTCUSD` in `markets_daily.csv`; the paper finds LLMs useful in volatile crypto markets). Compare the LLM-VaR with GARCH(1,1)-t again.""",

@@ -44,7 +44,7 @@ The data are real: hourly day-ahead prices for Romania (RO), Hungary (HU), Germa
 
 @practice an RL agent is worth deploying only if it beats the rule the desk already uses, after costs and over several seeds.
 
-## Batteries earn the daily price spread, and the spread has grown {h=717180c4}
+## Battery revenue from the daily price spread and the growth of the spread {h=163055c4}
 
 A battery buys in the cheapest hours and sells in the dearest, so its income depends on the daily spread between the maximum and minimum price, not on the price level. In Romania the mean daily spread was 47.9 EUR/MWh in 2019, 164.3 in 2025 and 182.8 in 2026 so far; the peak month was July 2024, at 394.4 EUR/MWh. Solar generation now pushes midday prices down, and evening peaks remain.
 
@@ -113,7 +113,7 @@ At 12:00 on the same day $V_{12}(0)$ = 1,541 EUR and $V_{12}(2)$ = 1,760 EUR: ha
 @chart dp_value
 Value function $V_h(s)$ of the battery problem on 30 June 2026 for 0, 1 and 2 MWh stored.
 
-## Perfect foresight: what a 2 MWh battery could have earned {h=92387171}
+## Revenue of a 2 MWh battery under perfect foresight {h=bcc8e1bd}
 
 With perfect foresight the battery would have earned 28.4 thousand EUR in Romania in 2019, 150.2 in 2022, 111.2 in 2025 and 98.5 in January–October 2026 (302 days with 24 complete hours). In 2025 the same battery would have earned 109.9 thousand EUR in Hungary, 112.9 in Bulgaria and 84.3 in Germany–Luxembourg. These are ceilings: they follow the spreads, not the price level.
 
@@ -140,14 +140,14 @@ The operator plans before the day's prices are known, so the agent's state is $(
 
 @practice a state that leaks today's prices would give a perfect but useless backtest.
 
-## What tabular Q-learning learned {h=e40b28c0}
+## The policy learned by tabular Q-learning {h=480bb0fd}
 
 With one MWh stored, the agent mostly charges in the early-afternoon solar trough and discharges in the evening; yesterday's ranking shifts the timing. The table can be printed and audited hour by hour, which is an advantage of tabular methods.
 
 @chart q_policy
 Action of the tabular Q-learning agent with 1 MWh stored, by hour and by yesterday's price quartile of that hour (first seed).
 
-## From a table to a network: the deep Q-network {h=ebc9ffe5}
+## The deep Q-network: a neural approximation of the Q-table {h=14381cad}
 
 The DQN replaces the table by a network $Q_\theta(s,a)$ and regresses it on the TD target (Mnih et al., 2015). Double DQN lets the online network choose the next action and a slowly updated target network evaluate it, which removes the upward bias of a maximum over noisy estimates (van Hasselt, Guez & Silver, 2016):
 
@@ -162,7 +162,7 @@ Both agents improve quickly, but on the 2024 validation year they stay below yes
 @chart battery_learning
 Validation revenue per day (2024) after each training epoch; line = mean, band = range over five seeds.
 
-## Test years: how much of the perfect-foresight revenue is captured {h=fd0f5c47}
+## Share of the perfect-foresight revenue captured in the test years {h=5339494b}
 
 On the test days the perfect-foresight revenue is 202.1 thousand EUR. Yesterday's optimal plan earns 163.1, tabular Q-learning 115.2 and the double DQN 101.3 (means of five seeds).
 
@@ -249,7 +249,7 @@ PPO has the higher Sharpe ratio in all five seeds, but the stationary block boot
 
 @practice an interval that contains zero means no evidence that the agent adds value, whatever the backtest chart suggests.
 
-## When is the agent out of the market? {h=07ef1e52}
+## Periods in which the agent is out of the market {h=0d7de9f2}
 
 Reading the positions tells what the agent actually does. PPO was invested on 82 % of the test days. Between 20 February and 30 April 2020 it was invested 42 % of the time, against 14 % for the moving-average rule; in 2022 it was invested 63 % of the time, against 15 %. The agent cuts exposure in stress, but less than the trend rule.
 
@@ -258,7 +258,7 @@ Share of capital invested by the PPO agent (mean over seeds, 21-day mean) and by
 
 @practice read the policy, not only its profit: an agent that is simply always long is buy-and-hold with extra model risk.
 
-## Why RL trading backtests mislead {h=3f234657}
+## Limitations of backtests for RL trading agents {h=72aee42f}
 
 Daily equity returns are close to unpredictable, so the agent mostly learns the noise of its training windows. Markets are non-stationary: the training years contain 2008, the test years a pandemic crash, an inflation shock and a long rally. Five seeds already give a range of Sharpe ratios, and reporting the best is backtest overfitting. A price-taking simulator ignores market impact, and costs must be in the reward. RL helps more in problems with a real state and a known reward: order execution, market making, hedging and storage (Hambly, Xu & Yang, 2023).
 
@@ -307,14 +307,14 @@ The ES of the deep hedge ranges from 1.10 to 1.24 across seeds and is below the 
 
 @practice judge a hedge by the tail of the loss and by its turnover, not by its mean profit.
 
-## What the network learned: a flatter, cost-aware hedge ratio {h=b6af2f8f}
+## The learned hedge ratio: flatter and adjusted for costs {h=cc80e1fe}
 
 Ten days before maturity, with the VIX at 20, the learned hedge ratio is flatter than the delta around the strike: 0.46 at the money against 0.51 for Black-Scholes. The network has learned to trade less where trading is expensive and the payoff uncertain.
 
 @chart hedge_delta
 Hedge ratio of the deep hedge (mean and range of five seeds) and the Black-Scholes delta as a function of moneyness.
 
-## Transaction costs: where the learned hedge helps {h=d0f6f280}
+## Transaction costs and the advantage of the learned hedge {h=62c25e97}
 
 One network was trained for each cost level from 0 to 50 basis points. Without costs the ES95 is 1.75 % for the delta and 0.90 % for the deep hedge; at 50 basis points, 2.76 % and 2.34 %. The learned hedge also adapts to the real, fat-tailed paths, not only to costs.
 

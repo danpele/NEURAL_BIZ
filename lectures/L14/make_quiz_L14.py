@@ -36,11 +36,11 @@ q(1, ("Patches", "A 224 × 224 image is cut into 16 × 16 patches by a vision tr
    ["196", "197", "256", "50.176"],
    "14 × 14 = 196 de tokeni-petic plus un token de clasă = 197.",
    "Imaginea se împarte în 224/16 = 14 petice pe latură; tokenul de clasă se adaugă secvenței."))
-q(3, ("Why ViTs need pre-training", "Why does a vision transformer need much more training data than a CNN of similar size?",
+q(3, ("Pre-training of vision transformers", "Why does a vision transformer need much more training data than a CNN of similar size?",
       ["It has no attention", "It cannot process colour", "It uses a smaller image", "It has no built-in locality or translation invariance, so it must learn them from data"],
       "Convolutions build locality into the architecture; a ViT treats patches as a set with positions and learns spatial structure from examples.",
       "A ViT is built on attention and handles colour and full-size images; what it lacks is the inductive bias of convolutions."),
-  ("De ce are nevoie ViT de preantrenare", "De ce are nevoie un transformer pentru imagini de mult mai multe date de antrenare decît o CNN de dimensiune similară?",
+  ("Preantrenarea transformerelor pentru imagini", "De ce are nevoie un transformer pentru imagini de mult mai multe date de antrenare decît o CNN de dimensiune similară?",
    ["Nu are atenție", "Nu poate prelucra culoarea", "Folosește o imagine mai mică", "Nu are localitatea și invarianța la translație încorporate, deci trebuie să le învețe din date"],
    "Convoluțiile încorporează localitatea în arhitectură; un ViT tratează peticele ca o mulțime cu poziții și învață structura spațială din exemple.",
    "Un ViT se bazează pe atenție și prelucrează culoarea și imaginile întregi; îi lipsește prejudecata inductivă a convoluțiilor."))

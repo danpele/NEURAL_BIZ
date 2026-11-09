@@ -53,8 +53,8 @@
    "src": "Quantlets/L1/NN_L1_boundary_hmeq/boundary_hmeq.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L1/NN_L1_boundary_hmeq",
    "q": "NN_L1_boundary_hmeq",
-   "en": "An MLP bends the decision boundary, but two inputs carry little extra signal",
-   "ro": "Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus"
+   "en": "Nonlinear decision boundary of an MLP with two inputs",
+   "ro": "Frontiera de decizie neliniară a unui MLP cu două intrări"
   },
   {
    "src": "Quantlets/L1/NN_L1_width_auc/width_auc.png",
@@ -125,8 +125,8 @@
    "src": "Quantlets/L2/NN_L2_optimizers/optimizers.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_optimizers",
    "q": "NN_L2_optimizers",
-   "en": "On California housing, all tuned optimisers end close; adaptive ones get there more reliably",
-   "ro": "Pe datele California, toți optimizatorii ajustați ajung aproape; cei adaptivi ajung mai sigur"
+   "en": "On California housing, tuned optimisers reach similar errors and adaptive methods converge more reliably",
+   "ro": "Pe datele California, optimizatorii ajustați ating erori apropiate, iar metodele adaptive converg mai sigur"
   },
   {
    "src": "Quantlets/L2/NN_L2_optimizer_seeds/optimizer_seeds.png",
@@ -153,8 +153,8 @@
    "src": "Quantlets/L2/NN_L2_var_backtest/var_backtest.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_var_backtest",
    "q": "NN_L2_var_backtest",
-   "en": "Through the 2020 pandemic and after, the quantile MLP is breached about as often as it should be",
-   "ro": "În pandemia din 2020 și după, VaR-ul MLP cuantilic este depășit aproximativ cît ar trebui"
+   "en": "Breaches of the quantile-MLP VaR during and after the 2020 pandemic are close to the nominal rate",
+   "ro": "Depășirile VaR-ului MLP cuantilic în pandemia din 2020 și după aceasta sînt apropiate de rata nominală"
   }
  ],
  "l3": [
@@ -176,8 +176,8 @@
    "src": "Quantlets/L3/NN_L3_l1_l2_weights/l1_l2_weights.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_l1_l2_weights",
    "q": "NN_L3_l1_l2_weights",
-   "en": "L1 piles the first-layer weights at zero, L2 only shrinks them",
-   "ro": "L1 adună ponderile primului strat în zero, L2 doar le micșorează"
+   "en": "First-layer weights under L1 and L2 penalties",
+   "ro": "Ponderile primului strat cu penalizare L1 și cu penalizare L2"
   },
   {
    "src": "Quantlets/L3/NN_L3_wd_dropout/wd_dropout.png",
@@ -191,7 +191,7 @@
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_early_stopping",
    "q": "NN_L3_early_stopping",
    "en": "On card fraud, validation loss bottoms out early while training loss keeps falling",
-   "ro": "La fraude, pierderea de validare atinge minimul devreme, cea de antrenare tot scade"
+   "ro": "La fraudele cu carduri, pierderea pe validare atinge minimul devreme, în timp ce pierderea pe antrenare continuă să scadă"
   },
   {
    "src": "Quantlets/L3/NN_L3_batchnorm/batchnorm.png",
@@ -225,8 +225,8 @@
    "src": "Quantlets/L3/NN_L3_reg_ablation/reg_ablation.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_reg_ablation",
    "q": "NN_L3_reg_ablation",
-   "en": "On the test hours, early stopping is the regulariser that clearly helps",
-   "ro": "Pe orele de test, oprirea timpurie este regularizatorul care ajută clar"
+   "en": "On the test hours, early stopping is the regulariser with the clearest gain",
+   "ro": "Pe orele de test, oprirea timpurie este regularizatorul cu cel mai clar cîștig"
   },
   {
    "src": "Quantlets/L3/NN_L3_fraud_pr/fraud_pr.png",
@@ -239,8 +239,8 @@
    "src": "Quantlets/L3/NN_L3_fraud_cost/fraud_cost.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_fraud_cost",
    "q": "NN_L3_fraud_cost",
-   "en": "The right number of alerts saves most of the fraud losses",
-   "ro": "Numărul potrivit de alerte salvează cea mai mare parte din pierderi"
+   "en": "Number of alerts and the share of fraud losses avoided",
+   "ro": "Numărul de alerte și ponderea pierderilor din fraudă evitate"
   }
  ],
  "l4": [
@@ -276,15 +276,15 @@
    "src": "Quantlets/L4/NN_L4_fmnist_compare/fmnist_compare.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_compare",
    "q": "NN_L4_fmnist_compare",
-   "en": "Higher accuracy with fewer parameters",
-   "ro": "Acuratețe mai mare cu mai puțini parametri"
+   "en": "Accuracy and number of parameters of the three models",
+   "ro": "Acuratețea și numărul de parametri ai celor trei modele"
   },
   {
    "src": "Quantlets/L4/NN_L4_fmnist_confusion/fmnist_confusion.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_confusion",
    "q": "NN_L4_fmnist_confusion",
-   "en": "The errors are the products that people also confuse",
-   "ro": "Erorile sînt la produsele pe care le confundă și oamenii"
+   "en": "Confusion matrix: errors between products of similar shape",
+   "ro": "Matricea de confuzie: erori între produse cu forme asemănătoare"
   },
   {
    "src": "Quantlets/L4/NN_L4_fmnist_filters/fmnist_filters.png",
@@ -297,15 +297,15 @@
    "src": "Quantlets/L4/NN_L4_fmnist_featuremaps/fmnist_featuremaps.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_fmnist_featuremaps",
    "q": "NN_L4_fmnist_featuremaps",
-   "en": "Feature maps: from edges to a coarse map of parts",
-   "ro": "Hărțile de trăsături: de la muchii la o hartă grosieră a părților"
+   "en": "Feature maps at increasing depth",
+   "ro": "Hărțile de trăsături la adîncimi crescătoare"
   },
   {
    "src": "Quantlets/L4/NN_L4_cifar_curves/cifar_curves.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L4/NN_L4_cifar_curves",
    "q": "NN_L4_cifar_curves",
-   "en": "Augmentation narrows the gap; residuals make depth trainable",
-   "ro": "Augmentarea reduce decalajul; conexiunile reziduale fac adîncimea antrenabilă"
+   "en": "Effects of data augmentation and residual connections",
+   "ro": "Efectele augmentării datelor și ale conexiunilor reziduale"
   },
   {
    "src": "Quantlets/L4/NN_L4_eurosat_samples/eurosat_samples.png",
@@ -383,8 +383,8 @@
    "src": "Quantlets/L5/NN_L5_returns_r2/returns_r2.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_returns_r2",
    "q": "NN_L5_returns_r2",
-   "en": "Out of sample, return forecasts explain almost nothing",
-   "ro": "În afara eșantionului, prognozele randamentelor nu explică aproape nimic"
+   "en": "Return forecasts explain almost none of the out-of-sample variance",
+   "ro": "Prognozele randamentelor explică foarte puțin din varianța în afara eșantionului"
   },
   {
    "src": "Quantlets/L5/NN_L5_load_series/load_series.png",
@@ -420,8 +420,8 @@
    "src": "Quantlets/L6/NN_L6_zipf/zipf.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_zipf",
    "q": "NN_L6_zipf",
-   "en": "Few words are frequent, most are rare: Zipf's law",
-   "ro": "Puține cuvinte sînt frecvente, cele mai multe sînt rare: legea lui Zipf"
+   "en": "Word frequencies and Zipf's law",
+   "ro": "Frecvențele cuvintelor și legea lui Zipf"
   },
   {
    "src": "Quantlets/L6/NN_L6_top_words/top_words.png",
@@ -462,8 +462,8 @@
    "src": "Quantlets/L6/NN_L6_learning_curve/learning_curve.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_learning_curve",
    "q": "NN_L6_learning_curve",
-   "en": "With few labels, a word2vec start helps the network; TF-IDF stays competitive",
-   "ro": "Cu puține etichete, startul word2vec ajută rețeaua; TF-IDF rămîne competitiv"
+   "en": "Learning curves with few labels: word2vec initialisation and TF-IDF",
+   "ro": "Curbele de învățare cu puține etichete: inițializarea word2vec și TF-IDF"
   },
   {
    "src": "Quantlets/L6/NN_L6_topic_f1/topic_f1.png",
@@ -478,8 +478,8 @@
    "src": "Quantlets/L7/NN_L7_context_lengths/context_lengths.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_context_lengths",
    "q": "NN_L7_context_lengths",
-   "en": "Tweets are short; central-bank speeches are far beyond a 512-token window",
-   "ro": "Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni"
+   "en": "Length of tweets and central-bank speeches in tokens",
+   "ro": "Lungimea tweet-urilor și a discursurilor băncilor centrale, în tokeni"
   },
   {
    "src": "Quantlets/L7/NN_L7_attention_example/attention_example.png",
@@ -527,8 +527,8 @@
    "src": "Quantlets/L7/NN_L7_confusion/confusion.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_confusion",
    "q": "NN_L7_confusion",
-   "en": "Fine-tuning fixes what the zero-shot model gets wrong",
-   "ro": "Ajustarea fină corectează ce greșește modelul fără antrenare"
+   "en": "Zero-shot errors corrected by fine-tuning",
+   "ro": "Erorile modelului fără antrenare corectate prin ajustare fină"
   }
  ],
  "l8": [
@@ -536,15 +536,15 @@
    "src": "Quantlets/L8/NN_L8_ae_error_dist/ae_error_dist.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_ae_error_dist",
    "q": "NN_L8_ae_error_dist",
-   "en": "Frauds are hard to rebuild: their reconstruction error is far larger",
-   "ro": "Fraudele sînt greu de reconstruit: eroarea lor de reconstrucție este mult mai mare"
+   "en": "Reconstruction error of fraudulent and legitimate payments",
+   "ro": "Eroarea de reconstrucție a plăților frauduloase și a celor legitime"
   },
   {
    "src": "Quantlets/L8/NN_L8_ae_pr/ae_pr.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_ae_pr",
    "q": "NN_L8_ae_pr",
-   "en": "Without labels the autoencoder finds frauds; with labels a simple classifier finds many more",
-   "ro": "Fără etichete, autoencoderul găsește fraude; cu etichete, un clasificator simplu găsește mult mai multe"
+   "en": "Autoencoder without labels compared with a supervised classifier",
+   "ro": "Autoencoderul fără etichete comparat cu un clasificator supervizat"
   },
   {
    "src": "Quantlets/L8/NN_L8_ae_bottleneck/ae_bottleneck.png",
@@ -557,8 +557,8 @@
    "src": "Quantlets/L8/NN_L8_vae_latent/vae_latent.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_vae_latent",
    "q": "NN_L8_vae_latent",
-   "en": "A two-dimensional latent space already sorts the products",
-   "ro": "Un spațiu latent cu două dimensiuni sortează deja produsele"
+   "en": "A two-dimensional latent space separates the product types",
+   "ro": "Un spațiu latent cu două dimensiuni separă tipurile de produse"
   },
   {
    "src": "Quantlets/L8/NN_L8_vae_samples/vae_samples.png",
@@ -571,8 +571,8 @@
    "src": "Quantlets/L8/NN_L8_vae_elbo/vae_elbo.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_vae_elbo",
    "q": "NN_L8_vae_elbo",
-   "en": "Training trades reconstruction against the KL penalty",
-   "ro": "Antrenarea negociază între reconstrucție și penalizarea KL"
+   "en": "Trade-off between reconstruction and the KL penalty during training",
+   "ro": "Compromisul dintre reconstrucție și penalizarea KL în timpul antrenării"
   },
   {
    "src": "Quantlets/L8/NN_L8_gan_losses/gan_losses.png",
@@ -585,8 +585,8 @@
    "src": "Quantlets/L8/NN_L8_gan_density/gan_density.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_gan_density",
    "q": "NN_L8_gan_density",
-   "en": "The GAN learns fat tails that the Gaussian misses",
-   "ro": "GAN-ul învață cozile groase pe care distribuția normală nu le vede"
+   "en": "The GAN reproduces the fat tails missed by the Gaussian model",
+   "ro": "GAN-ul reproduce cozile groase pe care modelul gaussian nu le surprinde"
   },
   {
    "src": "Quantlets/L8/NN_L8_gan_acf/gan_acf.png",
@@ -606,15 +606,15 @@
    "src": "Quantlets/L8/NN_L8_yc_density/yc_density.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_yc_density",
    "q": "NN_L8_yc_density",
-   "en": "Diffusion reproduces the two regimes of euro rates; a Gaussian cannot",
-   "ro": "Difuzia reproduce cele două regimuri ale dobînzilor euro; distribuția normală nu poate"
+   "en": "The two regimes of euro rates in diffusion and Gaussian samples",
+   "ro": "Cele două regimuri ale dobînzilor euro în eșantioanele generate prin difuzie și de modelul gaussian"
   },
   {
    "src": "Quantlets/L8/NN_L8_yc_scatter/yc_scatter.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L8/NN_L8_yc_scatter",
    "q": "NN_L8_yc_scatter",
-   "en": "Level and slope move together in a curved way that diffusion keeps",
-   "ro": "Nivelul și panta se mișcă împreună, într-un mod curb, pe care difuzia îl păstrează"
+   "en": "Diffusion preserves the nonlinear co-movement of level and slope",
+   "ro": "Difuzia păstrează dependența neliniară dintre nivel și pantă"
   },
   {
    "src": "Quantlets/L8/NN_L8_yc_latent_time/yc_latent_time.png",
@@ -636,8 +636,8 @@
    "src": "Quantlets/L9/NN_L9_degree_dist/degree_dist.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_degree_dist",
    "q": "NN_L9_degree_dist",
-   "en": "Most transactions touch one or two others; a few are hubs",
-   "ro": "Cele mai multe tranzacții ating una sau două altele; puține sînt noduri centrale"
+   "en": "Degree distribution of the transaction graph",
+   "ro": "Distribuția gradelor în graful tranzacțiilor"
   },
   {
    "src": "Quantlets/L9/NN_L9_homophily/homophily.png",
@@ -657,22 +657,22 @@
    "src": "Quantlets/L9/NN_L9_oversmoothing/oversmoothing.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_oversmoothing",
    "q": "NN_L9_oversmoothing",
-   "en": "Too many layers make all nodes look alike: over-smoothing",
-   "ro": "Prea multe straturi fac toate nodurile să semene: suprasmoothing-ul (over-smoothing)"
+   "en": "Over-smoothing in deep graph networks",
+   "ro": "Netezirea excesivă (over-smoothing) în rețelele pe graf cu multe straturi"
   },
   {
    "src": "Quantlets/L9/NN_L9_model_comparison/model_comparison.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_model_comparison",
    "q": "NN_L9_model_comparison",
-   "en": "On Elliptic the forest leads; graph layers mainly add ranking power to a network",
-   "ro": "Pe Elliptic pădurea conduce; straturile pe graf adaugă mai ales putere de ordonare unei rețele"
+   "en": "Results on Elliptic: the random forest and the contribution of graph layers",
+   "ro": "Rezultatele pe Elliptic: pădurea aleatoare și contribuția straturilor pe graf"
   },
   {
    "src": "Quantlets/L9/NN_L9_pr_curves/pr_curves.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_pr_curves",
    "q": "NN_L9_pr_curves",
-   "en": "Precision-recall curves: the ranking behind the F1",
-   "ro": "Curbele precizie-recall: ordonarea din spatele lui F1"
+   "en": "Precision-recall curves of the models",
+   "ro": "Curbele precizie-recall ale modelelor"
   },
   {
    "src": "Quantlets/L9/NN_L9_f1_by_timestep/f1_by_timestep.png",
@@ -685,22 +685,22 @@
    "src": "Quantlets/L9/NN_L9_alert_budget/alert_budget.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_alert_budget",
    "q": "NN_L9_alert_budget",
-   "en": "What an investigation team gets from 1,000 alerts",
-   "ro": "Ce obține o echipă de investigații din 1 000 de alerte"
+   "en": "Illicit transactions found among the top 1,000 alerts",
+   "ro": "Tranzacțiile ilicite identificate între primele 1 000 de alerte"
   },
   {
    "src": "Quantlets/L9/NN_L9_gcn_embeddings/gcn_embeddings.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_gcn_embeddings",
    "q": "NN_L9_gcn_embeddings",
-   "en": "The GCN learns a space where illicit transactions gather",
-   "ro": "Rețeaua GCN învață un spațiu în care tranzacțiile ilicite se adună"
+   "en": "Illicit transactions cluster in the GCN embedding space",
+   "ro": "Tranzacțiile ilicite se grupează în spațiul de reprezentare al GCN"
   },
   {
    "src": "Quantlets/L9/NN_L9_importance_shift/importance_shift.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_importance_shift",
    "q": "NN_L9_importance_shift",
-   "en": "Adding graph features reshuffles the explanations",
-   "ro": "Adăugarea variabilelor de graf reordonează explicațiile"
+   "en": "Effect of graph features on the explanations",
+   "ro": "Efectul variabilelor de graf asupra explicațiilor"
   }
  ],
  "l10": [
@@ -708,8 +708,8 @@
    "src": "Quantlets/L10/NN_L10_spread_monthly/spread_monthly.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_spread_monthly",
    "q": "NN_L10_spread_monthly",
-   "en": "Batteries earn the daily price spread, and the spread has grown",
-   "ro": "Bateriile cîștigă diferența zilnică de preț, iar aceasta a crescut"
+   "en": "Battery revenue from the daily price spread and the growth of the spread",
+   "ro": "Venitul bateriilor din diferența zilnică de preț și creșterea acestei diferențe"
   },
   {
    "src": "Quantlets/L10/NN_L10_dp_day/dp_day.png",
@@ -729,15 +729,15 @@
    "src": "Quantlets/L10/NN_L10_dp_revenue_year/dp_revenue_year.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_dp_revenue_year",
    "q": "NN_L10_dp_revenue_year",
-   "en": "Perfect foresight: what a 2 MWh battery could have earned",
-   "ro": "Previziune perfectă: cît ar fi putut cîștiga o baterie de 2 MWh"
+   "en": "Revenue of a 2 MWh battery under perfect foresight",
+   "ro": "Venitul unei baterii de 2 MWh în condiții de previziune perfectă"
   },
   {
    "src": "Quantlets/L10/NN_L10_q_policy/q_policy.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_q_policy",
    "q": "NN_L10_q_policy",
-   "en": "What tabular Q-learning learned",
-   "ro": "Ce a învățat Q-learning tabelar"
+   "en": "The policy learned by tabular Q-learning",
+   "ro": "Politica învățată prin Q-learning tabelar"
   },
   {
    "src": "Quantlets/L10/NN_L10_battery_learning/battery_learning.png",
@@ -750,8 +750,8 @@
    "src": "Quantlets/L10/NN_L10_battery_test_cum/battery_test_cum.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_battery_test_cum",
    "q": "NN_L10_battery_test_cum",
-   "en": "Test years: how much of the perfect-foresight revenue is captured",
-   "ro": "Anii de test: cît din venitul cu previziune perfectă se obține"
+   "en": "Share of the perfect-foresight revenue captured in the test years",
+   "ro": "Ponderea venitului cu previziune perfectă obținută în anii de test"
   },
   {
    "src": "Quantlets/L10/NN_L10_ppo_clip/ppo_clip.png",
@@ -778,8 +778,8 @@
    "src": "Quantlets/L10/NN_L10_trading_exposure/trading_exposure.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_trading_exposure",
    "q": "NN_L10_trading_exposure",
-   "en": "When is the agent out of the market?",
-   "ro": "Cînd iese agentul din piață?"
+   "en": "Periods in which the agent is out of the market",
+   "ro": "Perioadele în care agentul este în afara pieței"
   },
   {
    "src": "Quantlets/L10/NN_L10_hedge_pnl/hedge_pnl.png",
@@ -792,15 +792,15 @@
    "src": "Quantlets/L10/NN_L10_hedge_delta/hedge_delta.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_hedge_delta",
    "q": "NN_L10_hedge_delta",
-   "en": "What the network learned: a flatter, cost-aware hedge ratio",
-   "ro": "Ce a învățat rețeaua: un raport de acoperire mai plat, atent la costuri"
+   "en": "The learned hedge ratio: flatter and adjusted for costs",
+   "ro": "Raportul de acoperire învățat: mai plat și ajustat pentru costuri"
   },
   {
    "src": "Quantlets/L10/NN_L10_hedge_costs/hedge_costs.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_hedge_costs",
    "q": "NN_L10_hedge_costs",
-   "en": "Transaction costs: where the learned hedge helps",
-   "ro": "Costurile de tranzacționare: unde ajută acoperirea învățată"
+   "en": "Transaction costs and the advantage of the learned hedge",
+   "ro": "Costurile de tranzacționare și avantajul acoperirii învățate"
   }
  ],
  "l11": [
@@ -843,8 +843,8 @@
    "src": "Quantlets/L11/NN_L11_lime_instability/lime_instability.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_lime_instability",
    "q": "NN_L11_lime_instability",
-   "en": "LIME depends on its own settings",
-   "ro": "LIME depinde de propriile setări"
+   "en": "Sensitivity of LIME to its settings",
+   "ro": "Sensibilitatea LIME la propriile setări"
   },
   {
    "src": "Quantlets/L11/NN_L11_pdp_ice/pdp_ice.png",
@@ -871,8 +871,8 @@
    "src": "Quantlets/L11/NN_L11_method_agreement/method_agreement.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_method_agreement",
    "q": "NN_L11_method_agreement",
-   "en": "Agreement between methods: high but not perfect",
-   "ro": "Concordanța metodelor: ridicată, dar nu perfectă"
+   "en": "Agreement between explanation methods",
+   "ro": "Concordanța metodelor de explicare"
   },
   {
    "src": "Quantlets/L11/NN_L11_deletion_curve/deletion_curve.png",
@@ -943,8 +943,8 @@
    "src": "Quantlets/L12/NN_L12_prompt_sensitivity/prompt_sensitivity.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_prompt_sensitivity",
    "q": "NN_L12_prompt_sensitivity",
-   "en": "Rewording the instruction moves the score: prompt sensitivity",
-   "ro": "Reformularea instrucțiunii schimbă scorul: sensibilitatea la prompt"
+   "en": "Prompt sensitivity: effect of rewording the instruction",
+   "ro": "Sensibilitatea la prompt: efectul reformulării instrucțiunii"
   },
   {
    "src": "Quantlets/L12/NN_L12_calibration/calibration.png",
@@ -971,8 +971,8 @@
    "src": "Quantlets/L12/NN_L12_rag_recall/rag_recall.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_rag_recall",
    "q": "NN_L12_rag_recall",
-   "en": "Finding the right speech from its title",
-   "ro": "Găsirea discursului corect după titlu"
+   "en": "Retrieval of the correct speech from its title",
+   "ro": "Regăsirea discursului corect după titlu"
   },
   {
    "src": "Quantlets/L12/NN_L12_rag_qa/rag_qa.png",
@@ -1036,8 +1036,8 @@
    "src": "Quantlets/L13/NN_L13_context_length/context_length.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_context_length",
    "q": "NN_L13_context_length",
-   "en": "Longer context helps the foundation model, up to a point",
-   "ro": "Un context mai lung ajută modelul fundație, pînă la un punct"
+   "en": "Effect of context length on the foundation model",
+   "ro": "Efectul lungimii contextului asupra modelului fundație"
   },
   {
    "src": "Quantlets/L13/NN_L13_dm_pvalues/dm_pvalues.png",
@@ -1064,8 +1064,8 @@
    "src": "Quantlets/L13/NN_L13_load_mape/load_mape.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_load_mape",
    "q": "NN_L13_load_mape",
-   "en": "Load is easier than price: foundation models forecast it within a few percent",
-   "ro": "Consumul este mai ușor de prognozat decît prețul: modelele fundație greșesc cu cîteva procente"
+   "en": "Load forecasts of foundation models: errors of a few percent",
+   "ro": "Prognozele de consum ale modelelor fundație: erori de cîteva procente"
   },
   {
    "src": "Quantlets/L13/NN_L13_var_sp500/var_sp500.png",
@@ -1101,8 +1101,8 @@
    "src": "Quantlets/L14/NN_L14_zeroshot_confusion/zeroshot_confusion.png",
    "url": "https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L14/NN_L14_zeroshot_confusion",
    "q": "NN_L14_zeroshot_confusion",
-   "en": "Where zero-shot fails: similar-looking land uses",
-   "ro": "Unde greșește zero-shot: utilizări ale terenului care arată la fel"
+   "en": "Zero-shot errors on visually similar land uses",
+   "ro": "Erorile zero-shot la utilizări ale terenului asemănătoare vizual"
   },
   {
    "src": "Quantlets/L14/NN_L14_text_search/text_search.png",

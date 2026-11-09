@@ -50,8 +50,8 @@ L = {
        'is the mean of four 15-minute prices. S&P 500 and Cboe Volatility Index (VIX): Yahoo Finance, daily closes. The agents were '
        'trained once by lectures/L10/analysis_L10.py (five seeds, 20261108–20261112); the page replays their test-period decisions and '
        'recomputes the dynamic programme, the costs and the risk measures. Data to the cut-off of the lecture, 31 October 2026.'),
- 'ro': dict(h1='Cursul 10 · Învățarea prin întărire: tranzacționare, acoperirea riscului și dispecerizarea bateriilor',
-   note='Învățarea prin întărire (RL, reinforcement learning) pe trei probleme reale: o baterie de 2 MWh (megawatt-oră) care '
+ 'ro': dict(h1='Cursul 10 · Reinforcement learning: tranzacționare, acoperirea riscului și dispecerizarea bateriilor',
+   note='Reinforcement learning (RL) pe trei probleme reale: o baterie de 2 MWh (megawatt-oră) care '
         'tranzacționează pe piața pentru ziua următoare, o poziție în indicele S&P 500 care este fie în afara pieței, fie investită, și '
         'acoperirea zilnică a unei opțiuni call pe o lună. În stînga este slide-ul din curs, în dreapta aceeași figură, recalculată în '
         'browser din datele cursului (data/clean) și din deciziile agenților antrenați cînd modificați un control. Butonul ▶ modifică '

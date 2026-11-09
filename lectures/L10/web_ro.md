@@ -5,7 +5,7 @@ Codurile cadrelor: python3 build_web_lecture.py 10 --frames
 
 ## @intro
 
-Unele decizii economice schimbă situația în care se ia decizia următoare. O baterie care se încarcă acum nu se mai poate încărca peste o oră; un trader care vinde azi plătește un cost ca să cumpere înapoi mîine; un desk care acoperă riscul unei opțiuni își ajustează acoperirea în fiecare zi. Învățarea prin întărire (RL, reinforcement learning) este ramura învățării automate construită pentru asemenea decizii secvențiale: un agent observă o stare, alege o acțiune, primește o recompensă și trece într-o stare nouă, învățînd o politică ce maximizează recompensa totală.
+Unele decizii economice schimbă situația în care se ia decizia următoare. O baterie care se încarcă acum nu se mai poate încărca peste o oră; un trader care vinde azi plătește un cost ca să cumpere înapoi mîine; un desk care acoperă riscul unei opțiuni își ajustează acoperirea în fiecare zi. Reinforcement learning (RL) este ramura învățării automate construită pentru asemenea decizii secvențiale: un agent observă o stare, alege o acțiune, primește o recompensă și trece într-o stare nouă, învățînd o politică ce maximizează recompensa totală.
 
 Cursul formulează în acest limbaj trei probleme economice reale și le rezolvă pe date reale. Prima este dispecerizarea unei baterii de 2 MWh pe prețurile pentru ziua următoare din România, rezolvată exact prin programare dinamică (DP) și apoi învățată prin Q-learning tabelar și printr-o rețea Q profundă (DQN). A doua este tranzacționarea indicelui S&P 500 cu optimizarea proximală a politicii (PPO), o metodă actor-critic. A treia este acoperirea riscului unei opțiuni pe o lună cu o politică neuronală care minimizează pierderea așteptată în coada distribuției (ES). Fiecare agent este antrenat cu cinci valori inițiale și comparat cu regula pe care un practician o folosește deja. Verdictul este mixt și instructiv: pentru baterie cîștigă regula simplă, avantajul PPO la tranzacționare nu este stabilit statistic, iar acoperirea învățată bate delta din manual pentru fiecare valoare inițială.
 
@@ -18,11 +18,11 @@ Cursul formulează în acest limbaj trei probleme economice reale și le rezolv�
 
 # Decizii secvențiale în afaceri
 
-Învățarea prin întărire privește ce trebuie făcut, nu ce se va întîmpla. Secțiunea prezintă bucla agent-mediu și cele trei probleme ale cursului.
+Reinforcement learning privește ce trebuie făcut, nu ce se va întîmpla. Secțiunea prezintă bucla agent-mediu și cele trei probleme ale cursului.
 
-## Învățarea prin întărire și învățarea supervizată {h=0f2ebb2c}
+## Reinforcement learning și învățarea supervizată {h=ff33fdc6}
 
-Învățarea supervizată are o etichetă pentru fiecare exemplu, iar prognozele ei nu schimbă exemplul următor. În învățarea prin întărire, agentul vede o stare $s_t$, alege o acțiune $a_t$ și primește o recompensă $r_{t+1}$; acțiunea schimbă starea următoare și nimeni nu spune care ar fi fost acțiunea corectă, ci doar ce recompensă a urmat. Stocarea, tranzacționarea, acoperirea riscului, stocurile, prețurile și limitele de credit au toate această structură. Cînd acțiunea de azi nu schimbă opțiunile de mîine, ajung o prognoză și o regulă.
+Învățarea supervizată are o etichetă pentru fiecare exemplu, iar prognozele ei nu schimbă exemplul următor. În reinforcement learning, agentul vede o stare $s_t$, alege o acțiune $a_t$ și primește o recompensă $r_{t+1}$; acțiunea schimbă starea următoare și nimeni nu spune care ar fi fost acțiunea corectă, ci doar ce recompensă a urmat. Stocarea, tranzacționarea, acoperirea riscului, stocurile, prețurile și limitele de credit au toate această structură. Cînd acțiunea de azi nu schimbă opțiunile de mîine, ajung o prognoză și o regulă.
 
 @practice folosiți RL doar cînd acțiunea de azi schimbă opțiunile de mîine.
 
@@ -32,7 +32,7 @@ Agentul urmează o politică $\pi_\theta(a\mid s)$; mediul răspunde la fiecare 
 
 @practice scrieți starea, acțiunea și recompensa înainte de orice antrenare.
 
-## Trei aplicații economice ale învățării prin întărire {h=ed7561dc}
+## Trei aplicații economice ale reinforcement learning {h=db4d5749}
 
 | Problema | Starea $s_t$ | Acțiunea $a_t$ | Recompensa $r_{t+1}$ |
 |---|---|---|---|
@@ -44,7 +44,7 @@ Datele sînt reale: prețurile orare pentru ziua următoare din România (RO), U
 
 @practice un agent RL merită folosit doar dacă bate regula deja folosită, după costuri și pe mai multe valori inițiale.
 
-## Bateriile cîștigă diferența zilnică de preț, iar aceasta a crescut {h=d291bbdb}
+## Venitul bateriilor din diferența zilnică de preț și creșterea acestei diferențe {h=6cf06db6}
 
 O baterie cumpără în orele cele mai ieftine și vinde în cele mai scumpe, deci venitul ei depinde de diferența zilnică dintre prețul maxim și cel minim, nu de nivelul prețului. În România, diferența zilnică medie a fost 47,9 EUR/MWh în 2019, 164,3 în 2025 și 182,8 în 2026 pînă acum; luna de vîrf a fost iulie 2024, cu 394,4 EUR/MWh. Producția solară coboară acum prețurile de la prînz, iar vîrfurile de seară rămîn.
 
@@ -113,7 +113,7 @@ La ora 12:00 din aceeași zi, $V_{12}(0)$ = 1 541 EUR și $V_{12}(2)$ = 1 760 EU
 @chart dp_value
 Funcția de valoare $V_h(s)$ a problemei bateriei pe 30 iunie 2026, pentru 0, 1 și 2 MWh stocați.
 
-## Previziune perfectă: cît ar fi putut cîștiga o baterie de 2 MWh {h=94ecb12f}
+## Venitul unei baterii de 2 MWh în condiții de previziune perfectă {h=b1077fc0}
 
 Cu previziune perfectă, bateria ar fi cîștigat în România 28,4 mii EUR în 2019, 150,2 în 2022, 111,2 în 2025 și 98,5 în ianuarie–octombrie 2026 (302 zile cu 24 de ore complete). În 2025, aceeași baterie ar fi cîștigat 109,9 mii EUR în Ungaria, 112,9 în Bulgaria și 84,3 în Germania–Luxemburg. Acestea sînt plafoane: ele urmează diferențele de preț, nu nivelul prețului.
 
@@ -140,14 +140,14 @@ Operatorul planifică înainte să cunoască prețurile zilei, deci starea agent
 
 @practice o stare care include prețurile de azi ar da un test retrospectiv perfect, dar inutil.
 
-## Ce a învățat Q-learning tabelar {h=a32260a6}
+## Politica învățată prin Q-learning tabelar {h=a27b6356}
 
 Cu un MWh stocat, agentul încarcă mai ales în golul solar de la începutul după-amiezii și descarcă seara; clasamentul de ieri mută momentul încărcării. Tabelul poate fi tipărit și verificat oră cu oră, un avantaj al metodelor tabelare.
 
 @chart q_policy
 Acțiunea agentului Q-learning tabelar cu 1 MWh stocat, pe ore și pe quartila de ieri a prețului orei respective (prima valoare inițială).
 
-## De la tabel la rețea: rețeaua Q profundă {h=a9fd8185}
+## Rețeaua Q profundă: aproximarea tabelului Q printr-o rețea neuronală {h=936a8170}
 
 DQN înlocuiește tabelul cu o rețea $Q_\theta(s,a)$, ajustată prin regresie pe ținta TD (Mnih et al., 2015). DQN dublu lasă rețeaua online să aleagă acțiunea următoare și o rețea-țintă, actualizată lent, să o evalueze, ceea ce elimină deplasarea în sus a maximului unor estimări zgomotoase (van Hasselt, Guez & Silver, 2016):
 
@@ -162,7 +162,7 @@ Ambii agenți progresează repede, dar pe anul de validare 2024 rămîn sub plan
 @chart battery_learning
 Venitul de validare pe zi (2024) după fiecare epocă de antrenare; linia = media, banda = intervalul celor cinci valori inițiale.
 
-## Anii de test: cît din venitul cu previziune perfectă se obține {h=f3dd374d}
+## Ponderea venitului cu previziune perfectă obținută în anii de test {h=10c82c77}
 
 În zilele de test, venitul cu previziune perfectă este 202,1 mii EUR. Planul optim de ieri obține 163,1, Q-learning tabelar 115,2, iar DQN dublu 101,3 (medii pe cinci valori inițiale).
 
@@ -249,7 +249,7 @@ PPO are raportul Sharpe mai mare pentru toate cele cinci valori inițiale, dar b
 
 @practice un interval care conține zero înseamnă că nu există dovezi că agentul aduce valoare, orice ar sugera graficul retrospectiv.
 
-## Cînd iese agentul din piață? {h=4efb9860}
+## Perioadele în care agentul este în afara pieței {h=6e5fd60f}
 
 Citirea pozițiilor arată ce face efectiv agentul. PPO a fost investit în 82 % din zilele de test. Între 20 februarie și 30 aprilie 2020 a fost investit 42 % din timp, față de 14 % pentru regula mediei mobile; în 2022, 63 % din timp, față de 15 %. Agentul își reduce expunerea în perioadele de stres, dar mai puțin decît regula de trend.
 
@@ -258,7 +258,7 @@ Ponderea capitalului investit de agentul PPO (media pe valori inițiale, medie p
 
 @practice citiți politica, nu doar profitul: un agent care este pur și simplu mereu investit este o strategie cumpără și păstrează cu risc de model suplimentar.
 
-## De ce induc în eroare testele retrospective ale agenților de tranzacționare {h=a8760bc8}
+## Limitele testelor retrospective pentru agenții de tranzacționare {h=fad359ba}
 
 Randamentele zilnice ale acțiunilor sînt aproape imprevizibile, deci agentul învață mai ales zgomotul ferestrelor de antrenare. Piețele sînt nestaționare: anii de antrenare conțin 2008, iar anii de test o prăbușire în pandemie, un șoc al inflației și o creștere lungă. Cinci valori inițiale dau deja un interval de rapoarte Sharpe, iar raportarea celei mai bune este supraajustare retrospectivă. Un simulator în care agentul nu influențează prețul ignoră impactul asupra pieței, iar costurile trebuie incluse în recompensă. RL ajută mai mult în probleme cu o stare reală și o recompensă cunoscută: execuția ordinelor, crearea de piață, acoperirea riscului și stocarea (Hambly, Xu & Yang, 2023).
 
@@ -307,14 +307,14 @@ ES-ul acoperirii neuronale variază între 1,10 și 1,24 pe valori inițiale și
 
 @practice judecați o acoperire după coada pierderii și după volumul tranzacționat, nu după profitul mediu.
 
-## Ce a învățat rețeaua: un raport de acoperire mai plat, atent la costuri {h=3d3d70d7}
+## Raportul de acoperire învățat: mai plat și ajustat pentru costuri {h=31641d13}
 
 Cu zece zile înainte de scadență și cu VIX la 20, raportul de acoperire învățat este mai plat decît delta în jurul prețului de exercitare: 0,46 la bani, față de 0,51 pentru Black-Scholes. Rețeaua a învățat să tranzacționeze mai puțin acolo unde tranzacțiile sînt scumpe și plata incertă.
 
 @chart hedge_delta
 Raportul de acoperire al acoperirii neuronale (media și intervalul a cinci valori inițiale) și delta Black-Scholes, în funcție de raportul $S_t/K$.
 
-## Costurile de tranzacționare: unde ajută acoperirea învățată {h=91d5bf06}
+## Costurile de tranzacționare și avantajul acoperirii învățate {h=87f4fa97}
 
 Am antrenat cîte o rețea pentru fiecare nivel de cost, de la 0 la 50 de puncte de bază. Fără costuri, ES95 este 1,75 % pentru delta și 0,90 % pentru acoperirea neuronală; la 50 de puncte de bază, 2,76 % și 2,34 %. Acoperirea învățată se adaptează și la traiectoriile reale, cu cozi groase, nu doar la costuri.
 
@@ -323,7 +323,7 @@ ES95 al pierderii din acoperire pe traiectoriile de test, în funcție de costul
 
 @practice valoarea unei acoperiri învățate crește cu fricțiunile: active suport nelichide, diferențe mari între cotații, acoperiri pe energie și mărfuri.
 
-## Învățarea prin întărire în producție: riscul de model {h=04b1e28f}
+## Reinforcement learning în producție: riscul de model {h=1f84e953}
 
 Agentul optimizează exact recompensa primită: dacă omiteți costurile, riscul sau restricțiile, va exploata lipsa. O reluare istorică ignoră impactul propriu asupra prețului și regimurile viitoare. Evaluarea offline cere o singură perioadă de test, folosită o dată, mai multe valori inițiale și un test față de regula folosită deja. În producție, măștile de acțiune, limitele de poziție, oprirea de urgență și aprobarea umană limitează pagubele; un tabel sau o curbă a raportului de acoperire pot fi auditate, iar cursul 11 explică politicile neuronale; rata de captare și volumul tranzacționat trebuie comparate lunar cu testul retrospectiv.
 

@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261108s">
-<link rel="stylesheet" href="interactive.css?v=20261108s">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'en';</script>
-<link rel="preload" as="script" href="L3.js?v=20261108s">
+<link rel="preload" as="script" href="L3.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L3_data.js?v=20261108s", "L3_text_en.js?v=20261108s", "common.js?v=20261109m"], "L3.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L3_data.js?v=20261109n", "L3_text_en.js?v=20261109n", "common.js?v=20261109n"], "L3.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>Far: over 200 random splits the AUC ranges from 0.702 to 0.842 (mean 0.780, standard deviation 0.024). With a 10% test set (100 applicants, about 30 defaults) the standard deviation doubles to 0.047; with 50% it falls to 0.019, but the model is then trained on fewer applicants (mean AUC 0.767). A difference of 0.01–0.02 AUC between two models on one small hold-out is noise; repeated cross-validation or a paired test is needed.</p></details>
 </section>
 <section class="blk" id="fraud-cost">
-  <h3>The right number of alerts saves most of the fraud losses</h3>
+  <h3>Number of alerts and the share of fraud losses avoided</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L3_fraud_cost_en.jpg" alt="Slide 32: The right number of alerts saves most of the fraud losses" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L3/lecture3.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L3_fraud_cost_en.jpg" alt="Slide 32: Number of alerts and the share of fraud losses avoided" loading="lazy"></a>
       <figcaption>Slide 32</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fc-r">Cost of reviewing one alert (EUR): <b id="fc-r-v"></b></label><input type="range" id="fc-r" min="1" max="50" step="1" value="5"></div><div class="ctl"><label for="fc-a">Alerts sent to review (weighted, log scale): <b id="fc-a-v"></b></label><input type="range" id="fc-a" min="1" max="3.6" step="0.02" value="1.8"></div><div class="ctl ctl-tg" id="fc-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="fc-m" value="logit" checked> Logistic regression</label><label class="tg"><input type="checkbox" name="fc-m" value="mlp" checked> Regularised MLP</label><label class="tg"><input type="checkbox" name="fc-m" value="xgb" checked> XGBoost</label></div></div><button class="btn play" id="fc-play" type="button"></button></div><div class="charts one"><div class="chart" id="fc-chart"></div></div><ul class="out" id="fc-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L3/NN_L3_fraud_cost" target="_blank" rel="noopener">NN_L3_fraud_cost</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L3/NN_L3_fraud_cost/NN_L3_fraud_cost.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

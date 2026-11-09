@@ -126,7 +126,7 @@ def build(lang, H=None):
     abbreviation_frames(D, ABBR)
 
     # ------------------------------------------------------------------ 1 why generative
-    D.section(t("Why generative models", "De ce modele generative"))
+    D.section(t("Principles of generative modelling", "Principiile modelării generative"))
     D.concept(t("A generative model learns how the data themselves arise", "Un model generativ învață cum apar datele"),
               t("A classifier learns the boundary between classes; a generative model learns the whole distribution, so it can score, simulate and fill in data.",
                 "Un clasificator învață granița dintre clase; un model generativ învață toată distribuția datelor."),
@@ -182,7 +182,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 2 autoencoders
     D.section(t("Autoencoders: anomaly detection for card fraud", "Autoencodere: detectarea anomaliilor la fraude cu carduri"))
-    D.concept(t("An autoencoder squeezes the data through a bottleneck and rebuilds them", "Un autoencoder comprimă datele printr-un strat îngust și le reconstruiește"),
+    D.concept(t("An autoencoder compresses the data through a bottleneck and reconstructs them", "Un autoencoder comprimă datele printr-un strat îngust și le reconstruiește"),
               t("If the network rebuilds normal transactions from a few numbers, one it cannot rebuild is unusual.",
                 "Dacă rețeaua reconstruiește tranzacțiile normale din cîteva numere, una pe care nu o poate reconstrui este neobișnuită."),
               "\\[ \\mathbf z=f_{\\phi}(\\mathbf x)\\in\\R^{k},\\qquad \\hat{\\mathbf x}=g_{\\psi}(\\mathbf z) \\]"
@@ -218,15 +218,15 @@ def build(lang, H=None):
           "\\textbf{Fără scurgeri de informație}: mediile și abaterile standard din tranzacțiile legitime de antrenare; oprire timpurie pe partea de validare; semințele 1--3")) +
         D.bottom(None, NB + "1"), "footnotesize", cite="(Dal Pozzolo et al., 2015)")
 
-    D.chart(t("Frauds are hard to rebuild: their reconstruction error is far larger", "Fraudele sînt greu de reconstruit: eroarea lor de reconstrucție este mult mai mare"), "ae_error_dist", [
+    D.chart(t("Reconstruction error of fraudulent and legitimate payments", "Eroarea de reconstrucție a plăților frauduloase și a celor legitime"), "ae_error_dist", [
         t("\\textbf{Separation}: the median error of a fraud is @{ae.median_ratio|.1f} times that of a legitimate transaction (test part).",
           "\\textbf{Separarea}: eroarea mediană a unei fraude este de @{ae.median_ratio|.1f} ori mai mare decît a unei tranzacții legitime (partea de test)"),
         t("\\textbf{Overlap}: many frauds still look normal to the autoencoder; they sit in the bulk of the legitimate distribution.",
           "\\textbf{Suprapunerea}: multe fraude arată totuși normal pentru autoencoder; se află în grosul distribuției legitime")],
         height="0.55\\textheight", tryit=NB + "1")
 
-    D.chart(t("Without labels the autoencoder finds frauds; with labels a simple classifier finds many more",
-              "Fără etichete, autoencoderul găsește fraude; cu etichete, un clasificator simplu găsește mult mai multe"), "ae_pr", [
+    D.chart(t("Autoencoder without labels compared with a supervised classifier",
+              "Autoencoderul fără etichete comparat cu un clasificator supervizat"), "ae_pr", [
         t("\\textbf{PR-AUC on the test part}: autoencoder @{ae.ap|.1f}\\,\\% (sd @{ae.ap_sd|.1f} over 3 seeds), PCA @{ae.ap_pca|.1f}\\,\\%, logistic regression with labels @{ae.ap_logit|.1f}\\,\\%; a random score: @{ae.base_ap|.3f}\\,\\%.",
           "\\textbf{PR-AUC pe partea de test}: autoencoder @{ae.ap|.1f}\\,\\% (abatere standard @{ae.ap_sd|.1f} pe 3 semințe), PCA @{ae.ap_pca|.1f}\\,\\%, regresie logistică cu etichete @{ae.ap_logit|.1f}\\,\\%; un scor aleator: @{ae.base_ap|.3f}\\,\\%"),
         t("\\textbf{ROC-AUC} is high for all three (@{ae.auc|.1f}, @{ae.auc_pca|.1f}, @{ae.auc_logit|.1f}\\,\\%): with 1 fraud in 700 it hides the difference that PR-AUC shows.",
@@ -241,7 +241,7 @@ def build(lang, H=None):
         height="0.48\\textheight", tryit=NB + "1",
         job=t("choose $k$ on a validation period, never on the frauds you will report on.", "alegeți $k$ pe o perioadă de validare, niciodată pe fraudele despre care veți raporta."))
 
-    D.frame(t("What a fraud team gets from the top 0.1\\,\\% of scores", "Ce obține echipa antifraudă din primele 0,1\\,\\% scoruri"), cols(
+    D.frame(t("Frauds found among the top 0.1\\,\\% of scores", "Fraudele identificate în primele 0,1\\,\\% dintre scoruri"), cols(
         table("@{}lrr@{}", [t("Detector", "Detector"), t("Frauds found", "Fraude găsite"), t("Share of frauds", "Pondere")], [
             [t("Autoencoder (no labels)", "Autoencoder (fără etichete)"), "@{ae.top01_frauds_ae}", "@{ae.top01_recall_ae|.1f}\\,\\%"],
             [t("PCA, 8 components (no labels)", "PCA, 8 comp.\\ (fără etichete)"), "@{ae.top01_frauds_pca}", "@{ae.top01_recall_pca|.1f}\\,\\%"],
@@ -295,7 +295,7 @@ def build(lang, H=None):
                 "același truc stă la baza oricărui model care extrage aleator în interiorul rețelei: VAE, dropout ca inferență, politici stocastice."),
               tryit=NB + "2", cite="(Kingma \\& Welling, 2014; Xiao et al., 2017)")
 
-    D.chart(t("A two-dimensional latent space already sorts the products", "Un spațiu latent cu două dimensiuni sortează deja produsele"), "vae_latent", [
+    D.chart(t("A two-dimensional latent space separates the product types", "Un spațiu latent cu două dimensiuni separă tipurile de produse"), "vae_latent", [
         t("\\textbf{No labels used}: the VAE never saw the classes, yet shoes, bags and garments occupy separate regions.",
           "\\textbf{Fără etichete}: VAE nu a văzut clasele, dar încălțămintea, gențile și hainele ocupă regiuni separate"),
         t("\\textbf{Measured}: a 15-nearest-neighbour classifier on the two latent means reaches @{vae.knn_acc_2d|.1f}\\,\\% accuracy (5-fold, test images).",
@@ -309,7 +309,7 @@ def build(lang, H=None):
           "\\textbf{Neclaritatea} vine din distribuția a posteriori gaussiană și din pierderea calculată pixel cu pixel: decodorul face media detaliilor plauzibile")],
         height="0.48\\textheight", tryit=NB + "2")
 
-    D.chart(t("Training trades reconstruction against the KL penalty", "Antrenarea negociază între reconstrucție și penalizarea KL"), "vae_elbo", [
+    D.chart(t("Trade-off between reconstruction and the KL penalty during training", "Compromisul dintre reconstrucție și penalizarea KL în timpul antrenării"), "vae_elbo", [
         t("\\textbf{Test, $k=16$, last epoch}: reconstruction @{vae.beta.b1.rec|.1f} nats per image, KL @{vae.beta.b1.kl|.1f} nats; ELBO @{vae.elbo_16|.1f} nats.",
           "\\textbf{Test, $k=16$, ultima epocă}: reconstrucția @{vae.beta.b1.rec|.1f} nats pe imagine, KL @{vae.beta.b1.kl|.1f} nats; ELBO @{vae.elbo_16|.1f} nats"),
         t("\\textbf{The KL rises} while the error falls: the encoder spends more information on each image as it learns.",
@@ -377,7 +377,7 @@ def build(lang, H=None):
           "\\textbf{Nicio garanție de convergență}: jocul pe gradienți poate oscila; curbele de pierdere nu măsoară calitatea eșantioanelor")],
         height="0.50\\textheight", tryit=NB + "3")
 
-    D.chart(t("The GAN learns fat tails that the Gaussian misses", "GAN-ul învață cozile groase pe care distribuția normală nu le vede"), "gan_density", [
+    D.chart(t("The GAN reproduces the fat tails missed by the Gaussian model", "GAN-ul reproduce cozile groase pe care modelul gaussian nu le surprinde"), "gan_density", [
         t("\\textbf{Excess kurtosis}: real @{gan.kurt_real|.2f}, GAN @{gan.kurt_gan|.2f} (sd @{gan.kurt_gan_sd|.2f} over 3 seeds), Gaussian 0.",
           "\\textbf{Excesul de aplatizare}: real @{gan.kurt_real|.2f}, GAN @{gan.kurt_gan|.2f} (abatere standard @{gan.kurt_gan_sd|.2f} pe 3 semințe), normala 0"),
         t("\\textbf{Kolmogorov--Smirnov distance} to the real returns: GAN @{gan.ks_gan|.3f}, fitted Gaussian @{gan.ks_norm|.3f}.",
@@ -466,14 +466,14 @@ def build(lang, H=None):
                 "aceeași pierdere stă la baza generatoarelor de imagini, iar aici generează scenarii de dobîndă."),
               tryit=NB + "4", cite="(Ho, Jain \\& Abbeel, 2020; Bishop \\& Bishop, 2024, ch.\\ 20)", wl="0.58", wr="0.39")
 
-    D.chart(t("Diffusion reproduces the two regimes of euro rates; a Gaussian cannot", "Difuzia reproduce cele două regimuri ale dobînzilor euro; distribuția normală nu poate"), "yc_density", [
+    D.chart(t("The two regimes of euro rates in diffusion and Gaussian samples", "Cele două regimuri ale dobînzilor euro în eșantioanele generate prin difuzie și de modelul gaussian"), "yc_density", [
         t("\\textbf{Real 10-year yield}: from @{yc.y10_min|.2f}\\,\\% to @{yc.y10_max|.2f}\\,\\%, negative on @{yc.pct_neg10_real|.1f}\\,\\% of the days: a low-rate and a normal-rate regime.",
           "\\textbf{Randamentul real la 10 ani}: de la @{yc.y10_min|.2f}\\,\\% la @{yc.y10_max|.2f}\\,\\%, negativ în @{yc.pct_neg10_real|.1f}\\,\\% dintre zile: un regim de dobînzi scăzute și unul de dobînzi normale"),
         t("\\textbf{Wasserstein distance} of the generated 10-year yield to the real one: DDPM @{yc.ddpm.w_y10|.3f}, VAE @{yc.vae.w_y10|.3f}, Gaussian @{yc.gauss.w_y10|.3f} percentage points.",
           "\\textbf{Distanța Wasserstein} dintre randamentul generat la 10 ani și cel real: DDPM @{yc.ddpm.w_y10|.3f}, VAE @{yc.vae.w_y10|.3f}, normala @{yc.gauss.w_y10|.3f} puncte procentuale")],
         height="0.52\\textheight", tryit=NB + "4")
 
-    D.chart(t("Level and slope move together in a curved way that diffusion keeps", "Nivelul și panta se mișcă împreună, într-un mod curb, pe care difuzia îl păstrează"), "yc_scatter", [
+    D.chart(t("Diffusion preserves the nonlinear co-movement of level and slope", "Difuzia păstrează dependența neliniară dintre nivel și pantă"), "yc_scatter", [
         t("\\textbf{Inverted curves} (10 years below 3 months): @{yc.pct_inverted_real|.1f}\\,\\% of real days, @{yc.ddpm.pct_inverted|.1f}\\,\\% of diffusion samples, @{yc.gauss.pct_inverted|.1f}\\,\\% of Gaussian samples.",
           "\\textbf{Curbe inversate} (10 ani sub 3 luni): @{yc.pct_inverted_real|.1f}\\,\\% dintre zilele reale, @{yc.ddpm.pct_inverted|.1f}\\,\\% dintre eșantioanele difuziei, @{yc.gauss.pct_inverted|.1f}\\,\\% dintre cele normale"),
         t("\\textbf{Slope distance} (Wasserstein): DDPM @{yc.ddpm.w_slope|.3f}, VAE @{yc.vae.w_slope|.3f}, Gaussian @{yc.gauss.w_slope|.3f}.",
@@ -489,7 +489,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 6 practice
     D.section(t("Generative models in practice", "Modelele generative în practică"))
-    D.frame(t("How to judge synthetic financial data", "Cum judecăm datele financiare sintetice"), cols(
+    D.frame(t("Evaluation criteria for synthetic financial data", "Criterii de evaluare a datelor financiare sintetice"), cols(
         it((t("\\textbf{Fidelity}", "\\textbf{Fidelitatea}"),
             t("marginals and tails (kurtosis, 1\\,\\% quantile), dependence across assets and over time (autocorrelation of $|r_t|$)",
               "distribuțiile marginale și cozile (aplatizarea, cuantila de 1\\,\\%), dependența între active și în timp (autocorelația lui $|r_t|$)")),
@@ -521,7 +521,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ wrap-up
     D.section(t("Wrap-up", "Concluzii"))
-    D.frame(t("What to remember", "Ce reținem"), it(
+    D.frame(t("Key takeaways", "Idei principale"), it(
         t("\\textbf{Autoencoders} model ``normal'': on card fraud PR-AUC @{ae.ap|.1f}\\,\\% without labels, against @{ae.ap_logit|.1f}\\,\\% for a classifier that uses labels.",
           "\\textbf{Autoencoderele} modelează ``normalul'': la fraudele cu carduri, PR-AUC @{ae.ap|.1f}\\,\\% fără etichete, față de @{ae.ap_logit|.1f}\\,\\% pentru un clasificator cu etichete"),
         t("\\textbf{VAEs} maximise the ELBO = reconstruction $-$ KL; the reparameterisation trick makes them trainable; $\\beta$ trades detail for a tidy latent space.",

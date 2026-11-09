@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=20261109m">
-<link rel="stylesheet" href="interactive.css?v=20261109m">
+<link rel="stylesheet" href="../assets/site.css?v=20261109n">
+<link rel="stylesheet" href="interactive.css?v=20261109n">
 <script>window.NN_LANG = 'ro';</script>
-<link rel="preload" as="script" href="L12.js?v=20261109m">
+<link rel="preload" as="script" href="L12.js?v=20261109n">
 <script>
 (function (early, page) {
   'use strict';
@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261109m", "L12_text_ro.js?v=20261109m", "common.js?v=20261109m"], "L12.js?v=20261109m");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L12_data.js?v=20261109n", "L12_text_ro.js?v=20261109n", "common.js?v=20261109n"], "L12.js?v=20261109n");
 </script>
 </head>
 <body>
@@ -76,9 +76,9 @@
   <details><summary>Răspuns</summary><p>Nu. Fără exemple (zero-shot), Qwen2.5-3B atinge un macro-F1 de 92,2%; cu k = 1, 2, 4 și 8 exemple, media pe trei extrageri aleatoare ale exemplelor este 89,5%, 90,4%, 92,1% și 91,3%, iar cu k = 1 extragerile variază între 87,5% și 91,1%. Modelul mai mic, de 1,5 miliarde, cîștigă puțin la k = 1 (85,1% → 87,3%) și pierde la k = 8 (84,1%). Contează ce exemple extrageți aproape cît contează cîte. Macro-F1 mediază scorul F1 (media armonică a preciziei și a sensibilității) celor trei clase, deci clasa negativă, rară, contează cît cea neutră.</p></details>
 </section>
 <section class="blk" id="prompt-sensitivity">
-  <h3>Reformularea instrucțiunii schimbă scorul: sensibilitatea la prompt</h3>
+  <h3>Sensibilitatea la prompt: efectul reformulării instrucțiunii</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L12_prompt_sensitivity_ro.jpg" alt="Slide-ul 25: Reformularea instrucțiunii schimbă scorul: sensibilitatea la prompt" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=25" target="_blank" rel="noopener"><img src="slides/L12_prompt_sensitivity_ro.jpg" alt="Slide-ul 25: Sensibilitatea la prompt: efectul reformulării instrucțiunii" loading="lazy"></a>
       <figcaption>Slide-ul 25</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ps-d">Setul de date</label><select id="ps-d"><option value="pb" selected>Financial PhraseBank (știri despre companii)</option><option value="tw">Tweet-uri financiare</option></select></div><div class="ctl"><label for="ps-m">Modelul (zero-shot)</label><select id="ps-m"><option value="1.5B" selected>Qwen2.5-1.5B</option><option value="3B">Qwen2.5-3B</option></select></div><div class="ctl ctl-tg" id="ps-i"><span class="lbl">Formularea instrucțiunii</span><div class="tgs"><label class="tg"><input type="radio" name="ps-i" value="0" checked> 1</label><label class="tg"><input type="radio" name="ps-i" value="1"> 2</label><label class="tg"><input type="radio" name="ps-i" value="2"> 3</label><label class="tg"><input type="radio" name="ps-i" value="3"> 4</label><label class="tg"><input type="radio" name="ps-i" value="4"> 5</label></div></div><button class="btn play" id="ps-play" type="button"></button></div><div class="charts "><div class="chart" id="ps-bars"></div><div class="chart" id="ps-conf"></div></div><ul class="out" id="ps-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_prompt_sensitivity" target="_blank" rel="noopener">NN_L12_prompt_sensitivity</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_prompt_sensitivity/NN_L12_prompt_sensitivity.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>Da: mutați pragul și urmăriți cum scade acoperirea, în timp ce acuratețea pe propozițiile cu răspuns crește. Aceasta funcționează numai dacă probabilitățile sînt calibrate, adică dacă „90% sigur” are dreptate în circa 90% din cazuri. Cursul măsoară eroarea de calibrare așteptată (ECE) pe Financial PhraseBank: 4,7% pentru zero-shot 3B, 3,6% pentru few-shot 3B și 5,4% pentru TF-IDF (frecvența termenului – frecvența inversă în documente) cu regresie logistică. Comparați modelul 0,5B: curba sa de fiabilitate este departe de diagonală, iar un prag aduce mult mai puțin.</p></details>
 </section><h2 class="sec" id="s-rag">Generarea augmentată prin regăsire (RAG)</h2>
 <section class="blk" id="rag-recall">
-  <h3>Găsirea discursului corect după titlu</h3>
+  <h3>Regăsirea discursului corect după titlu</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=36" target="_blank" rel="noopener"><img src="slides/L12_rag_recall_ro.jpg" alt="Slide-ul 36: Găsirea discursului corect după titlu" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L12/lecture12_ro.pdf#page=36" target="_blank" rel="noopener"><img src="slides/L12_rag_recall_ro.jpg" alt="Slide-ul 36: Regăsirea discursului corect după titlu" loading="lazy"></a>
       <figcaption>Slide-ul 36</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="rg-r"><span class="lbl">Metoda de regăsire</span><div class="tgs"><label class="tg"><input type="checkbox" name="rg-r" value="tfidf" checked> TF-IDF</label><label class="tg"><input type="checkbox" name="rg-r" value="bm25" checked> BM25</label><label class="tg"><input type="checkbox" name="rg-r" value="dense" checked> Embedding dense (bge-small)</label><label class="tg"><input type="checkbox" name="rg-r" value="hybrid" checked> Hibrid (BM25 + dense)</label></div></div><div class="ctl"><label for="rg-k">k: cîte discursuri returnează regăsirea: <b id="rg-k-v"></b></label><input type="range" id="rg-k" min="1" max="20" step="1" value="5"></div><div class="ctl"><label for="rg-y">Anul discursurilor</label><select id="rg-y"><option value="all" selected>Toți anii (2022–2026)</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option></select></div><button class="btn play" id="rg-play" type="button"></button></div><div class="charts one"><div class="chart" id="rg-chart"></div></div><ul class="out" id="rg-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L12/NN_L12_rag_recall" target="_blank" rel="noopener">NN_L12_rag_recall</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L12/NN_L12_rag_recall/NN_L12_rag_recall.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

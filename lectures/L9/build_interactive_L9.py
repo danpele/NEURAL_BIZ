@@ -27,9 +27,9 @@ BLOCKS = [('homophily', 'homophily', 'why', 'hm'),
           ('alert-budget', 'alert_budget', 'case', 'ab')]
 
 SECTIONS = {
- 'en': dict(why='Why graphs for financial crime', mp='Message passing',
+ 'en': dict(why='Graphs in the detection of financial crime', mp='Message passing',
             case='Case study: illicit Bitcoin transactions'),
- 'ro': dict(why='De ce grafuri pentru criminalitatea financiară', mp='Transmiterea mesajelor',
+ 'ro': dict(why='Grafurile în detectarea infracțiunilor financiare', mp='Transmiterea mesajelor',
             case='Studiu de caz: tranzacții Bitcoin ilicite'),
 }
 
@@ -59,8 +59,8 @@ L = {
 }
 
 # frame title of the alert-budget slide written with a LaTeX thin space (1\\,000), which the shared title cleaner keeps
-TITLES = {'en': {'alert-budget': 'What an investigation team gets from 1,000 alerts'},
-          'ro': {'alert-budget': 'Ce obține o echipă de investigații din 1.000 de alerte'}}
+TITLES = {'en': {'alert-budget': 'Illicit transactions found among the top 1,000 alerts'},
+          'ro': {'alert-budget': 'Tranzacțiile ilicite identificate între primele 1.000 de alerte'}}
 
 MNAME = {
  'en': dict(lr_local='Logistic regression, local features', lr_all='Logistic regression, all features', rf='Random forest',

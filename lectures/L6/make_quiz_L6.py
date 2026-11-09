@@ -218,11 +218,11 @@ q(1, ("Few labels", "With only {curve.n_small} labelled sentences, which numbers
    ["Toate modelele au fost la nivelul clasei majoritare", "TF-IDF {curve.tfidf_lr.p5|.1f}, media word2vec {curve.w2v_lr.p5|.1f}, embedding bag aleator {curve.embbag.p5|.1f}, start word2vec {curve.embbag_w2v.p5|.1f} (macro-F1)", "Doar embedding bag a putut fi antrenat", "Rezultatele au fost identice cu cele obținute cu toate etichetele"],
    "Curba de învățare arată cum se comportă fiecare reprezentare cînd etichetele sînt rare; comparați-o cu valorile pentru {curve.n_full|,} de fraze.",
    "Toate cele patru modele au fost antrenate la fiecare dimensiune; valorile diferă de cele cu toate datele, iar aceasta este ideea curbei."))
-q(2, ("Where the errors are", "In the pooled PhraseBank test sets, most errors of TF-IDF + logistic are of which kind?",
+q(2, ("Classification errors", "In the pooled PhraseBank test sets, most errors of TF-IDF + logistic are of which kind?",
       ["Negative sentences read as positive", "Positive read as negative", "Negative or positive sentences read as neutral", "Neutral sentences read as positive, always"],
       "Opposite-sign errors are rare ({cm.neg_as_pos} negative read as positive); the recall is {cm.neg_recall|.1f}% for negative and {cm.pos_recall|.1f}% for positive sentences.",
       "The confusion matrix shows that the model hesitates towards neutral much more often than it flips the sign."),
-  ("Unde sînt erorile", "În seturile de test PhraseBank reunite, ce tip de erori face cel mai des TF-IDF + logistic?",
+  ("Erorile de clasificare", "În seturile de test PhraseBank reunite, ce tip de erori face cel mai des TF-IDF + logistic?",
    ["Fraze negative citite ca pozitive", "Fraze pozitive citite ca negative", "Fraze negative sau pozitive citite ca neutre", "Fraze neutre citite mereu ca pozitive"],
    "Erorile de semn opus sînt rare ({cm.neg_as_pos} fraze negative citite ca pozitive); sensibilitatea este {cm.neg_recall|.1f}% pentru frazele negative și {cm.pos_recall|.1f}% pentru cele pozitive.",
    "Matricea de confuzie arată că modelul ezită spre neutru mult mai des decît inversează semnul."))

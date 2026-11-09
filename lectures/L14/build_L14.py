@@ -34,7 +34,7 @@ ABBR = {
     "OCR": ("optical character recognition", "recunoașterea optică a caracterelor"),
     "RAG": ("retrieval-augmented generation", "generare augmentată prin regăsire"),
     "RGB": ("red, green, blue (colour channels)", "roșu, verde, albastru (canalele de culoare)"),
-    "RL": ("reinforcement learning", "învățare prin recompensă"),
+    "RL": ("reinforcement learning", "reinforcement learning"),
     "ROC": ("receiver operating characteristic", "caracteristica de operare a receptorului"),
     "SHAP": ("Shapley additive explanations", "explicații aditive Shapley"),
     "VAE": ("variational autoencoder", "autoencoder variațional"),
@@ -127,7 +127,7 @@ def build(lang, H=None):
     abbreviation_frames(D, ABBR)
 
     # ------------------------------------------------------------------ 1. why multimodal
-    D.section(t("Why multimodal models", "De ce modele multimodale"))
+    D.section(t("Multimodal data in business", "Datele multimodale în afaceri"))
     D.frame(t("Images, documents and charts as business data", "Imagini, documente și grafice ca date economice"), it(
         (t("\\textbf{Satellite and aerial images}", "\\textbf{Imagini satelitare și aeriene}"),
          t("crop monitoring for agricultural credit and insurance; land use for environmental, social and governance (ESG) reporting",
@@ -152,7 +152,7 @@ def build(lang, H=None):
         sep="3pt"), "small", cite="(Helber et al., 2019)")
     d = N["data"]
     ct = N["charts_task"]
-    D.frame(t("Real data only: satellite images, market charts, yield-curve tables", "Numai date reale: imagini satelitare, grafice de piață, tabele ale curbei randamentelor"),
+    D.frame(t("The data: satellite images, market charts, yield-curve tables", "Datele: imagini satelitare, grafice de piață, tabele ale curbei randamentelor"),
             table("@{}p{0.3\\textwidth}p{0.3\\textwidth}p{0.33\\textwidth}@{}", [t("Data", "Date"), t("Size", "Dimensiune"), t("Task", "Sarcina")],
                   [[t("EuroSAT: Sentinel-2 images of Europe, red, green, blue (RGB) channels", "EuroSAT: imagini Sentinel-2 ale Europei, canalele roșu, verde, albastru (RGB)"),
                     t(f"{d['n']:,} images, {d['px']}$\\times${d['px']} pixels, {d['n_classes']} classes".replace(",", "\\,"),
@@ -210,7 +210,7 @@ def build(lang, H=None):
               t("one embedding space for images and text enables search, zero-shot labels and retrieval for retrieval-augmented generation (RAG).",
                 "un singur spațiu de embedding pentru imagini și text permite căutarea, etichetarea zero-shot și regăsirea pentru generarea augmentată prin regăsire (RAG)."),
               cite="(Radford et al., 2021; Oord et al., 2018)", wl="0.58", wr="0.39")
-    D.concept(t("Zero-shot classification: the class names become the classifier", "Clasificarea zero-shot: numele claselor devin clasificatorul"),
+    D.concept(t("Zero-shot classification with class names as text prompts", "Clasificarea zero-shot cu numele claselor ca prompturi textuale"),
               t("embed one sentence per class, embed the image, and pick the closest sentence.", "se calculează embedding-ul unei propoziții pentru fiecare clasă și al imaginii, apoi se alege propoziția cea mai apropiată."),
               "\\[ \\mathbf w_c=\\mathrm{norm}\\Big(\\frac{1}{M}\\sum_{m=1}^{M}g\\big(\\text{template}_m(c)\\big)\\Big) \\]\\[ \\hat c(I)=\\argmax_c\\ \\mathbf u(I)^{\\top}\\mathbf w_c \\]" +
               "\\where{" + t("template$_m$ = sentence such as ``a satellite photo of \\{class\\}.''; $M$ = 1 or 5 templates (prompt ensemble); class descriptions as in Radford et al.\\ (2021).",
@@ -239,7 +239,7 @@ def build(lang, H=None):
                bullets=[t("@{examples.n_right} of @{examples.n} correct in this sample.", "@{examples.n_right} din @{examples.n} corecte în acest eșantion.")],
                height="0.72\\textheight", tryit=NB + " \\S2")
     tc = N["zs_top_conf"]
-    D.figframe(t("Where zero-shot fails: similar-looking land uses", "Unde greșește zero-shot: utilizări ale terenului care arată la fel"),
+    D.figframe(t("Zero-shot errors on visually similar land uses", "Erorile zero-shot la utilizări ale terenului asemănătoare vizual"),
                t("rows: true class; columns: predicted class; each row sums to 100\\,\\%.", "rîndurile: clasa reală; coloanele: clasa prezisă; fiecare rînd însumează 100\\,\\%."),
                None, "zeroshot_confusion",
                bullets=[t(f"Best class: {nm[N['zs_best_class']]} (@{{zs_class.{N['zs_best_class']}|.1f}}\\,\\%); worst: {nm[N['zs_worst']]} (@{{zs_class.{N['zs_worst']}|.1f}}\\,\\%); "
@@ -301,7 +301,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 4. VLMs
     D.section(t("Vision-language models: reading charts and tables", "Modele vizual-lingvistice: citirea graficelor și a tabelelor"))
-    D.concept(t("A VLM plugs an image encoder into a language model", "Un VLM conectează un codificator de imagini la un model de limbaj"),
+    D.concept(t("A VLM: an image encoder connected to a language model", "Un VLM: un codificator de imagini conectat la un model de limbaj"),
               t("image patches are projected into the word-embedding space of a large language model (LLM), which reads them as extra tokens.",
                 "peticele imaginii sînt proiectate în spațiul embedding-urilor de cuvinte al unui model lingvistic mare (LLM), care le citește ca tokeni suplimentari."),
               "\\[ \\mathbf H_v=\\mathbf W_p\\,f_{\\text{ViT}}(I) \\]\\[ p(y_t\\mid y_{<t},I,q)=\\mathrm{LLM}_{\\btheta}\\big([\\mathbf H_v;\\ \\mathbf e(q);\\ \\mathbf e(y_{<t})]\\big) \\]" +
@@ -357,7 +357,7 @@ def build(lang, H=None):
             "small", cite=t("(own computation, after Jheng, Pele, Tak \\& Găman, 2026)", "(calcul propriu, după Jheng, Pele, Tak \\& Găman, 2026)"), tryit=NB + " \\S4")
     vl = N["vl"]
     tb = N["table"]
-    D.frame(t("What a 2-billion-parameter VLM can read: trends and table cells", "Ce poate citi un VLM de 2 miliarde de parametri: tendințe și celule de tabel"), it(
+    D.frame(t("Reading trends and table cells with a 2-billion-parameter VLM", "Citirea tendințelor și a celulelor de tabel cu un VLM de 2 miliarde de parametri"), it(
         (t("\\textbf{Trend question} on @{vl.trend_n} test charts: ``did the price end higher or lower?''",
            "\\textbf{Întrebarea despre tendință}, pe @{vl.trend_n} de grafice de test: „prețul a încheiat mai sus sau mai jos?”"),
          t("accuracy @{vl.trend_acc|.1f}\\,\\% at the 0.5 threshold, below always answering the majority (@{vl.trend_base|.1f}\\,\\%)",
@@ -374,7 +374,7 @@ def build(lang, H=None):
          t("for documents with known layout, extract the numbers with a parser and use the VLM only where layout varies",
            "pentru documente cu structură cunoscută, extrageți cifrele cu un program de citire și folosiți VLM doar unde structura variază")),
         sep="3pt"), "small", cite=t("(own computation; Wang et al., 2024)", "(calcul propriu; Wang et al., 2024)"), tryit=NB + " \\S5")
-    D.frame(t("A document pipeline in a bank: where the VLM fits", "Fluxul documentelor într-o bancă: unde se potrivește un VLM"), it(
+    D.frame(t("The role of a VLM in a bank's document pipeline", "Rolul unui VLM în fluxul documentelor unei bănci"), it(
         (t("\\textbf{1. Capture}", "\\textbf{1. Preluarea}"), t("scanned page or electronic file; known templates go to a rule-based parser", "pagină scanată sau fișier electronic; șabloanele cunoscute merg la un program de citire bazat pe reguli")),
         (t("\\textbf{2. Read}", "\\textbf{2. Citirea}"), t("OCR and layout for text and tables; a VLM for free-form pages, charts and stamps",
                                                                "OCR și așezarea în pagină pentru text și tabele; un VLM pentru pagini libere, grafice și ștampile")),
@@ -408,7 +408,7 @@ def build(lang, H=None):
                    [t("Text", "Text"), t("embeddings, transformers, LLM, retrieval-augmented generation (RAG)", "embedding, transformere, LLM, generare augmentată prin regăsire (RAG)"), t("6, 7, 12: sentiment, central banks", "6, 7, 12: sentiment, bănci centrale")],
                    [t("Generation", "Generare"), t("variational autoencoder (VAE), generative adversarial network (GAN), diffusion", "autoencoder variațional (VAE), rețea generativă adversarială (GAN), difuzie"), t("8: synthetic data, anomalies", "8: date sintetice, anomalii")],
                    [t("Graphs", "Grafuri"), t("graph neural network (GNN)", "rețea neuronală pe grafuri (GNN)"), t("9: transaction networks", "9: rețele de tranzacții")],
-                   [t("Decisions", "Decizii"), t("reinforcement learning (RL)", "învățare prin recompensă (RL)"), t("10: trading, hedging, batteries", "10: tranzacționare, acoperirea riscului, baterii")],
+                   [t("Decisions", "Decizii"), t("reinforcement learning (RL)", "reinforcement learning (RL)"), t("10: trading, hedging, batteries", "10: tranzacționare, acoperirea riscului, baterii")],
                    [t("Trust", "Încredere"), t("explainable artificial intelligence (XAI): Shapley additive explanations (SHAP), gradients", "inteligență artificială explicabilă (XAI): explicații aditive Shapley (SHAP), gradienți"), t("11: credit audits", "11: auditul modelelor de credit")]],
                   size="scriptsize"), "small")
     D.frame(t("Choosing a model for a business problem", "Alegerea modelului pentru o problemă de afaceri"), it(
@@ -423,7 +423,7 @@ def build(lang, H=None):
         (t("\\textbf{5. Prove it}", "\\textbf{5. Demonstrați}"),
          t("test once, several seeds, a significance test, calibration, an explanation for the regulator", "testare o singură dată, mai multe rulări, un test de semnificație, calibrare, o explicație pentru autoritatea de supraveghere")),
         sep="2pt"), "small")
-    D.frame(t("Five evaluation rules that held in every lecture", "Cinci reguli de evaluare valabile în fiecare curs"), it(
+    D.frame(t("Five evaluation rules applied throughout the course", "Cinci reguli de evaluare aplicate pe parcursul cursului"), it(
         t("\\textbf{No leakage}: scalers, prompts and thresholds are chosen on training or validation data; time series are split in time.",
           "\\textbf{Fără scurgeri de informație}: scalările, prompturile și pragurile se aleg pe datele de antrenare sau de validare; seriile de timp se împart cronologic."),
         t("\\textbf{A benchmark next to every network}: here, a CNN trained from scratch next to CLIP, numbers next to chart images.",
@@ -465,7 +465,7 @@ def build(lang, H=None):
          [t("Contrastive image--text loss", "Pierderea contrastivă imagine--text"), "$-\\log\\frac{e^{s_{ii}}}{\\sum_j e^{s_{ij}}}$", "14"]], size="footnotesize", stretch="1.4") +
         note(t("$\\mathbf K$ = kernel; $\\tilde{\\mathbf A}$ = adjacency matrix with self-loops, $\\tilde{\\mathbf D}$ its degree matrix; $s_{ij}$ = scaled image--text similarity.",
                "$\\mathbf K$ = nucleul; $\\tilde{\\mathbf A}$ = matricea de adiacență cu bucle, $\\tilde{\\mathbf D}$ matricea gradelor; $s_{ij}$ = similaritatea scalată imagine--text.")), "small")
-    D.frame(t("Responsible use: the same rules for every model of the course", "Utilizarea responsabilă: aceleași reguli pentru fiecare model din curs"), it(
+    D.frame(t("Responsible use of the models of the course", "Utilizarea responsabilă a modelelor din curs"), it(
         (t("\\textbf{Regulation}", "\\textbf{Reglementare}"),
          t("the European Union Artificial Intelligence Act (Regulation 2024/1689) lists credit scoring among high-risk uses: documentation, human oversight, data governance",
            "Regulamentul UE privind inteligența artificială (2024/1689) include scoringul de credit printre utilizările cu risc ridicat: documentație, supraveghere umană, guvernanța datelor")),
@@ -477,7 +477,7 @@ def build(lang, H=None):
         (t("\\textbf{Privacy}", "\\textbf{Confidențialitate}"),
          t("local open models keep client documents and images in-house", "modelele deschise rulate local păstrează documentele și imaginile clienților în instituție")),
         sep="3pt"), "small")
-    D.frame(t("What a good course project looks like", "Cum arată un proiect bun pentru acest curs"), cols(it(
+    D.frame(t("Requirements for a good course project", "Cerințele unui proiect bun pentru acest curs"), cols(it(
         (t("\\textbf{Question and data}", "\\textbf{Întrebare și date}"), t("one business decision, one public data set, its period and licence",
                                                                           "o decizie de afaceri, un set de date public, perioada și licența lui")),
         (t("\\textbf{Benchmark first}", "\\textbf{Întîi reperul}"), t("a linear or naive model, reported next to every network", "un model liniar sau naiv, raportat lîngă fiecare rețea")),

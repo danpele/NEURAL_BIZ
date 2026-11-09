@@ -34,7 +34,7 @@ Cursul este organizat după decizie și tipul datelor. Creditul și plățile s�
 
 Deep learning nu este automat mai bun. În comparația amplă a metodelor de scoring de credit realizată de Lessmann et al. (2015), regresia logistică rămîne o referință solidă, iar ansamblurile de modele conduc; pe date tabelare obișnuite, de mărime medie, ansamblurile de arbori încă depășesc rețelele adînci (Grinsztajn, Oyallon și Varoquaux, 2022). Deciziile de creditare trebuie, în plus, explicate solicitantului. De aceea, în acest curs fiecare rețea este raportată alături de un model de referință liniar și de unul de boosting.
 
-## Trei seturi reale de date de credit, fără nicio înregistrare simulată {h=8483430e}
+## Datele: trei seturi reale de date de credit {h=7a95cc59}
 
 German credit provine din Machine Learning Repository al Universității California din Irvine (UCI): 1 000 de solicitanți, 20 de atribute, sume în mărci germane (DM) și o rată de neplată de 30,0 %. HMEQ (Baesens, Rösch și Scheule, 2016) are 5 960 de credite, o rată de neplată de 19,9 % și multe valori lipsă, pe care le păstrăm. Datele California dau valoarea mediană a locuințelor în sute de mii de dolari americani (USD).
 
@@ -49,7 +49,7 @@ Rata de neplată după starea contului curent (German credit) și după numărul
 
 @practice un model trebuie să reproducă cel puțin aceste rate pe setul de validare.
 
-## Învățarea = minimizarea pierderii medii pe datele de antrenare, judecată pe date noi {h=e0d6d4b1}
+## Învățarea ca minimizare a pierderii medii pe datele de antrenare, evaluată pe date noi {h=91a55bfc}
 
 Antrenarea minimizează riscul empiric $\hat R_n(\boldsymbol\theta)=\frac1n\sum_i\ell(y_i,f(\mathbf x_i;\boldsymbol\theta))$, dar banca plătește riscul pe solicitanții viitori, $R(\boldsymbol\theta)=\mathbb E\,\ell(y,f(\mathbf x;\boldsymbol\theta))$. De aceea împărțim datele în trei: antrenare ($\boldsymbol\theta$), validare (alegerea modelului și oprirea) și testare (raportată o singură dată). Pentru HMEQ, împărțirea stratificată dă 3 576, 1 192 și 1 192 de credite; medianele și standardizarea se estimează doar pe partea de antrenare, astfel încît nicio informație nu scapă din setul de testare.
 
@@ -104,7 +104,7 @@ Perceptronul lui Rosenblatt învață o frontieră liniară din propriile greșe
 
 McCulloch și Pitts (1943) au scris neuronul ca unitate cu prag, $\hat y=\operatorname{step}(\mathbf w^\top\mathbf x+b)$; Rosenblatt (1958) a făcut ca ponderile lui să învețe din exemple etichetate. Minsky și Papert (1969) au demonstrat că un singur strat nu poate reprezenta XOR, iar domeniul și-a revenit abia cînd propagarea înapoi a erorii a permis antrenarea mai multor straturi (Rumelhart, Hinton și Williams, 1986).
 
-## Perceptronul învață numai din greșelile sale {h=050587dc}
+## Perceptronul își actualizează ponderile numai pe exemplele clasificate greșit {h=f49751d4}
 
 Dacă exemplul $i$ este clasificat greșit, $y_i(\mathbf w^\top\mathbf x_i+b)\le0$ cu $y_i\in\{-1,+1\}$, ponderile se mută spre el: $\mathbf w\leftarrow\mathbf w+\eta y_i\mathbf x_i$. Este un pas de coborîre stohastică pe gradient (SGD) pe criteriul perceptronului. Exemplele corecte nu dau gradient, iar ieșirea este o clasă, nu o probabilitate, pe care un creditor nu o poate evalua.
 
@@ -172,7 +172,7 @@ Valoarea locuințelor în funcție de latitudine: medii pe clase și rețele est
 
 O rețea ReLU este liniară pe porțiuni, iar numărul regiunilor ei liniare poate crește exponențial cu adîncimea, la un număr fix de neuroni (Montúfar et al., 2014). Pe datele tabelare de credit, două sau trei straturi ascunse sînt de obicei suficiente; adîncimea contează la imagini, text și secvențe.
 
-## Un MLP curbează frontiera de decizie, dar două intrări aduc puțin semnal în plus {h=25926395}
+## Frontiera de decizie neliniară a unui MLP cu două intrări {h=768c4df1}
 
 Cu două intrări HMEQ, raportul datorii/venit și vechimea celei mai vechi linii de credit, modelul logistic desenează benzi drepte de probabilitate, iar MLP regiuni curbe. Aria de sub curbă (AUC) a caracteristicii de operare a receptorului (ROC), adică probabilitatea ca un client în neplată ales la întîmplare să aibă un scor mai mare decît un credit bun, este 0,744 pentru modelul logistic și 0,736 pentru MLP: flexibilitatea nu ajută cînd cele două intrări aduc puțin semnal.
 

@@ -225,7 +225,7 @@ window.NN_DATA.quizzes['l8'] = {
   {
    "correct": 3,
    "en": {
-    "title": "Why the ELBO is a bound",
+    "title": "The ELBO as a lower bound",
     "text": "Why is the ELBO never above $\\log p(\\mathbf x)$?",
     "options": [
      "Because the reconstruction term is negative",
@@ -237,7 +237,7 @@ window.NN_DATA.quizzes['l8'] = {
     "incorrectExplanation": "The decomposition $\\log p(\\mathbf x)=\\text{ELBO}+\\mathrm{KL}(q\\|p(\\mathbf z\\mid\\mathbf x))$ shows the gap: the error of the encoder, measured by a KL divergence, which cannot be negative."
    },
    "ro": {
-    "title": "De ce ELBO este o margine",
+    "title": "ELBO ca margine inferioară",
     "text": "De ce ELBO nu este niciodată peste $\\log p(\\mathbf x)$?",
     "options": [
      "Pentru că termenul de reconstrucție este negativ",
@@ -603,7 +603,7 @@ window.NN_DATA.quizzes['l8'] = {
   {
    "correct": 2,
    "en": {
-    "title": "What the denoiser predicts",
+    "title": "Target of the denoising network",
     "text": "What is the training target of the DDPM network $\\boldsymbol\\varepsilon_\\theta(\\mathbf x_t,t)$?",
     "options": [
      "The clean curve $\\mathbf x_0$ only",
@@ -615,7 +615,7 @@ window.NN_DATA.quizzes['l8'] = {
     "incorrectExplanation": "The network sees the noisy input and the step and predicts the noise; knowing the noise is equivalent to knowing the clean input, and it gives a stable regression target."
    },
    "ro": {
-    "title": "Ce prezice rețeaua de difuzie",
+    "title": "Ținta rețelei de eliminare a zgomotului",
     "text": "Care este ținta de antrenare a rețelei DDPM $\\boldsymbol\\varepsilon_\\theta(\\mathbf x_t,t)$?",
     "options": [
      "Doar curba curată $\\mathbf x_0$",

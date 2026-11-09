@@ -55,7 +55,7 @@ XAI & explainable artificial intelligence\\\end{tabular}}\end{column}
 % END-ABBR
 
 
-\section{Why multimodal models}
+\section{Multimodal data in business}
 
 \begin{frame}{Images, documents and charts as business data}
 \small
@@ -103,7 +103,7 @@ XAI & explainable artificial intelligence\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Helber et al., 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Real data only: satellite images, market charts, yield-curve tables}
+\begin{frame}{The data: satellite images, market charts, yield-curve tables}
 \small
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.3\textwidth}p{0.3\textwidth}p{0.33\textwidth}@{}}\toprule
@@ -198,7 +198,7 @@ Euro area AAA yield curve, European Central Bank (ECB) & 60 tables rendered as i
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Radford et al., 2021; Oord et al., 2018)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Zero-shot classification: the class names become the classifier}
+\begin{frame}{Zero-shot classification with class names as text prompts}
 \footnotesize
 \intuition{embed one sentence per class, embed the image, and pick the closest sentence.}
 \begin{columns}[T,onlytextwidth]
@@ -251,7 +251,7 @@ Euro area AAA yield curve, European Central Bank (ECB) & 60 tables rendered as i
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L14\_zeroshot\_examples}{Quantlets/L14/NN_L14_zeroshot_examples}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Where zero-shot fails: similar-looking land uses}
+\begin{frame}{Zero-shot errors on visually similar land uses}
 \small
 \intuition{rows: true class; columns: predicted class; each row sums to 100\,\%.}
 \begin{center}\includegraphics[width=\textwidth,height=0.524\textheight,keepaspectratio]{charts/en/zeroshot_confusion.pdf}\end{center}\vspace{-3mm}
@@ -349,7 +349,7 @@ Qwen2-VL-2B (chart questions) & 2.21 billion & 262 & -- \\
 
 \section{Vision-language models: reading charts and tables}
 
-\begin{frame}{A VLM plugs an image encoder into a language model}
+\begin{frame}{A VLM: an image encoder connected to a language model}
 \footnotesize
 \intuition{image patches are projected into the word-embedding space of a large language model (LLM), which reads them as extra tokens.}
 \begin{columns}[T,onlytextwidth]
@@ -450,7 +450,7 @@ Qwen2-VL zero-shot & \cellcolor{Forest!11}0.758 & \cellcolor{Crimson!9}0.302 & n
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation, after Jheng, Pele, Tak \& Găman, 2026)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{What a 2-billion-parameter VLM can read: trends and table cells}
+\begin{frame}{Reading trends and table cells with a 2-billion-parameter VLM}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Trend question} on 394 test charts: ``did the price end higher or lower?''
@@ -471,7 +471,7 @@ Qwen2-VL zero-shot & \cellcolor{Forest!11}0.758 & \cellcolor{Crimson!9}0.302 & n
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation; Wang et al., 2024)}\hfill\tryit{notebook \S5}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A document pipeline in a bank: where the VLM fits}
+\begin{frame}{The role of a VLM in a bank's document pipeline}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{1. Capture}
@@ -569,7 +569,7 @@ Trust & explainable artificial intelligence (XAI): Shapley additive explanations
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Five evaluation rules that held in every lecture}
+\begin{frame}{Five evaluation rules applied throughout the course}
 \small
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{No leakage}: scalers, prompts and thresholds are chosen on training or validation data
@@ -641,7 +641,7 @@ Contrastive image--text loss & $-\log\frac{e^{s_{ii}}}{\sum_j e^{s_{ij}}}$ & 14 
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Responsible use: the same rules for every model of the course}
+\begin{frame}{Responsible use of the models of the course}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Regulation}
@@ -663,7 +663,7 @@ Contrastive image--text loss & $-\log\frac{e^{s_{ii}}}{\sum_j e^{s_{ij}}}$ & 14 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{What a good course project looks like}
+\begin{frame}{Requirements for a good course project}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
