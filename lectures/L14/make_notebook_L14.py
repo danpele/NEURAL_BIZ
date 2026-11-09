@@ -31,7 +31,7 @@ NAMES = ("NAMES = {'AnnualCrop': 'annual crop land', 'Forest': 'forest', 'Herbac
 
 def lecture(nb):
     T = nb.T
-    nb.md(T("## §1 A vision transformer sees patches", "## §1 Un transformer pentru imagini vede petice"))
+    nb.md(T("## §1 Image patches in a vision transformer", "## §1 Fragmentele de imagine într-un transformer pentru imagini"))
     nb.code(SETUP)
     nb.code("img = ES[int(Z['index'][0])][0].resize((224, 224), Image.NEAREST)\nfig, ax = plt.subplots(figsize=(3, 3))\nax.imshow(img)\n"
             "for g in range(0, 225, 32):\n    ax.axhline(g - 0.5, color='white', lw=0.5); ax.axvline(g - 0.5, color='white', lw=0.5)\n"
@@ -43,7 +43,7 @@ def lecture(nb):
             "print('full test set, lecture results:', {c: round(100 * float((Z[c] == Z['true']).mean()), 1) for c in Z.columns if c[:3] in ('B32', 'B16')})")
     nb.md(T("§ *Experiment yourself*: write prompts for a class pair that CLIP confuses (pasture and herbaceous vegetation) and check whether the accuracy improves.",
             "§ *Exercițiu practic*: scrieți prompturi pentru o pereche de clase pe care CLIP le confundă (pășune și vegetație ierboasă) și verificați dacă acuratețea crește."))
-    nb.md(T("## §3 A linear probe needs few labels", "## §3 Un clasificator liniar are nevoie de puține etichete"))
+    nb.md(T("## §3 A linear probe with few labels", "## §3 Un clasificator liniar cu puține etichete"))
     nb.code("from sklearn.linear_model import LogisticRegression\ntrain_idx = np.setdiff1d(np.arange(len(ES)), Z['index'].values)\n"
             "ytr_all = np.array(ES.targets)[train_idx]\nrng = np.random.default_rng(SEED)\nk16 = np.concatenate([rng.choice(train_idx[ytr_all == c], 16, replace=False) for c in range(10)])\n"
             "clf = LogisticRegression(max_iter=3000, C=10).fit(img_emb(k16), np.array(ES.targets)[k16])\n"
@@ -53,7 +53,7 @@ def lecture(nb):
     nb.code("from sklearn.metrics import roc_auc_score\nC = pd.read_csv(RES + 'chart_regime.csv')\nTt = C[C.split == 'test']\n"
             "print('stress share in test:', round(100 * Tt.stress.mean(), 1), '%')\n"
             "print({m: round(roc_auc_score(Tt.stress, Tt[m]), 3) for m in ('numeric', 'clip_probe', 'clip_zs', 'vlm_stress')})")
-    nb.md(T("## §5 What a vision-language model reads from tables", "## §5 Ce citește un model vizual-lingvistic din tabele"))
+    nb.md(T("## §5 Reading tables with a vision-language model", "## §5 Citirea tabelelor cu un model vizual-lingvistic"))
     nb.code("TR = pd.read_csv(RES + 'table_reading.csv')\nTR['read'] = pd.to_numeric(TR.answer.str.extract(r'(-?\\d+(?:\\.\\d+)?)')[0], errors='coerce')\n"
             "print('exact answers:', round(100 * float(np.isclose(TR.read, TR.true_10y, atol=0.001).mean()), 1), '%')\nprint(TR[~np.isclose(TR.read, TR.true_10y, atol=0.001)].head())\n"
             "fig, ax = plt.subplots(figsize=(4.6, 1.3))\nax.imshow(Image.open(RES + 'table_example.png'))\nax.axis('off')\nplt.show()")

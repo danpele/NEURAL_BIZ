@@ -145,7 +145,7 @@ def lecture(nb):
             "for bn in (False, True):\n"
             "    _, h, _ = fit(Cz[ci_tr], y32[ci_tr], Cz[ci_va], y32[ci_va], hidden=(64,) * 6, bn=bn, lr=0.1, epochs=40, bs=128, early=False, loss='mse', opt_name='sgd')\n"
             "    v = [x[1] for x in h]; print('batch norm' if bn else 'no batch norm', '| epochs run', len(v), '| best validation MSE', round(np.nanmin(v), 3))")
-    nb.md(T("## §7 How noisy is one hold-out split?", "## §7 Cît de zgomotoasă este o singură împărțire?"))
+    nb.md(T("## §7 Variability of a single hold-out split", "## §7 Variabilitatea unei singure împărțiri"))
     nb.code("aucs = []\n"
             "for s in range(200):\n"
             "    a, b = train_test_split(np.arange(len(yg)), test_size=0.3, stratify=yg, random_state=SEED + s); xa, xb = encode_german(Xg_raw.iloc[a], [Xg_raw.iloc[b]])\n"

@@ -130,8 +130,8 @@ def lecture(nb):
             "def ig(X, m=64):\n    tot = np.zeros_like(X)\n    for a in (np.arange(m) + 0.5) / m: tot += grad_of(base_f + a * (X - base_f))\n    return (X - base_f) * tot / m\n"
             "gap = ff(F2) - ff(base_f[None])[0]\nfor m_ in (4, 16, 64, 256):\n"
             "    print('IG steps', m_, 'median completeness error %:', round(100 * np.median(np.abs(ig(F2, m_).sum(1) - gap) / np.abs(gap)), 3))")
-    nb.md(T("## §6 Do the methods agree? Faithfulness (deletion) and local robustness",
-            "## §6 Sînt metodele de acord? Fidelitatea (eliminarea) și robustețea locală"))
+    nb.md(T("## §6 Agreement between methods, faithfulness (deletion) and local robustness",
+            "## §6 Concordanța metodelor, fidelitatea (eliminarea) și robustețea locală"))
     nb.code("from scipy import stats\nA = {'saliency': np.abs(grad_of(F2)), 'gradxinput': grad_of(F2) * (F2 - base_f), 'ig': ig(F2)}\n"
             "G = pd.DataFrame({k: np.abs(v).mean(0) for k, v in A.items()}, index=FF)\nprint(G.corr(method='spearman').round(2))\n"
             "def deletion(Am, K=12):\n    out = np.zeros(K + 1)\n    for i, x in enumerate(F2):\n        o = np.argsort(-np.abs(Am[i])); xs = np.repeat(x[None], K + 1, 0)\n"

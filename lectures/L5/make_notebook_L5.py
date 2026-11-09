@@ -91,7 +91,7 @@ def lecture(nb):
             "print('rho_r(1) =', round(ar[0], 3), ' rho_|r|(1) =', round(aa[0], 3), ' rho_|r|(50) =', round(aa[-1], 3))\n"
             "fig, ax = plt.subplots(figsize=(7, 2.4)); ax.vlines(np.arange(1, 51) - .15, 0, ar, label='r'); ax.vlines(np.arange(1, 51) + .15, 0, aa, color='C1', label='|r|')\n"
             "fig.legend(loc='lower center', ncol=2); fig.tight_layout(rect=(0, .1, 1, 1)); plt.show()")
-    nb.md(T("## §2 Benchmarks first: naive, HAR, GARCH", "## §2 Întîi modelele de referință: naiv, HAR, GARCH"))
+    nb.md(T("## §2 Benchmarks: naive, HAR, GARCH", "## §2 Modelele de referință: naiv, HAR, GARCH"))
     nb.code(NET + "\n" + VOLDATA)
     nb.code("X, Y, td, ytrue, naive, H, mu, sd = vol_data(spx)\ntr, va, te = td <= TR_END, (td > TR_END) & (td <= VA_END), td > VA_END\n"
             "beta = np.linalg.lstsq(H[tr], ytrue[tr], rcond=None)[0]; har = H @ beta\nmse = lambda p: float(np.mean((p[te] - ytrue[te]) ** 2))\n"
@@ -100,7 +100,7 @@ def lecture(nb):
     nb.code("P = {}\nfor cell in ['rnn', 'lstm', 'gru']:\n    m = train_rec(cell, X[tr], Y[tr], X[va], Y[va])\n"
             "    P[cell] = predict(m, X)[:, 0] * sd + mu; print(cell, 'test MSE', round(mse(P[cell]), 4))\n"
             "print('DM LSTM vs HAR:', dm_test((P['lstm'][te] - ytrue[te]) ** 2, (har[te] - ytrue[te]) ** 2))")
-    nb.md(T("## §4 Returns: is there anything to forecast?", "## §4 Randamentele: este ceva de prognozat?"))
+    nb.md(T("## §4 Forecasting returns", "## §4 Prognoza randamentelor"))
     nb.code("r = spx.r.values.astype(np.float32); d = spx.index; Tn = np.arange(21, len(r) - 1); tdr = d[Tn + 1]\n"
             "a, b, c = tdr <= TR_END, (tdr > TR_END) & (tdr <= VA_END), tdr > VA_END; s = r[d <= TR_END].std()\n"
             "Xr = np.stack([r[t - 21:t + 1, None] / s for t in Tn]).astype(np.float32); Yr = (r[Tn + 1] / s).astype(np.float32)\n"
@@ -126,7 +126,7 @@ def lecture(nb):
             "from sklearn.linear_model import Ridge\nZ = np.column_stack([X_[:, :, :24].reshape(len(X_), -1), S_]); rg = Ridge(alpha=1).fit(Z[a], Y_[a])\n"
             "lstm = train_rec('lstm', X_[a], Y_[a], X_[b], Y_[b], hidden=48, epochs=40, lr=3e-3, bs=64, Str=S_[a], Sva=S_[b], patience=5)\n"
             "pl = predict(lstm, X_, S_) * lsd + NV\nprint('MAPE %: seasonal naive', mape(NV), ' ridge ARX', mape(rg.predict(Z) * lsd + NV), ' LSTM', mape(pl))")
-    nb.md(T("## §6 How far back does the network look?", "## §6 Cît de departe privește rețeaua în trecut?") + "\n\n" +
+    nb.md(T("## §6 Effective memory of the network", "## §6 Memoria efectivă a rețelei") + "\n\n" +
           T("$S(k)=\\frac1n\\sum_i|\\partial \\hat y_{i,12}/\\partial x_{i,T+1-k}|$, the sensitivity of the noon forecast to the input $k$ hours earlier.",
             "$S(k)=\\frac1n\\sum_i|\\partial \\hat y_{i,12}/\\partial x_{i,T+1-k}|$, sensibilitatea prognozei pentru ora 12 la intrarea de acum $k$ ore."))
     nb.code("rnn = train_rec('rnn', X_[a], Y_[a], X_[b], Y_[b], hidden=48, epochs=40, lr=3e-3, bs=64, Str=S_[a], Sva=S_[b], patience=5)\n"

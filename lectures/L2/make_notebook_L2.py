@@ -193,7 +193,7 @@ def lecture(nb):
             "print('test days', v_te.sum(), ' expected violations', round(TAU * v_te.sum(), 1))\n"
             "print('quantile MLP (violations, LR, p):', kupiec(yy[v_te] < q[v_te]))\n"
             "print('historical simulation (violations, LR, p):', kupiec(yy[v_te] < hs[v_te]))")
-    nb.md(T("## §9 CPU or GPU?", "## §9 CPU sau GPU?"))
+    nb.md(T("## §9 Training time on CPU and GPU", "## §9 Timpul de antrenare pe CPU și GPU"))
     nb.code("import time\n"
             "dev = 'cuda' if torch.cuda.is_available() else ('mps' if torch.backends.mps.is_available() else 'cpu')\n"
             "def timing(d, steps=20):\n"

@@ -110,7 +110,7 @@ def lecture(nb):
             "z = lm.params[0] + contrib.sum()\n"
             "print(pd.Series(contrib, index=base).sort_values(key=abs, ascending=False).round(2).head(3))\n"
             "print('score z =', round(z, 2), ' PD =', round(100 / (1 + np.exp(-z)), 1), '%')")
-    nb.md(T("## §3 The perceptron never settles on real loans", "## §3 Perceptronul nu se stabilizează pe credite reale"))
+    nb.md(T("## §3 Perceptron convergence on real loan data", "## §3 Convergența perceptronului pe date reale de credit"))
     nb.code("rng = np.random.default_rng(SEED); s = 2 * ytr - 1; X = Xtr.astype(float)\n"
             "w, b, err = np.zeros(X.shape[1]), 0.0, []\n"
             "for ep in range(60):\n"

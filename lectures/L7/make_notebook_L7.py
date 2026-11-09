@@ -113,8 +113,8 @@ print('small transformer, test macro-F1:', round(100 * f1_score(yte, pred_tiny, 
             "for b in range(0, len(perm), 32):\n    j = perm[b:b+32]; loss = F.cross_entropy(fb(input_ids=Itr[j].to(DEVICE), attention_mask=Mtr[j].to(DEVICE)).logits, yfin[j].to(DEVICE))\n"
             "    opt.zero_grad(); loss.backward(); opt.step()\nfb.eval(); lg, _ = run(fb, Ite, Mte)\np_ft = np.array([fin2our[int(i)] for i in lg.argmax(1)])\n"
             "print('FinBERT fine-tuned (1 epoch) macro-F1', round(100 * f1_score(yte, p_ft, average='macro'), 1))\nprint(confusion_matrix(yte, p_ft))")
-    nb.md(T("## §6 How much labelled data do you need?\nTF-IDF and frozen FinBERT trained on 5 %, 25 % and 100 % of the training tweets.",
-            "## §6 De cîte date etichetate este nevoie?\nTF-IDF și FinBERT înghețat, antrenate pe 5 %, 25 % și 100 % dintre tweet-urile de antrenare."))
+    nb.md(T("## §6 Accuracy by size of the labelled sample\nTF-IDF and frozen FinBERT trained on 5 %, 25 % and 100 % of the training tweets.",
+            "## §6 Acuratețea în funcție de volumul datelor etichetate\nTF-IDF și FinBERT înghețat, antrenate pe 5 %, 25 % și 100 % dintre tweet-urile de antrenare."))
     nb.code("for fr in [0.05, 0.25, 1.0]:\n    idx = np.arange(len(ytr)) if fr == 1 else train_test_split(np.arange(len(ytr)), train_size=fr, stratify=ytr, random_state=1)[0]\n"
             "    v2 = TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True); xa = v2.fit_transform(tr.text.iloc[idx])\n"
             "    f_t = f1_score(yte, LogisticRegression(C=10, max_iter=3000, class_weight='balanced').fit(xa, ytr[idx]).predict(v2.transform(te.text)), average='macro')\n"
