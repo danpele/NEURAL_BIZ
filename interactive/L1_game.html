@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You or the network? A credit game</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 1 · Game: you or the network?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<style>
+.g-wrap { max-width: 760px; }
+.g-tab { width: 100%; border-collapse: collapse; margin: 0.3rem 0 0.8rem; font-size: 0.95rem; }
+.g-tab th { text-align: left; font-weight: 500; padding: 0.3rem 0.6rem 0.3rem 0; border-bottom: 1px solid var(--border); width: 62%; }
+.g-tab td { text-align: right; font-weight: 600; padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+.g-miss { color: var(--ida-red); font-style: italic; font-weight: 600; }
+.g-act { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.g-act .btn { flex: 1 1 200px; padding: 0.7rem 1rem; font-size: 1rem; }
+.g-act .btn:disabled { opacity: 0.45; cursor: default; }
+.g-ok { border-color: #2E7D32; color: #2E7D32; }
+.g-ok:hover:not(:disabled) { background: #2E7D32; color: #fff; }
+.g-no { border-color: var(--ida-red); color: var(--ida-red); }
+.g-no:hover:not(:disabled) { background: var(--ida-red); color: #fff; }
+.g-res { margin: 0.7rem 0 0.8rem 1.2rem; }
+.g-res li { margin: 0.2rem 0; }
+.g-right { color: #2E7D32; font-weight: 700; }
+.g-wrong { color: var(--ida-red); font-weight: 700; }
+.g-score { font-size: 1.05rem; margin: 0 0 0.6rem; min-height: 1.5em; }
+.g-of { color: var(--mid-gray); }
+.g-big { font-size: 1.15rem; font-weight: 600; }
+#g-card h4 { color: var(--main-blue); margin: 1rem 0 0.3rem; }
+</style>
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 1 · Game: you or the network?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L1.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L1/lecture1.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L1_game.html" class="lang-btn active">EN</a><a href="L1_game_ro.html" class="lang-btn ">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">You or the network? A credit game</h2>
+<section id="g-intro">
+  <p class="lead">You are the credit officer of a bank. You see 10 real home-equity loan applications and decide: approve or refuse. After each decision you see what the network of Lecture 1 decided and whether the client repaid. In the full data 19.9% of the loans defaulted; in the game one application in three is a default.</p>
+  <p>The network is the multilayer perceptron (MLP 64-64) of the lecture, trained on 3,576 other loans; it never saw these applications. It refuses a loan when its probability of default is at least 50%.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 1,192 test loans the network decides correctly in 92.1% of cases (AUC, the area under the ROC curve, 0.942).</li><li>A signal people tend to overlook: when the debt-to-income ratio is missing from the file, 62.0% of the loans default; when it is reported, 8.6%. The network learned this from the data.</li><li>50% is not necessarily the right threshold: if a default costs five times as much as a lost good client, the cost-minimising threshold is 1/6 (slide 40 of the lecture).</li></ul></template>
+<p class="src foot">Data: HMEQ home-equity loans (Baesens, Roesch and Scheule, 2016; 5,960 loans). The 36 applications of the game are drawn at random from the test loans (12 defaults, 24 repaid; seed 20261108); every game draws 10 of them. Code: lectures/L1/make_game_L1.py.</p>
+</main>
+<script src="L1_game_data.js?v=20261109g"></script>
+<script src="L1_game.js?v=20261109g"></script>
+</body>
+</html>

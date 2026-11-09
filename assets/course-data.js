@@ -89,7 +89,7 @@
                 coming: 'Coming',
                 chapterSoon: 'The materials of this lecture will be published before the lecture.',
                 rows: { course: 'Lecture', code: 'Code' },
-                links: { slides: 'Slides (PDF)', web: 'Web page', interactive: 'Interactive', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Open in Colab', quantletsTitle: 'The code of every chart of the lecture, one folder per chart, on GitHub' },
+                links: { slides: 'Slides (PDF)', web: 'Web page', interactive: 'Interactive', game: 'Game: you or the network?', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Open in Colab', quantletsTitle: 'The code of every chart of the lecture, one folder per chart, on GitHub' },
                 formulas: 'Key formulas',
                 prevChart: 'Previous chart',
                 nextChart: 'Next chart',
@@ -168,7 +168,7 @@
                 coming: 'Urmează',
                 chapterSoon: 'Materialele acestui curs vor fi publicate înainte de curs.',
                 rows: { course: 'Curs', code: 'Cod' },
-                links: { slides: 'Slide-uri (PDF)', web: 'Pagină web', interactive: 'Interactiv', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Deschide în Colab', quantletsTitle: 'Codul fiecărui grafic al cursului, cîte un dosar pentru fiecare grafic, pe GitHub' },
+                links: { slides: 'Slide-uri (PDF)', web: 'Pagină web', interactive: 'Interactiv', game: 'Joc: dumneavoastră sau rețeaua?', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Deschide în Colab', quantletsTitle: 'Codul fiecărui grafic al cursului, cîte un dosar pentru fiecare grafic, pe GitHub' },
                 formulas: 'Formule principale',
                 prevChart: 'Graficul anterior',
                 nextChart: 'Graficul următor',
@@ -278,7 +278,7 @@
         // ---------------------------------------------------------------
         lectures: [
             {
-                id: 'l1', num: 1, status: 'ready', files: files(1), interactive: true,
+                id: 'l1', num: 1, status: 'ready', files: files(1), interactive: true, game: true,
                 videos: [{ id: 'aircAruvnKk', by: '3Blue1Brown', title: 'But what is a neural network? | Deep learning chapter 1' }, { id: 'CqOfi41LfDw', by: 'StatQuest with Josh Starmer', title: 'The Essential Main Ideas of Neural Networks' }, { id: 'bxe2T-V8XRs', by: 'Welch Labs', title: 'Neural Networks Demystified [Part 1: Data and Architecture]' }, { id: '68BZ5f7P94E', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 3: ReLU In Action!!!' }, { id: '83LYR-1IcjA', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 4: Multiple Inputs and Outputs' }, { id: 'KpKog-L9veg', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 5: ArgMax and SoftMax' }, { id: 'ErnWZxJovaM', by: 'Alexander Amini', title: 'MIT Introduction to Deep Learning (2024) | 6.S191' }],
                 quantinar: [q('mlRisk'), q('digitalTransformation')],
                 title: TITLES[1],

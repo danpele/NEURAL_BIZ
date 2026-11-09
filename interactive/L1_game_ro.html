@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau rețeaua? Un joc de creditare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 1 · Joc: dumneavoastră sau rețeaua?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<style>
+.g-wrap { max-width: 760px; }
+.g-tab { width: 100%; border-collapse: collapse; margin: 0.3rem 0 0.8rem; font-size: 0.95rem; }
+.g-tab th { text-align: left; font-weight: 500; padding: 0.3rem 0.6rem 0.3rem 0; border-bottom: 1px solid var(--border); width: 62%; }
+.g-tab td { text-align: right; font-weight: 600; padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+.g-miss { color: var(--ida-red); font-style: italic; font-weight: 600; }
+.g-act { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.g-act .btn { flex: 1 1 200px; padding: 0.7rem 1rem; font-size: 1rem; }
+.g-act .btn:disabled { opacity: 0.45; cursor: default; }
+.g-ok { border-color: #2E7D32; color: #2E7D32; }
+.g-ok:hover:not(:disabled) { background: #2E7D32; color: #fff; }
+.g-no { border-color: var(--ida-red); color: var(--ida-red); }
+.g-no:hover:not(:disabled) { background: var(--ida-red); color: #fff; }
+.g-res { margin: 0.7rem 0 0.8rem 1.2rem; }
+.g-res li { margin: 0.2rem 0; }
+.g-right { color: #2E7D32; font-weight: 700; }
+.g-wrong { color: var(--ida-red); font-weight: 700; }
+.g-score { font-size: 1.05rem; margin: 0 0 0.6rem; min-height: 1.5em; }
+.g-of { color: var(--mid-gray); }
+.g-big { font-size: 1.15rem; font-weight: 600; }
+#g-card h4 { color: var(--main-blue); margin: 1rem 0 0.3rem; }
+</style>
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 1 · Joc: dumneavoastră sau rețeaua?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L1_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L1/lecture1_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L1_game.html" class="lang-btn ">EN</a><a href="L1_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau rețeaua? Un joc de creditare</h2>
+<section id="g-intro">
+  <p class="lead">Sînteți analistul de credit al unei bănci. Vedeți 10 cereri reale de credit garantat cu locuința și decideți: aprobați sau respingeți. După fiecare decizie vedeți ce a decis rețeaua din cursul 1 și dacă clientul a rambursat. În datele complete, 19,9 % dintre credite au intrat în neplată; în joc, una din trei cereri este o neplată.</p>
+  <p>Rețeaua este perceptronul multistrat (MLP 64-64) din curs, antrenat pe alte 3.576 de credite; nu a văzut aceste cereri. Respinge un credit cînd probabilitatea de neplată este de cel puțin 50 %.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 1.192 de credite de test, rețeaua decide corect în 92,1 % din cazuri (AUC, aria de sub curba ROC, 0,942).</li><li>Un semnal pe care oamenii îl trec ușor cu vederea: cînd raportul datorii/venit lipsește din dosar, 62,0 % dintre credite ajung în neplată; cînd este raportat, 8,6 %. Rețeaua a învățat asta din date.</li><li>Pragul de 50 % nu este neapărat cel potrivit: dacă o neplată costă de cinci ori cît un client bun pierdut, pragul care minimizează costul este 1/6 (slide-ul 40 din curs).</li></ul></template>
+<p class="src foot">Date: creditele HMEQ garantate cu locuința (Baesens, Roesch și Scheule, 2016; 5.960 de credite). Cele 36 de cereri din joc sînt extrase aleator dintre creditele de test (12 neplăți, 24 rambursate; sămînța 20261108); fiecare joc extrage 10 dintre ele. Cod: lectures/L1/make_game_L1.py.</p>
+</main>
+<script src="L1_game_data.js?v=20261109g"></script>
+<script src="L1_game.js?v=20261109g"></script>
+</body>
+</html>
