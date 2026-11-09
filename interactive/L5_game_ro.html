@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crește sau scade mîine?</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 5 · Joc: Crește sau scade mîine?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 5 · Joc: Crește sau scade mîine?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L5_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L5/lecture5_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L5_game.html" class="lang-btn">EN</a><a href="L5_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Crește sau scade mîine?</h2>
+<section id="g-intro">
+  <p class="lead">Vedeți ultimele 60 de zile de tranzacționare ale indicelui S&amp;P 500 sau ale acțiunii Banca Transilvania (TLV, Bursa de Valori București) și decideți: următoarea zi de tranzacționare se închide în creștere sau în scădere? După fiecare decizie vedeți prognoza rețelei recurente din cursul 5 și închiderea reală. Toate cele 10 zile provin din perioada de test a cursului (2020 - octombrie 2026), pe care rețeaua nu a văzut-o la antrenare.</p>
+  <p>Rețeaua este LSTM-ul (rețea cu memorie lungă pe termen scurt, long short-term memory) din curs: are 16 unități ascunse, citește ultimele 22 de randamente zilnice și îl prognozează pe următorul. A fost antrenată pe perioada 2005-2016 (TLV: 2008-2016) și ajustată pe 2017-2019. În curs au fost antrenate cinci astfel de rețele, cu semințe diferite; jocul arată media prognozelor lor și răspunde „crește” cînd aceasta este pozitivă. În zilele de test ale S&amp;P 500, această medie indică o creștere în 70,2 % din zile.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 1.717 de zile de test ale S&amp;P 500, LSTM-ul din curs ghicește direcția în 52,1 % din zile, iar pe cele 1.573 de zile de test ale Băncii Transilvania, în 52,9 % (media celor cinci rețele; media prognozelor lor: 53,1 % și 53,1 %). Răspunsul „crește” în fiecare zi ar fi obținut 54,0 % și 55,1 %.</li><li>R² în afara eșantionului (partea din varianța randamentelor explicată de prognoză) este 0,78 % pentru S&amp;P 500 și 0,21 % pentru TLV: semnul randamentului de mîine este aproape aruncarea unei monede, pentru dumneavoastră și pentru rețea.</li><li>Memorie are, în schimb, mărimea mișcărilor (autocorelația randamentelor absolute ale S&amp;P 500 este 0,315 la decalajul 1). De aceea cursul prognozează volatilitatea: acolo LSTM-ul reduce eroarea pătratică medie a prognozei naive cu 35,3 %.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l5">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: prețurile de închidere ajustate ale S&amp;P 500 (Yahoo Finance) și ale Băncii Transilvania (EODHD, Bursa de Valori București); prognoze: prognozele LSTM salvate de analysis_L5.py (lectures/L5/cache/ret.pkl). Cele 40 de zile din joc sînt extrase aleator dintre zilele de test (20 pentru fiecare serie; sămînța 20261108); fiecare joc extrage 5 din fiecare serie. Cod: lectures/L5/make_game_L5.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L5_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L5_game.js?v=20261109g"></script>
+</body>
+</html>

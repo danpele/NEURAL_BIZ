@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real sau generat? Randamentele S&amp;P 500</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 8 · Joc: Real sau generat? Randamentele S&amp;P 500">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 8 · Joc: Real sau generat? Randamentele S&amp;P 500</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L8_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L8/lecture8_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L8_game.html" class="lang-btn">EN</a><a href="L8_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Real sau generat? Randamentele S&amp;P 500</h2>
+<section id="g-intro">
+  <p class="lead">Fiecare carte arată două serii de cîte 250 de randamente zilnice ale indicelui bursier S&amp;P 500, cam un an de tranzacționare. Una este reală, din anii 2005–2019; cealaltă a fost produsă de rețeaua generativă adversarială (GAN) din cursul 8, antrenată pe aceiași ani. Alegeți seria reală.</p>
+  <p>Modelul cu care jucați nu este o rețea, ci un test statistic din curs: gruparea volatilității. Pentru fiecare serie calculează autocorelația medie a randamentelor în valoare absolută la decalajele 1–5 (o săptămînă de tranzacționare) și declară reală seria cu valoarea mai mare.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>GAN-ul a învățat bine distribuția unei singure zile: valoarea sa la risc (VaR) de 1 % este −3,61 %, față de −3,48 % pentru randamentele reale, iar cozile sînt groase (excesul de aplatizare 6,65, față de 11,86).</li><li>Nu a învățat ordinea zilelor: autocorelația randamentelor în valoare absolută la decalajul 1 este 0,28 pentru randamentele reale și −0,01 pentru GAN. Piețele reale au perioade calme și perioade agitate; GAN-ul își împrăștie la întîmplare mișcările mari.</li><li>Doar această statistică alege seria reală în 98,2 % din 1.000 de perechi aleatoare. Un generator pentru teste de stres trebuie să producă traiectorii întregi, nu zile izolate; de aceea cursul continuă cu modelele de secvențe și cu modelele de difuzie.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l8">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: S&amp;P 500, prețuri zilnice de închidere ajustate (Yahoo Finance), randamente logaritmice 4 ianuarie 2005 – 31 decembrie 2019; eșantioane GAN: lectures/L8/cache/gan.npz (generatorul cu sămînța 1). Cele 24 de perechi din joc sînt extrase aleator (sămînța 20261108); fiecare joc arată 10 dintre ele, în ordine și poziție aleatoare. Cod: lectures/L8/make_game_L8.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L8_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L8_game.js?v=20261109g"></script>
+</body>
+</html>

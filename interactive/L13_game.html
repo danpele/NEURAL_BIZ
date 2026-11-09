@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Higher or lower than today?</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 13 · Game: Higher or lower than today?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 13 · Game: Higher or lower than today?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L13.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L13/lecture13.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L13_game.html" class="lang-btn active">EN</a><a href="L13_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Higher or lower than today?</h2>
+<section id="g-intro">
+  <p class="lead">You are the trader of a Romanian electricity supplier. You see the daily average day-ahead price of the last three weeks on the Romanian market (OPCOM, Romanian electricity and gas market operator) and decide: will tomorrow's average price be higher or lower than today's? After each decision you see the forecast of the foundation model of Lecture 13 and the real price. All 10 days come from the test year of the lecture (1 November 2025 to 31 October 2026).</p>
+  <p>The model is Chronos-2, a time-series foundation model pre-trained by Amazon on many other series and used zero-shot: it was never trained on Romanian prices. It reads the last 2,048 hourly prices (about 85 days) and forecasts the 24 hours of tomorrow; the game averages them. For comparison you also see LEAR (an autoregressive model estimated with the LASSO, least absolute shrinkage and selection operator), the classical benchmark of electricity price forecasting, recalibrated every day on three years of data.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 360 evaluation days of the test year Chronos-2 calls the direction right on 79.2% of days, LEAR on 79.2%; the price rose on 46.4% of days. In Lecture 5 the LSTM (long short-term memory network) called the direction of daily returns right on only 52.1% of days (S&amp;P 500) and 52.9% (Banca Transilvania).</li><li>Electricity has a calendar that stock prices do not have: in the test year the average day cost 145.3 EUR/MWh from Monday to Friday, 114.7 on Saturday and 101.9 on Sunday. A good part of the game is the weekly cycle, and the model learned it from the context alone.</li><li>The lecture measures more than the direction: the mean absolute error (MAE) of Chronos-2 over the 24 hours is 20.72 EUR/MWh, against 22.79 for LEAR and 27.74 for the naive rule: about 25% less than the naive rule.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l13">Class board for the projector</a></p>
+<p class="src foot">Data: Romanian day-ahead prices (OPCOM, via energy-charts.info), daily averages of the 24 hourly prices; forecasts: cached test-year forecasts of analysis_L13.py (lectures/L13/results/forecasts_hourly.csv). The 40 days of the game are drawn at random from the 360 evaluation days (seed 20261108); every game draws 10 of them. Code: lectures/L13/make_game_L13.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L13_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L13_game.js?v=20261109g"></script>
+</body>
+</html>

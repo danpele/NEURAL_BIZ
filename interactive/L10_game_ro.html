@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau agentul? O baterie pe piața românească pentru ziua următoare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 10 · Joc: Dumneavoastră sau agentul? O baterie pe piața românească pentru ziua următoare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 10 · Joc: Dumneavoastră sau agentul? O baterie pe piața românească pentru ziua următoare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L10_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L10/lecture10_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L10_game.html" class="lang-btn">EN</a><a href="L10_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau agentul? O baterie pe piața românească pentru ziua următoare</h2>
+<section id="g-intro">
+  <p class="lead">Administrați o baterie de 2 MWh pe piața românească de energie electrică pentru ziua următoare. Fiecare card este o zi reală din 2025 sau 2026. Ca și agentul din curs, planificați ziua înainte de a-i cunoaște prețurile: vedeți doar cele 24 de prețuri orare de ieri și alegeți unul dintre patru planuri simple. Apoi vedeți cît au cîștigat planul dumneavoastră, agentul și un operator cu previziune perfectă la prețurile reale ale zilei.</p>
+  <p>Bateria încarcă sau descarcă 1 MWh de energie stocată pe oră, începe ziua goală și pierde 15 % din energie pe un ciclu complet (randament dus-întors de 85 %). Agentul este agentul Q-learning tabelar din curs (reinforcement learning: a învățat în ce ore să încarce și să descarce din 1.746 de zile din 2019-2023); starea sa este ora, energia stocată și rangul orei respective între prețurile de ieri. Un card este cîștigat în fața agentului cînd planul dumneavoastră aduce cel puțin cît agentul; scorul numără cardurile pe care ați ales cel mai bun dintre cele patru planuri.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe cele 638 de zile de test (1 ianuarie 2025 - 24 octombrie 2026), previziunea perfectă aduce 202,1 mii EUR, planul optim de ieri 163,1 mii (80,7 % din maxim), Q-learning tabelar 115,2 mii (57,0 %), iar rețeaua Q profundă (DQN, deep Q-network) 101,3 mii (50,1 %), medii pe cinci valori inițiale.</li><li>Cele trei planuri fixe din joc aduc, în aceleași zile, 77,2 (noaptea - seara), 144,9 (la prînz - seara) și 148,0 mii EUR (două cicluri); agentul din joc (prima valoare inițială) aduce 101,4 mii.</li><li>O regulă simplă care folosește toate cele 24 de prețuri de ieri îi întrece pe ambii agenți: un agent de reinforcement learning trebuie comparat întotdeauna cu regula folosită deja în practică.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l10">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: prețurile orare pentru ziua următoare în România, energy-charts.info (Institutul Fraunhofer pentru Sisteme de Energie Solară, ISE), pînă la 31 octombrie 2026; orele sînt în ora Europei Centrale (CET). Cele 40 de zile din joc sînt extrase aleator dintre cele 638 de zile de test (sămînța 20261108); fiecare joc extrage 8 dintre ele. Orele planurilor fixe provin din profilul mediu al prețurilor din 2019-2024. Cod: lectures/L10/make_game_L10.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L10_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L10_game.js?v=20261109g"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You or FinBERT? Finance tweets on which the models disagree</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 7 · Game: You or FinBERT? Finance tweets on which the models disagree">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 7 · Game: You or FinBERT? Finance tweets on which the models disagree</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L7.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L7/lecture7.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L7_game.html" class="lang-btn active">EN</a><a href="L7_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">You or FinBERT? Finance tweets on which the models disagree</h2>
+<section id="g-intro">
+  <p class="lead">You read 10 real finance tweets and decide whether each one is bearish (bad news for the price), neutral or bullish (good news for the price). After each answer you see what FinBERT decided, what two simple models decided, and the true label. The tweets were chosen on purpose: they are cases where the simple models and FinBERT do not agree.</p>
+  <p>FinBERT is a BERT (bidirectional encoder representations from transformers) model pretrained on financial text and fine-tuned in the lecture on 8,588 labelled tweets. The two simple models are term frequency–inverse document frequency (TF-IDF) with logistic regression and the embedding bag; neither looks at the order of the words. Of the 2,388 test tweets, in 230 the two simple models give the same label and FinBERT a different one; the game draws its cards at random from these 230. Links in the tweets are removed.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 230 tweets of this kind FinBERT is right in 63.0% of cases, the two simple models in 31.7%. Example: “Beckhams’ business empire sees revenues drop 18%”: both simple models say bullish, FinBERT and the label say bearish. Attention lets every word take its meaning from the other words of the text.</li><li>On all 2,388 test tweets fine-tuned FinBERT reaches a macro-F1 of 84.8%, TF-IDF with logistic regression 75.5%: a difference of 9.3 points, 95% bootstrap interval [7.3; 11.3].</li><li>The gain comes from pretraining, not from attention alone: our small transformer trained from scratch reaches 68.8%, below TF-IDF, and FinBERT without fine-tuning 66.9%.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l7">Class board for the projector</a></p>
+<p class="src foot">Data: Twitter financial news sentiment (Hugging Face, zeroshot), published validation split (2,388 tweets), the test set of the lecture. Disagreement set: TF-IDF + logistic regression and embedding bag (first run) agree, FinBERT fine-tuned (first seed) differs; 230 tweets. The 30 cards of the game are drawn at random from them (seed 20261108); every game draws 10. Predictions: cached outputs of analysis_L7.py. Code: lectures/L7/make_game_L7.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L7_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L7_game.js?v=20261109g"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop early or train longer? A game on training curves</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 3 · Game: Stop early or train longer? A game on training curves">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 3 · Game: Stop early or train longer? A game on training curves</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L3.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L3/lecture3.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L3_game.html" class="lang-btn active">EN</a><a href="L3_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Stop early or train longer? A game on training curves</h2>
+<section id="g-intro">
+  <p class="lead">You train a neural network and must decide when to stop. Each chart is a real run of Lecture 3: the training loss and, on most cards, the loss on a validation set the network does not train on. Pick one of three epochs. The right answer is the epoch whose network makes the smallest error on new data: a test set nobody looked at during training. Nine charts, about four minutes.</p>
+  <p>Seven charts come from German credit applications (600 for training, 200 for validation, 200 for test); two from card payments split by time. The loss is the cross-entropy: the lower, the better the predicted probabilities. On the first three charts you see only the training loss, as in a report that shows the fit to the training data. The model you play against is early stopping: it picks the epoch with the lowest validation loss.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On German credit the training loss of the network without regularisation falls to 0.0001 after 150 epochs, while its validation loss rises from 0.536 at epoch 3 to 2.187: the network memorises its 600 applicants. A falling training loss says nothing about new clients.</li><li>In the 9 German-credit runs of the game, with or without dropout and weight decay, the test loss is lowest between epochs 3 and 5, and the validation loss points to epochs 3 to 4.</li><li>On card fraud, early stopping raises the test area under the precision-recall curve (PR-AUC) from 0.796 to 0.842 (5 seeds); weight decay (0.787) or dropout (0.798) alone do not.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l3">Class board for the projector</a></p>
+<p class="src foot">Data: German credit (Hofmann, 1994; UCI), 1,000 applicants split 60/20/20 at random; card fraud of the ULB Machine Learning Group and Worldline (OpenML 1597), split by time. Runs: the networks of analysis_L3.py (seed 20261108), repeated with the test loss recorded after every epoch. Code: lectures/L3/make_game_L3.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L3_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L3_game.js?v=20261109g"></script>
+</body>
+</html>

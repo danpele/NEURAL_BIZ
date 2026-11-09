@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ce variabilă a determinat decizia?</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 11 · Joc: Ce variabilă a determinat decizia?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 11 · Joc: Ce variabilă a determinat decizia?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L11_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L11/lecture11_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L11_game.html" class="lang-btn">EN</a><a href="L11_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Ce variabilă a determinat decizia?</h2>
+<section id="g-intro">
+  <p class="lead">Rețeaua unei bănci a aprobat sau a respins o cerere reală de credit garantat cu locuința. Pentru fiecare dintre cei 8 solicitanți vedeți dosarul și decizia rețelei și alegeți, dintre patru variabile, pe cea care a împins cel mai mult această decizie. Apoi vedeți răspunsul SHAP (SHapley Additive exPlanations, Kernel SHAP) și dacă LIME (local interpretable model-agnostic explanations, explicații locale interpretabile, independente de model) este de acord.</p>
+  <p>Rețeaua este perceptronul multistrat (MLP) din cursul 11, antrenat pe alte 3.576 de credite (aria de sub curba ROC, receiver operating characteristic, AUC, 0,937 pe creditele de test); respinge un credit cînd probabilitatea de neplată este de cel puțin 50 %. Răspunsul corect este varianta cu cea mai mare contribuție Kernel SHAP, în valoare absolută, la log-șansele de neplată; răspunsul LIME este varianta cu cea mai mare valoare absolută a produsului dintre panta LIME și valoarea standardizată. Ambele explicații au fost calculate cu setările din curs.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>LIME și SHAP indică aceeași variabilă principală pentru 19 dintre cei 30 de solicitanți din joc. Pentru solicitantul studiat în curs, SHAP pune pe primul loc lipsa raportului datorii/venit (DEBTINC lipsă), iar LIME liniile de credit cu restanțe (DELINQ); corelația Spearman a contribuțiilor lor absolute este 0,80.</li><li>Explicațiile sînt estimări și variază cu hazardul: cu 500 de eșantioane, LIME păstrează aceeași variabilă principală doar în 73 % din 30 de rulări, iar între cele 10 valori inițiale de antrenare ale aceleiași rețele variabila SHAP principală a unui solicitant coincide doar pentru 78 % din perechile de valori inițiale.</li><li>Înainte ca o explicație să ajungă la un client sau la autoritatea de supraveghere, ea trebuie verificată: două metode, mai multe valori inițiale, setări fixate și raportate.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l11">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: creditele HMEQ garantate cu locuința (Baesens, Roesch și Scheule, 2016; 5.960 de credite). Cei 30 de solicitanți din joc sînt extrași aleator dintre solicitanții de test explicați în curs (12 respinși și 18 aprobați de rețea; sămînța 20261108); fiecare joc extrage 8 dintre ei. Kernel SHAP și comparația între valorile inițiale provin din rezultatele salvate ale cursului; LIME este recalculat cu setările din curs (5.000 de eșantioane, lățimea implicită a nucleului, sămînța 0). Cod: lectures/L11/make_game_L11.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L11_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L11_game.js?v=20261109g"></script>
+</body>
+</html>

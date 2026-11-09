@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau modelul? Crizele bursiere din grafice</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 14 · Joc: Dumneavoastră sau modelul? Crizele bursiere din grafice">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 14 · Joc: Dumneavoastră sau modelul? Crizele bursiere din grafice</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L14_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L14/lecture14_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L14_game.html" class="lang-btn">EN</a><a href="L14_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau modelul? Crizele bursiere din grafice</h2>
+<section id="g-intro">
+  <p class="lead">Vedeți 10 grafice reale ale indicelui bursier S&amp;P 500 (Standard &amp; Poor's 500), fiecare pe 120 de zile de tranzacționare între 2018 și 2026: sus prețul (100 = prima zi), jos scăderea de la cel mai mare preț de pînă atunci (în %). Pentru 7 grafice decideți dacă piața este calmă sau în criză la sfîrșitul ferestrei; pentru 3 grafice, dacă indicele a încheiat fereastra mai sus sau mai jos decît a început-o. După fiecare răspuns vedeți ce au răspuns modelele din cursul 14, pe aceeași imagine, și situația reală.</p>
+  <p>O fereastră este etichetată „criză” cînd volatilitatea ultimelor 20 de zile depășește percentila 90 din ultimii trei ani (8,4 % din ferestrele de test; în joc, 3 din cele 7 grafice despre regim). Modelul de regim este o regresie logistică pe embedding-ul CLIP (preantrenare contrastivă limbaj–imagine) al imaginii, estimată pe ferestrele de pînă în 2018. Modelul de tendință este Qwen2-VL-2B, un model limbaj–viziune (VLM) cu 2,21 miliarde de parametri, întrebat fără niciun exemplu. Toate graficele din joc sînt din 2019 încoace: niciun model nu le-a văzut la antrenare.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 394 de ferestre de test, aria de sub curba caracteristică de operare a receptorului (AUC, aria de sub curba ROC) este 0,933 pentru regresia logistică pe randamente, volatilitate și scăderea de la maxim, 0,907 pentru CLIP fără exemple (zero-shot) și 0,880 pentru regresia pe embedding-ul CLIP al imaginii: cînd cifrele există, imaginea adaugă un pas cu pierdere de informație.</li><li>La pragul de 0,5, modelul pe imagini semnalează 63,6 % din cele 33 de ferestre de criză și 15,2 % din cele calme; modelul pe cifre, 84,8 % și 13,6 %.</li><li>Qwen2-VL spune corect dacă prețul a încheiat mai sus sau mai jos doar în 57,1 % din cele 394 de grafice, sub cele 74,9 % ale răspunsului constant „mai sus”, deși AUC este 0,974: ordonează bine graficele, dar pragul de 0,5 este deplasat.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l14">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: închiderile zilnice ale S&amp;P 500 (Yahoo Finance), ferestre de 120 de zile de tranzacționare, din 5 în 5 zile; ferestrele de test se încheie între 2019-01-07 și 2026-10-30. Metoda după Jheng, Pele, Tak și Găman (2026). Graficele din joc sînt extrase aleator dintre ferestrele de test, cu sămînța 20261108: 12 ferestre de criză și 24 calme pentru întrebările despre regim, alte 15 ferestre pentru întrebările despre tendință. Ieșirile modelelor: lectures/L14/results/chart_regime.csv (analysis_L14.py). Cod: lectures/L14/make_game_L14.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L14_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L14_game.js?v=20261109g"></script>
+</body>
+</html>

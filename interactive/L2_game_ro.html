@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antrenare rapidă sau lentă? Un joc cu curbe de antrenare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 2 · Joc: Antrenare rapidă sau lentă? Un joc cu curbe de antrenare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 2 · Joc: Antrenare rapidă sau lentă? Un joc cu curbe de antrenare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L2_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L2/lecture2_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L2_game.html" class="lang-btn">EN</a><a href="L2_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Antrenare rapidă sau lentă? Un joc cu curbe de antrenare</h2>
+<section id="g-intro">
+  <p class="lead">Fiecare grafic din acest joc este o antrenare reală din cursul 2. Vedeți cum evoluează eroarea rețelei, epocă după epocă, și indicați ce setare a produs curba: rata de învățare, mărimea lotului sau optimizatorul. Nouă grafice, circa trei minute.</p>
+  <p>Primele șase antrenări potrivesc un perceptron multistrat (MLP 64-64) pe cele 20.640 de grupuri de locuințe din recensămîntul californian folosit în curs; graficul arată eroarea pătratică medie (MSE) pe 4.128 de grupuri de validare pe care rețeaua nu se antrenează (mai mic înseamnă mai bine). Ultimele trei antrenări detectează fraude cu carduri; graficul arată aria de sub curba precizie-sensibilitate (PR-AUC) pe tranzacțiile de validare (mai mare înseamnă mai bine). Aici nu există un model cu care să vă comparați: contează doar scorul dumneavoastră.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Cu coborîrea stohastică pe gradient (SGD) simplă și 30 de epoci, rata de învățare decide totul: cu η = 0,0001, MSE pe validare rămîne la 1,093, cu η = 0,1 ajunge la 0,281, iar de la η = 0,3 în sus antrenarea diverge (mediana a 3 inițializări).</li><li>Optimizatorul stabilește viteza: după o epocă pe datele de fraudă, PR-AUC pe validare este 0,004 cu SGD simplu, 0,488 cu moment și 0,592 cu Adam; pe tranzacțiile de test cele trei ajung la 0,786, 0,823 și 0,803 (5 inițializări).</li><li>Loturile mici învață mai mult pe epocă (MSE pe validare după 5 epoci: 0,294 cu loturi de 16, 0,870 cu loturi de 1.024), dar cer mai mult timp: 25,8 s față de 1,0 s pentru 40 de epoci.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l2">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: locuințele din California, recensămîntul din 1990 (Pace și Barry, 1997; StatLib), împărțite aleator 60/20/20; fraudele cu carduri ale Université libre de Bruxelles (ULB) și Worldline, setul 1597 al platformei Open Machine Learning (OpenML), împărțite cronologic. Curbe: antrenările din analysis_L2.py (sămînța 20261108; salvate în lectures/L2/cache). Cod: lectures/L2/make_game_L2.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L2_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L2_game.js?v=20261109g"></script>
+</body>
+</html>

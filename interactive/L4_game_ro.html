@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau rețeaua convoluțională? Utilizarea terenului din imagini satelitare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 4 · Joc: Dumneavoastră sau rețeaua convoluțională? Utilizarea terenului din imagini satelitare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 4 · Joc: Dumneavoastră sau rețeaua convoluțională? Utilizarea terenului din imagini satelitare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L4_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L4/lecture4_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L4_game.html" class="lang-btn">EN</a><a href="L4_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau rețeaua convoluțională? Utilizarea terenului din imagini satelitare</h2>
+<section id="g-intro">
+  <p class="lead">Vedeți 10 imagini satelitare reale Sentinel-2 din setul de date EuroSAT. Fiecare imagine acoperă 640 m × 640 m de teren din Europa (64 × 64 pixeli de 10 m). Pentru fiecare imagine alegeți clasa de utilizare a terenului dintre patru variante. După fiecare răspuns vedeți ce a prezis rețeaua neuronală convoluțională (CNN) din cursul 4 și clasa corectă.</p>
+  <p>Rețeaua este un ResNet-18 (rețea reziduală cu 18 straturi) preantrenat pe fotografiile ImageNet și ajustat fin pe 16.200 de imagini EuroSAT (transferul învățării). Nu a văzut imaginile din joc: ele provin din cele 5.400 de imagini de test. În fiecare joc, două carduri sînt imagini pe care rețeaua le clasifică greșit.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 5.400 de imagini de test, rețeaua ajustată fin are dreptate în 98,76 % din cazuri: 67 de erori, cel mai des culturi anuale luate drept culturi permanente (8 imagini).</li><li>Transferul învățării contează cel mai mult cînd etichetele sînt puține: cu doar 10 imagini etichetate pe clasă, rețeaua ajustată fin ajunge la 87,8 %, iar o CNN antrenată de la zero la 69,9 %.</li><li>Jocul suprareprezintă erorile rețelei (2 carduri din 10, față de 1,24 % din imaginile de test), așa că scorul ei în joc este mai mic decît pe întregul set de test.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l4">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: EuroSAT, imagini Sentinel-2 (Helber et al., 2019; 27.000 de imagini, 10 clase). Cele 40 de imagini din joc sînt extrase aleator dintre imaginile de test, cu sămînța 20261108: 3 pe clasă dintre cele clasificate corect de rețea și 10 dintre cele 67 de erori ale ei; fiecare joc extrage 8 corecte și 2 greșite. Modelul: predicțiile salvate de lectures/L4/analysis_L4.py. Cod: lectures/L4/make_game_L4.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L4_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L4_game.js?v=20261109g"></script>
+</body>
+</html>

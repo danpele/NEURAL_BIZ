@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Judecați tranzacția după vecinii ei</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 9 · Joc: Judecați tranzacția după vecinii ei">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 9 · Joc: Judecați tranzacția după vecinii ei</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L9_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L9/lecture9_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L9_game.html" class="lang-btn">EN</a><a href="L9_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Judecați tranzacția după vecinii ei</h2>
+<section id="g-intro">
+  <p class="lead">Lucrați în echipa de combatere a spălării banilor a unei platforme de schimb cripto. Fiecare carte arată o tranzacție Bitcoin reală din graful Elliptic (perioada de test din cursul 9, pașii de timp 35–49) și tranzacțiile legate de ea prin fluxuri de plăți, pînă la doi pași distanță. Vecinii despre care se știe că sînt ilicite sînt roșii, cei liciți verzi, cei necunoscuți gri. Decideți: ilicită sau licită? Dintre toate tranzacțiile de test, 6,5 % sînt ilicite; în joc, 40 %, ca să întîlniți destule.</p>
+  <p>Jucați împotriva rețelei de eșantionare și agregare pe graf (GraphSAGE) din curs, o rețea neuronală pe grafuri (GNN) antrenată pe pașii de timp 1–34. Rețeaua nu vede niciodată etichetele vecinilor, ci doar cele 165 de variabile ale lor, pe care le mediază pe doi pași ai grafului. Marchează o tranzacție ca ilicită cînd probabilitatea este de cel puțin 50 %.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Vecinii poartă informație: dintre vecinii etichetați ai unei tranzacții ilicite, 51,0 % sînt ilicite; dintre cei ai unei tranzacții licite, 1,8 %. Un tabel cu variabilele proprii ale tranzacției ascunde acest lucru.</li><li>Vecinii ajută și rețeaua: scorul F1 pe clasa ilicită (echilibrul dintre precizie și recall) este 0,564 pentru GraphSAGE, față de 0,498 pentru aceeași rețea fără graf (perceptronul multistrat, MLP).</li><li>Graful nu este totul: o pădure aleatoare pe cele 165 de variabile, dintre care 72 rezumă deja vecinii, ajunge la 0,808. Cursul arată cînd merită straturile pe graf și cum se combină cu astfel de modele de referință.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l9">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019; 203.769 de tranzacții). Cele 30 de tranzacții din joc sînt extrase aleator dintre tranzacțiile de test etichetate cu 1–12 vecini direcți, dintre care cel puțin unul etichetat (12 ilicite, 18 licite; sămînța 20261108); fiecare joc arată 4 ilicite și 6 licite. Pentru fiecare vecin se desenează cel mult 6 vecini de ordinul doi, întîi cei etichetați; ceilalți sînt doar numărați. Predicții: probabilitatea medie a celor trei rețele GraphSAGE și MLP din curs (lectures/L9/cache/models.npz). Cod: lectures/L9/make_game_L9.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L9_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L9_game.js?v=20261109g"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You or the agent? A battery on the Romanian day-ahead market</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 10 · Game: You or the agent? A battery on the Romanian day-ahead market">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 10 · Game: You or the agent? A battery on the Romanian day-ahead market</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L10.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L10/lecture10.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L10_game.html" class="lang-btn active">EN</a><a href="L10_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">You or the agent? A battery on the Romanian day-ahead market</h2>
+<section id="g-intro">
+  <p class="lead">You run a 2 MWh battery on the Romanian day-ahead electricity market. Each card is a real day of 2025 or 2026. Like the agent of the lecture, you plan the day before its prices are known: you see only yesterday's 24 hourly prices and choose one of four simple plans. Then you see what your plan, the agent and a trader with perfect foresight earned on that day's real prices.</p>
+  <p>The battery charges or discharges 1 MWh of stored energy per hour, starts the day empty and loses 15% of the energy over a full cycle (85% round-trip efficiency). The agent is the tabular Q-learning agent of the lecture (reinforcement learning: it learned which hours to charge and discharge from 1,746 days of 2019-2023); its state is the hour, the stored energy and the rank of that hour among yesterday's prices. A card is won against the agent when your plan earns at least as much as the agent; the score counts the cards on which you chose the best of the four plans.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>Over the 638 test days (1 January 2025 to 24 October 2026), perfect foresight earns 202.1 thousand EUR, yesterday's optimal plan 163.1 thousand (80.7% of the maximum), tabular Q-learning 115.2 thousand (57.0%) and the deep Q-network (DQN) 101.3 thousand (50.1%), means of five seeds.</li><li>The three fixed plans of the game earn 77.2 (night to evening), 144.9 (midday to evening) and 148.0 thousand EUR (two cycles) on the same days; the agent of the game (first seed) earns 101.4 thousand.</li><li>A simple rule that uses all 24 of yesterday's prices beats both learning agents: reinforcement learning must always be benchmarked against the rule already in use.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l10">Class board for the projector</a></p>
+<p class="src foot">Data: hourly day-ahead prices for Romania, energy-charts.info (Fraunhofer Institute for Solar Energy Systems, ISE), up to 31 October 2026; hours in Central European Time (CET). The 40 days of the game are drawn at random from the 638 test days (seed 20261108); every game draws 8 of them. The hours of the fixed plans come from the mean price profile of 2019-2024. Code: lectures/L10/make_game_L10.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L10_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L10_game.js?v=20261109g"></script>
+</body>
+</html>

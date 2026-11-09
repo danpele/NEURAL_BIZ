@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau rețeaua? Sentimentul știrilor financiare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 6 · Joc: Dumneavoastră sau rețeaua? Sentimentul știrilor financiare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 6 · Joc: Dumneavoastră sau rețeaua? Sentimentul știrilor financiare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L6_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L6/lecture6_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L6_game.html" class="lang-btn">EN</a><a href="L6_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau rețeaua? Sentimentul știrilor financiare</h2>
+<section id="g-intro">
+  <p class="lead">Citiți 10 propoziții reale din știri financiare despre companii listate și decideți dacă fiecare este o veste bună, o veste proastă sau nici una, nici alta pentru un investitor în companie. După fiecare răspuns vedeți eticheta dată de rețeaua din cursul 6 și eticheta dată de adnotatorii setului de date (persoane cu pregătire în piețe financiare). Propozițiile sînt în limba engleză, ca în setul de date.</p>
+  <p>Rețeaua este modelul embedding bag din curs: face media vectorilor cuvintelor și ai perechilor de cuvinte din propoziție, pornind de la vectorii word2vec învățați pe discursurile Băncii Centrale Europene (BCE), și trece media printr-un strat softmax. A fost antrenată pe alte 3.385 de propoziții și nu le-a văzut pe acestea; pe cele 727 de propoziții de test ale acestei împărțiri are dreptate în 72,4 % din cazuri. În date, cele mai multe propoziții sînt neutre (59,3 %); jocul arată mai multe propoziții pozitive și negative.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe cele cinci seturi de test din curs, modelul embedding bag are dreptate în 75,0 % din propoziții (macro-F1 69,9 %); frecvența termenilor – inversul frecvenței în documente (TF-IDF) cu regresie logistică atinge 77,7 % (macro-F1 73,5 %). Cu 3.385 de propoziții etichetate, numărarea cuvintelor rămîne mai bună decît media vectorilor de cuvinte.</li><li>Pornirea de la vectorii word2vec învățați pe discursurile BCE adaugă doar 0,37 puncte de macro-F1: acești vectori acoperă 84,7 % din cuvintele știrilor, iar limbajul unei bănci centrale nu este limbajul știrilor despre companii.</li><li>Cele mai multe erori mută o propoziție pozitivă sau negativă în clasa neutră (sensibilitatea este 65,9 % pentru propozițiile negative și 69,5 % pentru cele pozitive, cu TF-IDF); pozitiv și negativ se confundă rar. Un vector pentru fiecare cuvînt nu poate spune ce înseamnă un număr sau o comparație în context; acesta este subiectul cursului 7.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l6">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: Financial PhraseBank (Malo et al., 2014; 4.838 de propoziții, 5–8 adnotatori pentru fiecare). Cele 40 de propoziții din joc sînt extrase aleator dintre propozițiile de test ale primei dintre cele cinci împărțiri aleatoare din curs (12 negative, 12 pozitive, 16 neutre, cel mult 40 de cuvinte; sămînța 20261108); fiecare joc extrage 10 dintre ele. Predicțiile: rezultatele salvate ale analysis_L6.py. Cod: lectures/L6/make_game_L6.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L6_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L6_game.js?v=20261109g"></script>
+</body>
+</html>

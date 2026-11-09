@@ -293,7 +293,7 @@
                 ]
             },
             {
-                id: 'l2', num: 2, status: 'ready', files: files(2), interactive: true,
+                id: 'l2', num: 2, status: 'ready', files: files(2), interactive: true, game: true,
                 videos: [{ id: 'IHZwWFHWa-w', by: '3Blue1Brown', title: 'Gradient descent, how neural networks learn | Deep Learning Chapter 2' }, { id: 'Ilg3gGewQ5U', by: '3Blue1Brown', title: 'Backpropagation, intuitively | Deep Learning Chapter 3' }, { id: 'tIeHLnjs5U8', by: '3Blue1Brown', title: 'Backpropagation calculus | Deep Learning Chapter 4' }, { id: 'IN2XmBhILt4', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 2: Backpropagation Main Ideas' }, { id: 'sDv4f4s2SB8', by: 'StatQuest with Josh Starmer', title: 'Gradient Descent, Step-by-Step' }, { id: 'vMh0zPT0tLI', by: 'StatQuest with Josh Starmer', title: 'Stochastic Gradient Descent, Clearly Explained!!!' }, { id: 'k8fTYJPd3_I', by: 'DeepLearningAI', title: 'Gradient Descent With Momentum (C2W2L06)' }, { id: 'JXQT_vxqwIs', by: 'DeepLearningAI', title: 'Adam Optimization Algorithm (C2W2L08)' }, { id: 'QzulmoOg2JE', by: 'DeepLearningAI', title: 'Learning Rate Decay (C2W2L09)' }, { id: 'VMj-3S1tku0', by: 'Andrej Karpathy', title: 'The spelled-out intro to neural networks and backpropagation: building micrograd' }],
                 quantinar: [q('mlRisk')],
                 title: TITLES[2],
@@ -308,7 +308,7 @@
                 ]
             },
             {
-                id: 'l3', num: 3, status: 'ready', files: files(3), interactive: true,
+                id: 'l3', num: 3, status: 'ready', files: files(3), interactive: true, game: true,
                 videos: [{ id: 'SjQyLhQIXSM', by: 'DeepLearningAI', title: 'Bias/Variance (C2W1L02)' }, { id: 'Q81RR3yKn30', by: 'StatQuest with Josh Starmer', title: 'Regularization Part 1: Ridge (L2) Regression' }, { id: 'NGf0voTMlcs', by: 'StatQuest with Josh Starmer', title: 'Regularization Part 2: Lasso (L1) Regression' }, { id: 'D8PJAL-MZv8', by: 'DeepLearningAI', title: 'Dropout Regularization (C2W1L06)' }, { id: 'tNIpEZLv_eg', by: 'DeepLearningAI', title: 'Normalizing Activations in a Network (C2W3L04)' }, { id: 'nUUqwaxLnWs', by: 'DeepLearningAI', title: 'Why Does Batch Norm Work? (C2W3L06)' }, { id: '6ArSys5qHAU', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 6: Cross Entropy' }],
                 quantinar: [q('rf'), q('mlRisk')],
                 title: TITLES[3],
@@ -323,7 +323,7 @@
                 ]
             },
             {
-                id: 'l4', num: 4, status: 'ready', files: files(4), interactive: true,
+                id: 'l4', num: 4, status: 'ready', files: files(4), interactive: true, game: true,
                 videos: [{ id: 'KuXjwB4LzSA', by: '3Blue1Brown', title: 'But what is a convolution?' }, { id: 'HGwBXDKFk9I', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 8: Image Classification with Convolutional Neural Networks (CNNs)' }, { id: 'UZDiGooFs54', by: 'Welch Labs', title: 'The moment we stopped understanding AI [AlexNet]' }, { id: 'ZILIbUvp5lk', by: 'DeepLearningAI', title: 'C4W2L03 Resnets' }, { id: 'yofjFQddwHE', by: 'DeepLearningAI', title: 'Transfer Learning (C3W2L07)' }, { id: 'oGpzWAlP5p0', by: 'Alexander Amini', title: 'MIT 6.S191 (2025): Convolutional Neural Networks' }],
                 quantinar: [q('mlRisk')],
                 title: TITLES[4],
@@ -338,7 +338,7 @@
                 ]
             },
             {
-                id: 'l5', num: 5, status: 'ready', files: files(5), interactive: true,
+                id: 'l5', num: 5, status: 'ready', files: files(5), interactive: true, game: true,
                 videos: [{ id: 'AsNTP8Kwu80', by: 'StatQuest with Josh Starmer', title: 'Recurrent Neural Networks (RNNs), Clearly Explained!!!' }, { id: 'YCzL96nL7j0', by: 'StatQuest with Josh Starmer', title: 'Long Short-Term Memory (LSTM), Clearly Explained' }, { id: 'L8HKweZIOmg', by: 'StatQuest with Josh Starmer', title: 'Sequence-to-Sequence (seq2seq) Encoder-Decoder Neural Networks, Clearly Explained!!!' }, { id: 'RHGiXPuo_pI', by: 'StatQuest with Josh Starmer', title: 'Long Short-Term Memory with PyTorch + Lightning' }, { id: 'dqoEU9Ac3ek', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Recurrent Neural Networks, Transformers, and Attention' }],
                 quantinar: [q('tsaPython'), q('kalman')],
                 title: TITLES[5],
@@ -353,7 +353,7 @@
                 ]
             },
             {
-                id: 'l6', num: 6, status: 'ready', files: files(6), interactive: true,
+                id: 'l6', num: 6, status: 'ready', files: files(6), interactive: true, game: true,
                 videos: [{ id: 'viZrOnJclY0', by: 'StatQuest with Josh Starmer', title: 'Word Embedding and Word2Vec, Clearly Explained!!!' }, { id: 'e9U0QAFbfLI', by: 'StatQuest with Josh Starmer', title: 'Cosine Similarity, Clearly Explained!!!' }, { id: 'zduSFxRajkE', by: 'Andrej Karpathy', title: 'Let\'s build the GPT Tokenizer' }, { id: 'wjZofJX0v4M', by: '3Blue1Brown', title: 'Transformers, the tech behind LLMs | Deep Learning Chapter 5' }],
                 quantinar: [q('nlp'), q('lda'), q('delta')],
                 title: TITLES[6],
@@ -368,7 +368,7 @@
                 ]
             },
             {
-                id: 'l7', num: 7, status: 'ready', files: files(7), interactive: true,
+                id: 'l7', num: 7, status: 'ready', files: files(7), interactive: true, game: true,
                 videos: [{ id: 'PSs6nxngL6k', by: 'StatQuest with Josh Starmer', title: 'Attention for Neural Networks, Clearly Explained!!!' }, { id: 'eMlx5fFNoYc', by: '3Blue1Brown', title: 'Attention in transformers, step-by-step | Deep Learning Chapter 6' }, { id: 'zxQyTK8quyY', by: 'StatQuest with Josh Starmer', title: 'Transformer Neural Networks, ChatGPT\'s foundation, Clearly Explained!!!' }, { id: 'bQ5BoolX9Ag', by: 'StatQuest with Josh Starmer', title: 'Decoder-Only Transformers, ChatGPTs specific Transformer, Clearly Explained!!!' }, { id: 'bCz4OMemCcA', by: 'Umar Jamil', title: 'Attention is all you need (Transformer) - Model explanation (including math), Inference and Training' }, { id: 'KJtZARuO3JY', by: 'Grant Sanderson', title: 'Visualizing transformers and attention | Talk for TNG Big Tech Day \'24' }, { id: 'kCc8FmEb1nY', by: 'Andrej Karpathy', title: 'Let\'s build GPT: from scratch, in code, spelled out.' }],
                 quantinar: [q('nextWord'), q('delta'), q('nlp')],
                 title: TITLES[7],
@@ -383,7 +383,7 @@
                 ]
             },
             {
-                id: 'l8', num: 8, status: 'ready', files: files(8), interactive: true,
+                id: 'l8', num: 8, status: 'ready', files: files(8), interactive: true, game: true,
                 videos: [{ id: 'xwrzh4e8DLs', by: 'Valerio Velardo - The Sound of AI', title: 'Autoencoders Explained Easily' }, { id: '9zKuYvjFFS8', by: 'Arxiv Insights', title: 'Variational Autoencoders' }, { id: 'iwEzwTTalbg', by: 'Umar Jamil', title: 'Variational Autoencoder - Model, ELBO, loss function and maths explained easily!' }, { id: '8L11aMN5KY8', by: 'Luis Serrano Academy', title: 'A Friendly Introduction to Generative Adversarial Networks (GANs)' }, { id: 'Sw9r8CL98N0', by: 'Computerphile', title: 'Generative Adversarial Networks (GANs) - Computerphile' }, { id: 'fbLgFrlTnGU', by: 'Ari Seff', title: 'What are Diffusion Models?' }, { id: 'iv-5mZ_9CPY', by: '3Blue1Brown', title: 'But how do AI images and videos actually work? | Guest video by Welch Labs' }, { id: 'I1sPXkm2NH4', by: 'Umar Jamil', title: 'How diffusion models work - explanation and code!' }, { id: 'Dmm4UG-6jxA', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Deep Generative Modeling' }],
                 quantinar: [q('gans')],
                 title: TITLES[8],
@@ -398,7 +398,7 @@
                 ]
             },
             {
-                id: 'l9', num: 9, status: 'ready', files: files(9), interactive: true,
+                id: 'l9', num: 9, status: 'ready', files: files(9), interactive: true, game: true,
                 videos: [{ id: 'JAB_plj2rbA', by: 'Stanford Online', title: 'Stanford CS224W: Machine Learning with Graphs | 2021 | Lecture 1.1 - Why Graphs' }, { id: 'fOctJB4kVlM', by: 'DeepFindr', title: 'Understanding Graph Neural Networks | Part 1/3 - Introduction' }, { id: 'ABCGCf8cJOE', by: 'DeepFindr', title: 'Understanding Graph Neural Networks | Part 2/3 - GNNs and it\'s Variants' }, { id: '8owQBFAHw7E', by: 'TensorFlow', title: 'Intro to graph neural networks (ML Tech Talks)' }],
                 quantinar: [q('cryptoNetworks'), q('centrality'), q('mst')],
                 title: TITLES[9],
@@ -413,7 +413,7 @@
                 ]
             },
             {
-                id: 'l10', num: 10, status: 'ready', files: files(10), interactive: true,
+                id: 'l10', num: 10, status: 'ready', files: files(10), interactive: true, game: true,
                 videos: [{ id: 'Z-T0iJEXiwM', by: 'StatQuest with Josh Starmer', title: 'Reinforcement Learning: Essential Concepts' }, { id: '9hbQieQh7-o', by: 'StatQuest with Josh Starmer', title: 'Reinforcement Learning with Neural Networks: Essential Concepts' }, { id: 'SgC6AZss478', by: 'Luis Serrano Academy', title: 'A friendly introduction to deep reinforcement learning, Q-networks and policy gradients' }, { id: '0MNVhXEX9to', by: 'Steve Brunton', title: 'Reinforcement Learning: Machine Learning Meets Control Theory' }, { id: '8JVRbHAVCws', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Reinforcement Learning' }, { id: '2pWv7GOvuf0', by: 'Google DeepMind', title: 'RL Course by David Silver - Lecture 1: Introduction to Reinforcement Learning' }],
                 quantinar: [q('rl')],
                 title: TITLES[10],
@@ -428,7 +428,7 @@
                 ]
             },
             {
-                id: 'l11', num: 11, status: 'ready', files: files(11), interactive: true,
+                id: 'l11', num: 11, status: 'ready', files: files(11), interactive: true, game: true,
                 videos: [{ id: '6xePkn3-LME', by: 'TensorFlow', title: 'Introduction to Explainable AI (ML Tech Talks)' }, { id: 'MQ6fFDwjuco', by: 'A Data Odyssey', title: 'SHAP values for beginners | What they mean and their applications' }, { id: '9haIOplEIGM', by: 'DeepFindr', title: 'Explainable AI explained! | #4 SHAP' }, { id: 'd6j6bofhj2M', by: 'DeepFindr', title: 'Explainable AI explained! | #3 LIME' }],
                 quantinar: [q('xai'), q('shapley'), q('rf')],
                 title: TITLES[11],
@@ -443,7 +443,7 @@
                 ]
             },
             {
-                id: 'l12', num: 12, status: 'ready', files: files(12), interactive: true,
+                id: 'l12', num: 12, status: 'ready', files: files(12), interactive: true, game: true,
                 videos: [{ id: 'LPZh9BOjkQs', by: '3Blue1Brown', title: 'Large Language Models explained briefly' }, { id: 'zjkBMFhNj_g', by: 'Andrej Karpathy', title: '[1hr Talk] Intro to Large Language Models' }, { id: '7xTGNNLPyMI', by: 'Andrej Karpathy', title: 'Deep Dive into LLMs like ChatGPT' }, { id: '1c9iyoVIwDs', by: 'IBM Technology', title: '4 Methods of Prompt Engineering' }, { id: 'T-D1OfcDW1M', by: 'IBM Technology', title: 'What is Retrieval-Augmented Generation (RAG)?' }, { id: 'zYGDpG-pTho', by: 'IBM Technology', title: 'RAG vs Fine-Tuning vs Prompt Engineering: Optimizing AI Models' }, { id: '9-Jl0dxWQs8', by: '3Blue1Brown', title: 'How might LLMs store facts | Deep Learning Chapter 7' }],
                 quantinar: [q('nextWord'), q('delta')],
                 title: TITLES[12],
@@ -458,7 +458,7 @@
                 ]
             },
             {
-                id: 'l13', num: 13, status: 'ready', files: files(13), interactive: true,
+                id: 'l13', num: 13, status: 'ready', files: files(13), interactive: true, game: true,
                 videos: [{ id: 'REzWTRKRwzk', by: 'Anastasia Borovykh', title: 'Time Series Foundation Models' }, { id: 'yKKWCqABspw', by: 'Arize AI', title: 'Chronos: Learning the Language of Time Series' }, { id: 'YCzL96nL7j0', by: 'StatQuest with Josh Starmer', title: 'Long Short-Term Memory (LSTM), Clearly Explained' }, { id: 'dqoEU9Ac3ek', by: 'Alexander Amini', title: 'MIT 6.S191 (2024): Recurrent Neural Networks, Transformers, and Attention' }],
                 quantinar: [q('tsaPython'), q('kalman')],
                 title: TITLES[13],
@@ -473,7 +473,7 @@
                 ]
             },
             {
-                id: 'l14', num: 14, status: 'ready', files: files(14), interactive: true,
+                id: 'l14', num: 14, status: 'ready', files: files(14), interactive: true, game: true,
                 videos: [{ id: 'T9XSU0pKX2E', by: 'Yannic Kilcher', title: 'OpenAI CLIP: ConnectingText and Images (Paper Explained)' }, { id: 'TrdevFK_am4', by: 'Yannic Kilcher', title: 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale (Paper Explained)' }, { id: 'EWvNQjAaOHw', by: 'Andrej Karpathy', title: 'How I use LLMs' }, { id: 'iv-5mZ_9CPY', by: '3Blue1Brown', title: 'But how do AI images and videos actually work? | Guest video by Welch Labs' }],
                 quantinar: [q('digitalTransformation'), q('xai')],
                 title: TITLES[14],

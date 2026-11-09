@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Judge the transaction by its neighbours</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 9 · Game: Judge the transaction by its neighbours">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 9 · Game: Judge the transaction by its neighbours</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L9.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L9/lecture9.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L9_game.html" class="lang-btn active">EN</a><a href="L9_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Judge the transaction by its neighbours</h2>
+<section id="g-intro">
+  <p class="lead">You work in the anti-money-laundering team of a crypto exchange. Each card shows a real Bitcoin transaction from the Elliptic graph (the test period of Lecture 9, time steps 35–49) and the transactions linked to it by payment flows, up to two steps away. Neighbours already known to be illicit are red, licit ones green, unknown ones grey. Decide: illicit or licit? Among all test transactions 6.5% are illicit; in the game 40% are, so that you meet enough of them.</p>
+  <p>You play against the graph sample and aggregate network (GraphSAGE) of the lecture, a graph neural network (GNN) trained on time steps 1–34. It never sees the labels of the neighbours, only their 165 features, which it averages over two steps of the graph. It flags a transaction as illicit when its probability is at least 50%.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>Neighbours carry information: among the labelled neighbours of an illicit transaction 51.0% are illicit; among those of a licit transaction, 1.8%. A table of the transaction's own features hides this.</li><li>Reading the neighbours helps the network too: the F1 score on the illicit class (the balance of precision and recall) is 0.564 for GraphSAGE against 0.498 for the same network without the graph (multilayer perceptron, MLP).</li><li>The graph is not everything: a random forest on the 165 features, 72 of which already summarise the neighbours, reaches 0.808. The lecture shows when the graph layers pay off and how to combine them with such benchmarks.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l9">Class board for the projector</a></p>
+<p class="src foot">Data: Elliptic Bitcoin transaction graph (Weber et al., 2019; 203,769 transactions). The 30 transactions of the game are drawn at random from the labelled test transactions with 1–12 direct neighbours, at least one of them labelled (12 illicit, 18 licit; seed 20261108); every game shows 4 illicit and 6 licit. Per neighbour at most 6 second-step neighbours are drawn, labelled ones first; the others are counted. Predictions: mean probability of the three GraphSAGE and MLP networks of the lecture (lectures/L9/cache/models.npz). Code: lectures/L9/make_game_L9.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L9_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L9_game.js?v=20261109g"></script>
+</body>
+</html>

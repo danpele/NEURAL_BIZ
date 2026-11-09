@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You or the CNN? Land use from satellite images</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 4 · Game: You or the CNN? Land use from satellite images">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 4 · Game: You or the CNN? Land use from satellite images</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L4.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L4/lecture4.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L4_game.html" class="lang-btn active">EN</a><a href="L4_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">You or the CNN? Land use from satellite images</h2>
+<section id="g-intro">
+  <p class="lead">You see 10 real Sentinel-2 satellite images from the EuroSAT data set. Each image covers 640 m × 640 m of land in Europe (64 × 64 pixels of 10 m). For each image, choose its land-use class among four options. After each answer you see what the convolutional neural network (CNN) of Lecture 4 predicted and the true class.</p>
+  <p>The network is a ResNet-18 (residual network with 18 layers) pre-trained on the ImageNet photographs and fine-tuned on 16,200 EuroSAT images (transfer learning). It never saw the images of the game: they come from the 5,400 test images. Two cards in each game are images that the network classifies wrongly.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 5,400 test images the fine-tuned network is right in 98.76% of cases: 67 errors, most often annual crop taken for permanent crop (8 images).</li><li>Transfer learning matters most when labels are scarce: with only 10 labelled images per class, the fine-tuned network reaches 87.8%, a CNN trained from scratch 69.9%.</li><li>The game over-represents the network's errors (2 cards in 10, against 1.24% of the test images), so its score in the game is lower than on the full test set.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l4">Class board for the projector</a></p>
+<p class="src foot">Data: EuroSAT, Sentinel-2 images (Helber et al., 2019; 27,000 images, 10 classes). The 40 images of the game are drawn at random from the test images with the seed 20261108: 3 per class among those the network classifies correctly and 10 of its 67 errors; every game draws 8 correct and 2 wrong ones. Model: cached predictions of lectures/L4/analysis_L4.py. Code: lectures/L4/make_game_L4.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L4_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L4_game.js?v=20261109g"></script>
+</body>
+</html>

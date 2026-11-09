@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau FinBERT? Tweet-uri financiare la care modelele nu sînt de acord</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 7 · Joc: Dumneavoastră sau FinBERT? Tweet-uri financiare la care modelele nu sînt de acord">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 7 · Joc: Dumneavoastră sau FinBERT? Tweet-uri financiare la care modelele nu sînt de acord</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L7_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L7/lecture7_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L7_game.html" class="lang-btn">EN</a><a href="L7_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau FinBERT? Tweet-uri financiare la care modelele nu sînt de acord</h2>
+<section id="g-intro">
+  <p class="lead">Citiți 10 tweet-uri financiare reale și decideți dacă fiecare este negativ pentru preț (bearish), neutru sau pozitiv pentru preț (bullish). După fiecare răspuns vedeți ce a decis FinBERT, ce au decis două modele simple și eticheta corectă. Tweet-urile au fost alese intenționat: sînt cazuri în care modelele simple și FinBERT nu sînt de acord. Textele sînt în limba engleză, ca în setul de date.</p>
+  <p>FinBERT este un model BERT (bidirectional encoder representations from transformers, reprezentări bidirecționale ale codificatorului, obținute cu transformeri) preantrenat pe texte financiare și ajustat (fine-tuned) în curs pe 8.588 de tweet-uri etichetate. Cele două modele simple sînt frecvența termenilor – inversul frecvenței în documente (TF-IDF) cu regresie logistică și modelul embedding bag; niciunul nu ține seama de ordinea cuvintelor. Dintre cele 2.388 de tweet-uri de test, la 230 cele două modele simple dau aceeași etichetă, iar FinBERT alta; jocul își extrage aleator cartonașele dintre aceste 230. Linkurile din tweet-uri sînt eliminate.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 230 de tweet-uri de acest fel, FinBERT are dreptate în 63,0 % din cazuri, cele două modele simple în 31,7 %. Exemplu: „Beckhams’ business empire sees revenues drop 18%”: ambele modele simple spun bullish, iar FinBERT și eticheta spun bearish. Atenția permite fiecărui cuvînt să-și ia sensul de la celelalte cuvinte din text.</li><li>Pe toate cele 2.388 de tweet-uri de test, FinBERT ajustat atinge un macro-F1 de 84,8 %, iar TF-IDF cu regresie logistică 75,5 %: o diferență de 9,3 puncte, cu intervalul bootstrap de 95 % [7,3; 11,3].</li><li>Cîștigul vine din preantrenare, nu doar din atenție: transformerul nostru mic, antrenat de la zero, atinge 68,8 %, sub TF-IDF, iar FinBERT fără ajustare 66,9 %.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l7">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: Twitter financial news sentiment (Hugging Face, zeroshot), setul de validare publicat (2.388 de tweet-uri), setul de test din curs. Setul de dezacord: TF-IDF cu regresie logistică și embedding bag (prima rulare) sînt de acord, FinBERT ajustat (prima sămînță) diferă; 230 de tweet-uri. Cele 30 de cartonașe din joc sînt extrase aleator dintre ele (sămînța 20261108); fiecare joc extrage 10. Predicțiile: rezultatele salvate ale analysis_L7.py. Cod: lectures/L7/make_game_L7.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L7_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L7_game.js?v=20261109g"></script>
+</body>
+</html>

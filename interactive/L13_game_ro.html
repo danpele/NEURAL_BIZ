@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mai scump sau mai ieftin decît azi?</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 13 · Joc: Mai scump sau mai ieftin decît azi?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 13 · Joc: Mai scump sau mai ieftin decît azi?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L13_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L13/lecture13_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L13_game.html" class="lang-btn">EN</a><a href="L13_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Mai scump sau mai ieftin decît azi?</h2>
+<section id="g-intro">
+  <p class="lead">Sînteți traderul unui furnizor român de energie electrică. Vedeți prețul mediu zilnic din piața pentru ziua următoare din ultimele trei săptămîni (OPCOM, operatorul pieței de energie electrică și de gaze naturale din România) și decideți: prețul mediu de mîine va fi mai mare sau mai mic decît cel de azi? După fiecare decizie vedeți prognoza modelului fundație din cursul 13 și prețul real. Toate cele 10 zile provin din anul de test al cursului (1 noiembrie 2025 - 31 octombrie 2026).</p>
+  <p>Modelul este Chronos-2, un model fundație pentru serii de timp, preantrenat de Amazon pe multe alte serii și folosit fără reantrenare: nu a fost antrenat niciodată pe prețurile din România. Citește ultimele 2.048 de prețuri orare (circa 85 de zile) și prognozează cele 24 de ore de mîine; jocul face media lor. Pentru comparație vedeți și LEAR (model autoregresiv estimat cu LASSO, least absolute shrinkage and selection operator), reperul clasic în prognoza prețului energiei, recalibrat zilnic pe trei ani de date.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 360 de zile de evaluare din anul de test, Chronos-2 ghicește direcția în 79,2 % din zile, iar LEAR în 79,2 %; prețul a crescut în 46,4 % din zile. În cursul 5, LSTM-ul (rețea cu memorie lungă pe termen scurt, long short-term memory) ghicea direcția randamentelor zilnice în doar 52,1 % din zile (S&amp;P 500) și 52,9 % (Banca Transilvania).</li><li>Energia electrică are un calendar pe care prețurile acțiunilor nu îl au: în anul de test, o zi a costat în medie 145,3 EUR/MWh de luni pînă vineri, 114,7 sîmbăta și 101,9 duminica. O bună parte din joc ține de ciclul săptămînal, pe care modelul l-a învățat numai din context.</li><li>Cursul măsoară mai mult decît direcția: eroarea absolută medie (MAE) a Chronos-2 pe cele 24 de ore este 20,72 EUR/MWh, față de 22,79 pentru LEAR și 27,74 pentru regula naivă: cu circa 25 % mai puțin decît regula naivă.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l13">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: prețurile din piața pentru ziua următoare din România (OPCOM, prin energy-charts.info), medii zilnice ale celor 24 de prețuri orare; prognoze: prognozele pentru anul de test salvate de analysis_L13.py (lectures/L13/results/forecasts_hourly.csv). Cele 40 de zile din joc sînt extrase aleator dintre cele 360 de zile de evaluare (sămînța 20261108); fiecare joc extrage 10 dintre ele. Cod: lectures/L13/make_game_L13.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L13_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L13_game.js?v=20261109g"></script>
+</body>
+</html>

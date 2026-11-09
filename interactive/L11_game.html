@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which feature drove the decision?</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 11 · Game: Which feature drove the decision?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 11 · Game: Which feature drove the decision?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L11.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L11/lecture11.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L11_game.html" class="lang-btn active">EN</a><a href="L11_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Which feature drove the decision?</h2>
+<section id="g-intro">
+  <p class="lead">A bank's network has approved or refused a real home-equity loan application. For each of 8 applicants you see the file and the network's decision, and you choose, among four features, the one that pushed this decision the most. Then you see the answer of SHAP (SHapley Additive exPlanations, Kernel SHAP) and whether LIME (local interpretable model-agnostic explanations) agrees.</p>
+  <p>The network is the multilayer perceptron (MLP) of Lecture 11, trained on 3,576 other loans (area under the receiver operating characteristic curve, AUC, 0.937 on the test loans); it refuses a loan when its probability of default is at least 50%. The right answer is the option with the largest absolute Kernel SHAP contribution to the log-odds of default; LIME's answer is the option with the largest absolute LIME slope × standardised value. Both explanations were computed with the settings of the lecture.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>LIME and SHAP name the same top feature for 19 of the 30 applicants of the game. For the applicant studied in the lecture, SHAP puts first the missing debt-to-income ratio (DEBTINC missing) and LIME the delinquent credit lines (DELINQ); the Spearman correlation of their absolute contributions is 0.80.</li><li>Explanations are estimates and move with chance: with 500 samples LIME keeps the same top feature in only 73% of 30 runs, and across the 10 training seeds of the same network an applicant's top SHAP feature agrees for only 78% of the pairs of seeds.</li><li>Before an explanation reaches a customer or a supervisor, check it: two methods, several seeds, fixed and reported settings.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l11">Class board for the projector</a></p>
+<p class="src foot">Data: HMEQ home-equity loans (Baesens, Roesch and Scheule, 2016; 5,960 loans). The 30 applicants of the game are drawn at random from the test applicants explained in the lecture (12 refused and 18 approved by the network; seed 20261108); every game draws 8 of them. Kernel SHAP and the seed comparison come from the lecture's cached results; LIME is recomputed with the lecture's settings (5,000 samples, default kernel width, seed 0). Code: lectures/L11/make_game_L11.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L11_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L11_game.js?v=20261109g"></script>
+</body>
+</html>

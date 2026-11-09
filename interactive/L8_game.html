@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real or generated? S&amp;P 500 returns</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 8 · Game: Real or generated? S&amp;P 500 returns">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 8 · Game: Real or generated? S&amp;P 500 returns</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L8.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L8/lecture8.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L8_game.html" class="lang-btn active">EN</a><a href="L8_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Real or generated? S&amp;P 500 returns</h2>
+<section id="g-intro">
+  <p class="lead">Each card shows two series of 250 daily returns of the S&amp;P 500 stock index, about one trading year. One is real, from the years 2005–2019; the other was produced by the generative adversarial network (GAN) of Lecture 8, trained on the same years. Pick the real one.</p>
+  <p>The model you play against is not a network but a statistical check from the lecture: volatility clustering. For each series it computes the average autocorrelation of the absolute returns over lags 1 to 5 (one trading week) and calls the series with the larger value real.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>The GAN learned the distribution of a single day well: its 1% Value-at-Risk (VaR) is −3.61% against −3.48% for the real returns, and its tails are fat (excess kurtosis 6.65 against 11.86).</li><li>It did not learn the order of the days: the autocorrelation of the absolute returns at lag 1 is 0.28 for the real returns and −0.01 for the GAN. Real markets have calm and turbulent periods; the GAN scatters its large moves at random.</li><li>This one statistic picks the real series in 98.2% of 1,000 random pairs. A generator for stress tests must produce whole paths, not single days: this is why sequence models and diffusion models follow in the lecture.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l8">Class board for the projector</a></p>
+<p class="src foot">Data: S&amp;P 500, daily adjusted closing prices (Yahoo Finance), log returns 4 January 2005 – 31 December 2019; GAN samples: lectures/L8/cache/gan.npz (generator of seed 1). The 24 pairs of the game are drawn at random (seed 20261108); every game shows 10 of them, in random order and position. Code: lectures/L8/make_game_L8.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L8_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L8_game.js?v=20261109g"></script>
+</body>
+</html>

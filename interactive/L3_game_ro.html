@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oprire timpurie sau antrenare mai lungă? Un joc cu curbe de învățare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 3 · Joc: Oprire timpurie sau antrenare mai lungă? Un joc cu curbe de învățare">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 3 · Joc: Oprire timpurie sau antrenare mai lungă? Un joc cu curbe de învățare</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L3_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L3/lecture3_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L3_game.html" class="lang-btn">EN</a><a href="L3_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Oprire timpurie sau antrenare mai lungă? Un joc cu curbe de învățare</h2>
+<section id="g-intro">
+  <p class="lead">Antrenați o rețea neuronală și trebuie să decideți cînd vă opriți. Fiecare grafic este o antrenare reală din cursul 3: pierderea de antrenare și, pe majoritatea cartonașelor, pierderea pe un set de validare pe care rețeaua nu se antrenează. Alegeți una din trei epoci. Răspunsul corect este epoca în care rețeaua greșește cel mai puțin pe date noi: un set de test pe care nu l-a folosit nimeni în timpul antrenării. Nouă grafice, circa patru minute.</p>
+  <p>Șapte grafice provin din cererile de credit germane (600 pentru antrenare, 200 pentru validare, 200 pentru test), două din plățile cu carduri împărțite cronologic. Pierderea este entropia încrucișată: cu cît este mai mică, cu atît probabilitățile estimate sînt mai bune. Pe primele trei grafice vedeți doar pierderea de antrenare, ca într-un raport care arată numai potrivirea pe datele de antrenare. Modelul cu care vă comparați este oprirea timpurie: alege epoca cu cea mai mică pierdere de validare.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe creditele germane, pierderea de antrenare a rețelei fără regularizare scade la 0,0001 după 150 de epoci, în timp ce pierderea de validare crește de la 0,536 la epoca 3 la 2,187: rețeaua învață pe de rost cei 600 de solicitanți. O pierdere de antrenare care scade nu spune nimic despre clienții noi.</li><li>În cele 9 antrenări pe creditele germane din joc, cu sau fără dropout și penalizarea ponderilor, pierderea pe test este minimă între epocile 3 și 5, iar pierderea de validare indică epocile 3–4.</li><li>Pe fraudele cu carduri, oprirea timpurie crește aria de sub curba precizie-sensibilitate (PR-AUC) pe test de la 0,796 la 0,842 (5 inițializări); penalizarea ponderilor (0,787) sau dropout (0,798) singure nu o cresc.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l3">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: creditele germane (Hofmann, 1994; UCI), 1.000 de solicitanți împărțiți aleator 60/20/20; fraudele cu carduri ale ULB Machine Learning Group și Worldline (OpenML 1597), împărțite cronologic. Antrenări: rețelele din analysis_L3.py (sămînța 20261108), repetate cu pierderea pe test înregistrată după fiecare epocă. Cod: lectures/L3/make_game_L3.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L3_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L3_game.js?v=20261109g"></script>
+</body>
+</html>

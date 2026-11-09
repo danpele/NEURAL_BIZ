@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dumneavoastră sau modelul de limbaj? Cînd adnotatorii nu sînt de acord</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 12 · Joc: Dumneavoastră sau modelul de limbaj? Cînd adnotatorii nu sînt de acord">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'ro';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 12 · Joc: Dumneavoastră sau modelul de limbaj? Cînd adnotatorii nu sînt de acord</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Academia Română, Institutul de Prognoză Economică"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="L12_ro.html">Cursul interactiv</a></li>
+  <li><a href="../lectures/L12/lecture12_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li class="lang-switcher"><a href="L12_game.html" class="lang-btn">EN</a><a href="L12_game_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Dumneavoastră sau modelul de limbaj? Cînd adnotatorii nu sînt de acord</h2>
+<section id="g-intro">
+  <p class="lead">Citiți 10 propoziții reale din știri financiare și le etichetați ca negative, neutre sau pozitive pentru un investitor în companie. Jucați împotriva unui model mare de limbaj (LLM, large language model) folosit drept clasificator printr-un prompt, ca în cursul 12. Unele propoziții au fost etichetate la fel de toți adnotatorii setului de date; la altele, adnotatorii au fost împărțiți. După fiecare răspuns vedeți despre care caz este vorba. Propozițiile sînt în limba engleză, ca în setul de date.</p>
+  <p>Modelul este Qwen2.5-3B-Instruct, un LLM deschis cu 3,09 miliarde de parametri, rulat pe un laptop și întrebat fără exemple (zero-shot): „Classify the sentiment of this sentence from financial news, from the point of view of an investor in the company. Answer with one word: positive, negative or neutral.” Răspunsul său este eticheta cu cea mai mare probabilitate pentru cuvîntul următor; cartonașul arată și această probabilitate. Răspunsul corect este eticheta aleasă de majoritatea celor 5–8 adnotatori.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Modelul are dreptate la 93,1 % dintre propozițiile asupra cărora toți adnotatorii sînt de acord, la 77,2 % cînd acordul este de 75 %, la 65,7 % cînd este de 66 % și la 53,7 % cînd doar jumătate dintre ei sînt de acord. Un model nu poate fi mai sigur decît oamenii care au etichetat datele.</li><li>Pe propozițiile de test unanime, probabilitățile sale sînt aproape calibrate: eroarea de calibrare așteptată (ECE) este de 4,7 %, față de 5,4 % pentru un clasificator TF-IDF (frecvența termenilor – inversul frecvenței în documente) antrenat pe 1.581 de propoziții.</li><li>Promptul este un hiperparametru: cinci formulări ale aceleiași instrucțiuni schimbă macro-F1 al acestui model cu 3,6 puncte pe aceste propoziții și cu 12,9 puncte pe tweet-uri financiare.</li></ul></template>
+<p class="src"><a href="game_board_ro.html?game=l12">Clasamentul sălii, pentru proiector</a></p>
+<p class="src foot">Date: Financial PhraseBank (Malo et al., 2014; 4.838 de propoziții, 5–8 adnotatori pentru fiecare). Cartonașele unanime: setul de test din curs (678 de propoziții); cartonașele cu adnotatori împărțiți: cele 2.579 de propoziții cu acord de 50–75 %, nefolosite nici la antrenare, nici ca exemple. Jocul are 10 propoziții pentru fiecare nivel de acord (cel mult 40 de cuvinte), extrase aleator (sămînța 20261108); fiecare joc extrage 3, 3, 2 și 2 dintre ele. Rezultatele modelului: ieșirile salvate ale analysis_L12.py. Cod: lectures/L12/make_game_L12.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L12_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L12_game.js?v=20261109g"></script>
+</body>
+</html>

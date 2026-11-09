@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast or slow training? A training-curve game</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 2 · Game: Fast or slow training? A training-curve game">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 2 · Game: Fast or slow training? A training-curve game</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L2.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L2/lecture2.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L2_game.html" class="lang-btn active">EN</a><a href="L2_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Fast or slow training? A training-curve game</h2>
+<section id="g-intro">
+  <p class="lead">Every chart in this game is a real training run of Lecture 2. You see how the error of the network evolves, epoch by epoch, and you say which setting produced the curve: the learning rate, the batch size or the optimiser. Nine charts, about three minutes.</p>
+  <p>The first six runs fit a multilayer perceptron (MLP 64-64) to the 20,640 Californian census block groups of the lecture; the chart shows the mean squared error (MSE) on 4,128 validation block groups the network does not train on (lower is better). The last three runs detect card fraud; the chart shows the area under the precision-recall curve (PR-AUC) on the validation transactions (higher is better). There is no model to beat here: only your score counts.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>With plain stochastic gradient descent (SGD) and 30 epochs, the learning rate decides everything: η = 0.0001 leaves the validation MSE at 1.093, η = 0.1 reaches 0.281, and from η = 0.3 upwards training diverges (median of 3 seeds).</li><li>The optimiser sets the speed: after one epoch on card fraud the validation PR-AUC is 0.004 with plain SGD, 0.488 with momentum and 0.592 with Adam; on the test transactions the three end at 0.786, 0.823 and 0.803 (5 seeds).</li><li>Small batches learn more per epoch (validation MSE after 5 epochs: 0.294 with batches of 16, 0.870 with 1,024) but cost more time: 25.8 s against 1.0 s for 40 epochs.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l2">Class board for the projector</a></p>
+<p class="src foot">Data: California housing, 1990 census (Pace and Barry, 1997; StatLib), split 60/20/20 at random; card fraud of the Université libre de Bruxelles (ULB) and Worldline, Open Machine Learning platform (OpenML) dataset 1597, split by time. Curves: the runs of analysis_L2.py (seed 20261108; cached in lectures/L2/cache). Code: lectures/L2/make_game_L2.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L2_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L2_game.js?v=20261109g"></script>
+</body>
+</html>

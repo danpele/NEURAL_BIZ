@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You or the language model? When the annotators disagree</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 12 · Game: You or the language model? When the annotators disagree">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 12 · Game: You or the language model? When the annotators disagree</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L12.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L12/lecture12.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L12_game.html" class="lang-btn active">EN</a><a href="L12_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">You or the language model? When the annotators disagree</h2>
+<section id="g-intro">
+  <p class="lead">You read 10 real sentences from financial news and label each one negative, neutral or positive for an investor in the company. You play against a large language model (LLM) used as a classifier with a prompt, as in Lecture 12. Some sentences were labelled the same way by all annotators of the data set; on others the annotators were split. After each answer you see which case it was.</p>
+  <p>The model is Qwen2.5-3B-Instruct, an open LLM with 3.09 billion parameters run on a laptop, asked without examples (zero-shot): “Classify the sentiment of this sentence from financial news, from the point of view of an investor in the company. Answer with one word: positive, negative or neutral.” Its answer is the label with the highest probability for the next word; the card also shows that probability. The right answer is the label chosen by the majority of the 5–8 annotators.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>The model is right on 93.1% of the sentences on which all annotators agree, on 77.2% at 75% agreement, 65.7% at 66% and 53.7% when only half of them agree. A model cannot be more certain than the people who labelled the data.</li><li>On the unanimous test sentences its probabilities are close to calibrated: the expected calibration error (ECE) is 4.7%, against 5.4% for a TF-IDF (term frequency–inverse document frequency) classifier trained on 1,581 sentences.</li><li>The prompt is a hyper-parameter: five wordings of the same instruction move the macro-F1 of this model by 3.6 points on these sentences and by 12.9 points on finance tweets.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l12">Class board for the projector</a></p>
+<p class="src foot">Data: Financial PhraseBank (Malo et al., 2014; 4,838 sentences, 5–8 annotators each). Unanimous cards: test set of the lecture (678 sentences); split cards: the 2,579 sentences with 50–75% agreement, never used for training or as examples. The game pool has 10 sentences per agreement level (at most 40 words), drawn at random (seed 20261108); every game draws 3, 3, 2 and 2 of them. Model outputs: cached outputs of analysis_L12.py. Code: lectures/L12/make_game_L12.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L12_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L12_game.js?v=20261109g"></script>
+</body>
+</html>

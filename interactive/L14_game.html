@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You or the model? Market stress from chart images</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 14 · Game: You or the model? Market stress from chart images">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 14 · Game: You or the model? Market stress from chart images</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L14.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L14/lecture14.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L14_game.html" class="lang-btn active">EN</a><a href="L14_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">You or the model? Market stress from chart images</h2>
+<section id="g-intro">
+  <p class="lead">You see 10 real charts of the S&P 500 (Standard &amp; Poor's 500) stock index, each covering 120 trading days between 2018 and 2026: the price on top (100 = first day) and, below, the fall from the highest price so far (drawdown, %). For 7 charts you decide whether the market is calm or in stress at the end of the window; for 3 charts, whether the index ended higher or lower than it started. After each answer you see what the models of Lecture 14 answered, on the same image, and the truth.</p>
+  <p>A window is labelled “stress” when the volatility of its last 20 days exceeds the 90th percentile of the previous three years (8.4% of the test windows; in the game, 3 of the 7 regime charts). The regime model is a logistic regression on the CLIP (contrastive language–image pre-training) embedding of the image, fitted on the windows up to 2018. The trend model is Qwen2-VL-2B, a vision-language model (VLM) with 2.21 billion parameters, asked the question without any example. All the charts of the game are from 2019 onwards: no model saw them during training.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 394 test windows the area under the receiver operating characteristic curve (AUC, area under the ROC curve) is 0.933 for a logistic regression on returns, volatility and drawdown, 0.907 for CLIP without examples (zero-shot) and 0.880 for the regression on the CLIP image embedding: when the numbers exist, the picture adds a lossy step.</li><li>At the 0.5 threshold the image model flags 63.6% of the 33 stress windows and 15.2% of the calm ones; the model on the numbers, 84.8% and 13.6%.</li><li>Qwen2-VL says correctly whether the price ended higher or lower in only 57.1% of the 394 charts, below the 74.9% of always answering “higher”, yet its AUC is 0.974: it ranks the charts well, but its 0.5 threshold is biased.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l14">Class board for the projector</a></p>
+<p class="src foot">Data: S&amp;P 500 daily closes (Yahoo Finance), windows of 120 trading days every 5 days; test windows ending 2019-01-07 to 2026-10-30. Method after Jheng, Pele, Tak and Găman (2026). The game charts are drawn at random from the test windows with the seed 20261108: 12 stress and 24 calm windows for the regime cards, 15 other windows for the trend cards. Model outputs: lectures/L14/results/chart_regime.csv (analysis_L14.py). Code: lectures/L14/make_game_L14.py.</p>
+</main>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L14_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L14_game.js?v=20261109g"></script>
+</body>
+</html>

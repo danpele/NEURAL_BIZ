@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Up or down tomorrow?</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 5 · Game: Up or down tomorrow?">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<link rel="stylesheet" href="game.css?v=20261109g">
+<script>window.NN_LANG = 'en';</script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 5 · Game: Up or down tomorrow?</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="Romanian Academy, Institute for Economic Forecasting"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L5.html">Interactive lecture</a></li>
+  <li><a href="../lectures/L5/lecture5.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li class="lang-switcher"><a href="L5_game.html" class="lang-btn active">EN</a><a href="L5_game_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain g-wrap">
+<h2 class="sec">Up or down tomorrow?</h2>
+<section id="g-intro">
+  <p class="lead">You see the last 60 trading days of the S&amp;P 500 index or of the Banca Transilvania share (TLV, Bucharest Stock Exchange) and decide: will the next trading day close up or down? After each decision you see the forecast of the recurrent network of Lecture 5 and the real close. All 10 days come from the test period of the lecture (2020 to October 2026), which the network never saw during training.</p>
+  <p>The network is the LSTM (long short-term memory network) of the lecture: 16 hidden units, it reads the last 22 daily returns and forecasts the next one. It was trained on 2005 to 2016 (TLV: 2008 to 2016) and tuned on 2017 to 2019. The lecture trained five such networks with different seeds; the game shows their average forecast and says 'up' when it is positive. On the S&amp;P 500 test days this average says 'up' on 70.2% of days.</p>
+  <button type="button" class="btn play" id="g-s"></button>
+</section>
+<section id="g-play" hidden>
+  <p class="g-score" id="g-score" aria-live="polite"></p>
+  <div class="blk" id="g-card"></div>
+</section>
+<template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 1,717 S&amp;P 500 test days the LSTM of the lecture gets the direction right on 52.1% of days, on the 1,573 Banca Transilvania test days on 52.9% (mean of the five networks; their average forecast: 53.1% and 53.1%). Answering 'up' every day scores 54.0% and 55.1%.</li><li>The out-of-sample R² (the share of the variance of returns that the forecast explains) of the LSTM is 0.78% for the S&amp;P 500 and 0.21% for TLV: the sign of tomorrow's return is close to a coin flip, for you and for the network.</li><li>What does have memory is the size of the moves (autocorrelation of absolute S&amp;P 500 returns 0.315 at lag 1). This is why the lecture forecasts volatility: there the LSTM cuts the mean squared error of the naive forecast by 35.3%.</li></ul></template>
+<p class="src"><a href="game_board.html?game=l5">Class board for the projector</a></p>
+<p class="src foot">Data: S&amp;P 500 adjusted closes (Yahoo Finance) and Banca Transilvania adjusted closes (EODHD, Bucharest Stock Exchange); forecasts: cached LSTM forecasts of analysis_L5.py (lectures/L5/cache/ret.pkl). The 40 days of the game are drawn at random from the test days (20 per series; seed 20261108); every game draws 5 of each series. Code: lectures/L5/make_game_L5.py.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script src="L5_game_data.js?v=20261109g"></script>
+<script src="game_common.js?v=20261109g"></script>
+<script src="L5_game.js?v=20261109g"></script>
+</body>
+</html>
