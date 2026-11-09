@@ -28,7 +28,7 @@ Pe piața pentru ziua următoare, prețul fiecărei ore de mîine este stabilit 
 
 Prețurile pentru România (RO), Germania–Luxemburg (DE-LU) și Ungaria (HU) și consumul României provin de pe energy-charts.info, portalul de date al Institutului Fraunhofer pentru Sisteme de Energie Solară (ISE), care republică datele burselor și ale Rețelei europene a operatorilor de transport și de sistem pentru energie electrică (ENTSO-E). Fișierul de prețuri acoperă perioada 1 ianuarie 2015 -- 31 octombrie 2026, cu 103 595 de prețuri orare. Prețurile zilnice ale S&P 500 și ale Bitcoin provin de la Yahoo Finance. Orele lipsă rămîn lipsă: cele două zile pe an cu schimbarea orei intră în analiză doar dacă există toate cele 24 de ore.
 
-## Prețurile din România: nivelul de criză, apoi un regim nou {h=c3347f3c}
+## Media zilnică a prețurilor pentru ziua următoare în România {h=56e29095}
 
 @chart price_history
 Prețurile medii zilnice pentru ziua următoare în România și în Germania–Luxemburg.
@@ -64,7 +64,7 @@ Regulile jocului: doar informația disponibilă la închiderea licitației, o fe
 
 Înaintea unei rețele profunde, un reper liniar puternic: LEAR este modelul de referință deschis al prognozei prețurilor energiei electrice. Rețeaua DNN folosește exact aceleași intrări, astfel încît comparația izolează modelul.
 
-## Transformarea care stabilizează varianța {h=0ffc5ca0}
+## Transformarea care stabilizează varianța {h=939866bb}
 
 Prețurile au vîrfuri și pot fi negative. Sinusul hiperbolic invers se comportă ca un logaritm pentru valori mari și ca identitatea în jurul lui zero:
 
@@ -101,7 +101,7 @@ LEAR și DNN folosesc aceeași informație; pe acest an, DNN nu depășește LEA
 
 Trei idei definesc rețelele moderne de prognoză: o rețea recurentă care produce o distribuție (DeepAR), stive de blocuri complet conectate (N-BEATS) și arhitecturi transformer aplicate pe petice ale seriei.
 
-## O rețea recurentă care produce o distribuție {h=9f95dcb6}
+## O rețea recurentă probabilistă {h=7bade3c4}
 
 Rețeaua recurentă autoregresivă profundă (DeepAR) a lui Salinas et al. (2020) parcurge seria cu o rețea cu memorie pe termen scurt și lung (LSTM) și produce parametrii distribuției de mîine; se antrenează prin verosimilitate maximă, simultan pe multe serii înrudite. Designul ei global și probabilistic este strămoșul modelelor fundație de azi.
 
@@ -127,7 +127,7 @@ $$ \hat q^{\tau}_{T+k}=g_{\boldsymbol\theta^{*}}\big(y_{T-C+1:T}\big)_{k,\tau} $
 
 unde $C$ este lungimea contextului (aici 2 048 de ore), $\tau$ nivelul cuantilei, iar $\boldsymbol\theta^{*}$ ponderile preantrenate, fixe, obținute prin minimizarea pierderii cuantile (pinball) pe corpusul de preantrenare. Testăm Chronos-2 și Chronos-Bolt (Amazon) și TimesFM (Google Research).
 
-## Chronos: o serie de timp citită ca o propoziție {h=827b9ff9}
+## Chronos: tokenizarea seriilor de timp {h=c8562437}
 
 Chronos original (Ansari et al., 2024) împarte seria la valoarea ei absolută medie, taie valorile scalate în intervale și antrenează un model de limbaj să prezică următorul interval, cu entropia încrucișată. Chronos-Bolt și Chronos-2 înlocuiesc intervalele cu petice și ieșiri de cuantile. Modelul cunoaște forme (sezonalitate, revenire la medie), nu piața românească.
 
@@ -161,7 +161,7 @@ MAE pe ore de livrare.
 
 Toate modelele greșesc mai mult seara: ora cea mai grea pentru LEAR este 19:00 (MAE 35,78 EUR/MWh), la fel și pentru Chronos-2 (34,05), în timp ce orele de noapte se prognozează cu erori de circa 10,75 EUR/MWh.
 
-## O săptămînă de prognoze {h=f638c9e3}
+## O săptămînă de prognoze {h=ec67ef0a}
 
 @chart forecast_week
 Prețurile realizate și trei prognoze, 19–25 octombrie 2026.
@@ -183,7 +183,7 @@ $$ \mathrm{DM}=\frac{\bar\Delta}{\hat\sigma_\Delta/\sqrt{|\mathcal T|}}\ \overse
 
 testează dacă modelul B este mai precis decît modelul A (Diebold și Mariano, 1995; Ziel și Weron, 2018). Lucrul cu pierderi zilnice, nu orare, ține cont de faptul că cele 24 de ore ale unei zile folosesc aceeași informație.
 
-## Tabla de șah completă {h=da941757}
+## Testele Diebold–Mariano pe perechi de modele {h=0e1d4f86}
 
 @chart dm_pvalues
 Valorile p unilaterale ale testului Diebold–Mariano multivariat.
@@ -207,7 +207,7 @@ O prognoză de cuantilă $\hat q^{\tau}$ se evaluează cu pierderea pinball $\rh
 @chart chronos_fan
 Benzile de cuantile Chronos-2 și prețurile realizate, 19–25 octombrie 2026.
 
-## Corecția conformală {h=9c9d0f64}
+## Corecția conformală {h=27732c19}
 
 Scorul de conformitate al fiecărei ore trecute măsoară cît de departe de banda brută a căzut valoarea realizată, $s_i=\max(\hat q^{\alpha/2}_i-y_i,\ y_i-\hat q^{1-\alpha/2}_i)$. Luăm ca $\hat Q$ al $\lceil (n+1)(1-\alpha)\rceil$-lea cel mai mic scor din ultimele 60 de zile și lărgim banda cu $\hat Q$ pe ambele părți; pentru date interschimbabile, acoperirea este garantat cel puțin $1-\alpha$ (Romano, Patterson și Candès, 2019), iar pentru serii de timp garanția este aproximativă. Pentru banda de 80 %, acoperirea brută a lui Chronos-2 a fost de 76,5 %, iar cea conformală de 79,3 %, cu lățimea medie trecînd de la 60,03 la 63,89 EUR/MWh.
 
@@ -250,7 +250,7 @@ Pe 1 717 zile de tranzacționare, VaR conformală Chronos-2 a trecut testul Ku
 
 @practice recalibrarea este o schimbare de model: documentați-o și testați-o pe date noi.
 
-## Două căi spre aceeași cuantilă {h=169261c0}
+## Prognozele cuantilelor cu modele de limbaj și cu modele de serii de timp {h=8c748764}
 
 În cursul 12, randamentele trecute au fost scrise în promptul unui model de limbaj (LLM-VaR, Pele et al., 2026); aici, un model fundație pentru serii de timp le citește ca numere. Ambele căi sînt zero-shot și ambele trebuie testate retrospectiv, pe date noi, față de GARCH și simularea istorică.
 

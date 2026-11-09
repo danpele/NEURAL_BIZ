@@ -86,7 +86,7 @@ Logistic regression on HMEQ: standardised coefficients with 95 % confidence inte
 
 For one test applicant who later defaulted (a loan of 15,400 USD, debt-to-income 36.4 %, 2 delinquent lines), the score is the sum of the contributions $w_jx_j$ plus the bias, $z=$ −1.71, and the neuron outputs $p=\sigma(z)=$ 15.3 %. The applicant would pass a 50 % cut-off; Section 5 shows why the cut-off should be set from costs.
 
-## A missing value can be the strongest signal {h=875df299}
+## Missing values as predictors of default {h=b4332c7e}
 
 The debt-to-income ratio is missing for 21.3 % of HMEQ loans, and these default in 62.0 % of cases against 8.6 % when it is reported. Dropping incomplete rows would drop the riskiest applicants. We fill each numeric input with its training median and add an indicator of missingness, which gives $d=$ 28 inputs.
 
@@ -112,7 +112,7 @@ If example $i$ is misclassified, $y_i(\mathbf w^\top\mathbf x_i+b)\le0$ with $y_
 
 Novikoff (1962): if a unit vector $\mathbf w^*$ separates the data with margin $\gamma$ and all inputs lie within radius $R$, the perceptron makes at most $(R/\gamma)^2$ mistakes, whatever the number of examples or the dimension. Without a separating hyperplane the theorem says nothing.
 
-## On real loans the perceptron never settles {h=5c326982}
+## The perceptron does not converge on non-separable credit data {h=aff57f6d}
 
 On the HMEQ training loans the classes overlap. Over 60 epochs the training error jumps between 13.2 % and 23.4 % after 35,876 updates, while logistic regression on the same inputs reaches 11.7 % and always predicting 'no default' 19.9 %.
 
@@ -121,7 +121,7 @@ Training error of the perceptron after each epoch on HMEQ, against logistic regr
 
 @practice a smooth loss and a probability output fix both problems.
 
-## No straight line separates XOR: one hidden layer does {h=c2363946}
+## The XOR problem and the hidden layer {h=fd5e431f}
 
 XOR is true when exactly one input is on. Any linear boundary classifies at most three of the four points correctly (50 % here), while an MLP with two tanh hidden units reaches 100 %: the hidden layer maps the inputs to a space where the classes become separable. Interactions such as 'high debt and short history' are of this kind. This is a mechanism picture on the logical table, not a data result.
 
@@ -168,7 +168,7 @@ House values against latitude: bin means and fitted networks with 1, 3 and 50 hi
 
 @practice location effects are nonlinear: a linear term cannot price them.
 
-## Depth reuses features: deep and narrow can beat shallow and wide {h=2bebfff6}
+## Depth and width of a network {h=085feb87}
 
 A ReLU network is piecewise linear, and the number of its linear regions can grow exponentially with depth for a fixed number of units (Montúfar et al., 2014). On tabular credit data, two or three hidden layers are usually enough; depth pays off on images, text and sequences.
 

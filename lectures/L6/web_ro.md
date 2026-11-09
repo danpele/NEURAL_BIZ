@@ -88,7 +88,7 @@ Pe PhraseBank, TF-IDF cu regresie logistică atinge un macro-F1 de 73,49% (abate
 @chart sentiment_models
 Macro-F1 pe test pentru cele șapte modele, pe PhraseBank și pe tweet-uri financiare (media și abaterea standard).
 
-## Modelele greșesc acolo unde oamenii nu sînt de acord
+## Erorile de clasificare și acordul adnotatorilor
 
 TF-IDF cu regresie logistică clasifică bine 88,4% din frazele asupra cărora toți adnotatorii au fost de acord și 58,1% din cele cu un acord de doar 50%. Zgomotul din etichete limitează orice model; înainte de a cumpăra un model mai mare, verificați cît de mult sînt de acord propriii analiști.
 

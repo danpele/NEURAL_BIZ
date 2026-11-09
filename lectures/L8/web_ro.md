@@ -29,11 +29,11 @@ Cunoașterea lui $p(\mathbf x)$ aduce patru utilizări în finanțe: o densitate
 
 @practice un clasificator ordonează clienții, un model generativ arată și ce s-ar putea întîmpla.
 
-## Variabile latente: cîteva cauze ascunse, multe valori observate {h=3fcdacd2}
+## Modele cu variabile latente {h=8f061e6c}
 
 Unsprezece randamente sau 784 de pixeli sînt determinate de cîțiva factori ascunși. Un model cu variabile latente scrie $p(\mathbf x)=\int p(\mathbf x\mid\mathbf z)p(\mathbf z)\,d\mathbf z$, cu $\mathbf z\in\mathbb R^k$ și $k$ mult mai mic decît dimensiunea datelor. În cazul liniar-gaussian, $\mathbf x=W\mathbf z+\boldsymbol\mu+\boldsymbol\varepsilon$, se obține analiza probabilistă a componentelor principale (PCA), cu verosimilitate în formă închisă. Cu un decodor neuronal integrala nu mai are formă închisă, iar fiecare familie din acest curs plătește altfel pentru flexibilitate: VAE maximizează o margine inferioară, GAN renunță la verosimilitate, iar difuzia construiește o margine pas cu pas.
 
-## Peisajul: patru familii, patru compromisuri {h=5559a2fa}
+## Patru familii de modele generative {h=38371617}
 
 | Familia | Ce se optimizează | Verosimilitate | Generarea |
 |---|---|---|---|
@@ -78,7 +78,7 @@ PR-AUC pe partea de test este 14,2 % pentru autoencoder (abatere standard 2,9 pe
 @chart ae_pr
 Curbele precizie-recall pe partea de test, ponderate la datele complete.
 
-## Stratul îngust trebuie să fie destul de îngust ca să uite ce este neobișnuit {h=3f21c6e7}
+## Dimensiunea stratului îngust și detectarea anomaliilor {h=047f02c4}
 
 Cu un strat îngust de 2, PR-AUC este 7,8 %, cu 8 este 15,8 %, iar cu 24 este 12,1 % (media pe 2 semințe); dimensiunea cea mai bună este 8. Prea îngust, și chiar plățile normale sînt reconstruite prost; prea larg, și rețeaua învață să copieze și fraudele.
 
@@ -109,7 +109,7 @@ $$ \log p_\theta(\mathbf x)\ge\mathbb E_{q_\phi(\mathbf z\mid\mathbf x)}\big[\lo
 
 Primul termen răsplătește reconstrucțiile bune; al doilea, divergența Kullback–Leibler (KL) față de distribuția a priori $p(\mathbf z)=\mathcal N(0,I)$, adună toate codurile în jurul originii, astfel încît un cod aleator să producă o imagine realistă. Pentru gaussiene are forma închisă $\tfrac12\sum_j(\mu_j^2+\sigma_j^2-\log\sigma_j^2-1)$.
 
-## Trucul reparametrizării lasă gradientul să treacă prin hazard {h=284a04aa}
+## Trucul reparametrizării {h=2e45e21a}
 
 Extragerea lui $\mathbf z$ nu este derivabilă, dar $\mathbf z=\boldsymbol\mu_\phi(\mathbf x)+\boldsymbol\sigma_\phi(\mathbf x)\odot\boldsymbol\varepsilon$, cu $\boldsymbol\varepsilon\sim\mathcal N(0,I)$, este: hazardul stă în $\boldsymbol\varepsilon$, care nu depinde de parametri. VAE-ul nostru este antrenat pe Fashion-MNIST, 60 000 de imagini de antrenare și 10 000 de test, gri, de 28 × 28 de pixeli, cu 10 tipuri de îmbrăcăminte, și are un decodor Bernoulli; rețeaua 784–400–200–$k$ are 798 816 de parametri pentru $k=16$ și este antrenată 20 de epoci.
 
@@ -134,7 +134,7 @@ Pe imaginile de test, după ultima epocă, termenul de reconstrucție este 228,6
 @chart vae_elbo
 Termenii de reconstrucție și KL ai ELBO pe imaginile de test, pe epoci.
 
-## β-VAE: un singur buton între reconstrucții clare și un spațiu latent ordonat {h=3f00feda}
+## β-VAE: calitatea reconstrucției și structura spațiului latent {h=5e4eb686}
 
 Înmulțirea termenului KL cu $\beta$ schimbă echilibrul. Cu $\beta=0{,}5$, termenul de reconstrucție este 222,5 nats și 9 dintre cele 16 dimensiuni latente sînt active (KL peste 0,05); cu $\beta=4$, reconstrucția se înrăutățește la 242,5 nats și rămîn active doar 4 dimensiuni. Un $\beta$ mai mare dă coduri mai netede și mai separate; unul mai mic dă copii mai bune și eșantioane mai slabe.
 
@@ -148,7 +148,7 @@ VAE maximizează ELBO = reconstrucție − KL; trucul reparametrizării îl face
 
 Un GAN învață să extragă din distribuția datelor jucînd împotriva unui discriminator.
 
-## Un GAN este un joc între un falsificator și un detectiv {h=a5496d20}
+## Rețelele generative adversariale: generatorul și discriminatorul {h=362d2b8d}
 
 Generatorul $G$ transformă zgomotul $\mathbf z$ în date false; discriminatorul $D$ dă probabilitatea ca inputul să fie real. Ei joacă
 
@@ -201,7 +201,7 @@ Un GAN reproduce cozile groase ale randamentelor și o valoare VaR de 1 % utiliz
 
 Un model de difuzie învață să inverseze, pas cu pas, un proces care transformă datele în zgomot.
 
-## Difuzia: distrugem datele cu zgomot, apoi învățăm să refacem pașii {h=fa9d8c39}
+## Modelele de difuzie: adăugarea și eliminarea treptată a zgomotului {h=48e7b8a2}
 
 Procesul înainte adaugă puțin zgomot gaussian la fiecare dintre cei $T$ = 200 de pași, $q(\mathbf x_t\mid\mathbf x_{t-1})=\mathcal N(\sqrt{1-\beta_t}\,\mathbf x_{t-1},\beta_tI)$, cu $\beta_t$ crescînd liniar de la $10^{-4}$ la 0,02. Orice pas se obține dintr-o singură extragere,
 

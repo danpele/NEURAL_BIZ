@@ -130,11 +130,11 @@ Pe 200 de împărțiri aleatoare 70/30 ale datelor German credit, AUC pe test a 
 @chart holdout_noise
 AUC pe test al regresiei logistice pe 200 de împărțiri aleatoare ale datelor German credit.
 
-## Scurgerea de informație: cînd setul de validare știe ceva ce nu ar trebui {h=35ad9b90}
+## Scurgerea de informație în setul de validare {h=5f352be3}
 
 Patru scurgeri apar frecvent în datele de afaceri: preprocesare estimată pe toate rîndurile, reeșantionare înainte de împărțire, ignorarea timpului și intrări cunoscute abia după decizie (Kaufman et al., 2012). Pentru serii de timp, folosiți validarea cu fereastră extinsă sau pe blocuri (Bergmeir și Benítez, 2012).
 
-## Supraeșantionarea înainte de împărțire face un detector să pară mult mai bun, pe hîrtie {h=d4334447}
+## Supraeșantionarea înainte de împărțire supraestimează performanța {h=047784c8}
 
 Același MLP, pe aceleași plăți, obține PR-AUC 0,843 cu împărțire cronologică, 0,853 cu împărțire aleatoare și 0,921 cînd fiecare fraudă este copiată de 20 de ori înainte de împărțire: copiile ajung de ambele părți.
 
@@ -156,7 +156,7 @@ Datele complete au 284 807 de plăți, cu o rată a fraudei de 0,173 %; fișier
 @chart fraud_by_hour
 Rata orară a fraudei în cele două zile, cu începutul validării și al testării.
 
-## La evenimente rare, acuratețea este inutilă: măsurăm precizia, sensibilitatea și PR-AUC {h=a864bae5}
+## Măsuri de performanță pentru evenimente rare: precizia, sensibilitatea și PR-AUC {h=5d41d24a}
 
 Precizia este $TP/(TP+FP)$, sensibilitatea $TP/(TP+FN)$, iar PR-AUC face media preciziei pe nivelurile de sensibilitate; un scor aleator are PR-AUC egal cu rata fraudei (Saito și Rehmsmeier, 2015). Fiecare plată legitimă contează cu ponderea 10 în $FP$, deci precizia este cea a populației complete.
 

@@ -53,7 +53,7 @@ XAI & explainable artificial intelligence\\\end{tabular}}\end{column}
 
 \section{Why graphs for financial crime}
 
-\begin{frame}{Money laundering hides in the links, not in the rows}
+\begin{frame}{Network structure in money-laundering detection}
 \footnotesize
 \intuition{A single payment can look ordinary; the chain of payments around it often does not.}
 \begin{columns}[T,onlytextwidth]
@@ -89,7 +89,7 @@ XAI & explainable artificial intelligence\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019; Bishop \& Bishop, 2024, ch.\ 13)}\hfill\tryit{notebook \S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The Elliptic data in one table}
+\begin{frame}{Description of the Elliptic data set}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.30\textwidth}p{0.62\textwidth}@{}}\toprule
@@ -114,7 +114,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019)}\hfill\tryit{notebook \S1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Labels arrive in waves: illicit activity is not stationary}
+\begin{frame}{Illicit transactions over time}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.441\textheight,keepaspectratio]{charts/en/elliptic_timesteps.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each).}
@@ -151,7 +151,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}$\deg(v)=|\mathcal N(v)|$}\hfill\qlink{NN\_L9\_degree\_dist}{Quantlets/L9/NN_L9_degree_dist}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Illicit transactions sit next to illicit transactions}
+\begin{frame}{Homophily of illicit transactions}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.480\textheight,keepaspectratio]{charts/en/homophily.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: Elliptic Bitcoin transaction graph, 49 time steps (about two weeks each).}
@@ -448,7 +448,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kipf \& Welling, 2017)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{GraphSAGE: keep yourself apart from your neighbours, and sample them}
+\begin{frame}{GraphSAGE: separate node representation and neighbour sampling}
 \footnotesize
 \intuition{GraphSAGE concatenates a node's own state with the mean of a sample of its neighbours, so it also works on nodes never seen in training.}
 \begin{columns}[T,onlytextwidth]
@@ -550,7 +550,7 @@ Training / test & steps 1--34 (29\,894 labelled) / steps 35--49 (16\,670 labelle
 
 \section{Case study: illicit Bitcoin transactions}
 
-\begin{frame}{Eight models, one temporal test}
+\begin{frame}{Eight models evaluated on a chronological test set}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.27\textwidth}p{0.66\textwidth}@{}}\toprule
@@ -712,7 +712,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A dark-market shutdown breaks every model: concept drift}
+\begin{frame}{Concept drift after a dark-market shutdown}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.415\textheight,keepaspectratio]{charts/en/f1_by_timestep.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Elliptic Bitcoin transaction graph (Weber et al., 2019). Data: own estimates; training steps 1-34, test time steps 35-49.}
@@ -813,7 +813,7 @@ Forest + GCN & 0.933 & 0.668 & \cellcolor{Forest!48}0.778 & \cellcolor{Forest!51
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Pareja et al., 2020; Ying et al., 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Graphs everywhere in finance}
+\begin{frame}{Applications of graph models in finance}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}

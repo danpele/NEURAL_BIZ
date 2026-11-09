@@ -67,7 +67,7 @@ Because the kernel is shared, its gradient sums the contributions of every posit
 
 # Case study: product photos, from softmax to CNN
 
-## Three models, one protocol
+## Experimental protocol for the three models
 
 The benchmark is a softmax (multinomial logistic) regression with 7,850 parameters; the MLP has two hidden layers (256 and 128 units, 235,146 parameters); the CNN has two blocks of two 3 × 3 convolutions with batch normalisation and max pooling, a third convolution and global average pooling (140,778 parameters). All three are trained with the same optimiser (AdamW), batch size 128, 12 epochs and early stopping on the validation images, with three seeds each.
 

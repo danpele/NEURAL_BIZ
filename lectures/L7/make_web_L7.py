@@ -105,14 +105,14 @@ def page(lang):
     # 1
     P.add(T("# Why attention\n\nText arrives fast and carries information that prices react to; recurrent networks read it slowly and forget.",
             "# De ce atenția\n\nTextul sosește repede și conține informație la care prețurile reacționează; rețelele recurente îl citesc încet și uită."))
-    P.block(T("Financial news moves prices; machines must read it fast", "Știrile financiare mișcă prețurile; mașinile trebuie să le citească repede"), text=T(
+    P.block(T("Financial news as input for models", "Știrile financiare ca date de intrare pentru modele"), text=T(
         f"""A sentiment model maps a text $x_{{1:n}}$ to a fixed-size representation $\\mathbf h$ and then to the probabilities of three classes, $\\hat{{\\mathbf p}}=\\operatorname{{softmax}}(W_o\\mathbf h+\\mathbf b_o)$; the whole lecture is about how to compute $\\mathbf h$. Our data are finance tweets labelled bearish, bullish or neutral: {v('data.n_train_pub', ',')} for training and {v('data.n_test', ',')} for the test, of which {v('data.pct_bearish_test', '.1f')} % bearish, {v('data.pct_bullish_test', '.1f')} % bullish and {v('data.pct_neutral_test', '.1f')} % neutral. Media pessimism predicts next-day returns and trading volume (Tetlock, 2007), so such a model is a measurement instrument.
 
 @practice a sentiment model must be accurate on the rare bearish news, not only on average.""",
         f"""Un model de sentiment duce un text $x_{{1:n}}$ într-o reprezentare de dimensiune fixă $\\mathbf h$ și apoi în probabilitățile a trei clase, $\\hat{{\\mathbf p}}=\\operatorname{{softmax}}(W_o\\mathbf h+\\mathbf b_o)$; tot cursul este despre cum se calculează $\\mathbf h$. Datele noastre sînt tweet-uri financiare etichetate negativ (bearish), pozitiv (bullish) sau neutru: {v('data.n_train_pub', ',')} pentru antrenare și {v('data.n_test', ',')} pentru test, dintre care {v('data.pct_bearish_test', '.1f')} % negative, {v('data.pct_bullish_test', '.1f')} % pozitive și {v('data.pct_neutral_test', '.1f')} % neutre. Pesimismul din presă anticipează randamentele și volumul din ziua următoare (Tetlock, 2007), deci un astfel de model este un instrument de măsură.
 
 @practice un model de sentiment trebuie să fie precis pe știrile negative rare, nu doar în medie."""))
-    P.block(T("Recurrent networks read word by word and forget", "Rețelele recurente citesc cuvînt cu cuvînt și uită"), text=T(
+    P.block(T("Limits of recurrent networks for long texts", "Limitele rețelelor recurente pentru textele lungi"), text=T(
         """A recurrent network updates one state vector token by token, $\\mathbf h_t=\\phi(W_h\\mathbf h_{t-1}+W_x\\mathbf x_t+\\mathbf b)$, so the gradient between words 1 and $n$ is a product of $n-1$ Jacobians that shrinks or explodes with the distance. The path between words $i$ and $j$ has $|i-j|$ steps, and the $n$ steps cannot run in parallel. The long short-term memory (LSTM) of Lecture 5 eases the first problem but keeps the second. In “profit fell, but guidance was raised”, the verdict depends on a word far from the subject.""",
         """O rețea recurentă actualizează un singur vector de stare, token cu token, $\\mathbf h_t=\\phi(W_h\\mathbf h_{t-1}+W_x\\mathbf x_t+\\mathbf b)$, deci gradientul dintre cuvintele 1 și $n$ este un produs de $n-1$ matrice jacobiene, care scade sau explodează odată cu distanța. Drumul dintre cuvintele $i$ și $j$ are $|i-j|$ pași, iar cei $n$ pași nu pot rula în paralel. Rețeaua cu memorie pe termen lung și scurt (LSTM) din cursul 5 atenuează prima problemă, dar o păstrează pe a doua. În „profitul a scăzut, dar prognoza a fost majorată”, verdictul depinde de un cuvînt aflat departe de subiect."""))
     P.block(T("Tweets are short; central-bank speeches are far beyond a 512-token window", "Tweet-urile sînt scurte; discursurile băncilor centrale depășesc mult fereastra de 512 tokeni"), text=T(
@@ -176,7 +176,7 @@ Normalised entropy of attention and share of attention on [CLS] and [SEP], by la
 
 @chart attention_entropy
 Entropia normalizată a atenției și ponderea atenției pe [CLS] și [SEP], pe straturile FinBERT."""))
-    P.block(T("Attention weights are a clue, not an explanation", "Ponderile de atenție sînt un indiciu, nu o explicație"), text=T(
+    P.block(T("Attention weights as explanations: limitations", "Ponderile de atenție ca explicații: limite"), text=T(
         """The contribution of word $j$ to word $i$ is $a_{ij}$ times a value vector whose norm can be large or small, and the residual stream carries information that attention never touches. Different attention maps can give the same prediction (Jain and Wallace, 2019), and heavy attention on [SEP] carries almost no information. Gradient-based attributions and occlusion tests (Lecture 11) are better tools.
 
 @practice never show an attention map to a regulator as “the reason” for a decision.""",
@@ -189,7 +189,7 @@ Entropia normalizată a atenției și ponderea atenției pe [CLS] și [SEP], pe 
     # 3
     P.add(T("# The transformer architecture\n\nPositions, the block, the two families and the tokenizer.",
             "# Arhitectura transformer\n\nPozițiile, blocul, cele două familii și tokenizatorul."))
-    P.block(T("Attention ignores order; positional encoding puts it back", "Atenția ignoră ordinea; codificarea poziției o readuce"), text=T(
+    P.block(T("Sinusoidal positional encoding", "Codificarea sinusoidală a poziției"), text=T(
         """Self-attention is permutation-equivariant: without positions, “rates cut, stocks up” would equal “stocks cut, rates up”. The original transformer adds to each token embedding the vector $p_{t,2i}=\\sin(t/10000^{2i/d})$, $p_{t,2i+1}=\\cos(t/10000^{2i/d})$; low dimensions change fast with the position, high ones slowly, so every position has a unique code and relative shifts are linear maps.
 
 @chart positional_encoding
@@ -209,7 +209,7 @@ where the position-wise feed-forward network (FFN) is $W_2\\,\\mathrm{{GELU}}(W_
 $$ Z=X+\\operatorname{{MHA}}(\\operatorname{{LN}}(X)),\\qquad X'=Z+\\operatorname{{FFN}}(\\operatorname{{LN}}(Z)), $$ {{#eq:block}}
 
 unde rețeaua directă aplicată fiecărei poziții (FFN) este $W_2\\,\\mathrm{{GELU}}(W_1\\mathbf z+\\mathbf b_1)+\\mathbf b_2$, cu unitatea liniară cu eroare gaussiană (GELU), iar LN este normalizarea pe variabilele unui token. Un bloc are circa $12d^2$ parametri, două treimi dintre ei în partea directă. Blocul nostru are $d=64$, o rețea FFN de lățime 128 și dropout 0,1; două blocuri au {v('models.tiny.params_noemb', ',')} de parametri în afara reprezentărilor."""))
-    P.block(T("Encoders read, decoders write: two pretraining tasks", "Codificatoarele citesc, decodoarele scriu: două sarcini de preantrenare"), text=T(
+    P.block(T("Encoders and decoders: two pretraining objectives", "Codificatoare și decodoare: două obiective de preantrenare"), text=T(
         """Bidirectional Encoder Representations from Transformers (BERT) is pretrained by masked language modelling (MLM): 15 % of the tokens are hidden and predicted from both sides. The Generative Pre-trained Transformer (GPT) predicts the next token with a causal mask, $M_{ij}=-\\infty$ for $j>i$, and today's large language models (LLM) follow this design. Encoders suit classification and extraction, decoders generation; the original transformer had both, for translation.
 
 @practice for labelling texts use an encoder; for writing reports use a decoder (Lecture 12).""",
@@ -240,7 +240,7 @@ O rețea neuronală recurentă (RNN) este ieftină pe pas, dar lentă pe propozi
     # 4
     P.add(T("# Case study: sentiment of finance tweets\n\nSeven models on one held-out test set, with bootstrap intervals and per-class errors.",
             "# Studiu de caz: sentimentul tweet-urilor financiare\n\nȘapte modele pe un singur set de test păstrat deoparte, cu intervale bootstrap și erori pe clase."))
-    P.block(T("Seven models, one held-out test set", "Șapte modele, un singur set de test păstrat deoparte"), text=T(
+    P.block(T("Seven models evaluated on a common test set", "Șapte modele evaluate pe același set de test"), text=T(
         f"""The published training tweets are split into {v('data.n_train', ',')} for training and {v('data.n_val', ',')} for validation (10 %, stratified); the published validation set is our test set of {v('data.n_test', ',')} tweets, used once. The models are a TF-IDF logistic regression on word 1–2-grams ({v('tfidf.n_features', ',')} features); a mean of learned token embeddings without attention; our small transformer, with and without positions; and FinBERT, a BERT model further trained on financial text (Araci, 2019), used zero-shot, frozen with a logistic regression on its {v('probe.dim')}-dimensional vectors, and fine-tuned. We do not test on Financial PhraseBank: FinBERT was fine-tuned on it, so the test would be contaminated.""",
         f"""Tweet-urile de antrenare publicate se împart în {v('data.n_train', ',')} pentru antrenare și {v('data.n_val', ',')} pentru validare (10 %, stratificat); setul de validare publicat este setul nostru de test, cu {v('data.n_test', ',')} de tweet-uri, folosit o singură dată. Modelele sînt: o regresie logistică TF-IDF pe secvențe de 1–2 cuvinte ({v('tfidf.n_features', ',')} de variabile); media reprezentărilor învățate ale tokenilor, fără atenție; transformerul nostru mic, cu și fără poziții; și FinBERT, un model BERT antrenat suplimentar pe texte financiare (Araci, 2019), folosit fără antrenare, înghețat cu o regresie logistică pe vectorii lui de {v('probe.dim')} de dimensiuni și ajustat. Nu testăm pe Financial PhraseBank: FinBERT a fost ajustat pe aceste date, deci testul ar fi contaminat."""))
     P.block(T("Our small transformer, trained from scratch", "Transformerul nostru mic, antrenat de la zero"), text=T(
@@ -256,7 +256,7 @@ Training and validation cross-entropy by epoch, seed 1; the dashed line marks th
 Entropia încrucișată pe antrenare și pe validare, pe epoci, sămînța 1; linia punctată marchează epoca reținută.
 
 @practice macro-F1 este măsura potrivită cînd clasa rară, știrile negative, este cea care costă bani."""))
-    P.block(T("Pretraining wins: fine-tuned FinBERT leads, the small transformer trails TF-IDF", "Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF"), text=T(
+    P.block(T("Comparison of the models: macro-F1 on the test set", "Compararea modelelor: macro-F1 pe setul de test"), text=T(
         f"""On the {v('data.n_test', ',')} test tweets, macro-F1 is {v('models.finbert_ft.macro_f1', '.1f')} % for fine-tuned FinBERT, {v('models.tfidf.macro_f1', '.1f')} % for TF-IDF and {v('models.tiny.macro_f1', '.1f')} % for the small transformer (standard deviation {v('models.tiny.macro_f1_sd', '.1f')} over 3 seeds). FinBERT without any training on tweets reaches {v('models.finbert_zs.macro_f1', '.1f')} %, and frozen FinBERT with a logistic regression {v('models.finbert_probe.macro_f1', '.1f')} %.
 
 @chart model_comparison

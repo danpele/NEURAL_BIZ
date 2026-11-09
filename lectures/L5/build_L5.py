@@ -139,7 +139,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1. sequences
     D.section(t("Sequences in finance and energy", "Secvențe în finanțe și energie"))
-    D.figframe(t("Returns look like noise, volatility comes in clusters", "Randamentele par zgomot, volatilitatea vine în grupuri"),
+    D.figframe(t("Returns and volatility clustering", "Randamentele și gruparea volatilității"),
                t("the size of the move today says a lot about the size tomorrow; its sign says almost nothing.",
                  "mărimea mișcării de azi spune mult despre mărimea celei de mîine; semnul ei nu spune aproape nimic."),
                "\\[ r_t=100\\ln\\frac{P_t}{P_{t-1}},\\qquad \\hat\\sigma^2_{\\mathrm{GK},t}=\\tfrac12\\Big(\\ln\\frac{H_t}{L_t}\\Big)^2-(2\\ln2-1)\\Big(\\ln\\frac{C_t}{O_t}\\Big)^2 \\]",
@@ -148,7 +148,7 @@ def build(lang, H=None):
                           "Estimatorul Garman--Klass (GK), din prețurile de deschidere $O_t$, maxim $H_t$, minim $L_t$ și închidere $C_t$; volatilitatea anualizată are mediana @{data.gk_ann_median|.2f}\\,\\% și vîrful @{data.gk_ann_max|.0f}\\,\\%, la @{data.gk_ann_max_date|date}.")],
                height="0.42\\textheight", cite=t("(Garman \\& Klass, 1980; own computation)", "(Garman \\& Klass, 1980; calcul propriu)"))
 
-    D.figframe(t("The memory is in the volatility, not in the returns", "Memoria este în volatilitate, nu în randamente"),
+    D.figframe(t("Autocorrelation of returns and of absolute returns", "Autocorelația randamentelor și a randamentelor absolute"),
                t("autocorrelations of $|r_t|$ stay positive for months; those of $r_t$ are within the noise band.",
                  "autocorelațiile lui $|r_t|$ rămîn pozitive luni întregi; cele ale lui $r_t$ sînt în banda de zgomot."),
                "\\[ \\hat\\rho(k)=\\frac{\\sum_{t=k+1}^{T}(x_t-\\bar x)(x_{t-k}-\\bar x)}{\\sum_{t=1}^{T}(x_t-\\bar x)^2} \\]",
@@ -159,7 +159,7 @@ def build(lang, H=None):
                      "un model cu memorie merită încercat pentru risc (volatilitate, valoarea expusă la risc (VaR)), mult mai puțin pentru direcția prețului."),
                height="0.4\\textheight", cite=OWN)
 
-    D.concept(t("A window-MLP forgets everything outside the window", "Un MLP pe fereastră uită tot ce este în afara ferestrei"),
+    D.concept(t("Limited memory of a fixed-window MLP", "Memoria limitată a unui MLP pe fereastră fixă"),
               t("an MLP on the last $W$ observations has separate weights for every lag and a hard memory limit.",
                 "un MLP aplicat ultimelor $W$ observații are ponderi separate pentru fiecare decalaj și o limită strictă de memorie."),
               "\\[ \\hat y_{t+1}=g\\big(\\mW[\\mathbf x_{t-W+1};\\dots;\\mathbf x_t]+\\vb\\big),\\qquad \\mW\\in\\R^{m\\times Wd} \\]"
@@ -281,7 +281,7 @@ def build(lang, H=None):
                      "porțile sînt un instrument de diagnostic, nu o explicație: folosiți-le pentru a vedea cînd își schimbă modelul regimul, apoi verificați pe date."),
                height="0.42\\textheight", cite=OWN)
 
-    D.frame(t("Sequence patterns and one trap", "Tipare de secvențe și o capcană"), cols(it(
+    D.frame(t("Sequence architectures and look-ahead leakage", "Arhitecturi pentru secvențe și scurgerea de informație din viitor"), cols(it(
         t(("\\textbf{Many-to-one}", "a window in, one value out: tomorrow's volatility"), ("\\textbf{Many-to-one}", "o fereastră la intrare, o valoare la ieșire: volatilitatea de mîine")),
         t(("\\textbf{Many-to-many (vector output)}", "a week of daily profiles in, 24 hours of tomorrow out: our load model"),
           ("\\textbf{Many-to-many (ieșire vectorială)}", "o săptămînă de profiluri zilnice la intrare, cele 24 de ore de mîine la ieșire: modelul nostru de consum")),
@@ -392,7 +392,7 @@ def build(lang, H=None):
                           "S\\&P 500: AR(1) @{ret.SP500.r2_ar|.3f}\\,\\%, LSTM @{ret.SP500.r2_lstm_mean|.3f}\\,\\% (semințe între @{ret.SP500.r2_lstm_min|.3f} și @{ret.SP500.r2_lstm_max|.3f}); TLV: AR(1) @{ret.TLV.r2_ar|.3f}\\,\\%, LSTM @{ret.TLV.r2_lstm_mean|.3f}\\,\\%.")],
                height="0.42\\textheight", cite=OWN, tryit=NB + "4")
 
-    D.concept(t("Why return forecasts stay weak, and what that teaches", "De ce rămîn slabe prognozele randamentelor și ce ne învață asta"),
+    D.concept(t("Low predictability of returns", "Predictibilitatea redusă a randamentelor"),
               t("in a liquid market the predictable part of returns is tiny compared with their noise.",
                 "pe o piață lichidă, partea previzibilă a randamentelor este infimă față de zgomotul lor."),
               "\\[ r_{t+1}=\\mu_t+\\varepsilon_{t+1},\\qquad \\frac{\\Var(\\mu_t)}{\\Var(r_{t+1})}\\approx0 \\]"

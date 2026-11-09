@@ -201,7 +201,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 3. dense
     D.section(t("Dense representations: word embeddings", "Reprezentări dense: vectorii de cuvinte (embeddings)"))
-    D.concept(t("You shall know a word by the company it keeps", "Un cuvînt se cunoaște după vecinii lui"),
+    D.concept(t("The distributional hypothesis", "Ipoteza distribuțională"),
               t("words used in similar contexts get similar vectors; similarity is the cosine of the angle.",
                 "cuvintele folosite în contexte asemănătoare primesc vectori asemănători; asemănarea este cosinusul unghiului."),
               "\\[ \\mathbf e_w=\\mathbf E^{\\top}\\mathbf o_w\\in\\R^{d},\\qquad \\cos(w,v)=\\frac{\\mathbf e_w^{\\top}\\mathbf e_v}{\\|\\mathbf e_w\\|\\,\\|\\mathbf e_v\\|} \\]"
@@ -256,7 +256,7 @@ def build(lang, H=None):
                 "@{glove.nnz|,d} de perechi nenule (@{glove.density_pct|.3f}\\,\\% din $V^2$); @{glove.share_below_xmax|.2f}\\,\\% sînt sub $x_{\\max}$ și primesc o pondere sub 1."),
               cite=t("(Pennington et al., 2014; own computation)", "(Pennington et al., 2014; calcul propriu)"), wl="0.5", wr="0.47")
 
-    D.concept(t("Counting is enough: PMI and a truncated matrix factorisation", "Numărarea este suficientă: PMI și o factorizare trunchiată"),
+    D.concept(t("Count-based word vectors: PMI and truncated matrix factorisation", "Vectori de cuvinte din frecvențe: PMI și factorizarea trunchiată a matricei"),
               t("before neural embeddings, dense vectors came from factorising a matrix of word associations.",
                 "înaintea vectorilor neuronali, vectorii denși proveneau din factorizarea unei matrice de asocieri între cuvinte."),
               "\\[ \\mathrm{PMI}(w,c)=\\ln\\frac{P(w,c)}{P(w)P(c)} \\]\\vspace{-2mm}\\[ \\mathbf M_{+}\\approx\\mathbf U_d\\boldsymbol\\Sigma_d\\mathbf V_d^{\\top},\\qquad \\mathbf E=\\mathbf U_d\\boldsymbol\\Sigma_d^{1/2} \\]"
@@ -417,7 +417,7 @@ def build(lang, H=None):
                      "alegeți $d$ pe datele de validare; un model mai mic este mai ieftin de rulat și de explicat.")),
         "footnotesize", cite=OWN)
 
-    D.figframe(t("Models fail where the annotators disagree", "Modelele greșesc acolo unde adnotatorii nu sînt de acord"),
+    D.figframe(t("Classification errors and annotator agreement", "Erorile de clasificare și acordul adnotatorilor"),
                t("test accuracy by the share of annotators who agreed on the label of the sentence.",
                  "acuratețea pe test în funcție de ponderea adnotatorilor care au fost de acord asupra etichetei frazei."),
                None, "agreement",

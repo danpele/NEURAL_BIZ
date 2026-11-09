@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L11.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L11.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>IG este o integrală a gradientului pe drumul drept de la referința x′ (tranzacția legitimă medie din ziua 1) la frauda x, calculată cu o sumă Riemann cu punctul de mijloc, cu m pași. Cu puțini pași, suma aproximează slab integrala: pe cele 211 fraude din ziua 2, eroarea relativă mediană este 7,5% cu 2 pași, 3,7% cu 4 și 0,18% cu 64; scade aproximativ ca 1/m², ca pentru regula punctului de mijloc. Ordinea variabilelor se stabilizează mult înaintea sumei.</p></details>
 </section><h2 class="sec" id="s-stab">Concordă explicațiile, sînt fidele, sînt stabile?</h2>
 <section class="blk" id="deletion">
-  <h3>Fidelitatea: eliminați ce spune explicația că este important</h3>
+  <h3>Fidelitatea explicațiilor: testul eliminării variabilelor</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L11_deletion_curve_ro.jpg" alt="Slide-ul 31: Fidelitatea: eliminați ce spune explicația că este important" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11_ro.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L11_deletion_curve_ro.jpg" alt="Slide-ul 31: Fidelitatea explicațiilor: testul eliminării variabilelor" loading="lazy"></a>
       <figcaption>Slide-ul 31</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="dl-m"><span class="lbl">Ordinea eliminării</span><div class="tgs"><label class="tg"><input type="checkbox" name="dl-m" value="ig" checked> Gradienți integrați</label><label class="tg"><input type="checkbox" name="dl-m" value="shap" checked> Kernel SHAP</label><label class="tg"><input type="checkbox" name="dl-m" value="lime"> LIME</label><label class="tg"><input type="checkbox" name="dl-m" value="saliency" checked> Saliență</label><label class="tg"><input type="checkbox" name="dl-m" value="random" checked> Ordine aleatoare</label></div></div><div class="ctl"><label for="dl-f">Frauda (0 = media celor 211 fraude; 1 = scorul cel mai mare): <b id="dl-f-v"></b></label><input type="range" id="dl-f" min="0" max="211" step="1" value="0"></div><div class="ctl"><label for="dl-k">Variabile readuse la referință, k: <b id="dl-k-v"></b></label><input type="range" id="dl-k" min="0" max="12" step="1" value="3"></div><button class="btn play" id="dl-play" type="button"></button></div><div class="charts one"><div class="chart" id="dl-chart"></div></div><ul class="out" id="dl-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_deletion_curve" target="_blank" rel="noopener">NN_L11_deletion_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_deletion_curve/NN_L11_deletion_curve.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

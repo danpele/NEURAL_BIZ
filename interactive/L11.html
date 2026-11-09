@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_en.js?v=20261108s", "common.js?v=20261108s"], "L11.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L11_data.js?v=20261108s", "L11_text_en.js?v=20261108s", "common.js?v=20261109m"], "L11.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>IG is an integral of the gradient along the straight path from the baseline x′ (the mean legitimate transaction of day 1) to the fraud x, computed with a midpoint Riemann sum of m steps. With few steps the sum is a poor approximation: over the 211 frauds of day 2 the median relative error is 7.5% with 2 steps, 3.7% with 4 and 0.18% with 64; it falls roughly as 1/m², as for the midpoint rule. The ranking of the features is stable much earlier than the sum.</p></details>
 </section><h2 class="sec" id="s-stab">Do explanations agree, are they faithful, are they stable?</h2>
 <section class="blk" id="deletion">
-  <h3>Faithfulness: remove what the explanation says matters</h3>
+  <h3>Faithfulness of explanations: deletion test</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L11_deletion_curve_en.jpg" alt="Slide 31: Faithfulness: remove what the explanation says matters" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L11/lecture11.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L11_deletion_curve_en.jpg" alt="Slide 31: Faithfulness of explanations: deletion test" loading="lazy"></a>
       <figcaption>Slide 31</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="dl-m"><span class="lbl">Order of deletion</span><div class="tgs"><label class="tg"><input type="checkbox" name="dl-m" value="ig" checked> Integrated gradients</label><label class="tg"><input type="checkbox" name="dl-m" value="shap" checked> Kernel SHAP</label><label class="tg"><input type="checkbox" name="dl-m" value="lime"> LIME</label><label class="tg"><input type="checkbox" name="dl-m" value="saliency" checked> Saliency</label><label class="tg"><input type="checkbox" name="dl-m" value="random" checked> Random order</label></div></div><div class="ctl"><label for="dl-f">Fraud (0 = mean of the 211 frauds; 1 = highest score): <b id="dl-f-v"></b></label><input type="range" id="dl-f" min="0" max="211" step="1" value="0"></div><div class="ctl"><label for="dl-k">Features reset to the baseline, k: <b id="dl-k-v"></b></label><input type="range" id="dl-k" min="0" max="12" step="1" value="3"></div><button class="btn play" id="dl-play" type="button"></button></div><div class="charts one"><div class="chart" id="dl-chart"></div></div><ul class="out" id="dl-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L11/NN_L11_deletion_curve" target="_blank" rel="noopener">NN_L11_deletion_curve</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L11/NN_L11_deletion_curve/NN_L11_deletion_curve.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

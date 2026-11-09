@@ -282,7 +282,7 @@ celelalte 8 intrări &  &  & \ensuremath{+}0{,}31 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O valoare lipsă poate fi cel mai puternic semnal}
+\begin{frame}{Valorile lipsă ca predictori ai neplății}
 \small
 \intuition{solicitanții care nu își declară raportul datorii/venit intră mult mai des în neplată: lipsa datelor este o informație.}
 \[ \tilde x_{ij}=\begin{cases}x_{ij}&\text{observat}\\ \mathrm{med}_{\text{train}}(x_j)&\text{lipsă}\end{cases},\qquad m_{ij}=\mathbb 1\{x_{ij}\ \text{lipsă}\} \]
@@ -374,7 +374,7 @@ celelalte 8 intrări &  &  & \ensuremath{+}0{,}31 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Novikoff, 1962)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Pe credite reale, perceptronul nu se stabilizează niciodată}
+\begin{frame}{Perceptronul nu converge pe date de credit neseparabile}
 \small
 \intuition{clasele se suprapun, așa că fiecare epocă corectează unele credite și le strică pe altele.}
 \begin{center}\includegraphics[width=\textwidth,height=0.454\textheight,keepaspectratio]{charts/ro/perceptron_errors.pdf}\end{center}\vspace{-3mm}
@@ -387,7 +387,7 @@ celelalte 8 intrări &  &  & \ensuremath{+}0{,}31 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L1\_perceptron\_errors}{Quantlets/L1/NN_L1_perceptron_errors}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Nicio dreaptă nu separă XOR: un strat ascuns reușește}
+\begin{frame}{Problema XOR și stratul ascuns}
 \small
 \intuition{XOR este adevărat cînd exact o intrare este activă; cele două puncte pozitive stau pe o diagonală.}
 \vspace{-1mm}\[ h_k=\tanh(\vw_k^\top\vx+b_k),\ k=1,2;\qquad p=\sigma(v_1h_1+v_2h_2+c) \]\vspace{-2mm}
@@ -511,7 +511,7 @@ cuantila $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L1\_uat\_california}{Quantlets/L1/NN_L1_uat_california}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Adîncimea refolosește variabilele: o rețea adîncă și îngustă poate întrece una lată}
+\begin{frame}{Adîncimea și lățimea unei rețele}
 \small
 \intuition{fiecare strat compune variabilele stratului anterior, astfel încît numărul de bucăți liniare poate crește cu adîncimea.}
 \[ \text{ReLU MLP:}\ \ f(\vx)\ \text{este liniară pe porțiuni; numărul de regiuni liniare pînă la}\ \ O\big(H^{dL}\big) \]

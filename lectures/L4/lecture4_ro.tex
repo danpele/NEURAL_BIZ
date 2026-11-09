@@ -302,7 +302,7 @@ EuroSAT & imagini satelitare Sentinel-2 din Europa, 10 clase de utilizare a tere
 
 \section{Studiu de caz: fotografii de produse, de la softmax la CNN}
 
-\begin{frame}{Trei modele, același protocol}
+\begin{frame}{Protocolul experimental pentru cele trei modele}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -444,7 +444,7 @@ EuroSAT & imagini satelitare Sentinel-2 din Europa, 10 clase de utilizare a tere
 
 \section{Arhitecturi: de la LeNet la ResNet}
 
-\begin{frame}{Treizeci de ani de arhitecturi într-un tabel}
+\begin{frame}{Arhitecturi pentru recunoașterea imaginilor, 1998--2021}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.17\textwidth}p{0.07\textwidth}p{0.68\textwidth}@{}}\toprule
@@ -461,7 +461,7 @@ Transformer vizual & 2021 & fragmente de imagine tratate ca unități lexicale, 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(LeCun et al., 1998; Krizhevsky et al., 2012; Simonyan \& Zisserman, 2015; He et al., 2016)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Conexiunile reziduale: învață corecția, păstrează identitatea}
+\begin{frame}{Conexiunile reziduale și calea identității}
 \footnotesize
 \intuition{un bloc își adună ieșirea la intrare, astfel încît gradientul are mereu un drum direct înapoi.}
 \begin{columns}[T,onlytextwidth]
@@ -503,7 +503,7 @@ Transformer vizual & 2021 & fragmente de imagine tratate ca unități lexicale, 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L4\_cifar\_curves}{Quantlets/L4/NN_L4_cifar_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Augmentarea datelor este o informație a priori scrisă ca transformări}
+\begin{frame}{Augmentarea datelor ca informație a priori}
 \footnotesize
 \intuition{antrenăm pe transformări aleatoare care nu ar trebui să schimbe eticheta, adică mediem pierderea peste ele.}
 \begin{columns}[T,onlytextwidth]

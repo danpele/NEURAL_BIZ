@@ -300,7 +300,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 
 \section{Case study: product photos, from softmax to CNN}
 
-\begin{frame}{Three models, one protocol}
+\begin{frame}{Experimental protocol for the three models}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -442,7 +442,7 @@ EuroSAT & Sentinel-2 satellite tiles of Europe, 10 land-use classes, 64$\times$6
 
 \section{Architectures: from LeNet to ResNet}
 
-\begin{frame}{Thirty years of architectures in one table}
+\begin{frame}{Image-recognition architectures, 1998--2021}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.17\textwidth}p{0.07\textwidth}p{0.68\textwidth}@{}}\toprule
@@ -459,7 +459,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(LeCun et al., 1998; Krizhevsky et al., 2012; Simonyan \& Zisserman, 2015; He et al., 2016)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Residual connections: learn the correction, keep the identity}
+\begin{frame}{Residual connections and the identity path}
 \footnotesize
 \intuition{a block adds its output to its input, so the gradient always has a direct path back.}
 \begin{columns}[T,onlytextwidth]
@@ -501,7 +501,7 @@ Vision transformer & 2021 & image patches as tokens with attention (Lecture 7) \
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L4\_cifar\_curves}{Quantlets/L4/NN_L4_cifar_curves}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Data augmentation is a prior written as transformations}
+\begin{frame}{Data augmentation as prior information}
 \footnotesize
 \intuition{we train on random transformations that should not change the label, which averages the loss over them.}
 \begin{columns}[T,onlytextwidth]

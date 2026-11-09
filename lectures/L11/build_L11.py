@@ -208,7 +208,7 @@ def build(lang, H=None):
              "Metodele post-hoc explică o cutie neagră deja antrenată; modelele interpretabile sînt transparente prin construcție (Rudin, 2019)."), sep="1pt"),
         "footnotesize", cite="(Rudin, 2019)")
 
-    D.concept(t("The credit case: three models, one decision", "Studiul de caz pentru credit: trei modele, o singură decizie"),
+    D.concept(t("Credit case study: comparison of three scoring models", "Studiul de caz pentru credit: compararea a trei modele de scoring"),
               t("the network ranks defaulters better than the logistic scorecard (higher area under the receiver operating characteristic (ROC) curve (AUC) and "
                 "area under the precision-recall curve (PR-AUC)); can we explain it as well?",
                 "rețeaua ordonează rău-platnicii mai bine decît grila logistică (aria de sub curba de operare (ROC) (AUC) și "
@@ -467,7 +467,7 @@ def build(lang, H=None):
                 "explicațiile pe concepte cer concepte etichetate încă de la colectarea datelor."),
               cite="(Smilkov et al., 2017; Kim et al., 2018)", wl="0.58", wr="0.39")
 
-    D.figframe(t("One fraud, four explanations", "O fraudă, patru explicații"),
+    D.figframe(t("Four explanation methods for one fraudulent transaction", "Patru metode de explicare aplicate unei tranzacții frauduloase"),
                t("signed attributions of one day-2 fraud (median fraud score), as shares of the total absolute attribution.",
                  "atribuirile cu semn pentru o fraudă din ziua 2 (scorul median al fraudelor), ca ponderi în atribuirea absolută totală."),
                None, "fraud_local", bullets=[
@@ -491,7 +491,7 @@ def build(lang, H=None):
                      "dezacordul este informație: importanța prin permutare arată de ce are nevoie modelul, atribuirile arată ce folosește."),
                tryit=NB + " \\S6", height="0.56\\textheight", cite="(Breiman, 2001; " + t("own computation", "calcul propriu") + ")")
 
-    D.figframe(t("Faithfulness: remove what the explanation says matters", "Fidelitatea: eliminați ce spune explicația că este important"),
+    D.figframe(t("Faithfulness of explanations: deletion test", "Fidelitatea explicațiilor: testul eliminării variabilelor"),
                t("reset the top-$k$ features of each fraud to the baseline; a faithful explanation makes the score fall fast.",
                  "variabilele de top $k$ ale fiecărei fraude sînt readuse la referință; o explicație fidelă face scorul să scadă repede."),
                "\\[ \\mathrm{AOPC}=\\frac{1}{K}\\sum_{k=1}^{K}\\big[f(\\vx)-f(\\vx^{(k)})\\big] \\]",

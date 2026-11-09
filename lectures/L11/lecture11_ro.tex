@@ -130,7 +130,7 @@ Importanța prin permutare & global & etichete + apeluri ale modelului & MLP de 
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Rudin, 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Studiul de caz pentru credit: trei modele, o singură decizie}
+\begin{frame}{Studiul de caz pentru credit: compararea a trei modele de scoring}
 \footnotesize
 \intuition{rețeaua ordonează rău-platnicii mai bine decît grila logistică (aria de sub curba de operare (ROC) (AUC) și aria de sub curba precizie-sensibilitate (PR-AUC) sînt mai mari); o putem explica la fel de bine?}
 \begin{columns}[T,onlytextwidth]
@@ -542,7 +542,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Smilkov et al., 2017; Kim et al., 2018)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O fraudă, patru explicații}
+\begin{frame}{Patru metode de explicare aplicate unei tranzacții frauduloase}
 \small
 \intuition{atribuirile cu semn pentru o fraudă din ziua 2 (scorul median al fraudelor), ca ponderi în atribuirea absolută totală.}
 \begin{center}\includegraphics[width=\textwidth,height=0.481\textheight,keepaspectratio]{charts/ro/fraud_local.pdf}\end{center}\vspace{-3mm}
@@ -576,7 +576,7 @@ LOAN & 14\,500{,}0 & 15\,700{,}0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Breiman, 2001; calcul propriu)}\hfill\qlink{NN\_L11\_method\_agreement}{Quantlets/L11/NN_L11_method_agreement}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Fidelitatea: eliminați ce spune explicația că este important}
+\begin{frame}{Fidelitatea explicațiilor: testul eliminării variabilelor}
 \small
 \intuition{variabilele de top $k$ ale fiecărei fraude sînt readuse la referință; o explicație fidelă face scorul să scadă repede.}
 \vspace{-1mm}\[ \mathrm{AOPC}=\frac{1}{K}\sum_{k=1}^{K}\big[f(\vx)-f(\vx^{(k)})\big] \]\vspace{-2mm}

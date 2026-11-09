@@ -202,7 +202,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Baydin et al., 2018; Paszke et al., 2019)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi}
+\begin{frame}{Dispariția gradientului în rețelele adînci cu activare sigmoidă}
 \small
 \intuition{semnalul înapoi este un produs de matrice jacobiene; cu $\sigma'\le1/4$, el scade la fiecare strat.}
 \vspace{-1mm}\[ \frac{\partial\ell}{\partial\vh^{(l)}}=\Big(\prod_{k=l+1}^{L}\mW^{(k)\top}\operatorname{diag}\big(a'(\vz^{(k)})\big)\Big)\frac{\partial\ell}{\partial\vh^{(L)}} \]\vspace{-2mm}
@@ -261,7 +261,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Robbins \& Monro, 1951)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge}
+\begin{frame}{Efectul ratei de învățare asupra antrenării}
 \small
 \intuition{SGD simplu pe un MLP 64-64, 30 de epoci, loturi de 128, pentru nouă rate de învățare și trei inițializări.}
 \begin{center}\includegraphics[width=\textwidth,height=0.389\textheight,keepaspectratio]{charts/ro/lr_sweep.pdf}\end{center}\vspace{-3mm}
@@ -277,7 +277,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L2\_lr\_sweep}{Quantlets/L2/NN_L2_lr_sweep}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă}
+\begin{frame}{Efectul dimensiunii lotului: progresul pe epocă și pe secundă}
 \small
 \intuition{Adam cu rata de învățare 0,001, 40 de epoci, loturi de 16, 128 și 1\,024 de exemple.}
 \begin{center}\includegraphics[width=\textwidth,height=0.437\textheight,keepaspectratio]{charts/ro/batch_size.pdf}\end{center}\vspace{-3mm}
@@ -431,7 +431,7 @@ $\partial\ell/\partial W^{(1)}_{k2}=\delta^{(1)}_kx_2$ & \ensuremath{-}1{,}419 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L2\_fraud\_optimizers}{Quantlets/L2/NN_L2_fraud_optimizers}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Optimizatorii pe scurt}
+\begin{frame}{Compararea optimizatorilor}
 \small
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.15\textwidth}p{0.37\textwidth}p{0.17\textwidth}p{0.24\textwidth}@{}}\toprule
@@ -532,7 +532,7 @@ EWMA, $\lambda=0{,}94$ & 41 & 2{,}39 & 24{,}08 & 0{,}000 & 0{,}0473 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\tryit{notebook \S9}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O rețetă de antrenare care funcționează pe majoritatea datelor de afaceri}
+\begin{frame}{O procedură standard de antrenare}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}

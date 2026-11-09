@@ -20,7 +20,7 @@ We start from the language-model objective, tokens, perplexity and temperature, 
 
 An LLM is trained to predict the next token. Everything else, from answering questions to writing a risk report, is repeated use of that single probability.
 
-## Why finance cares {h=c7f81768}
+## Text data in financial institutions {h=5506846a}
 
 Prices react to news within minutes, central banks steer expectations with words, and loan files and annual reports cost analyst hours. All models in this lecture are open and run locally (Qwen2.5-Instruct with 0.5, 1.5 and 3 billion parameters), so no text leaves the machine and no application programming interface (API) is paid.
 
@@ -145,7 +145,7 @@ Reliability diagram of the predicted label probabilities.
 
 The expected calibration error (ECE) is 4.7 % for zero-shot 3B, 3.6 % for few-shot 3B and 5.4 % for TF-IDF with logistic regression: on this task the label probabilities of the LLM are about as reliable as those of the trained classifier. Calibration must still be checked on validation data before scores are used as risk probabilities (Guo et al., 2017).
 
-## Where humans disagree, models fail {h=f7f4d4ab}
+## Accuracy by level of annotator agreement {h=b2d8e599}
 
 @chart agreement
 Accuracy by annotator agreement.
@@ -186,7 +186,7 @@ Recall@k of the four retrievers.
 
 The hybrid retriever puts the right speech first for 50.7 % of the titles and within the first ten for 83.2 %.
 
-## Without documents the model invents a speaker {h=3ef91deb}
+## Answers with and without retrieved documents {h=63db9336}
 
 @chart rag_qa
 Who gave the speech? Answers without documents, with RAG and with the right speech.

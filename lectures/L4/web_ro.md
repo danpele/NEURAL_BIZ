@@ -67,7 +67,7 @@ Pentru că nucleul este partajat, gradientul lui adună contribuțiile tuturor p
 
 # Studiu de caz: fotografii de produse, de la softmax la CNN
 
-## Trei modele, același protocol
+## Protocolul experimental pentru cele trei modele
 
 Modelul de referință este o regresie softmax (logistică multinomială) cu 7 850 de parametri; MLP are două straturi ascunse (256 și 128 de unități, 235 146 de parametri); CNN are două blocuri cu cîte două convoluții 3 × 3, normalizare pe loturi și agregare prin maxim, o a treia convoluție și agregare prin medie globală (140 778 de parametri). Toate trei sînt antrenate cu același optimizator (AdamW), loturi de 128, 12 epoci și oprire timpurie pe imaginile de validare, cu cîte trei semințe.
 

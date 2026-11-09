@@ -28,7 +28,7 @@ On the day-ahead market, the price of every hour of tomorrow is set by one aucti
 
 Prices for Romania (RO), Germany–Luxembourg (DE-LU) and Hungary (HU) and the Romanian load come from energy-charts.info, the data portal of the Fraunhofer Institute for Solar Energy Systems (ISE), which republishes exchange data and the data of the European Network of Transmission System Operators for Electricity (ENTSO-E). The price file runs from 1 January 2015 to 31 October 2026 with 103,595 hourly prices. Daily closes of the S&P 500 and of Bitcoin come from Yahoo Finance. Missing hours stay missing: the two clock-change days of every year enter only if all 24 hours exist.
 
-## Romanian prices: a crisis level, then a new regime {h=8f7d1797}
+## Daily mean day-ahead prices in Romania {h=b855c497}
 
 @chart price_history
 Daily mean day-ahead prices in Romania and Germany–Luxembourg.
@@ -64,7 +64,7 @@ The rules of the game: information at gate closure only, a rolling window, one u
 
 Before a deep network, a strong linear benchmark: LEAR is the open reference model of electricity price forecasting. The DNN uses exactly the same inputs, so the comparison isolates the model.
 
-## Variance-stabilising transform {h=a0c10516}
+## Variance-stabilising transform {h=664741f7}
 
 Prices have spikes and can be negative. The area hyperbolic sine behaves like a logarithm for large values and like the identity near zero:
 
@@ -101,7 +101,7 @@ LEAR and the DNN use the same information; the DNN does not beat LEAR by a signi
 
 Three ideas shape modern forecasting networks: a recurrent network that outputs a distribution (DeepAR), stacks of fully connected blocks (N-BEATS), and transformers on patches of the series.
 
-## A recurrent network that outputs a distribution {h=285890eb}
+## A probabilistic recurrent network {h=06d501f8}
 
 The deep autoregressive recurrent network (DeepAR) of Salinas et al. (2020) runs a long short-term memory network (LSTM) over the series and outputs the parameters of tomorrow's distribution; it is trained by maximum likelihood on many related series at once. Its global, probabilistic design is the ancestor of today's foundation models.
 
@@ -127,7 +127,7 @@ $$ \hat q^{\tau}_{T+k}=g_{\boldsymbol\theta^{*}}\big(y_{T-C+1:T}\big)_{k,\tau} $
 
 where $C$ is the context length (2,048 hours here), $\tau$ a quantile level and $\boldsymbol\theta^{*}$ the frozen pre-trained weights, obtained by minimising the quantile (pinball) loss over the pre-training corpus. We test Chronos-2 and Chronos-Bolt (Amazon) and TimesFM 2.5 (Google Research).
 
-## Chronos: a time series read as a sentence {h=94c0ff3a}
+## Chronos: tokenisation of time series {h=2e44ea50}
 
 The original Chronos (Ansari et al., 2024) divides the series by its mean absolute value, cuts the scaled values into bins and trains a language model to predict the next bin with the cross-entropy loss. Chronos-Bolt and Chronos-2 replace the bins by patches and quantile outputs. The model knows shapes (seasonality, mean reversion), not the Romanian market.
 
@@ -161,7 +161,7 @@ MAE by delivery hour.
 
 All models struggle in the evening: the worst hour of LEAR is 19:00 (MAE 35.78 EUR/MWh) and so is that of Chronos-2 (34.05), while night hours are forecast within about 10.75 EUR/MWh.
 
-## One week of forecasts {h=c38877d1}
+## One week of forecasts {h=6011482a}
 
 @chart forecast_week
 Actual prices and three forecasts, 19–25 October 2026.
@@ -183,7 +183,7 @@ $$ \mathrm{DM}=\frac{\bar\Delta}{\hat\sigma_\Delta/\sqrt{|\mathcal T|}}\ \overse
 
 tests whether model B is more accurate than model A (Diebold & Mariano, 1995; Ziel & Weron, 2018). Working with daily rather than hourly losses respects the fact that the 24 hours of a day share the same information.
 
-## The full chessboard {h=31abb1c0}
+## Pairwise Diebold–Mariano tests {h=31abb1c0}
 
 @chart dm_pvalues
 One-sided p-values of the multivariate Diebold–Mariano test.
@@ -207,7 +207,7 @@ A quantile forecast $\hat q^{\tau}$ is scored with the pinball loss $\rho_\tau(u
 @chart chronos_fan
 Chronos-2 quantile bands and actual prices, 19–25 October 2026.
 
-## Split-conformal correction {h=56cc0daa}
+## Split-conformal correction {h=ab75e63a}
 
 The conformity score of each past hour measures how far the outcome fell outside the raw band, $s_i=\max(\hat q^{\alpha/2}_i-y_i,\ y_i-\hat q^{1-\alpha/2}_i)$. Taking the $\lceil (n+1)(1-\alpha)\rceil$-th smallest score of the last 60 days as $\hat Q$ and widening the band by $\hat Q$ on both sides guarantees coverage of at least $1-\alpha$ when the data are exchangeable (Romano, Patterson & Candès, 2019); for time series the guarantee is approximate. For the 80 % band, the raw Chronos-2 coverage was 76.5 % and the conformal coverage 79.3 %, with the mean width moving from 60.03 to 63.89 EUR/MWh.
 
@@ -250,7 +250,7 @@ Over 1,717 trading days the conformal Chronos-2 VaR passed the Kupiec test at bo
 
 @practice recalibration is a model change: document it and backtest it out of sample.
 
-## Two routes to the same quantile {h=0765b4d2}
+## Quantile forecasts from language models and time-series models {h=ccdd208f}
 
 Lecture 12 wrote past returns into the prompt of a language model (LLM-VaR, Pele et al., 2026); here a time-series foundation model reads them as numbers. Both are zero-shot, both must be backtested out of sample against GARCH and historical simulation.
 

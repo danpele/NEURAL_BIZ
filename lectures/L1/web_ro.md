@@ -86,7 +86,7 @@ Regresia logistică pe HMEQ: coeficienți standardizați cu intervale de încred
 
 Pentru un solicitant din setul de testare care a intrat ulterior în neplată (un credit de 15 400 USD, raport datorii/venit 36,4 %, 2 linii cu restanțe), scorul este suma contribuțiilor $w_jx_j$ plus termenul liber, $z=$ −1,71, iar neuronul produce $p=\sigma(z)=$ 15,3 %. Solicitantul ar trece de un prag de 50 %; secțiunea 5 arată de ce pragul trebuie stabilit din costuri.
 
-## O valoare lipsă poate fi cel mai puternic semnal {h=8b7fd166}
+## Valorile lipsă ca predictori ai neplății {h=8617b2cd}
 
 Raportul datorii/venit lipsește pentru 21,3 % dintre creditele HMEQ, iar acestea intră în neplată în 62,0 % din cazuri, față de 8,6 % cînd raportul este declarat. Eliminarea rîndurilor incomplete ar elimina solicitanții cei mai riscanți. Completăm fiecare intrare numerică cu mediana de antrenare și adăugăm un indicator de valoare lipsă, ceea ce dă $d=$ 28 de intrări.
 
@@ -112,7 +112,7 @@ Dacă exemplul $i$ este clasificat greșit, $y_i(\mathbf w^\top\mathbf x_i+b)\le
 
 Novikoff (1962): dacă un vector unitar $\mathbf w^*$ separă datele cu marginea $\gamma$ și toate intrările se află în raza $R$, perceptronul face cel mult $(R/\gamma)^2$ greșeli, oricîte exemple și oricare ar fi dimensiunea. Fără un hiperplan separator, teorema nu spune nimic.
 
-## Pe credite reale, perceptronul nu se stabilizează niciodată {h=cdb05342}
+## Perceptronul nu converge pe date de credit neseparabile {h=0c932a16}
 
 Pe creditele HMEQ de antrenare, clasele se suprapun. În 60 de epoci, eroarea de antrenare sare între 13,2 % și 23,4 %, după 35 876 de actualizări, în timp ce regresia logistică pe aceleași intrări ajunge la 11,7 %, iar regula „mereu fără neplată” la 19,9 %.
 
@@ -121,7 +121,7 @@ Eroarea de antrenare a perceptronului după fiecare epocă pe HMEQ, comparată c
 
 @practice o pierdere netedă și o ieșire probabilistă rezolvă ambele probleme.
 
-## Nicio dreaptă nu separă XOR: un strat ascuns reușește {h=29c37c83}
+## Problema XOR și stratul ascuns {h=24aa4ddf}
 
 XOR este adevărat cînd exact o intrare este activă. Orice frontieră liniară clasifică corect cel mult trei dintre cele patru puncte (aici 50 %), în timp ce un MLP cu doi neuroni ascunși tanh ajunge la 100 %: stratul ascuns duce intrările într-un spațiu în care clasele devin separabile. Interacțiunile de tipul „datorii mari și istoric scurt” sînt de acest fel. Este o ilustrare a mecanismului pe tabelul logic, nu un rezultat pe date.
 
@@ -168,7 +168,7 @@ Valoarea locuințelor în funcție de latitudine: medii pe clase și rețele est
 
 @practice efectele de localizare sînt neliniare: un termen liniar nu le poate surprinde.
 
-## Adîncimea refolosește variabilele: o rețea adîncă și îngustă poate întrece una lată {h=6380c20c}
+## Adîncimea și lățimea unei rețele {h=82cb68e6}
 
 O rețea ReLU este liniară pe porțiuni, iar numărul regiunilor ei liniare poate crește exponențial cu adîncimea, la un număr fix de neuroni (Montúfar et al., 2014). Pe datele tabelare de credit, două sau trei straturi ascunse sînt de obicei suficiente; adîncimea contează la imagini, text și secvențe.
 

@@ -32,7 +32,7 @@ Există și motive de afaceri: explicațiile scot la iveală scurgerile de infor
 
 Metodele diferă prin domeniu și prin ce le este necesar. Metodele globale descriu modelul pe întreaga populație (coeficienți, valorile SHAP absolute medii, dependența parțială, importanța prin permutare); metodele locale explică o singură decizie (diagrama cascadă SHAP, LIME, gradienții, un contrafactual). Metodele independente de model doar apelează modelul (Kernel SHAP, LIME, dependența parțială); metodele specifice folosesc structura lui (TreeSHAP pentru arbori, gradienții pentru rețele). În sfîrșit, metodele post-hoc explică un model deja antrenat, în timp ce modelele interpretabile, de exemplu o grilă de scor, sînt transparente prin construcție. Rudin (2019) susține că în deciziile cu miză mare a doua cale trebuie încercată prima; vom vedea cîtă acuratețe costă ea pe datele noastre.
 
-## Studiul de caz pentru credit: trei modele, o singură decizie {h=9478cf50}
+## Studiul de caz pentru credit: compararea a trei modele de scoring {h=a802796a}
 
 Rețeaua are două straturi ascunse, cu 64 și 32 de unități liniare rectificate (ReLU):
 
@@ -204,7 +204,7 @@ Eroarea relativă mediană de completitudine a gradienților integrați în func
 
 SmoothGrad (Smilkov et al., 2017) mediază gradienții pe copii perturbate ale intrării, ceea ce elimină oscilațiile unei rețele ReLU. Testarea cu vectori de activare a conceptelor (TCAV) (Kim et al., 2018) pune o altă întrebare: un concept uman, învățat ca direcție $\mathbf v_C$ într-un strat ascuns, mișcă ieșirea? Conceptele trebuie etichetate, ceea ce nu este posibil cu componente PCA anonimizate; ele trebuie planificate încă de la colectarea datelor.
 
-## O fraudă, patru explicații {h=d7a5363e}
+## Patru metode de explicare aplicate unei tranzacții frauduloase {h=ae4a7404}
 
 Pentru frauda cu scorul median din ziua 2 (scor de fraudă 99,9 %), Kernel SHAP și gradienții integrați indică amîndoi V14 ca variabilă principală, în timp ce saliența indică V12: saliența măsoară cît de sensibil este scorul, nu cît de departe este tranzacția de normal.
 
@@ -224,7 +224,7 @@ Corelația Spearman a importanțelor globale (atribuirea absolută medie) pentru
 
 @practice dezacordul este informație: importanța prin permutare arată de ce are nevoie modelul, atribuirile arată ce folosește.
 
-## Fidelitatea: eliminați ce spune explicația că este important {h=5c419b6f}
+## Fidelitatea explicațiilor: testul eliminării variabilelor {h=6a7bd22f}
 
 O explicație fidelă numește variabilele a căror eliminare schimbă prognoza. Readucem la referință primele $k$ variabile ale fiecărei fraude și urmărim scorul mediu de fraudă; aria de deasupra curbei de perturbare (AOPC) rezumă scăderea (Samek et al., 2017). În puncte de scor de fraudă: IG 56,2, SHAP 58,4, LIME 56,1, saliență 48,0, ordine aleatoare 3,9. SHAP, IG și LIME sînt aici la fel de fidele, saliența mai puțin, iar toate metodele sînt mult mai bune decît hazardul.
 

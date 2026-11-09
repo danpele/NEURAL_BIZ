@@ -80,7 +80,7 @@ WGAN & Wasserstein GAN\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.\ 16)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Latent variables: a few hidden causes, many observed numbers}
+\begin{frame}{Latent-variable models}
 \footnotesize
 \intuition{Eleven yields or 784 pixels are driven by a handful of hidden factors; a latent-variable model writes this down.}
 \begin{columns}[T,onlytextwidth]
@@ -112,7 +112,7 @@ WGAN & Wasserstein GAN\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, sec.\ 16.2)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The landscape: four families, four trade-offs}
+\begin{frame}{Four families of generative models}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.25}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.15\textwidth}p{0.20\textwidth}p{0.17\textwidth}p{0.17\textwidth}p{0.23\textwidth}@{}}\toprule
@@ -221,7 +221,7 @@ Metrics & area under the precision-recall curve (PR-AUC) and the area under the 
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L8\_ae\_pr}{Quantlets/L8/NN_L8_ae_pr}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The bottleneck must be narrow enough to forget the unusual}
+\begin{frame}{Bottleneck size and anomaly detection}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.395\textheight,keepaspectratio]{charts/en/ae_bottleneck.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: ULB Machine Learning Group and Worldline, credit-card transactions (OpenML 1597). Data: own estimates; two days of September 2013; test = last 20\,\% of the time span.}
@@ -307,7 +307,7 @@ Logistic regression (labels) & 48 & 64.0\,\% \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kingma \& Welling, 2014; Bishop \& Bishop, 2024, sec.\ 19.2)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The reparameterisation trick lets gradients flow through randomness}
+\begin{frame}{The reparameterisation trick}
 \footnotesize
 \intuition{Sampling is not differentiable, but a shifted and scaled standard normal is.}
 \begin{columns}[T,onlytextwidth]
@@ -382,7 +382,7 @@ Logistic regression (labels) & 48 & 64.0\,\% \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation, seed 1)}\hfill\qlink{NN\_L8\_vae\_elbo}{Quantlets/L8/NN_L8_vae_elbo}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{$\beta$-VAE: one knob between sharp reconstructions and a tidy latent space}
+\begin{frame}{$\beta$-VAE: reconstruction quality and latent-space structure}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
@@ -418,7 +418,7 @@ $\beta$ & Reconstruction & KL & Active dims \\ \midrule
 
 \section{Generative adversarial networks}
 
-\begin{frame}{A GAN is a game between a forger and a detective}
+\begin{frame}{Generative adversarial networks: generator and discriminator}
 \footnotesize
 \intuition{The generator turns noise into fake data; the discriminator tries to tell fake from real; each improves against the other.}
 \begin{columns}[T,onlytextwidth]
@@ -584,7 +584,7 @@ Gaussian & \ensuremath{-}2.67\,\% & 2.39\,\% \\
 
 \section{Diffusion models}
 
-\begin{frame}{Diffusion: destroy the data with noise, then learn to undo it}
+\begin{frame}{Diffusion models: forward noising and reverse denoising}
 \footnotesize
 \intuition{Adding a little Gaussian noise many times turns any data into pure noise; a network learns each small reverse step.}
 \begin{columns}[T,onlytextwidth]

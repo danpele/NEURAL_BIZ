@@ -20,7 +20,7 @@ Cursul formulează în acest limbaj trei probleme economice reale și le rezolv�
 
 Învățarea prin întărire privește ce trebuie făcut, nu ce se va întîmpla. Secțiunea prezintă bucla agent-mediu și cele trei probleme ale cursului.
 
-## Învățarea prin întărire: ce să faci, nu ce se va întîmpla {h=69ed51cd}
+## Învățarea prin întărire și învățarea supervizată {h=0f2ebb2c}
 
 Învățarea supervizată are o etichetă pentru fiecare exemplu, iar prognozele ei nu schimbă exemplul următor. În învățarea prin întărire, agentul vede o stare $s_t$, alege o acțiune $a_t$ și primește o recompensă $r_{t+1}$; acțiunea schimbă starea următoare și nimeni nu spune care ar fi fost acțiunea corectă, ci doar ce recompensă a urmat. Stocarea, tranzacționarea, acoperirea riscului, stocurile, prețurile și limitele de credit au toate această structură. Cînd acțiunea de azi nu schimbă opțiunile de mîine, ajung o prognoză și o regulă.
 
@@ -32,7 +32,7 @@ Agentul urmează o politică $\pi_\theta(a\mid s)$; mediul răspunde la fiecare 
 
 @practice scrieți starea, acțiunea și recompensa înainte de orice antrenare.
 
-## Trei probleme economice, un singur cadru {h=8505da12}
+## Trei aplicații economice ale învățării prin întărire {h=ed7561dc}
 
 | Problema | Starea $s_t$ | Acțiunea $a_t$ | Recompensa $r_{t+1}$ |
 |---|---|---|---|
@@ -99,7 +99,7 @@ iar venitul zilei este $V_0(0)$. Toate cele 4 292 de zile se rezolvă în cîtev
 
 @practice DP dă plafonul față de care se evaluează orice agent care învață.
 
-## O zi reală: cumpără la minim, vinde la vîrfuri {h=3aa2e324}
+## Programul optim al bateriei pentru o zi {h=c66524cc}
 
 Pe 30 iunie 2026, ziua din 2026 cu cea mai mare diferență de preț, prețurile au variat de la 100,65 EUR/MWh la ora 13:00 la 954,59 EUR/MWh la ora 20:00. Planul optim încarcă în cele mai ieftine două ore din jurul prînzului și descarcă în două ore de seară, cu un venit de 1 541 EUR.
 
@@ -134,7 +134,7 @@ $$ Q(s_t,a_t)\leftarrow Q(s_t,a_t)+\alpha\big[r_{t+1}+\gamma\max_{a'}Q(s_{t+1},a
 
 Paranteza este eroarea de diferență temporală (TD), un semnal de învățare disponibil după fiecare oră. Ținta folosește acțiunea lacomă, indiferent ce face agentul în continuare, deci Q-learning este off-policy. Metoda converge dacă fiecare pereche este vizitată de o infinitate de ori și pașii respectă condițiile Robbins–Monro. Explorarea este $\varepsilon$-lacomă, cu $\varepsilon$ redus de la 1 la 0,05.
 
-## O stare realistă: agentul vede ziua de ieri, nu pe cea de azi {h=c155275e}
+## Definirea stării: informația disponibilă agentului {h=4d8f186b}
 
 Operatorul planifică înainte să cunoască prețurile zilei, deci starea agentului este $(h,\ \text{energia stocată},\ q_h)$, unde $q_h$ este quartila orei $h$ între cele 24 de prețuri de ieri: 288 de stări și 3 acțiuni. Agentul este antrenat pe 1 746 de zile din 2019–2023, în 40 de treceri; se păstrează epoca cu cel mai mare venit pe anul de validare 2024, iar cele 638 de zile de test, între 1 ianuarie 2025 și 24 octombrie 2026, sînt folosite o singură dată.
 
@@ -186,7 +186,7 @@ Un test Diebold–Mariano (DM) pe diferențele zilnice de venit dintre DQN și p
 
 Metodele bazate pe gradientul politicii parametrizează direct politica. PPO este cea mai folosită dintre ele.
 
-## Gradientul politicii: crește probabilitatea acțiunilor care au adus cîștig {h=e5a66701}
+## Metodele de gradient al politicii {h=db6f0f28}
 
 Teorema gradientului politicii (Sutton et al., 2000) dă
 
@@ -202,7 +202,7 @@ $$ \hat A_t=\sum_{l\ge0}(\gamma\lambda)^{l}\,\delta_{t+l} $$ {#eq:gae}
 
 unde $\lambda=0$ dă avantajul TD de un pas, iar $\lambda=1$ avantajul Monte Carlo; folosim $\gamma=0{,}99$ și $\lambda=0{,}95$. Actorul și criticul împart două straturi de cîte 64 de unități tanh, iar un bonus de entropie de 0,01 împiedică politica să devină deterministă prea devreme.
 
-## PPO: îmbunătățește politica, dar nu prea mult dintr-odată {h=4896cdfb}
+## PPO: actualizarea plafonată a politicii {h=ff381a63}
 
 PPO (Schulman et al., 2017) maximizează obiectivul plafonat
 

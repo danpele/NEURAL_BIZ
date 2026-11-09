@@ -18,14 +18,14 @@ Rețelele sînt apoi testate acolo unde le-ar folosi un manager de risc sau un f
 
 # Secvențe în finanțe și energie
 
-## Randamentele par zgomot, volatilitatea vine în grupuri
+## Randamentele și gruparea volatilității
 
 Datele sînt prețurile zilnice de deschidere, maxim, minim și închidere ale S&P 500, de la 4 ianuarie 2005 la 30 octombrie 2026 (5 491 de zile de tranzacționare). Varianța zilnică este măsurată cu estimatorul Garman–Klass (GK), $\hat\sigma^2_{GK,t}=\frac12\ln^2(H_t/L_t)-(2\ln2-1)\ln^2(C_t/O_t)$, care folosește prețurile maxim $H_t$, minim $L_t$, de deschidere $O_t$ și de închidere $C_t$ ale zilei. Anualizată, mediana ei este 8,77%, iar vîrful 122%, la 10 octombrie 2008.
 
 @chart sp500_vol
 Randamentele logaritmice zilnice și volatilitatea Garman–Klass anualizată a S&P 500 (scară logaritmică).
 
-## Memoria este în volatilitate, nu în randamente
+## Autocorelația randamentelor și a randamentelor absolute
 
 Autocorelația de ordinul 1 a randamentelor este −0,119, în interiorul benzii de zgomot de ±0,026; cea a randamentelor absolute este 0,315 și încă 0,126 la decalajul 50. Din 50 de decalaje, 15 sînt semnificative pentru randamente și 50 pentru randamentele absolute. Un model cu memorie merită deci încercat pentru risc, de exemplu ca intrare pentru valoarea expusă la risc (VaR), mult mai puțin pentru direcția prețului.
 

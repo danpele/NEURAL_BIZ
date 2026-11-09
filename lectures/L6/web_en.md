@@ -88,7 +88,7 @@ On PhraseBank, TF-IDF with logistic regression reaches a macro-F1 of 73.49% (sta
 @chart sentiment_models
 Test macro-F1 of the seven models on PhraseBank and on finance tweets (mean and standard deviation).
 
-## Models fail where people disagree
+## Classification errors and annotator agreement
 
 TF-IDF with logistic regression is right on 88.4% of the sentences on which all annotators agreed and on 58.1% of those with only 50% agreement. Label noise caps every model; before buying a bigger model, check how much your own analysts agree.
 

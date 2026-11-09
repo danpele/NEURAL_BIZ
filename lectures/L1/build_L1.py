@@ -357,7 +357,7 @@ def build(lang, H=None):
             D.bottom(t("the cut-off is a business choice: Section 5 sets it from the cost of a missed default.",
                        "pragul este o decizie de afaceri: secțiunea 5 îl stabilește din costul unei neplăți neidentificate."), NB + " \\S2"),
             cite=OWN)
-    D.frame(t("A missing value can be the strongest signal", "O valoare lipsă poate fi cel mai puternic semnal"),
+    D.frame(t("Missing values as predictors of default", "Valorile lipsă ca predictori ai neplății"),
             "\\intuition{" + t("applicants who do not report their debt ratio default far more often: missingness is information.",
                                "solicitanții care nu își declară raportul datorii/venit intră mult mai des în neplată: lipsa datelor este o informație.") + "}\n" +
             "\\[ \\tilde x_{ij}=\\begin{cases}x_{ij}&\\text{" + t("observed", "observat") + "}\\\\ \\mathrm{med}_{\\text{train}}(x_j)&\\text{" +
@@ -430,7 +430,7 @@ def build(lang, H=None):
             D.bottom(t("real default data are never separable: applicants with the same file can repay or default.",
                        "datele reale de neplată nu sînt niciodată separabile: solicitanți cu același dosar pot rambursa sau nu."), NB + " \\S3"),
             cite="(Novikoff, 1962)")
-    D.figframe(t("On real loans the perceptron never settles", "Pe credite reale, perceptronul nu se stabilizează niciodată"),
+    D.figframe(t("The perceptron does not converge on non-separable credit data", "Perceptronul nu converge pe date de credit neseparabile"),
                t("the classes overlap, so every epoch corrects some loans and breaks others.",
                  "clasele se suprapun, așa că fiecare epocă corectează unele credite și le strică pe altele."),
                None, "perceptron_errors",
@@ -441,7 +441,7 @@ def build(lang, H=None):
                job=t("a smooth loss and a probability output fix this: networks use sigmoids, not steps.",
                      "o pierdere netedă și o ieșire probabilistă rezolvă problema: rețelele folosesc sigmoide, nu trepte."),
                tryit=NB + " \\S3", cite=OWN, height="0.58\\textheight")
-    D.figframe(t("No straight line separates XOR: one hidden layer does", "Nicio dreaptă nu separă XOR: un strat ascuns reușește"),
+    D.figframe(t("The XOR problem and the hidden layer", "Problema XOR și stratul ascuns"),
                t("XOR is true when exactly one input is on; the two positive points sit on a diagonal.",
                  "XOR este adevărat cînd exact o intrare este activă; cele două puncte pozitive stau pe o diagonală."),
                "\\[ h_k=\\tanh(\\vw_k^\\top\\vx+b_k),\\ k=1,2;\\qquad p=\\sigma(v_1h_1+v_2h_2+c) \\]",
@@ -537,7 +537,7 @@ def build(lang, H=None):
                job=t("location effects are nonlinear: a linear term in latitude cannot price them.",
                      "efectele de localizare sînt neliniare: un termen liniar în latitudine nu le poate surprinde."),
                tryit=NB + " \\S4", cite=OWN, height="0.58\\textheight")
-    D.frame(t("Depth reuses features: deep and narrow can beat shallow and wide", "Adîncimea refolosește variabilele: o rețea adîncă și îngustă poate întrece una lată"),
+    D.frame(t("Depth and width of a network", "Adîncimea și lățimea unei rețele"),
             "\\intuition{" + t("each layer composes the features of the previous one, so the number of linear pieces can grow with depth.",
                                "fiecare strat compune variabilele stratului anterior, astfel încît numărul de bucăți liniare poate crește cu adîncimea.") + "}\n" +
             "\\[ \\text{ReLU MLP:}\\ \\ f(\\vx)\\ \\text{" + t("is piecewise linear; number of linear regions up to", "este liniară pe porțiuni; numărul de regiuni liniare pînă la") +

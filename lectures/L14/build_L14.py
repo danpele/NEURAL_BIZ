@@ -128,7 +128,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1. why multimodal
     D.section(t("Why multimodal models", "De ce modele multimodale"))
-    D.frame(t("Business data come as images, documents and charts, not only as tables", "Datele de afaceri vin ca imagini, documente și grafice, nu doar ca tabele"), it(
+    D.frame(t("Images, documents and charts as business data", "Imagini, documente și grafice ca date economice"), it(
         (t("\\textbf{Satellite and aerial images}", "\\textbf{Imagini satelitare și aeriene}"),
          t("crop monitoring for agricultural credit and insurance; land use for environmental, social and governance (ESG) reporting",
            "monitorizarea culturilor pentru creditul și asigurarea agricolă; utilizarea terenului pentru raportările de mediu, sociale și de guvernanță (ESG)")),
@@ -139,7 +139,7 @@ def build(lang, H=None):
         (t("\\textbf{This lecture}", "\\textbf{Acest curs}"),
          t("CLIP and a vision-language model (VLM), measured on real images", "CLIP și un model vizual-lingvistic (VLM), evaluate pe imagini reale")),
         sep="3pt"), "small", cite="(Radford et al., 2021; Bishop \\& Bishop, 2024)")
-    D.frame(t("The business thread: land use for credit, insurance and ESG", "Firul economic: utilizarea terenului pentru credit, asigurări și ESG"), it(
+    D.frame(t("Business application: land use for credit, insurance and ESG", "Aplicația economică: utilizarea terenului pentru credit, asigurări și ESG"), it(
         (t("\\textbf{Agricultural credit}", "\\textbf{Creditul agricol}"),
          t("a bank checks that the financed plots are cropland and stay cropland over the season", "o bancă verifică dacă parcelele finanțate sînt teren arabil și rămîn așa pe tot sezonul")),
         (t("\\textbf{Insurance}", "\\textbf{Asigurări}"),
@@ -383,7 +383,7 @@ def build(lang, H=None):
         (t("\\textbf{4. Measure}", "\\textbf{4. Măsurarea}"), t("exact-match rate per field on a labelled sample, as for the yield tables (@{table.exact|.1f}\\,\\% here)",
                                                                     "rata de potrivire exactă pe fiecare cîmp, pe un eșantion etichetat, ca la tabelele de randamente (aici @{table.exact|.1f}\\,\\%)")),
         sep="3pt"), "small")
-    D.frame(t("What multimodal models can and cannot do (yet)", "Ce pot și ce nu pot (încă) face modelele multimodale"),
+    D.frame(t("Capabilities and limitations of multimodal models", "Capacitățile și limitele modelelor multimodale"),
             cols(it((t("\\textbf{Can}", "\\textbf{Pot}"),
                      t("label images with no training data (@{zs." + zb + "|.1f}\\,\\% on EuroSAT)", "eticheta imagini fără date de antrenare (@{zs." + zb + "|.1f}\\,\\% pe EuroSAT)"),
                      t("give features that need few labels (@{fewshot.probe.16.mean|.1f}\\,\\% with 16 per class)", "oferi trăsături care au nevoie de puține etichete (@{fewshot.probe.16.mean|.1f}\\,\\% cu 16 pe clasă)"),
@@ -400,7 +400,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 5. synthesis
     D.section(t("Synthesis of the course", "Sinteza cursului"))
-    D.frame(t("Fourteen lectures, one toolbox", "Paisprezece cursuri, o singură trusă de instrumente"),
+    D.frame(t("Methods of the course by data type", "Metodele cursului după tipul de date"),
             table("@{}p{0.2\\textwidth}p{0.36\\textwidth}p{0.37\\textwidth}@{}", [t("Data", "Date"), t("Models", "Modele"), t("Lectures and business cases", "Cursuri și aplicații")],
                   [[t("Tables", "Tabele"), t("logistic regression, MLP, regularisation", "regresie logistică, MLP, regularizare"), t("1--3: credit scoring, fraud", "1--3: scoring de credit, fraudă")],
                    [t("Images", "Imagini"), t("CNN, transfer learning, ViT, CLIP", "CNN, transferul învățării, ViT, CLIP"), t("4, 14: land use, documents", "4, 14: utilizarea terenului, documente")],
@@ -435,7 +435,7 @@ def build(lang, H=None):
         t("\\textbf{Real data, reproducible}: every number comes from a script and a public data set, with a Quantlet.",
           "\\textbf{Date reale, rezultate reproductibile}: fiecare cifră provine dintr-un program și dintr-un set de date public, cu un Quantlet."),
         sep="4pt"), "small")
-    D.frame(t("Foundation models across the course: one pattern, three data types", "Modelele fundație în acest curs: un singur tipar, trei tipuri de date"), it(
+    D.frame(t("Foundation models for images, text and time series", "Modelele fundație pentru imagini, text și serii de timp"), it(
         (t("\\textbf{The pattern}", "\\textbf{Tiparul}"), t("pre-train once on huge unlabelled data; use zero-shot, with a few examples, or with a small trained head",
                                                             "preantrenare o singură dată pe volume uriașe de date neetichetate; utilizare zero-shot, cu cîteva exemple sau cu un mic clasificator antrenat")),
         (t("\\textbf{Text} (Lecture 12)", "\\textbf{Text} (cursul 12)"), t("prompts and LLM embeddings for sentiment, RAG on ECB speeches, LLM-VaR",
@@ -487,7 +487,7 @@ def build(lang, H=None):
            (t("\\textbf{Explanation}", "\\textbf{Explicație}"), t("SHAP or gradients for the decision that matters", "SHAP sau gradienți pentru decizia care contează")),
            (t("\\textbf{Reproducible}", "\\textbf{Reproductibil}"), t("one script from raw data to every number and chart", "un singur program, de la datele brute la fiecare cifră și grafic")), sep="3pt"),
         "0.49", "0.48"), "small")
-    D.frame(t("Open problems worth a thesis", "Probleme deschise care merită o lucrare de disertație"), cols(it(
+    D.frame(t("Open research problems for dissertations", "Probleme de cercetare deschise pentru lucrările de disertație"), cols(it(
         t("\\textbf{Calibration under drift}: conformal bands that stay valid when markets change regime.",
           "\\textbf{Calibrarea în prezența derivei}: benzi conformale care rămîn valide cînd piețele își schimbă regimul."),
         t("\\textbf{Leakage-proof evaluation} of foundation models trained on the open web.",

@@ -19,13 +19,13 @@ Cursul construiește cele trei straturi GNN clasice, rețeaua convoluțională p
 
 Graful Elliptic arată cum arată o rețea de tranzacții și de ce vecinii poartă informație.
 
-## Spălarea banilor se ascunde în legături, nu în rînduri {h=c5e8d7f9}
+## Structura de rețea în detectarea spălării banilor {h=e3436209}
 
 Un graf $G=(\mathcal V,\mathcal E,\mathbf X)$ are nodurile $\mathcal V$ (aici tranzacții), muchiile $\mathcal E$ (un flux de plată de la o tranzacție la următoarea) și matricea variabilelor $\mathbf X\in\mathbb R^{n\times d}$; eticheta $y_v=1$ marchează o tranzacție ilicită (fraude, ransomware, piețe ilegale). Graful Elliptic are 203 769 de tranzacții, 234 355 de fluxuri de plată, 165 de variabile pe tranzacție și 49 de pași de timp. Sarcina este clasificarea nodurilor.
 
 @practice echipa de conformitate a unei bănci gîndește deja în lanțuri de plăți; o rețea GNN învață din aceleași lanțuri.
 
-## Datele Elliptic într-un singur tabel {h=a608161c}
+## Descrierea setului de date Elliptic {h=5cfccf7e}
 
 | Element | Valoare |
 |---|---|
@@ -36,7 +36,7 @@ Un graf $G=(\mathcal V,\mathcal E,\mathbf X)$ are nodurile $\mathcal V$ (aici tr
 
 Doar 9,76 % dintre tranzacțiile etichetate sînt ilicite, deci acuratețea singură nu ar spune nimic. Denumirile variabilelor sînt anonimizate de Elliptic.
 
-## Etichetele vin în valuri: activitatea ilicită nu este staționară {h=ac2a2ac7}
+## Evoluția în timp a tranzacțiilor ilicite {h=89d99f7b}
 
 Numărul tranzacțiilor ilicite atinge un vîrf de 342 în pasul 32; fiecare pas are în total circa 4 159 de tranzacții. Ca în Weber et al. (2019), modelele sînt antrenate pe pașii 1–34 și testate o singură dată pe pașii 35–49; pașii nu se amestecă niciodată.
 
@@ -52,7 +52,7 @@ Graful este rar: gradul mediu este 2,30, mediana 2, iar 34,5 % dintre noduri au 
 @chart degree_dist
 Funcția de repartiție complementară a gradului, pe scară dublu logaritmică.
 
-## Tranzacțiile ilicite stau lîngă alte tranzacții ilicite {h=c03fe27c}
+## Homofilia tranzacțiilor ilicite {h=e73696f8}
 
 Dintre vecinii etichetați ai unei tranzacții ilicite, 51,0 % sînt ilicite; pentru o tranzacție licită ponderea este 1,8 %. Dintre muchiile etichetate, 95,4 % leagă două tranzacții din aceeași clasă, față de 82,4 % dacă etichetele ar fi date la întîmplare. Această homofilie este motivul pentru care ne uităm la vecini.
 
@@ -149,7 +149,7 @@ o regresie liniară pe media normalizată a nodului și a vecinilor lui, urmată
 
 @practice o rețea GCN este analogul pe graf al unei medii mobile: robustă, ieftină și oarbă la care vecin contează cel mai mult.
 
-## GraphSAGE: separă nodul de vecini și eșantionează vecinii {h=d6e8b92f}
+## GraphSAGE: reprezentarea separată a nodului și eșantionarea vecinilor {h=4d119b2a}
 
 GraphSAGE folosește ponderi separate pentru nod și pentru media unui eșantion $\mathcal S(v)$ de vecini: $\mathbf h_v^{(l+1)}=\mathrm{ReLU}\big(W_1\mathbf h_v^{(l)}+W_2\,\mathrm{mean}_{u\in\mathcal S(v)}\mathbf h_u^{(l)}\big)$. Ponderile nu depind de graf, deci tranzacțiile de mîine primesc un scor fără reantrenare (învățare inductivă), iar eșantionarea limitează costul pe nod. Pe Elliptic, F1 pe clasa ilicită este 0,564 (abatere standard 0,022), iar PR-AUC 0,582.
 
@@ -175,7 +175,7 @@ GCN face media cu ponderi după grad, GraphSAGE separă nodul de vecini și este
 
 Opt modele pe același test în timp, judecate cum le-ar judeca o echipă de investigații.
 
-## Opt modele, un singur test în timp {h=eca73a43}
+## Opt modele evaluate pe un set de test cronologic {h=2b8e131a}
 
 Modelele sînt: o regresie logistică pe cele 93 de variabile locale și pe toate cele 165; o pădure aleatoare cu 100 de arbori și 50 de variabile la fiecare împărțire, ca în Weber et al. (2019); un MLP cu aceleași straturi ca GCN, dar fără mesaje, care izolează valoarea muchiilor; GCN, GraphSAGE și GAT; și o pădure aleatoare pe variabile plus cele 100 de ieșiri ascunse ale GCN. Precizia, recall-ul și F1 pe clasa ilicită se măsoară la pragul 0,5 pe pașii 35–49, împreună cu PR-AUC, care nu depinde de prag; fiecare rețea și pădure este rulată cu 3 semințe.
 
@@ -211,7 +211,7 @@ Reeșantionînd tranzacțiile de test de 1 000 de ori, cu aceeași extragere pen
 
 @practice înainte de a antrena o rețea GNN, verificați dacă furnizorul datelor nu a agregat deja vecinătatea.
 
-## Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului {h=9e8d53d8}
+## Schimbarea conceptului după închiderea unei piețe ilegale {h=94ba37af}
 
 Înainte de pasul 43, F1 mediu este 0,898 pentru pădurea aleatoare și 0,473 pentru GCN; de la pasul 43 este 0,048 și 0,000. După închiderea unei piețe ilegale importante, fluxurile ilicite și-au schimbat forma (Weber et al., 2019), iar niciun model antrenat pe pașii 1–34 nu văzuse noul comportament.
 
@@ -257,7 +257,7 @@ Scurgeri de informație prin muchii: un nod de test nu trebuie să primească me
 
 @practice testați un model pe graf așa cum va funcționa: pe perioade ulterioare, cu etichetele disponibile atunci.
 
-## Grafuri peste tot în finanțe {h=97da8de9}
+## Aplicații ale modelelor bazate pe grafuri în finanțe {h=9c80546c}
 
 Grafurile deținător–comerciant leagă multe victime de un singur terminal compromis; rețelele de garanți și furnizori propagă neplata prin creditul comercial; grafurile de adrese și tranzacții scot la iveală serviciile de amestecare și grupurile de portofele; expunerile interbancare și rețelele de dependență în cozi arată cine cade dacă o bancă cade; acțiunile legate prin corelație, lanț de aprovizionare sau acționariat alimentează prognozele randamentelor; rețelele electrice și zonele de preț interconectate sînt grafuri prin construcție.
 

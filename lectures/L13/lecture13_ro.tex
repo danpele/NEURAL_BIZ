@@ -110,7 +110,7 @@ S\&P 500, Bitcoin (BTC/USD) & zilnică & Yahoo Finance & valoarea expusă la ris
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Prețurile din România: nivelul de criză, apoi un regim nou}
+\begin{frame}{Media zilnică a prețurilor pentru ziua următoare în România}
 \small
 \intuition{un model antrenat înainte de 2021 nu a văzut niciodată prețuri ca în 2022; unul antrenat pe 2022 supraestimează prețurile de azi.}
 \vspace{-1mm}\[ \bar P_d=\frac{1}{24}\sum_{h=0}^{23}P_{d,h} \]\vspace{-2mm}
@@ -205,7 +205,7 @@ S\&P 500, Bitcoin (BTC/USD) & zilnică & Yahoo Finance & valoarea expusă la ris
 
 \section{Un reper liniar puternic și o rețea profundă}
 
-\begin{frame}{Transformarea care stabilizează varianța: vîrfurile și prețurile negative sînt îmblînzite}
+\begin{frame}{Transformarea care stabilizează varianța: vîrfuri de preț și prețuri negative}
 \footnotesize
 \intuition{sinusul hiperbolic invers se comportă ca un logaritm pentru prețuri mari și ca identitatea în jurul lui zero, deci acceptă prețuri negative.}
 \begin{columns}[T,onlytextwidth]
@@ -304,7 +304,7 @@ S\&P 500, Bitcoin (BTC/USD) & zilnică & Yahoo Finance & valoarea expusă la ris
 
 \section{Arhitecturi profunde de prognoză}
 
-\begin{frame}{O rețea recurentă care produce o distribuție, nu un număr}
+\begin{frame}{O rețea recurentă probabilistă pentru prognoză}
 \footnotesize
 \intuition{starea recurentă rezumă trecutul; rețeaua produce parametrii distribuției de mîine.}
 \begin{columns}[T,onlytextwidth]
@@ -416,7 +416,7 @@ S\&P 500, Bitcoin (BTC/USD) & zilnică & Yahoo Finance & valoarea expusă la ris
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Ansari et al., 2024, 2025; Das et al., 2024)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Chronos: o serie de timp citită ca o propoziție}
+\begin{frame}{Chronos: tokenizarea seriilor de timp}
 \footnotesize
 \intuition{seria se scalează, valorile se împart în intervale, iar un model de limbaj prezice intervalul următor.}
 \begin{columns}[T,onlytextwidth]
@@ -504,7 +504,7 @@ modelul naiv & \cellcolor{Crimson!55}27{,}74 & 44{,}57 & \cellcolor{Crimson!55}1
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_mae\_by\_hour}{Quantlets/L13/NN_L13_mae_by_hour}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O săptămînă de prognoze: nivelul este corect, vîrfurile sînt netezite}
+\begin{frame}{Prognozele pentru o săptămînă din anul de test}
 \small
 \intuition{toate cele trei modele urmăresc forma zilnică; niciunul nu anticipează complet cele mai mari vîrfuri de seară.}
 \begin{center}\includegraphics[width=\textwidth,height=0.469\textheight,keepaspectratio]{charts/ro/forecast_week.pdf}\end{center}\vspace{-3mm}
@@ -587,7 +587,7 @@ modelul naiv & \cellcolor{Crimson!55}27{,}74 & 44{,}57 & \cellcolor{Crimson!55}1
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Diebold \& Mariano, 1995; Ziel \& Weron, 2018)}\hfill\tryit{notebook \S6}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Care prognoză este semnificativ mai bună? Tabla de șah completă}
+\begin{frame}{Testele Diebold--Mariano pe perechi de modele}
 \small
 \intuition{celulele verzi: modelul din coloană este semnificativ mai precis decît cel din rînd.}
 \begin{center}\includegraphics[width=\textwidth,height=0.531\textheight,keepaspectratio]{charts/ro/dm_pvalues.pdf}\end{center}\vspace{-3mm}
@@ -644,7 +644,7 @@ modelul naiv & \cellcolor{Crimson!55}27{,}74 & 44{,}57 & \cellcolor{Crimson!55}1
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_chronos\_fan}{Quantlets/L13/NN_L13_chronos_fan}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Corecția conformală: o acoperire pe care vă puteți baza}
+\begin{frame}{Corecția conformală a intervalelor de prognoză}
 \footnotesize
 \intuition{măsurăm cît de departe de banda brută au căzut valorile în trecutul recent și lărgim (sau îngustăm) banda cu acea valoare.}
 \begin{columns}[T,onlytextwidth]
@@ -785,7 +785,7 @@ Bitcoin & HS (250 de zile) & 33 & \cellcolor{Forest!55}0{,}123 & 0{,}458 & 126 &
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu; Kupiec, 1995; Christoffersen, 1998)}\hfill\tryit{notebook \S9}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Modele de limbaj și modele de serii de timp: două căi spre aceeași cuantilă}
+\begin{frame}{Prognozele cuantilelor cu modele de limbaj și cu modele de serii de timp}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Calea modelului lingvistic mare (LLM)} (cursul 12)

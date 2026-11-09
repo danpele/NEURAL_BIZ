@@ -19,13 +19,13 @@ This lecture builds the three classic GNN layers, the graph convolutional networ
 
 The Elliptic graph shows what a transaction network looks like and why the neighbours carry information.
 
-## Money laundering hides in the links, not in the rows {h=5f94203b}
+## Network structure in money-laundering detection {h=ec43dbab}
 
 A graph $G=(\mathcal V,\mathcal E,\mathbf X)$ has nodes $\mathcal V$ (here transactions), edges $\mathcal E$ (a payment flow from one transaction to the next) and a feature matrix $\mathbf X\in\mathbb R^{n\times d}$; the label $y_v=1$ marks an illicit transaction (scams, ransomware, dark markets). The Elliptic graph has 203,769 transactions, 234,355 payment flows, 165 features per transaction and 49 time steps. The task is node classification.
 
 @practice a bank's anti-money-laundering team already thinks in chains of payments; a GNN learns from the same chains.
 
-## The Elliptic data in one table {h=878a8fda}
+## Description of the Elliptic data set {h=3a20d2ba}
 
 | Element | Value |
 |---|---|
@@ -36,7 +36,7 @@ A graph $G=(\mathcal V,\mathcal E,\mathbf X)$ has nodes $\mathcal V$ (here trans
 
 Only 9.76 % of the labelled transactions are illicit, so accuracy alone would be meaningless. The feature names are anonymised by Elliptic.
 
-## Labels arrive in waves: illicit activity is not stationary {h=4319c8a9}
+## Illicit transactions over time {h=2edf279c}
 
 The number of illicit transactions peaks at 342 in step 32; each step has about 4,159 transactions in total. As in Weber et al. (2019), the models are trained on steps 1–34 and tested once on steps 35–49; the steps are never shuffled.
 
@@ -52,7 +52,7 @@ The graph is sparse: the mean degree is 2.30, the median 2, and 34.5 % of the no
 @chart degree_dist
 Complementary cumulative distribution of the degree, log-log scale.
 
-## Illicit transactions sit next to illicit transactions {h=241f091c}
+## Homophily of illicit transactions {h=dd5c80b6}
 
 Among the labelled neighbours of an illicit transaction, 51.0 % are illicit; for a licit transaction the share is 1.8 %. Of the labelled edges, 95.4 % join two transactions of the same class, against 82.4 % if labels were assigned at random. This homophily is the reason to look at the neighbours.
 
@@ -149,7 +149,7 @@ a linear regression on the normalised average of a node and its neighbours, foll
 
 @practice a GCN is the graph analogue of a moving average: robust, cheap, and blind to which neighbour matters most.
 
-## GraphSAGE: keep yourself apart from your neighbours, and sample them {h=16130e42}
+## GraphSAGE: separate node representation and neighbour sampling {h=4532e3ae}
 
 GraphSAGE uses separate weights for the node and for the mean of a sample $\mathcal S(v)$ of its neighbours: $\mathbf h_v^{(l+1)}=\mathrm{ReLU}\big(W_1\mathbf h_v^{(l)}+W_2\,\mathrm{mean}_{u\in\mathcal S(v)}\mathbf h_u^{(l)}\big)$. The weights do not depend on the graph, so tomorrow's transactions get a score without retraining (inductive learning), and sampling bounds the cost per node. On Elliptic its illicit-class F1 is 0.564 (standard deviation 0.022) and its PR-AUC 0.582.
 
@@ -175,7 +175,7 @@ GCN averages with degree weights, GraphSAGE separates self and neighbours and is
 
 Eight models on the same temporal test, judged like an investigation team would judge them.
 
-## Eight models, one temporal test {h=961f378e}
+## Eight models evaluated on a chronological test set {h=f5c947c5}
 
 The models are a logistic regression on the 93 local features and on all 165 features; a random forest with 100 trees and 50 features per split, as in Weber et al. (2019); an MLP with the same layers as the GCN but no messages, which isolates the value of the edges; GCN, GraphSAGE and GAT; and a random forest on the features plus the 100 hidden GCN outputs. Precision, recall and F1 of the illicit class are measured at threshold 0.5 on steps 35–49, together with the threshold-free PR-AUC; each network and forest is run with 3 seeds.
 
@@ -211,7 +211,7 @@ Resampling the test transactions 1,000 times, with the same draw for both models
 
 @practice before training a GNN, check whether the data provider has already aggregated the neighbourhood for you.
 
-## A dark-market shutdown breaks every model: concept drift {h=3a998ebb}
+## Concept drift after a dark-market shutdown {h=64a87c9f}
 
 Before step 43 the mean F1 is 0.898 for the random forest and 0.473 for the GCN; from step 43 it is 0.048 and 0.000. After a major dark market closed, illicit flows changed form (Weber et al., 2019), and no model trained on steps 1–34 had seen the new behaviour.
 
@@ -257,7 +257,7 @@ Leakage through edges: a test node must not receive messages from the future; in
 
 @practice test a graph model the way it will run: on later periods, with the labels available at that time.
 
-## Graphs everywhere in finance {h=6f1c01fb}
+## Applications of graph models in finance {h=2db73e31}
 
 Cardholder–merchant graphs link many fraud victims to one compromised terminal; guarantor and supplier networks carry defaults along trade credit; address and transaction graphs reveal mixers and wallet clusters; interbank exposures and tail-dependence networks show who falls if one bank fails; stocks linked by correlation, supply chain or ownership feed return forecasts; power grids and interconnected price zones are graphs by construction.
 

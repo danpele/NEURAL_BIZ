@@ -192,7 +192,7 @@ def build(lang, H=None):
                  t("Missing hours stay missing; the two clock-change days per year are kept only when all 24 hours exist.",
                    "Orele lipsă rămîn lipsă; cele două zile pe an cu schimbarea orei sînt păstrate doar dacă există toate cele 24 de ore.")),
             "small")
-    D.figframe(t("Romanian prices: a crisis level, then a new regime", "Prețurile din România: nivelul de criză, apoi un regim nou"),
+    D.figframe(t("Daily mean day-ahead prices in Romania", "Media zilnică a prețurilor pentru ziua următoare în România"),
                t("a model trained before 2021 has never seen prices like those of 2022; a model trained on 2022 overestimates today.",
                  "un model antrenat înainte de 2021 nu a văzut niciodată prețuri ca în 2022; unul antrenat pe 2022 supraestimează prețurile de azi."),
                "\\[ \\bar P_d=\\frac{1}{24}\\sum_{h=0}^{23}P_{d,h} \\]", "price_history",
@@ -252,7 +252,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 2. LEAR and the DNN
     D.section(t("A strong linear benchmark and a deep network", "Un reper liniar puternic și o rețea profundă"))
-    D.concept(t("Variance-stabilising transform: spikes and negative prices tamed", "Transformarea care stabilizează varianța: vîrfurile și prețurile negative sînt îmblînzite"),
+    D.concept(t("Variance-stabilising transformation: price spikes and negative prices", "Transformarea care stabilizează varianța: vîrfuri de preț și prețuri negative"),
               t("the area hyperbolic sine behaves like a log for large prices and like the identity near zero, so it accepts negative prices.",
                 "sinusul hiperbolic invers se comportă ca un logaritm pentru prețuri mari și ca identitatea în jurul lui zero, deci acceptă prețuri negative."),
               "\\[ z=\\asinh\\!\\Big(\\frac{y-\\tilde m}{\\hat\\sigma}\\Big),\\quad \\hat\\sigma=\\frac{\\mathrm{MAD}}{0.6745},\\quad y=\\tilde m+\\hat\\sigma\\sinh(\\hat z) \\]" +
@@ -305,7 +305,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 3. deep forecasting architectures
     D.section(t("Deep forecasting architectures", "Arhitecturi profunde de prognoză"))
-    D.concept(t("A recurrent network that outputs a distribution, not a number", "O rețea recurentă care produce o distribuție, nu un număr"),
+    D.concept(t("A probabilistic recurrent network for forecasting", "O rețea recurentă probabilistă pentru prognoză"),
               t("the recurrent state summarises the past; the network outputs the parameters of tomorrow's distribution.",
                 "starea recurentă rezumă trecutul; rețeaua produce parametrii distribuției de mîine."),
               "\\[ \\mathbf h_t=\\mathrm{LSTM}(\\mathbf h_{t-1},y_{t-1},\\mathbf c_t),\\quad y_t\\mid\\mathbf h_t\\sim\\mathcal N\\big(\\mu(\\mathbf h_t),\\sigma^2(\\mathbf h_t)\\big) \\]"
@@ -369,7 +369,7 @@ def build(lang, H=None):
               t("zero-shot means no training cost and no data pipeline, but also no adaptation to our market.",
                 "zero-shot înseamnă fără cost de antrenare și fără flux de date, dar și fără adaptare la piața noastră."),
               cite="(Ansari et al., 2024, 2025; Das et al., 2024)", tryit=NB + " \\S4")
-    D.concept(t("Chronos: a time series read as a sentence", "Chronos: o serie de timp citită ca o propoziție"),
+    D.concept(t("Chronos: tokenisation of time series", "Chronos: tokenizarea seriilor de timp"),
               t("scale the series, cut its values into bins, and train a language model to predict the next bin.",
                 "seria se scalează, valorile se împart în intervale, iar un model de limbaj prezice intervalul următor."),
               "\\[ \\tilde y_t=\\frac{y_t}{s},\\ \\ s=\\frac{1}{C}\\sum_{t}|y_t|,\\qquad v_t=\\mathrm{bin}(\\tilde y_t)\\in\\{1,\\dots,B\\} \\]"
@@ -423,7 +423,7 @@ def build(lang, H=None):
                           f"LEAR: ora cea mai grea {bh['lear']['worst_hour']} (@{{byhour.lear.worst|.2f}}), cea mai ușoară {bh['lear']['best_hour']} (@{{byhour.lear.best|.2f}}); "
                           f"Chronos-2: ora cea mai grea {bh['chronos2']['worst_hour']} (@{{byhour.chronos2.worst|.2f}}).")],
                height="0.55\\textheight", tryit=NB + " \\S4")
-    D.figframe(t("One week of forecasts: level right, spikes smoothed", "O săptămînă de prognoze: nivelul este corect, vîrfurile sînt netezite"),
+    D.figframe(t("Forecasts for one week of the test year", "Prognozele pentru o săptămînă din anul de test"),
                t("all three models follow the daily shape; none of them anticipates the largest evening spikes in full.",
                  "toate cele trei modele urmăresc forma zilnică; niciunul nu anticipează complet cele mai mari vîrfuri de seară."),
                None, "forecast_week",
@@ -467,7 +467,7 @@ def build(lang, H=None):
                    "\\textbf{Pe zile, nu pe ore}: orele aceleiași zile folosesc aceeași informație, deci nu sînt independente.")),
               t("claim that a model is better only with a test on the test period.", "afirmați că un model este mai bun doar pe baza unui test pe perioada de test."),
               cite="(Diebold \\& Mariano, 1995; Ziel \\& Weron, 2018)", tryit=NB + " \\S6")
-    D.figframe(t("Which forecast is significantly better? The full chessboard", "Care prognoză este semnificativ mai bună? Tabla de șah completă"),
+    D.figframe(t("Pairwise Diebold--Mariano tests for all models", "Testele Diebold--Mariano pe perechi de modele"),
                t("green cells: the column model is significantly more accurate than the row model.",
                  "celulele verzi: modelul din coloană este semnificativ mai precis decît cel din rînd."),
                None, "dm_pvalues",
@@ -496,7 +496,7 @@ def build(lang, H=None):
                  "modelul este mai puțin sigur în orele de seară, exact acolo unde erorile sînt cele mai mari."),
                None, "chronos_fan", height="0.6\\textheight", tryit=NB + " \\S7")
     c2 = N["cov"]["chronos2"]
-    D.concept(t("Split-conformal correction: coverage you can trust", "Corecția conformală: o acoperire pe care vă puteți baza"),
+    D.concept(t("Split-conformal correction of prediction intervals", "Corecția conformală a intervalelor de prognoză"),
               t("measure how far the outcomes fell outside the raw band in the recent past, and widen (or shrink) the band by that amount.",
                 "măsurăm cît de departe de banda brută au căzut valorile în trecutul recent și lărgim (sau îngustăm) banda cu acea valoare."),
               "\\[ s_i=\\max\\big(\\hat q^{\\alpha/2}_i-y_i,\\ y_i-\\hat q^{1-\\alpha/2}_i\\big),\\quad \\hat Q=s_{(\\lceil (n+1)(1-\\alpha)\\rceil)} \\]"
@@ -588,7 +588,7 @@ def build(lang, H=None):
                  t("Green $p$-value: coverage not rejected at 10\\,\\%; red: rejected. Tick loss = pinball loss at $\\tau=0.05$ (lower is better).",
                    "Valoare $p$ verde: acoperirea nu este respinsă la 10\\,\\%; roșie: este respinsă. Pierderea tick = pierderea pinball la $\\tau=0{,}05$ (mai mică este mai bine).")),
             "small", cite=t("(own computation; Kupiec, 1995; Christoffersen, 1998)", "(calcul propriu; Kupiec, 1995; Christoffersen, 1998)"), tryit=NB + " \\S9")
-    D.frame(t("Language models and time-series models: two routes to the same quantile", "Modele de limbaj și modele de serii de timp: două căi spre aceeași cuantilă"), it(
+    D.frame(t("Quantile forecasts from language models and time-series models", "Prognozele cuantilelor cu modele de limbaj și cu modele de serii de timp"), it(
         (t("\\textbf{Large language model (LLM) route} (Lecture 12)", "\\textbf{Calea modelului lingvistic mare (LLM)} (cursul 12)"),
          t("the returns are written as text in a prompt; a general model answers with a number", "randamentele sînt scrise ca text într-un prompt; un model general răspunde cu un număr"),
          t("LLM-VaR and, for the expected shortfall (ES), LLM-ES, of our group: zero-shot, no fine-tuning (Pele et al., 2026)",

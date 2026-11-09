@@ -279,8 +279,8 @@ def build(lang, H=None):
             D.bottom(t("when you write a custom layer or loss, run a gradient check once before trusting it.",
                        "cînd scrieți un strat sau o pierdere proprie, rulați o dată verificarea gradientului înainte de a vă baza pe ele."), NB + " \\S2"),
             cite="(Baydin et al., 2018; Paszke et al., 2019)")
-    D.figframe(t("In a deep sigmoid network the gradient dies before it reaches the first layers",
-                 "Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi"),
+    D.figframe(t("Vanishing gradients in deep sigmoid networks",
+                 "Dispariția gradientului în rețelele adînci cu activare sigmoidă"),
                t("the backward signal is a product of Jacobians; with $\\sigma'\\le1/4$ it shrinks at every layer.",
                  "semnalul înapoi este un produs de matrice jacobiene; cu $\\sigma'\\le1/4$, el scade la fiecare strat."),
                "\\[ \\frac{\\partial\\ell}{\\partial\\vh^{(l)}}=\\Big(\\prod_{k=l+1}^{L}\\mW^{(k)\\top}\\operatorname{diag}\\big(a'(\\vz^{(k)})\\big)\\Big)\\frac{\\partial\\ell}{\\partial\\vh^{(L)}} \\]",
@@ -323,7 +323,7 @@ def build(lang, H=None):
             D.bottom(t("batches of 32--256 are the usual compromise between noise, speed and memory.",
                        "loturile de 32--256 de exemple sînt compromisul obișnuit între zgomot, viteză și memorie."), NB + " \\S4"),
             cite="(Robbins \\& Monro, 1951)")
-    D.figframe(t("The learning rate decides everything: too small crawls, too large diverges", "Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge"),
+    D.figframe(t("Effect of the learning rate on training", "Efectul ratei de învățare asupra antrenării"),
                t("plain SGD on an MLP 64-64, 30 epochs, batches of 128, for nine learning rates and three seeds.",
                  "SGD simplu pe un MLP 64-64, 30 de epoci, loturi de 128, pentru nouă rate de învățare și trei inițializări."),
                None, "lr_sweep",
@@ -334,7 +334,7 @@ def build(lang, H=None):
                job=t("tune the learning rate first, on a log grid, before any other hyperparameter.",
                      "ajustați mai întîi rata de învățare, pe o grilă logaritmică, înaintea oricărui alt hiperparametru."),
                tryit=NB + " \\S4", cite=OWN, height="0.56\\textheight")
-    D.figframe(t("Small batches learn more per epoch, large batches more per second", "Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă"),
+    D.figframe(t("Effect of batch size: progress per epoch and per second", "Efectul dimensiunii lotului: progresul pe epocă și pe secundă"),
                t("Adam with learning rate 0.001, 40 epochs, batch sizes 16, 128 and 1,024.",
                  "Adam cu rata de învățare 0,001, 40 de epoci, loturi de 16, 128 și 1\\,024 de exemple."),
                None, "batch_size",
@@ -455,7 +455,7 @@ def build(lang, H=None):
                      "cu o clasă rară, SGD simplu are nevoie de multe epoci, momentul sau Adam de una singură."),
                tryit=NB + " \\S7", cite=OWN, height="0.52\\textheight")
 
-    D.frame(t("Optimisers at a glance", "Optimizatorii pe scurt"),
+    D.frame(t("Comparison of optimisers", "Compararea optimizatorilor"),
             table("@{}p{0.15\\textwidth}p{0.37\\textwidth}p{0.17\\textwidth}p{0.24\\textwidth}@{}",
                   [t("Method", "Metoda"), t("Update", "Actualizarea"), t("Extra memory", "Memorie suplimentară"), t("Use when", "Cînd se folosește")],
                   [["SGD", "$\\theta-\\eta g$", t("none", "nimic"), t("large vision models, tuned schedule", "modele mari de imagini, program ajustat")],
@@ -535,7 +535,7 @@ def build(lang, H=None):
             D.bottom(t("measure before you buy: for tabular models a CPU is enough, for images and text a GPU is not optional.",
                        "măsurați înainte să cumpărați: pentru modele tabelare ajunge un CPU, pentru imagini și text un GPU este indispensabil."), NB + " \\S9"),
             cite=OWN)
-    D.frame(t("A training recipe that works on most business datasets", "O rețetă de antrenare care funcționează pe majoritatea datelor de afaceri"),
+    D.frame(t("A default training procedure", "O procedură standard de antrenare"),
             cols(block(t("Before training", "Înainte de antrenare"), it(
                 t("Standardise inputs on the training set; split in time order when time matters.",
                   "Standardizați intrările pe setul de antrenare; împărțiți cronologic cînd timpul contează."),

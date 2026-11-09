@@ -57,7 +57,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 
 \section{From next-token prediction to large language models}
 
-\begin{frame}{Why finance cares: text is the largest unused data set of a bank}
+\begin{frame}{Text data in financial institutions}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Markets}
@@ -329,7 +329,7 @@ Term frequency--inverse document frequency (TF-IDF) + logistic regression & -- &
 
 \section{Prompt engineering, measured on labelled data}
 
-\begin{frame}{Anatomy of a prompt}
+\begin{frame}{Structure of a prompt}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -554,7 +554,7 @@ embeddings 1.5B + logistic & 91.3 & \cellcolor{Forest!47}87.5 & [84.5; 90.7] & 8
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Guo et al., 2017)}\hfill\qlink{NN\_L12\_calibration}{Quantlets/L12/NN_L12_calibration}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Where humans disagree, models fail: accuracy by annotator agreement}
+\begin{frame}{Accuracy by level of annotator agreement}
 \small
 \intuition{sentences that split the annotators are genuinely ambiguous; no model reaches the unanimous-case accuracy on them.}
 \begin{center}\includegraphics[width=\textwidth,height=0.377\textheight,keepaspectratio]{charts/en/agreement.pdf}\end{center}\vspace{-3mm}
@@ -700,10 +700,10 @@ neutral & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_rag\_recall}{Quantlets/L12/NN_L12_rag_recall}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Without documents the model invents a speaker; with RAG it answers from the source}
+\begin{frame}{Answers with and without retrieved documents}
 \small
 \intuition{question: which board member gave the speech with this title? 160 speeches since 15 Jan 2025, after the model's training data.}
-\begin{center}\includegraphics[width=\textwidth,height=0.289\textheight,keepaspectratio]{charts/en/rag_qa.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.350\textheight,keepaspectratio]{charts/en/rag_qa.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: European Central Bank, speeches dataset. Data: 160 single-speaker speeches from 15 Jan 2025 to 30 Oct 2026; model Qwen2.5-3B-Instruct.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}

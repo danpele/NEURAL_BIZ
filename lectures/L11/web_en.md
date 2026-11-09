@@ -32,7 +32,7 @@ There are business reasons too: explanations reveal leakage (a feature that shou
 
 Methods differ in scope and in what they need. Global methods describe the model over the whole population (coefficients, mean absolute SHAP values, partial dependence, permutation importance); local methods explain one decision (a SHAP waterfall, LIME, gradients, a counterfactual). Model-agnostic methods only call the model (Kernel SHAP, LIME, partial dependence); model-specific methods use its structure (TreeSHAP for trees, gradients for networks). Finally, post-hoc methods explain a model that is already trained, while interpretable models such as a scorecard are transparent by design. Rudin (2019) argues that in high-stakes decisions the second route should be tried first; we will see how much accuracy it costs on our data.
 
-## The credit case: three models, one decision {h=d5da7e90}
+## Credit case study: comparison of three scoring models {h=8401cd9c}
 
 The network has two hidden layers of 64 and 32 rectified linear units (ReLU):
 
@@ -204,7 +204,7 @@ Median relative completeness error of integrated gradients against the number of
 
 SmoothGrad (Smilkov et al., 2017) averages gradients over noisy copies of the input, which removes the jitter of a ReLU network. Testing with concept activation vectors (TCAV) (Kim et al., 2018) asks a different question: does a human concept, learned as a direction $\mathbf v_C$ in a hidden layer, move the output? Concepts must be labelled, which is not possible with anonymised PCA components; plan them when the data are collected.
 
-## One fraud, four explanations {h=17402e94}
+## Four explanation methods for one fraudulent transaction {h=5facdc1a}
 
 For the median-score fraud of day 2 (fraud score 99.9 %), Kernel SHAP and integrated gradients both name V14 as the main feature, while saliency names V12: saliency measures how sensitive the score is, not how far the transaction is from normal.
 
@@ -224,7 +224,7 @@ Spearman correlation of the global importances (mean absolute attribution) of se
 
 @practice disagreement is information: permutation importance measures what the model needs, attributions what it uses.
 
-## Faithfulness: remove what the explanation says matters {h=fee1bfd4}
+## Faithfulness of explanations: deletion test {h=f2550be3}
 
 A faithful explanation names the features whose removal changes the prediction. We reset the top-$k$ features of each fraud to the baseline and follow the mean fraud score; the area over the perturbation curve (AOPC) summarises the fall (Samek et al., 2017). In points of fraud score: IG 56.2, SHAP 58.4, LIME 56.1, saliency 48.0, random order 3.9. SHAP, IG and LIME are equally faithful here, saliency less so, and every method is far better than chance.
 

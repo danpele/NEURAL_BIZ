@@ -19,13 +19,13 @@ Cursul scrie atenția și blocul transformer cu toate simbolurile definite și l
 
 Textul sosește repede și conține informație la care prețurile reacționează; rețelele recurente îl citesc încet și uită.
 
-## Știrile financiare mișcă prețurile; mașinile trebuie să le citească repede {h=3294f1cb}
+## Știrile financiare ca date de intrare pentru modele {h=28fc1d1d}
 
 Un model de sentiment duce un text $x_{1:n}$ într-o reprezentare de dimensiune fixă $\mathbf h$ și apoi în probabilitățile a trei clase, $\hat{\mathbf p}=\operatorname{softmax}(W_o\mathbf h+\mathbf b_o)$; tot cursul este despre cum se calculează $\mathbf h$. Datele noastre sînt tweet-uri financiare etichetate negativ (bearish), pozitiv (bullish) sau neutru: 9 543 pentru antrenare și 2 388 pentru test, dintre care 14,5 % negative, 19,9 % pozitive și 65,6 % neutre. Pesimismul din presă anticipează randamentele și volumul din ziua următoare (Tetlock, 2007), deci un astfel de model este un instrument de măsură.
 
 @practice un model de sentiment trebuie să fie precis pe știrile negative rare, nu doar în medie.
 
-## Rețelele recurente citesc cuvînt cu cuvînt și uită {h=2d180edd}
+## Limitele rețelelor recurente pentru textele lungi {h=59738945}
 
 O rețea recurentă actualizează un singur vector de stare, token cu token, $\mathbf h_t=\phi(W_h\mathbf h_{t-1}+W_x\mathbf x_t+\mathbf b)$, deci gradientul dintre cuvintele 1 și $n$ este un produs de $n-1$ matrice jacobiene, care scade sau explodează odată cu distanța. Drumul dintre cuvintele $i$ și $j$ are $|i-j|$ pași, iar cei $n$ pași nu pot rula în paralel. Rețeaua cu memorie pe termen lung și scurt (LSTM) din cursul 5 atenuează prima problemă, dar o păstrează pe a doua. În „profitul a scăzut, dar prognoza a fost majorată”, verdictul depinde de un cuvînt aflat departe de subiect.
 
@@ -82,7 +82,7 @@ Pe 500 de tweet-uri de test, entropia rîndurilor de atenție împărțită la $
 @chart attention_entropy
 Entropia normalizată a atenției și ponderea atenției pe [CLS] și [SEP], pe straturile FinBERT.
 
-## Ponderile de atenție sînt un indiciu, nu o explicație {h=36e9d32d}
+## Ponderile de atenție ca explicații: limite {h=013c5c41}
 
 Contribuția cuvîntului $j$ la cuvîntul $i$ este $a_{ij}$ înmulțit cu un vector de valori a cărui normă poate fi mare sau mică, iar fluxul rezidual duce informație pe care atenția nu o atinge. Hărți de atenție diferite pot da aceeași predicție (Jain și Wallace, 2019), iar atenția mare pe [SEP] nu poartă aproape nicio informație. Atribuirile bazate pe gradient și testele de ocluzie (cursul 11) sînt instrumente mai bune.
 
@@ -96,7 +96,7 @@ Atenția = softmax al scorurilor întrebare–cheie scalate, înmulțit cu valor
 
 Pozițiile, blocul, cele două familii și tokenizatorul.
 
-## Atenția ignoră ordinea; codificarea poziției o readuce {h=95774729}
+## Codificarea sinusoidală a poziției {h=5237108f}
 
 Auto-atenția este echivariantă la permutări: fără poziții, „dobînzile scad, acțiunile cresc” ar fi totuna cu „acțiunile scad, dobînzile cresc”. Transformerul original adaugă la reprezentarea fiecărui token vectorul $p_{t,2i}=\sin(t/10000^{2i/d})$, $p_{t,2i+1}=\cos(t/10000^{2i/d})$; dimensiunile mici se schimbă repede cu poziția, cele mari încet, deci fiecare poziție are un cod unic, iar deplasările relative sînt aplicații liniare.
 
@@ -111,7 +111,7 @@ $$ Z=X+\operatorname{MHA}(\operatorname{LN}(X)),\qquad X'=Z+\operatorname{FFN}(\
 
 unde rețeaua directă aplicată fiecărei poziții (FFN) este $W_2\,\mathrm{GELU}(W_1\mathbf z+\mathbf b_1)+\mathbf b_2$, cu unitatea liniară cu eroare gaussiană (GELU), iar LN este normalizarea pe variabilele unui token. Un bloc are circa $12d^2$ parametri, două treimi dintre ei în partea directă. Blocul nostru are $d=64$, o rețea FFN de lățime 128 și dropout 0,1; două blocuri au 67 139 de parametri în afara reprezentărilor.
 
-## Codificatoarele citesc, decodoarele scriu: două sarcini de preantrenare {h=7282bd74}
+## Codificatoare și decodoare: două obiective de preantrenare {h=b101519e}
 
 Bidirectional Encoder Representations from Transformers (BERT) se preantrenează prin modelarea limbajului cu cuvinte mascate (MLM): 15 % dintre tokeni sînt ascunși și preziși din ambele părți. Generative Pre-trained Transformer (GPT) prezice tokenul următor cu o mască cauzală, $M_{ij}=-\infty$ pentru $j>i$, iar modelele mari de limbaj (LLM) de azi urmează această schemă. Codificatoarele se potrivesc clasificării și extragerii de informații, decodoarele generării; transformerul original le avea pe amîndouă, pentru traducere.
 
@@ -139,7 +139,7 @@ Un transformer suprapune blocuri de atenție și rețele directe, cu conexiuni r
 
 Șapte modele pe un singur set de test păstrat deoparte, cu intervale bootstrap și erori pe clase.
 
-## Șapte modele, un singur set de test păstrat deoparte {h=bf7ca4f2}
+## Șapte modele evaluate pe același set de test {h=aadef457}
 
 Tweet-urile de antrenare publicate se împart în 8 588 pentru antrenare și 955 pentru validare (10 %, stratificat); setul de validare publicat este setul nostru de test, cu 2 388 de tweet-uri, folosit o singură dată. Modelele sînt: o regresie logistică TF-IDF pe secvențe de 1–2 cuvinte (17 119 de variabile); media reprezentărilor învățate ale tokenilor, fără atenție; transformerul nostru mic, cu și fără poziții; și FinBERT, un model BERT antrenat suplimentar pe texte financiare (Araci, 2019), folosit fără antrenare, înghețat cu o regresie logistică pe vectorii lui de 768 de dimensiuni și ajustat. Nu testăm pe Financial PhraseBank: FinBERT a fost ajustat pe aceste date, deci testul ar fi contaminat.
 
@@ -152,7 +152,7 @@ Entropia încrucișată pe antrenare și pe validare, pe epoci, sămînța 1; li
 
 @practice macro-F1 este măsura potrivită cînd clasa rară, știrile negative, este cea care costă bani.
 
-## Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF {h=ad05ecaa}
+## Compararea modelelor: macro-F1 pe setul de test {h=2f554725}
 
 Pe cele 2 388 de tweet-uri de test, macro-F1 este 84,8 % pentru FinBERT ajustat, 75,5 % pentru TF-IDF și 68,8 % pentru transformerul mic (abatere standard 1,5 pe 3 semințe). FinBERT fără nicio antrenare pe tweet-uri atinge 66,9 %, iar FinBERT înghețat cu o regresie logistică 75,3 %.
 

@@ -366,7 +366,7 @@ def build(lang, H=None):
                job=t("on a small dataset, one split cannot separate two models: use repeated cross-validation.",
                      "pe un set mic, o singură împărțire nu poate separa două modele: folosiți validarea încrucișată repetată."),
                tryit=NB + " \\S7", cite=OWN, height="0.60\\textheight")
-    D.frame(t("Leakage: when the validation set knows something it should not", "Scurgerea de informație: cînd setul de validare știe ceva ce nu ar trebui"),
+    D.frame(t("Information leakage into the validation set", "Scurgerea de informație în setul de validare"),
             "\\intuition{" + t("any information from the evaluation rows that reaches training inflates the score and disappears in production.",
                                "orice informație din rîndurile de evaluare care ajunge în antrenare umflă scorul și dispare în producție.") + "}\n" +
             table("@{}p{0.27\\textwidth}p{0.36\\textwidth}p{0.30\\textwidth}@{}",
@@ -383,8 +383,8 @@ def build(lang, H=None):
                    "Serii de timp: validare cu fereastră extinsă sau pe blocuri; nu amestecați niciodată ordinea (Bergmeir \\& Benítez, 2012).")) +
             D.bottom(t("write down, for every input, the moment it becomes known.", "notați, pentru fiecare intrare, momentul în care devine cunoscută."), NB + " \\S8"),
             cite="(Kaufman et al., 2012)")
-    D.figframe(t("Oversampling before the split makes a detector look far better, on paper",
-                 "Supraeșantionarea înainte de împărțire face un detector să pară mult mai bun, pe hîrtie"),
+    D.figframe(t("Oversampling before the split overstates performance",
+                 "Supraeșantionarea înainte de împărțire supraestimează performanța"),
                t("the same MLP 128-128 and the same transactions, evaluated three ways; 5 seeds each.",
                  "același MLP 128-128 și aceleași tranzacții, evaluate în trei moduri; cîte 5 inițializări."),
                None, "split_leakage",
@@ -406,7 +406,7 @@ def build(lang, H=None):
                job=t("the hourly rate swings strongly: a random split would mix calm and attack hours.",
                      "rata orară variază puternic: o împărțire aleatoare ar amesteca orele liniștite și cele de atac."),
                tryit=NB + " \\S9", cite="(Dal Pozzolo et al., 2015)", height="0.60\\textheight")
-    D.frame(t("With rare events, accuracy is useless: measure precision, recall and PR-AUC", "La evenimente rare, acuratețea este inutilă: măsurăm precizia, sensibilitatea și PR-AUC"),
+    D.frame(t("Performance measures for rare events: precision, recall and PR-AUC", "Măsuri de performanță pentru evenimente rare: precizia, sensibilitatea și PR-AUC"),
             "\\intuition{" + t("flagging nothing is 99.8\\,\\% accurate; the bank cares how many alerts are frauds and how many frauds raise an alert.",
                                "dacă nu semnalăm nimic avem o acuratețe de 99,8\\,\\%; banca vrea să știe cîte alerte sînt fraude și cîte fraude declanșează o alertă.") + "}\n" +
             "\\[ \\text{" + t("precision", "precizia") + "}=\\frac{TP}{TP+FP},\\quad \\text{" + t("recall", "sensibilitatea") + "}=\\frac{TP}{TP+FN},\\quad "
@@ -464,7 +464,7 @@ def build(lang, H=None):
                           "Pierderi fără alerte @{cost.no_model|,.0f} EUR; la numărul optim de alerte: logistic @{cost.logit.min|,.0f}, MLP @{cost.mlp.min|,.0f}, XGBoost @{cost.xgb.min|,.0f} EUR.")],
                job=t("the alert budget is the business decision, the model only ranks.", "bugetul de alerte este decizia de afaceri, modelul doar ordonează."),
                tryit=NB + " \\S10", cite=OWN, height="0.60\\textheight")
-    D.frame(t("The regularisation toolbox at a glance", "Trusa de regularizare pe scurt"),
+    D.frame(t("Summary of regularisation methods", "Sinteza metodelor de regularizare"),
             table("@{}p{0.17\\textwidth}p{0.30\\textwidth}p{0.22\\textwidth}p{0.25\\textwidth}@{}",
                   [t("Method", "Metoda"), t("What it does", "Ce face"), t("Main knob", "Parametrul principal"), t("On our data", "Pe datele noastre")],
                   [[t("Weight decay", "Penalizarea ponderilor"), t("shrinks all weights", "micșorează toate ponderile"), "$\\lambda$",

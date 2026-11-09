@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261108s", "L13_text_en.js?v=20261108s", "common.js?v=20261108s"], "L13.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L13_data.js?v=20261108s", "L13_text_en.js?v=20261108s", "common.js?v=20261109m"], "L13.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-epf">Day-ahead price forecasts for Romania</a> · <a href="#s-eval">Is one forecast really better?</a> · <a href="#s-fm">Foundation models: context and quantiles</a> · <a href="#s-risk">Value-at-Risk with a foundation model</a></p>
 <h2 class="sec" id="s-epf">Day-ahead price forecasts for Romania</h2>
 <section class="blk" id="forecast-week">
-  <h3>One week of forecasts: level right, spikes smoothed</h3>
+  <h3>Forecasts for one week of the test year</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L13_forecast_week_en.jpg" alt="Slide 27: One week of forecasts: level right, spikes smoothed" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=27" target="_blank" rel="noopener"><img src="slides/L13_forecast_week_en.jpg" alt="Slide 27: Forecasts for one week of the test year" loading="lazy"></a>
       <figcaption>Slide 27</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="fw-w">Week (starting on Monday): <b id="fw-w-v"></b></label><input type="range" id="fw-w" min="0" max="51" step="1" value="50"></div><div class="ctl ctl-tg" id="fw-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="fw-m" value="naive"> Naive (weekly/daily)</label><label class="tg"><input type="checkbox" name="fw-m" value="lear" checked> LEAR</label><label class="tg"><input type="checkbox" name="fw-m" value="dnn" checked> DNN</label><label class="tg"><input type="checkbox" name="fw-m" value="nbeats"> N-BEATS</label><label class="tg"><input type="checkbox" name="fw-m" value="chronos2" checked> Chronos-2</label><label class="tg"><input type="checkbox" name="fw-m" value="chronos2_cov"> Chronos-2 + covariates</label><label class="tg"><input type="checkbox" name="fw-m" value="bolt"> Chronos-Bolt</label><label class="tg"><input type="checkbox" name="fw-m" value="timesfm"> TimesFM 2.5</label><label class="tg"><input type="checkbox" name="fw-m" value="ens"> Ensemble LEAR+DNN+Chronos-2</label></div></div><button class="btn play" id="fw-play" type="button"></button></div><div class="charts one"><div class="chart" id="fw-chart"></div></div><ul class="out" id="fw-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_forecast_week" target="_blank" rel="noopener">NN_L13_forecast_week</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_forecast_week/NN_L13_forecast_week.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -76,9 +76,9 @@
   <details><summary>Answer</summary><p>In the evening: for LEAR the worst hour is 19:00 (35.78 EUR/MWh) and the best 01:00 (10.75 EUR/MWh); Chronos-2 has the same worst hour (34.05) and best hour (8.57 EUR/MWh). The evening peak is when solar output has gone and prices jump; the night is calm and predictable. Choose spring or summer to see the second bump of errors around midday, when solar output pushes prices down and sometimes below zero.</p></details>
 </section><h2 class="sec" id="s-eval">Is one forecast really better?</h2>
 <section class="blk" id="dm-test">
-  <h3>Which forecast is significantly better? The full chessboard</h3>
+  <h3>Pairwise Diebold–Mariano tests for all models</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L13_dm_pvalues_en.jpg" alt="Slide 31: Which forecast is significantly better? The full chessboard" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L13/lecture13.pdf#page=31" target="_blank" rel="noopener"><img src="slides/L13_dm_pvalues_en.jpg" alt="Slide 31: Pairwise Diebold–Mariano tests for all models" loading="lazy"></a>
       <figcaption>Slide 31</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="dm-a">Model A (reference)</label><select id="dm-a"><option value="naive">Naive (weekly/daily)</option><option value="lear" selected>LEAR</option><option value="dnn">DNN</option><option value="nbeats">N-BEATS</option><option value="chronos2">Chronos-2</option><option value="chronos2_cov">Chronos-2 + covariates</option><option value="bolt">Chronos-Bolt</option><option value="timesfm">TimesFM 2.5</option><option value="ens">Ensemble LEAR+DNN+Chronos-2</option></select></div><div class="ctl"><label for="dm-b">Model B (is it better?)</label><select id="dm-b"><option value="naive">Naive (weekly/daily)</option><option value="lear">LEAR</option><option value="dnn">DNN</option><option value="nbeats">N-BEATS</option><option value="chronos2" selected>Chronos-2</option><option value="chronos2_cov">Chronos-2 + covariates</option><option value="bolt">Chronos-Bolt</option><option value="timesfm">TimesFM 2.5</option><option value="ens">Ensemble LEAR+DNN+Chronos-2</option></select></div><div class="ctl ctl-tg" id="dm-l"><span class="lbl">Loss</span><div class="tgs"><label class="tg"><input type="radio" name="dm-l" value="abs" checked> absolute error</label><label class="tg"><input type="radio" name="dm-l" value="sq"> squared error</label></div></div></div><div class="charts "><div class="chart" id="dm-d"></div><div class="chart" id="dm-c"></div></div><ul class="out" id="dm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L13/NN_L13_dm_pvalues" target="_blank" rel="noopener">NN_L13_dm_pvalues</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L13/NN_L13_dm_pvalues/NN_L13_dm_pvalues.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

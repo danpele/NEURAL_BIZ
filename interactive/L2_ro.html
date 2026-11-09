@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L2.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L2.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -66,9 +66,9 @@
   <details><summary>Răspuns</summary><p>Cele două direcții ale văii au curburile λmax = 38,8 și λmin = 0,37 (numărul de condiționare 104): pasul trebuie să rămînă sub 2/λmax ca să nu diveargă (încercați 2,05 × 1/λmax), iar la acest pas direcția plată este parcursă de 104 ori mai încet. După 60 de pași, MSE este încă 1,486, față de un minim de 0,701. Momentul (β = 0,9 cu jumătate din pas) acumulează partea constantă a gradientului și ajunge la 0,704. Standardizarea face valea rotundă (numărul de condiționare 1,0): un singur pas de 1/λmax ajunge în minim.</p></details>
 </section>
 <section class="blk" id="lr-sweep">
-  <h3>Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge</h3>
+  <h3>Efectul ratei de învățare asupra antrenării</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L2_lr_sweep_ro.jpg" alt="Slide-ul 17: Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L2_lr_sweep_ro.jpg" alt="Slide-ul 17: Efectul ratei de învățare asupra antrenării" loading="lazy"></a>
       <figcaption>Slide-ul 17</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="lr-i">Rata de învățare η (SGD): <b id="lr-i-v"></b></label><input type="range" id="lr-i" min="0" max="8" step="1" value="6"></div><div class="ctl ctl-tg" id="lr-s"><span class="lbl">Afișare</span><div class="tgs"><label class="tg"><input type="checkbox" name="lr-s" value="all" checked> Curbele celorlalte rate (gri)</label></div></div><button class="btn play" id="lr-play" type="button"></button></div><div class="charts "><div class="chart" id="lr-curve"></div><div class="chart" id="lr-all"></div></div><ul class="out" id="lr-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_lr_sweep" target="_blank" rel="noopener">NN_L2_lr_sweep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_lr_sweep/NN_L2_lr_sweep.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Răspuns</summary><p>În cadrul aceluiași optimizator, rata contează mai mult: Adam termină la 0,288 cu η = 0,0003 și la 0,259 cu η = 0,003; SGD termină la 0,307 cu η = 0,01 și la 0,274 cu η = 0,1. La ratele lor cele mai bune, cei cinci optimizatori termină aproape unul de altul (MSE pe validare între 0,259 și 0,274) și toți depășesc regresia liniară (0,500); Adam și AdamW ajung acolo mai repede (0,299 după 10 epoci, față de 0,350 pentru SGD) și cu o dispersie mai mică între inițializări. Pe setul de test, Adam nu este semnificativ mai bun decît SGD (t pereche = 1,01, p = 0,37, 5 inițializări).</p></details>
 </section>
 <section class="blk" id="batch-size">
-  <h3>Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă</h3>
+  <h3>Efectul dimensiunii lotului: progresul pe epocă și pe secundă</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L2_batch_size_ro.jpg" alt="Slide-ul 18: Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L2_batch_size_ro.jpg" alt="Slide-ul 18: Efectul dimensiunii lotului: progresul pe epocă și pe secundă" loading="lazy"></a>
       <figcaption>Slide-ul 18</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bs-x"><span class="lbl">Axa orizontală</span><div class="tgs"><label class="tg"><input type="radio" name="bs-x" value="ep" checked> Epoci (treceri prin date)</label><label class="tg"><input type="radio" name="bs-x" value="st"> Pași de gradient</label><label class="tg"><input type="radio" name="bs-x" value="sec"> Secunde de calcul</label></div></div><div class="ctl ctl-tg" id="bs-b"><span class="lbl">Mărimea lotului</span><div class="tgs"><label class="tg"><input type="checkbox" name="bs-b" value="16" checked> 16</label><label class="tg"><input type="checkbox" name="bs-b" value="128" checked> 128</label><label class="tg"><input type="checkbox" name="bs-b" value="1024" checked> 1024</label></div></div></div><div class="charts one"><div class="chart" id="bs-chart"></div></div><ul class="out" id="bs-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_batch_size" target="_blank" rel="noopener">NN_L2_batch_size</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_batch_size/NN_L2_batch_size.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>Pe epocă cîștigă lotul de 16 (MSE pe validare 0,294 după 5 epoci, față de 0,367 pentru 128 și 0,870 pentru 1.024), pentru că face 774 de pași pe epocă în loc de 97 sau 13. Pe pas de gradient, lotul mare este cel puțin la fel de bun: fiecare pas al său mediază mai multe exemple. Pe secundă, imaginea se schimbă din nou: cele 40 de epoci au durat 25,8 s cu lotul de 16, 3,7 s cu 128 și 1,0 s cu 1.024 pe acest laptop. Cu aceeași rată de învățare, lotul mare nu a convers după 40 de epoci (0,335); loturile mari cer de obicei o rată de învățare mai mare.</p></details>
 </section><h2 class="sec" id="s-deep">Rețele adînci: gradienți care se sting</h2>
 <section class="blk" id="vanishing">
-  <h3>Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi</h3>
+  <h3>Dispariția gradientului în rețelele adînci cu activare sigmoidă</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L2_vanishing_ro.jpg" alt="Slide-ul 13: Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2_ro.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L2_vanishing_ro.jpg" alt="Slide-ul 13: Dispariția gradientului în rețelele adînci cu activare sigmoidă" loading="lazy"></a>
       <figcaption>Slide-ul 13</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="vg-a">Funcția de activare</label><select id="vg-a"><option value="sig" selected>sigmoidă</option><option value="tanh">tanh</option><option value="relu">ReLU</option></select></div><div class="ctl"><label for="vg-i">Inițializarea ponderilor</label><select id="vg-i"><option value="xavier" selected>Xavier (Glorot)</option><option value="he">He (Kaiming)</option><option value="small">N(0; 0,01²)</option><option value="large">N(0; 1)</option></select></div><div class="ctl"><label for="vg-d">Numărul de straturi ascunse: <b id="vg-d-v"></b></label><input type="range" id="vg-d" min="0" max="7" step="1" value="4"></div><button class="btn play" id="vg-play" type="button"></button></div><div class="charts one"><div class="chart" id="vg-chart"></div></div><ul class="out" id="vg-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_vanishing" target="_blank" rel="noopener">NN_L2_vanishing</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_vanishing/NN_L2_vanishing.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

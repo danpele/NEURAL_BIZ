@@ -177,7 +177,7 @@ PAGE = dict(
                       "și @{holdout.max|.3f}, iar 90 % dintre împărțiri dau valori între @{holdout.p05|.3f} și @{holdout.p95|.3f}."),
                 chart="holdout_noise", cap=("Test AUC of logistic regression over 200 random hold-out splits of German credit.",
                                             "AUC pe test al regresiei logistice pe 200 de împărțiri aleatoare ale datelor German credit.")),
-              B(frame="Leakage: when the validation set",
+              B(frame="Information leakage into the validation",
                 text=("Four leaks recur in business data: preprocessing fitted on all rows, resampling before the split, ignoring time, and inputs that are "
                       "only known after the decision (Kaufman et al., 2012). For time series, use expanding-window or blocked validation (Bergmeir and Benítez, 2012).",
                       "Patru scurgeri apar frecvent în datele de afaceri: preprocesare estimată pe toate rîndurile, reeșantionare înainte de împărțire, ignorarea "
@@ -208,7 +208,7 @@ PAGE = dict(
                       "de @{fraud.rate_h_median_pct|.3f} %."),
                 chart="fraud_by_hour", cap=("Hourly fraud rate over the two days, with the start of validation and test.",
                                             "Rata orară a fraudei în cele două zile, cu începutul validării și al testării.")),
-              B(frame="With rare events, accuracy is useless",
+              B(frame="Performance measures for rare events",
                 text=("Precision is $TP/(TP+FP)$, recall $TP/(TP+FN)$, and the PR-AUC averages precision over recall levels; a random score gets a PR-AUC "
                       "equal to the fraud rate (Saito and Rehmsmeier, 2015). Every legitimate payment counts with weight @{fraud.legit_weight|.0f} in $FP$, "
                       "so precision is that of the full population.",

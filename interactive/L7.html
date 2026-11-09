@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261108s", "L7_text_en.js?v=20261108s", "common.js?v=20261108s"], "L7.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261108s", "L7_text_en.js?v=20261108s", "common.js?v=20261109m"], "L7.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>The dot product of two 64-dimensional vectors has a spread that grows with √d_k; without the division, the softmax saturates: one token gets almost all the weight and the gradients of the others vanish. With c = 1/8 (2^−3) most rows put nearly all their weight on one token; with c = 8 they become close to uniform (entropy / log n near 1). On the 500 test tweets of the lecture, the normalised entropy falls from 0.76 in layer 1 to 0.36 in layer 8.</p></details>
 </section><h2 class="sec" id="s-arch">The transformer architecture</h2>
 <section class="blk" id="positional-encoding">
-  <h3>Attention ignores order; positional encoding puts it back</h3>
+  <h3>Sinusoidal positional encoding</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L7_positional_encoding_en.jpg" alt="Slide 17: Attention ignores order; positional encoding puts it back" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L7_positional_encoding_en.jpg" alt="Slide 17: Sinusoidal positional encoding" loading="lazy"></a>
       <figcaption>Slide 17</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="pe-t">Token position t: <b id="pe-t-v"></b></label><input type="range" id="pe-t" min="0" max="63" step="1" value="10"></div><div class="ctl"><label for="pe-i">Dimension pair i (dimensions 2i and 2i+1): <b id="pe-i-v"></b></label><input type="range" id="pe-i" min="0" max="31" step="1" value="2"></div><button class="btn play" id="pe-play" type="button"></button></div><div class="charts "><div class="chart" id="pe-map"></div><div class="chart" id="pe-sim"></div></div><ul class="out" id="pe-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_positional_encoding" target="_blank" rel="noopener">NN_L7_positional_encoding</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_positional_encoding/NN_L7_positional_encoding.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>Each position gets a vector of 64 sines and cosines with wavelengths from 2π to about 2π·10,000^(62/64): the first pairs change fast, the last ones slowly, like the hands of a clock. The dot product of two position vectors is largest when they are equal and falls with the distance, so nearby positions look similar. In the case study, adding positions to the small transformer raises macro-F1 by 0.9 points (95% interval 0.1 to 1.7).</p></details>
 </section><h2 class="sec" id="s-case">Case study: sentiment of finance tweets</h2>
 <section class="blk" id="model-comparison">
-  <h3>Pretraining wins: fine-tuned FinBERT leads, the small transformer trails TF-IDF</h3>
+  <h3>Comparison of the models: macro-F1 on the test set</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L7_model_comparison_en.jpg" alt="Slide 26: Pretraining wins: fine-tuned FinBERT leads, the small transformer trails TF-IDF" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L7_model_comparison_en.jpg" alt="Slide 26: Comparison of the models: macro-F1 on the test set" loading="lazy"></a>
       <figcaption>Slide 26</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="mc-a">Model A</label><select id="mc-a"><option value="tfidf">TF-IDF + logistic regression</option><option value="embbag">Embedding bag</option><option value="tiny_nopos">Small transformer, no positions</option><option value="tiny">Small transformer</option><option value="finbert_zs">FinBERT zero-shot</option><option value="finbert_probe">FinBERT frozen + logistic</option><option value="finbert_ft" selected>FinBERT fine-tuned</option></select></div><div class="ctl"><label for="mc-b">Model B</label><select id="mc-b"><option value="tfidf" selected>TF-IDF + logistic regression</option><option value="embbag">Embedding bag</option><option value="tiny_nopos">Small transformer, no positions</option><option value="tiny">Small transformer</option><option value="finbert_zs">FinBERT zero-shot</option><option value="finbert_probe">FinBERT frozen + logistic</option><option value="finbert_ft">FinBERT fine-tuned</option></select></div><div class="ctl"><label for="mc-r">Bootstrap replications: <b id="mc-r-v"></b></label><input type="range" id="mc-r" min="200" max="2000" step="200" value="1000"></div><button class="btn play" id="mc-play" type="button"></button></div><div class="charts "><div class="chart" id="mc-bar"></div><div class="chart" id="mc-boot"></div></div><ul class="out" id="mc-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_model_comparison" target="_blank" rel="noopener">NN_L7_model_comparison</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_model_comparison/NN_L7_model_comparison.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

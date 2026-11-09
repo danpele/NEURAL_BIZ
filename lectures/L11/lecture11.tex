@@ -127,7 +127,7 @@ Permutation importance & global & labels + model calls & fraud MLP \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Rudin, 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The credit case: three models, one decision}
+\begin{frame}{Credit case study: comparison of three scoring models}
 \footnotesize
 \intuition{the network ranks defaulters better than the logistic scorecard (higher area under the receiver operating characteristic (ROC) curve (AUC) and area under the precision-recall curve (PR-AUC)); can we explain it as well?}
 \begin{columns}[T,onlytextwidth]
@@ -539,7 +539,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Smilkov et al., 2017; Kim et al., 2018)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{One fraud, four explanations}
+\begin{frame}{Four explanation methods for one fraudulent transaction}
 \small
 \intuition{signed attributions of one day-2 fraud (median fraud score), as shares of the total absolute attribution.}
 \begin{center}\includegraphics[width=\textwidth,height=0.485\textheight,keepaspectratio]{charts/en/fraud_local.pdf}\end{center}\vspace{-3mm}
@@ -573,7 +573,7 @@ LOAN & 14\,500.0 & 15\,700.0 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Breiman, 2001; own computation)}\hfill\qlink{NN\_L11\_method\_agreement}{Quantlets/L11/NN_L11_method_agreement}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Faithfulness: remove what the explanation says matters}
+\begin{frame}{Faithfulness of explanations: deletion test}
 \small
 \intuition{reset the top-$k$ features of each fraud to the baseline; a faithful explanation makes the score fall fast.}
 \vspace{-1mm}\[ \mathrm{AOPC}=\frac{1}{K}\sum_{k=1}^{K}\big[f(\vx)-f(\vx^{(k)})\big] \]\vspace{-2mm}

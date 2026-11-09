@@ -58,14 +58,14 @@ The networks are then tested where a risk manager or an energy supplier would us
 
 # Sequences in finance and energy
 
-## Returns look like noise, volatility comes in clusters
+## Returns and volatility clustering
 
 The data are the daily open, high, low and close of the S&P 500 from {data.first|date} to {data.last|date} ({data.n_days|,} trading days). The daily variance is measured with the Garman–Klass (GK) range estimator, $\hat\sigma^2_{GK,t}=\frac12\ln^2(H_t/L_t)-(2\ln2-1)\ln^2(C_t/O_t)$, which uses the high $H_t$, low $L_t$, open $O_t$ and close $C_t$ of the day. Annualised, its median is {data.gk_ann_median|.2f}% and its peak {data.gk_ann_max|.0f}%, on {data.gk_ann_max_date|date}.
 
 @chart sp500_vol
 Daily log returns and annualised Garman–Klass volatility of the S&P 500 (log scale).
 
-## The memory is in the volatility, not in the returns
+## Autocorrelation of returns and of absolute returns
 
 The first-order autocorrelation of returns is {acf.r1|.3f}, inside the noise band of ±{acf.band|.3f}; that of absolute returns is {acf.a1|.3f} and still {acf.a50|.3f} at lag 50. Out of 50 lags, {acf.n_sig_r} are significant for returns and {acf.n_sig_a} for absolute returns. A model with memory is therefore worth trying for risk, for example as an input to value-at-risk (VaR), much less for the direction of the price.
 
@@ -194,14 +194,14 @@ Rețelele sînt apoi testate acolo unde le-ar folosi un manager de risc sau un f
 
 # Secvențe în finanțe și energie
 
-## Randamentele par zgomot, volatilitatea vine în grupuri
+## Randamentele și gruparea volatilității
 
 Datele sînt prețurile zilnice de deschidere, maxim, minim și închidere ale S&P 500, de la {data.first|date} la {data.last|date} ({data.n_days|,} de zile de tranzacționare). Varianța zilnică este măsurată cu estimatorul Garman–Klass (GK), $\hat\sigma^2_{GK,t}=\frac12\ln^2(H_t/L_t)-(2\ln2-1)\ln^2(C_t/O_t)$, care folosește prețurile maxim $H_t$, minim $L_t$, de deschidere $O_t$ și de închidere $C_t$ ale zilei. Anualizată, mediana ei este {data.gk_ann_median|.2f}%, iar vîrful {data.gk_ann_max|.0f}%, la {data.gk_ann_max_date|date}.
 
 @chart sp500_vol
 Randamentele logaritmice zilnice și volatilitatea Garman–Klass anualizată a S&P 500 (scară logaritmică).
 
-## Memoria este în volatilitate, nu în randamente
+## Autocorelația randamentelor și a randamentelor absolute
 
 Autocorelația de ordinul 1 a randamentelor este {acf.r1|.3f}, în interiorul benzii de zgomot de ±{acf.band|.3f}; cea a randamentelor absolute este {acf.a1|.3f} și încă {acf.a50|.3f} la decalajul 50. Din 50 de decalaje, {acf.n_sig_r} sînt semnificative pentru randamente și {acf.n_sig_a} pentru randamentele absolute. Un model cu memorie merită deci încercat pentru risc, de exemplu ca intrare pentru valoarea expusă la risc (VaR), mult mai puțin pentru direcția prețului.
 

@@ -129,7 +129,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1 why graphs
     D.section(t("Why graphs for financial crime", "De ce grafuri pentru infracțiunile financiare"))
-    D.concept(t("Money laundering hides in the links, not in the rows", "Spălarea banilor se ascunde în legături, nu în rînduri"),
+    D.concept(t("Network structure in money-laundering detection", "Structura de rețea în detectarea spălării banilor"),
               t("A single payment can look ordinary; the chain of payments around it often does not.",
                 "O plată izolată poate părea obișnuită; lanțul de plăți din jurul ei, de cele mai multe ori, nu."),
               "\\[ G=(\\mathcal V,\\mathcal E,\\mathbf X),\\qquad \\mathbf X\\in\\R^{n\\times d},\\qquad y_v\\in\\{0,1\\} \\]"
@@ -149,7 +149,7 @@ def build(lang, H=None):
                 "echipa de conformitate a unei bănci gîndește deja în lanțuri de plăți; o rețea GNN învață din aceleași lanțuri."),
               tryit=NB + "1", cite="(Weber et al., 2019; Bishop \\& Bishop, 2024, ch.\\ 13)")
 
-    D.frame(t("The Elliptic data in one table", "Datele Elliptic într-un singur tabel"), table(
+    D.frame(t("Description of the Elliptic data set", "Descrierea setului de date Elliptic"), table(
         "@{}p{0.30\\textwidth}p{0.62\\textwidth}@{}",
         [t("Element", "Element"), t("Value in our copy of the data", "Valoarea în copia noastră a datelor")],
         [[t("Nodes, edges", "Noduri, muchii"), t("@{data.n_nodes|,d} transactions; @{data.n_edges|,d} directed payment flows",
@@ -169,7 +169,7 @@ def build(lang, H=None):
           "\\textbf{Date anonimizate}: Elliptic nu publică denumirile variabilelor; le notăm $f_1,\\dots,f_{165}$")) +
         D.bottom(None, NB + "1"), "footnotesize", cite="(Weber et al., 2019)")
 
-    D.chart(t("Labels arrive in waves: illicit activity is not stationary", "Etichetele vin în valuri: activitatea ilicită nu este staționară"),
+    D.chart(t("Illicit transactions over time", "Evoluția în timp a tranzacțiilor ilicite"),
             "elliptic_timesteps", [
                 t("\\textbf{Peak}: @{data.max_illicit_n} illicit transactions in step @{data.max_illicit_step}; about @{data.nodes_per_step_mean|,d} transactions per step in total.",
                   "\\textbf{Vîrful}: @{data.max_illicit_n} " + de("data.max_illicit_n") + "tranzacții ilicite în pasul @{data.max_illicit_step}; în medie, circa @{data.nodes_per_step_mean|,d} " + de("data.nodes_per_step_mean") + "tranzacții pe pas"),
@@ -187,7 +187,7 @@ def build(lang, H=None):
                   "\\textbf{Coadă grea}: cel mai mare nod central are @{data.max_degree} " + de("data.max_degree") + "vecini; o rețea GNN nu trebuie să lase nodurile centrale să le acopere pe celelalte (de aici normalizarea)")],
             height="0.55\\textheight", tryit=NB + "1", cite="$\\deg(v)=|\\mathcal N(v)|$")
 
-    D.chart(t("Illicit transactions sit next to illicit transactions", "Tranzacțiile ilicite stau lîngă alte tranzacții ilicite"), "homophily", [
+    D.chart(t("Homophily of illicit transactions", "Homofilia tranzacțiilor ilicite"), "homophily", [
         t("\\textbf{Homophily}: @{homophily.illicit_nb_of_illicit_pct|.1f}\\,\\% of the labelled neighbours of an illicit node are illicit, against @{homophily.illicit_nb_of_licit_pct|.1f}\\,\\% for a licit node.",
           "\\textbf{Homofilie}: @{homophily.illicit_nb_of_illicit_pct|.1f}\\,\\% dintre vecinii etichetați ai unui nod ilicit sînt ilicite, față de @{homophily.illicit_nb_of_licit_pct|.1f}\\,\\% pentru un nod licit"),
         t("\\textbf{Edge homophily} @{homophily.edge_pct|.1f}\\,\\% of the labelled edges join the same class; with random labels: @{homophily.edge_random_pct|.1f}\\,\\%.",
@@ -348,7 +348,7 @@ def build(lang, H=None):
                 "o rețea GCN este analogul pe graf al unei medii mobile: robustă, ieftină și oarbă la care vecin contează cel mai mult."),
               tryit=NB + "3", cite="(Kipf \\& Welling, 2017)")
 
-    D.concept(t("GraphSAGE: keep yourself apart from your neighbours, and sample them", "GraphSAGE: separă nodul de vecini și eșantionează vecinii"),
+    D.concept(t("GraphSAGE: separate node representation and neighbour sampling", "GraphSAGE: reprezentarea separată a nodului și eșantionarea vecinilor"),
               t("GraphSAGE concatenates a node's own state with the mean of a sample of its neighbours, so it also works on nodes never seen in training.",
                 "GraphSAGE alătură starea proprie a nodului și media unui eșantion de vecini, deci funcționează și pe noduri nevăzute la antrenare."),
               "\\[ \\mathbf h_v^{(l+1)}=\\ReLU\\Big(W_1^{(l)}\\mathbf h_v^{(l)}+W_2^{(l)}\\frac{1}{|\\mathcal S(v)|}\\sum_{u\\in\\mathcal S(v)}\\mathbf h_u^{(l)}\\Big) \\]"
@@ -405,7 +405,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 5 case study
     D.section(t("Case study: illicit Bitcoin transactions", "Studiu de caz: tranzacții Bitcoin ilicite"))
-    D.frame(t("Eight models, one temporal test", "Opt modele, un singur test în timp"), table(
+    D.frame(t("Eight models evaluated on a chronological test set", "Opt modele evaluate pe un set de test cronologic"), table(
         "@{}p{0.27\\textwidth}p{0.66\\textwidth}@{}",
         [t("Model", "Model"), t("What it sees", "Ce vede")],
         [[t("Logistic regression", "Regresie logistică"), t("local features only (@{data.n_local}), then all @{data.n_features}", "doar variabilele locale (@{data.n_local}), apoi toate cele @{data.n_features}")],
@@ -492,7 +492,7 @@ def build(lang, H=None):
                    "înainte de a antrena o rețea GNN, verificați dacă furnizorul datelor nu a agregat deja vecinătatea."), NB + "2"),
         "footnotesize", cite="(Weber et al., 2019)")
 
-    D.chart(t("A dark-market shutdown breaks every model: concept drift", "Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului"), "f1_by_timestep", [
+    D.chart(t("Concept drift after a dark-market shutdown", "Schimbarea conceptului după închiderea unei piețe ilegale"), "f1_by_timestep", [
         t("\\textbf{Before step 43}: mean F1 random forest @{shutdown.rf_f1_pre|.3f}, GCN @{shutdown.gcn_f1_pre|.3f}; \\textbf{from step 43}: @{shutdown.rf_f1_post|.3f} and @{shutdown.gcn_f1_post|.3f}.",
           "\\textbf{Înainte de pasul 43}: F1 mediu pădure @{shutdown.rf_f1_pre|.3f}, GCN @{shutdown.gcn_f1_pre|.3f}; \\textbf{de la pasul 43}: @{shutdown.rf_f1_post|.3f} și @{shutdown.gcn_f1_post|.3f}"),
         t("\\textbf{New behaviour}: after a major dark market closed, illicit flows changed form; no model trained on steps 1--34 had seen it (Weber et al., 2019).",
@@ -547,7 +547,7 @@ def build(lang, H=None):
                    "testați un model pe graf așa cum va funcționa: pe perioade ulterioare, cu etichetele disponibile atunci."), None),
         "footnotesize", cite="(Pareja et al., 2020; Ying et al., 2019)")
 
-    D.frame(t("Graphs everywhere in finance", "Grafuri peste tot în finanțe"), cols(
+    D.frame(t("Applications of graph models in finance", "Aplicații ale modelelor bazate pe grafuri în finanțe"), cols(
         it((t("\\textbf{Payments and cards}", "\\textbf{Plăți și carduri}"),
             t("cardholder--merchant graphs: a compromised terminal links many fraud victims", "grafuri deținător--comerciant: un terminal compromis leagă multe victime")),
            (t("\\textbf{Credit}", "\\textbf{Credit}"),

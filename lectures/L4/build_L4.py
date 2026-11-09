@@ -258,7 +258,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 3. Fashion-MNIST case study
     D.section(t("Case study: product photos, from softmax to CNN", "Studiu de caz: fotografii de produse, de la softmax la CNN"))
-    D.frame(t("Three models, one protocol", "Trei modele, același protocol"), cols(it(
+    D.frame(t("Experimental protocol for the three models", "Protocolul experimental pentru cele trei modele"), cols(it(
         t(("\\textbf{Benchmark}: softmax (multinomial logistic) regression", "$\\hat{\\mathbf p}=\\softmax(\\mW\\mathrm{vec}(\\mathbf X)+\\vb)$, @{fmnist.softmax.params|,d} parameters"),
           ("\\textbf{Reper}: regresia softmax (logistică multinomială)", "$\\hat{\\mathbf p}=\\softmax(\\mW\\mathrm{vec}(\\mathbf X)+\\vb)$, @{fmnist.softmax.params|,d} de parametri")),
         t(("\\textbf{MLP}: 784--256--128--10, ReLU, dropout 0.2", "@{fmnist.mlp.params|,d} parameters"),
@@ -339,7 +339,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 4. Architectures
     D.section(t("Architectures: from LeNet to ResNet", "Arhitecturi: de la LeNet la ResNet"))
-    D.frame(t("Thirty years of architectures in one table", "Treizeci de ani de arhitecturi într-un tabel"),
+    D.frame(t("Image-recognition architectures, 1998--2021", "Arhitecturi pentru recunoașterea imaginilor, 1998--2021"),
             table("@{}p{0.17\\textwidth}p{0.07\\textwidth}p{0.68\\textwidth}@{}",
                   [t("Network", "Rețeaua"), t("Year", "Anul"), t("Key idea", "Ideea principală")],
                   [["LeNet-5", "1998", t("convolution + subsampling for handwritten digits (the MNIST benchmark); trained by backpropagation",
@@ -355,7 +355,7 @@ def build(lang, H=None):
             "footnotesize", cite=t("(LeCun et al., 1998; Krizhevsky et al., 2012; Simonyan \\& Zisserman, 2015; He et al., 2016)",
                                    "(LeCun et al., 1998; Krizhevsky et al., 2012; Simonyan \\& Zisserman, 2015; He et al., 2016)"))
 
-    D.concept(t("Residual connections: learn the correction, keep the identity", "Conexiunile reziduale: învață corecția, păstrează identitatea"),
+    D.concept(t("Residual connections and the identity path", "Conexiunile reziduale și calea identității"),
               t("a block adds its output to its input, so the gradient always has a direct path back.",
                 "un bloc își adună ieșirea la intrare, astfel încît gradientul are mereu un drum direct înapoi."),
               "\\[ \\mathbf y=\\ReLU\\big(\\mathbf x+F(\\mathbf x;\\mW)\\big),\\qquad \\frac{\\partial\\loss}{\\partial\\mathbf x}=\\frac{\\partial\\loss}{\\partial\\mathbf y}\\Big(\\mathbf I+\\frac{\\partial F}{\\partial\\mathbf x}\\Big) \\]"
@@ -380,7 +380,7 @@ def build(lang, H=None):
                           "Rețeaua simplă cu 32 de straturi @{cifar.plain32.test_acc|.2f}\\,\\%, ResNet-32 @{cifar.res32.test_acc|.2f}\\,\\%; pierderea finală la antrenare @{cifar.plain32.train_loss|.3f} față de @{cifar.res32.train_loss|.3f}.")],
                height="0.42\\textheight", cite=OWN, tryit=NB + "4")
 
-    D.concept(t("Data augmentation is a prior written as transformations", "Augmentarea datelor este o informație a priori scrisă ca transformări"),
+    D.concept(t("Data augmentation as prior information", "Augmentarea datelor ca informație a priori"),
               t("we train on random transformations that should not change the label, which averages the loss over them.",
                 "antrenăm pe transformări aleatoare care nu ar trebui să schimbe eticheta, adică mediem pierderea peste ele."),
               "\\[ \\min_{\\btheta}\\;\\frac1n\\sum_{i=1}^n\\E_{T\\sim\\mathcal T}\\Big[\\ell\\big(f_{\\btheta}(T(\\mathbf X_i)),y_i\\big)\\Big] \\]"

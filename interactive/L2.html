@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_en.js?v=20261108s", "common.js?v=20261108s"], "L2.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L2_data.js?v=20261108s", "L2_text_en.js?v=20261108s", "common.js?v=20261109m"], "L2.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -66,9 +66,9 @@
   <details><summary>Answer</summary><p>The two directions of the valley have curvatures λmax = 38.8 and λmin = 0.37 (condition number 104): a step must stay below 2/λmax to avoid divergence (try 2.05 × 1/λmax), and at that step the flat direction is covered 104 times more slowly. After 60 steps the MSE is still 1.486, against a minimum of 0.701. Momentum (β = 0.9 with half the step) accumulates the consistent part of the gradient and reaches 0.704. Standardising makes the valley round (condition number 1.0): one step of 1/λmax lands on the minimum.</p></details>
 </section>
 <section class="blk" id="lr-sweep">
-  <h3>The learning rate decides everything: too small crawls, too large diverges</h3>
+  <h3>Effect of the learning rate on training</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L2_lr_sweep_en.jpg" alt="Slide 17: The learning rate decides everything: too small crawls, too large diverges" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L2_lr_sweep_en.jpg" alt="Slide 17: Effect of the learning rate on training" loading="lazy"></a>
       <figcaption>Slide 17</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="lr-i">Learning rate η (SGD): <b id="lr-i-v"></b></label><input type="range" id="lr-i" min="0" max="8" step="1" value="6"></div><div class="ctl ctl-tg" id="lr-s"><span class="lbl">Show</span><div class="tgs"><label class="tg"><input type="checkbox" name="lr-s" value="all" checked> Curves of the other rates (grey)</label></div></div><button class="btn play" id="lr-play" type="button"></button></div><div class="charts "><div class="chart" id="lr-curve"></div><div class="chart" id="lr-all"></div></div><ul class="out" id="lr-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_lr_sweep" target="_blank" rel="noopener">NN_L2_lr_sweep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_lr_sweep/NN_L2_lr_sweep.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -86,9 +86,9 @@
   <details><summary>Answer</summary><p>Within one optimiser, the learning rate matters more: Adam ends at 0.288 with η = 0.0003 and 0.259 with η = 0.003; SGD ends at 0.307 with η = 0.01 and 0.274 with η = 0.1. At their best rates the five optimisers end close to each other (validation MSE 0.259 to 0.274) and all beat the linear regression (0.500); Adam and AdamW get there faster (0.299 after 10 epochs, against 0.350 for SGD) and with less spread across seeds. On the test set, Adam is not significantly better than SGD (paired t = 1.01, p = 0.37, 5 seeds).</p></details>
 </section>
 <section class="blk" id="batch-size">
-  <h3>Small batches learn more per epoch, large batches more per second</h3>
+  <h3>Effect of batch size: progress per epoch and per second</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L2_batch_size_en.jpg" alt="Slide 18: Small batches learn more per epoch, large batches more per second" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=18" target="_blank" rel="noopener"><img src="slides/L2_batch_size_en.jpg" alt="Slide 18: Effect of batch size: progress per epoch and per second" loading="lazy"></a>
       <figcaption>Slide 18</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="bs-x"><span class="lbl">Horizontal axis</span><div class="tgs"><label class="tg"><input type="radio" name="bs-x" value="ep" checked> Epochs (passes over the data)</label><label class="tg"><input type="radio" name="bs-x" value="st"> Gradient steps</label><label class="tg"><input type="radio" name="bs-x" value="sec"> Seconds of computing</label></div></div><div class="ctl ctl-tg" id="bs-b"><span class="lbl">Batch size</span><div class="tgs"><label class="tg"><input type="checkbox" name="bs-b" value="16" checked> 16</label><label class="tg"><input type="checkbox" name="bs-b" value="128" checked> 128</label><label class="tg"><input type="checkbox" name="bs-b" value="1024" checked> 1024</label></div></div></div><div class="charts one"><div class="chart" id="bs-chart"></div></div><ul class="out" id="bs-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_batch_size" target="_blank" rel="noopener">NN_L2_batch_size</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_batch_size/NN_L2_batch_size.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>Per epoch, batch 16 wins (validation MSE 0.294 after 5 epochs, against 0.367 for 128 and 0.870 for 1,024), because it takes 774 steps per epoch instead of 97 or 13. Per gradient step the large batch is at least as good: each of its steps averages more examples. Per second the picture changes again: the 40 epochs took 25.8 s with batch 16, 3.7 s with 128 and 1.0 s with 1,024 on this laptop. With the same learning rate, the large batch has not converged after 40 epochs (0.335); larger batches usually need a larger learning rate.</p></details>
 </section><h2 class="sec" id="s-deep">Deep networks: vanishing gradients</h2>
 <section class="blk" id="vanishing">
-  <h3>In a deep sigmoid network the gradient dies before it reaches the first layers</h3>
+  <h3>Vanishing gradients in deep sigmoid networks</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L2_vanishing_en.jpg" alt="Slide 13: In a deep sigmoid network the gradient dies before it reaches the first layers" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L2/lecture2.pdf#page=13" target="_blank" rel="noopener"><img src="slides/L2_vanishing_en.jpg" alt="Slide 13: Vanishing gradients in deep sigmoid networks" loading="lazy"></a>
       <figcaption>Slide 13</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="vg-a">Activation function</label><select id="vg-a"><option value="sig" selected>sigmoid</option><option value="tanh">tanh</option><option value="relu">ReLU</option></select></div><div class="ctl"><label for="vg-i">Weight initialisation</label><select id="vg-i"><option value="xavier" selected>Xavier (Glorot)</option><option value="he">He (Kaiming)</option><option value="small">N(0, 0.01²)</option><option value="large">N(0, 1)</option></select></div><div class="ctl"><label for="vg-d">Number of hidden layers: <b id="vg-d-v"></b></label><input type="range" id="vg-d" min="0" max="7" step="1" value="4"></div><button class="btn play" id="vg-play" type="button"></button></div><div class="charts one"><div class="chart" id="vg-chart"></div></div><ul class="out" id="vg-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L2/NN_L2_vanishing" target="_blank" rel="noopener">NN_L2_vanishing</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L2/NN_L2_vanishing/NN_L2_vanishing.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

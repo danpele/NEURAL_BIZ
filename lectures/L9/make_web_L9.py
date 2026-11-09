@@ -107,14 +107,14 @@ def page(lang):
     # 1
     P.add(T("# Why graphs for financial crime\n\nThe Elliptic graph shows what a transaction network looks like and why the neighbours carry information.",
             "# De ce grafuri pentru infracțiunile financiare\n\nGraful Elliptic arată cum arată o rețea de tranzacții și de ce vecinii poartă informație."))
-    P.block(T("Money laundering hides in the links, not in the rows", "Spălarea banilor se ascunde în legături, nu în rînduri"), text=T(
+    P.block(T("Network structure in money-laundering detection", "Structura de rețea în detectarea spălării banilor"), text=T(
         f"""A graph $G=(\\mathcal V,\\mathcal E,\\mathbf X)$ has nodes $\\mathcal V$ (here transactions), edges $\\mathcal E$ (a payment flow from one transaction to the next) and a feature matrix $\\mathbf X\\in\\mathbb R^{{n\\times d}}$; the label $y_v=1$ marks an illicit transaction (scams, ransomware, dark markets). The Elliptic graph has {v('data.n_nodes', ',')} transactions, {v('data.n_edges', ',')} payment flows, {v('data.n_features')} features per transaction and {v('data.n_steps')} time steps. The task is node classification.
 
 @practice a bank's anti-money-laundering team already thinks in chains of payments; a GNN learns from the same chains.""",
         f"""Un graf $G=(\\mathcal V,\\mathcal E,\\mathbf X)$ are nodurile $\\mathcal V$ (aici tranzacții), muchiile $\\mathcal E$ (un flux de plată de la o tranzacție la următoarea) și matricea variabilelor $\\mathbf X\\in\\mathbb R^{{n\\times d}}$; eticheta $y_v=1$ marchează o tranzacție ilicită (fraude, ransomware, piețe ilegale). Graful Elliptic are {v('data.n_nodes', ',')} de tranzacții, {v('data.n_edges', ',')} de fluxuri de plată, {v('data.n_features')} de variabile pe tranzacție și {v('data.n_steps')} de pași de timp. Sarcina este clasificarea nodurilor.
 
 @practice echipa de conformitate a unei bănci gîndește deja în lanțuri de plăți; o rețea GNN învață din aceleași lanțuri."""))
-    P.block(T("The Elliptic data in one table", "Datele Elliptic într-un singur tabel"), text=T(
+    P.block(T("Description of the Elliptic data set", "Descrierea setului de date Elliptic"), text=T(
         f"""| Element | Value |
 |---|---|
 | Labels | {v('data.n_illicit', ',')} illicit, {v('data.n_licit', ',')} licit, {v('data.n_unknown', ',')} unknown ({v('data.pct_labelled', '.1f')} % labelled) |
@@ -131,7 +131,7 @@ Only {v('data.pct_illicit_lab', '.2f')} % of the labelled transactions are illic
 | Antrenare / test | pașii 1–34 ({v('data.n_train', ',')} etichetate) / pașii 35–49 ({v('data.n_test', ',')} etichetate, {v('data.n_test_illicit', ',')} ilicite) |
 
 Doar {v('data.pct_illicit_lab', '.2f')} % dintre tranzacțiile etichetate sînt ilicite, deci acuratețea singură nu ar spune nimic. Denumirile variabilelor sînt anonimizate de Elliptic."""))
-    P.block(T("Labels arrive in waves: illicit activity is not stationary", "Etichetele vin în valuri: activitatea ilicită nu este staționară"), text=T(
+    P.block(T("Illicit transactions over time", "Evoluția în timp a tranzacțiilor ilicite"), text=T(
         f"""The number of illicit transactions peaks at {v('data.max_illicit_n')} in step {v('data.max_illicit_step')}; each step has about {v('data.nodes_per_step_mean', ',')} transactions in total. As in Weber et al. (2019), the models are trained on steps 1–34 and tested once on steps 35–49; the steps are never shuffled.
 
 @chart elliptic_timesteps
@@ -153,7 +153,7 @@ Complementary cumulative distribution of the degree, log-log scale.""",
 
 @chart degree_dist
 Funcția de repartiție complementară a gradului, pe scară dublu logaritmică."""))
-    P.block(T("Illicit transactions sit next to illicit transactions", "Tranzacțiile ilicite stau lîngă alte tranzacții ilicite"), text=T(
+    P.block(T("Homophily of illicit transactions", "Homofilia tranzacțiilor ilicite"), text=T(
         f"""Among the labelled neighbours of an illicit transaction, {v('homophily.illicit_nb_of_illicit_pct', '.1f')} % are illicit; for a licit transaction the share is {v('homophily.illicit_nb_of_licit_pct', '.1f')} %. Of the labelled edges, {v('homophily.edge_pct', '.1f')} % join two transactions of the same class, against {v('homophily.edge_random_pct', '.1f')} % if labels were assigned at random. This homophily is the reason to look at the neighbours.
 
 @chart homophily
@@ -267,7 +267,7 @@ $$ H^{{(l+1)}}=\\mathrm{{ReLU}}\\big(\\hat AH^{{(l)}}W^{{(l)}}\\big), $$ {{#eq:g
 o regresie liniară pe media normalizată a nodului și a vecinilor lui, urmată de unitatea liniară rectificată (ReLU). Rețeaua noastră GCN are 2 straturi cu 100 de unități ascunse și dropout 0,2, {v('gcn_params', ',')} de parametri, și se antrenează pe tot graful deodată în circa {v('models.gcn.sec', '.0f')} de secunde pe sămînță, pe procesorul unui laptop. Costul pe strat este liniar în numărul de muchii.
 
 @practice o rețea GCN este analogul pe graf al unei medii mobile: robustă, ieftină și oarbă la care vecin contează cel mai mult."""))
-    P.block(T("GraphSAGE: keep yourself apart from your neighbours, and sample them", "GraphSAGE: separă nodul de vecini și eșantionează vecinii"), text=T(
+    P.block(T("GraphSAGE: separate node representation and neighbour sampling", "GraphSAGE: reprezentarea separată a nodului și eșantionarea vecinilor"), text=T(
         f"""GraphSAGE uses separate weights for the node and for the mean of a sample $\\mathcal S(v)$ of its neighbours: $\\mathbf h_v^{{(l+1)}}=\\mathrm{{ReLU}}\\big(W_1\\mathbf h_v^{{(l)}}+W_2\\,\\mathrm{{mean}}_{{u\\in\\mathcal S(v)}}\\mathbf h_u^{{(l)}}\\big)$. The weights do not depend on the graph, so tomorrow's transactions get a score without retraining (inductive learning), and sampling bounds the cost per node. On Elliptic its illicit-class F1 is {v('models.sage.f1', '.3f')} (standard deviation {v('models.sage.f1_sd', '.3f')}) and its PR-AUC {v('models.sage.ap', '.3f')}.""",
         f"""GraphSAGE folosește ponderi separate pentru nod și pentru media unui eșantion $\\mathcal S(v)$ de vecini: $\\mathbf h_v^{{(l+1)}}=\\mathrm{{ReLU}}\\big(W_1\\mathbf h_v^{{(l)}}+W_2\\,\\mathrm{{mean}}_{{u\\in\\mathcal S(v)}}\\mathbf h_u^{{(l)}}\\big)$. Ponderile nu depind de graf, deci tranzacțiile de mîine primesc un scor fără reantrenare (învățare inductivă), iar eșantionarea limitează costul pe nod. Pe Elliptic, F1 pe clasa ilicită este {v('models.sage.f1', '.3f')} (abatere standard {v('models.sage.f1_sd', '.3f')}), iar PR-AUC {v('models.sage.ap', '.3f')}."""))
     P.block(T("GAT: let the network decide which neighbour matters", "GAT: rețeaua decide care vecin contează"), text=T(
@@ -294,7 +294,7 @@ $$ \\alpha_{{vu}}=\\operatorname{{softmax}}_u\\Big(\\mathrm{{LeakyReLU}}\\big(\\
     # 5
     P.add(T("# Case study: illicit Bitcoin transactions\n\nEight models on the same temporal test, judged like an investigation team would judge them.",
             "# Studiu de caz: tranzacții Bitcoin ilicite\n\nOpt modele pe același test în timp, judecate cum le-ar judeca o echipă de investigații."))
-    P.block(T("Eight models, one temporal test", "Opt modele, un singur test în timp"), text=T(
+    P.block(T("Eight models evaluated on a chronological test set", "Opt modele evaluate pe un set de test cronologic"), text=T(
         f"""The models are a logistic regression on the {v('data.n_local')} local features and on all {v('data.n_features')} features; a random forest with 100 trees and 50 features per split, as in Weber et al. (2019); an MLP with the same layers as the GCN but no messages, which isolates the value of the edges; GCN, GraphSAGE and GAT; and a random forest on the features plus the 100 hidden GCN outputs. Precision, recall and F1 of the illicit class are measured at threshold 0.5 on steps 35–49, together with the threshold-free PR-AUC; each network and forest is run with {v('models.gcn.n_runs')} seeds.""",
         f"""Modelele sînt: o regresie logistică pe cele {v('data.n_local')} de variabile locale și pe toate cele {v('data.n_features')}; o pădure aleatoare cu 100 de arbori și 50 de variabile la fiecare împărțire, ca în Weber et al. (2019); un MLP cu aceleași straturi ca GCN, dar fără mesaje, care izolează valoarea muchiilor; GCN, GraphSAGE și GAT; și o pădure aleatoare pe variabile plus cele 100 de ieșiri ascunse ale GCN. Precizia, recall-ul și F1 pe clasa ilicită se măsoară la pragul 0,5 pe pașii 35–49, împreună cu PR-AUC, care nu depinde de prag; fiecare rețea și pădure este rulată cu {v('models.gcn.n_runs')} semințe."""))
     P.block(T("On Elliptic the forest leads; graph layers mainly add ranking power to a network", "Pe Elliptic pădurea conduce; straturile pe graf adaugă mai ales putere de ordonare unei rețele"), text=T(
@@ -336,7 +336,7 @@ Curbele precizie-recall pe pașii de test (scoruri mediate pe semințe); linia p
         f"""{v('data.n_agg')} dintre cele {v('data.n_features')} de variabile sînt agregate pe vecinii de la un salt (maxime, minime, abateri standard, corelații): un strat GNN fix, calculat de Elliptic înainte de publicarea datelor. O regresie logistică numai pe variabilele locale atinge F1 {v('models.lr_local.f1', '.3f')}, față de {v('models.lr_all.f1', '.3f')} cu agregatele. În plus, arborii prind bine tiparele de fraudă de tip regulă. Rețelele GNN își justifică costul pe grafuri brute, fără agregate construite manual, pe tipare pe mai multe salturi și la scorurile inductive; combinînd cele două, pădurea cu reprezentări GCN schimbă F1 cu {v('rfemb_vs_rf_f1_pts', '+.1f')} puncte.
 
 @practice înainte de a antrena o rețea GNN, verificați dacă furnizorul datelor nu a agregat deja vecinătatea."""))
-    P.block(T("A dark-market shutdown breaks every model: concept drift", "Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului"), text=T(
+    P.block(T("Concept drift after a dark-market shutdown", "Schimbarea conceptului după închiderea unei piețe ilegale"), text=T(
         f"""Before step 43 the mean F1 is {v('shutdown.rf_f1_pre', '.3f')} for the random forest and {v('shutdown.gcn_f1_pre', '.3f')} for the GCN; from step 43 it is {v('shutdown.rf_f1_post', '.3f')} and {v('shutdown.gcn_f1_post', '.3f')}. After a major dark market closed, illicit flows changed form (Weber et al., 2019), and no model trained on steps 1–34 had seen the new behaviour.
 
 @chart f1_by_timestep
@@ -393,7 +393,7 @@ Importanța primelor 10 variabile ale pădurii aleatoare, fără și cu reprezen
         f"""Scurgeri de informație prin muchii: un nod de test nu trebuie să primească mesaje din viitor; în Elliptic, {v('data.pct_same_step', '.1f')} % dintre muchii rămîn în același pas de timp, deci împărțirea în timp este curată. Puține etichete: doar {v('data.pct_labelled', '.1f')} % dintre noduri sînt etichetate, iar etichetele din investigațiile trecute favorizează cazurile deja găsite. Schimbarea în timp: infractorii se adaptează, iar rețelele GNN temporale precum EvolveGCN lasă ponderile să evolueze. Explicabilitatea: un raport de activitate suspectă are nevoie de o justificare pe care un supraveghetor o poate citi; GNNExplainer găsește subgraful și variabilele din spatele unei predicții.
 
 @practice testați un model pe graf așa cum va funcționa: pe perioade ulterioare, cu etichetele disponibile atunci."""))
-    P.block(T("Graphs everywhere in finance", "Grafuri peste tot în finanțe"), text=T(
+    P.block(T("Applications of graph models in finance", "Aplicații ale modelelor bazate pe grafuri în finanțe"), text=T(
         """Cardholder–merchant graphs link many fraud victims to one compromised terminal; guarantor and supplier networks carry defaults along trade credit; address and transaction graphs reveal mixers and wallet clusters; interbank exposures and tail-dependence networks show who falls if one bank fails; stocks linked by correlation, supply chain or ownership feed return forecasts; power grids and interconnected price zones are graphs by construction.
 
 @practice whenever the risk of one unit depends on its counterparties, a graph model is worth a try.""",

@@ -59,7 +59,7 @@ VaR & valoarea expusă la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 
 \section{De la prezicerea următorului token la modelele lingvistice mari}
 
-\begin{frame}{De ce contează în finanțe: textul este cel mai mare set de date nefolosit al unei bănci}
+\begin{frame}{Datele de tip text în instituțiile financiare}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Piețe}
@@ -334,7 +334,7 @@ Frecvența termenului--frecvența inversă în documente (TF-IDF) + regresie log
 
 \section{Formularea instrucțiunilor, evaluată pe date etichetate}
 
-\begin{frame}{Anatomia unui prompt}
+\begin{frame}{Structura unui prompt}
 \small
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.5\textwidth}
@@ -559,10 +559,10 @@ embedding 1,5B + logistică & 91{,}3 & \cellcolor{Forest!47}87{,}5 & [84{,}5; 90
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Guo et al., 2017)}\hfill\qlink{NN\_L12\_calibration}{Quantlets/L12/NN_L12_calibration}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Acolo unde oamenii nu sînt de acord, modelele greșesc: acuratețea după acordul adnotatorilor}
+\begin{frame}{Acuratețea în funcție de gradul de acord al adnotatorilor}
 \small
 \intuition{propozițiile care îi împart pe adnotatori sînt cu adevărat ambigue; niciun model nu atinge pe ele acuratețea din cazurile unanime.}
-\begin{center}\includegraphics[width=\textwidth,height=0.304\textheight,keepaspectratio]{charts/ro/agreement.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.365\textheight,keepaspectratio]{charts/ro/agreement.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Financial PhraseBank (Malo et al., 2014). Date: propoziții nefolosite nici la antrenare, nici ca exemple.}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}
@@ -705,7 +705,7 @@ neutru & \cellcolor{MainBlue!3}20 & 3 & \cellcolor{MainBlue!60}\textcolor{white}
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L12\_rag\_recall}{Quantlets/L12/NN_L12_rag_recall}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Fără documente modelul inventează vorbitorul; cu RAG răspunde din sursă}
+\begin{frame}{Răspunsurile cu și fără documente regăsite}
 \small
 \intuition{întrebarea: ce membru al conducerii a ținut discursul cu acest titlu? 160 de discursuri din 15 ianuarie 2025, ulterioare datelor de antrenare ale modelului.}
 \begin{center}\includegraphics[width=\textwidth,height=0.348\textheight,keepaspectratio]{charts/ro/rag_qa.pdf}\end{center}\vspace{-3mm}

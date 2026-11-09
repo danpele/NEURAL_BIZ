@@ -145,7 +145,7 @@ def build(lang, H=None):
                 "un clasificator ordonează clienții, un model generativ arată și ce s-ar putea întîmpla."),
               cite="(Bishop \\& Bishop, 2024, ch.\\ 16)")
 
-    D.concept(t("Latent variables: a few hidden causes, many observed numbers", "Variabile latente: cîteva cauze ascunse, multe valori observate"),
+    D.concept(t("Latent-variable models", "Modele cu variabile latente"),
               t("Eleven yields or 784 pixels are driven by a handful of hidden factors; a latent-variable model writes this down.",
                 "Unsprezece randamente sau 784 de pixeli sînt determinate de cîțiva factori ascunși; un model cu variabile latente formalizează acest lucru."),
               "\\[ p_{\\btheta}(\\mathbf x)=\\int p_{\\btheta}(\\mathbf x\\mid\\mathbf z)\\,p(\\mathbf z)\\,d\\mathbf z,\\qquad \\mathbf z\\in\\R^k,\\ k\\ll d \\]"
@@ -164,7 +164,7 @@ def build(lang, H=None):
                 "la evaluarea unui model, întrebați care parte este povestea latentă și care este zgomot estimat."),
               cite="(Bishop \\& Bishop, 2024, sec.\\ 16.2)")
 
-    D.frame(t("The landscape: four families, four trade-offs", "Peisajul: patru familii, patru compromisuri"), table(
+    D.frame(t("Four families of generative models", "Patru familii de modele generative"), table(
         "@{}p{0.15\\textwidth}p{0.20\\textwidth}p{0.17\\textwidth}p{0.17\\textwidth}p{0.23\\textwidth}@{}",
         [t("Family", "Familia"), t("Training signal", "Ce se optimizează"), t("Likelihood", "Verosimilitate"), t("Sampling", "Generarea"), t("In this lecture", "În acest curs")],
         [["AE", t("reconstruction error", "eroarea de reconstrucție"), t("none", "nu"), t("not a generator", "nu este generator"), t("card fraud as anomaly", "frauda cu carduri ca anomalie")],
@@ -233,7 +233,7 @@ def build(lang, H=None):
           "\\textbf{ROC-AUC} este mare pentru toate trei (@{ae.auc|.1f}, @{ae.auc_pca|.1f}, @{ae.auc_logit|.1f}\\,\\%): la o fraudă din 700 ascunde diferența pe care o arată PR-AUC")],
         height="0.52\\textheight", tryit=NB + "1")
 
-    D.chart(t("The bottleneck must be narrow enough to forget the unusual", "Stratul îngust trebuie să fie destul de îngust ca să uite ce este neobișnuit"), "ae_bottleneck", [
+    D.chart(t("Bottleneck size and anomaly detection", "Dimensiunea stratului îngust și detectarea anomaliilor"), "ae_bottleneck", [
         t("\\textbf{PR-AUC by bottleneck size}: @{ae.bottleneck.2|.1f}\\,\\% with $k=2$, @{ae.bottleneck.8|.1f}\\,\\% with $k=8$, @{ae.bottleneck.24|.1f}\\,\\% with $k=24$ (mean of 2 seeds); best $k$ = @{ae.best_k}.",
           "\\textbf{PR-AUC după dimensiunea stratului îngust}: @{ae.bottleneck.2|.1f}\\,\\% cu $k=2$, @{ae.bottleneck.8|.1f}\\,\\% cu $k=8$, @{ae.bottleneck.24|.1f}\\,\\% cu $k=24$ (media pe 2 semințe); cel mai bun $k$ = @{ae.best_k}"),
         t("\\textbf{Too narrow}: even normal payments are rebuilt badly; \\textbf{too wide}: the network learns to copy frauds as well.",
@@ -276,7 +276,7 @@ def build(lang, H=None):
                 "termenul KL face codurile aleatoare să aibă sens: aduce toate intrările în jurul originii spațiului latent."),
               tryit=NB + "2", cite="(Kingma \\& Welling, 2014; Bishop \\& Bishop, 2024, sec.\\ 19.2)", wl="0.58", wr="0.39")
 
-    D.concept(t("The reparameterisation trick lets gradients flow through randomness", "Trucul reparametrizării lasă gradientul să treacă prin hazard"),
+    D.concept(t("The reparameterisation trick", "Trucul reparametrizării"),
               t("Sampling is not differentiable, but a shifted and scaled standard normal is.",
                 "Extragerea aleatoare nu este derivabilă, dar o normală standard translatată și scalată este."),
               "\\[ \\mathbf z=\\boldsymbol\\mu_\\phi(\\mathbf x)+\\boldsymbol\\sigma_\\phi(\\mathbf x)\\odot\\boldsymbol\\varepsilon,\\qquad \\boldsymbol\\varepsilon\\sim\\mathcal N(0,I) \\]"
@@ -317,7 +317,7 @@ def build(lang, H=None):
         height="0.48\\textheight", tryit=NB + "2", cite="(own computation, seed 1)" if not ro else "(calcule proprii, sămînța 1)")
 
     B = N["vae"]["beta"]
-    D.frame(t("$\\beta$-VAE: one knob between sharp reconstructions and a tidy latent space", "$\\beta$-VAE: un singur buton între reconstrucții clare și un spațiu latent ordonat"), cols(
+    D.frame(t("$\\beta$-VAE: reconstruction quality and latent-space structure", "$\\beta$-VAE: calitatea reconstrucției și structura spațiului latent"), cols(
         "\\[ \\loss_\\beta=-\\E_{q}[\\log p(\\mathbf x\\mid\\mathbf z)]+\\beta\\,\\mathrm{KL}\\big(q(\\mathbf z\\mid\\mathbf x)\\|p(\\mathbf z)\\big) \\]" +
         table("@{}lrrr@{}", ["$\\beta$", t("Reconstruction", "Reconstrucție"), "KL", t("Active dims", "Dim.\\ active")],
               [[n_(b, ".1f"), n_(B[k]["rec"], ".1f"), n_(B[k]["kl"], ".1f"), str(B[k]["active"])] for b, k in [(0.5, "b05"), (1.0, "b1"), (4.0, "b4")]],
@@ -334,7 +334,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 4 GAN
     D.section(t("Generative adversarial networks", "Rețele generative adversariale"))
-    D.concept(t("A GAN is a game between a forger and a detective", "Un GAN este un joc între un falsificator și un detectiv"),
+    D.concept(t("Generative adversarial networks: generator and discriminator", "Rețelele generative adversariale: generatorul și discriminatorul"),
               t("The generator turns noise into fake data; the discriminator tries to tell fake from real; each improves against the other.",
                 "Generatorul face date false din zgomot, discriminatorul caută falsul; fiecare progresează împotriva celuilalt."),
               "\\[ \\min_{G}\\max_{D}\\ \\E_{\\mathbf x\\sim p_{data}}\\big[\\log D(\\mathbf x)\\big]+\\E_{\\mathbf z\\sim p(\\mathbf z)}\\big[\\log\\big(1-D(G(\\mathbf z))\\big)\\big] \\]"
@@ -425,7 +425,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 5 diffusion
     D.section(t("Diffusion models", "Modele de difuzie"))
-    D.concept(t("Diffusion: destroy the data with noise, then learn to undo it", "Difuzia: distrugem datele cu zgomot, apoi învățăm să refacem pașii"),
+    D.concept(t("Diffusion models: forward noising and reverse denoising", "Modelele de difuzie: adăugarea și eliminarea treptată a zgomotului"),
               t("Adding a little Gaussian noise many times turns any data into pure noise; a network learns each small reverse step.",
                 "Cu zgomot gaussian adăugat treptat, orice date devin zgomot pur; o rețea învață fiecare pas înapoi."),
               "\\[ q(\\mathbf x_t\\mid\\mathbf x_{t-1})=\\mathcal N\\big(\\sqrt{1-\\beta_t}\\,\\mathbf x_{t-1},\\ \\beta_tI\\big) \\]"

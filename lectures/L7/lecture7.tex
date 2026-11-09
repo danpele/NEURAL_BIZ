@@ -51,7 +51,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 
 \section{Why attention}
 
-\begin{frame}{Financial news moves prices; machines must read it fast}
+\begin{frame}{Financial news as input for models}
 \footnotesize
 \intuition{Thousands of headlines and posts arrive every hour; a desk needs their tone in seconds, consistently, in the same units.}
 \begin{columns}[T,onlytextwidth]
@@ -84,7 +84,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Tetlock, 2007; Malo et al., 2014)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Recurrent networks read word by word and forget}
+\begin{frame}{Limits of recurrent networks for long texts}
 \footnotesize
 \intuition{A recurrent network squeezes everything read so far into one state vector, updated one token at a time.}
 \begin{columns}[T,onlytextwidth]
@@ -293,7 +293,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation, 500 test tweets; Clark et al., 2019)}\hfill\qlink{NN\_L7\_attention\_entropy}{Quantlets/L7/NN_L7_attention_entropy}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Attention weights are a clue, not an explanation}
+\begin{frame}{Attention weights as explanations: limitations}
 \footnotesize
 \intuition{Where a head looks is not the same as why the model decides: values, later layers and the classifier all transform what attention selects.}
 \begin{columns}[T,onlytextwidth]
@@ -327,7 +327,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 
 \section{The transformer architecture}
 
-\begin{frame}{Attention ignores order; positional encoding puts it back}
+\begin{frame}{Sinusoidal positional encoding}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.480\textheight,keepaspectratio]{charts/en/positional_encoding.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Vaswani et al. (2017), sinusoidal formula. Data: mechanism illustration, $d=64$, 64 positions.}
@@ -378,7 +378,7 @@ VaR & Value-at-Risk\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Vaswani et al., 2017; Ba, Kiros \& Hinton, 2016)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Encoders read, decoders write: two pretraining tasks}
+\begin{frame}{Encoders and decoders: two pretraining objectives}
 \footnotesize
 \intuition{The same block reads or writes, depending on the mask and the pretraining task.}
 \begin{columns}[T,onlytextwidth]
@@ -470,7 +470,7 @@ Convolution, kernel $k$ & $O(k n d^2)$ & $O(1)$ & $O(\log_k n)$ \\
 
 \section{Case study: sentiment of finance tweets}
 
-\begin{frame}{Seven models, one held-out test set}
+\begin{frame}{Seven models evaluated on a common test set}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.30\textwidth}p{0.62\textwidth}@{}}\toprule
@@ -549,9 +549,9 @@ FinBERT fine-tuned & all 109.5 million weights, 3 epochs \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L7\_tiny\_learning\_curve}{Quantlets/L7/NN_L7_tiny_learning_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Pretraining wins: fine-tuned FinBERT leads, the small transformer trails TF-IDF}
+\begin{frame}{Comparison of the models: macro-F1 on the test set}
 \small
-\begin{center}\includegraphics[width=\textwidth,height=0.481\textheight,keepaspectratio]{charts/en/model_comparison.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.542\textheight,keepaspectratio]{charts/en/model_comparison.pdf}\end{center}\vspace{-3mm}
 \chartsource{Source: Twitter financial news datasets (Hugging Face, zeroshot). Data: own estimates; 2,388 test tweets (published validation split).}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}

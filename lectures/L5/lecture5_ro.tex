@@ -81,7 +81,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 
 \section{Secvențe în finanțe și energie}
 
-\begin{frame}{Randamentele par zgomot, volatilitatea vine în grupuri}
+\begin{frame}{Randamentele și gruparea volatilității}
 \small
 \intuition{mărimea mișcării de azi spune mult despre mărimea celei de mîine; semnul ei nu spune aproape nimic.}
 \vspace{-1mm}\[ r_t=100\ln\frac{P_t}{P_{t-1}},\qquad \hat\sigma^2_{\mathrm{GK},t}=\tfrac12\Big(\ln\frac{H_t}{L_t}\Big)^2-(2\ln2-1)\Big(\ln\frac{C_t}{O_t}\Big)^2 \]\vspace{-2mm}
@@ -97,7 +97,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Garman \& Klass, 1980; calcul propriu)}\hfill\qlink{NN\_L5\_sp500\_vol}{Quantlets/L5/NN_L5_sp500_vol}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Memoria este în volatilitate, nu în randamente}
+\begin{frame}{Autocorelația randamentelor și a randamentelor absolute}
 \small
 \intuition{autocorelațiile lui $|r_t|$ rămîn pozitive luni întregi; cele ale lui $r_t$ sînt în banda de zgomot.}
 \vspace{-1mm}\[ \hat\rho(k)=\frac{\sum_{t=k+1}^{T}(x_t-\bar x)(x_{t-k}-\bar x)}{\sum_{t=1}^{T}(x_t-\bar x)^2} \]\vspace{-2mm}
@@ -115,7 +115,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L5\_acf\_abs}{Quantlets/L5/NN_L5_acf_abs}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Un MLP pe fereastră uită tot ce este în afara ferestrei}
+\begin{frame}{Memoria limitată a unui MLP pe fereastră fixă}
 \footnotesize
 \intuition{un MLP aplicat ultimelor $W$ observații are ponderi separate pentru fiecare decalaj și o limită strictă de memorie.}
 \begin{columns}[T,onlytextwidth]
@@ -351,7 +351,7 @@ Consumul orar din România & Rețeaua europeană a operatorilor de transport și
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L5\_lstm\_gates}{Quantlets/L5/NN_L5_lstm_gates}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Tipare de secvențe și o capcană}
+\begin{frame}{Arhitecturi pentru secvențe și scurgerea de informație din viitor}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -570,7 +570,7 @@ GRU (prognoza medie) & 0{,}624 & 0{,}521 & 5 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\hfill\qlink{NN\_L5\_returns\_r2}{Quantlets/L5/NN_L5_returns_r2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{De ce rămîn slabe prognozele randamentelor și ce ne învață asta}
+\begin{frame}{Predictibilitatea redusă a randamentelor}
 \footnotesize
 \intuition{pe o piață lichidă, partea previzibilă a randamentelor este infimă față de zgomotul lor.}
 \begin{columns}[T,onlytextwidth]

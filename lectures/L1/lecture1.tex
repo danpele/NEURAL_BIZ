@@ -280,7 +280,7 @@ bias $b$ &  &  & \ensuremath{-}1.99 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A missing value can be the strongest signal}
+\begin{frame}{Missing values as predictors of default}
 \small
 \intuition{applicants who do not report their debt ratio default far more often: missingness is information.}
 \[ \tilde x_{ij}=\begin{cases}x_{ij}&\text{observed}\\ \mathrm{med}_{\text{train}}(x_j)&\text{missing}\end{cases},\qquad m_{ij}=\mathbb 1\{x_{ij}\ \text{missing}\} \]
@@ -372,7 +372,7 @@ bias $b$ &  &  & \ensuremath{-}1.99 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Novikoff, 1962)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{On real loans the perceptron never settles}
+\begin{frame}{The perceptron does not converge on non-separable credit data}
 \small
 \intuition{the classes overlap, so every epoch corrects some loans and breaks others.}
 \begin{center}\includegraphics[width=\textwidth,height=0.469\textheight,keepaspectratio]{charts/en/perceptron_errors.pdf}\end{center}\vspace{-3mm}
@@ -385,7 +385,7 @@ bias $b$ &  &  & \ensuremath{-}1.99 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L1\_perceptron\_errors}{Quantlets/L1/NN_L1_perceptron_errors}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{No straight line separates XOR: one hidden layer does}
+\begin{frame}{The XOR problem and the hidden layer}
 \small
 \intuition{XOR is true when exactly one input is on; the two positive points sit on a diagonal.}
 \vspace{-1mm}\[ h_k=\tanh(\vw_k^\top\vx+b_k),\ k=1,2;\qquad p=\sigma(v_1h_1+v_2h_2+c) \]\vspace{-2mm}
@@ -509,7 +509,7 @@ quantile $\tau$ & $\hat q=z$ & pinball: $\frac1n\sum\rho_\tau(y_i-\hat q_i)$ & v
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L1\_uat\_california}{Quantlets/L1/NN_L1_uat_california}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Depth reuses features: deep and narrow can beat shallow and wide}
+\begin{frame}{Depth and width of a network}
 \small
 \intuition{each layer composes the features of the previous one, so the number of linear pieces can grow with depth.}
 \[ \text{ReLU MLP:}\ \ f(\vx)\ \text{is piecewise linear; number of linear regions up to}\ \ O\big(H^{dL}\big) \]

@@ -189,7 +189,7 @@ European Central Bank (ECB) speeches & full texts of the Executive Board and Sup
 
 \section{Dense representations: word embeddings}
 
-\begin{frame}{You shall know a word by the company it keeps}
+\begin{frame}{The distributional hypothesis}
 \footnotesize
 \intuition{words used in similar contexts get similar vectors; similarity is the cosine of the angle.}
 \begin{columns}[T,onlytextwidth]
@@ -300,7 +300,7 @@ European Central Bank (ECB) speeches & full texts of the Executive Board and Sup
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Pennington et al., 2014; own computation)}\hfill\qlink{NN\_L6\_emb\_training}{Quantlets/L6/NN_L6_emb_training}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Counting is enough: PMI and a truncated matrix factorisation}
+\begin{frame}{Count-based word vectors: PMI and truncated matrix factorisation}
 \footnotesize
 \intuition{before neural embeddings, dense vectors came from factorising a matrix of word associations.}
 \begin{columns}[T,onlytextwidth]
@@ -604,7 +604,7 @@ Dimension $d$ & Macro-F1 (\%) \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Models fail where the annotators disagree}
+\begin{frame}{Classification errors and annotator agreement}
 \small
 \intuition{test accuracy by the share of annotators who agreed on the label of the sentence.}
 \begin{center}\includegraphics[width=\textwidth,height=0.420\textheight,keepaspectratio]{charts/en/agreement.pdf}\end{center}\vspace{-3mm}

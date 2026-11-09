@@ -63,7 +63,7 @@ Pentru un grup real de locuințe din setul de test, cu venitul standardizat −0
 
 O singură trecere înapoi dă toate cele $P$ derivate parțiale ale unei pierderi scalare; diferențele finite ar cere $P$ treceri suplimentare. Verificarea gradientului pe MLP 64-64, cu diferențe centrale în dublă precizie pe 30 de ponderi alese aleator, găsește o eroare relativă maximă de $7,0\times10^{-7}$.
 
-## Într-o rețea adîncă cu sigmoide, gradientul dispare înainte de primele straturi {h=c21366fd}
+## Dispariția gradientului în rețelele adînci cu activare sigmoidă {h=4102b9b6}
 
 Semnalul înapoi este un produs de jacobiene $\mathbf W^\top\operatorname{diag}(a')$. Într-o rețea cu 10 straturi, pe un lot real, norma gradientului în primul strat este $8,5\times10^{-7}$ cu sigmoide, față de $7,5\times10^{0}$ în ultimul strat; cu ReLU și inițializare He, primul strat primește încă $3,1\times10^{0}$.
 
@@ -86,7 +86,7 @@ Mini-loturile, rata de învățare, momentul, pașii adaptivi și programele rat
 
 Gradientul pe mini-lot $\mathbf g_t=\frac1B\sum_{i\in\mathcal B_t}\nabla\ell_i$ este nedeplasat pentru gradientul complet, iar varianța lui scade aproximativ ca $1/B$. Cu pași care satisfac $\sum\eta_t=\infty$ și $\sum\eta_t^2<\infty$, coborîrea stohastică pe gradient converge către un punct staționar (Robbins și Monro, 1951).
 
-## Rata de învățare decide totul: prea mică se tîrăște, prea mare diverge {h=9646f656}
+## Efectul ratei de învățare asupra antrenării {h=3893c960}
 
 Cu SGD simplu, 30 de epoci și loturi de 128, MSE pe validare este 1,093 la $\eta=10^{-4}$, mai slab decît regresia liniară (0,500), și 0,281 la $\eta=$ 0,1; de la $\eta=$ 0,3, cel puțin o inițializare diverge.
 
@@ -95,7 +95,7 @@ MSE pe validare după 30 de epoci de SGD, pentru nouă rate de învățare și t
 
 @practice ajustați mai întîi rata de învățare, pe o grilă logaritmică.
 
-## Loturile mici învață mai mult pe epocă, cele mari mai mult pe secundă {h=67b75fa2}
+## Efectul dimensiunii lotului: progresul pe epocă și pe secundă {h=10e93cf5}
 
 După 5 epoci cu Adam, MSE pe validare este 0,294 cu loturi de 16, 0,367 cu 128 și 0,870 cu 1 024: loturile mici fac 774 de pași pe epocă, cele mari 13. Pe secundă situația se inversează: 40 de epoci durează 25,8, 3,7 și 1,0 secunde.
 

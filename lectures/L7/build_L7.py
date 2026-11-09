@@ -128,7 +128,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1 why attention
     D.section(t("Why attention", "De ce atenția"))
-    D.concept(t("Financial news moves prices; machines must read it fast", "Știrile financiare mișcă prețurile; mașinile trebuie să le citească repede"),
+    D.concept(t("Financial news as input for models", "Știrile financiare ca date de intrare pentru modele"),
               t("Thousands of headlines and posts arrive every hour; a desk needs their tone in seconds, consistently, in the same units.",
                 "Mii de titluri și postări sosesc în fiecare oră; o mesă de tranzacționare are nevoie de tonul lor în cîteva secunde, consecvent, pe aceeași scară."),
               "\\[ \\hat{\\mathbf p}(x_{1:n})=\\softmax\\big(W_o\\,\\vh(x_{1:n})+\\vb_o\\big)\\in\\Delta^{3} \\]"
@@ -146,7 +146,7 @@ def build(lang, H=None):
                 "un model de sentiment este un instrument de măsură: trebuie să fie precis pe știrile negative rare, nu doar în medie."),
               cite="(Tetlock, 2007; Malo et al., 2014)")
 
-    D.concept(t("Recurrent networks read word by word and forget", "Rețelele recurente citesc cuvînt cu cuvînt și uită"),
+    D.concept(t("Limits of recurrent networks for long texts", "Limitele rețelelor recurente pentru textele lungi"),
               t("A recurrent network squeezes everything read so far into one state vector, updated one token at a time.",
                 "O rețea recurentă comprimă tot ce a citit pînă acum într-un singur vector de stare, actualizat token cu token."),
               "\\[ \\vh_t=\\phi\\big(W_h\\vh_{t-1}+W_x\\vx_t+\\vb\\big),\\qquad \\frac{\\partial\\vh_n}{\\partial\\vh_1}=\\prod_{t=2}^{n}\\frac{\\partial\\vh_t}{\\partial\\vh_{t-1}} \\]"
@@ -251,7 +251,7 @@ def build(lang, H=None):
           "\\textbf{[SEP] ca destinație implicită}: pînă la @{attn.sep_max_pct|.1f}\\,\\% din toată atenția (stratul @{attn.sep_max_layer}) merge spre separator, o operație nulă pe care un cap o folosește cînd nu are nimic de adăugat")],
         height="0.52\\textheight", tryit=NB + "4", cite=t("(own computation, @{attn.n_tweets} test tweets; Clark et al., 2019)", "(calcule proprii, @{attn.n_tweets} de tweet-uri de test; Clark et al., 2019)"))
 
-    D.concept(t("Attention weights are a clue, not an explanation", "Ponderile de atenție sînt un indiciu, nu o explicație"),
+    D.concept(t("Attention weights as explanations: limitations", "Ponderile de atenție ca explicații: limite"),
               t("Where a head looks is not the same as why the model decides: values, later layers and the classifier all transform what attention selects.",
                 "Unde se uită un cap nu este același lucru cu motivul deciziei: valorile, straturile următoare și clasificatorul transformă tot ce selectează atenția."),
               "\\[ \\vh_i^{(l+1)}=\\vh_i^{(l)}+\\sum_{m=1}^{h}\\sum_{j}a_{ij}^{(l,m)}\\,W_O^{m\\top}W_V^{m\\top}\\vh_j^{(l)}+\\dots \\]"
@@ -268,7 +268,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 3 transformer block
     D.section(t("The transformer architecture", "Arhitectura transformer"))
-    D.chart(t("Attention ignores order; positional encoding puts it back", "Atenția ignoră ordinea; codificarea poziției o readuce"), "positional_encoding", [
+    D.chart(t("Sinusoidal positional encoding", "Codificarea sinusoidală a poziției"), "positional_encoding", [
         t("\\textbf{Formula}: $p_{t,2i}=\\sin(t/10000^{2i/d})$, $p_{t,2i+1}=\\cos(t/10000^{2i/d})$, added to the token embedding; low dimensions change fast, high ones slowly.",
           "\\textbf{Formula}: $p_{t,2i}=\\sin(t/10000^{2i/d})$, $p_{t,2i+1}=\\cos(t/10000^{2i/d})$, adunată la reprezentarea tokenului; dimensiunile mici se schimbă repede, cele mari încet"),
         t("\\textbf{Why}: self-attention is permutation-equivariant; without positions ``rates cut, stocks up'' equals ``stocks cut, rates up''.",
@@ -293,7 +293,7 @@ def build(lang, H=None):
                 "cei mai mulți parametri ai unui transformer se află în straturile directe, nu în atenție."),
               tryit=NB + "3", cite="(Vaswani et al., 2017; Ba, Kiros \\& Hinton, 2016)")
 
-    D.concept(t("Encoders read, decoders write: two pretraining tasks", "Codificatoarele citesc, decodoarele scriu: două sarcini de preantrenare"),
+    D.concept(t("Encoders and decoders: two pretraining objectives", "Codificatoare și decodoare: două obiective de preantrenare"),
               t("The same block reads or writes, depending on the mask and the pretraining task.",
                 "Același bloc devine cititor sau scriitor în funcție de mască și de sarcina de preantrenare."),
               "\\[ \\loss_{\\text{MLM}}=-\\sum_{i\\in\\mathcal M}\\log p_{\\btheta}\\big(x_i\\mid x_{\\setminus\\mathcal M}\\big) \\]\\[ "
@@ -343,7 +343,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 4 case study
     D.section(t("Case study: sentiment of finance tweets", "Studiu de caz: sentimentul tweet-urilor financiare"))
-    D.frame(t("Seven models, one held-out test set", "Șapte modele, un singur set de test păstrat deoparte"), table(
+    D.frame(t("Seven models evaluated on a common test set", "Șapte modele evaluate pe același set de test"), table(
         "@{}p{0.30\\textwidth}p{0.62\\textwidth}@{}",
         [t("Model", "Model"), t("What is trained", "Ce se antrenează")],
         [[t("TF-IDF + logistic", "TF-IDF + logistic"), t("logistic regression on word 1--2-grams (@{tfidf.n_features|,d} features), $C$ chosen on validation",
@@ -386,7 +386,7 @@ def build(lang, H=None):
                   "\\textbf{Are nevoie de multe date}: @{data.n_train|,d} de tweet-uri sînt puține pentru @{models.tiny.params|,d} de parametri învățați de la zero; modelul devine prea sigur pe el înainte să se oprească din progres")],
             height="0.50\\textheight", tryit=NB + "5")
 
-    D.chart(t("Pretraining wins: fine-tuned FinBERT leads, the small transformer trails TF-IDF", "Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF"), "model_comparison", [
+    D.chart(t("Comparison of the models: macro-F1 on the test set", "Compararea modelelor: macro-F1 pe setul de test"), "model_comparison", [
         t("\\textbf{Macro-F1 on @{data.n_test|,d} test tweets}: FinBERT fine-tuned @{models.finbert_ft.macro_f1|.1f}\\,\\%, TF-IDF @{models.tfidf.macro_f1|.1f}\\,\\%, small transformer @{models.tiny.macro_f1|.1f}\\,\\% (sd @{models.tiny.macro_f1_sd|.1f}, 3 seeds).",
           "\\textbf{Macro-F1 pe @{data.n_test|,d} de tweet-uri de test}: FinBERT ajustat @{models.finbert_ft.macro_f1|.1f}\\,\\%, TF-IDF @{models.tfidf.macro_f1|.1f}\\,\\%, transformerul mic @{models.tiny.macro_f1|.1f}\\,\\% (abatere standard @{models.tiny.macro_f1_sd|.1f}, 3 semințe)"),
         t("\\textbf{FinBERT without training on tweets}: @{models.finbert_zs.macro_f1|.1f}\\,\\%; frozen FinBERT + logistic: @{models.finbert_probe.macro_f1|.1f}\\,\\%.",

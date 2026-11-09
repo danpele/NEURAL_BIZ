@@ -89,7 +89,7 @@ Acoperirea opțiunii & Traiectorii S\&P 500 de 21 de zile, VIX ca volatilitate i
 
 \section{Decizii secvențiale în afaceri}
 
-\begin{frame}{Învățarea prin întărire: ce să faci, nu ce se va întîmpla}
+\begin{frame}{Învățarea prin întărire și învățarea supervizată}
 \footnotesize
 \intuition{învățarea supervizată prognozează o etichetă; RL alege acțiuni cu efecte întîrziate, care depind de deciziile anterioare.}
 \begin{columns}[T,onlytextwidth]
@@ -141,7 +141,7 @@ Acoperirea opțiunii & Traiectorii S\&P 500 de 21 de zile, VIX ca volatilitate i
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Sutton \& Barto, 2018, ch.\ 3)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Trei probleme economice, un singur cadru}
+\begin{frame}{Trei aplicații economice ale învățării prin întărire}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.14\textwidth}p{0.27\textwidth}p{0.2\textwidth}p{0.33\textwidth}@{}}\toprule
@@ -328,7 +328,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bellman, 1957)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O zi reală: cumpără la minim, vinde la vîrfuri}
+\begin{frame}{Programul optim al bateriei pentru o zi}
 \small
 \intuition{în ziua cu cea mai mare diferență de preț din 2026, DP încarcă în orele cele mai ieftine și descarcă în cele mai scumpe.}
 \begin{center}\includegraphics[width=\textwidth,height=0.417\textheight,keepaspectratio]{charts/ro/dp_day.pdf}\end{center}\vspace{-3mm}
@@ -405,7 +405,7 @@ Acoperire & nivelul indicelui, timpul pînă la scadență, VIX, acoperirea ante
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Watkins \& Dayan, 1992)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{O stare realistă: agentul vede ziua de ieri, nu pe cea de azi}
+\begin{frame}{Definirea stării: informația disponibilă agentului}
 \footnotesize
 \intuition{operatorul planifică înainte să cunoască prețurile pentru ziua următoare; agentul ține cont de cît de ieftină a fost fiecare oră ieri.}
 \begin{columns}[T,onlytextwidth]
@@ -530,7 +530,7 @@ Planul optim de ieri (naiv) & 163{,}1 & 80{,}7 & -- \\
 
 \section{Gradienți de politică și PPO: tranzacționarea indicelui S\&P 500}
 
-\begin{frame}{Gradientul politicii: crește probabilitatea acțiunilor care au adus cîștig}
+\begin{frame}{Metodele de gradient al politicii}
 \footnotesize
 \intuition{politica se parametrizează direct și se urcă pe gradientul cîștigului așteptat.}
 \begin{columns}[T,onlytextwidth]
@@ -591,7 +591,7 @@ Planul optim de ieri (naiv) & 163{,}1 & 80{,}7 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Schulman et al., 2016)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{PPO: îmbunătățește politica, dar nu prea mult dintr-odată}
+\begin{frame}{PPO: actualizarea plafonată a politicii}
 \small
 \intuition{obiectivul plafonat elimină stimulentul de a muta raportul probabilităților în afara intervalului $[1-\epsilon,1+\epsilon]$.}
 \vspace{-1mm}\[ \loss^{\text{CLIP}}(\btheta)=\E_t\big[\min\big(\rho_t\hat A_t,\ \mathrm{clip}(\rho_t,1-\epsilon,1+\epsilon)\hat A_t\big)\big],\quad \rho_t=\frac{\pi_{\btheta}(a_t\mid s_t)}{\pi_{\btheta_{\text{old}}}(a_t\mid s_t)} \]\vspace{-2mm}

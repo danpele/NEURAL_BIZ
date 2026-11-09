@@ -108,7 +108,7 @@ S\&P 500, Bitcoin (BTC/USD) & daily & Yahoo Finance & Value-at-Risk \\
 \end{itemize}}
 \end{frame}
 
-\begin{frame}{Romanian prices: a crisis level, then a new regime}
+\begin{frame}{Daily mean day-ahead prices in Romania}
 \small
 \intuition{a model trained before 2021 has never seen prices like those of 2022; a model trained on 2022 overestimates today.}
 \vspace{-1mm}\[ \bar P_d=\frac{1}{24}\sum_{h=0}^{23}P_{d,h} \]\vspace{-2mm}
@@ -203,7 +203,7 @@ S\&P 500, Bitcoin (BTC/USD) & daily & Yahoo Finance & Value-at-Risk \\
 
 \section{A strong linear benchmark and a deep network}
 
-\begin{frame}{Variance-stabilising transform: spikes and negative prices tamed}
+\begin{frame}{Variance-stabilising transformation: price spikes and negative prices}
 \footnotesize
 \intuition{the area hyperbolic sine behaves like a log for large prices and like the identity near zero, so it accepts negative prices.}
 \begin{columns}[T,onlytextwidth]
@@ -302,7 +302,7 @@ S\&P 500, Bitcoin (BTC/USD) & daily & Yahoo Finance & Value-at-Risk \\
 
 \section{Deep forecasting architectures}
 
-\begin{frame}{A recurrent network that outputs a distribution, not a number}
+\begin{frame}{A probabilistic recurrent network for forecasting}
 \footnotesize
 \intuition{the recurrent state summarises the past; the network outputs the parameters of tomorrow's distribution.}
 \begin{columns}[T,onlytextwidth]
@@ -414,7 +414,7 @@ S\&P 500, Bitcoin (BTC/USD) & daily & Yahoo Finance & Value-at-Risk \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Ansari et al., 2024, 2025; Das et al., 2024)}\hfill\tryit{notebook \S4}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Chronos: a time series read as a sentence}
+\begin{frame}{Chronos: tokenisation of time series}
 \footnotesize
 \intuition{scale the series, cut its values into bins, and train a language model to predict the next bin.}
 \begin{columns}[T,onlytextwidth]
@@ -502,7 +502,7 @@ the naive benchmark & \cellcolor{Crimson!55}27.74 & 44.57 & \cellcolor{Crimson!5
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_mae\_by\_hour}{Quantlets/L13/NN_L13_mae_by_hour}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{One week of forecasts: level right, spikes smoothed}
+\begin{frame}{Forecasts for one week of the test year}
 \small
 \intuition{all three models follow the daily shape; none of them anticipates the largest evening spikes in full.}
 \begin{center}\includegraphics[width=\textwidth,height=0.513\textheight,keepaspectratio]{charts/en/forecast_week.pdf}\end{center}\vspace{-3mm}
@@ -585,7 +585,7 @@ the naive benchmark & \cellcolor{Crimson!55}27.74 & 44.57 & \cellcolor{Crimson!5
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Diebold \& Mariano, 1995; Ziel \& Weron, 2018)}\hfill\tryit{notebook \S6}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Which forecast is significantly better? The full chessboard}
+\begin{frame}{Pairwise Diebold--Mariano tests for all models}
 \small
 \intuition{green cells: the column model is significantly more accurate than the row model.}
 \begin{center}\includegraphics[width=\textwidth,height=0.534\textheight,keepaspectratio]{charts/en/dm_pvalues.pdf}\end{center}\vspace{-3mm}
@@ -642,7 +642,7 @@ the naive benchmark & \cellcolor{Crimson!55}27.74 & 44.57 & \cellcolor{Crimson!5
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L13\_chronos\_fan}{Quantlets/L13/NN_L13_chronos_fan}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Split-conformal correction: coverage you can trust}
+\begin{frame}{Split-conformal correction of prediction intervals}
 \footnotesize
 \intuition{measure how far the outcomes fell outside the raw band in the recent past, and widen (or shrink) the band by that amount.}
 \begin{columns}[T,onlytextwidth]
@@ -783,7 +783,7 @@ Bitcoin & HS (250 days) & 33 & \cellcolor{Forest!55}0.123 & 0.458 & 126 & \cellc
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation; Kupiec, 1995; Christoffersen, 1998)}\hfill\tryit{notebook \S9}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Language models and time-series models: two routes to the same quantile}
+\begin{frame}{Quantile forecasts from language models and time-series models}
 \small
 \begin{itemize}\setlength{\itemsep}{3pt}
   \item \textbf{Large language model (LLM) route} (Lecture 12)

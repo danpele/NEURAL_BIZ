@@ -1,5 +1,5 @@
-TITLE = ("Case 1 - Explainable fraud detection: which model, which explanation, which alert threshold?",
-         "Studiul de caz 1 - Detectarea explicabilă a fraudei: ce model, ce explicație, ce prag de alertă?")
+TITLE = ("Case 1 - Explainable fraud detection: model choice, explanations and alert thresholds",
+         "Studiul de caz 1 - Detectarea explicabilă a fraudei: alegerea modelului, explicațiile și pragurile de alertă")
 
 CELLS = [
 ("md",

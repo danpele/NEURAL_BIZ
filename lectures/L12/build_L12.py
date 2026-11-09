@@ -153,7 +153,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 1. language models
     D.section(t("From next-token prediction to large language models", "De la prezicerea următorului token la modelele lingvistice mari"))
-    D.frame(t("Why finance cares: text is the largest unused data set of a bank", "De ce contează în finanțe: textul este cel mai mare set de date nefolosit al unei bănci"), it(
+    D.frame(t("Text data in financial institutions", "Datele de tip text în instituțiile financiare"), it(
         (t("\\textbf{Markets}", "\\textbf{Piețe}"), t("news and social media move prices within minutes; sentiment is a signal",
                                                      "știrile și rețelele sociale mișcă prețurile în cîteva minute; sentimentul este un semnal")),
         (t("\\textbf{Central banks}", "\\textbf{Bănci centrale}"),
@@ -319,7 +319,7 @@ def build(lang, H=None):
 
     # ------------------------------------------------------------------ 3. prompt engineering, measured
     D.section(t("Prompt engineering, measured on labelled data", "Formularea instrucțiunilor, evaluată pe date etichetate"))
-    D.frame(t("Anatomy of a prompt", "Anatomia unui prompt"), cols(it(
+    D.frame(t("Structure of a prompt", "Structura unui prompt"), cols(it(
         (t("\\textbf{System}", "\\textbf{Sistem}"), t("role and rules: ``You are a careful financial analyst.''", "rolul și regulile: „You are a careful financial analyst.”")),
         (t("\\textbf{Instruction}", "\\textbf{Instrucțiune}"), t("task, label set, output format: ``Answer with one word: positive, negative or neutral.''",
                                                              "sarcina, mulțimea etichetelor, formatul: „Answer with one word: positive, negative or neutral.”")),
@@ -446,7 +446,7 @@ def build(lang, H=None):
                      "recalibrați pe un set de validare (scalarea temperaturii) înainte de a folosi probabilitățile LLM ca scoruri de risc."),
                height="0.5\\textheight", cite="(Guo et al., 2017)", tryit=NB + " \\S6")
     ag = N["agree"]
-    D.figframe(t("Where humans disagree, models fail: accuracy by annotator agreement", "Acolo unde oamenii nu sînt de acord, modelele greșesc: acuratețea după acordul adnotatorilor"),
+    D.figframe(t("Accuracy by level of annotator agreement", "Acuratețea în funcție de gradul de acord al adnotatorilor"),
                t("sentences that split the annotators are genuinely ambiguous; no model reaches the unanimous-case accuracy on them.",
                  "propozițiile care îi împart pe adnotatori sînt cu adevărat ambigue; niciun model nu atinge pe ele acuratețea din cazurile unanime."),
                None, "agreement",
@@ -528,7 +528,7 @@ def build(lang, H=None):
                           "Recall@1: TF-IDF @{rag.tfidf.r1|.1f}\\,\\%, BM25 @{rag.bm25.r1|.1f}\\,\\%, dense @{rag.dense.r1|.1f}\\,\\%, hibrid @{rag.hybrid.r1|.1f}\\,\\%; "
                           "recall@10 hibrid @{rag.hybrid.r10|.1f}\\,\\%.")],
                height="0.5\\textheight", tryit=NB + " \\S7")
-    D.figframe(t("Without documents the model invents a speaker; with RAG it answers from the source", "Fără documente modelul inventează vorbitorul; cu RAG răspunde din sursă"),
+    D.figframe(t("Answers with and without retrieved documents", "Răspunsurile cu și fără documente regăsite"),
                t("question: which board member gave the speech with this title? @{rag.qa_n} speeches since @{rag.qa_first|date}, after the model's training data.",
                  "întrebarea: ce membru al conducerii a ținut discursul cu acest titlu? @{rag.qa_n} de discursuri din @{rag.qa_first|date}, ulterioare datelor de antrenare ale modelului."),
                None, "rag_qa",

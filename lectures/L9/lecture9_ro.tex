@@ -66,7 +66,7 @@ XAI & inteligență artificială explicabilă\\\end{tabular}}\end{column}
 
 \section{De ce grafuri pentru infracțiunile financiare}
 
-\begin{frame}{Spălarea banilor se ascunde în legături, nu în rînduri}
+\begin{frame}{Structura de rețea în detectarea spălării banilor}
 \footnotesize
 \intuition{O plată izolată poate părea obișnuită; lanțul de plăți din jurul ei, de cele mai multe ori, nu.}
 \begin{columns}[T,onlytextwidth]
@@ -102,7 +102,7 @@ XAI & inteligență artificială explicabilă\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019; Bishop \& Bishop, 2024, ch.\ 13)}\hfill\tryit{notebook, secțiunea 1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Datele Elliptic într-un singur tabel}
+\begin{frame}{Descrierea setului de date Elliptic}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.30\textwidth}p{0.62\textwidth}@{}}\toprule
@@ -127,7 +127,7 @@ Antrenare / test & pașii 1--34 (29\,894 etichetate) / pașii 35--49 (16\,670 et
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019)}\hfill\tryit{notebook, secțiunea 1}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Etichetele vin în valuri: activitatea ilicită nu este staționară}
+\begin{frame}{Evoluția în timp a tranzacțiilor ilicite}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.389\textheight,keepaspectratio]{charts/ro/elliptic_timesteps.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019). Date: graful tranzacțiilor Bitcoin Elliptic, 49 de pași de timp (circa două săptămîni fiecare).}
@@ -164,7 +164,7 @@ Antrenare / test & pașii 1--34 (29\,894 etichetate) / pașii 35--49 (16\,670 et
 \par\vfill\noindent{\scriptsize\color{FooterGray}$\deg(v)=|\mathcal N(v)|$}\hfill\qlink{NN\_L9\_degree\_dist}{Quantlets/L9/NN_L9_degree_dist}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Tranzacțiile ilicite stau lîngă alte tranzacții ilicite}
+\begin{frame}{Homofilia tranzacțiilor ilicite}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.480\textheight,keepaspectratio]{charts/ro/homophily.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019). Date: graful tranzacțiilor Bitcoin Elliptic, 49 de pași de timp (circa două săptămîni fiecare).}
@@ -461,7 +461,7 @@ Antrenare / test & pașii 1--34 (29\,894 etichetate) / pașii 35--49 (16\,670 et
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kipf \& Welling, 2017)}\hfill\tryit{notebook, secțiunea 3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{GraphSAGE: separă nodul de vecini și eșantionează vecinii}
+\begin{frame}{GraphSAGE: reprezentarea separată a nodului și eșantionarea vecinilor}
 \footnotesize
 \intuition{GraphSAGE alătură starea proprie a nodului și media unui eșantion de vecini, deci funcționează și pe noduri nevăzute la antrenare.}
 \begin{columns}[T,onlytextwidth]
@@ -563,7 +563,7 @@ Antrenare / test & pașii 1--34 (29\,894 etichetate) / pașii 35--49 (16\,670 et
 
 \section{Studiu de caz: tranzacții Bitcoin ilicite}
 
-\begin{frame}{Opt modele, un singur test în timp}
+\begin{frame}{Opt modele evaluate pe un set de test cronologic}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.27\textwidth}p{0.66\textwidth}@{}}\toprule
@@ -725,7 +725,7 @@ Pădure + GCN & 0{,}933 & 0{,}668 & \cellcolor{Forest!48}0{,}778 & \cellcolor{Fo
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Weber et al., 2019)}\hfill\tryit{notebook, secțiunea 2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului}
+\begin{frame}{Schimbarea conceptului după închiderea unei piețe ilegale}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.373\textheight,keepaspectratio]{charts/ro/f1_by_timestep.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Graful tranzacțiilor Bitcoin Elliptic (Weber et al., 2019). Date: estimări proprii; antrenare pe pașii 1-34, pașii de timp de test 35-49.}
@@ -826,7 +826,7 @@ Pădure + GCN & 0{,}933 & 0{,}668 & \cellcolor{Forest!48}0{,}778 & \cellcolor{Fo
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Pareja et al., 2020; Ying et al., 2019)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Grafuri peste tot în finanțe}
+\begin{frame}{Aplicații ale modelelor bazate pe grafuri în finanțe}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}

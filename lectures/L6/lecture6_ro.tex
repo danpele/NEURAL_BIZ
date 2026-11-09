@@ -191,7 +191,7 @@ Discursurile Băncii Centrale Europene (BCE) & textele integrale ale membrilor C
 
 \section{Reprezentări dense: vectorii de cuvinte (embeddings)}
 
-\begin{frame}{Un cuvînt se cunoaște după vecinii lui}
+\begin{frame}{Ipoteza distribuțională}
 \footnotesize
 \intuition{cuvintele folosite în contexte asemănătoare primesc vectori asemănători; asemănarea este cosinusul unghiului.}
 \begin{columns}[T,onlytextwidth]
@@ -302,7 +302,7 @@ Discursurile Băncii Centrale Europene (BCE) & textele integrale ale membrilor C
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Pennington et al., 2014; calcul propriu)}\hfill\qlink{NN\_L6\_emb\_training}{Quantlets/L6/NN_L6_emb_training}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Numărarea este suficientă: PMI și o factorizare trunchiată}
+\begin{frame}{Vectori de cuvinte din frecvențe: PMI și factorizarea trunchiată a matricei}
 \footnotesize
 \intuition{înaintea vectorilor neuronali, vectorii denși proveneau din factorizarea unei matrice de asocieri între cuvinte.}
 \begin{columns}[T,onlytextwidth]
@@ -606,7 +606,7 @@ Dimensiunea $d$ & Macro-F1 (\%) \\ \midrule
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcul propriu)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Modelele greșesc acolo unde adnotatorii nu sînt de acord}
+\begin{frame}{Erorile de clasificare și acordul adnotatorilor}
 \small
 \intuition{acuratețea pe test în funcție de ponderea adnotatorilor care au fost de acord asupra etichetei frazei.}
 \begin{center}\includegraphics[width=\textwidth,height=0.349\textheight,keepaspectratio]{charts/ro/agreement.pdf}\end{center}\vspace{-3mm}

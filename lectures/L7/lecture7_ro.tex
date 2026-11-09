@@ -59,7 +59,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 
 \section{De ce atenția}
 
-\begin{frame}{Știrile financiare mișcă prețurile; mașinile trebuie să le citească repede}
+\begin{frame}{Știrile financiare ca date de intrare pentru modele}
 \footnotesize
 \intuition{Mii de titluri și postări sosesc în fiecare oră; o mesă de tranzacționare are nevoie de tonul lor în cîteva secunde, consecvent, pe aceeași scară.}
 \begin{columns}[T,onlytextwidth]
@@ -92,7 +92,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Tetlock, 2007; Malo et al., 2014)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Rețelele recurente citesc cuvînt cu cuvînt și uită}
+\begin{frame}{Limitele rețelelor recurente pentru textele lungi}
 \footnotesize
 \intuition{O rețea recurentă comprimă tot ce a citit pînă acum într-un singur vector de stare, actualizat token cu token.}
 \begin{columns}[T,onlytextwidth]
@@ -301,7 +301,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcule proprii, 500 de tweet-uri de test; Clark et al., 2019)}\hfill\qlink{NN\_L7\_attention\_entropy}{Quantlets/L7/NN_L7_attention_entropy}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Ponderile de atenție sînt un indiciu, nu o explicație}
+\begin{frame}{Ponderile de atenție ca explicații: limite}
 \footnotesize
 \intuition{Unde se uită un cap nu este același lucru cu motivul deciziei: valorile, straturile următoare și clasificatorul transformă tot ce selectează atenția.}
 \begin{columns}[T,onlytextwidth]
@@ -335,7 +335,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 
 \section{Arhitectura transformer}
 
-\begin{frame}{Atenția ignoră ordinea; codificarea poziției o readuce}
+\begin{frame}{Codificarea sinusoidală a poziției}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.480\textheight,keepaspectratio]{charts/ro/positional_encoding.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Vaswani et al. (2017), formula sinusoidală. Date: ilustrarea mecanismului, $d=64$, 64 de poziții.}
@@ -386,7 +386,7 @@ VaR & valoarea la risc (Value-at-Risk)\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Vaswani et al., 2017; Ba, Kiros \& Hinton, 2016)}\hfill\tryit{notebook, secțiunea 3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Codificatoarele citesc, decodoarele scriu: două sarcini de preantrenare}
+\begin{frame}{Codificatoare și decodoare: două obiective de preantrenare}
 \footnotesize
 \intuition{Același bloc devine cititor sau scriitor în funcție de mască și de sarcina de preantrenare.}
 \begin{columns}[T,onlytextwidth]
@@ -478,7 +478,7 @@ Convoluție, nucleu $k$ & $O(k n d^2)$ & $O(1)$ & $O(\log_k n)$ \\
 
 \section{Studiu de caz: sentimentul tweet-urilor financiare}
 
-\begin{frame}{Șapte modele, un singur set de test păstrat deoparte}
+\begin{frame}{Șapte modele evaluate pe același set de test}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.30\textwidth}p{0.62\textwidth}@{}}\toprule
@@ -557,9 +557,9 @@ FinBERT ajustat & toate cele 109{,}5 milioane de ponderi, 3 epoci \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L7\_tiny\_learning\_curve}{Quantlets/L7/NN_L7_tiny_learning_curve}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF}
+\begin{frame}{Compararea modelelor: macro-F1 pe setul de test}
 \small
-\begin{center}\includegraphics[width=\textwidth,height=0.449\textheight,keepaspectratio]{charts/ro/model_comparison.pdf}\end{center}\vspace{-3mm}
+\begin{center}\includegraphics[width=\textwidth,height=0.510\textheight,keepaspectratio]{charts/ro/model_comparison.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: Seturile Twitter financial news (Hugging Face, zeroshot). Date: estimări proprii; 2.388 tweet-uri de test (setul de validare publicat).}
 \vspace{0.5mm}
 \begin{itemize}\setlength{\itemsep}{0pt}

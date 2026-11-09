@@ -105,7 +105,7 @@ Because the kernel is shared, its gradient sums the contributions of every posit
 
 # Case study: product photos, from softmax to CNN
 
-## Three models, one protocol
+## Experimental protocol for the three models
 
 The benchmark is a softmax (multinomial logistic) regression with {fmnist.softmax.params|,} parameters; the MLP has two hidden layers (256 and 128 units, {fmnist.mlp.params|,} parameters); the CNN has two blocks of two 3 × 3 convolutions with batch normalisation and max pooling, a third convolution and global average pooling ({fmnist.cnn.params|,} parameters). All three are trained with the same optimiser (AdamW), batch size {fmnist.batch}, {fmnist.epochs} epochs and early stopping on the validation images, with three seeds each.
 
@@ -263,7 +263,7 @@ Pentru că nucleul este partajat, gradientul lui adună contribuțiile tuturor p
 
 # Studiu de caz: fotografii de produse, de la softmax la CNN
 
-## Trei modele, același protocol
+## Protocolul experimental pentru cele trei modele
 
 Modelul de referință este o regresie softmax (logistică multinomială) cu {fmnist.softmax.params|,} de parametri; MLP are două straturi ascunse (256 și 128 de unități, {fmnist.mlp.params|,} de parametri); CNN are două blocuri cu cîte două convoluții 3 × 3, normalizare pe loturi și agregare prin maxim, o a treia convoluție și agregare prin medie globală ({fmnist.cnn.params|,} de parametri). Toate trei sînt antrenate cu același optimizator (AdamW), loturi de {fmnist.batch}, {fmnist.epochs} epoci și oprire timpurie pe imaginile de validare, cu cîte trei semințe.
 

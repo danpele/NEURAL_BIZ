@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261108s", "L10_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L10.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L10_data.js?v=20261108s", "L10_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L10.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-bat">Bateria ca proces decizional Markov (MDP): programarea dinamică (DP)</a> · <a href="#s-val">Învățarea bazată pe valoare: Q-learning și rețeaua Q profundă (DQN)</a> · <a href="#s-pol">Gradienți de politică: optimizarea proximală a politicii (PPO) în tranzacționare</a> · <a href="#s-hed">Acoperirea neuronală a unei opțiuni call vîndute</a></p>
 <h2 class="sec" id="s-bat">Bateria ca proces decizional Markov (MDP): programarea dinamică (DP)</h2>
 <section class="blk" id="dp-day">
-  <h3>O zi reală: cumpără la minim, vinde la vîrfuri</h3>
+  <h3>Programul optim al bateriei pentru o zi</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L10_dp_day_ro.jpg" alt="Slide-ul 16: O zi reală: cumpără la minim, vinde la vîrfuri" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L10/lecture10_ro.pdf#page=16" target="_blank" rel="noopener"><img src="slides/L10_dp_day_ro.jpg" alt="Slide-ul 16: Programul optim al bateriei pentru o zi" loading="lazy"></a>
       <figcaption>Slide-ul 16</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="dd-z">Zona de licitație</label><select id="dd-z"><option value="RO" selected>România</option><option value="HU">Ungaria</option><option value="DE_LU">Germania–Luxemburg</option><option value="BG">Bulgaria</option></select></div><div class="ctl"><label for="dd-d">Ziua de livrare: <b id="dd-d-v"></b></label><input type="range" id="dd-d" min="0" max="1" step="1" value="0"></div><div class="ctl"><label for="dd-e">Randamentul ciclului complet (încărcare și descărcare): <b id="dd-e-v"></b></label><input type="range" id="dd-e" min="50" max="100" step="5" value="85"></div><div class="ctl"><label for="dd-c">Capacitatea bateriei (se mută 1 MWh pe oră): <b id="dd-c-v"></b></label><input type="range" id="dd-c" min="1" max="6" step="1" value="2"></div><button class="btn play" id="dd-play" type="button"></button></div><div class="charts one"><div class="chart" id="dd-chart"></div></div><ul class="out" id="dd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L10/NN_L10_dp_day" target="_blank" rel="noopener">NN_L10_dp_day</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L10/NN_L10_dp_day/NN_L10_dp_day.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

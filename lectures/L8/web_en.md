@@ -29,11 +29,11 @@ Knowing $p(\mathbf x)$ gives four uses in finance: a low density marks a suspici
 
 @practice a classifier ranks clients, a generative model also shows what could happen.
 
-## Latent variables: a few hidden causes, many observed numbers {h=be9a313a}
+## Latent-variable models {h=9672dbd8}
 
 Eleven yields or 784 pixels are driven by a handful of hidden factors. A latent-variable model writes $p(\mathbf x)=\int p(\mathbf x\mid\mathbf z)p(\mathbf z)\,d\mathbf z$ with $\mathbf z\in\mathbb R^k$, $k$ much smaller than the dimension of the data. In the linear-Gaussian case, $\mathbf x=W\mathbf z+\boldsymbol\mu+\boldsymbol\varepsilon$, this is probabilistic principal component analysis (PCA), whose likelihood has a closed form. With a neural decoder the integral has no closed form, and each family of this lecture pays for the flexibility differently: the VAE maximises a lower bound, the GAN gives up the likelihood, and diffusion builds a bound step by step.
 
-## The landscape: four families, four trade-offs {h=7966d6c7}
+## Four families of generative models {h=63224be0}
 
 | Family | Training signal | Likelihood | Sampling |
 |---|---|---|---|
@@ -78,7 +78,7 @@ The PR-AUC on the test part is 14.2 % for the autoencoder (standard deviation 2.
 @chart ae_pr
 Precision-recall curves on the test part, weighted to the full data.
 
-## The bottleneck must be narrow enough to forget the unusual {h=e945c9ee}
+## Bottleneck size and anomaly detection {h=6a1927f4}
 
 With a bottleneck of 2 the PR-AUC is 7.8 %, with 8 it is 15.8 % and with 24 it is 12.1 % (mean of 2 seeds); the best size is 8. Too narrow, and even normal payments are rebuilt badly; too wide, and the network learns to copy frauds as well.
 
@@ -109,7 +109,7 @@ $$ \log p_\theta(\mathbf x)\ge\mathbb E_{q_\phi(\mathbf z\mid\mathbf x)}\big[\lo
 
 The first term rewards good reconstructions; the second, the Kullback–Leibler divergence (KL) from the prior $p(\mathbf z)=\mathcal N(0,I)$, packs all codes around the origin, so that a random code decodes to a realistic image. For Gaussians it has the closed form $\tfrac12\sum_j(\mu_j^2+\sigma_j^2-\log\sigma_j^2-1)$.
 
-## The reparameterisation trick lets gradients flow through randomness {h=6526c9af}
+## The reparameterisation trick {h=f716abc7}
 
 Sampling $\mathbf z$ is not differentiable, but $\mathbf z=\boldsymbol\mu_\phi(\mathbf x)+\boldsymbol\sigma_\phi(\mathbf x)\odot\boldsymbol\varepsilon$ with $\boldsymbol\varepsilon\sim\mathcal N(0,I)$ is: the randomness sits in $\boldsymbol\varepsilon$, which does not depend on the parameters. Our VAE is trained on Fashion-MNIST, 60,000 training and 10,000 test grey images of 28 × 28 pixels showing 10 kinds of clothing, with a Bernoulli decoder; the network 784–400–200–$k$ has 798,816 parameters for $k=16$ and is trained for 20 epochs.
 
@@ -134,7 +134,7 @@ On the test images, after the last epoch, the reconstruction term is 228.6 nats 
 @chart vae_elbo
 Reconstruction and KL terms of the ELBO on the test images, by epoch.
 
-## β-VAE: one knob between sharp reconstructions and a tidy latent space {h=d6272a09}
+## β-VAE: reconstruction quality and latent-space structure {h=6fdfc392}
 
 Multiplying the KL term by $\beta$ changes the balance. With $\beta=0.5$ the reconstruction term is 222.5 nats and 9 of the 16 latent dimensions are active (KL above 0.05); with $\beta=4$ the reconstruction worsens to 242.5 nats and only 4 dimensions stay active. A larger $\beta$ gives smoother and more disentangled codes; a smaller one gives better copies and poorer samples.
 
@@ -148,7 +148,7 @@ The VAE maximises the ELBO = reconstruction − KL; the reparameterisation trick
 
 A GAN learns to sample from the data distribution by playing against a discriminator.
 
-## A GAN is a game between a forger and a detective {h=27922dec}
+## Generative adversarial networks: generator and discriminator {h=b002e59f}
 
 The generator $G$ turns noise $\mathbf z$ into fake data; the discriminator $D$ gives the probability that its input is real. They play
 
@@ -201,7 +201,7 @@ A GAN reproduces the fat tails of returns and a usable 1 % VaR, but not volatili
 
 A diffusion model learns to undo, step by step, a process that turns data into noise.
 
-## Diffusion: destroy the data with noise, then learn to undo it {h=3c8d4e5d}
+## Diffusion models: forward noising and reverse denoising {h=0e9bfc6a}
 
 The forward process adds a little Gaussian noise at each of $T$ = 200 steps, $q(\mathbf x_t\mid\mathbf x_{t-1})=\mathcal N(\sqrt{1-\beta_t}\,\mathbf x_{t-1},\beta_tI)$, with $\beta_t$ rising linearly from $10^{-4}$ to 0.02. Any step can be reached in one draw,
 

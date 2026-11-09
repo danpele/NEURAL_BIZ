@@ -19,13 +19,13 @@ This lecture writes attention and the transformer block with every symbol define
 
 Text arrives fast and carries information that prices react to; recurrent networks read it slowly and forget.
 
-## Financial news moves prices; machines must read it fast {h=b6cd9608}
+## Financial news as input for models {h=c5cefa63}
 
 A sentiment model maps a text $x_{1:n}$ to a fixed-size representation $\mathbf h$ and then to the probabilities of three classes, $\hat{\mathbf p}=\operatorname{softmax}(W_o\mathbf h+\mathbf b_o)$; the whole lecture is about how to compute $\mathbf h$. Our data are finance tweets labelled bearish, bullish or neutral: 9,543 for training and 2,388 for the test, of which 14.5 % bearish, 19.9 % bullish and 65.6 % neutral. Media pessimism predicts next-day returns and trading volume (Tetlock, 2007), so such a model is a measurement instrument.
 
 @practice a sentiment model must be accurate on the rare bearish news, not only on average.
 
-## Recurrent networks read word by word and forget {h=be297ee3}
+## Limits of recurrent networks for long texts {h=9003e0db}
 
 A recurrent network updates one state vector token by token, $\mathbf h_t=\phi(W_h\mathbf h_{t-1}+W_x\mathbf x_t+\mathbf b)$, so the gradient between words 1 and $n$ is a product of $n-1$ Jacobians that shrinks or explodes with the distance. The path between words $i$ and $j$ has $|i-j|$ steps, and the $n$ steps cannot run in parallel. The long short-term memory (LSTM) of Lecture 5 eases the first problem but keeps the second. In “profit fell, but guidance was raised”, the verdict depends on a word far from the subject.
 
@@ -82,7 +82,7 @@ Over 500 test tweets, the entropy of the attention rows divided by $\log n$ is 0
 @chart attention_entropy
 Normalised entropy of attention and share of attention on [CLS] and [SEP], by layer of FinBERT.
 
-## Attention weights are a clue, not an explanation {h=8a4d755b}
+## Attention weights as explanations: limitations {h=69355c99}
 
 The contribution of word $j$ to word $i$ is $a_{ij}$ times a value vector whose norm can be large or small, and the residual stream carries information that attention never touches. Different attention maps can give the same prediction (Jain and Wallace, 2019), and heavy attention on [SEP] carries almost no information. Gradient-based attributions and occlusion tests (Lecture 11) are better tools.
 
@@ -96,7 +96,7 @@ Attention = softmax of scaled query–key scores times values; heads specialise;
 
 Positions, the block, the two families and the tokenizer.
 
-## Attention ignores order; positional encoding puts it back {h=96bc15a5}
+## Sinusoidal positional encoding {h=5ce5f213}
 
 Self-attention is permutation-equivariant: without positions, “rates cut, stocks up” would equal “stocks cut, rates up”. The original transformer adds to each token embedding the vector $p_{t,2i}=\sin(t/10000^{2i/d})$, $p_{t,2i+1}=\cos(t/10000^{2i/d})$; low dimensions change fast with the position, high ones slowly, so every position has a unique code and relative shifts are linear maps.
 
@@ -111,7 +111,7 @@ $$ Z=X+\operatorname{MHA}(\operatorname{LN}(X)),\qquad X'=Z+\operatorname{FFN}(\
 
 where the position-wise feed-forward network (FFN) is $W_2\,\mathrm{GELU}(W_1\mathbf z+\mathbf b_1)+\mathbf b_2$ with the Gaussian error linear unit (GELU), and LN is layer normalisation over the features of one token. A block has about $12d^2$ parameters, two thirds of them in the feed-forward part. Our block has $d=64$, an FFN of width 128 and dropout 0.1; two blocks have 67,139 parameters outside the embeddings.
 
-## Encoders read, decoders write: two pretraining tasks {h=310bcc29}
+## Encoders and decoders: two pretraining objectives {h=86e95b2e}
 
 Bidirectional Encoder Representations from Transformers (BERT) is pretrained by masked language modelling (MLM): 15 % of the tokens are hidden and predicted from both sides. The Generative Pre-trained Transformer (GPT) predicts the next token with a causal mask, $M_{ij}=-\infty$ for $j>i$, and today's large language models (LLM) follow this design. Encoders suit classification and extraction, decoders generation; the original transformer had both, for translation.
 
@@ -139,7 +139,7 @@ A transformer stacks attention and feed-forward blocks with residuals and normal
 
 Seven models on one held-out test set, with bootstrap intervals and per-class errors.
 
-## Seven models, one held-out test set {h=1c524625}
+## Seven models evaluated on a common test set {h=913866b9}
 
 The published training tweets are split into 8,588 for training and 955 for validation (10 %, stratified); the published validation set is our test set of 2,388 tweets, used once. The models are a TF-IDF logistic regression on word 1–2-grams (17,119 features); a mean of learned token embeddings without attention; our small transformer, with and without positions; and FinBERT, a BERT model further trained on financial text (Araci, 2019), used zero-shot, frozen with a logistic regression on its 768-dimensional vectors, and fine-tuned. We do not test on Financial PhraseBank: FinBERT was fine-tuned on it, so the test would be contaminated.
 
@@ -152,7 +152,7 @@ Training and validation cross-entropy by epoch, seed 1; the dashed line marks th
 
 @practice macro-F1 is the right yardstick when the rare class, bearish news, is the one that costs money.
 
-## Pretraining wins: fine-tuned FinBERT leads, the small transformer trails TF-IDF {h=3c8077f3}
+## Comparison of the models: macro-F1 on the test set {h=9cd1eb6c}
 
 On the 2,388 test tweets, macro-F1 is 84.8 % for fine-tuned FinBERT, 75.5 % for TF-IDF and 68.8 % for the small transformer (standard deviation 1.5 over 3 seeds). FinBERT without any training on tweets reaches 66.9 %, and frozen FinBERT with a logistic regression 75.3 %.
 

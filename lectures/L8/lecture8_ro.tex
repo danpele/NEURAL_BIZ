@@ -94,7 +94,7 @@ WGAN & GAN Wasserstein\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, ch.\ 16)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Variabile latente: cîteva cauze ascunse, multe valori observate}
+\begin{frame}{Modele cu variabile latente}
 \footnotesize
 \intuition{Unsprezece randamente sau 784 de pixeli sînt determinate de cîțiva factori ascunși; un model cu variabile latente formalizează acest lucru.}
 \begin{columns}[T,onlytextwidth]
@@ -126,7 +126,7 @@ WGAN & GAN Wasserstein\\\end{tabular}}\end{column}
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bishop \& Bishop, 2024, sec.\ 16.2)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Peisajul: patru familii, patru compromisuri}
+\begin{frame}{Patru familii de modele generative}
 \footnotesize
 {\scriptsize\renewcommand{\arraystretch}{1.25}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.15\textwidth}p{0.20\textwidth}p{0.17\textwidth}p{0.17\textwidth}p{0.23\textwidth}@{}}\toprule
@@ -235,7 +235,7 @@ Măsuri & aria de sub curba precizie-recall (PR-AUC) și aria de sub curba carac
 \par\vfill\noindent{\scriptsize\color{FooterGray}}\hfill\qlink{NN\_L8\_ae\_pr}{Quantlets/L8/NN_L8_ae_pr}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Stratul îngust trebuie să fie destul de îngust ca să uite ce este neobișnuit}
+\begin{frame}{Dimensiunea stratului îngust și detectarea anomaliilor}
 \small
 \begin{center}\includegraphics[width=\textwidth,height=0.391\textheight,keepaspectratio]{charts/ro/ae_bottleneck.pdf}\end{center}\vspace{-3mm}
 \chartsource{Sursa: ULB Machine Learning Group și Worldline, tranzacții cu carduri (OpenML 1597). Date: estimări proprii; două zile din septembrie 2013; test = ultimele 20\,\% din interval.}
@@ -321,7 +321,7 @@ Regresie logistică (cu etichete) & 48 & 64{,}0\,\% \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Kingma \& Welling, 2014; Bishop \& Bishop, 2024, sec.\ 19.2)}\hfill\tryit{notebook, secțiunea 2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Trucul reparametrizării lasă gradientul să treacă prin hazard}
+\begin{frame}{Trucul reparametrizării}
 \footnotesize
 \intuition{Extragerea aleatoare nu este derivabilă, dar o normală standard translatată și scalată este.}
 \begin{columns}[T,onlytextwidth]
@@ -396,7 +396,7 @@ Regresie logistică (cu etichete) & 48 & 64{,}0\,\% \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(calcule proprii, sămînța 1)}\hfill\qlink{NN\_L8\_vae\_elbo}{Quantlets/L8/NN_L8_vae_elbo}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{$\beta$-VAE: un singur buton între reconstrucții clare și un spațiu latent ordonat}
+\begin{frame}{$\beta$-VAE: calitatea reconstrucției și structura spațiului latent}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.50\textwidth}
@@ -432,7 +432,7 @@ $\beta$ & Reconstrucție & KL & Dim.\ active \\ \midrule
 
 \section{Rețele generative adversariale}
 
-\begin{frame}{Un GAN este un joc între un falsificator și un detectiv}
+\begin{frame}{Rețelele generative adversariale: generatorul și discriminatorul}
 \footnotesize
 \intuition{Generatorul face date false din zgomot, discriminatorul caută falsul; fiecare progresează împotriva celuilalt.}
 \begin{columns}[T,onlytextwidth]
@@ -598,7 +598,7 @@ Normală & \ensuremath{-}2{,}67\,\% & 2{,}39\,\% \\
 
 \section{Modele de difuzie}
 
-\begin{frame}{Difuzia: distrugem datele cu zgomot, apoi învățăm să refacem pașii}
+\begin{frame}{Modelele de difuzie: adăugarea și eliminarea treptată a zgomotului}
 \footnotesize
 \intuition{Cu zgomot gaussian adăugat treptat, orice date devin zgomot pur; o rețea învață fiecare pas înapoi.}
 \begin{columns}[T,onlytextwidth]

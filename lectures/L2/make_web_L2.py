@@ -120,7 +120,7 @@ PAGE = dict(
                       "O singură trecere înapoi dă toate cele $P$ derivate parțiale ale unei pierderi scalare; diferențele finite ar cere $P$ treceri "
                       "suplimentare. Verificarea gradientului pe MLP 64-64, cu diferențe centrale în dublă precizie pe @{gradcheck.n_checked} de ponderi "
                       "alese aleator, găsește o eroare relativă maximă de @{gradcheck.max_rel_err|sci}.")),
-              B(frame="In a deep sigmoid network",
+              B(frame="Vanishing gradients in deep sigmoid",
                 text=("The backward signal is a product of Jacobians $\\mathbf W^\\top\\operatorname{diag}(a')$. In a 10-layer net on one real batch, the "
                       "first-layer gradient norm is @{vanish.sig.first|sci} with sigmoids against @{vanish.sig.last|sci} in the last layer; with ReLU and "
                       "He initialisation the first layer still gets @{vanish.relu_he.first|sci}.",
@@ -153,7 +153,7 @@ PAGE = dict(
                       "Gradientul pe mini-lot $\\mathbf g_t=\\frac1B\\sum_{i\\in\\mathcal B_t}\\nabla\\ell_i$ este nedeplasat pentru gradientul complet, iar varianța "
                       "lui scade aproximativ ca $1/B$. Cu pași care satisfac $\\sum\\eta_t=\\infty$ și $\\sum\\eta_t^2<\\infty$, coborîrea stohastică pe gradient "
                       "converge către un punct staționar (Robbins și Monro, 1951).")),
-              B(frame="The learning rate decides everything",
+              B(frame="Effect of the learning rate",
                 text=("With plain SGD, 30 epochs and batches of 128, the validation MSE is @{lrsweep.smallest_mse|.3f} at $\\eta=10^{-4}$, worse than "
                       "linear regression (@{cal.mse_lin_val|.3f}), and @{lrsweep.best_mse|.3f} at $\\eta=$ @{lrsweep.best_lr|g}; from $\\eta=$ "
                       "@{lrsweep.first_diverged|g} at least one seed diverges.",
@@ -163,7 +163,7 @@ PAGE = dict(
                 chart="lr_sweep", cap=("Validation MSE after 30 epochs of SGD for nine learning rates and three seeds.",
                                        "MSE pe validare după 30 de epoci de SGD, pentru nouă rate de învățare și trei inițializări."),
                 practice=("tune the learning rate first, on a log grid.", "ajustați mai întîi rata de învățare, pe o grilă logaritmică.")),
-              B(frame="Small batches learn more per epoch",
+              B(frame="Effect of batch size",
                 text=("After 5 epochs of Adam the validation MSE is @{batch.16.val_ep5|.3f} with batches of 16, @{batch.128.val_ep5|.3f} with 128 and "
                       "@{batch.1024.val_ep5|.3f} with 1,024: small batches make @{batch.16.steps_per_epoch} steps per epoch, large ones "
                       "@{batch.1024.steps_per_epoch}. Per second the picture reverses: 40 epochs take @{batch.16.sec|.1f}, @{batch.128.sec|.1f} and "

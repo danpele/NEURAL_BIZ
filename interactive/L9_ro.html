@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261108s", "L9_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L9.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261108s", "L9_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L9.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-why">De ce grafuri pentru criminalitatea financiară</a> · <a href="#s-mp">Transmiterea mesajelor</a> · <a href="#s-case">Studiu de caz: tranzacții Bitcoin ilicite</a></p>
 <h2 class="sec" id="s-why">De ce grafuri pentru criminalitatea financiară</h2>
 <section class="blk" id="homophily">
-  <h3>Tranzacțiile ilicite stau lîngă alte tranzacții ilicite</h3>
+  <h3>Homofilia tranzacțiilor ilicite</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=9" target="_blank" rel="noopener"><img src="slides/L9_homophily_ro.jpg" alt="Slide-ul 9: Tranzacțiile ilicite stau lîngă alte tranzacții ilicite" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=9" target="_blank" rel="noopener"><img src="slides/L9_homophily_ro.jpg" alt="Slide-ul 9: Homofilia tranzacțiilor ilicite" loading="lazy"></a>
       <figcaption>Slide-ul 9</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="hm-s">Pasul de timp: <b id="hm-s-v"></b></label><input type="range" id="hm-s" min="1" max="49" step="1" value="29"></div><div class="ctl"><label for="hm-m">Măsura</label><select id="hm-m"><option value="node" selected>Ponderea vecinilor ilicite, pe clase</option><option value="edge">Muchii care leagă aceeași clasă</option></select></div><button class="btn play" id="hm-play" type="button"></button></div><div class="charts "><div class="chart" id="hm-bar"></div><div class="chart" id="hm-line"></div></div><ul class="out" id="hm-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_homophily" target="_blank" rel="noopener">NN_L9_homophily</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_homophily/NN_L9_homophily.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>La pragul 0,5, regresia logistică pe toate variabilele găsește 77,1% dintre tranzacțiile ilicite de test (recall), dar numai 22,0% dintre alertele ei sînt ilicite (precizie); pădurea aleatoare găsește 72,5%, cu o precizie de 92,7%. Curba arată întregul compromis: cu scorurile mediate pe semințe, aria de sub ea este 0,785 pentru pădure, 0,499 pentru GCN, 0,596 pentru GraphSAGE și 0,311 pentru regresia logistică, față de o rată de bază de 6,5%. Modificați pragul: pădurea rămîne deasupra celorlalte modele la aproape orice recall.</p></details>
 </section>
 <section class="blk" id="drift">
-  <h3>Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului</h3>
+  <h3>Schimbarea conceptului după închiderea unei piețe ilegale</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L9_f1_by_timestep_ro.jpg" alt="Slide-ul 32: Închiderea unei piețe ilegale strică toate modelele: schimbarea conceptului" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9_ro.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L9_f1_by_timestep_ro.jpg" alt="Slide-ul 32: Schimbarea conceptului după închiderea unei piețe ilegale" loading="lazy"></a>
       <figcaption>Slide-ul 32</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="fd-m"><span class="lbl">Modele</span><div class="tgs"><label class="tg"><input type="checkbox" name="fd-m" value="lr_local"> Regresie logistică, variabile locale</label><label class="tg"><input type="checkbox" name="fd-m" value="lr_all" checked> Regresie logistică, toate variabilele</label><label class="tg"><input type="checkbox" name="fd-m" value="rf" checked> Pădure aleatoare</label><label class="tg"><input type="checkbox" name="fd-m" value="mlp"> MLP (fără graf)</label><label class="tg"><input type="checkbox" name="fd-m" value="gcn" checked> GCN</label><label class="tg"><input type="checkbox" name="fd-m" value="sage"> GraphSAGE</label><label class="tg"><input type="checkbox" name="fd-m" value="gat"> GAT</label><label class="tg"><input type="checkbox" name="fd-m" value="rf_emb" checked> Pădure aleatoare + reprezentări GCN</label></div></div><div class="ctl"><label for="fd-t">Pragul de alertă pe scor: <b id="fd-t-v"></b></label><input type="range" id="fd-t" min="0.05" max="0.95" step="0.05" value="0.5"></div><button class="btn play" id="fd-play" type="button"></button></div><div class="charts one"><div class="chart" id="fd-chart"></div></div><ul class="out" id="fd-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_f1_by_timestep" target="_blank" rel="noopener">NN_L9_f1_by_timestep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_f1_by_timestep/NN_L9_f1_by_timestep.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

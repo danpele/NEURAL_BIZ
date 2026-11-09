@@ -63,7 +63,7 @@ For one real test block group with standardised income −0.21 and latitude −0
 
 One backward sweep delivers all $P$ partial derivatives of a scalar loss; finite differences would need $P$ extra passes. A gradient check on the MLP 64-64, with central differences in double precision on 30 random weights, finds a largest relative error of $7.0\times10^{-7}$.
 
-## In a deep sigmoid network the gradient dies before it reaches the first layers {h=62be8d06}
+## Vanishing gradients in deep sigmoid networks {h=e2bc2f5f}
 
 The backward signal is a product of Jacobians $\mathbf W^\top\operatorname{diag}(a')$. In a 10-layer net on one real batch, the first-layer gradient norm is $8.5\times10^{-7}$ with sigmoids against $7.5\times10^{0}$ in the last layer; with ReLU and He initialisation the first layer still gets $3.1\times10^{0}$.
 
@@ -86,7 +86,7 @@ Mini-batches, the learning rate, momentum, adaptive steps and schedules decide h
 
 The mini-batch gradient $\mathbf g_t=\frac1B\sum_{i\in\mathcal B_t}\nabla\ell_i$ is unbiased for the full gradient and its variance falls roughly as $1/B$. With step sizes satisfying $\sum\eta_t=\infty$ and $\sum\eta_t^2<\infty$, stochastic gradient descent converges to a stationary point (Robbins and Monro, 1951).
 
-## The learning rate decides everything: too small crawls, too large diverges {h=140fe002}
+## Effect of the learning rate on training {h=41cbfe05}
 
 With plain SGD, 30 epochs and batches of 128, the validation MSE is 1.093 at $\eta=10^{-4}$, worse than linear regression (0.500), and 0.281 at $\eta=$ 0.1; from $\eta=$ 0.3 at least one seed diverges.
 
@@ -95,7 +95,7 @@ Validation MSE after 30 epochs of SGD for nine learning rates and three seeds.
 
 @practice tune the learning rate first, on a log grid.
 
-## Small batches learn more per epoch, large batches more per second {h=5e61d090}
+## Effect of batch size: progress per epoch and per second {h=76028e4f}
 
 After 5 epochs of Adam the validation MSE is 0.294 with batches of 16, 0.367 with 128 and 0.870 with 1,024: small batches make 774 steps per epoch, large ones 13. Per second the picture reverses: 40 epochs take 25.8, 3.7 and 1.0 seconds.
 

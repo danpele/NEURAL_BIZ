@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261108s", "L6_text_en.js?v=20261108s", "common.js?v=20261108s"], "L6.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261108s", "L6_text_en.js?v=20261108s", "common.js?v=20261109m"], "L6.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>Yes: monetary-policy, energy, banking and payment words occupy different regions, although the map keeps only about 32% of the variance of the 32 vectors (31.8% for word2vec and 31.5% for GloVe as computed here from vectors rounded to four decimals; the lecture reports 31.9%). Keep only monetary policy and energy: the first two components now keep 45.9% (word2vec), because the map has fewer directions to show. A 2-D map is a picture, not a measure of similarity; use the cosine of the full vectors for that.</p></details>
 </section><h2 class="sec" id="s-clf">Sentence classifiers</h2>
 <section class="blk" id="agreement">
-  <h3>Models fail where the annotators disagree</h3>
+  <h3>Classification errors and annotator agreement</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L6/lecture6.pdf#page=30" target="_blank" rel="noopener"><img src="slides/L6_agreement_en.jpg" alt="Slide 30: Models fail where the annotators disagree" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L6/lecture6.pdf#page=30" target="_blank" rel="noopener"><img src="slides/L6_agreement_en.jpg" alt="Slide 30: Classification errors and annotator agreement" loading="lazy"></a>
       <figcaption>Slide 30</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ag-m">Model</label><select id="ag-m"><option value="majority">Majority class</option><option value="bow_lr">BoW + logistic</option><option value="tfidf_lr" selected>TF-IDF + logistic</option><option value="tfidf_mlp">TF-IDF + MLP</option><option value="w2v_lr">Mean word2vec + logistic</option><option value="embbag">Embedding bag (random start)</option><option value="embbag_w2v">Embedding bag (word2vec start)</option></select></div><div class="ctl ctl-tg" id="ag-a"><span class="lbl">Agreement of the annotators</span><div class="tgs"><label class="tg"><input type="radio" name="ag-a" value="all" checked> all sentences</label><label class="tg"><input type="radio" name="ag-a" value="50"> 50%</label><label class="tg"><input type="radio" name="ag-a" value="66"> 66%</label><label class="tg"><input type="radio" name="ag-a" value="75"> 75%</label><label class="tg"><input type="radio" name="ag-a" value="100"> 100%</label></div></div></div><div class="charts "><div class="chart" id="ag-cm"></div><div class="chart" id="ag-acc"></div></div><ul class="out" id="ag-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_agreement" target="_blank" rel="noopener">NN_L6_agreement</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L6/NN_L6_agreement/NN_L6_agreement.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

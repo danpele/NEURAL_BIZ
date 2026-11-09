@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L5.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L5.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-fin">Serii de timp financiare: ce se poate prognoza</a> · <a href="#s-load">Consumul de energie electrică din România, pentru ziua următoare</a></p>
 <h2 class="sec" id="s-fin">Serii de timp financiare: ce se poate prognoza</h2>
 <section class="blk" id="acf">
-  <h3>Memoria este în volatilitate, nu în randamente</h3>
+  <h3>Autocorelația randamentelor și a randamentelor absolute</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L5_acf_abs_ro.jpg" alt="Slide-ul 7: Memoria este în volatilitate, nu în randamente" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L5/lecture5_ro.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L5_acf_abs_ro.jpg" alt="Slide-ul 7: Autocorelația randamentelor și a randamentelor absolute" loading="lazy"></a>
       <figcaption>Slide-ul 7</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ac-m">Piața</label><select id="ac-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl ctl-tg" id="ac-t"><span class="lbl">Seria</span><div class="tgs"><label class="tg"><input type="radio" name="ac-t" value="r"> randamente rₜ</label><label class="tg"><input type="radio" name="ac-t" value="a" checked> randamente absolute |rₜ|</label><label class="tg"><input type="radio" name="ac-t" value="s"> randamente la pătrat rₜ²</label></div></div><div class="ctl"><label for="ac-l">Laguri afișate (zile de tranzacționare): <b id="ac-l-v"></b></label><input type="range" id="ac-l" min="10" max="250" step="10" value="50"></div></div><div class="charts one"><div class="chart" id="ac-chart"></div></div><ul class="out" id="ac-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_acf_abs" target="_blank" rel="noopener">NN_L5_acf_abs</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_acf_abs/NN_L5_acf_abs.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

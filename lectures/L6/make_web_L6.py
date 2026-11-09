@@ -128,7 +128,7 @@ On PhraseBank, TF-IDF with logistic regression reaches a macro-F1 of {sent.pb.tf
 @chart sentiment_models
 Test macro-F1 of the seven models on PhraseBank and on finance tweets (mean and standard deviation).
 
-## Models fail where people disagree
+## Classification errors and annotator agreement
 
 TF-IDF with logistic regression is right on {agree.tfidf_lr.100|.1f}% of the sentences on which all annotators agreed and on {agree.tfidf_lr.50|.1f}% of those with only 50% agreement. Label noise caps every model; before buying a bigger model, check how much your own analysts agree.
 
@@ -250,7 +250,7 @@ Pe PhraseBank, TF-IDF cu regresie logistică atinge un macro-F1 de {sent.pb.tfid
 @chart sentiment_models
 Macro-F1 pe test pentru cele șapte modele, pe PhraseBank și pe tweet-uri financiare (media și abaterea standard).
 
-## Modelele greșesc acolo unde oamenii nu sînt de acord
+## Erorile de clasificare și acordul adnotatorilor
 
 TF-IDF cu regresie logistică clasifică bine {agree.tfidf_lr.100|.1f}% din frazele asupra cărora toți adnotatorii au fost de acord și {agree.tfidf_lr.50|.1f}% din cele cu un acord de doar 50%. Zgomotul din etichete limitează orice model; înainte de a cumpăra un model mai mare, verificați cît de mult sînt de acord propriii analiști.
 

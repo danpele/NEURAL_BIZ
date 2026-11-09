@@ -42,7 +42,7 @@ OUT = os.path.join(ROOT, 'web')
 REPO = 'https://github.com/danpele/NEURAL_BIZ'
 COLAB = 'https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/'
 MATHJAX = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js'
-VER = '20261108b'
+VER = '20261109m'
 
 L = {
     'en': dict(course='Neural Networks and Deep Learning', lecture='Lecture', back='Course site', site='../index.html#chapters',

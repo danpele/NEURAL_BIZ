@@ -166,7 +166,7 @@ def build(lang, H=None):
 
     # ================================================================== 1. sequential decisions
     D.section(t("Sequential decisions in business", "Decizii secvențiale în afaceri"))
-    D.concept(t("Reinforcement learning: learning what to do, not what will happen", "Învățarea prin întărire: ce să faci, nu ce se va întîmpla"),
+    D.concept(t("Reinforcement learning and supervised learning", "Învățarea prin întărire și învățarea supervizată"),
               t("supervised learning predicts a label; RL chooses actions whose consequences arrive later and depend on what it did before.",
                 "învățarea supervizată prognozează o etichetă; RL alege acțiuni cu efecte întîrziate, care depind de deciziile anterioare."),
               it((t("\\textbf{Supervised}", "\\textbf{Supervizată}"),
@@ -205,7 +205,7 @@ def build(lang, H=None):
                        "scrieți starea, acțiunea și recompensa înainte de orice antrenare.")),
             "small", cite="(Sutton \\& Barto, 2018, ch.\\ 3)")
 
-    D.frame(t("Three business problems, one framework", "Trei probleme economice, un singur cadru"), table(
+    D.frame(t("Three business applications of reinforcement learning", "Trei aplicații economice ale învățării prin întărire"), table(
         "@{}p{0.14\\textwidth}p{0.27\\textwidth}p{0.2\\textwidth}p{0.33\\textwidth}@{}",
         [t("Problem", "Problema"), t("State $s_t$", "Starea $s_t$"), t("Action $a_t$", "Acțiunea $a_t$"), t("Reward $r_{t+1}$", "Recompensa $r_{t+1}$")],
         [[t("Battery", "Baterie"), t("hour, stored energy, yesterday's prices", "ora, energia stocată, prețurile de ieri"),
@@ -341,7 +341,7 @@ def build(lang, H=None):
                 "DP dă plafonul față de care se evaluează orice agent care învață (rata de captare = venit / venitul cu previziune perfectă)."),
               tryit=NB + " \\S2", cite="(Bellman, 1957)", wl="0.53", wr="0.44")
 
-    D.figframe(t("One real day: buy at the trough, sell at the peaks", "O zi reală: cumpără la minim, vinde la vîrfuri"),
+    D.figframe(t("Optimal battery schedule for one day", "Programul optim al bateriei pentru o zi"),
                t("on the day with the largest spread of @{cutoff.year}, DP charges in the cheapest hours and discharges in the dearest.",
                  "în ziua cu cea mai mare diferență de preț din @{cutoff.year}, DP încarcă în orele cele mai ieftine și descarcă în cele mai scumpe."),
                None, "dp_day", bullets=[
@@ -399,7 +399,7 @@ def build(lang, H=None):
                 "eroarea TD este un semnal de învățare disponibil după fiecare oră, nu doar la sfîrșitul zilei."),
               tryit=NB + " \\S3", cite="(Watkins \\& Dayan, 1992)", wl="0.56", wr="0.41")
 
-    D.concept(t("A realistic state: the agent sees yesterday, not today", "O stare realistă: agentul vede ziua de ieri, nu pe cea de azi"),
+    D.concept(t("Definition of the state: information available to the agent", "Definirea stării: informația disponibilă agentului"),
               t("the operator plans before the day-ahead prices are known; the agent conditions on how cheap each hour was yesterday.",
                 "operatorul planifică înainte să cunoască prețurile pentru ziua următoare; agentul ține cont de cît de ieftină a fost fiecare oră ieri."),
               "\\[ s_h=\\big(h,\\ \\text{stored}_h,\\ q_{h}\\big),\\quad q_h=\\Big\\lfloor\\tfrac{\\mathrm{rank}(p^{\\,\\text{" + t("yesterday", "ieri") + "}}_h)}{6}\\Big\\rfloor\\in\\{0,1,2,3\\} \\]" +
@@ -488,7 +488,7 @@ def build(lang, H=None):
 
     # ================================================================== 4. policy gradients
     D.section(t("Policy gradients and PPO: trading the S\\&P 500", "Gradienți de politică și PPO: tranzacționarea indicelui S\\&P 500"))
-    D.concept(t("Policy gradient: push up the probability of actions that paid", "Gradientul politicii: crește probabilitatea acțiunilor care au adus cîștig"),
+    D.concept(t("Policy-gradient methods", "Metodele de gradient al politicii"),
               t("parameterise the policy directly and climb the gradient of the expected return.",
                 "politica se parametrizează direct și se urcă pe gradientul cîștigului așteptat."),
               "\\[ \\nabla_{\\btheta}J(\\btheta)=\\E_{\\pi_{\\btheta}}\\Big[\\sum_{t}\\nabla_{\\btheta}\\log\\pi_{\\btheta}(a_t\\mid s_t)\\,\\big(G_t-b(s_t)\\big)\\Big] \\]" +
@@ -525,7 +525,7 @@ def build(lang, H=None):
                 "criticul este o prognoză a recompensei viitoare; un critic slab dă avantaje zgomotoase și o învățare lentă."),
               cite="(Schulman et al., 2016)", wl="0.56", wr="0.41")
 
-    D.figframe(t("PPO: improve the policy, but not too far in one step", "PPO: îmbunătățește politica, dar nu prea mult dintr-odată"),
+    D.figframe(t("PPO: clipped policy updates", "PPO: actualizarea plafonată a politicii"),
                t("the clipped objective removes the incentive to move the probability ratio outside $[1-\\epsilon,1+\\epsilon]$.",
                  "obiectivul plafonat elimină stimulentul de a muta raportul probabilităților în afara intervalului $[1-\\epsilon,1+\\epsilon]$."),
                "\\[ \\loss^{\\text{CLIP}}(\\btheta)=\\E_t\\big[\\min\\big(\\rho_t\\hat A_t,\\ \\mathrm{clip}(\\rho_t,1-\\epsilon,1+\\epsilon)\\hat A_t\\big)\\big],\\quad "

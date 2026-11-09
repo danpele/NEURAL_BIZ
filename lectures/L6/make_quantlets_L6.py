@@ -130,7 +130,7 @@ res_ag = {k: [[float((r["preds"][k][agree[r["te"]] == a] == pb_y[r["te"]][agree[
 make("agreement", "Test accuracy on the Financial PhraseBank by the share of annotators who agreed on the label (50, 66, 75, 100%), 5 random splits.",
      "label noise, annotator agreement, sentiment, TF-IDF, embedding bag, Financial PhraseBank",
      "Financial PhraseBank; saved test predictions of analysis_L6.py (agreement_results.json)",
-     "Models fail where the annotators disagree.",
+     "Test accuracy is much lower on the sentences on which the annotators disagree.",
      "for k in ['tfidf_lr']:\n    show(f'agree.{k}.100', 'accuracy, unanimous sentences (%)', round(100 * float(np.mean(R[k][3])), 1)); show(f'agree.{k}.50', 'accuracy, 50% agreement (%)', round(100 * float(np.mean(R[k][0])), 1))\n"
      "fig, ax = plt.subplots(figsize=(6.4, 2.2)); xs = np.arange(4)\nfor j, (k, c, l) in enumerate([('majority', '#8a8a8a', 'Majority'), ('tfidf_lr', PAL['benchmark'], 'TF-IDF + logistic'), ('embbag_w2v', PAL['model'], 'embedding bag (word2vec start)')]):\n"
      "    ax.bar(xs + (j - 1) * .27, [100 * np.mean(v) for v in R[k]], width=.27, color=c, label=l)\n"

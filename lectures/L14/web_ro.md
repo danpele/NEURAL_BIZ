@@ -17,11 +17,11 @@ Clasificăm 5 400 de imagini de test din setul EuroSAT (imagini satelitare Sen
 
 # De ce modele multimodale
 
-## Datele de afaceri vin ca imagini, documente și grafice {h=bd01ccb1}
+## Imagini, documente și grafice ca date economice {h=af98382d}
 
 Imaginile satelitare servesc creditul agricol, asigurările și raportările de mediu, sociale și de guvernanță (ESG); documentele combină text, tabele și așezare în pagină; graficele rezumă piețele pentru oameni. Cînd cifrele din spatele unei imagini există, ele sînt de obicei intrări mai bune; cînd nu există, un model multimodal este singura cale de a folosi imaginea.
 
-## Firul economic {h=e6d52406}
+## Aplicația economică: utilizarea terenului {h=3c87e513}
 
 O bancă ce finanțează ferme verifică dacă parcelele sînt teren arabil; un asigurător compară imagini de dinainte și de după o inundație sau o secetă; un administrator de active măsoară suprafața împădurită și zonele industriale din jurul activelor sale. Imaginile sînt gratuite și frecvente (Sentinel-2 revine la cîteva zile), etichetele sînt scumpe: de aici modelele zero-shot și cele cu puține exemple.
 
@@ -132,7 +132,7 @@ Precizia medie, care contează pentru un eveniment rar, este 0,578 pentru cifre,
 
 # Sinteza cursului
 
-## Paisprezece cursuri, o singură trusă de instrumente {h=0d146961}
+## Metodele cursului după tipul de date {h=5f54e900}
 
 Tabele (cursurile 1–3), imagini (4, 14), secvențe (5, 13), text (6, 7, 12), generare (8), grafuri (9), decizii (10) și încredere (11): fiecare tip de date are arhitectura sa, iar fiecare curs a comparat-o cu un reper, pe date reale.
 
@@ -144,7 +144,7 @@ Porniți de la decizie și de la costul erorilor, estimați întîi reperul, num
 
 Fără scurgeri de informație; un reper lîngă fiecare rețea; rulări repetate și intervale; metrici pentru evenimente rare; date reale și programe reproductibile.
 
-## Modelele fundație în acest curs {h=0576b691}
+## Modelele fundație pentru imagini, text și serii de timp {h=c08f72d5}
 
 Același tipar, preantrenare o singură dată și utilizare zero-shot sau cu un mic clasificator, a funcționat pentru text (cursul 12), serii de timp (cursul 13) și imagini (acest curs: 56,4 % zero-shot, 95,5 % cu un clasificator pe toate etichetele). Avertismentul comun este că datele de preantrenare pot conține setul de test.
 

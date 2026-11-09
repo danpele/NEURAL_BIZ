@@ -174,7 +174,7 @@ PAGE = dict(
                       "@{one.debtinc|.1f} %, @{one.delinq} linii cu restanțe), scorul este suma contribuțiilor $w_jx_j$ plus termenul liber, "
                       "$z=$ @{one.z|.2f}, iar neuronul produce $p=\\sigma(z)=$ @{one.p_pct|.1f} %. Solicitantul ar trece de un prag de 50 %; secțiunea 5 "
                       "arată de ce pragul trebuie stabilit din costuri.")),
-              B(frame="A missing value can be the strongest signal",
+              B(frame="Missing values as predictors of default",
                 text=("The debt-to-income ratio is missing for @{data.hmeq_debtinc_missing_pct|.1f} % of HMEQ loans, and these default in "
                       "@{data.hmeq_bad_debtinc_missing_pct|.1f} % of cases against @{data.hmeq_bad_debtinc_present_pct|.1f} % when it is reported. "
                       "Dropping incomplete rows would drop the riskiest applicants. We fill each numeric input with its training median and add an "
@@ -217,7 +217,7 @@ PAGE = dict(
                       "Novikoff (1962): dacă un vector unitar $\\mathbf w^*$ separă datele cu marginea $\\gamma$ și toate intrările se află în raza $R$, "
                       "perceptronul face cel mult $(R/\\gamma)^2$ greșeli, oricîte exemple și oricare ar fi dimensiunea. Fără un hiperplan separator, "
                       "teorema nu spune nimic.")),
-              B(frame="On real loans the perceptron never settles",
+              B(frame="The perceptron does not converge on non-separable credit data",
                 text=("On the HMEQ training loans the classes overlap. Over @{perceptron.epochs} epochs the training error jumps between "
                       "@{perceptron.err_min_pct|.1f} % and @{perceptron.err_max_pct|.1f} % after @{perceptron.updates|,d} updates, while logistic "
                       "regression on the same inputs reaches @{perceptron.logit_err_pct|.1f} % and always predicting 'no default' "
@@ -230,7 +230,7 @@ PAGE = dict(
                 cap=("Training error of the perceptron after each epoch on HMEQ, against logistic regression and the majority rule.",
                      "Eroarea de antrenare a perceptronului după fiecare epocă pe HMEQ, comparată cu regresia logistică și cu regula majorității."),
                 practice=("a smooth loss and a probability output fix both problems.", "o pierdere netedă și o ieșire probabilistă rezolvă ambele probleme.")),
-              B(frame="No straight line separates XOR",
+              B(frame="The XOR problem and the hidden layer",
                 text=("XOR is true when exactly one input is on. Any linear boundary classifies at most three of the four points correctly "
                       "(@{xor.logit_acc_pct} % here), while an MLP with two tanh hidden units reaches @{xor.mlp_acc_pct} %: the hidden layer maps the "
                       "inputs to a space where the classes become separable. Interactions such as 'high debt and short history' are of this kind. "
@@ -303,7 +303,7 @@ PAGE = dict(
                 chart="uat_california", cap=("House values against latitude: bin means and fitted networks with 1, 3 and 50 hidden units.",
                                              "Valoarea locuințelor în funcție de latitudine: medii pe clase și rețele estimate cu 1, 3 și 50 de neuroni ascunși."),
                 practice=("location effects are nonlinear: a linear term cannot price them.", "efectele de localizare sînt neliniare: un termen liniar nu le poate surprinde.")),
-              B(frame="Depth reuses features",
+              B(frame="Depth and width of a network",
                 text=("A ReLU network is piecewise linear, and the number of its linear regions can grow exponentially with depth for a fixed number "
                       "of units (Montúfar et al., 2014). On tabular credit data, two or three hidden layers are usually enough; depth pays off on "
                       "images, text and sequences.",

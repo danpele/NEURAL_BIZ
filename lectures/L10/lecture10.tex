@@ -87,7 +87,7 @@ Option hedging & 21-day S\&P 500 paths, VIX as implied volatility & paths starti
 
 \section{Sequential decisions in business}
 
-\begin{frame}{Reinforcement learning: learning what to do, not what will happen}
+\begin{frame}{Reinforcement learning and supervised learning}
 \footnotesize
 \intuition{supervised learning predicts a label; RL chooses actions whose consequences arrive later and depend on what it did before.}
 \begin{columns}[T,onlytextwidth]
@@ -139,7 +139,7 @@ Option hedging & 21-day S\&P 500 paths, VIX as implied volatility & paths starti
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Sutton \& Barto, 2018, ch.\ 3)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Three business problems, one framework}
+\begin{frame}{Three business applications of reinforcement learning}
 \footnotesize
 {\footnotesize\renewcommand{\arraystretch}{1.05}\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.14\textwidth}p{0.27\textwidth}p{0.2\textwidth}p{0.33\textwidth}@{}}\toprule
@@ -323,7 +323,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bellman, 1957)}\hfill\tryit{notebook \S2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{One real day: buy at the trough, sell at the peaks}
+\begin{frame}{Optimal battery schedule for one day}
 \small
 \intuition{on the day with the largest spread of 2026, DP charges in the cheapest hours and discharges in the dearest.}
 \begin{center}\includegraphics[width=\textwidth,height=0.417\textheight,keepaspectratio]{charts/en/dp_day.pdf}\end{center}\vspace{-3mm}
@@ -400,7 +400,7 @@ Hedging & index level, time to maturity, VIX, previous hedge & hedge ratio $\del
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Watkins \& Dayan, 1992)}\hfill\tryit{notebook \S3}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A realistic state: the agent sees yesterday, not today}
+\begin{frame}{Definition of the state: information available to the agent}
 \footnotesize
 \intuition{the operator plans before the day-ahead prices are known; the agent conditions on how cheap each hour was yesterday.}
 \begin{columns}[T,onlytextwidth]
@@ -522,7 +522,7 @@ Yesterday's optimal plan (naive) & 163.1 & 80.7 & -- \\
 
 \section{Policy gradients and PPO: trading the S\&P 500}
 
-\begin{frame}{Policy gradient: push up the probability of actions that paid}
+\begin{frame}{Policy-gradient methods}
 \footnotesize
 \intuition{parameterise the policy directly and climb the gradient of the expected return.}
 \begin{columns}[T,onlytextwidth]
@@ -583,7 +583,7 @@ Yesterday's optimal plan (naive) & 163.1 & 80.7 & -- \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Schulman et al., 2016)}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{PPO: improve the policy, but not too far in one step}
+\begin{frame}{PPO: clipped policy updates}
 \small
 \intuition{the clipped objective removes the incentive to move the probability ratio outside $[1-\epsilon,1+\epsilon]$.}
 \vspace{-1mm}\[ \loss^{\text{CLIP}}(\btheta)=\E_t\big[\min\big(\rho_t\hat A_t,\ \mathrm{clip}(\rho_t,1-\epsilon,1+\epsilon)\hat A_t\big)\big],\quad \rho_t=\frac{\pi_{\btheta}(a_t\mid s_t)}{\pi_{\btheta_{\text{old}}}(a_t\mid s_t)} \]\vspace{-2mm}

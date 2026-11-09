@@ -79,7 +79,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 
 \section{Sequences in finance and energy}
 
-\begin{frame}{Returns look like noise, volatility comes in clusters}
+\begin{frame}{Returns and volatility clustering}
 \small
 \intuition{the size of the move today says a lot about the size tomorrow; its sign says almost nothing.}
 \vspace{-1mm}\[ r_t=100\ln\frac{P_t}{P_{t-1}},\qquad \hat\sigma^2_{\mathrm{GK},t}=\tfrac12\Big(\ln\frac{H_t}{L_t}\Big)^2-(2\ln2-1)\Big(\ln\frac{C_t}{O_t}\Big)^2 \]\vspace{-2mm}
@@ -95,7 +95,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Garman \& Klass, 1980; own computation)}\hfill\qlink{NN\_L5\_sp500\_vol}{Quantlets/L5/NN_L5_sp500_vol}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{The memory is in the volatility, not in the returns}
+\begin{frame}{Autocorrelation of returns and of absolute returns}
 \small
 \intuition{autocorrelations of $|r_t|$ stay positive for months; those of $r_t$ are within the noise band.}
 \vspace{-1mm}\[ \hat\rho(k)=\frac{\sum_{t=k+1}^{T}(x_t-\bar x)(x_{t-k}-\bar x)}{\sum_{t=1}^{T}(x_t-\bar x)^2} \]\vspace{-2mm}
@@ -113,7 +113,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L5\_acf\_abs}{Quantlets/L5/NN_L5_acf_abs}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{A window-MLP forgets everything outside the window}
+\begin{frame}{Limited memory of a fixed-window MLP}
 \footnotesize
 \intuition{an MLP on the last $W$ observations has separate weights for every lag and a hard memory limit.}
 \begin{columns}[T,onlytextwidth]
@@ -349,7 +349,7 @@ Romanian hourly load & European Network of Transmission System Operators for Ele
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L5\_lstm\_gates}{Quantlets/L5/NN_L5_lstm_gates}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Sequence patterns and one trap}
+\begin{frame}{Sequence architectures and look-ahead leakage}
 \footnotesize
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.49\textwidth}
@@ -568,7 +568,7 @@ GRU (mean forecast) & 0.624 & 0.521 & 5 \\
 \par\vfill\noindent{\scriptsize\color{FooterGray}(own computation)}\hfill\qlink{NN\_L5\_returns\_r2}{Quantlets/L5/NN_L5_returns_r2}\par\vspace{0.5mm}
 \end{frame}
 
-\begin{frame}{Why return forecasts stay weak, and what that teaches}
+\begin{frame}{Low predictability of returns}
 \footnotesize
 \intuition{in a liquid market the predictable part of returns is tiny compared with their noise.}
 \begin{columns}[T,onlytextwidth]

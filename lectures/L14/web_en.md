@@ -17,11 +17,11 @@ We classify 5,400 test images of the EuroSAT data set (Sentinel-2 satellite imag
 
 # Why multimodal models
 
-## Business data come as images, documents and charts {h=955e4f56}
+## Images, documents and charts as business data {h=e94960b4}
 
 Satellite images serve agricultural credit, insurance and environmental, social and governance (ESG) reporting; documents mix text, tables and layout; charts summarise markets for people. When the numbers behind an image exist, they are usually better inputs; when they do not, a multimodal model is the only way to use the image.
 
-## The business thread {h=53894045}
+## Business application: land use {h=34251a69}
 
 A bank financing farms checks that the plots are cropland; an insurer compares images before and after a flood or a drought; an asset manager measures forest cover and industrial sites around its assets. Images are free and frequent (Sentinel-2 revisits every few days), labels are expensive: hence zero-shot and few-shot models.
 
@@ -132,7 +132,7 @@ Known templates go to a rule-based parser; optical character recognition and lay
 
 # Synthesis of the course
 
-## Fourteen lectures, one toolbox {h=5adcee11}
+## Methods of the course by data type {h=adf81613}
 
 Tables (lectures 1–3), images (4, 14), sequences (5, 13), text (6, 7, 12), generation (8), graphs (9), decisions (10) and trust (11): each data type has its architecture, and every lecture compared it with a benchmark on real data.
 
@@ -144,7 +144,7 @@ Start with the decision and the cost of errors, fit the benchmark first, count t
 
 No leakage; a benchmark next to every network; seeds and intervals; metrics for rare events; real data and reproducible scripts.
 
-## Foundation models across the course {h=ebc8ab51}
+## Foundation models for images, text and time series {h=b5604d73}
 
 The same pattern, pre-train once and use zero-shot or with a small head, worked for text (Lecture 12), time series (Lecture 13) and images (this lecture: 56.4 % zero-shot, 95.5 % with a probe on all labels). The common caveat is that pre-training data may contain the test set.
 

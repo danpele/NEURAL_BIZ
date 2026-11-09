@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_en.js?v=20261108s", "common.js?v=20261108s"], "L5.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L5_data.js?v=20261108s", "L5_text_en.js?v=20261108s", "common.js?v=20261109m"], "L5.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-fin">Financial time series: what is predictable</a> · <a href="#s-load">Day-ahead electricity load in Romania</a></p>
 <h2 class="sec" id="s-fin">Financial time series: what is predictable</h2>
 <section class="blk" id="acf">
-  <h3>The memory is in the volatility, not in the returns</h3>
+  <h3>Autocorrelation of returns and of absolute returns</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L5_acf_abs_en.jpg" alt="Slide 7: The memory is in the volatility, not in the returns" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L5/lecture5.pdf#page=7" target="_blank" rel="noopener"><img src="slides/L5_acf_abs_en.jpg" alt="Slide 7: Autocorrelation of returns and of absolute returns" loading="lazy"></a>
       <figcaption>Slide 7</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ac-m">Market</label><select id="ac-m"><option value="SP500" selected>S&P 500</option><option value="TLV">Banca Transilvania (TLV)</option></select></div><div class="ctl ctl-tg" id="ac-t"><span class="lbl">Series</span><div class="tgs"><label class="tg"><input type="radio" name="ac-t" value="r"> returns rₜ</label><label class="tg"><input type="radio" name="ac-t" value="a" checked> absolute returns |rₜ|</label><label class="tg"><input type="radio" name="ac-t" value="s"> squared returns rₜ²</label></div></div><div class="ctl"><label for="ac-l">Lags shown (trading days): <b id="ac-l-v"></b></label><input type="range" id="ac-l" min="10" max="250" step="10" value="50"></div></div><div class="charts one"><div class="chart" id="ac-chart"></div></div><ul class="out" id="ac-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L5/NN_L5_acf_abs" target="_blank" rel="noopener">NN_L5_acf_abs</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L5/NN_L5_acf_abs/NN_L5_acf_abs.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

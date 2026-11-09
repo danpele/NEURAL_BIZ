@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261108s", "L6_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L6.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L6_data.js?v=20261108s", "L6_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L6.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>Da: cuvintele despre politica monetară, energie, sistemul bancar și plăți ocupă regiuni diferite, deși harta păstrează doar circa 32% din varianța celor 32 de vectori (31,8% pentru word2vec și 31,5% pentru GloVe, calculat aici pe vectori rotunjiți la patru zecimale; cursul raportează 31,9%). Păstrați doar politica monetară și energia: primele două componente păstrează acum 45,9% (word2vec), pentru că harta are mai puține direcții de arătat. O hartă 2-D este o imagine, nu o măsură a asemănării; pentru aceasta folosiți cosinusul vectorilor compleți.</p></details>
 </section><h2 class="sec" id="s-clf">Clasificatoare de fraze</h2>
 <section class="blk" id="agreement">
-  <h3>Modelele greșesc acolo unde adnotatorii nu sînt de acord</h3>
+  <h3>Erorile de clasificare și acordul adnotatorilor</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L6/lecture6_ro.pdf#page=30" target="_blank" rel="noopener"><img src="slides/L6_agreement_ro.jpg" alt="Slide-ul 30: Modelele greșesc acolo unde adnotatorii nu sînt de acord" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L6/lecture6_ro.pdf#page=30" target="_blank" rel="noopener"><img src="slides/L6_agreement_ro.jpg" alt="Slide-ul 30: Erorile de clasificare și acordul adnotatorilor" loading="lazy"></a>
       <figcaption>Slide-ul 30</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="ag-m">Modelul</label><select id="ag-m"><option value="majority">Clasa majoritară</option><option value="bow_lr">BoW + logistic</option><option value="tfidf_lr" selected>TF-IDF + logistic</option><option value="tfidf_mlp">TF-IDF + MLP</option><option value="w2v_lr">Media word2vec + logistic</option><option value="embbag">Embedding bag (start aleator)</option><option value="embbag_w2v">Embedding bag (start word2vec)</option></select></div><div class="ctl ctl-tg" id="ag-a"><span class="lbl">Acordul adnotatorilor</span><div class="tgs"><label class="tg"><input type="radio" name="ag-a" value="all" checked> toate frazele</label><label class="tg"><input type="radio" name="ag-a" value="50"> 50%</label><label class="tg"><input type="radio" name="ag-a" value="66"> 66%</label><label class="tg"><input type="radio" name="ag-a" value="75"> 75%</label><label class="tg"><input type="radio" name="ag-a" value="100"> 100%</label></div></div></div><div class="charts "><div class="chart" id="ag-cm"></div><div class="chart" id="ag-acc"></div></div><ul class="out" id="ag-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L6/NN_L6_agreement" target="_blank" rel="noopener">NN_L6_agreement</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L6/NN_L6_agreement/NN_L6_agreement.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

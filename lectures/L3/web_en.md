@@ -130,11 +130,11 @@ Over 200 random 70/30 splits of German credit, the test AUC of the same logistic
 @chart holdout_noise
 Test AUC of logistic regression over 200 random hold-out splits of German credit.
 
-## Leakage: when the validation set knows something it should not {h=319e5bd9}
+## Information leakage into the validation set {h=55628a21}
 
 Four leaks recur in business data: preprocessing fitted on all rows, resampling before the split, ignoring time, and inputs that are only known after the decision (Kaufman et al., 2012). For time series, use expanding-window or blocked validation (Bergmeir and Benítez, 2012).
 
-## Oversampling before the split makes a detector look far better, on paper {h=5bb370d6}
+## Oversampling before the split overstates performance {h=4919df6b}
 
 The same MLP on the same payments gets PR-AUC 0.843 with a time-ordered split, 0.853 with a random split, and 0.921 when every fraud is copied 20 times before splitting: copies end up on both sides.
 
@@ -156,7 +156,7 @@ The full data hold 284,807 payments with a fraud rate of 0.173 %; our file keeps
 @chart fraud_by_hour
 Hourly fraud rate over the two days, with the start of validation and test.
 
-## With rare events, accuracy is useless: measure precision, recall and PR-AUC {h=59815bb6}
+## Performance measures for rare events: precision, recall and PR-AUC {h=69e6f271}
 
 Precision is $TP/(TP+FP)$, recall $TP/(TP+FN)$, and the PR-AUC averages precision over recall levels; a random score gets a PR-AUC equal to the fraud rate (Saito and Rehmsmeier, 2015). Every legitimate payment counts with weight 10 in $FP$, so precision is that of the full population.
 

@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261108s", "L7_text_ro.js?v=20261108s", "common.js?v=20261108s"], "L7.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L7_data.js?v=20261108s", "L7_text_ro.js?v=20261108s", "common.js?v=20261109m"], "L7.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -86,9 +86,9 @@
   <details><summary>Răspuns</summary><p>Produsul scalar a doi vectori cu 64 de dimensiuni are o împrăștiere care crește cu √d_k; fără împărțire, softmax se saturează: un singur token primește aproape toată ponderea, iar gradienții celorlalți dispar. Cu c = 1/8 (2^−3), cele mai multe rînduri pun aproape toată ponderea pe un token; cu c = 8 devin aproape uniforme (entropie / log n aproape de 1). Pe cele 500 de tweet-uri de test din curs, entropia normalizată scade de la 0,76 în stratul 1 la 0,36 în stratul 8.</p></details>
 </section><h2 class="sec" id="s-arch">Arhitectura transformer</h2>
 <section class="blk" id="positional-encoding">
-  <h3>Atenția ignoră ordinea; codificarea poziției o readuce</h3>
+  <h3>Codificarea sinusoidală a poziției</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L7_positional_encoding_ro.jpg" alt="Slide-ul 17: Atenția ignoră ordinea; codificarea poziției o readuce" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=17" target="_blank" rel="noopener"><img src="slides/L7_positional_encoding_ro.jpg" alt="Slide-ul 17: Codificarea sinusoidală a poziției" loading="lazy"></a>
       <figcaption>Slide-ul 17</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="pe-t">Poziția tokenului t: <b id="pe-t-v"></b></label><input type="range" id="pe-t" min="0" max="63" step="1" value="10"></div><div class="ctl"><label for="pe-i">Perechea de dimensiuni i (dimensiunile 2i și 2i+1): <b id="pe-i-v"></b></label><input type="range" id="pe-i" min="0" max="31" step="1" value="2"></div><button class="btn play" id="pe-play" type="button"></button></div><div class="charts "><div class="chart" id="pe-map"></div><div class="chart" id="pe-sim"></div></div><ul class="out" id="pe-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_positional_encoding" target="_blank" rel="noopener">NN_L7_positional_encoding</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_positional_encoding/NN_L7_positional_encoding.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Răspuns</summary><p>Fiecare poziție primește un vector de 64 de sinusuri și cosinusuri, cu lungimi de undă de la 2π pînă la circa 2π·10.000^(62/64): primele perechi se schimbă repede, ultimele încet, ca acele unui ceas. Produsul scalar a doi vectori de poziție este maxim cînd pozițiile coincid și scade cu distanța, deci pozițiile apropiate seamănă. În studiul de caz, adăugarea pozițiilor în transformerul mic crește macro-F1 cu 0,9 puncte (intervalul de 95%: 0,1 – 1,7).</p></details>
 </section><h2 class="sec" id="s-case">Studiu de caz: sentimentul tweet-urilor financiare</h2>
 <section class="blk" id="model-comparison">
-  <h3>Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF</h3>
+  <h3>Compararea modelelor: macro-F1 pe setul de test</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L7_model_comparison_ro.jpg" alt="Slide-ul 26: Preantrenarea cîștigă: FinBERT ajustat conduce, transformerul mic rămîne sub TF-IDF" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L7/lecture7_ro.pdf#page=26" target="_blank" rel="noopener"><img src="slides/L7_model_comparison_ro.jpg" alt="Slide-ul 26: Compararea modelelor: macro-F1 pe setul de test" loading="lazy"></a>
       <figcaption>Slide-ul 26</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="mc-a">Modelul A</label><select id="mc-a"><option value="tfidf">TF-IDF + regresie logistică</option><option value="embbag">Medie de embedding-uri</option><option value="tiny_nopos">Transformer mic, fără poziții</option><option value="tiny">Transformer mic</option><option value="finbert_zs">FinBERT fără antrenare</option><option value="finbert_probe">FinBERT înghețat + logistic</option><option value="finbert_ft" selected>FinBERT ajustat</option></select></div><div class="ctl"><label for="mc-b">Modelul B</label><select id="mc-b"><option value="tfidf" selected>TF-IDF + regresie logistică</option><option value="embbag">Medie de embedding-uri</option><option value="tiny_nopos">Transformer mic, fără poziții</option><option value="tiny">Transformer mic</option><option value="finbert_zs">FinBERT fără antrenare</option><option value="finbert_probe">FinBERT înghețat + logistic</option><option value="finbert_ft">FinBERT ajustat</option></select></div><div class="ctl"><label for="mc-r">Replicări bootstrap: <b id="mc-r-v"></b></label><input type="range" id="mc-r" min="200" max="2000" step="200" value="1000"></div><button class="btn play" id="mc-play" type="button"></button></div><div class="charts "><div class="chart" id="mc-bar"></div><div class="chart" id="mc-boot"></div></div><ul class="out" id="mc-out"></ul><p class="qlk">Codul acestei figuri: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L7/NN_L7_model_comparison" target="_blank" rel="noopener">NN_L7_model_comparison</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L7/NN_L7_model_comparison/NN_L7_model_comparison.ipynb" target="_blank" rel="noopener">deschide în Colab</a></p></div>
   </div>

@@ -20,7 +20,7 @@ Pornim de la obiectivul unui model de limbaj, de la tokeni, perplexitate și tem
 
 Un LLM este antrenat să prezică următorul token. Tot restul, de la răspunsuri la întrebări pînă la redactarea unui raport de risc, înseamnă folosirea repetată a acestei singure probabilități.
 
-## De ce contează în finanțe {h=61ee4a4c}
+## Datele de tip text în instituțiile financiare {h=9a9949c5}
 
 Prețurile reacționează la știri în cîteva minute, băncile centrale ghidează așteptările prin cuvinte, iar dosarele de credit și rapoartele anuale costă ore de analiză. Toate modelele din acest curs sînt deschise și rulează local (Qwen2.5-Instruct cu 0,5, 1,5 și 3 miliarde de parametri), deci niciun text nu părăsește calculatorul și nu se plătește nicio interfață de programare a aplicațiilor (API).
 
@@ -145,7 +145,7 @@ Diagrama de fiabilitate a probabilităților prezise ale etichetelor.
 
 Eroarea de calibrare așteptată (ECE) este 4,7 % pentru zero-shot 3B, 3,6 % pentru few-shot 3B și 5,4 % pentru TF-IDF cu regresie logistică: pe această sarcină, probabilitățile etichetelor date de LLM sînt aproximativ la fel de fiabile ca ale clasificatorului antrenat. Calibrarea trebuie totuși verificată pe date de validare înainte ca scorurile să fie folosite ca probabilități de risc (Guo et al., 2017).
 
-## Acolo unde oamenii nu sînt de acord, modelele greșesc {h=5a367788}
+## Acuratețea în funcție de gradul de acord al adnotatorilor {h=90ea2734}
 
 @chart agreement
 Acuratețea în funcție de acordul adnotatorilor.
@@ -186,7 +186,7 @@ Recall@k pentru cele patru metode de regăsire.
 
 Metoda hibridă pune discursul corect pe primul loc pentru 50,7 % din titluri și între primele zece pentru 83,2 %.
 
-## Fără documente modelul inventează vorbitorul {h=3020d297}
+## Răspunsurile cu și fără documente regăsite {h=68220ece}
 
 @chart rag_qa
 Cine a ținut discursul? Răspunsuri fără documente, cu RAG și cu discursul corect.

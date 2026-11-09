@@ -34,7 +34,7 @@
   early.forEach(src => add(src, 0, r => { ok = ok && r; left--; go(); }, false));
   if (!parsed) document.addEventListener('DOMContentLoaded', () => { parsed = true; go(); });
   go();
-})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261108s", "L9_text_en.js?v=20261108s", "common.js?v=20261108s"], "L9.js?v=20261108s");
+})(["https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js", "L9_data.js?v=20261108s", "L9_text_en.js?v=20261108s", "common.js?v=20261109m"], "L9.js?v=20261108s");
 </script>
 </head>
 <body>
@@ -56,9 +56,9 @@
 <p class="toc"><a href="#s-why">Why graphs for financial crime</a> · <a href="#s-mp">Message passing</a> · <a href="#s-case">Case study: illicit Bitcoin transactions</a></p>
 <h2 class="sec" id="s-why">Why graphs for financial crime</h2>
 <section class="blk" id="homophily">
-  <h3>Illicit transactions sit next to illicit transactions</h3>
+  <h3>Homophily of illicit transactions</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=9" target="_blank" rel="noopener"><img src="slides/L9_homophily_en.jpg" alt="Slide 9: Illicit transactions sit next to illicit transactions" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=9" target="_blank" rel="noopener"><img src="slides/L9_homophily_en.jpg" alt="Slide 9: Homophily of illicit transactions" loading="lazy"></a>
       <figcaption>Slide 9</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl"><label for="hm-s">Time step: <b id="hm-s-v"></b></label><input type="range" id="hm-s" min="1" max="49" step="1" value="29"></div><div class="ctl"><label for="hm-m">Measure</label><select id="hm-m"><option value="node" selected>Share of illicit neighbours, by class</option><option value="edge">Edges joining the same class</option></select></div><button class="btn play" id="hm-play" type="button"></button></div><div class="charts "><div class="chart" id="hm-bar"></div><div class="chart" id="hm-line"></div></div><ul class="out" id="hm-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_homophily" target="_blank" rel="noopener">NN_L9_homophily</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_homophily/NN_L9_homophily.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>
@@ -96,9 +96,9 @@
   <details><summary>Answer</summary><p>At threshold 0.5 the logistic regression on all features finds 77.1% of the illicit test transactions (recall) but only 22.0% of its alerts are illicit (precision); the random forest finds 72.5% with a precision of 92.7%. The curve shows the whole trade-off: with seed-averaged scores the area under it is 0.785 for the forest, 0.499 for the GCN, 0.596 for GraphSAGE and 0.311 for the logistic regression, against a base rate of 6.5%. Move the threshold to see that the forest stays above the others at almost every recall.</p></details>
 </section>
 <section class="blk" id="drift">
-  <h3>A dark-market shutdown breaks every model: concept drift</h3>
+  <h3>Concept drift after a dark-market shutdown</h3>
   <div class="pair">
-    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L9_f1_by_timestep_en.jpg" alt="Slide 32: A dark-market shutdown breaks every model: concept drift" loading="lazy"></a>
+    <figure class="slide"><a href="../lectures/L9/lecture9.pdf#page=32" target="_blank" rel="noopener"><img src="slides/L9_f1_by_timestep_en.jpg" alt="Slide 32: Concept drift after a dark-market shutdown" loading="lazy"></a>
       <figcaption>Slide 32</figcaption></figure>
     <div class="live"><div class="ctls"><div class="ctl ctl-tg" id="fd-m"><span class="lbl">Models</span><div class="tgs"><label class="tg"><input type="checkbox" name="fd-m" value="lr_local"> Logistic regression, local features</label><label class="tg"><input type="checkbox" name="fd-m" value="lr_all" checked> Logistic regression, all features</label><label class="tg"><input type="checkbox" name="fd-m" value="rf" checked> Random forest</label><label class="tg"><input type="checkbox" name="fd-m" value="mlp"> MLP (no graph)</label><label class="tg"><input type="checkbox" name="fd-m" value="gcn" checked> GCN</label><label class="tg"><input type="checkbox" name="fd-m" value="sage"> GraphSAGE</label><label class="tg"><input type="checkbox" name="fd-m" value="gat"> GAT</label><label class="tg"><input type="checkbox" name="fd-m" value="rf_emb" checked> Random forest + GCN representations</label></div></div><div class="ctl"><label for="fd-t">Alert threshold on the score: <b id="fd-t-v"></b></label><input type="range" id="fd-t" min="0.05" max="0.95" step="0.05" value="0.5"></div><button class="btn play" id="fd-play" type="button"></button></div><div class="charts one"><div class="chart" id="fd-chart"></div></div><ul class="out" id="fd-out"></ul><p class="qlk">Code of this chart: <a href="https://github.com/danpele/NEURAL_BIZ/tree/main/Quantlets/L9/NN_L9_f1_by_timestep" target="_blank" rel="noopener">NN_L9_f1_by_timestep</a> · <a href="https://colab.research.google.com/github/danpele/NEURAL_BIZ/blob/main/Quantlets/L9/NN_L9_f1_by_timestep/NN_L9_f1_by_timestep.ipynb" target="_blank" rel="noopener">open in Colab</a></p></div>
   </div>

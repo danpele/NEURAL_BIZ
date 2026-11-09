@@ -20,7 +20,7 @@ This lecture writes three real business problems in that language and solves the
 
 Reinforcement learning is about what to do, not about what will happen. This section sets up the agent-environment loop and the three problems of the lecture.
 
-## Reinforcement learning: learning what to do, not what will happen {h=06606a96}
+## Reinforcement learning and supervised learning {h=d1cebedc}
 
 Supervised learning has a label for every example, and its predictions do not change the next example. In reinforcement learning the agent sees a state $s_t$, chooses an action $a_t$ and receives a reward $r_{t+1}$; the action changes the next state, and no teacher says what the right action was, only how much reward followed. Storage, trading, hedging, inventory, pricing and credit limits all have this structure. When today's action does not change tomorrow's options, a forecast and a rule are enough.
 
@@ -32,7 +32,7 @@ The agent follows a policy $\pi_\theta(a\mid s)$; the environment answers each a
 
 @practice write down state, action and reward before training anything.
 
-## Three business problems, one framework {h=304c75ff}
+## Three business applications of reinforcement learning {h=ba650448}
 
 | Problem | State $s_t$ | Action $a_t$ | Reward $r_{t+1}$ |
 |---|---|---|---|
@@ -99,7 +99,7 @@ and the revenue of the day is $V_0(0)$. All 4,292 days are solved in millisecond
 
 @practice DP gives the ceiling against which every learning agent is scored.
 
-## One real day: buy at the trough, sell at the peaks {h=263c2bc0}
+## Optimal battery schedule for one day {h=1da87f3c}
 
 On 30 June 2026, the day of 2026 with the largest spread, prices ranged from 100.65 EUR/MWh at 13:00 to 954.59 EUR/MWh at 20:00. The optimal plan charges in the two cheapest hours around midday and discharges in two evening hours, earning 1,541 EUR.
 
@@ -134,7 +134,7 @@ $$ Q(s_t,a_t)\leftarrow Q(s_t,a_t)+\alpha\big[r_{t+1}+\gamma\max_{a'}Q(s_{t+1},a
 
 The bracket is the temporal-difference (TD) error, a learning signal available after every hour. The target uses the greedy action whatever the agent does next, so Q-learning is off-policy. It converges if every pair is visited infinitely often and the step sizes satisfy the Robbins–Monro conditions. Exploration is $\varepsilon$-greedy, with $\varepsilon$ decayed from 1 to 0.05.
 
-## A realistic state: the agent sees yesterday, not today {h=3620938d}
+## Definition of the state: information available to the agent {h=e2c1ba7d}
 
 The operator plans before the day's prices are known, so the agent's state is $(h,\ \text{stored energy},\ q_h)$, where $q_h$ is the quartile of hour $h$ among yesterday's 24 prices: 288 states and 3 actions. The agent is trained on 1,746 days of 2019–2023 for 40 passes; the epoch with the best revenue on the 2024 validation year is kept, and the 638 test days, 1 January 2025 to 24 October 2026, are used once.
 
@@ -186,7 +186,7 @@ A Diebold–Mariano (DM) test on the daily revenue differences between the DQN a
 
 Policy-gradient methods parameterise the policy directly. PPO is the most used of them.
 
-## Policy gradient: push up the probability of actions that paid {h=a9c6dbaf}
+## Policy-gradient methods {h=ca41b33d}
 
 The policy gradient theorem (Sutton et al., 2000) gives
 
@@ -202,7 +202,7 @@ $$ \hat A_t=\sum_{l\ge0}(\gamma\lambda)^{l}\,\delta_{t+l} $$ {#eq:gae}
 
 with $\lambda=0$ giving the one-step TD advantage and $\lambda=1$ the Monte Carlo advantage; we use $\gamma=0.99$ and $\lambda=0.95$. Actor and critic share two layers of 64 tanh units, and an entropy bonus of 0.01 keeps the policy from collapsing too early.
 
-## PPO: improve the policy, but not too far in one step {h=1fdec13d}
+## PPO: clipped policy updates {h=31433f0d}
 
 PPO (Schulman et al., 2017) maximises the clipped objective
 

@@ -18,14 +18,14 @@ The networks are then tested where a risk manager or an energy supplier would us
 
 # Sequences in finance and energy
 
-## Returns look like noise, volatility comes in clusters
+## Returns and volatility clustering
 
 The data are the daily open, high, low and close of the S&P 500 from 4 January 2005 to 30 October 2026 (5,491 trading days). The daily variance is measured with the Garman–Klass (GK) range estimator, $\hat\sigma^2_{GK,t}=\frac12\ln^2(H_t/L_t)-(2\ln2-1)\ln^2(C_t/O_t)$, which uses the high $H_t$, low $L_t$, open $O_t$ and close $C_t$ of the day. Annualised, its median is 8.77% and its peak 122%, on 10 October 2008.
 
 @chart sp500_vol
 Daily log returns and annualised Garman–Klass volatility of the S&P 500 (log scale).
 
-## The memory is in the volatility, not in the returns
+## Autocorrelation of returns and of absolute returns
 
 The first-order autocorrelation of returns is −0.119, inside the noise band of ±0.026; that of absolute returns is 0.315 and still 0.126 at lag 50. Out of 50 lags, 15 are significant for returns and 50 for absolute returns. A model with memory is therefore worth trying for risk, for example as an input to value-at-risk (VaR), much less for the direction of the price.
 
