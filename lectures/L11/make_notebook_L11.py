@@ -99,7 +99,7 @@ def lecture(nb):
     nb.code("def lime_w(x, n=5000, kw=None, seed=0):\n"
             "    e = LimeTabularExplainer(Xtr, mode='regression', feature_names=FEATS, discretize_continuous=False, sample_around_instance=True,\n"
             "                             random_state=seed, kernel_width=kw).explain_instance(x, f0, num_features=len(FEATS), num_samples=n)\n"
-            "    w = np.zeros(len(FEATS))\n    for j, v in e.local_exp[0]: w[j] = v\n    return w\n"
+            "    w = np.zeros(len(FEATS))\n    for j, v in e.local_exp[1]: w[j] = v\n    return w\n"
             "W500 = np.array([lime_w(x_app, 500, seed=s) for s in range(15)]); W5k = np.array([lime_w(x_app, 5000, seed=s) for s in range(15)])\n"
             "top1 = lambda W: np.mean([np.argmax(np.abs(w)) == np.argmax(np.abs(W5k[0])) for w in W])\n"
             "print('same top feature, 500 samples:', top1(W500), '| 5,000 samples:', top1(W5k))\n"
@@ -186,7 +186,7 @@ def seminar(nb):
               "Explicați cu LIME de 20 de ori solicitantul cu cel mai mare risc din test (500 de eșantioane, valori inițiale 0-19). Cît de des este aceeași variabila de top?"))
     nb.solution("x = Xte[np.argmax(f0(Xte))]\ndef lime_w(x, n, seed):\n"
                 "    e = LimeTabularExplainer(Xtr, mode='regression', discretize_continuous=False, sample_around_instance=True, random_state=seed).explain_instance(x, f0, num_features=len(FEATS), num_samples=n)\n"
-                "    w = np.zeros(len(FEATS))\n    for j, v in e.local_exp[0]: w[j] = v\n    return w\n"
+                "    w = np.zeros(len(FEATS))\n    for j, v in e.local_exp[1]: w[j] = v\n    return w\n"
                 "tops = [np.argmax(np.abs(lime_w(x, 500, s))) for s in range(20)]\nprint(pd.Series([FEATS[t] for t in tops]).value_counts())")
     nb.task(T("Integrated gradients for the same applicant (baseline = mean good applicant of the training set, 128 steps). Verify completeness.",
               "Gradienții integrați pentru același solicitant (referința = solicitantul bun mediu din setul de antrenare, 128 de pași). Verificați completitudinea."))

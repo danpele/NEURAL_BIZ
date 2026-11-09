@@ -368,7 +368,7 @@ window.NN_DATA.quizzes['l11'] = {
      "Only the intercept changes",
      "The explanation becomes a Shapley value"
     ],
-    "correctExplanation": "The width sets which perturbations count; the slope of the top feature moved between -2.042 and -0.001 on our applicant.",
+    "correctExplanation": "The width sets which perturbations count; the slope of the top feature moved between 0.001 and 2.042 on our applicant.",
     "incorrectExplanation": "A wider kernel averages the model over a larger region, so the local slopes are different."
    },
    "ro": {
@@ -380,7 +380,7 @@ window.NN_DATA.quizzes['l11'] = {
      "Se schimbă doar termenul liber",
      "Explicația devine o valoare Shapley"
     ],
-    "correctExplanation": "Lățimea stabilește ce perturbări contează; panta variabilei de top s-a mutat între −2,042 și −0,001 pentru solicitantul nostru.",
+    "correctExplanation": "Lățimea stabilește ce perturbări contează; panta variabilei de top s-a mutat între 0,001 și 2,042 pentru solicitantul nostru.",
     "incorrectExplanation": "Un nucleu mai larg mediază modelul pe o regiune mai mare, deci pantele locale sînt diferite."
    }
   },

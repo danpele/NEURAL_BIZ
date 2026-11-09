@@ -161,7 +161,7 @@ def lime_w(x, n=5000, kw=None, seed=0):
     e = LimeTabularExplainer(Xtr, mode='regression', feature_names=FEATS, discretize_continuous=False, sample_around_instance=True,
                              random_state=seed, kernel_width=kw).explain_instance(x, f0, num_features=len(FEATS), num_samples=n)
     w = np.zeros(len(FEATS))
-    for j, v in e.local_exp[0]: w[j] = v
+    for j, v in e.local_exp[1]: w[j] = v
     return w
 show('lime.kw_default', 'default LIME kernel width 0.75 sqrt(d)', round(float(0.75 * np.sqrt(len(FEATS))), 2))"""
 ql("lime_vs_shap", "LIME (local linear surrogate) against Kernel SHAP for the same HMEQ applicant: contribution of each feature to the log-odds of default.",

@@ -365,7 +365,7 @@ D_ = Xtr.shape[1]
 def lime_weights(x, num_samples=5000, kw=None, seed=0, f=f0):
     e = lime_ex(kw, seed).explain_instance(x, f, num_features=D_, num_samples=num_samples)
     w = np.zeros(D_)
-    for j, v in e.local_exp[0]:
+    for j, v in e.local_exp[1]:   # regression mode: local_exp[1] holds the slopes, local_exp[0] their negatives
         w[j] = v
     return w
 
@@ -381,7 +381,7 @@ def lime_runs():
     return out
 
 
-LM = cached("lime_v1", lime_runs)
+LM = cached("lime_v2", lime_runs)
 lime_contrib = LM["main"] * x_app                              # local slope x standardised value (deviation from the mean)
 top_l = np.argsort(-np.abs(LM["main"]))
 N["lime"] = {"kw_default": r(0.75 * np.sqrt(D_), 2), "top1": FEATS[top_l[0]], "top2": FEATS[top_l[1]],
@@ -646,7 +646,7 @@ def fraud_xai():
     for x in F2:
         e = lex.explain_instance(x, ff, num_features=len(FF), num_samples=2000)
         w = np.zeros(len(FF))
-        for j, v in e.local_exp[0]:
+        for j, v in e.local_exp[1]:   # regression mode: local_exp[1] holds the slopes, local_exp[0] their negatives
             w[j] = v
         LW.append(w * (x - base_f))
     A["lime"] = np.array(LW)
@@ -672,7 +672,7 @@ def fraud_xai():
     return {"A": A, "comp": comp, "pimp": pimp, "ig_day1": A1, "bg": bgf}
 
 
-FX = cached("fraud_xai_v1", fraud_xai)
+FX = cached("fraud_xai_v2", fraud_xai)
 A = FX["A"]
 METH = ["saliency", "gradxinput", "smoothgrad", "ig", "shap", "lime"]
 MN = {"en": {"saliency": "saliency", "gradxinput": "gradient × input", "smoothgrad": "SmoothGrad", "ig": "integrated gradients",

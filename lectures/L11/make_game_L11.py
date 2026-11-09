@@ -11,7 +11,7 @@ Sources (all from analysis_L11.py, same data, split, seed and settings):
   - Kernel SHAP of the first network for 400 test applicants: cache/shap_main_v1.pkl;
   - Kernel SHAP of the 10 networks (seeds) for the first 200 of them: cache/seed_shap_v1.pkl;
   - the networks: cache/credit_models_v1.pkl;
-  - LIME is cached for the lecture's applicant only (cache/lime_v1.pkl); for the game applicants it is recomputed with the
+  - LIME is cached for the lecture's applicant only (cache/lime_v2.pkl); for the game applicants it is recomputed with the
     lecture's function and settings (5,000 samples, default kernel width, seed 0); the script checks that the recomputation
     reproduces the cached LIME weights of the lecture's applicant.
 The pool: 30 applicants drawn at random (seed of the course) among those 200 test applicants, 12 refused and 18 approved
@@ -114,7 +114,7 @@ def lime_weights(x, num_samples=5000, kw=None, seed=0):
     e = LimeTabularExplainer(Xtr, mode="regression", feature_names=FEATS, discretize_continuous=False, sample_around_instance=True,
                              random_state=seed, kernel_width=kw).explain_instance(x, f0, num_features=len(FEATS), num_samples=num_samples)
     w = np.zeros(len(FEATS))
-    for j, v in e.local_exp[0]:
+    for j, v in e.local_exp[1]:
         w[j] = v
     return w
 
@@ -123,8 +123,8 @@ p_sub = sig(f0(Xsub))
 cand = np.where((p_sub > 0.5) & (p_sub < 0.8) & (yte[i_sub] == 1))[0]
 k_app = int(cand[np.argmin(np.abs(p_sub[cand] - 0.65))])
 assert int(XR.index[i_te[i_sub[k_app]]]) == NUMS["app"]["row"]
-LM = load("lime_v1")
-assert np.allclose(lime_weights(Xsub[k_app]), LM["main"], atol=1e-8), "LIME recomputation differs from cache/lime_v1.pkl"
+LM = load("lime_v2")
+assert np.allclose(lime_weights(Xsub[k_app]), LM["main"], atol=1e-8), "LIME recomputation differs from cache/lime_v2.pkl"
 
 # ---------------------------------------------------------------- the pool: 12 refused + 18 approved among the first 200
 ref = np.where(p_sub[:200] >= 0.5)[0]
@@ -134,10 +134,8 @@ pool, agree_top, agree_opt = [], 0, 0
 for k in pick:
     x = Xsub[k]
     phi = sv[k]
-    # LIME slope x standardised value (contribution). In regression mode the lime package stores the fitted slopes in
-    # local_exp[1] and their negatives in local_exp[0]; lime_weights (as in analysis_L11.py) reads local_exp[0], so the
-    # sign is restored here. Rankings by |slope| (top feature, agreement) do not depend on the sign.
-    lime = -lime_weights(x) * x
+    # LIME slope x standardised value (contribution); lime_weights reads local_exp[1], the fitted slopes in regression mode
+    lime = lime_weights(x) * x
     ords = np.argsort(-np.abs(phi))
     opts = [int(ords[0]), int(ords[1])]
     lt = int(np.argmax(np.abs(lime)))

@@ -141,7 +141,7 @@ Contribuția Kernel SHAP și panta LIME × valoarea standardizată pentru cele m
 
 ## Sensibilitatea LIME la propriile setări {h=3fc89cb2}
 
-Am repetat LIME de 30 de ori, cu valori inițiale diferite. Cu 500 de eșantioane, variabila de top a fost aceeași în 73 % din rulări, iar suprapunerea Jaccard a primelor cinci variabile a fost 0,72; cu 5 000 de eșantioane, în 100 % din rulări, cu suprapunerea 1,00. Coeficientul de variație al celor mai mari cinci pante scade de la 10 % la 2 %. Lățimea nucleului contează la fel de mult: panta variabilei de top se mută între $-2{,}042$ și $-0{,}001$ cînd $\sigma$ variază de la 0,5 la 10.
+Am repetat LIME de 30 de ori, cu valori inițiale diferite. Cu 500 de eșantioane, variabila de top a fost aceeași în 73 % din rulări, iar suprapunerea Jaccard a primelor cinci variabile a fost 0,72; cu 5 000 de eșantioane, în 100 % din rulări, cu suprapunerea 1,00. Coeficientul de variație al celor mai mari cinci pante scade de la 10 % la 2 %. Lățimea nucleului contează la fel de mult: panta variabilei de top se mută între $0{,}001$ și $2{,}042$ cînd $\sigma$ variază de la 0,5 la 10.
 
 @chart lime_instability
 Stînga: pantele LIME ale cinci variabile în 30 de rulări, cu 500 și cu 5 000 de eșantioane. Dreapta: aceleași pante în funcție de lățimea nucleului (linia punctată: valoarea implicită).

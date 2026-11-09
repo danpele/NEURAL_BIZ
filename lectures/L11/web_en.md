@@ -141,7 +141,7 @@ Kernel SHAP contribution and LIME slope × standardised value for the eight larg
 
 ## Sensitivity of LIME to its settings {h=42e424e9}
 
-We repeated LIME 30 times with different seeds. With 500 samples the top feature was the same in 73 % of the runs and the Jaccard overlap of the top-5 sets was 0.72; with 5,000 samples, in 100 % of the runs, overlap 1.00. The coefficient of variation of the five largest slopes falls from 10 % to 2 %. The kernel width matters as much: the slope of the top feature moves between $-2.042$ and $-0.001$ as $\sigma$ goes from 0.5 to 10.
+We repeated LIME 30 times with different seeds. With 500 samples the top feature was the same in 73 % of the runs and the Jaccard overlap of the top-5 sets was 0.72; with 5,000 samples, in 100 % of the runs, overlap 1.00. The coefficient of variation of the five largest slopes falls from 10 % to 2 %. The kernel width matters as much: the slope of the top feature moves between $0.001$ and $2.042$ as $\sigma$ goes from 0.5 to 10.
 
 @chart lime_instability
 Left: LIME slopes of five features over 30 runs with 500 and with 5,000 samples. Right: the same slopes as a function of the kernel width (dashed line: default).

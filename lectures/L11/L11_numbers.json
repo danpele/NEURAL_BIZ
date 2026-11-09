@@ -172,8 +172,8 @@
   "seconds": 1.0,
   "jacc_500": 0.72,
   "jacc_5000": 1.0,
-  "kw_top1_min": -2.042,
-  "kw_top1_max": -0.001,
+  "kw_top1_min": 0.001,
+  "kw_top1_max": 2.042,
   "kw_sign_flips": 0,
   "cv_500": 10.0,
   "cv_5000": 2.0
@@ -314,5 +314,5 @@
   "ice_spread_hi": 0.95,
   "corr_rooms": 0.33
  },
- "runtime_s": 22.0
+ "runtime_s": 4.0
 }
