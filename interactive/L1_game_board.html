@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class board: you or the network?</title>
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261109g">
+<link rel="stylesheet" href="interactive.css?v=20261109g">
+<style>
+.b-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
+.b-kpi { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; margin-bottom: 1.2rem; }
+.b-k { border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem; text-align: center; background: var(--white); }
+.b-k b { display: block; font-size: 2.4rem; color: var(--main-blue); font-variant-numeric: tabular-nums; }
+.b-k span { font-size: 0.9rem; }
+.b-hist { display: flex; align-items: flex-end; gap: 4px; height: 220px; border-bottom: 1px solid var(--border); }
+.b-bar { flex: 1; background: var(--main-blue); border-radius: 3px 3px 0 0; min-height: 2px; position: relative; }
+.b-bar.net { background: var(--ida-red); }
+.b-bar i { position: absolute; top: -1.3em; left: 0; right: 0; text-align: center; font-style: normal; font-size: 0.8rem; }
+.b-ax { display: flex; gap: 4px; font-size: 0.8rem; }
+.b-ax span { flex: 1; text-align: center; }
+.b-top { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.b-top td { padding: 0.3rem 0.4rem; border-bottom: 1px solid var(--border); }
+.b-top td:last-child { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+#b-qr { background: #fff; padding: 10px; display: inline-block; border: 1px solid var(--border); border-radius: 8px; }
+.b-url { font-size: 0.8rem; word-break: break-all; }
+.b-st { font-size: 0.85rem; color: var(--mid-gray); }
+@media (max-width: 900px) { .b-grid { grid-template-columns: 1fr; } .b-kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="L1_game.html">The game</a></li>
+  <li class="lang-switcher"><a href="L1_game_board.html" class="lang-btn active">EN</a><a href="L1_game_board_ro.html" class="lang-btn ">RO</a></li>
+</ul></nav>
+<main class="imain">
+<h2 class="sec">Class board: you or the network?</h2>
+<div class="b-grid">
+  <div>
+    <div class="b-kpi">
+      <div class="b-k"><b id="b-n">0</b><span>players</span></div>
+      <div class="b-k"><b id="b-you">–</b><span>class, correct decisions</span></div>
+      <div class="b-k"><b id="b-net">–</b><span>network, correct decisions</span></div>
+      <div class="b-k"><b id="b-beat">0</b><span>beat the network</span></div>
+    </div>
+    <h3>Scores of the class</h3>
+    <div class="b-hist" id="b-hist"></div>
+    <div class="b-ax" id="b-ax"></div>
+    <p class="b-st" id="b-st">Waiting for the first results…</p>
+  </div>
+  <div>
+    <h3>Scan to play</h3>
+    <div id="b-qr"></div>
+    <p class="b-url">https://danpele.github.io/NEURAL_BIZ/interactive/L1_game.html</p>
+    <h3>Top 10</h3>
+    <table class="b-top"><tbody id="b-top"></tbody></table>
+  </div>
+</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="../assets/config.js?v=20261109g"></script>
+<script>
+(function () {
+  'use strict';
+  const RO = false, $ = id => document.getElementById(id);
+  const URL_ = (window.NN_CONFIG || {}).QUIZ_SCORES_URL || '';
+  const q = new URLSearchParams(location.search), d = new Date();
+  const SESSION = q.get('session') || ('' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'));
+  const pc = x => x === null ? '–' : (100 * x).toFixed(0) + (RO ? ' %' : '%');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  try { new QRCode($('b-qr'), { text: 'https://danpele.github.io/NEURAL_BIZ/interactive/L1_game.html', width: 220, height: 220 }); } catch (e) { /* QR library unavailable: the address is shown below */ }
+  function draw(j) {
+    $('b-n').textContent = j.players; $('b-you').textContent = pc(j.you); $('b-net').textContent = pc(j.net); $('b-beat').textContent = j.beat;
+    const n = j.n || 10, h = new Array(n + 1).fill(0);
+    j.scores.forEach(s => { if (s >= 0 && s <= n) h[s]++; });
+    const mx = Math.max(1, ...h);
+    $('b-hist').innerHTML = h.map(c => `<div class="b-bar" style="height:${100 * c / mx}%"><i>${c || ''}</i></div>`).join('');
+    $('b-ax').innerHTML = h.map((_, i) => `<span>${i}</span>`).join('');
+    $('b-top').innerHTML = j.top.map((r, i) => `<tr><td>${i + 1}. ${esc(r.nick)}</td><td>${r.you} / ${r.n}</td></tr>`).join('');
+    $('b-st').textContent = 'Session ' + SESSION + ' · updated ' + new Date().toLocaleTimeString(RO ? 'ro-RO' : 'en-GB');
+  }
+  function poll() {
+    if (!/^https:\/\/script\.google\.com\//.test(URL_)) { $('b-st').textContent = 'The board is not connected yet: the instructor has to update the Google Apps Script (tools/quiz_scores.gs).'; return; }
+    fetch(URL_ + '?board=l1&session=' + SESSION, { cache: 'no-store' }).then(r => r.json()).then(j => {
+      if (j.ok) draw(j); else $('b-st').textContent = 'The board is not connected yet: the instructor has to update the Google Apps Script (tools/quiz_scores.gs).';
+    }).catch(() => { $('b-st').textContent = 'The board is not connected yet: the instructor has to update the Google Apps Script (tools/quiz_scores.gs).'; }).finally(() => setTimeout(poll, 5000));
+  }
+  poll();
+})();
+</script>
+</body>
+</html>

@@ -92,8 +92,38 @@
     const cy = res.filter(r => r.bad && r.you).length, cm = res.filter(r => r.bad && r.net).length;
     const ly = res.filter(r => !r.bad && r.you).length, lm = res.filter(r => !r.bad && r.net).length;
     $('g-card').innerHTML = `<h3>${RO ? 'Rezultatul' : 'The result'}</h3><p class="g-big">${TX.end(y, m, n)}</p><ul class="g-res"><li>${TX.caught(cy, cm)}</li><li>${TX.lost(ly, lm)}</li></ul>` +
-      $('g-lesson').innerHTML + `<button type="button" class="btn play" id="g-s2">${TX.again}</button>`;
+      sendForm() + $('g-lesson').innerHTML + `<button type="button" class="btn play" id="g-s2">${TX.again}</button>`;
     $('g-s2').onclick = start;
+    const f = $('g-send');
+    if (f) f.onsubmit = ev => { ev.preventDefault(); send({ you: y, net: m, total: n, caught: cy, lost: ly }); };
+  }
+
+  // ---- class board: the first finished game of the day on this device goes to the instructor's sheet (anonymous, nickname)
+  const URL_ = (window.NN_CONFIG || {}).QUIZ_SCORES_URL || '';
+  const SESSION = (() => { const d = new Date(); return '' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); })();
+  const KEY = 'nn_game_l1_' + SESSION;
+  const store = { get: () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } },
+                  set: v => { try { localStorage.setItem(KEY, v); } catch (e) { /* private mode: nothing kept */ } } };
+  const S = RO ? { h: 'Clasamentul sălii', nick: 'Pseudonim (apare pe ecranul din sală, nu folosiți numele real)', send: 'Trimite rezultatul',
+      sent: 'Rezultatul a fost trimis. Doar primul joc al zilei intră în clasament.', done: 'Ați trimis deja rezultatul de azi; jocurile următoare nu mai intră în clasament.',
+      fail: 'Rezultatul nu a putut fi trimis.', sending: 'Se trimite…' }
+    : { h: 'Class board', nick: 'Nickname (shown on the screen in the room; do not use your real name)', send: 'Send my result',
+      sent: 'Your result was sent. Only the first game of the day counts on the board.', done: 'You already sent today\'s result; later games do not count on the board.',
+      fail: 'The result could not be sent.', sending: 'Sending…' };
+  function sendForm() {
+    if (!/^https:\/\/script\.google\.com\//.test(URL_)) return '';
+    if (store.get()) return `<p class="g-note">${S.done}</p>`;
+    return `<form id="g-send" class="g-send"><h4>${S.h}</h4><label for="g-nick">${S.nick}</label>` +
+      `<div class="g-row"><input id="g-nick" maxlength="20" autocomplete="off" required><button type="submit" class="btn">${S.send}</button></div><p id="g-st" class="g-note" aria-live="polite"></p></form>`;
+  }
+  function send(r) {
+    const st = $('g-st'), b = $('g-send').querySelector('button');
+    b.disabled = true; st.textContent = S.sending;
+    fetch(URL_, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(Object.assign({ type: 'game', game: 'l1', session: SESSION, nick: $('g-nick').value, lang: RO ? 'ro' : 'en' }, r)) })
+      .then(x => x.json()).then(j => {
+        if (j.ok) { store.set('1'); st.textContent = S.sent; $('g-nick').disabled = true; } else { st.textContent = S.fail; b.disabled = false; }
+      }).catch(() => { st.textContent = S.fail; b.disabled = false; });
   }
   function start() {
     deck = draw(); k = 0; res = [];

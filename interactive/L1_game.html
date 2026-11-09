@@ -32,6 +32,11 @@
 .g-of { color: var(--mid-gray); }
 .g-big { font-size: 1.15rem; font-weight: 600; }
 #g-card h4 { color: var(--main-blue); margin: 1rem 0 0.3rem; }
+.g-send { border-top: 1px solid var(--border); margin-top: 0.8rem; padding-top: 0.2rem; }
+.g-send label { font-size: 0.9rem; }
+.g-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+.g-row input { flex: 1 1 180px; padding: 0.45rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+.g-note { font-size: 0.9rem; color: var(--mid-gray); margin: 0.4rem 0 0; }
 </style>
 <script>window.NN_LANG = 'en';</script>
 </head>
@@ -61,8 +66,10 @@
   <div class="blk" id="g-card"></div>
 </section>
 <template id="g-lesson"><h4>What the game shows</h4><ul class="g-res"><li>On all 1,192 test loans the network decides correctly in 92.1% of cases (AUC, the area under the ROC curve, 0.942).</li><li>A signal people tend to overlook: when the debt-to-income ratio is missing from the file, 62.0% of the loans default; when it is reported, 8.6%. The network learned this from the data.</li><li>50% is not necessarily the right threshold: if a default costs five times as much as a lost good client, the cost-minimising threshold is 1/6 (slide 40 of the lecture).</li></ul></template>
+<p class="src"><a href="L1_game_board.html">Class board for the projector</a></p>
 <p class="src foot">Data: HMEQ home-equity loans (Baesens, Roesch and Scheule, 2016; 5,960 loans). The 36 applications of the game are drawn at random from the test loans (12 defaults, 24 repaid; seed 20261108); every game draws 10 of them. Code: lectures/L1/make_game_L1.py.</p>
 </main>
+<script src="../assets/config.js?v=20261109g"></script>
 <script src="L1_game_data.js?v=20261109g"></script>
 <script src="L1_game.js?v=20261109g"></script>
 </body>

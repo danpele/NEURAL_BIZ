@@ -32,6 +32,11 @@
 .g-of { color: var(--mid-gray); }
 .g-big { font-size: 1.15rem; font-weight: 600; }
 #g-card h4 { color: var(--main-blue); margin: 1rem 0 0.3rem; }
+.g-send { border-top: 1px solid var(--border); margin-top: 0.8rem; padding-top: 0.2rem; }
+.g-send label { font-size: 0.9rem; }
+.g-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+.g-row input { flex: 1 1 180px; padding: 0.45rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+.g-note { font-size: 0.9rem; color: var(--mid-gray); margin: 0.4rem 0 0; }
 </style>
 <script>window.NN_LANG = 'ro';</script>
 </head>
@@ -61,8 +66,10 @@
   <div class="blk" id="g-card"></div>
 </section>
 <template id="g-lesson"><h4>Ce arată jocul</h4><ul class="g-res"><li>Pe toate cele 1.192 de credite de test, rețeaua decide corect în 92,1 % din cazuri (AUC, aria de sub curba ROC, 0,942).</li><li>Un semnal pe care oamenii îl trec ușor cu vederea: cînd raportul datorii/venit lipsește din dosar, 62,0 % dintre credite ajung în neplată; cînd este raportat, 8,6 %. Rețeaua a învățat asta din date.</li><li>Pragul de 50 % nu este neapărat cel potrivit: dacă o neplată costă de cinci ori cît un client bun pierdut, pragul care minimizează costul este 1/6 (slide-ul 40 din curs).</li></ul></template>
+<p class="src"><a href="L1_game_board_ro.html">Clasamentul sălii, pentru proiector</a></p>
 <p class="src foot">Date: creditele HMEQ garantate cu locuința (Baesens, Roesch și Scheule, 2016; 5.960 de credite). Cele 36 de cereri din joc sînt extrase aleator dintre creditele de test (12 neplăți, 24 rambursate; sămînța 20261108); fiecare joc extrage 10 dintre ele. Cod: lectures/L1/make_game_L1.py.</p>
 </main>
+<script src="../assets/config.js?v=20261109g"></script>
 <script src="L1_game_data.js?v=20261109g"></script>
 <script src="L1_game.js?v=20261109g"></script>
 </body>

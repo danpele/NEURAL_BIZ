@@ -46,10 +46,57 @@ function verify_(idToken) {
   return { name: t.name || t.email, email: t.email };
 }
 
+// ------------------------------------------------------------
+// Jocurile de la curs (de ex. cursul 1, "Dumneavoastră sau rețeaua?"): rezultate anonime, cu pseudonim, fără logare.
+// Foaia "Joc" se creează la primul rezultat. Clasamentul sălii: GET ?board=l1&session=AAAALLZZ (ziua cursului).
+// ------------------------------------------------------------
+var GAME_HEADER = ['Data', 'Sesiune', 'Joc', 'Pseudonim', 'Corect', 'Rețeaua', 'Total', 'Neplăți oprite', 'Clienți buni respinși', 'Limba'];
+
+function gameSheet_() {
+  var ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SS_ID'));
+  var sh = ss.getSheetByName('Joc');
+  if (!sh) {
+    sh = ss.insertSheet('Joc');
+    sh.getRange(1, 1, 1, GAME_HEADER.length).setValues([GAME_HEADER]).setFontWeight('bold');
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+function saveGame_(p) {
+  var n = Number(p.total), you = Number(p.you), net = Number(p.net);
+  var ok = /^l([1-9]|1[0-4])$/.test(String(p.game)) && /^\d{8}$/.test(String(p.session)) &&
+           n > 0 && n <= 50 && you >= 0 && you <= n && net >= 0 && net <= n;
+  if (!ok) return { ok: false, error: 'data' };
+  var nick = String(p.nick || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 20) || 'Anonim';
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  gameSheet_().appendRow([new Date(), String(p.session), String(p.game), nick, you, net, n,
+    Number(p.caught) || 0, Number(p.lost) || 0, String(p.lang || '')]);
+  lock.releaseLock();
+  return { ok: true };
+}
+
+function board_(game, session) {
+  var rows = gameSheet_().getDataRange().getValues().slice(1)
+    .filter(function (r) { return String(r[1]) === session && String(r[2]) === game; });
+  var top = rows.map(function (r) { return { nick: String(r[3]), you: Number(r[4]), net: Number(r[5]), n: Number(r[6]), t: new Date(r[0]).getTime() }; })
+    .sort(function (a, b) { return (b.you / b.n - a.you / a.n) || (a.t - b.t); });
+  var mean = function (k) { return top.length ? top.reduce(function (s, r) { return s + r[k] / r.n; }, 0) / top.length : null; };
+  return { ok: true, players: top.length, you: mean('you'), net: mean('net'),
+           beat: top.filter(function (r) { return r.you > r.net; }).length,
+           tie: top.filter(function (r) { return r.you === r.net; }).length,
+           scores: top.map(function (r) { return r.you; }), n: top.length ? top[0].n : 10,
+           top: top.slice(0, 10).map(function (r) { return { nick: r.nick, you: r.you, net: r.net, n: r.n }; }) };
+}
+
 function doPost(e) {
   var out = { ok: false };
   try {
     var p = JSON.parse(e.postData.contents);
+    if (p.type === 'game') {
+      return ContentService.createTextOutput(JSON.stringify(saveGame_(p))).setMimeType(ContentService.MimeType.JSON);
+    }
     var who = verify_(p.credential);
     if (!who) {
       out.error = 'token';
@@ -74,6 +121,17 @@ function doPost(e) {
   return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
 }
 
-function doGet() {
+function doGet(e) {
+  var q = (e && e.parameter) || {};
+  if (q.board) {
+    var out;
+    try {
+      out = /^l([1-9]|1[0-4])$/.test(String(q.board)) && /^\d{8}$/.test(String(q.session))
+        ? board_(String(q.board), String(q.session)) : { ok: false, error: 'data' };
+    } catch (err) {
+      out = { ok: false, error: 'server' };
+    }
+    return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
+  }
   return ContentService.createTextOutput('NN quiz scores endpoint');
 }
