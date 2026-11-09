@@ -1,0 +1,33 @@
+/* Classroom games of the NN course (interactive/Lk_game.html), on top of assets/site.css and interactive.css */
+.g-wrap { max-width: 820px; }
+.g-tab { width: 100%; border-collapse: collapse; margin: 0.3rem 0 0.8rem; font-size: 0.95rem; }
+.g-tab th { text-align: left; font-weight: 500; padding: 0.3rem 0.6rem 0.3rem 0; border-bottom: 1px solid var(--border); width: 62%; }
+.g-tab td { text-align: right; font-weight: 600; padding: 0.3rem 0; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+.g-miss { color: var(--ida-red); font-style: italic; font-weight: 600; }
+.g-act { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
+.g-act .btn { flex: 1 1 160px; padding: 0.7rem 1rem; font-size: 1rem; }
+.g-act .btn:disabled { opacity: 0.45; cursor: default; }
+.g-act .btn.g-is { opacity: 1; box-shadow: 0 0 0 3px #2E7D32 inset; }
+.g-act .btn.g-mine { opacity: 1; }
+.g-ok { border-color: #2E7D32; color: #2E7D32; }
+.g-ok:hover:not(:disabled) { background: #2E7D32; color: #fff; }
+.g-no { border-color: var(--ida-red); color: var(--ida-red); }
+.g-no:hover:not(:disabled) { background: var(--ida-red); color: #fff; }
+.g-res { margin: 0.7rem 0 0.8rem 1.2rem; }
+.g-res li { margin: 0.2rem 0; }
+.g-right { color: #2E7D32; font-weight: 700; }
+.g-wrong { color: var(--ida-red); font-weight: 700; }
+.g-score { font-size: 1.05rem; margin: 0 0 0.6rem; min-height: 1.5em; }
+.g-of { color: var(--mid-gray); }
+.g-big { font-size: 1.15rem; font-weight: 600; }
+.g-fig { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: 6px; background: #fff; }
+.g-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem; }
+.g-quote { font-size: 1.1rem; border-left: 4px solid var(--main-blue); background: #EEF3FA; padding: 0.7rem 0.9rem; border-radius: 4px; margin: 0.3rem 0 0.4rem; }
+.g-chart { width: 100%; height: 300px; }
+#g-card h4 { color: var(--main-blue); margin: 1rem 0 0.3rem; }
+.g-send { border-top: 1px solid var(--border); margin-top: 0.8rem; padding-top: 0.2rem; }
+.g-send label { font-size: 0.9rem; }
+.g-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+.g-row input { flex: 1 1 180px; padding: 0.45rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+.g-note { font-size: 0.9rem; color: var(--mid-gray); margin: 0.4rem 0 0; }
+@media (max-width: 720px) { .g-chart { height: 240px; } }

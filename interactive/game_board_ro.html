@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clasamentul sălii: dumneavoastră sau rețeaua?</title>
+<title>Clasamentul sălii</title>
 <link rel="icon" href="../assets/logos/ase_logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css?v=20261109g">
@@ -32,11 +32,11 @@
 <body>
 <nav><ul>
   <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
-  <li><a href="L1_game_ro.html">Jocul</a></li>
-  <li class="lang-switcher"><a href="L1_game_board.html" class="lang-btn ">EN</a><a href="L1_game_board_ro.html" class="lang-btn active">RO</a></li>
+  <li><a id="b-game" href="#">Jocul</a></li>
+  <li class="lang-switcher"><a href="game_board.html" class="lang-btn ">EN</a><a href="game_board_ro.html" class="lang-btn active">RO</a></li>
 </ul></nav>
 <main class="imain">
-<h2 class="sec">Clasamentul sălii: dumneavoastră sau rețeaua?</h2>
+<h2 class="sec" id="b-title"></h2>
 <div class="b-grid">
   <div>
     <div class="b-kpi">
@@ -53,7 +53,7 @@
   <div>
     <h3>Scanați pentru a juca</h3>
     <div id="b-qr"></div>
-    <p class="b-url">https://danpele.github.io/NEURAL_BIZ/interactive/L1_game_ro.html</p>
+    <p class="b-url" id="b-url"></p>
     <h3>Primii 10</h3>
     <table class="b-top"><tbody id="b-top"></tbody></table>
   </div>
@@ -67,10 +67,15 @@
   const RO = true, $ = id => document.getElementById(id);
   const URL_ = (window.NN_CONFIG || {}).QUIZ_SCORES_URL || '';
   const q = new URLSearchParams(location.search), d = new Date();
+  const GAME = /^l([1-9]|1[0-4])$/.test(q.get('game') || '') ? q.get('game') : 'l1', K = GAME.slice(1);
+  const PAGE = 'L' + K + '_game_ro.html', GURL = 'https://danpele.github.io/NEURAL_BIZ/interactive/' + PAGE;
+  $('b-title').textContent = 'Cursul ' + K + ' · clasamentul sălii';
+  $('b-game').href = PAGE; $('b-url').textContent = GURL;
+  document.querySelectorAll('.lang-btn').forEach(a => { a.href = a.getAttribute('href').split('?')[0] + '?game=' + GAME; });
   const SESSION = q.get('session') || ('' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'));
   const pc = x => x === null ? '–' : (100 * x).toFixed(0) + (RO ? ' %' : '%');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  try { new QRCode($('b-qr'), { text: 'https://danpele.github.io/NEURAL_BIZ/interactive/L1_game_ro.html', width: 220, height: 220 }); } catch (e) { /* QR library unavailable: the address is shown below */ }
+  try { new QRCode($('b-qr'), { text: GURL, width: 220, height: 220 }); } catch (e) { /* QR library unavailable: the address is shown below */ }
   function draw(j) {
     $('b-n').textContent = j.players; $('b-you').textContent = pc(j.you); $('b-net').textContent = pc(j.net); $('b-beat').textContent = j.beat;
     const n = j.n || 10, h = new Array(n + 1).fill(0);
@@ -83,7 +88,7 @@
   }
   function poll() {
     if (!/^https:\/\/script\.google\.com\//.test(URL_)) { $('b-st').textContent = 'Clasamentul nu este încă conectat: scriptul Google Apps Script (tools/quiz_scores.gs) trebuie actualizat.'; return; }
-    fetch(URL_ + '?board=l1&session=' + SESSION, { cache: 'no-store' }).then(r => r.json()).then(j => {
+    fetch(URL_ + '?board=' + GAME + '&session=' + SESSION, { cache: 'no-store' }).then(r => r.json()).then(j => {
       if (j.ok) draw(j); else $('b-st').textContent = 'Clasamentul nu este încă conectat: scriptul Google Apps Script (tools/quiz_scores.gs) trebuie actualizat.';
     }).catch(() => { $('b-st').textContent = 'Clasamentul nu este încă conectat: scriptul Google Apps Script (tools/quiz_scores.gs) trebuie actualizat.'; }).finally(() => setTimeout(poll, 5000));
   }
