@@ -242,6 +242,14 @@ Costul pe solicitant German credit în funcție de prag, cu predicții în afara
 
 Cincisprezece rînduri sînt suficiente: un `nn.Sequential` de straturi liniare și ReLU, `BCEWithLogitsLoss` (sigmoida și entropia încrucișată într-o singură funcție stabilă), optimizatorul Adam și o buclă cu `zero_grad`, `backward` și `step`. Notebook-ul acestui curs adaugă pregătirea datelor, oprirea pe baza validării și inițializările.
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [TensorFlow Playground](https://playground.tensorflow.org/): alegeți setul de date în formă de cerc și păstrați doar intrările $x_1, x_2$. Fără strat ascuns, frontiera rămîne o dreaptă, ca la regresia logistică; adăugați un strat ascuns cu patru neuroni și frontiera se închide în jurul cercului.
+- [TensorFlow Playground](https://playground.tensorflow.org/): păstrați stratul ascuns și setați activarea la Linear: frontiera redevine dreaptă, pentru că o compunere de funcții liniare este liniară.
+- [3Blue1Brown, capitolul 1](https://www.3blue1brown.com/topics/neural-networks): ce calculează ponderile, termenii liberi și straturile unei rețele, pe cifre scrise de mînă.
+
 ## @end
 
 Pe 3 576 de credite HMEQ, MLP depășește scorul logistic (AUC 0,945 față de 0,920), iar boosting le depășește pe amîndouă; pe 1 000 de solicitanți germani, niciun model nu depășește semnificativ regresia logistică. În ambele cazuri, pragul stabilit din costuri contează mai mult decît modelul.

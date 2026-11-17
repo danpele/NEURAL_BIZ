@@ -591,6 +591,13 @@ def build(lang, H=None):
           "antrenat prin gradient, cu aceste modele preantrenate."), sep="5pt") +
         note(t("Findings as stated in the papers; numbers on the other slides come from our own computations.",
                "Rezultatele sînt cele declarate în lucrări; cifrele de pe celelalte slide-uri provin din calculele noastre.")))
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        t('\\textbf{\\href{https://playground.tensorflow.org/}{TensorFlow Playground}}: press the step button to see one gradient update at a time, then compare learning rates 0.03, 3 and 0.0001: the loss settles, oscillates, or barely moves.',
+          '\\textbf{\\href{https://playground.tensorflow.org/}{TensorFlow Playground}}: apăsați butonul de pas pentru a vedea cîte o actualizare a gradientului, apoi comparați ratele de învățare 0,03, 3 și 0,0001: pierderea se stabilizează, oscilează sau abia se mișcă.'),
+        t('\\textbf{\\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, chapters 2--4}}: gradient descent, the intuition of backpropagation and its calculus, with animations of the chain rule.',
+          '\\textbf{\\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, capitolele 2--4}}: coborîrea pe gradient, intuiția propagării înapoi și calculul ei, cu animații ale regulii de derivare a funcțiilor compuse.'),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapters 7--8: gradient descent and backpropagation: ",
           "\\textbf{Bishop \\& Bishop (2024)}, capitolele 7--8: coborîrea pe gradient și propagarea înapoi: ") + "\\href{https://www.bishopbook.com}{bishopbook.com}.",

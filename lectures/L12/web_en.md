@@ -228,6 +228,15 @@ The published study evaluated much larger general-purpose models; the results he
 
 Hallucination (86.2 % wrong names without documents) is controlled by RAG with sources; leakage by testing on text written after the training cut-off; prompt sensitivity (12.9 points) by selecting and freezing prompts on validation data; miscalibration (ECE 4.7 % zero-shot) by checking and, if needed, recalibrating on validation data; cost by the smallest model that passes the test; data protection by local models and by the duties of the European Union (EU) Artificial Intelligence (AI) Act for high-risk uses such as credit scoring.
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/): the temperature of this lecture on a live GPT-2: at low temperature one continuation takes almost all the probability, at high temperature unlikely tokens become plausible.
+- [Mixture of experts (M. Grootendorst)](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts): a router sends each token to a few experts, so a model can have many parameters while using only some of them per token.
+- [LLM Inference Handbook](https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/): what happens between the prompt and the answer: the prefill of the prompt, token-by-token decoding, the cache of keys and values, and the time to the first token.
+- [LLM Visualization (B. Bycroft)](https://bbycroft.net/llm): the same architecture at several sizes, from a small GPT to GPT-2 and GPT-3.
+
 ## @end
 
 A prompt is a model: measure it on labelled data, with intervals, seeds and paraphrases; ground answers in documents; backtest any risk number.

@@ -866,6 +866,19 @@ FinBERT fine-tuned & \cellcolor{Forest!55}84.8 & \cellcolor{Forest!55}88.2 & \ce
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)}\par\vspace{0.5mm}
 \end{frame}
 
+\begin{frame}{Explore it visually}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{5pt}
+  \item \textbf{\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: a GPT-2 model running in the browser: type a sentence, open one attention head to see the scores $\mathbf q^{\top}\mathbf k$, the softmax and the weighted sum of the values
+    \begin{itemize}\setlength{\itemsep}{0pt}
+      \item Move the temperature to sharpen or flatten the next-token distribution.
+    \end{itemize}
+  \item \textbf{\href{https://bbycroft.net/llm}{LLM Visualization (B.\ Bycroft)}}: a 3D walk through a small GPT, block by block: every matrix product of normalisation, attention and the feed-forward layer.
+  \item \textbf{\href{https://jalammar.github.io/illustrated-transformer/}{The Illustrated Transformer (J.\ Alammar)}}: queries, keys and values drawn step by step for one sentence.
+  \item \textbf{\href{https://magazine.sebastianraschka.com/p/visual-attention-variants}{Attention variants (S.\ Raschka)}}: from multi-head to grouped-query and latent attention, sliding windows and sparse attention: how recent models reduce the memory of keys and values.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]

@@ -620,6 +620,10 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies (ASE); Romanian Academy, Institute for Economic Forecasting (IPE))",
                                "(Academia de Studii Economice din București (ASE); Academia Română, Institutul de Prognoză Economică (IPE))"))
 
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        (t('\\textbf{\\href{https://www.neuronpedia.org/}{Neuronpedia}}', '\\textbf{\\href{https://www.neuronpedia.org/}{Neuronpedia}}'), t('open-source platform for the interpretability of language models: sparse autoencoders split the activations of a layer into features, and each feature page lists the texts on which it fires most.', 'platformă open-source pentru interpretabilitatea modelelor lingvistice: autoencoderele rare descompun activările unui strat în trăsături, iar pagina fiecărei trăsături arată textele pe care se activează cel mai puternic.'), t('compare the two views: SHAP and LIME attribute one prediction to the inputs, while these features describe what the inside of the model represents.', 'comparați cele două perspective: SHAP și LIME atribuie o predicție intrărilor, pe cînd aceste trăsături descriu ce reprezintă interiorul modelului.')),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{C.\\ Molnar, Interpretable Machine Learning}, free online: ", "\\textbf{C.\\ Molnar, Interpretable Machine Learning}, gratuit online: ") +
         "\\href{https://christophm.github.io/interpretable-ml-book/}{christophm.github.io/interpretable-ml-book}.",

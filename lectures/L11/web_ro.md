@@ -279,6 +279,13 @@ Un audit al explicațiilor pornește de la scop: cine citește explicația (clie
 
 @practice raportul de validare trebuie să conțină explicațiile și testele lor de stabilitate, nu doar acuratețea.
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [Neuronpedia](https://www.neuronpedia.org/): platformă open-source pentru interpretabilitatea modelelor lingvistice: autoencoderele rare descompun activările unui strat în trăsături, iar pagina fiecărei trăsături arată textele pe care se activează cel mai puternic.
+- [Neuronpedia](https://www.neuronpedia.org/): comparați cele două perspective: SHAP și LIME atribuie o predicție intrărilor, pe cînd aceste trăsături descriu ce reprezintă interiorul modelului.
+
 ## @end
 
 Cursul 12 trece la modelele lingvistice mari, unde explicațiile înseși devin text, cu noi întrebări despre fidelitate.

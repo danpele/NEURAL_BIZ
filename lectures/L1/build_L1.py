@@ -765,6 +765,12 @@ def build(lang, H=None):
           "pe S\\&P 500 --- cursul 14."), sep="2pt") +
         note(t("Findings as stated in the papers; numbers on the other slides come from our own computations.",
                "Rezultatele sînt cele declarate în lucrări; cifrele de pe celelalte slide-uri provin din calculele noastre.")), size="footnotesize")
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        (t('\\textbf{\\href{https://playground.tensorflow.org/}{TensorFlow Playground}}', '\\textbf{\\href{https://playground.tensorflow.org/}{TensorFlow Playground}}'), t('choose the circle data set and keep only the inputs $x_1, x_2$. With no hidden layer the boundary stays a straight line, as in logistic regression; add one hidden layer of four neurons and the boundary closes around the circle.', 'alegeți setul de date în formă de cerc și păstrați doar intrările $x_1, x_2$. Fără strat ascuns, frontiera rămîne o dreaptă, ca la regresia logistică; adăugați un strat ascuns cu patru neuroni și frontiera se închide în jurul cercului.'), t('keep the hidden layer and set the activation to Linear: the boundary is straight again, because a composition of linear maps is linear.', 'păstrați stratul ascuns și setați activarea la Linear: frontiera redevine dreaptă, pentru că o compunere de funcții liniare este liniară.')),
+        t('\\textbf{\\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, chapter 1}}: what the weights, biases and layers of a network compute, on handwritten digits.',
+          '\\textbf{\\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, capitolul 1}}: ce calculează ponderile, termenii liberi și straturile unei rețele, pe cifre scrise de mînă.'),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapters 4--6: linear models, classification, deep networks: ",
           "\\textbf{Bishop \\& Bishop (2024)}, capitolele 4--6: modele liniare, clasificare, rețele adînci: ") +

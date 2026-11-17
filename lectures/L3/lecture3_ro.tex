@@ -596,6 +596,17 @@ Model mai mic & mai puțini parametri & lățime, adîncime & regresia logistic�
 \end{itemize}}
 \end{frame}
 
+\begin{frame}{Explorați vizual}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{5pt}
+  \item \textbf{\href{https://playground.tensorflow.org/}{TensorFlow Playground}}
+    \begin{itemize}\setlength{\itemsep}{0pt}
+      \item Alegeți setul de date în spirală, zgomot 50 și 10\,\% date de antrenare, și o rețea cu mai multe straturi ascunse: pierderea pe test rămîne peste cea de antrenare, adică supraînvățare.
+      \item Setați regularizarea la L2, apoi la L1, cu rata 0,01: L1 aduce multe ponderi la zero, desenate ca legături subțiri, iar L2 le micșorează pe toate.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]

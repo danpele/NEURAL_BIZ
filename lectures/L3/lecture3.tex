@@ -594,6 +594,17 @@ Smaller model & fewer parameters & width, depth & logistic beats MLP on German c
 \end{itemize}}
 \end{frame}
 
+\begin{frame}{Explore it visually}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{5pt}
+  \item \textbf{\href{https://playground.tensorflow.org/}{TensorFlow Playground}}
+    \begin{itemize}\setlength{\itemsep}{0pt}
+      \item Choose the spiral data set, noise 50 and 10\,\% training data, and a network with several hidden layers: the test loss stays above the training loss, which is overfitting.
+      \item Set the regularisation to L2, then L1, with rate 0.01: L1 drives many weights to zero, drawn as thin connections, while L2 shrinks them all.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]

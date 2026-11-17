@@ -228,6 +228,15 @@ Studiul publicat a evaluat modele generale mult mai mari; rezultatele de aici de
 
 Halucinațiile (86,2 % nume greșite fără documente) se controlează prin RAG cu surse; scurgerea datelor, prin testare pe texte scrise după limita datelor de antrenare; sensibilitatea la prompt (12,9 puncte), prin alegerea și fixarea prompturilor pe date de validare; calibrarea (ECE 4,7 % zero-shot), prin verificare și, la nevoie, recalibrare pe date de validare; costul, prin cel mai mic model care trece testul; protecția datelor, prin modele locale și prin obligațiile din Regulamentul Uniunii Europene (UE) privind inteligența artificială (AI), pentru utilizările cu risc ridicat precum scoringul de credit.
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/): temperatura din acest curs pe un GPT-2 care rulează în browser: la temperatură mică o continuare ia aproape toată probabilitatea, la temperatură mare tokenii improbabili devin plauzibili.
+- [Mixture of experts (M. Grootendorst)](https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts): un router trimite fiecare token la cîțiva experți, astfel că modelul poate avea mulți parametri, dar folosește doar o parte dintre ei pentru fiecare token.
+- [LLM Inference Handbook](https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/): ce se întîmplă între prompt și răspuns: procesarea promptului (prefill), decodarea token cu token, memoria cache pentru keys și values și timpul pînă la primul token.
+- [LLM Visualization (B. Bycroft)](https://bbycroft.net/llm): aceeași arhitectură la mai multe dimensiuni, de la un GPT mic la GPT-2 și GPT-3.
+
 ## @end
 
 Un prompt este un model: măsurați-l pe date etichetate, cu intervale, rulări repetate și reformulări; ancorați răspunsurile în documente; testați retrospectiv orice cifră de risc.

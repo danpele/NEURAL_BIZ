@@ -115,6 +115,14 @@ F1 pe teme, pe tweet-urile de test: TF-IDF cu regresie logistică și embedding 
 
 Pele, Bolovăneanu, Lin, Ren, Ginavar, Spilak, Andrei, Toma, Lessmann și Härdle (2026) arată că modelele lingvistice mari (LLM) pot prognoza valoarea expusă la risc (VaR) și pierderea medie peste VaR (ES), comparate cu modelele clasice de risc prin teste retrospective formale (LLM-VaR și LLM-ES). În BitMood, Conda, Găman, Bâg, Mazurencu-Marinescu-Pele, Pele și Härdle (2026) clasifică 120 000 de postări de pe Facebook din perioada 2015–2023 cu FinBERT în scoruri compuse de sentiment; sentimentul prognozează volumul tranzacțiilor cu Bitcoin, strategiile bazate pe sentiment depășesc strategia cumpără-și-păstrează, iar modelarea temelor urmărește subiectele discuției.
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [Embedding Atlas (Apple)](https://apple.github.io/embedding-atlas/): instrument open-source care desenează embeddings de text în două dimensiuni, cu etichete automate ale grupurilor, căutare și vecini apropiați; rulați-l pe propozițiile PhraseBank din acest curs și colorați punctele după sentiment.
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/): primul pas al unui model lingvistic pe propoziția voastră: tokenii, embeddings-urile lor și embeddings-urile de poziție adunate la ele.
+- [3Blue1Brown, capitolul 5](https://www.3blue1brown.com/topics/neural-networks): direcții în spațiul embeddings, de exemplu diferența dintre vectorii lui „man” și „woman”.
+
 ## @end
 
 Textul devine numere prin frecvențe (BoW, TF-IDF) sau prin vectori denși învățați din co-apariții (word2vec, GloVe). Pe fraze financiare reale, TF-IDF cu regresie logistică este un reper puternic, iar vectorii preantrenați ajută cel mai mult cînd etichetele sînt puține. Cursul 7 adaugă atenția și vectorii contextuali, comparați corect cu aceste modele de referință.

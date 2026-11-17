@@ -662,6 +662,17 @@ def build(lang, H=None):
                             "Rezultatele sînt preluate din rezumatele lucrărilor; cifrele de pe celelalte slide-uri provin din datele noastre.")),
         "footnotesize", cite=t("(Bucharest University of Economic Studies, ASE; Romanian Academy, Institute for Economic Forecasting, IPE)",
                                "(Academia de Studii Economice din București, ASE; Academia Română, Institutul de Prognoză Economică, IPE)"))
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        t('\\textbf{\\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: the temperature of this lecture on a live GPT-2: at low temperature one continuation takes almost all the probability, at high temperature unlikely tokens become plausible.',
+          '\\textbf{\\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: temperatura din acest curs pe un GPT-2 care rulează în browser: la temperatură mică o continuare ia aproape toată probabilitatea, la temperatură mare tokenii improbabili devin plauzibili.'),
+        t('\\textbf{\\href{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts}{Mixture of experts (M.\\ Grootendorst)}}: a router sends each token to a few experts, so a model can have many parameters while using only some of them per token.',
+          '\\textbf{\\href{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts}{Mixture of experts (M.\\ Grootendorst)}}: un router trimite fiecare token la cîțiva experți, astfel că modelul poate avea mulți parametri, dar folosește doar o parte dintre ei pentru fiecare token.'),
+        t('\\textbf{\\href{https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/}{LLM Inference Handbook}}: what happens between the prompt and the answer: the prefill of the prompt, token-by-token decoding, the cache of keys and values, and the time to the first token.',
+          '\\textbf{\\href{https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/}{LLM Inference Handbook}}: ce se întîmplă între prompt și răspuns: procesarea promptului (prefill), decodarea token cu token, memoria cache pentru keys și values și timpul pînă la primul token.'),
+        t('\\textbf{\\href{https://bbycroft.net/llm}{LLM Visualization (B.\\ Bycroft)}}: the same architecture at several sizes, from a small GPT to GPT-2 and GPT-3.',
+          '\\textbf{\\href{https://bbycroft.net/llm}{LLM Visualization (B.\\ Bycroft)}}: aceeași arhitectură la mai multe dimensiuni, de la un GPT mic la GPT-2 și GPT-3.'),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Hugging Face} course on LLMs: ", "\\textbf{Hugging Face}, curs despre LLM: ") + "\\href{https://huggingface.co/learn/llm-course}{huggingface.co/learn/llm-course}.",
         t("\\textbf{Qwen2.5} models and report: ", "\\textbf{Qwen2.5}, modele și raport: ") + "\\href{https://huggingface.co/Qwen}{huggingface.co/Qwen}.",

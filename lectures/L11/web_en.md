@@ -279,6 +279,13 @@ An audit of explanations starts from the purpose: who reads the explanation (cus
 
 @practice the validation report should contain the explanations and their stability tests, not only the accuracy.
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [Neuronpedia](https://www.neuronpedia.org/): open-source platform for the interpretability of language models: sparse autoencoders split the activations of a layer into features, and each feature page lists the texts on which it fires most.
+- [Neuronpedia](https://www.neuronpedia.org/): compare the two views: SHAP and LIME attribute one prediction to the inputs, while these features describe what the inside of the model represents.
+
 ## @end
 
 Lecture 12 moves to large language models, where explanations themselves become text, with new questions about faithfulness.

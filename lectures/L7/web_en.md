@@ -223,6 +223,15 @@ Patches of a time series become tokens in pretrained forecasting models (Lecture
 
 @practice whatever the data, the question is the same: what are the tokens, and which pairs may attend to each other?
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/): a GPT-2 model running in the browser: type a sentence, open one attention head to see the scores $\mathbf q^{\top}\mathbf k$, the softmax and the weighted sum of the values; move the temperature to sharpen or flatten the next-token distribution.
+- [LLM Visualization (B. Bycroft)](https://bbycroft.net/llm): a 3D walk through a small GPT, block by block: every matrix product of normalisation, attention and the feed-forward layer.
+- [The Illustrated Transformer (J. Alammar)](https://jalammar.github.io/illustrated-transformer/): queries, keys and values drawn step by step for one sentence.
+- [Attention variants (S. Raschka)](https://magazine.sebastianraschka.com/p/visual-attention-variants): from multi-head to grouped-query and latent attention, sliding windows and sparse attention: how recent models reduce the memory of keys and values.
+
 ## @end
 
 Use transformers as measurement instruments: time-stamp the inputs, chunk long texts, and backtest the signal.

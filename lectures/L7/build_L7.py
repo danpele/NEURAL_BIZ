@@ -551,6 +551,17 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        t('\\textbf{\\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: a GPT-2 model running in the browser: type a sentence, open one attention head to see the scores $\\mathbf q^{\\top}\\mathbf k$, the softmax and the weighted sum of the values; move the temperature to sharpen or flatten the next-token distribution.',
+          '\\textbf{\\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: un model GPT-2 care rulează în browser: scrieți o propoziție, deschideți un cap de atenție și urmăriți scorurile $\\mathbf q^{\\top}\\mathbf k$, softmax-ul și suma ponderată a valorilor; mutați temperatura ca distribuția următorului token să devină mai ascuțită sau mai plată.'),
+        t('\\textbf{\\href{https://bbycroft.net/llm}{LLM Visualization (B.\\ Bycroft)}}: a 3D walk through a small GPT, block by block: every matrix product of normalisation, attention and the feed-forward layer.',
+          '\\textbf{\\href{https://bbycroft.net/llm}{LLM Visualization (B.\\ Bycroft)}}: o parcurgere 3D a unui GPT mic, bloc cu bloc: fiecare produs de matrice din normalizare, atenție și stratul feed-forward.'),
+        t('\\textbf{\\href{https://jalammar.github.io/illustrated-transformer/}{The Illustrated Transformer (J.\\ Alammar)}}: queries, keys and values drawn step by step for one sentence.',
+          '\\textbf{\\href{https://jalammar.github.io/illustrated-transformer/}{The Illustrated Transformer (J.\\ Alammar)}}: queries, keys și values desenate pas cu pas pentru o propoziție.'),
+        t('\\textbf{\\href{https://magazine.sebastianraschka.com/p/visual-attention-variants}{Attention variants (S.\\ Raschka)}}: from multi-head to grouped-query and latent attention, sliding windows and sparse attention: how recent models reduce the memory of keys and values.',
+          '\\textbf{\\href{https://magazine.sebastianraschka.com/p/visual-attention-variants}{Variante ale atenției (S.\\ Raschka)}}: de la atenția multi-head la grouped-query și latent attention, ferestre glisante și atenție rară: cum reduc modelele recente memoria pentru keys și values.'),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Vaswani et al.\\ (2017)}, ``Attention is all you need'': the original transformer.", "\\textbf{Vaswani et al.\\ (2017)}, ``Attention is all you need'': transformerul original"),
         t("\\textbf{Bishop \\& Bishop (2024)}, chapter 12: transformers, from attention to large language models.", "\\textbf{Bishop \\& Bishop (2024)}, capitolul 12: transformerele, de la atenție la modelele mari de limbaj"),

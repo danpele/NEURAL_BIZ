@@ -187,6 +187,13 @@ Total test-period cost against the number of alerts sent to review.
 
 @practice the alert budget, set from amounts and review costs, is the business decision; the model only ranks.
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [TensorFlow Playground](https://playground.tensorflow.org/): choose the spiral data set, noise 50 and 10% training data, and a network with several hidden layers: the test loss stays above the training loss, which is overfitting.
+- [TensorFlow Playground](https://playground.tensorflow.org/): set the regularisation to L2, then L1, with rate 0.01: L1 drives many weights to zero, drawn as thin connections, while L2 shrinks them all.
+
 ## @end
 
 For rare events, report PR-AUC, precision at a workable recall and the cost of alerts, on a time-ordered test set and with several seeds.

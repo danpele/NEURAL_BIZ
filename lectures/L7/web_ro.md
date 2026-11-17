@@ -223,6 +223,15 @@ Fragmentele unei serii de timp devin tokeni în modelele de prognoză preantrena
 
 @practice oricare ar fi datele, întrebarea este aceeași: care sînt tokenii și ce perechi au voie să-și acorde atenție?
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/): un model GPT-2 care rulează în browser: scrieți o propoziție, deschideți un cap de atenție și urmăriți scorurile $\mathbf q^{\top}\mathbf k$, softmax-ul și suma ponderată a valorilor; mutați temperatura ca distribuția următorului token să devină mai ascuțită sau mai plată.
+- [LLM Visualization (B. Bycroft)](https://bbycroft.net/llm): o parcurgere 3D a unui GPT mic, bloc cu bloc: fiecare produs de matrice din normalizare, atenție și stratul feed-forward.
+- [The Illustrated Transformer (J. Alammar)](https://jalammar.github.io/illustrated-transformer/): queries, keys și values desenate pas cu pas pentru o propoziție.
+- [Variante ale atenției (S. Raschka)](https://magazine.sebastianraschka.com/p/visual-attention-variants): de la atenția multi-head la grouped-query și latent attention, ferestre glisante și atenție rară: cum reduc modelele recente memoria pentru keys și values.
+
 ## @end
 
 Folosiți transformerele ca instrumente de măsură: marcați în timp intrările, împărțiți textele lungi și testați retrospectiv semnalul.

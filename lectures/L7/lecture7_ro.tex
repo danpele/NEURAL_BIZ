@@ -880,6 +880,19 @@ FinBERT ajustat & \cellcolor{Forest!55}84{,}8 & \cellcolor{Forest!55}88{,}2 & \c
 \par\vfill\noindent{\scriptsize\color{FooterGray}(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)}\par\vspace{0.5mm}
 \end{frame}
 
+\begin{frame}{Explorați vizual}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{5pt}
+  \item \textbf{\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: un model GPT-2 care rulează în browser: scrieți o propoziție, deschideți un cap de atenție și urmăriți scorurile $\mathbf q^{\top}\mathbf k$, softmax-ul și suma ponderată a valorilor
+    \begin{itemize}\setlength{\itemsep}{0pt}
+      \item Mutați temperatura ca distribuția următorului token să devină mai ascuțită sau mai plată.
+    \end{itemize}
+  \item \textbf{\href{https://bbycroft.net/llm}{LLM Visualization (B.\ Bycroft)}}: o parcurgere 3D a unui GPT mic, bloc cu bloc: fiecare produs de matrice din normalizare, atenție și stratul feed-forward.
+  \item \textbf{\href{https://jalammar.github.io/illustrated-transformer/}{The Illustrated Transformer (J.\ Alammar)}}: queries, keys și values desenate pas cu pas pentru o propoziție.
+  \item \textbf{\href{https://magazine.sebastianraschka.com/p/visual-attention-variants}{Variante ale atenției (S.\ Raschka)}}: de la atenția multi-head la grouped-query și latent attention, ferestre glisante și atenție rară: cum reduc modelele recente memoria pentru keys și values.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]

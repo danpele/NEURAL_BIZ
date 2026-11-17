@@ -242,6 +242,14 @@ Cost per German credit applicant against the cut-off, out-of-fold predictions; d
 
 Fifteen lines are enough: an `nn.Sequential` of linear layers and ReLUs, `BCEWithLogitsLoss` (sigmoid and cross-entropy in one stable function), the Adam optimiser and a loop of `zero_grad`, `backward` and `step`. The notebook of this lecture adds the data pipeline, the validation stopping and the seeds.
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [TensorFlow Playground](https://playground.tensorflow.org/): choose the circle data set and keep only the inputs $x_1, x_2$. With no hidden layer the boundary stays a straight line, as in logistic regression; add one hidden layer of four neurons and the boundary closes around the circle.
+- [TensorFlow Playground](https://playground.tensorflow.org/): keep the hidden layer and set the activation to Linear: the boundary is straight again, because a composition of linear maps is linear.
+- [3Blue1Brown, chapter 1](https://www.3blue1brown.com/topics/neural-networks): what the weights, biases and layers of a network compute, on handwritten digits.
+
 ## @end
 
 On 3,576 HMEQ loans the MLP beats the logistic score (AUC 0.945 against 0.920) and boosting beats both; on 1,000 German applicants nothing beats logistic regression significantly. In both cases the cost-based cut-off matters more than the model.

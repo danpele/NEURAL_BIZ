@@ -529,6 +529,15 @@ def build(lang, H=None):
         "footnotesize", cite=t("(Bucharest University of Economic Studies; Romanian Academy, Institute for Economic Forecasting)",
                                "(Academia de Studii Economice din București; Academia Română, Institutul de Prognoză Economică)"))
 
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        t('\\textbf{\\href{https://apple.github.io/embedding-atlas/}{Embedding Atlas (Apple)}}: open-source tool that maps text embeddings in two dimensions, with automatic cluster labels, search and nearest neighbours; run it on the PhraseBank sentences of this lecture and colour the points by sentiment.',
+          '\\textbf{\\href{https://apple.github.io/embedding-atlas/}{Embedding Atlas (Apple)}}: instrument open-source care desenează embeddings de text în două dimensiuni, cu etichete automate ale grupurilor, căutare și vecini apropiați; rulați-l pe propozițiile PhraseBank din acest curs și colorați punctele după sentiment.'),
+        t('\\textbf{\\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: the first step of a language model on your own sentence: tokens, token embeddings and the positional embeddings added to them.',
+          '\\textbf{\\href{https://poloclub.github.io/transformer-explainer/}{Transformer Explainer}}: primul pas al unui model lingvistic pe propoziția voastră: tokenii, embeddings-urile lor și embeddings-urile de poziție adunate la ele.'),
+        t('\\textbf{\\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, chapter 5}}: directions in the embedding space, such as the difference between the vectors of ``man and ``woman.',
+          '\\textbf{\\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, capitolul 5}}: direcții în spațiul embeddings, de exemplu diferența dintre vectorii lui „man” și „woman”.'),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Mikolov et al. (2013)} and \\textbf{Pennington et al. (2014)}: the two embedding papers, both short.",
           "\\textbf{Mikolov et al. (2013)} și \\textbf{Pennington et al. (2014)}: cele două articole despre vectorii de cuvinte, ambele scurte."),

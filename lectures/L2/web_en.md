@@ -177,6 +177,13 @@ Under a correct VaR the violations are Bernoulli with probability $\tau$; the Ku
 
 On this course's laptop one Adam step of an MLP 2048-2048 takes 333.6 ms on the central processing unit (CPU) and 32.5 ms on its GPU through Metal Performance Shaders (MPS), 10.3 times faster. The small tabular nets of Lectures 1 to 3 are faster on one CPU thread: copying tiny batches costs more than it saves.
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [TensorFlow Playground](https://playground.tensorflow.org/): press the step button to see one gradient update at a time, then compare learning rates 0.03, 3 and 0.0001: the loss settles, oscillates, or barely moves.
+- [3Blue1Brown, chapters 2–4](https://www.3blue1brown.com/topics/neural-networks): gradient descent, the intuition of backpropagation and its calculus, with animations of the chain rule.
+
 ## @end
 
 The loss defines the product: with the pinball loss the MLP gives a 99 % VaR that passes the Kupiec test while both standard benchmarks fail it on the same days.

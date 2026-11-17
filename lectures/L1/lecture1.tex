@@ -834,6 +834,18 @@ p = torch.sigmoid(model(x\_test))~~ \# predicted PD\par}
 \end{itemize}}
 \end{frame}
 
+\begin{frame}{Explore it visually}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{5pt}
+  \item \textbf{\href{https://playground.tensorflow.org/}{TensorFlow Playground}}
+    \begin{itemize}\setlength{\itemsep}{0pt}
+      \item Choose the circle data set and keep only the inputs $x_1, x_2$. With no hidden layer the boundary stays a straight line, as in logistic regression; add one hidden layer of four neurons and the boundary closes around the circle.
+      \item Keep the hidden layer and set the activation to Linear: the boundary is straight again, because a composition of linear maps is linear.
+    \end{itemize}
+  \item \textbf{\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, chapter 1}}: what the weights, biases and layers of a network compute, on handwritten digits.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Further reading and resources}
 \small
 \begin{columns}[T,onlytextwidth]

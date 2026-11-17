@@ -141,7 +141,6 @@
                 detailed: 'Detailed Results',
                 colQ: 'Q', colQuestion: 'Question', colCorrect: 'Correct answer', colYours: 'Your answer', colResult: 'Result',
                 resources: 'Resources',
-                visuals: 'Visual explainers',
                 bibliography: 'Bibliography',
                 abbreviations: 'Abbreviations',
                 contact: 'Contact',
@@ -221,7 +220,6 @@
                 detailed: 'Rezultate detaliate',
                 colQ: 'Nr.', colQuestion: 'Întrebare', colCorrect: 'Răspuns corect', colYours: 'Răspunsul ales', colResult: 'Rezultat',
                 resources: 'Resurse',
-                visuals: 'Explicații vizuale',
                 bibliography: 'Bibliografie',
                 abbreviations: 'Abrevieri',
                 contact: 'Contact',
@@ -291,7 +289,9 @@
                 further: [
                     { en: "Bishop &amp; Bishop (2024), Deep Learning: Foundations and Concepts, chapters 4-6", ro: "Bishop și Bishop (2024), Deep Learning: Foundations and Concepts, capitolele 4-6", url: "https://www.bishopbook.com" },
                     { en: "Dive into Deep Learning, chapters 3-5 (PyTorch)", ro: "Dive into Deep Learning, capitolele 3-5 (PyTorch)", url: "https://d2l.ai" },
-                    { en: "Lessmann et al. (2015), benchmarking classification algorithms for credit scoring", ro: "Lessmann et al. (2015), compararea algoritmilor de clasificare pentru scoringul de credit", url: "https://doi.org/10.1016/j.ejor.2015.05.030" }
+                    { en: "Lessmann et al. (2015), benchmarking classification algorithms for credit scoring", ro: "Lessmann et al. (2015), compararea algoritmilor de clasificare pentru scoringul de credit", url: "https://doi.org/10.1016/j.ejor.2015.05.030" },
+                    { en: "Explore visually: TensorFlow Playground", ro: "Explorați vizual: TensorFlow Playground", url: "https://playground.tensorflow.org/" },
+                    { en: "Explore visually: 3Blue1Brown, chapter 1", ro: "Explorați vizual: 3Blue1Brown, capitolul 1", url: "https://www.3blue1brown.com/topics/neural-networks" }
                 ]
             },
             {
@@ -306,7 +306,9 @@
                 further: [
                     { en: "Bishop &amp; Bishop (2024), chapters 7-8: gradient descent and backpropagation", ro: "Bishop și Bishop (2024), capitolele 7-8: coborîrea pe gradient și propagarea înapoi", url: "https://www.bishopbook.com" },
                     { en: "Dive into Deep Learning, chapter 12: optimisation algorithms", ro: "Dive into Deep Learning, capitolul 12: algoritmi de optimizare", url: "https://d2l.ai/chapter_optimization" },
-                    { en: "A. Karpathy, micrograd: backpropagation in about 100 lines", ro: "A. Karpathy, micrograd: propagarea înapoi în circa 100 de rînduri", url: "https://github.com/karpathy/micrograd" }
+                    { en: "A. Karpathy, micrograd: backpropagation in about 100 lines", ro: "A. Karpathy, micrograd: propagarea înapoi în circa 100 de rînduri", url: "https://github.com/karpathy/micrograd" },
+                    { en: "Explore visually: TensorFlow Playground", ro: "Explorați vizual: TensorFlow Playground", url: "https://playground.tensorflow.org/" },
+                    { en: "Explore visually: 3Blue1Brown, chapters 2–4", ro: "Explorați vizual: 3Blue1Brown, capitolele 2–4", url: "https://www.3blue1brown.com/topics/neural-networks" }
                 ]
             },
             {
@@ -321,7 +323,8 @@
                 further: [
                     { en: "Bishop &amp; Bishop (2024), chapter 9: regularisation", ro: "Bishop și Bishop (2024), capitolul 9: regularizarea", url: "https://www.bishopbook.com" },
                     { en: "Hastie, Tibshirani &amp; Friedman (2009), chapter 7: model assessment and selection", ro: "Hastie, Tibshirani și Friedman (2009), capitolul 7: evaluarea și selecția modelelor", url: "https://hastie.su.domains/ElemStatLearn/" },
-                    { en: "Reproducible machine learning for credit card fraud detection: practical handbook (ULB)", ro: "Manualul practic de detectare a fraudei cu carduri prin învățare automată (ULB)", url: "https://fraud-detection-handbook.github.io/fraud-detection-handbook/" }
+                    { en: "Reproducible machine learning for credit card fraud detection: practical handbook (ULB)", ro: "Manualul practic de detectare a fraudei cu carduri prin învățare automată (ULB)", url: "https://fraud-detection-handbook.github.io/fraud-detection-handbook/" },
+                    { en: "Explore visually: TensorFlow Playground", ro: "Explorați vizual: TensorFlow Playground", url: "https://playground.tensorflow.org/" }
                 ]
             },
             {
@@ -366,7 +369,10 @@
                 further: [
                     { en: "Mikolov et al. (2013), Distributed representations of words and phrases", ro: "Mikolov et al. (2013), Distributed representations of words and phrases", url: "https://arxiv.org/abs/1310.4546" },
                     { en: "Pennington, Socher &amp; Manning (2014), GloVe", ro: "Pennington, Socher &amp; Manning (2014), GloVe", url: "https://doi.org/10.3115/v1/D14-1162" },
-                    { en: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", ro: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", url: "https://doi.org/10.1016/j.eswa.2025.128676" }
+                    { en: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", ro: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", url: "https://doi.org/10.1016/j.eswa.2025.128676" },
+                    { en: "Explore visually: Embedding Atlas (Apple)", ro: "Explorați vizual: Embedding Atlas (Apple)", url: "https://apple.github.io/embedding-atlas/" },
+                    { en: "Explore visually: Transformer Explainer", ro: "Explorați vizual: Transformer Explainer", url: "https://poloclub.github.io/transformer-explainer/" },
+                    { en: "Explore visually: 3Blue1Brown, chapter 5", ro: "Explorați vizual: 3Blue1Brown, capitolul 5", url: "https://www.3blue1brown.com/topics/neural-networks" }
                 ]
             },
             {
@@ -381,7 +387,10 @@
                 further: [
                     { en: "Vaswani et al. (2017), Attention is all you need", ro: "Vaswani et al. (2017), Attention is all you need", url: "https://arxiv.org/abs/1706.03762" },
                     { en: "J. Alammar, The Illustrated Transformer", ro: "J. Alammar, The Illustrated Transformer", url: "https://jalammar.github.io/illustrated-transformer/" },
-                    { en: "Hugging Face course: fine-tuning encoders", ro: "Cursul Hugging Face: ajustarea codificatoarelor", url: "https://huggingface.co/learn/llm-course" }
+                    { en: "Hugging Face course: fine-tuning encoders", ro: "Cursul Hugging Face: ajustarea codificatoarelor", url: "https://huggingface.co/learn/llm-course" },
+                    { en: "Explore visually: Transformer Explainer", ro: "Explorați vizual: Transformer Explainer", url: "https://poloclub.github.io/transformer-explainer/" },
+                    { en: "Explore visually: LLM Visualization (B. Bycroft)", ro: "Explorați vizual: LLM Visualization (B. Bycroft)", url: "https://bbycroft.net/llm" },
+                    { en: "Explore visually: Attention variants (S. Raschka)", ro: "Explorați vizual: Variante ale atenției (S. Raschka)", url: "https://magazine.sebastianraschka.com/p/visual-attention-variants" }
                 ]
             },
             {
@@ -441,7 +450,8 @@
                 further: [
                     { en: "C. Molnar, Interpretable Machine Learning (free online book)", ro: "C. Molnar, Interpretable Machine Learning (carte gratuită online)", url: "https://christophm.github.io/interpretable-ml-book/" },
                     { en: "SHAP library documentation", ro: "Documentația bibliotecii SHAP", url: "https://shap.readthedocs.io" },
-                    { en: "Replication code of Diaconu &amp; Pele (2026), SHAP stability in graph-augmented fraud detection", ro: "Codul de replicare pentru Diaconu &amp; Pele (2026), stabilitatea SHAP în detectarea fraudei cu informație din graf", url: "https://github.com/QuantLet/GNN_XAI_Stability" }
+                    { en: "Replication code of Diaconu &amp; Pele (2026), SHAP stability in graph-augmented fraud detection", ro: "Codul de replicare pentru Diaconu &amp; Pele (2026), stabilitatea SHAP în detectarea fraudei cu informație din graf", url: "https://github.com/QuantLet/GNN_XAI_Stability" },
+                    { en: "Explore visually: Neuronpedia", ro: "Explorați vizual: Neuronpedia", url: "https://www.neuronpedia.org/" }
                 ]
             },
             {
@@ -456,7 +466,11 @@
                 further: [
                     { en: "Hugging Face LLM course", ro: "Hugging Face LLM course", url: "https://huggingface.co/learn/llm-course" },
                     { en: "Qwen2.5 open models", ro: "Qwen2.5 open models", url: "https://huggingface.co/Qwen" },
-                    { en: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", ro: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", url: "https://doi.org/10.1016/j.eswa.2025.128676" }
+                    { en: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", ro: "Pele et al. (2026), In the beginning was the Word: LLM-VaR and LLM-ES", url: "https://doi.org/10.1016/j.eswa.2025.128676" },
+                    { en: "Explore visually: Transformer Explainer", ro: "Explorați vizual: Transformer Explainer", url: "https://poloclub.github.io/transformer-explainer/" },
+                    { en: "Explore visually: Mixture of experts (M. Grootendorst)", ro: "Explorați vizual: Mixture of experts (M. Grootendorst)", url: "https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts" },
+                    { en: "Explore visually: LLM Inference Handbook", ro: "Explorați vizual: LLM Inference Handbook", url: "https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/" },
+                    { en: "Explore visually: LLM Visualization (B. Bycroft)", ro: "Explorați vizual: LLM Visualization (B. Bycroft)", url: "https://bbycroft.net/llm" }
                 ]
             },
             {
@@ -639,20 +653,6 @@
             { icon: '&#129303;', href: 'https://huggingface.co/learn', en: ['Hugging Face courses', 'Transformers, language models and datasets'], ro: ['Cursurile Hugging Face', 'Arhitecturi transformer, modele lingvistice și seturi de date'] },
             { icon: '&#128190;', img: 'assets/logos/ql_logo.png', href: 'https://quantlet.com', en: ['Quantlet', 'Reproducible code: one folder per chart of the lectures'], ro: ['Quantlet', 'Cod reproductibil: cîte un dosar pentru fiecare grafic al cursurilor'] },
             { icon: '&#127891;', img: 'assets/logos/qr_logo.png', href: 'https://quantinar.com', en: ['Quantinar', 'P2P (peer-to-peer) platform with advanced courses'], ro: ['Quantinar', 'Platformă P2P (peer-to-peer) cu cursuri avansate'] }
-        ],
-
-        // Visual explainers of neural networks, transformers and LLMs (links checked 17 November 2026)
-        visuals: [
-            { icon: '&#129504;', href: 'https://poloclub.github.io/transformer-explainer/', en: ['Transformer Explainer (Polo Club, Georgia Tech)', 'A GPT-2 model running in the browser: follow your own text through embeddings, attention and next-token probabilities'], ro: ['Transformer Explainer (Polo Club, Georgia Tech)', 'Un model GPT-2 care rulează în browser: textul vostru urmărit prin embeddings, atenție și probabilitățile următorului token'] },
-            { icon: '&#129513;', href: 'https://bbycroft.net/llm', en: ['LLM Visualization (Brendan Bycroft)', 'A 3D animated walkthrough of every layer and matrix product inside a small GPT'], ro: ['LLM Visualization (Brendan Bycroft)', 'Parcurgere 3D animată a fiecărui strat și produs de matrice dintr-un GPT mic'] },
-            { icon: '&#127909;', href: 'https://www.3blue1brown.com/topics/neural-networks', en: ['3Blue1Brown: Neural networks', 'Animated lessons by Grant Sanderson: gradient descent, backpropagation, transformers and attention'], ro: ['3Blue1Brown: Neural networks', 'Lecții animate de Grant Sanderson: gradient descent, backpropagation, transformere și atenție'] },
-            { icon: '&#128444;', href: 'https://jalammar.github.io/illustrated-transformer/', en: ['The Illustrated Transformer (Jay Alammar)', 'The transformer of Vaswani et al. (2017) drawn step by step: queries, keys, values and multi-head attention'], ro: ['The Illustrated Transformer (Jay Alammar)', 'Transformerul lui Vaswani et al. (2017) desenat pas cu pas: queries, keys, values și atenție multi-head'] },
-            { icon: '&#127918;', href: 'https://playground.tensorflow.org/', en: ['TensorFlow Playground', 'Train a small neural network in the browser: change layers, activations, learning rate and regularisation'], ro: ['TensorFlow Playground', 'Antrenați o rețea neuronală mică în browser: straturi, funcții de activare, rata de învățare și regularizare'] },
-            { icon: '&#128064;', href: 'https://magazine.sebastianraschka.com/p/visual-attention-variants', en: ['A Visual Guide to Attention Variants (Sebastian Raschka)', 'From multi-head and grouped-query attention to MLA, sparse attention and hybrid architectures'], ro: ['A Visual Guide to Attention Variants (Sebastian Raschka)', 'De la atenția multi-head și grouped-query la MLA, atenție rară și arhitecturi hibride'] },
-            { icon: '&#128256;', href: 'https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts', en: ['A Visual Guide to Mixture of Experts (Maarten Grootendorst)', 'Routers, experts and load balancing in large language models, in more than 50 illustrations'], ro: ['A Visual Guide to Mixture of Experts (Maarten Grootendorst)', 'Routere, experți și echilibrarea încărcării în modelele lingvistice mari, în peste 50 de ilustrații'] },
-            { icon: '&#9889;', href: 'https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/', en: ['LLM Inference Handbook', 'What happens between the prompt and the generated tokens: prefill, decoding, KV cache and serving'], ro: ['LLM Inference Handbook', 'Ce se întîmplă între prompt și tokenii generați: prefill, decodare, KV cache și servire'] },
-            { icon: '&#128300;', href: 'https://www.neuronpedia.org/', en: ['Neuronpedia', 'Open-source interpretability platform: browse the features learned inside language models'], ro: ['Neuronpedia', 'Platformă open-source de interpretabilitate: explorați trăsăturile învățate în interiorul modelelor lingvistice'] },
-            { icon: '&#127759;', href: 'https://apple.github.io/embedding-atlas/', en: ['Embedding Atlas (Apple)', 'Interactive maps of large embedding collections: clusters, nearest neighbours and metadata filters'], ro: ['Embedding Atlas (Apple)', 'Hărți interactive ale colecțiilor mari de embeddings: clustere, vecini apropiați și filtre pe metadate'] }
         ],
 
         // Bibliography by lecture: every reference cited in the slides (REFS of lectures/Lk/build_Lk.py), listed once under

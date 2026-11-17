@@ -380,12 +380,6 @@
                 <div><strong>${r[LANG][0]}</strong><p>${r[LANG][1]}</p></div>
             </a>`
         ).join('');
-        if ($('visuals-list') && D.visuals) $('visuals-list').innerHTML = D.visuals.map(r =>
-            `<a href="${r.href}" class="resource-item" target="_blank" rel="noopener">
-                <div class="resource-icon">${r.icon}</div>
-                <div><strong>${r[LANG][0]}</strong><p>${r[LANG][1]}</p></div>
-            </a>`
-        ).join('');
         $('bibliography').innerHTML = D.bibliography.map(g =>
             `<h4 class="biblio-group">${g.h[LANG]} <span class="muted-note">(${g.items.length})</span></h4>` +
             `<ol class="biblio">${g.items.map(b => `<li>${b}</li>`).join('')}</ol>`).join('');

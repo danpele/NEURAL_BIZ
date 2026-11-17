@@ -836,6 +836,18 @@ p = torch.sigmoid(model(x\_test))~~ \# predicted PD\par}
 \end{itemize}}
 \end{frame}
 
+\begin{frame}{Explorați vizual}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{5pt}
+  \item \textbf{\href{https://playground.tensorflow.org/}{TensorFlow Playground}}
+    \begin{itemize}\setlength{\itemsep}{0pt}
+      \item Alegeți setul de date în formă de cerc și păstrați doar intrările $x_1, x_2$. Fără strat ascuns, frontiera rămîne o dreaptă, ca la regresia logistică; adăugați un strat ascuns cu patru neuroni și frontiera se închide în jurul cercului.
+      \item Păstrați stratul ascuns și setați activarea la Linear: frontiera redevine dreaptă, pentru că o compunere de funcții liniare este liniară.
+    \end{itemize}
+  \item \textbf{\href{https://www.3blue1brown.com/topics/neural-networks}{3Blue1Brown, capitolul 1}}: ce calculează ponderile, termenii liberi și straturile unei rețele, pe cifre scrise de mînă.
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Lecturi și resurse suplimentare}
 \small
 \begin{columns}[T,onlytextwidth]

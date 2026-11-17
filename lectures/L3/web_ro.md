@@ -187,6 +187,13 @@ Costul total în perioada de test în funcție de numărul de alerte trimise la 
 
 @practice bugetul de alerte, stabilit din sume și costuri de verificare, este decizia de afaceri; modelul doar ordonează.
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [TensorFlow Playground](https://playground.tensorflow.org/): alegeți setul de date în spirală, zgomot 50 și 10% date de antrenare, și o rețea cu mai multe straturi ascunse: pierderea pe test rămîne peste cea de antrenare, adică supraînvățare.
+- [TensorFlow Playground](https://playground.tensorflow.org/): setați regularizarea la L2, apoi la L1, cu rata 0,01: L1 aduce multe ponderi la zero, desenate ca legături subțiri, iar L2 le micșorează pe toate.
+
 ## @end
 
 Pentru evenimente rare, raportați PR-AUC, precizia la o sensibilitate gestionabilă și costul alertelor, pe un set de test cronologic și cu mai multe inițializări.

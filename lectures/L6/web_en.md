@@ -115,6 +115,14 @@ F1 by topic on the test tweets: TF-IDF with logistic regression and the embeddin
 
 Pele, Bolovăneanu, Lin, Ren, Ginavar, Spilak, Andrei, Toma, Lessmann and Härdle (2026) show that large language models (LLM) can forecast value-at-risk (VaR) and expected shortfall (ES), benchmarked against classical risk models with formal backtests (LLM-VaR and LLM-ES). In BitMood, Conda, Găman, Bâg, Mazurencu-Marinescu-Pele, Pele and Härdle (2026) classify 120,000 Facebook posts from 2015–2023 with FinBERT into compound sentiment scores; sentiment predicts Bitcoin trading volume, sentiment-based strategies outperform buy-and-hold, and topic modelling tracks the themes of the discussion.
 
+## Explore it visually
+
+Free interactive tools and illustrated guides for this lecture; most run in the browser.
+
+- [Embedding Atlas (Apple)](https://apple.github.io/embedding-atlas/): open-source tool that maps text embeddings in two dimensions, with automatic cluster labels, search and nearest neighbours; run it on the PhraseBank sentences of this lecture and colour the points by sentiment.
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/): the first step of a language model on your own sentence: tokens, token embeddings and the positional embeddings added to them.
+- [3Blue1Brown, chapter 5](https://www.3blue1brown.com/topics/neural-networks): directions in the embedding space, such as the difference between the vectors of "man and "woman.
+
 ## @end
 
 Text becomes numbers through counts (BoW, TF-IDF) or dense vectors learned from co-occurrence (word2vec, GloVe). On real financial sentences TF-IDF with logistic regression is a strong benchmark, and pre-trained vectors help most when labels are few. Lecture 7 adds attention and contextual vectors, compared fairly with these baselines.

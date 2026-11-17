@@ -519,6 +519,10 @@ def build(lang, H=None):
           "automată, care prezic ce criptoactive devin active „zombie”; un model de avertizare timpurie trebuie validat înainte în timp, ca în secțiunea 4."), sep="5pt") +
         note(t("Findings as stated in the papers; numbers on the other slides come from our own computations.",
                "Rezultatele sînt cele declarate în lucrări; cifrele de pe celelalte slide-uri provin din calculele noastre.")))
+    # visual explainers: free interactive tools and illustrated guides for this lecture (links checked 17 November 2026)
+    D.frame(t("Explore it visually", "Explorați vizual"), it(
+        (t('\\textbf{\\href{https://playground.tensorflow.org/}{TensorFlow Playground}}', '\\textbf{\\href{https://playground.tensorflow.org/}{TensorFlow Playground}}'), t('choose the spiral data set, noise 50 and 10\\,\\% training data, and a network with several hidden layers: the test loss stays above the training loss, which is overfitting.', 'alegeți setul de date în spirală, zgomot 50 și 10\\,\\% date de antrenare, și o rețea cu mai multe straturi ascunse: pierderea pe test rămîne peste cea de antrenare, adică supraînvățare.'), t('set the regularisation to L2, then L1, with rate 0.01: L1 drives many weights to zero, drawn as thin connections, while L2 shrinks them all.', 'setați regularizarea la L2, apoi la L1, cu rata 0,01: L1 aduce multe ponderi la zero, desenate ca legături subțiri, iar L2 le micșorează pe toate.')),
+        sep="5pt"), "footnotesize")
     D.frame(t("Further reading and resources", "Lecturi și resurse suplimentare"), cols(it(
         t("\\textbf{Bishop \\& Bishop (2024)}, chapter 9: regularisation: ", "\\textbf{Bishop \\& Bishop (2024)}, capitolul 9: regularizarea: ") +
         "\\href{https://www.bishopbook.com}{bishopbook.com}.",

@@ -177,6 +177,13 @@ Pentru un VaR corect, depășirile sînt de tip Bernoulli cu probabilitatea $\ta
 
 Pe laptopul cursului, un pas Adam pentru un MLP 2048-2048 durează 333,6 ms pe procesorul central (CPU) și 32,5 ms pe GPU prin Metal Performance Shaders (MPS), de 10,3 ori mai repede. Rețelele tabelare mici din cursurile 1--3 sînt mai rapide pe un singur fir al procesorului: copierea loturilor mici costă mai mult decît economisește.
 
+## Explorați vizual
+
+Instrumente interactive gratuite și ghiduri ilustrate pentru acest curs; cele mai multe rulează în browser.
+
+- [TensorFlow Playground](https://playground.tensorflow.org/): apăsați butonul de pas pentru a vedea cîte o actualizare a gradientului, apoi comparați ratele de învățare 0,03, 3 și 0,0001: pierderea se stabilizează, oscilează sau abia se mișcă.
+- [3Blue1Brown, capitolele 2–4](https://www.3blue1brown.com/topics/neural-networks): coborîrea pe gradient, intuiția propagării înapoi și calculul ei, cu animații ale regulii de derivare a funcțiilor compuse.
+
 ## @end
 
 Pierderea definește produsul: cu pierderea pinball, MLP dă un VaR de 99 % care trece testul Kupiec, în timp ce ambele repere standard îl pică pe aceleași zile.
