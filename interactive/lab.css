@@ -68,6 +68,7 @@
 .lab-table, .lab-cm { width: calc(100% - 1.6rem); margin: 0.8rem; border-collapse: collapse; background: #fff; font-size: 0.92rem; }
 .lab-table th, .lab-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #e3e6ec; text-align: left; }
 .lab-table td.got { font-weight: 700; color: #a33a1f; }
+.lab-table td.ins { font-size: 0.84rem; color: #333; }
 .lab-cm th, .lab-cm td { padding: 0.6rem 0.4rem; border: 1px solid #e3e6ec; text-align: center; }
 .lab-cm td span { font-size: 0.8rem; }
 .lab-cmnote { margin: 0 0.8rem 0.8rem; font-size: 0.82rem; color: #444; }

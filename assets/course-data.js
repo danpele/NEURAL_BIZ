@@ -455,7 +455,7 @@
                 ]
             },
             {
-                id: 'l12', num: 12, status: 'ready', files: files(12), interactive: true, game: true,
+                id: 'l12', num: 12, status: 'ready', files: files(12), interactive: true, game: true, lab: true,
                 videos: [{ id: 'LPZh9BOjkQs', by: '3Blue1Brown', title: 'Large Language Models explained briefly' }, { id: 'zjkBMFhNj_g', by: 'Andrej Karpathy', title: '[1hr Talk] Intro to Large Language Models' }, { id: '7xTGNNLPyMI', by: 'Andrej Karpathy', title: 'Deep Dive into LLMs like ChatGPT' }, { id: '1c9iyoVIwDs', by: 'IBM Technology', title: '4 Methods of Prompt Engineering' }, { id: 'T-D1OfcDW1M', by: 'IBM Technology', title: 'What is Retrieval-Augmented Generation (RAG)?' }, { id: 'zYGDpG-pTho', by: 'IBM Technology', title: 'RAG vs Fine-Tuning vs Prompt Engineering: Optimizing AI Models' }, { id: '9-Jl0dxWQs8', by: '3Blue1Brown', title: 'How might LLMs store facts | Deep Learning Chapter 7' }],
                 quantinar: [q('nextWord'), q('delta')],
                 title: TITLES[12],

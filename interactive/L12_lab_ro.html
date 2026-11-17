@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laborator de modele de limbaj</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 12 · Laborator: preziceți, testați, demonstrați">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261118c">
+<link rel="stylesheet" href="interactive.css?v=20261118c">
+<link rel="stylesheet" href="lab.css?v=20261118c">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L12_data.js?v=20261118c"></script>
+<script>window.LAB_NUM = {"next":{"prompt":"The inflation impact is limited:","speech_date":"2026-10-30","speaker":"Philip R. Lane","true_next":"prices","entropy":{"t05":1.74,"t10":6.2,"t20":10.29},"top1":"the","top1_p":10.1,"top1_p05":49.9,"top1_p2":0.4},"cls":{"pb":{"majority":{"f1":25.4,"acc":61.4,"lo":24.4,"hi":26.3,"ms":0.0},"tfidf":{"f1":86.9,"acc":90.3,"lo":83.8,"hi":90.0,"ms":2.5},"zs_05B":{"f1":31.0,"acc":62.8,"lo":27.5,"hi":34.8,"ms":19.54},"zs_15B":{"f1":85.1,"acc":85.3,"lo":82.2,"hi":87.9,"ms":28.51},"zs_3B":{"f1":92.2,"acc":93.1,"lo":89.8,"hi":94.4,"ms":48.5},"fs_15B":{"f1":85.9,"acc":87.8,"f1_min":85.7,"f1_max":86.1,"lo":82.5,"hi":88.7,"ms":22.04},"fs_3B":{"f1":92.1,"acc":93.4,"f1_min":91.0,"f1_max":93.6,"lo":89.2,"hi":94.1,"ms":40.78},"cot_3B":{"f1":88.4,"acc":88.5,"lo":85.7,"hi":90.7,"ms":389.48},"probe":{"f1":87.5,"acc":91.3,"lo":84.5,"hi":90.7,"ms":25.37},"best":"zs_3B","best_llm":"zs_3B"},"tw":{"majority":{"f1":26.4,"acc":65.6,"lo":25.7,"hi":27.1,"ms":0.0},"tfidf":{"f1":75.5,"acc":81.4,"lo":71.9,"hi":78.7,"ms":8.59},"zs_05B":{"f1":18.7,"acc":23.1,"lo":15.7,"hi":21.9,"ms":18.6},"zs_15B":{"f1":40.9,"acc":37.8,"lo":37.9,"hi":43.7,"ms":31.48},"zs_3B":{"f1":77.4,"acc":81.2,"lo":74.2,"hi":80.3,"ms":50.56},"fs_15B":{"f1":68.8,"acc":73.7,"f1_min":65.7,"f1_max":74.2,"lo":62.3,"hi":69.1,"ms":29.74},"fs_3B":{"f1":79.8,"acc":84.3,"f1_min":79.6,"f1_max":80.1,"lo":77.2,"hi":83.2,"ms":58.19},"cot_3B":{"f1":65.1,"acc":64.7,"lo":62.0,"hi":68.0,"ms":507.68},"probe":{"f1":79.0,"acc":83.0,"lo":75.7,"hi":82.0,"ms":9.8},"best":"fs_3B","best_llm":"fs_3B"}},"rag":{"n_speeches":400,"n_chunks":8400,"chunk_words":200,"overlap":50,"dense_dim":384,"embed_seconds":56.8,"tfidf":{"r1":35.2,"r3":59.0,"r5":67.0,"r10":75.0,"mrr":0.496},"bm25":{"r1":37.0,"r3":61.0,"r5":68.5,"r10":78.0,"mrr":0.515},"dense":{"r1":44.0,"r3":64.5,"r5":72.2,"r10":80.0,"mrr":0.567},"hybrid":{"r1":50.7,"r3":69.8,"r5":76.0,"r10":83.2,"mrr":0.622},"qa_n":160,"qa_first":"2025-01-15","qa_closed":{"correct":13.8,"wrong":86.2,"abstain":0.0},"closed_top_wrong":"Philip Lane","closed_top_wrong_n":137,"qa_closed_abstain":{"correct":0.0,"wrong":0.0,"abstain":100.0},"qa_rag":{"correct":81.2,"wrong":4.4,"abstain":14.4},"qa_oracle":{"correct":98.8,"wrong":0.0,"abstain":1.2},"qa_majority":{"name":"Christine Lagarde","pct":35.6},"qa_r3_hybrid":73.1},"vocab":151665};</script>
+<script src="L12_lab_text_ro.js?v=20261118c"></script>
+<script type="module" src="L12_lab.js?v=20261118c"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 12 · Laborator: preziceți, testați, demonstrați</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L12/lecture12_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="L12_ro.html">Grafice interactive</a></li>
+  <li class="lang-switcher"><a href="L12_lab.html" class="lang-btn">EN</a><a href="L12_lab_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Cinci runde despre ce pot și ce nu pot face modelele de limbaj deschise cu textele financiare. În fiecare rundă mai întîi <b>preziceți</b> ce se va întîmpla și vă fixați răspunsul, apoi îl <b>testați</b> pe datele cursului și abia apoi vedeți <b>demonstrația</b>. Fiecare răspuns provine de la modele Qwen2.5 rulate local pe datele cursului: Financial PhraseBank, tweet-uri financiare și discursurile Băncii Centrale Europene (BCE).</p>
+<p class="lab-hint">Graficele rămîn goale pînă vă fixați predicția. În runda 1, trageți de relief ca să-l rotiți; derulați sau ciupiți ca să măriți.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Runda 1 · Temperatura</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-t">Temperatura T: <b id="r1-t-v"></b></label><input type="range" id="r1-t" min="0" max="5" step="1" value="1"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Runda 2 · Cît de mare trebuie să fie modelul?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Runda 3 · Ajută exemplele?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Runda 4 · Contează formularea?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl ctl-tg"><span class="lbl">Datele</span><div class="tgs"><label class="tg"><input type="radio" name="r4-d" value="pb" checked> PhraseBank</label><label class="tg"><input type="radio" name="r4-d" value="tw"> tweet-uri financiare</label></div></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r5">
+  <h2 class="sec">Runda 5 · Găsirea documentului potrivit</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r5-k">Pînă la k: <b id="r5-k-v"></b></label><input type="range" id="r5-k" min="1" max="10" step="1" value="10"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">Modele: Qwen2.5-0.5B, 1.5B și 3B-Instruct (Qwen Team, 2024), rulate local pe un laptop Apple silicon; fără nicio interfață de programare plătită. Financial PhraseBank (Malo et al., 2014), frazele cu acord complet: 1.581 pentru antrenare, 678 pentru test; tweet-uri financiare: 900 de tweet-uri de test. Regăsirea: 400 de discursuri BCE (2022–2026) în 8.400 de fragmente de 200 de cuvinte, embedding-uri dense bge-small-en-v1.5; întrebările despre discursurile din 2025 încoace. Codul: lectures/L12/analysis_L12.py și build_interactive_L12.py pe GitHub.</p>
+</main>
+</body>
+</html>
