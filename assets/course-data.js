@@ -312,7 +312,7 @@
                 ]
             },
             {
-                id: 'l3', num: 3, status: 'ready', files: files(3), interactive: true, game: true,
+                id: 'l3', num: 3, status: 'ready', files: files(3), interactive: true, game: true, lab: true,
                 videos: [{ id: 'SjQyLhQIXSM', by: 'DeepLearningAI', title: 'Bias/Variance (C2W1L02)' }, { id: 'Q81RR3yKn30', by: 'StatQuest with Josh Starmer', title: 'Regularization Part 1: Ridge (L2) Regression' }, { id: 'NGf0voTMlcs', by: 'StatQuest with Josh Starmer', title: 'Regularization Part 2: Lasso (L1) Regression' }, { id: 'D8PJAL-MZv8', by: 'DeepLearningAI', title: 'Dropout Regularization (C2W1L06)' }, { id: 'tNIpEZLv_eg', by: 'DeepLearningAI', title: 'Normalizing Activations in a Network (C2W3L04)' }, { id: 'nUUqwaxLnWs', by: 'DeepLearningAI', title: 'Why Does Batch Norm Work? (C2W3L06)' }, { id: '6ArSys5qHAU', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Part 6: Cross Entropy' }],
                 quantinar: [q('rf'), q('mlRisk')],
                 title: TITLES[3],

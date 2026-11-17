@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laborator de regularizare</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 3 · Laborator: preziceți, testați, demonstrați">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261117b">
+<link rel="stylesheet" href="interactive.css?v=20261117b">
+<link rel="stylesheet" href="lab.css?v=20261117b">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L3_data.js?v=20261117b"></script>
+<script src="L3_lab_text_ro.js?v=20261117b"></script>
+<script type="module" src="L3_lab.js?v=20261117b"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 3 · Laborator: preziceți, testați, demonstrați</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L3/lecture3_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="L3_ro.html">Grafice interactive</a></li>
+  <li class="lang-switcher"><a href="L3_lab.html" class="lang-btn">EN</a><a href="L3_lab_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Cinci runde despre motivul pentru care o rețea care își învață perfect datele de antrenare poate totuși să greșească și despre ce o oprește. În fiecare rundă mai întîi <b>preziceți</b> ce se va întîmpla și vă fixați răspunsul, apoi îl <b>testați</b> pe datele cursului și abia apoi vedeți <b>demonstrația</b>. Datele sînt cele din curs: 1.000 de solicitanți de credit din Germania, eșantionul de fraude cu carduri (împărțit în ordinea timpului) și California housing.</p>
+<p class="lab-hint">Graficele rămîn goale pînă vă fixați predicția. În runda 3, trageți de bare ca să le rotiți; derulați sau ciupiți ca să măriți.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Runda 1 · Memorarea</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-k">Epoci: <b id="r1-k-v"></b></label><input type="range" id="r1-k" min="1" max="150" step="1" value="150"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Runda 2 · Pierdere sau ordonare?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r2-k">Epoci: <b id="r2-k-v"></b></label><input type="range" id="r2-k" min="1" max="150" step="1" value="150"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Runda 3 · Dropout sau penalizarea ponderilor?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r3-k">Epoca: <b id="r3-k-v"></b></label><input type="range" id="r3-k" min="1" max="150" step="1" value="150"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Runda 4 · Cînd ne oprim</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r4-s">Oprire la epoca: <b id="r4-s-v"></b></label><input type="range" id="r4-s" min="1" max="120" step="1" value="120"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r5">
+  <h2 class="sec">Runda 5 · Dincolo de punctul de interpolare</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r5-p">Pînă la p: <b id="r5-p-v"></b></label><input type="range" id="r5-p" min="0" max="17" step="1" value="17"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">Credit Germania: 600 de solicitanți pentru antrenare, 200 pentru validare și 200 pentru test, 48 de intrări standardizate; rețeaua 256-256 cu ReLU, AdamW (rata de învățare 0,001), loturi de 64, 150 de epoci, fără oprire timpurie; regresia logistică cu C = 1. Fraude cu carduri: 28.924 de tranzacții în ordinea timpului (60/20/20), rețeaua 256-256, loturi de 256, 120 de epoci; precizia medie cu ponderile care refac proporția claselor din datele complete. Dubla coborîre: 400 de grupuri de locuințe pentru antrenare și 5.000 pentru test la fiecare extragere, variabile ReLU aleatoare, 10 extrageri, mediana. Semințele 20261108 + s. Codul: lectures/L3/analysis_L3.py și interactive_data_L3.py pe GitHub.</p>
+</main>
+</body>
+</html>

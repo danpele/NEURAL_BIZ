@@ -45,6 +45,19 @@
 .lab-svg .other { fill: none; stroke: #c4cad4; stroke-width: 1.2; }
 .lab-svg .main { fill: none; stroke: #c0392b; stroke-width: 2.4; }
 .lab-svg .div { font-size: 12px; fill: #a33a1f; font-weight: 600; }
+.lab-svg .trn { fill: none; stroke: #2e5c9a; stroke-width: 2; }
+.lab-svg .ap { fill: none; stroke: #1e7b3c; stroke-width: 2.4; }
+.lab-svg .main-dot { fill: #c0392b; }
+.lab-svg .trn-dot { fill: #2e5c9a; }
+.lab-svg .ap-dot { fill: #1e7b3c; }
+.lab-svg .seed { fill: #9aa3b2; fill-opacity: 0.55; }
+.lab-svg .mark { stroke: #555; stroke-dasharray: 3 3; }
+.lab-svg .leg-main { font-size: 12px; fill: #c0392b; font-weight: 600; }
+.lab-svg .leg-trn { font-size: 12px; fill: #2e5c9a; font-weight: 600; }
+.lab-panel + .lab-panel { border-top: 1px solid #e3e6ec; }
+.lab-key { position: absolute; left: 0.7rem; top: 0.5rem; margin: 0; font-size: 0.8rem; color: #444; pointer-events: none; }
+.lab-key .sw-gold { display: inline-block; width: 0.9em; height: 0.9em; margin-right: 0.35em; vertical-align: -0.1em; background: rgba(212,160,23,0.45); border: 1px solid #b8901a; }
+.lab-nogl { padding: 1rem; font-size: 0.9rem; color: #555; }
 @media (max-width: 900px) {
   .lab-grid { grid-template-columns: minmax(0, 1fr); }
   .lab-right { order: -1; }

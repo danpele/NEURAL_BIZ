@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regularisation lab</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 3 · Lab: predict, test, prove">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261117b">
+<link rel="stylesheet" href="interactive.css?v=20261117b">
+<link rel="stylesheet" href="lab.css?v=20261117b">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L3_data.js?v=20261117b"></script>
+<script src="L3_lab_text_en.js?v=20261117b"></script>
+<script type="module" src="L3_lab.js?v=20261117b"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 3 · Lab: predict, test, prove</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L3/lecture3.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="L3.html">Interactive charts</a></li>
+  <li class="lang-switcher"><a href="L3_lab.html" class="lang-btn active">EN</a><a href="L3_lab_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Five rounds on why a network that learns its training data perfectly can still fail, and what stops it. In each round you first <b>predict</b> what will happen and lock your answer, then <b>test</b> it on the course data, and only then see the <b>proof</b>. The data are those of the lecture: 1,000 German credit applicants, the card fraud sample (time-ordered split) and California housing.</p>
+<p class="lab-hint">Charts stay empty until you lock a prediction. In round 3, drag the bars to turn them; scroll or pinch to zoom.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Round 1 · Memorising</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-k">Epochs: <b id="r1-k-v"></b></label><input type="range" id="r1-k" min="1" max="150" step="1" value="150"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Round 2 · Loss or ranking?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r2-k">Epochs: <b id="r2-k-v"></b></label><input type="range" id="r2-k" min="1" max="150" step="1" value="150"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Round 3 · Dropout or weight decay?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r3-k">Epoch: <b id="r3-k-v"></b></label><input type="range" id="r3-k" min="1" max="150" step="1" value="150"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Round 4 · When to stop</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r4-s">Stop at epoch: <b id="r4-s-v"></b></label><input type="range" id="r4-s" min="1" max="120" step="1" value="120"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r5">
+  <h2 class="sec">Round 5 · Beyond the interpolation point</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r5-p">Up to p: <b id="r5-p-v"></b></label><input type="range" id="r5-p" min="0" max="17" step="1" value="17"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">German credit: 600 training, 200 validation and 200 test applicants, 48 standardised inputs; network 256-256 with ReLU, AdamW (learning rate 0.001), batch 64, 150 epochs, no early stopping; logistic regression with C = 1. Card fraud: 28,924 transactions in time order (60/20/20), network 256-256, batch 256, 120 epochs; average precision with the weights that restore the full-data class mix. Double descent: 400 training and 5,000 test block groups per draw, random ReLU features, 10 draws, median. Seeds 20261108 + s. Code: lectures/L3/analysis_L3.py and interactive_data_L3.py on GitHub.</p>
+</main>
+</body>
+</html>
