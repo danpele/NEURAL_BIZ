@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laborator de reprezentări ale cuvintelor</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 6 · Laborator: preziceți, testați, demonstrați">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261118b">
+<link rel="stylesheet" href="interactive.css?v=20261118b">
+<link rel="stylesheet" href="lab.css?v=20261118b">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L6_data.js?v=20261118b"></script>
+<script>window.LAB_NUM = {"analogy":{"germany:german::france":"fran","italy:italian::spain":"commissioned","banks:bank::households":"household","rise:rising::fall":"buffered","higher:lower::increase":"marginal"},"corpus":{"n_tokens":1289896,"n_types":20130,"zipf_slope":-1.498,"top10_share_pct":25.0,"hapax":6533,"top":"the, of, and, <num>, to, in, a, for","types_min5":8539,"hapax_pct":32.5},"w2v":{"V":8539,"dim":100,"win":5,"neg":5,"min_count":5,"t":0.0001,"pairs":3679754,"loss_first":2.622,"loss_last":2.223,"epochs":5,"seconds":119.8},"sent":{"splits_pb":5,"seeds_tw":3,"pb":{"majority":{"f1":24.81,"f1_sd":0.0,"acc":59.28},"bow_lr":{"f1":70.82,"f1_sd":2.41,"acc":74.94},"tfidf_lr":{"f1":73.49,"f1_sd":2.28,"acc":77.69},"tfidf_mlp":{"f1":71.37,"f1_sd":1.65,"acc":76.23},"w2v_lr":{"f1":57.3,"f1_sd":1.39,"acc":62.01},"embbag":{"f1":69.56,"f1_sd":1.81,"acc":74.11},"embbag_w2v":{"f1":69.93,"f1_sd":2.16,"acc":74.99},"best":"tfidf_lr"},"tw":{"majority":{"f1":26.4,"f1_sd":0.0,"acc":65.58},"bow_lr":{"f1":73.25,"f1_sd":0.59,"acc":80.0},"tfidf_lr":{"f1":75.47,"f1_sd":0.56,"acc":81.77},"tfidf_mlp":{"f1":73.85,"f1_sd":0.24,"acc":80.56},"w2v_lr":{"f1":53.71,"f1_sd":0.6,"acc":61.59},"embbag":{"f1":72.97,"f1_sd":0.78,"acc":79.77},"embbag_w2v":{"f1":72.76,"f1_sd":0.39,"acc":79.51},"best":"tfidf_lr"},"pb_diff_tfidf_embw2v":3.55,"pb_diff_t":9.88,"pb_w2v_gain":0.37,"tw_w2v_gain":-0.21},"cos":{"inflation_prices":0.49,"inflation_climate":0.16,"banks_lending":0.46,"energy_gas":0.58,"wages_labour":0.6},"oov":{"pb_cover":84.7,"tw_cover":76.4},"probes":["inflation","energy","banks","climate","digital","wages","ukraine","rates"]};</script>
+<script src="L6_lab_text_ro.js?v=20261118b"></script>
+<script type="module" src="L6_lab.js?v=20261118b"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 6 · Laborator: preziceți, testați, demonstrați</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L6/lecture6_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="L6_ro.html">Grafice interactive</a></li>
+  <li class="lang-switcher"><a href="L6_lab.html" class="lang-btn">EN</a><a href="L6_lab_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Cinci runde despre felul în care textul devine numere. În fiecare rundă mai întîi <b>preziceți</b> ce se va întîmpla și vă fixați răspunsul, apoi îl <b>testați</b> pe datele cursului și abia apoi vedeți <b>demonstrația</b>. Datele sînt cele din curs: 400 de discursuri ale Băncii Centrale Europene (2022–2026), pe care ne-am antrenat propriile modele word2vec și GloVe, și frazele din Financial PhraseBank.</p>
+<p class="lab-hint">Graficele rămîn goale pînă vă fixați predicția. În runda 2, trageți de spațiul cuvintelor ca să-l rotiți; derulați sau ciupiți ca să măriți.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Runda 1 · Cîteva cuvinte fac cea mai mare parte a muncii</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-r">Pînă la rangul: <b id="r1-r-v"></b></label><input type="range" id="r1-r" min="0" max="13" step="1" value="13"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Runda 2 · Cine sînt vecinii?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r2-w">Cuvîntul</label><select id="r2-w"><option value="inflation">inflation</option><option value="energy">energy</option><option value="banks">banks</option><option value="climate">climate</option><option value="digital">digital</option><option value="wages">wages</option><option value="ukraine">ukraine</option><option value="rates">rates</option></select></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Runda 3 · Aritmetică cu cuvinte</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Runda 4 · Media embedding-urilor sau numărarea cuvintelor?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r5">
+  <h2 class="sec">Runda 5 · Cînd adnotatorii nu sînt de acord</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r5-a">Acordul adnotatorilor: <b id="r5-a-v"></b></label><input type="range" id="r5-a" min="0" max="4" step="1" value="3"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">Discursurile BCE: 400 de discursuri, 8 ianuarie 2022 – 30 octombrie 2026, 1.289.896 de tokeni. word2vec: skip-gram cu eșantionare negativă, 100 de dimensiuni, fereastra 5, cuvinte văzute de cel puțin 5 ori; GloVe pe același text; ambele antrenate în PyTorch. Vederea 3D este o proiecție pe componente principale a celor 32 de cuvinte din patru grupuri tematice. Financial PhraseBank (Malo et al., 2014): 4.838 de fraze, 5 împărțiri aleatoare; tweet-uri financiare: 3 semințe. Codul: lectures/L6/analysis_L6.py și build_interactive_L6.py pe GitHub.</p>
+</main>
+</body>
+</html>

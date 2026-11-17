@@ -358,7 +358,7 @@
                 ]
             },
             {
-                id: 'l6', num: 6, status: 'ready', files: files(6), interactive: true, game: true,
+                id: 'l6', num: 6, status: 'ready', files: files(6), interactive: true, game: true, lab: true,
                 videos: [{ id: 'viZrOnJclY0', by: 'StatQuest with Josh Starmer', title: 'Word Embedding and Word2Vec, Clearly Explained!!!' }, { id: 'e9U0QAFbfLI', by: 'StatQuest with Josh Starmer', title: 'Cosine Similarity, Clearly Explained!!!' }, { id: 'zduSFxRajkE', by: 'Andrej Karpathy', title: 'Let\'s build the GPT Tokenizer' }, { id: 'wjZofJX0v4M', by: '3Blue1Brown', title: 'Transformers, the tech behind LLMs | Deep Learning Chapter 5' }],
                 quantinar: [q('nlp'), q('lda'), q('delta')],
                 title: TITLES[6],

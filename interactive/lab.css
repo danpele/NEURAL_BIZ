@@ -64,6 +64,13 @@
 .lab-svg .leg-ap { font-size: 12px; fill: #1e7b3c; font-weight: 600; }
 .lab-ctls select { max-width: 100%; font: inherit; font-size: 0.85rem; padding: 0.2rem; }
 .lab-svg .leg-main, .lab-svg .leg-trn, .lab-svg .leg-ap { paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+.lab-key .sw { display: inline-block; width: 0.75em; height: 0.75em; margin-right: 0.3em; border-radius: 50%; vertical-align: -0.05em; }
+.lab-table, .lab-cm { width: calc(100% - 1.6rem); margin: 0.8rem; border-collapse: collapse; background: #fff; font-size: 0.92rem; }
+.lab-table th, .lab-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #e3e6ec; text-align: left; }
+.lab-table td.got { font-weight: 700; color: #a33a1f; }
+.lab-cm th, .lab-cm td { padding: 0.6rem 0.4rem; border: 1px solid #e3e6ec; text-align: center; }
+.lab-cm td span { font-size: 0.8rem; }
+.lab-cmnote { margin: 0 0.8rem 0.8rem; font-size: 0.82rem; color: #444; }
 .lab-nogl { padding: 1rem; font-size: 0.9rem; color: #555; }
 @media (max-width: 900px) {
   .lab-grid { grid-template-columns: minmax(0, 1fr); }
