@@ -376,7 +376,7 @@
                 ]
             },
             {
-                id: 'l7', num: 7, status: 'ready', files: files(7), interactive: true, game: true,
+                id: 'l7', num: 7, status: 'ready', files: files(7), interactive: true, game: true, lab: true,
                 videos: [{ id: 'PSs6nxngL6k', by: 'StatQuest with Josh Starmer', title: 'Attention for Neural Networks, Clearly Explained!!!' }, { id: 'eMlx5fFNoYc', by: '3Blue1Brown', title: 'Attention in transformers, step-by-step | Deep Learning Chapter 6' }, { id: 'zxQyTK8quyY', by: 'StatQuest with Josh Starmer', title: 'Transformer Neural Networks, ChatGPT\'s foundation, Clearly Explained!!!' }, { id: 'bQ5BoolX9Ag', by: 'StatQuest with Josh Starmer', title: 'Decoder-Only Transformers, ChatGPTs specific Transformer, Clearly Explained!!!' }, { id: 'bCz4OMemCcA', by: 'Umar Jamil', title: 'Attention is all you need (Transformer) - Model explanation (including math), Inference and Training' }, { id: 'KJtZARuO3JY', by: 'Grant Sanderson', title: 'Visualizing transformers and attention | Talk for TNG Big Tech Day \'24' }, { id: 'kCc8FmEb1nY', by: 'Andrej Karpathy', title: 'Let\'s build GPT: from scratch, in code, spelled out.' }],
                 quantinar: [q('nextWord'), q('delta'), q('nlp')],
                 title: TITLES[7],

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laborator de atenție</title>
+<meta name="description" content="Rețele neuronale și deep learning: Cursul 7 · Laborator: preziceți, testați, demonstrați">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261118a">
+<link rel="stylesheet" href="interactive.css?v=20261118a">
+<link rel="stylesheet" href="lab.css?v=20261118a">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L7_data.js?v=20261118a"></script>
+<script>window.LAB_NUM = {"on_sep":[0.0517,0.0823,0.095,0.2454,0.5241,0.593,0.535,0.5517,0.54,0.5205,0.2421,0.3518],"on_cls":[0.1504,0.4047,0.3703,0.2215,0.0407,0.0261,0.0151,0.0136,0.0127,0.0163,0.0363,0.0251],"n_tweets":500,"boot_pos":{"mean":0.9,"lo":0.1,"hi":1.7},"f1":{"tfidf":75.5,"embbag":66.6,"tiny_nopos":67.9,"tiny":68.8,"finbert_zs":66.9,"finbert_probe":75.3,"finbert_ft":84.8},"gain_pos":0.9};</script>
+<script src="L7_lab_text_ro.js?v=20261118a"></script>
+<script type="module" src="L7_lab.js?v=20261118a"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index_ro.html">Rețele neuronale și deep learning</a></h1><p>Cursul 7 · Laborator: preziceți, testați, demonstrați</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index_ro.html#chapters">← Site-ul cursului</a></li>
+  <li><a href="../lectures/L7/lecture7_ro.pdf" target="_blank" rel="noopener">PDF-ul cursului</a></li>
+  <li><a href="L7_ro.html">Grafice interactive</a></li>
+  <li class="lang-switcher"><a href="L7_lab.html" class="lang-btn">EN</a><a href="L7_lab_ro.html" class="lang-btn active">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Cinci runde despre felul în care funcționează atenția și cît valorează. În fiecare rundă mai întîi <b>preziceți</b> ce se va întîmpla și vă fixați răspunsul, apoi îl <b>testați</b> pe datele cursului și abia apoi vedeți <b>demonstrația</b>. Rundele 1 și 2 desenează atenția reală a lui FinBERT pe tweet-uri financiare ca un relief 3D pe care îl puteți roti; rundele 3–5 folosesc cele 500 de tweet-uri de test și modelele din curs.</p>
+<p class="lab-hint">Graficele rămîn goale pînă vă fixați predicția. În rundele 1 și 2, trageți de relief ca să-l rotiți; derulați sau ciupiți ca să măriți.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Runda 1 · De ce împărțim la √d?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-l">Stratul: <b id="r1-l-v"></b></label><input type="range" id="r1-l" min="1" max="12" step="1" value="1"></div><div class="ctl"><label for="r1-h">Capul: <b id="r1-h-v"></b></label><input type="range" id="r1-h" min="1" max="12" step="1" value="1"></div><div class="ctl"><label for="r1-t">Împărțim scorurile la: <b id="r1-t-v"></b></label><input type="range" id="r1-t" min="0" max="4" step="1" value="0"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Runda 2 · Unde se concentrează atenția?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r2-w">Tweet-ul</label><select id="r2-w"><option value="0">BTIG points to breakfast pressure for Dunkin&#x27; … (pesimist)</option><option value="1">Netflix downgraded to underperform at Wells Fa… (pesimist)</option><option value="2">Lowe&#x27;s to shut 34 Canadian stores as it report… (pesimist)</option><option value="3">Morgan Stanley sees GM doubling in bull case s… (optimist)</option><option value="4">JMP Securities upgrades snap to outperform wit… (optimist)</option><option value="5">Fed&#x27;s Mester says central bank can watch and w… (neutru)</option><option value="6">Little impact on Netflix from Disney Plus laun… (neutru)</option></select></div><div class="ctl"><label for="r2-l">Stratul: <b id="r2-l-v"></b></label><input type="range" id="r2-l" min="1" max="12" step="1" value="1"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Runda 3 · Chiuveta [SEP]</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Runda 4 · Contează ordinea cuvintelor?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r5">
+  <h2 class="sec">Runda 5 · Puține date etichetate</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Preziceți</li><li class="lab-step-test">2 Testați</li><li class="lab-step-prove">3 Demonstrați</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r5-n">Pînă la n: <b id="r5-n-v"></b></label><input type="range" id="r5-n" min="0" max="4" step="1" value="4"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">Atenția: ProsusAI FinBERT (12 straturi × 12 capete, d = 64 pe cap), scorurile brute q·k recalculate din model și verificate cu atenția lui; runda 2 arată media celor 12 capete ale unui strat. Tweet-uri: Twitter financial news sentiment, setul de validare publicat folosit ca set de test (2.388 de tweet-uri); 8.588 de tweet-uri de antrenare. Entropia și ponderea [SEP]: 500 de tweet-uri de test. Transformerul mic: 3 semințe; bootstrap cu 1.000 de extrageri ale tweet-urilor de test. Codul: lectures/L7/analysis_L7.py și build_interactive_L7.py pe GitHub.</p>
+</main>
+</body>
+</html>

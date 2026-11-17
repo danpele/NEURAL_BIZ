@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attention lab</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 7 · Lab: predict, test, prove">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261118a">
+<link rel="stylesheet" href="interactive.css?v=20261118a">
+<link rel="stylesheet" href="lab.css?v=20261118a">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L7_data.js?v=20261118a"></script>
+<script>window.LAB_NUM = {"on_sep":[0.0517,0.0823,0.095,0.2454,0.5241,0.593,0.535,0.5517,0.54,0.5205,0.2421,0.3518],"on_cls":[0.1504,0.4047,0.3703,0.2215,0.0407,0.0261,0.0151,0.0136,0.0127,0.0163,0.0363,0.0251],"n_tweets":500,"boot_pos":{"mean":0.9,"lo":0.1,"hi":1.7},"f1":{"tfidf":75.5,"embbag":66.6,"tiny_nopos":67.9,"tiny":68.8,"finbert_zs":66.9,"finbert_probe":75.3,"finbert_ft":84.8},"gain_pos":0.9};</script>
+<script src="L7_lab_text_en.js?v=20261118a"></script>
+<script type="module" src="L7_lab.js?v=20261118a"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 7 · Lab: predict, test, prove</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L7/lecture7.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="L7.html">Interactive charts</a></li>
+  <li class="lang-switcher"><a href="L7_lab.html" class="lang-btn active">EN</a><a href="L7_lab_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Five rounds on how attention works and what it is worth. In each round you first <b>predict</b> what will happen and lock your answer, then <b>test</b> it on the course data, and only then see the <b>proof</b>. Rounds 1 and 2 draw the real attention of FinBERT on finance tweets as a 3D landscape you can turn; rounds 3 to 5 use the 500 test tweets and the models of the lecture.</p>
+<p class="lab-hint">Charts stay empty until you lock a prediction. In rounds 1 and 2, drag the landscape to turn it; scroll or pinch to zoom.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Round 1 · Why divide by √d?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-l">Layer: <b id="r1-l-v"></b></label><input type="range" id="r1-l" min="1" max="12" step="1" value="1"></div><div class="ctl"><label for="r1-h">Head: <b id="r1-h-v"></b></label><input type="range" id="r1-h" min="1" max="12" step="1" value="1"></div><div class="ctl"><label for="r1-t">Divide the scores by: <b id="r1-t-v"></b></label><input type="range" id="r1-t" min="0" max="4" step="1" value="0"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Round 2 · Where does attention focus?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r2-w">Tweet</label><select id="r2-w"><option value="0">BTIG points to breakfast pressure for Dunkin&#x27; … (bearish)</option><option value="1">Netflix downgraded to underperform at Wells Fa… (bearish)</option><option value="2">Lowe&#x27;s to shut 34 Canadian stores as it report… (bearish)</option><option value="3">Morgan Stanley sees GM doubling in bull case s… (bullish)</option><option value="4">JMP Securities upgrades snap to outperform wit… (bullish)</option><option value="5">Fed&#x27;s Mester says central bank can watch and w… (neutral)</option><option value="6">Little impact on Netflix from Disney Plus laun… (neutral)</option></select></div><div class="ctl"><label for="r2-l">Layer: <b id="r2-l-v"></b></label><input type="range" id="r2-l" min="1" max="12" step="1" value="1"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Round 3 · The [SEP] sink</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Round 4 · Does word order matter?</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r5">
+  <h2 class="sec">Round 5 · Little labelled data</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r5-n">Up to n: <b id="r5-n-v"></b></label><input type="range" id="r5-n" min="0" max="4" step="1" value="4"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">Attention: ProsusAI FinBERT (12 layers × 12 heads, d = 64 per head), raw scores q·k recomputed from the model and checked against its attention; round 2 shows the mean over the 12 heads of a layer. Tweets: Twitter financial news sentiment, published validation split used as the test set (2,388 tweets); 8,588 training tweets. Entropy and [SEP] share: 500 test tweets. Small transformer: 3 seeds; bootstrap with 1,000 draws of the test tweets. Code: lectures/L7/analysis_L7.py and build_interactive_L7.py on GitHub.</p>
+</main>
+</body>
+</html>

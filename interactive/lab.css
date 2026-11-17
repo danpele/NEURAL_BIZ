@@ -57,6 +57,13 @@
 .lab-panel + .lab-panel { border-top: 1px solid #e3e6ec; }
 .lab-key { position: absolute; left: 0.7rem; top: 0.5rem; margin: 0; font-size: 0.8rem; color: #444; pointer-events: none; }
 .lab-key .sw-gold { display: inline-block; width: 0.9em; height: 0.9em; margin-right: 0.35em; vertical-align: -0.1em; background: rgba(212,160,23,0.45); border: 1px solid #b8901a; }
+.lab-svg .bar-sep { fill: #c0392b; fill-opacity: 0.85; }
+.lab-svg .bar-cls { fill: #2e5c9a; fill-opacity: 0.85; }
+.lab-svg .meanbar { stroke: #1c2433; stroke-width: 2.4; }
+.lab-svg .tick.hl { fill: #c0392b; font-weight: 600; }
+.lab-svg .leg-ap { font-size: 12px; fill: #1e7b3c; font-weight: 600; }
+.lab-ctls select { max-width: 100%; font: inherit; font-size: 0.85rem; padding: 0.2rem; }
+.lab-svg .leg-main, .lab-svg .leg-trn, .lab-svg .leg-ap { paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
 .lab-nogl { padding: 1rem; font-size: 0.9rem; color: #555; }
 @media (max-width: 900px) {
   .lab-grid { grid-template-columns: minmax(0, 1fr); }
