@@ -78,8 +78,8 @@
     // ------------------------------------------------------------
     const READY = [];   // lectures whose PDF and notebook are published (add the number when lecture k is released); others are probed
     // lecture buttons in labelled rows, as on the MFM site: lecture (slides, web page, interactive), code (notebook + Colab, Quantlets)
-    const LINK_ROWS = [['course', ['slides', 'web', 'interactive', 'game']], ['code', ['notebook', 'quantlets']]];
-    const LINK_CLASS = { slides: 'btn-primary', web: 'btn-outline', interactive: 'btn-outline', game: 'btn-outline', notebook: 'btn-outline', quantlets: 'btn-outline' };
+    const LINK_ROWS = [['course', ['slides', 'web', 'interactive', 'lab', 'game']], ['code', ['notebook', 'quantlets']]];
+    const LINK_CLASS = { slides: 'btn-primary', web: 'btn-outline', interactive: 'btn-outline', lab: 'btn-outline', game: 'btn-outline', notebook: 'btn-outline', quantlets: 'btn-outline' };
     const avail = {};   // avail[id] = { slides, notebook, quantlets, web, interactive }
 
     // web lecture (web/LK.html) and interactive companion (interactive/LK.html), _ro on the Romanian page;
@@ -91,6 +91,8 @@
     function linkButton(type, l, ok) {
         const label = T.links[type];
         // classroom game of a lecture (interactive/LK_game.html), declared with game: true in course-data.js
+        // predict-test-prove lab of a lecture (interactive/LK_lab.html), declared with lab: true in course-data.js
+        if (type === 'lab') return l.lab ? `<a href="interactive/L${l.num}_lab${LANG === 'ro' ? '_ro' : ''}.html" class="btn ${LINK_CLASS[type]}">${label}</a>` : '';
         if (type === 'game') return l.game ? `<a href="interactive/L${l.num}_game${LANG === 'ro' ? '_ro' : ''}.html" class="btn ${LINK_CLASS[type]}">${label}</a>` : '';
         if (type === 'web' || type === 'interactive') return ok ? `<a href="${pageOf(type, l)}" class="btn ${LINK_CLASS[type]}">${label}</a>` : '';
         if (!ok) return `<span class="btn disabled" aria-disabled="true" title="${T.comingSoon}">${label} · ${T.comingSoonShort}</span>`;

@@ -89,7 +89,7 @@
                 coming: 'Coming',
                 chapterSoon: 'The materials of this lecture will be published before the lecture.',
                 rows: { course: 'Lecture', code: 'Code' },
-                links: { slides: 'Slides (PDF)', web: 'Web page', interactive: 'Interactive', game: 'Game: you or the network?', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Open in Colab', quantletsTitle: 'The code of every chart of the lecture, one folder per chart, on GitHub' },
+                links: { slides: 'Slides (PDF)', web: 'Web page', interactive: 'Interactive', game: 'Game: you or the network?', lab: 'Lab: predict, test, prove', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Open in Colab', quantletsTitle: 'The code of every chart of the lecture, one folder per chart, on GitHub' },
                 formulas: 'Key formulas',
                 prevChart: 'Previous chart',
                 nextChart: 'Next chart',
@@ -168,7 +168,7 @@
                 coming: 'Urmează',
                 chapterSoon: 'Materialele acestui curs vor fi publicate înainte de curs.',
                 rows: { course: 'Curs', code: 'Cod' },
-                links: { slides: 'Slide-uri (PDF)', web: 'Pagină web', interactive: 'Interactiv', game: 'Joc: dumneavoastră sau rețeaua?', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Deschide în Colab', quantletsTitle: 'Codul fiecărui grafic al cursului, cîte un dosar pentru fiecare grafic, pe GitHub' },
+                links: { slides: 'Slide-uri (PDF)', web: 'Pagină web', interactive: 'Interactiv', game: 'Joc: dumneavoastră sau rețeaua?', lab: 'Laborator: preziceți, testați, demonstrați', notebook: 'Notebook', quantlets: 'Quantlets', colab: 'Deschide în Colab', quantletsTitle: 'Codul fiecărui grafic al cursului, cîte un dosar pentru fiecare grafic, pe GitHub' },
                 formulas: 'Formule principale',
                 prevChart: 'Graficul anterior',
                 nextChart: 'Graficul următor',
@@ -295,7 +295,7 @@
                 ]
             },
             {
-                id: 'l2', num: 2, status: 'ready', files: files(2), interactive: true, game: true,
+                id: 'l2', num: 2, status: 'ready', files: files(2), interactive: true, game: true, lab: true,
                 videos: [{ id: 'IHZwWFHWa-w', by: '3Blue1Brown', title: 'Gradient descent, how neural networks learn | Deep Learning Chapter 2' }, { id: 'Ilg3gGewQ5U', by: '3Blue1Brown', title: 'Backpropagation, intuitively | Deep Learning Chapter 3' }, { id: 'tIeHLnjs5U8', by: '3Blue1Brown', title: 'Backpropagation calculus | Deep Learning Chapter 4' }, { id: 'IN2XmBhILt4', by: 'StatQuest with Josh Starmer', title: 'Neural Networks Pt. 2: Backpropagation Main Ideas' }, { id: 'sDv4f4s2SB8', by: 'StatQuest with Josh Starmer', title: 'Gradient Descent, Step-by-Step' }, { id: 'vMh0zPT0tLI', by: 'StatQuest with Josh Starmer', title: 'Stochastic Gradient Descent, Clearly Explained!!!' }, { id: 'k8fTYJPd3_I', by: 'DeepLearningAI', title: 'Gradient Descent With Momentum (C2W2L06)' }, { id: 'JXQT_vxqwIs', by: 'DeepLearningAI', title: 'Adam Optimization Algorithm (C2W2L08)' }, { id: 'QzulmoOg2JE', by: 'DeepLearningAI', title: 'Learning Rate Decay (C2W2L09)' }, { id: 'VMj-3S1tku0', by: 'Andrej Karpathy', title: 'The spelled-out intro to neural networks and backpropagation: building micrograd' }],
                 quantinar: [q('mlRisk')],
                 title: TITLES[2],

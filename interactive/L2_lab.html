@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gradient descent lab</title>
+<meta name="description" content="Neural Networks and Deep Learning: Lecture 2 · Lab: predict, test, prove">
+<link rel="icon" href="../assets/logos/ase_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=20261117a">
+<link rel="stylesheet" href="interactive.css?v=20261117a">
+<link rel="stylesheet" href="lab.css?v=20261117a">
+<script type="importmap">{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="L2_data.js?v=20261117a"></script>
+<script src="L2_lab_text_en.js?v=20261117a"></script>
+<script type="module" src="L2_lab.js?v=20261117a"></script>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="https://www.ase.ro" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/ase_logo.png" alt="ASE"></a>
+    <div class="header-title"><h1><a href="../index.html">Neural Networks and Deep Learning</a></h1><p>Lecture 2 · Lab: predict, test, prove</p></div>
+    <a href="https://ipe.ro/new/" target="_blank" rel="noopener"><img class="header-logo" src="../assets/logos/acad_logo.png" alt="IPE"></a>
+  </div>
+</header>
+<nav><ul>
+  <li><a href="../index.html#chapters">← Course site</a></li>
+  <li><a href="../lectures/L2/lecture2.pdf" target="_blank" rel="noopener">Lecture PDF</a></li>
+  <li><a href="L2.html">Interactive charts</a></li>
+  <li class="lang-switcher"><a href="L2_lab.html" class="lang-btn active">EN</a><a href="L2_lab_ro.html" class="lang-btn">RO</a></li>
+</ul></nav>
+<main class="imain lab">
+<p class="lead">Four rounds on how a network learns. In each round you first <b>predict</b> what will happen and lock your answer, then <b>test</b> it on the real loss surface of the lecture, which you can turn with the mouse or a finger, and only then see the <b>proof</b>. The data are those of the lecture: the median house value of the 20,640 block groups of California (1990 census) against their median income, and the 64-64 network of slide 17.</p>
+<p class="lab-hint">The gold diamond marks the least-squares minimum; the red ball is gradient descent. Drag to turn, scroll or pinch to zoom.</p>
+<p class="lab-score" id="lab-score" aria-live="polite"></p>
+<section class="lab-round" id="r1">
+  <h2 class="sec">Round 1 · The narrow valley</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r1-e">Step η: <b id="r1-e-v"></b></label><input type="range" id="r1-e" min="0.1" max="2.2" step="0.05" value="1"></div><div class="ctl"><label for="r1-k">Number of steps: <b id="r1-k-v"></b></label><input type="range" id="r1-k" min="1" max="400" step="1" value="60"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r2">
+  <h2 class="sec">Round 2 · Just above the edge</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r2-e">Step η: <b id="r2-e-v"></b></label><input type="range" id="r2-e" min="0.1" max="2.4" step="0.05" value="2.1"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r3">
+  <h2 class="sec">Round 3 · Two fixes</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl ctl-tg"><span class="lbl">Surface</span><div class="tgs"><label class="tg"><input type="radio" name="r3-m" value="std" checked> standardised income, plain gradient descent</label><label class="tg"><input type="radio" name="r3-m" value="mom"> raw income, with momentum β = 0.9 and half the step</label></div></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage three"></div></div>
+  </div>
+</section>
+<section class="lab-round" id="r4">
+  <h2 class="sec">Round 4 · A real network</h2>
+  <ol class="lab-steps"><li class="lab-step-predict on">1 Predict</li><li class="lab-step-test">2 Test</li><li class="lab-step-prove">3 Prove</li></ol>
+  <div class="lab-grid">
+    <div class="lab-left">
+      <p class="lab-q"></p>
+      <div class="lab-opts"></div>
+      <button class="btn lab-lock" type="button"></button>
+      <div class="lab-ctls"><div class="ctl"><label for="r4-e">Learning rate η: <b id="r4-e-v"></b></label><input type="range" id="r4-e" min="0" max="8" step="1" value="2"></div><button class="btn lab-run" type="button"></button></div>
+      <p class="lab-out" aria-live="polite"></p>
+      <button class="btn lab-why" type="button"></button>
+      <div class="lab-proof" hidden></div>
+    </div>
+    <div class="lab-right"><div class="lab-stage"></div></div>
+  </div>
+</section>
+<p class="src foot">Loss surface: mean squared error (MSE) of value = a + b × income, computed exactly from five sample moments of the data; gradient descent and momentum use the formulas of analysis_L2.py (start a = 4, b = −0.5, or b = −1 when standardised). Network: two hidden layers of 64 rectified linear units (ReLU), plain stochastic gradient descent, batch 128, 30 epochs; curves of seed 0, final MSE of three seeds (60/20/20 split, seed 20261108). Code: lectures/L2/analysis_L2.py and interactive_data_L2.py on GitHub.</p>
+</main>
+</body>
+</html>
