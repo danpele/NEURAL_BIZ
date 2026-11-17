@@ -141,6 +141,7 @@
                 detailed: 'Detailed Results',
                 colQ: 'Q', colQuestion: 'Question', colCorrect: 'Correct answer', colYours: 'Your answer', colResult: 'Result',
                 resources: 'Resources',
+                visuals: 'Visual explainers',
                 bibliography: 'Bibliography',
                 abbreviations: 'Abbreviations',
                 contact: 'Contact',
@@ -220,6 +221,7 @@
                 detailed: 'Rezultate detaliate',
                 colQ: 'Nr.', colQuestion: 'Întrebare', colCorrect: 'Răspuns corect', colYours: 'Răspunsul ales', colResult: 'Rezultat',
                 resources: 'Resurse',
+                visuals: 'Explicații vizuale',
                 bibliography: 'Bibliografie',
                 abbreviations: 'Abrevieri',
                 contact: 'Contact',
@@ -637,6 +639,20 @@
             { icon: '&#129303;', href: 'https://huggingface.co/learn', en: ['Hugging Face courses', 'Transformers, language models and datasets'], ro: ['Cursurile Hugging Face', 'Arhitecturi transformer, modele lingvistice și seturi de date'] },
             { icon: '&#128190;', img: 'assets/logos/ql_logo.png', href: 'https://quantlet.com', en: ['Quantlet', 'Reproducible code: one folder per chart of the lectures'], ro: ['Quantlet', 'Cod reproductibil: cîte un dosar pentru fiecare grafic al cursurilor'] },
             { icon: '&#127891;', img: 'assets/logos/qr_logo.png', href: 'https://quantinar.com', en: ['Quantinar', 'P2P (peer-to-peer) platform with advanced courses'], ro: ['Quantinar', 'Platformă P2P (peer-to-peer) cu cursuri avansate'] }
+        ],
+
+        // Visual explainers of neural networks, transformers and LLMs (links checked 17 November 2026)
+        visuals: [
+            { icon: '&#129504;', href: 'https://poloclub.github.io/transformer-explainer/', en: ['Transformer Explainer (Polo Club, Georgia Tech)', 'A GPT-2 model running in the browser: follow your own text through embeddings, attention and next-token probabilities'], ro: ['Transformer Explainer (Polo Club, Georgia Tech)', 'Un model GPT-2 care rulează în browser: textul vostru urmărit prin embeddings, atenție și probabilitățile următorului token'] },
+            { icon: '&#129513;', href: 'https://bbycroft.net/llm', en: ['LLM Visualization (Brendan Bycroft)', 'A 3D animated walkthrough of every layer and matrix product inside a small GPT'], ro: ['LLM Visualization (Brendan Bycroft)', 'Parcurgere 3D animată a fiecărui strat și produs de matrice dintr-un GPT mic'] },
+            { icon: '&#127909;', href: 'https://www.3blue1brown.com/topics/neural-networks', en: ['3Blue1Brown: Neural networks', 'Animated lessons by Grant Sanderson: gradient descent, backpropagation, transformers and attention'], ro: ['3Blue1Brown: Neural networks', 'Lecții animate de Grant Sanderson: gradient descent, backpropagation, transformere și atenție'] },
+            { icon: '&#128444;', href: 'https://jalammar.github.io/illustrated-transformer/', en: ['The Illustrated Transformer (Jay Alammar)', 'The transformer of Vaswani et al. (2017) drawn step by step: queries, keys, values and multi-head attention'], ro: ['The Illustrated Transformer (Jay Alammar)', 'Transformerul lui Vaswani et al. (2017) desenat pas cu pas: queries, keys, values și atenție multi-head'] },
+            { icon: '&#127918;', href: 'https://playground.tensorflow.org/', en: ['TensorFlow Playground', 'Train a small neural network in the browser: change layers, activations, learning rate and regularisation'], ro: ['TensorFlow Playground', 'Antrenați o rețea neuronală mică în browser: straturi, funcții de activare, rata de învățare și regularizare'] },
+            { icon: '&#128064;', href: 'https://magazine.sebastianraschka.com/p/visual-attention-variants', en: ['A Visual Guide to Attention Variants (Sebastian Raschka)', 'From multi-head and grouped-query attention to MLA, sparse attention and hybrid architectures'], ro: ['A Visual Guide to Attention Variants (Sebastian Raschka)', 'De la atenția multi-head și grouped-query la MLA, atenție rară și arhitecturi hibride'] },
+            { icon: '&#128256;', href: 'https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts', en: ['A Visual Guide to Mixture of Experts (Maarten Grootendorst)', 'Routers, experts and load balancing in large language models, in more than 50 illustrations'], ro: ['A Visual Guide to Mixture of Experts (Maarten Grootendorst)', 'Routere, experți și echilibrarea încărcării în modelele lingvistice mari, în peste 50 de ilustrații'] },
+            { icon: '&#9889;', href: 'https://handbook.modular.com/llm-inference-basics/what-is-llm-inference/', en: ['LLM Inference Handbook', 'What happens between the prompt and the generated tokens: prefill, decoding, KV cache and serving'], ro: ['LLM Inference Handbook', 'Ce se întîmplă între prompt și tokenii generați: prefill, decodare, KV cache și servire'] },
+            { icon: '&#128300;', href: 'https://www.neuronpedia.org/', en: ['Neuronpedia', 'Open-source interpretability platform: browse the features learned inside language models'], ro: ['Neuronpedia', 'Platformă open-source de interpretabilitate: explorați trăsăturile învățate în interiorul modelelor lingvistice'] },
+            { icon: '&#127759;', href: 'https://apple.github.io/embedding-atlas/', en: ['Embedding Atlas (Apple)', 'Interactive maps of large embedding collections: clusters, nearest neighbours and metadata filters'], ro: ['Embedding Atlas (Apple)', 'Hărți interactive ale colecțiilor mari de embeddings: clustere, vecini apropiați și filtre pe metadate'] }
         ],
 
         // Bibliography by lecture: every reference cited in the slides (REFS of lectures/Lk/build_Lk.py), listed once under
